@@ -22,17 +22,12 @@ const EditCar = ({ handelClick, isOpen, car }) => {
           title="Edit Car"
           sec_title="enter your km"
           inputs={[
-            // {
-            //   name: "numberPlate",
-            //   value: formData?.numberPlate,
-            // },
             {
               name: "km",
               type: "number",
               value: formData?.km,
               min: car?.km,
             },
-            // { name: "brand", type: "text", value: formData?.brand },
           ]}
           handelClick={handelClick}
           onSubmit={onSubmit}
