@@ -2,11 +2,12 @@ import "../components/table/table.css";
 import React, { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
 import ManageService from "../components/manage/ManageService";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { getServicesByType } from "../features/admin/adminSlice";
 import EditStatusService from "../components/edit/EditStatusService";
 import EditPaidService from "../components/edit/EditPaidService";
-const ServicesAdmin = ({ services }) => {
+const ServicesAdmin = () => {
+  const { services} = useSelector((state) => state.admin);
   const [servicesFilter, setServicesFilter] = useState();
   const [service, setService] = useState();
   const [handelService, isOpenService] = useOpenModel();

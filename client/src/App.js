@@ -20,7 +20,7 @@ import PageNotFound from "./components/pageNotFound/PageNotFound";
 function App() {
   const { user: userAuth } = useSelector((state) => state.auth);
   const { messages, user } = useSelector((state) => state.user);
-  const { services, cars, users } = useSelector((state) => state.admin);
+  const { services} = useSelector((state) => state.admin);
   const dispatch = useDispatch();
   useEffect(() => {
     if (userAuth?._id) dispatch(getUser(userAuth?._id));
@@ -40,7 +40,7 @@ function App() {
           />
           <Route
             path="/messages"
-            element={<Messages messages={messages} user={user} users={users} />}
+            element={<Messages/>}
           />
           <Route
             path="/services"
