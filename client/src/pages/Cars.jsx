@@ -9,7 +9,9 @@ import CreateService from "../components/create/CreateService";
 import { BiSolidCarCrash, BiTrash } from "react-icons/bi";
 import { deleteCar } from "../Utils";
 import DeleteCar from "../components/delete/DeleteCar";
-const Cars = ({ userId, cars = null }) => {
+const Cars = () => {
+  const { user } = useSelector((state) => state.user);
+  const { cars } = useSelector((state) => state.admin);
   const [car, setCar] = useState();
   const [handleManageCar, isOpenManageCar] = useOpenModel();
   const [filterCars, setFilterCars] = useState();
@@ -18,7 +20,7 @@ const Cars = ({ userId, cars = null }) => {
   const [handleDeleteCar, isOpenModelDeleteCar] = useOpenModel();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCarsByType(userId));
+    dispatch(getCarsByType(user?._id));
   }, [isOpenManageCar]);
   const filterSearch = (e) => {
     const { value } = e.target;
@@ -35,41 +37,28 @@ const Cars = ({ userId, cars = null }) => {
   const handleCar = async (e) => {
     const { name } = e.target;
     setCar(cars.find((car) => car._id === e.target.value));
-    // if (e.target.value) {
-    //   setCar(cars.find((car) => car._id === e.target.value));
-    // console.log(car);
-    // handleManageCar();
     if (name === "editCar") {
       handleEditCar();
     }
     if (name === "createService") handleCreateService();
     if (name === "deleteCar") {
-      // setCar(cars.find((car) => car._id === e.target.value));
       handleDeleteCar();
-      // dispatch(getCars());
     }
     // }
   };
   const bodyCars = (car) => {
     return (
       <tr key={car?._id}>
-        {/* <td>
-          <button value={car?._id} onClick={handleCar}>
-            Manage
-          </button>
-        </td> */}
         <td>
-          {/* <button name="createService" value={car?._id} onClick={handleCar}>
-           
-          </button> */}
           <button name="deleteCar" value={car?._id} onClick={handleCar}>
-             <BiTrash />Delete
+            <BiTrash />
+            Delete
           </button>
         </td>
         <td>{car?.owner?.username}</td>
         <td>
           <button name="createService" value={car?._id} onClick={handleCar}>
-          <BiSolidCarCrash /> {car?.numberPlate}
+            <BiSolidCarCrash /> {car?.numberPlate}
           </button>
         </td>
         <td>

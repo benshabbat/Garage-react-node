@@ -10,7 +10,6 @@ const Users = () => {
   const [user, setUser] = useState();
   const [handleManageUser, isOpenManageUser] = useOpenModel();
   const [handleCreateUser, isOpenCreateUser] = useOpenModel();
-  // const [data, setData] = useState(false)
   const [filterUsers, setFilterUsers] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
