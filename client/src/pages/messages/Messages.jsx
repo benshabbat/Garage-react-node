@@ -4,13 +4,13 @@ import CreateMessage from "../../components/create/CreateMessage";
 import useOpenModel from "../../hooks/useOpenModel";
 import { useDispatch } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
-const Messages = ({ messages = null, user, users = null }) => {
+const Messages = ({ messages, user, users }) => {
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModel();
   const [filterMessages, setFilterMessages] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMessagesByIdUser(user?._id));
-  }, []);
+  }, [isOpenCreateMessage]);
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterMessages(

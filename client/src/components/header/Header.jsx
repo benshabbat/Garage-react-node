@@ -2,10 +2,15 @@ import "./header.css";
 import { Link, Outlet } from "react-router-dom";
 import { MyAccount, NavAdmin, NavUser, NavLanding } from "../index";
 
+import { useSelector, useDispatch } from "react-redux";
+
 const Header = ({ userAuth = null, user = null }) => {
-  // if (userAuth && user?.isAdmin === undefined) {
-  //   return "Loading..";
-  // }
+  const { user: userAuth } = useSelector((state) => state.auth);
+  const { messages, user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (userAuth?._id) dispatch(getUser(userAuth?._id));
+  }, [userAuth]);
   return (
     <>
       <div className="main-header">
