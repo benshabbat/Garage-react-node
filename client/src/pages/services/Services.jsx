@@ -2,8 +2,9 @@ import "./services.css";
 import React from "react";
 import { useParams } from "react-router-dom";
 import Service from "../../components/service/Service";
-
-const Services = ({ user }) => {
+import { useSelector} from "react-redux";
+const Services = () => {
+  const { user } = useSelector((state) => state.user);
   const { carId } = useParams();
   const carFilter = user?.cars?.filter((car) => car._id === carId);
   const carService = (car) => {

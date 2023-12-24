@@ -1,5 +1,4 @@
 import "./App.css";
-import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components";
 import {
@@ -11,20 +10,11 @@ import {
   Cars,
   ServicesAdmin,
 } from "./pages";
-import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "./features/user/userSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CheckFormWithPattern from "./components/CheckFormWithPattern";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 function App() {
-  const { user: userAuth } = useSelector((state) => state.auth);
-  const { messages, user } = useSelector((state) => state.user);
-  const { services} = useSelector((state) => state.admin);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (userAuth?._id) dispatch(getUser(userAuth?._id));
-  }, [userAuth]);
   return (
     <>
       <BrowserRouter>
@@ -32,25 +22,13 @@ function App() {
         <Routes>
           <Route path="/" element={<PageLanding />} />
           <Route path="/check" element={<CheckFormWithPattern />} />
-          <Route path="/account" element={<Account/>} />
+          <Route path="/account" element={<Account />} />
           <Route path="/users" element={<Users />} />
-          <Route
-            path="/cars"
-            element={<Cars/>}
-          />
-          <Route
-            path="/messages"
-            element={<Messages/>}
-          />
-          <Route
-            path="/services"
-            element={<ServicesAdmin services={services} />}
-          />
-          <Route path="/services/user/" element={<Services user={user} />} />
-          <Route
-            path="/services/car/:carId"
-            element={<Services user={user} />}
-          />
+          <Route path="/cars" element={<Cars />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/services" element={<ServicesAdmin />} />
+          <Route path="/services/user/" element={<Services />} />
+          <Route path="/services/car/:carId" element={<Services />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
