@@ -36,7 +36,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route
             path="/cars"
-            element={<Cars userId={user?._id} cars={cars} />}
+            element={<Cars/>}
           />
           <Route
             path="/messages"

@@ -2,15 +2,17 @@ import "../../components/table/table.css";
 import React, { useState, useEffect } from "react";
 import CreateMessage from "../../components/create/CreateMessage";
 import useOpenModel from "../../hooks/useOpenModel";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
-const Messages = ({ messages, user, users }) => {
+const Messages = () => {
+  const { messages, user } = useSelector((state) => state.user);
+  const { users } = useSelector((state) => state.admin);
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModel();
   const [filterMessages, setFilterMessages] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMessagesByIdUser(user?._id));
-  }, [isOpenCreateMessage]);
+    if(user)dispatch(getMessagesByIdUser(user?._id));
+  }, [user,isOpenCreateMessage]);
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterMessages(

@@ -3,11 +3,10 @@ import React, { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
 import ManageCar from "../components/manage/ManageCar";
 import { getCarsByType } from "../features/admin/adminSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import EditCar from "../components/edit/EditCar";
 import CreateService from "../components/create/CreateService";
 import { BiSolidCarCrash, BiTrash } from "react-icons/bi";
-import { deleteCar } from "../Utils";
 import DeleteCar from "../components/delete/DeleteCar";
 const Cars = () => {
   const { user } = useSelector((state) => state.user);
