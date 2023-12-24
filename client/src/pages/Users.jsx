@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
 import ManageUser from "../components/manage/ManageUser";
 import { Register } from "../components";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { getUsers } from "../features/admin/adminSlice";
-const Users = ({ users = null }) => {
+const Users = () => {
+  const { users } = useSelector((state) => state.admin);
   const [user, setUser] = useState();
   const [handleManageUser, isOpenManageUser] = useOpenModel();
   const [handleCreateUser, isOpenCreateUser] = useOpenModel();
