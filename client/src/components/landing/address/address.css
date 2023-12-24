@@ -1,0 +1,10 @@
+#address{
+
+}
+.address {
+    display: flex;
+    gap: 4px;
+    margin: 0 10px;
+    font: bold;
+  }
+  

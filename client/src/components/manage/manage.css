@@ -1,0 +1,12 @@
+.create{
+    background-color: greenyellow;
+}
+.edit{
+    background-color: skyblue;
+}
+.delete{
+    background-color: red;
+}
+/* .header,.form-label{
+    margin-bottom: 24px;
+} */
