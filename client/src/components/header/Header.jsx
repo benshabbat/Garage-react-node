@@ -1,12 +1,12 @@
 import "./header.css";
 import { Link, Outlet } from "react-router-dom";
 import { MyAccount, NavAdmin, NavUser, NavLanding } from "../index";
-
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-const Header = ({ userAuth = null, user = null }) => {
+import { getUser } from "../../features/user/userSlice";
+const Header = () => {
   const { user: userAuth } = useSelector((state) => state.auth);
-  const { messages, user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     if (userAuth?._id) dispatch(getUser(userAuth?._id));
@@ -19,7 +19,6 @@ const Header = ({ userAuth = null, user = null }) => {
             <Link to="/">Garage770</Link>
           </div>
           <div>
-            {userAuth === null && <NavLanding />}
             {user?.isAdmin !== undefined && (
               <>
                 {user?.isAdmin && <NavAdmin />}
@@ -32,6 +31,7 @@ const Header = ({ userAuth = null, user = null }) => {
                 </div>
               </>
             )}
+            {(userAuth === null || userAuth === undefined )&& <NavLanding />}
           </div>
         </div>
       </div>

@@ -3,19 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReqService from "../../components/create/ReqService";
 import useOpenModel from "../../hooks/useOpenModel";
-import { useDispatch } from "react-redux";
-import {
-  getCarsByIdUser,
-  getMessagesByIdUser,
-} from "../../features/user/userSlice";
-const Account = ({ user }) => {
+import {useSelector } from "react-redux";
+const Account = () => {
+  const {user } = useSelector((state) => state.user);
   const [car, setCar] = useState();
   const [handleReqService, isOpenReqService] = useOpenModel();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCarsByIdUser(user?._id));
-    dispatch(getMessagesByIdUser(user?._id));
-  }, []);
+
   const handelCar = (e) => {
     const { value } = e.target;
     console.log(e.target.value);
@@ -28,7 +21,6 @@ const Account = ({ user }) => {
   const onServices = (e) => {
     const { value } = e.target;
     console.log(e.target.value);
-    // setCar(user?.cars.find((c) => c._id === value));
     navigate(`/services/car/${value}`);
   };
   return (

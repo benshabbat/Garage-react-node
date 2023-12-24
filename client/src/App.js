@@ -28,12 +28,11 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header userAuth={userAuth} user={user} />
-
+        <Header />
         <Routes>
           <Route path="/" element={<PageLanding />} />
           <Route path="/check" element={<CheckFormWithPattern />} />
-          <Route path="/account" element={<Account user={user} />} />
+          <Route path="/account" element={<Account/>} />
           <Route path="/users" element={<Users users={users} />} />
           <Route
             path="/cars"
