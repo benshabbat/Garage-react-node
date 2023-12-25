@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
 import ManageUser from "../components/manage/ManageUser";
 import { Register } from "../components";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../features/admin/adminSlice";
 const Users = () => {
   const { users } = useSelector((state) => state.admin);
@@ -74,8 +74,8 @@ const Users = () => {
               {filterUsers ? filterUsers?.map(bodyUser) : users?.map(bodyUser)}
             </tbody>
           </table>
-          <button onClick={handleCreateUser}>Create User</button>
         </section>
+        <button onClick={handleCreateUser}>Create User</button>
       </div>
       <Register handelClick={handleCreateUser} isOpen={isOpenCreateUser} />
       <ManageUser
