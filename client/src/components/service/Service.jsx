@@ -1,12 +1,37 @@
 import "../table/table.css";
-import React from "react";
+import {useState} from "react";
 const Service = ({ carServices }) => {
+  const [filterServices, setFilterServices] = useState(carServices);
+  const filterSearch = (e) => {
+    const { value } = e.target;
+    setFilterServices(
+      carServices.filter(
+        (item) =>
+          item?.title.includes(value) ||
+          item?.description.includes(value) ||
+          item?.price.toString().includes(value) ||
+          item?.paid.includes(value)||
+          item?.status.includes(value)
+      )
+    );
+  };
   return (
+    <div className="table-container">
+    <section className="table__header">
+      <h1>Cars</h1>
+      <div className="input-group">
+        <input
+          type="search"
+          placeholder="Search Data..."
+          onChange={filterSearch}
+        />
+      </div>
+    </section>
     <section className="table__body">
       <table>
         <thead>
           <tr>
-            <th>title</th>
+          <th>title</th>
             <th>description</th>
             <th>price</th>
             <th>paid</th>
@@ -14,7 +39,7 @@ const Service = ({ carServices }) => {
           </tr>
         </thead>
         <tbody>
-          {carServices&&carServices?.map((service,index) => {
+        {filterServices&&filterServices?.map((service,index) => {
             return (
               <tr key={index}>
                 <td>{service?.title}</td>
@@ -31,8 +56,9 @@ const Service = ({ carServices }) => {
           })}
         </tbody>
       </table>
-      <br />
     </section>
+  </div>
+
   );
 };
 
