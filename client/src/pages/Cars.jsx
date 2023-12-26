@@ -20,7 +20,7 @@ const Cars = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCarsByType(user?._id));
-  }, [isOpenManageCar]);
+  }, [isOpenManageCar,isOpenModelDeleteCar,isOpenModelEditCar]);
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterCars(
