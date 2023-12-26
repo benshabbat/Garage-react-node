@@ -18,7 +18,7 @@ const Service = ({ carServices }) => {
   return (
     <div className="table-container">
     <section className="table__header">
-      <h1>Cars</h1>
+      <h1>My Services</h1>
       <div className="input-group">
         <input
           type="search"
