@@ -14,7 +14,7 @@ const Users = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
-  }, [isOpenManageUser]);
+  }, [isOpenManageUser,isOpenCreateUser]);
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterUsers(
