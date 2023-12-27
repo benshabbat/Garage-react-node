@@ -54,7 +54,6 @@ const ServicesAdmin = () => {
         <td>{service?.description}</td>
         <td>{service?.price}</td>
         <td>
-          {" "}
           <button
             name="editPadid"
             value={service?._id}

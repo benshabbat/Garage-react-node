@@ -12,7 +12,7 @@ const Services = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getServicesByIdCar(carId));
-  }, []);
+  }, [user]);
   const carService = (car) => {
     return (
       <div key={car?._id}>
