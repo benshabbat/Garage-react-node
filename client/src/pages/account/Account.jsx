@@ -29,13 +29,32 @@ const Account = () => {
     setFilterCars(
       user?.cars?.filter(
         (item) =>
-          item.username.includes(value) ||
           item.numberPlate.includes(value) ||
           item.km.toString().includes(value) ||
           item.brand.includes(value)
       )
     );
   };
+  const bodyAcc =(car)=>{
+    return(
+      <tr key={car._id}>
+      <td>{car.brand}</td>
+      <td>{car.numberPlate}</td>
+      <td>{car.km}</td>
+      <td>
+        <button value={car._id} onClick={onServices}>
+          services
+        </button>
+      </td>
+      <td>
+        <button value={car._id} onClick={handelCar}>
+          req services
+        </button>
+      </td>
+    </tr>
+    )
+
+  }
   return (
     <>
       {" "}
@@ -62,26 +81,7 @@ const Account = () => {
               </tr>
             </thead>
             <tbody>
-              {user?.cars?.[0]?._id &&
-                user?.cars?.map((car) => {
-                  return (
-                    <tr key={car._id}>
-                      <td>{car.brand}</td>
-                      <td>{car.numberPlate}</td>
-                      <td>{car.km}</td>
-                      <td>
-                        <button value={car._id} onClick={onServices}>
-                          services
-                        </button>
-                      </td>
-                      <td>
-                        <button value={car._id} onClick={handelCar}>
-                          req services
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
+              {filterCars ? filterCars?.map(bodyAcc) :user?.cars?.map((bodyAcc))}
             </tbody>
           </table>
         </section>
