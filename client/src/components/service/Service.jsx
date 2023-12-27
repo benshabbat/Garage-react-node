@@ -15,6 +15,23 @@ const Service = ({ carServices }) => {
       )
     );
   };
+  const bodyService =(service,index) => {
+    return (
+      <tr key={index}>
+        <td>{service?.title}</td>
+        <td>{service?.description}</td>
+        <td>{service?.price}</td>
+        <td>{service?.paid && "paid"}</td>
+        <td>
+          <div className={`status ${service?.status}`}>
+            {service?.status}
+          </div>
+        </td>
+      </tr>
+    );
+  }
+
+  
   return (
     <div className="table-container">
     <section className="table__header">
@@ -39,21 +56,7 @@ const Service = ({ carServices }) => {
           </tr>
         </thead>
         <tbody>
-        {filterServices&&filterServices?.map((service,index) => {
-            return (
-              <tr key={index}>
-                <td>{service?.title}</td>
-                <td>{service?.description}</td>
-                <td>{service?.price}</td>
-                <td>{service?.paid && "paid"}</td>
-                <td>
-                  <div className={`status ${service?.status}`}>
-                    {service?.status}
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
+        {filterServices&&filterServices?.map(bodyService)}
         </tbody>
       </table>
     </section>
