@@ -1,11 +1,14 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components";
-import {Account,Services,Messages,PageLanding,Users,Cars,ServicesAdmin} from "./pages";
+import {Account,Services,Messages,PageLanding,Users,Cars,ServicesAdmin,} from "./pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CheckFormWithPattern from "./components/CheckFormWithPattern";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
+
+//Want to check what is the best practice for lazy loading
+
 
 function App() {
   return (
