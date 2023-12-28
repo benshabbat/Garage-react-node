@@ -1,12 +1,15 @@
 import "../table/table.css";
+import { useEffect } from "react";
 import { useState } from "react";
 const Service = ({ carServices }) => {
   const [filterServices, setFilterServices] = useState(carServices);
+
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterServices(
       carServices.filter(
         (item) =>
+          item.car?.numberPlate.includes(value) ||
           item?.title.includes(value) ||
           item?.description.includes(value) ||
           item?.price.toString().includes(value) ||
@@ -18,6 +21,7 @@ const Service = ({ carServices }) => {
   const bodyService = (service) => {
     return (
       <tr key={service?._id}>
+        <td>{service?.car?.numberPlate}</td>
         <td>{service?.title}</td>
         <td>{service?.description}</td>
         <td>{service?.price}</td>
@@ -45,6 +49,7 @@ const Service = ({ carServices }) => {
         <table>
           <thead>
             <tr>
+              <th>car</th>
               <th>title</th>
               <th>description</th>
               <th>price</th>
