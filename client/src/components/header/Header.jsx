@@ -20,7 +20,7 @@ const Header = () => {
             <Link to="/">Garage770</Link>
           </div>
           <div>
-            {user?.isAdmin !== undefined ? (
+            {user ? (
               user?.isAdmin ? (
                 <NavAdmin user={user} />
               ) : (
