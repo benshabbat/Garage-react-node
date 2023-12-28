@@ -20,13 +20,15 @@ const Header = () => {
             <Link to="/">Garage770</Link>
           </div>
           <div>
-            {user?.isAdmin !== undefined && (
-              <>
-                {user?.isAdmin && <NavAdmin user={user} />}
-                {user?.isAdmin === false && <NavUser user={user} />}
-              </>
+            {user?.isAdmin !== undefined ? (
+              user?.isAdmin ? (
+                <NavAdmin user={user} />
+              ) : (
+                <NavUser user={user} />
+              )
+            ) : (
+              (userAuth === null || userAuth === undefined) && <NavLanding />
             )}
-            {(userAuth === null || userAuth === undefined) && <NavLanding />}
           </div>
         </div>
       </div>
