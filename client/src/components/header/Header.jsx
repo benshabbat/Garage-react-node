@@ -1,7 +1,7 @@
 import "./header.css";
 import { Link, Outlet } from "react-router-dom";
 import { MyAccount, NavAdmin, NavUser, NavLanding } from "../index";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
 const Header = () => {
@@ -35,7 +35,10 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <Suspense fallback={<h1>Loading..</h1>}>
+
       <Outlet />
+      </Suspense>
     </>
   );
 };
