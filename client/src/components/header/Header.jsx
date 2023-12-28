@@ -11,6 +11,7 @@ const Header = () => {
   useEffect(() => {
     if (userAuth?._id) dispatch(getUser(userAuth?._id));
   }, [userAuth]);
+
   return (
     <>
       <div className="main-header">
@@ -21,23 +22,16 @@ const Header = () => {
           <div>
             {user?.isAdmin !== undefined && (
               <>
-                {user?.isAdmin && <NavAdmin />}
-                {user?.isAdmin === false && <NavUser />}
-                <div className="item-nav">
-                  <Link to={`/messages`}>Messages</Link>
-                </div>
-                <div className="item-nav dropdown">
-                  <MyAccount user={user} />
-                </div>
+                {user?.isAdmin && <NavAdmin user={user} />}
+                {user?.isAdmin === false && <NavUser user={user} />}
               </>
             )}
-            {(userAuth === null || userAuth === undefined )&& <NavLanding />}
+            {(userAuth === null || userAuth === undefined) && <NavLanding />}
           </div>
         </div>
       </div>
       <Suspense fallback={<h1>Loading..</h1>}>
-
-      <Outlet />
+        <Outlet />
       </Suspense>
     </>
   );
