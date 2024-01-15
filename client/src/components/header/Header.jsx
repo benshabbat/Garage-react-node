@@ -1,6 +1,6 @@
 import "./header.css";
 import { Link, Outlet } from "react-router-dom";
-import { NavAdmin, NavUser, NavLanding } from "../index";
+import { MyAccount, NavAdmin, NavUser, NavLanding } from "../index";
 import { Suspense, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
