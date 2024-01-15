@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form, OpenModel } from "../index";
 import { updateUser } from "../../Utils";
 const EditUser = ({ handelClick, isOpen, user }) => {
