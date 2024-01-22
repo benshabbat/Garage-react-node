@@ -18,18 +18,19 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
         <Routes>
-          <Route path="/" element={<PageLanding />} />
-          <Route path="/check" element={<CheckFormWithPattern />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/cars" element={<Cars />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/services" element={<ServicesAdmin />} />
-          <Route path="/services/user/" element={<Services />} />
-          <Route path="/services/car/:carId" element={<Services />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="/" element={<Header />}>
+            <Route path="/" element={<PageLanding />} />
+            <Route path="/check" element={<CheckFormWithPattern />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/cars" element={<Cars />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/services" element={<ServicesAdmin />} />
+            <Route path="/services/user/" element={<Services />} />
+            <Route path="/services/car/:carId" element={<Services />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       <ToastContainer />
