@@ -14,16 +14,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CheckFormWithPattern from "./components/CheckFormWithPattern";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
-
-//Want to check what is the best practice for lazy loading
-
 function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
         <Routes>
-          <Route path="/" element={<Header />} />
           <Route path="/" element={<PageLanding />} />
           <Route path="/check" element={<CheckFormWithPattern />} />
           <Route path="/account" element={<Account />} />
