@@ -20,6 +20,7 @@ const Header = () => {
             <Link to="/">Garage770</Link>
           </div>
           <div>
+            {console.log(userAuth)}
             {user ? (
               user?.isAdmin ? (
                 <NavAdmin user={user} />
