@@ -26,11 +26,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use("/api/auth", authRoute);
-app.use("/api/users", usersRoute);
-app.use("/api/cars", carsRoute);
-app.use("/api/services", servicesRoute);
-app.use("/api/messages", messagesRoute);
-app.use("/api/reviews", reviewsRoute);
+app.use("/users", usersRoute);
+app.use("/cars", carsRoute);
+app.use("/services", servicesRoute);
+app.use("/messages", messagesRoute);
+app.use("/reviews", reviewsRoute);
 
 
 // app.use(errorHandler())
