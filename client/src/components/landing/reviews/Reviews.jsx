@@ -42,14 +42,14 @@ const Reviews = () => {
   return (
     <div id="reviews">
       <h1>Reviews</h1>
-      <div>
+      <div className="reviews-container">
         <Carousel infinite={true} responsive={responsive}>
           {allReviews.map((customer, index) => {
             return <Review customer={customer} key={index} />;
           })}
         </Carousel>
       </div>
-      <button className="btn" onClick={handelClick}>
+      <button className="btn-review" onClick={handelClick}>
         Add Review
       </button>
       {<CreateReviews handelClick={handleAddReview} isOpen={isOpenAddReview} />}

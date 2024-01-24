@@ -1,31 +1,28 @@
 #reviews {
-  display: flex;
-  flex-direction: column;
   background-color: rgb(185, 206, 249);
-  text-align: center;
-  
 }
 #reviews h1 {
   font-size: 22px;
+  text-align: center;
 }
-
 .reviews-container {
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(185, 206, 249);
 }
 
-.btn {
+.btn-review {
   background-color: rgb(142, 154, 222);
   width: 120px;
   height: 60px;
   border-radius: 20px;
-  margin: auto;
 }
 
 .one-review {
+  margin: auto;
   background-color: blanchedalmond;
   max-width: 220px;
   height: 220px;
-  
 }
 
 .one-review h1 {
