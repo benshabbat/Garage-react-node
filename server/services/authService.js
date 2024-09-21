@@ -14,8 +14,8 @@ function templatePhone(phone) {
 const register = async (req) => {
   const { username, phone, email, password } = req.body;
   const newNumberPlate = templatePhone(phone);
-  //Check if User Exist
-  const userExists = await User.findOne({ username });
+  //Check if User Exist;
+  const userExists = await User.findOne({ username })
   if (userExists) return next(createError(400, "User already Exists"));
 
   // Hash password
