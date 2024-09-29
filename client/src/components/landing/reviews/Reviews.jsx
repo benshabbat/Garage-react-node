@@ -44,7 +44,7 @@ const Reviews = () => {
       <h1>Reviews</h1>
       <div className="reviews-container">
         <Carousel infinite={true} responsive={responsive}>
-          {allReviews.map((customer, index) => {
+          {allReviews?.map((customer, index) => {
             return <Review customer={customer} key={index} />;
           })}
         </Carousel>
