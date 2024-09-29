@@ -30,7 +30,7 @@ const Register = ({ handelClick, isOpen }) => {
         <Form
           setData={setFormData}
           title="Create User"
-          sec_title="enter your name & password"
+          sec_title=""
           inputs={[
             {
               name: "username",
