@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { valid } from "../../validation/Valid";
+import { valid } from "../../validation/valid";
 const Input = ({ i, index, handleChange, isFocus }) => {
   const [isBlur, setIsBlur] = useState(false);
   const ref = useRef();
