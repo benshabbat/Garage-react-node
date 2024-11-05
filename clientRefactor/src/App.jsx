@@ -10,7 +10,6 @@ import {
   Cars,
   ServicesAdmin,
 } from "./pages";
-import CheckFormWithPattern from "./components/CheckFormWithPattern";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Header />}>
             <Route path="/" element={<PageLanding />} />
-            <Route path="/check" element={<CheckFormWithPattern />} />
             <Route path="/account" element={<Account />} />
             <Route path="/users" element={<Users />} />
             <Route path="/cars" element={<Cars />} />
