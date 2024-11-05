@@ -51,6 +51,7 @@
   padding: 1.5rem;
   border-radius: 0.5rem;
   resize: none;
+  margin-bottom: 20px;
 }
 .form-label textarea {
   height: 150px;
@@ -61,6 +62,7 @@
   background-color: rgb(255, 255, 255);
 }
 .form-btn {
+  margin-top: 20px;
   background-color: rgb(142, 154, 222);
   width: 120px;
   height: 60px;
