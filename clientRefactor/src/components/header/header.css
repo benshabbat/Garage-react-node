@@ -26,3 +26,13 @@
   float: left;
   margin-right: 12px;
 }
+
+
+.item-nav:hover {
+  color: #484646;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}

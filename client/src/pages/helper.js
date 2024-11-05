@@ -76,7 +76,7 @@ export function useClouser() {
   const resService = servicesFilter
     ? servicesFilter?.map(bodyServices)
     : services?.map(bodyServices);
-  return {
+  return [
     bodyServices,
     filterSearch,
     servicesFilter,
@@ -87,5 +87,5 @@ export function useClouser() {
     services,
     handelService,
     resService
-  };
+  ];
 }
