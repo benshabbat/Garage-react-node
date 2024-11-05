@@ -5,10 +5,11 @@ const Input = ({ i, index, handleChange, isFocus }) => {
   const ref = useRef();
   const [iputsType, setIputsType] = useState({});
     useEffect(() => {
-    inputType(i?.name);
+    inputType(i);
   }, [i?.name]);
-  const inputType = (name) => {
-    switch (name) {
+  
+  const inputType = (i) => {
+    switch (i?.name) {
       case "email":
         return setIputsType({
           title: "regex@gmail.com",
