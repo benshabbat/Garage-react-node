@@ -1,25 +1,10 @@
-
+const PHONE_REGEX = /^[0-9]{3}[-][0-9]{7}|[0-9]{10}$/;
 const ValidPhone = (data) => {
-    // debugger;
-    if (data?.length === 11 ) {
-      for (let i = 0; i < data.length; i++) {
-       if (data?.length === 11) {
-          if (i === 3 && data[i] === "-") {
-            i++;
-          }
-          if (+data[i]) {
-            return true;
-          }
-        } else {
-          return false;
-        }
-      }
-    }
-  
-    if (data?.length === 10 && +data) {
-      return true;
-    } else {
-      return false;
-    }
+    if (
+      (data?.length === 10 && +data) ||
+      (data?.length === 11 && data.at(3) === "-")
+    ) {
+      return PHONE_REGEX.test(data);
+    } else return false;
   };
-  export default ValidPhone;
+export default ValidPhone;
