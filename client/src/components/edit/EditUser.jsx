@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Form, OpenModel } from "../index";
 import { updateUser } from "../../Utils";
 import { validPhone, validPass } from "../../validation/Valid";
 const EditUser = ({ handelClick, isOpen, user }) => {
-  const { users } = useSelector((state) => state?.admin);
   const [formData, setFormData] = useState(user);
   const onSubmit = async (e) => {
     e.preventDefault();
