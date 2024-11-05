@@ -1,13 +1,10 @@
-import "../components/table/table.css";
 import { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
-import ManageService from "../components/manage/ManageService";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../features/admin/adminSlice";
-import EditStatusService from "../components/edit/EditStatusService";
-import EditPaidService from "../components/edit/EditPaidService";
-const ServicesAdmin = () => {
-  const { services} = useSelector((state) => state.admin);
+
+export function useClouser() {
+  const { services } = useSelector((state) => state.admin);
   const [servicesFilter, setServicesFilter] = useState();
   const [service, setService] = useState();
   const [handelService, isOpenService] = useOpenModel();
@@ -75,57 +72,20 @@ const ServicesAdmin = () => {
       </tr>
     );
   };
-  return (
-    <>
-      <div className="table-container">
-        <section className="table__header">
-          <h1>Services</h1>
-          <div className="input-group">
-            <input
-              type="search"
-              placeholder="Search Data..."
-              onChange={filterSearch}
-            />
-          </div>
-        </section>
-        <section className="table__body">
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>car</th>
-                <th>title</th>
-                <th>description</th>
-                <th>price</th>
-                <th>paid</th>
-                <th>status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {servicesFilter
-                ? servicesFilter?.map(bodyServices)
-                : services?.map(bodyServices)}
-            </tbody>
-          </table>
-        </section>
-      </div>
-      <ManageService
-        service={service}
-        handelClick={handelService}
-        isOpen={isOpenService}
-      />
-      <EditStatusService
-        service={service}
-        handelClick={handleStatus}
-        isOpen={isOpenStatus}
-      />
-      <EditPaidService
-        service={service}
-        handelClick={handlePaid}
-        isOpen={isOpenPaid}
-      />
-    </>
-  );
-};
 
-export default ServicesAdmin;
+  const resService = servicesFilter
+    ? servicesFilter?.map(bodyServices)
+    : services?.map(bodyServices);
+  return {
+    bodyServices,
+    filterSearch,
+    servicesFilter,
+    service,
+    isOpenService,
+    isOpenStatus,
+    isOpenPaid,
+    services,
+    handelService,
+    resService
+  };
+}
