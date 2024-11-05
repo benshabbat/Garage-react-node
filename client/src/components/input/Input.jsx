@@ -1,9 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { valid } from "../../validation/valid";
 const Input = ({ i, index, handleChange, isFocus }) => {
   const [isBlur, setIsBlur] = useState(false);
   const ref = useRef();
   const [iputsType, setIputsType] = useState({});
+
+  useEffect(() => {
+    inputType(i?.name);
+  }, [i?.name]);
+
   const inputType = (name) => {
     switch (name) {
       case "email":
@@ -26,15 +31,12 @@ const Input = ({ i, index, handleChange, isFocus }) => {
       case "numberPlate":
         return setIputsType({
           title: "Number of car must 00-000-00 OR 000-00-000",
-          errorMessage: "Your Car numer is wrong",
+          errorMessage: "Your Car number is wrong",
         });
       default:
         return setIputsType({ title: i?.title, errorMessage: i?.errorMessage });
     }
   };
-  useEffect(() => {
-    inputType(i?.name);
-  }, [i?.name]);
 
   return (
     <label className="form-label">
