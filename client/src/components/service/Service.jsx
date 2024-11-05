@@ -1,5 +1,4 @@
 import "../table/table.css";
-import { useEffect } from "react";
 import { useState } from "react";
 const Service = ({ carServices }) => {
   const [filterServices, setFilterServices] = useState(carServices);
