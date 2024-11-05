@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { OpenModel, Form } from "..";
-import { createMessage,createMessageToAdmin } from "../../Utils";
+import { createMessage,createMessageToAdmin } from "../../utils";
 
 const CreateMessage = ({ handelClick, isOpen ,user,users=null }) => {
   const [formData, setFormData] = useState({

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, OpenModel } from "../index";
-import { updateUser } from "../../Utils";
+import { updateUser } from "../../utils";
 import { validPhone, validPass } from "../../validation/valid";
 const EditUser = ({ handelClick, isOpen, user }) => {
   const [formData, setFormData] = useState(user);

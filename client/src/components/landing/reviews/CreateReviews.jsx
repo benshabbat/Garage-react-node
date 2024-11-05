@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Rating } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { OpenModel } from "../../index";
-import { createReview } from "../../../Utils";
+import { createReview } from "../../../utils";
 const CreateReviews = ({ handelClick, isOpen }) => {
   const nameRef = useRef();
   const descRef = useRef();

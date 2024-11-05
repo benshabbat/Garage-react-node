@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { getServices } from "../../features/admin/adminSlice";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { deleteService } from "../../Utils";
+import { deleteService } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { OpenModel } from "../index";
 import EditService from "../edit/EditService";

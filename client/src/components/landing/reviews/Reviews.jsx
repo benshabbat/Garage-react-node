@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { CreateReviews, Review } from "../../index";
 import Carousel from "react-multi-carousel";
 import useOpenModel from "../../../hooks/useOpenModel";
-import { getReviews } from "../../../Utils";
+import { getReviews } from "../../../utils";
 const Reviews = () => {
   const [handleAddReview, isOpenAddReview] = useOpenModel();
   const [allReviews, setAllReviews] = useState([]);

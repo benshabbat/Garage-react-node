@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { getUsers } from "../../features/admin/adminSlice";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { deleteUser } from "../../Utils";
+import { deleteUser } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { CreateCar, OpenModel, EditUser } from "../index";
 const ManageUser = ({

@@ -2,7 +2,7 @@ import "./manage.css";
 import React from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CreateService from "../create/CreateService";
-import { deleteCar } from "../../Utils";
+import { deleteCar } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { OpenModel, EditCar } from "../index";
 import {BsPencilSquare} from "react-icons/bs"

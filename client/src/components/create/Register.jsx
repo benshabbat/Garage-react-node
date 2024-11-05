@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { createUser } from "../../Utils";
+import { createUser } from "../../utils";
 import { Form, OpenModel } from "..";
 import { validPhone, validPass, validEmail } from "../../validation/valid";
 

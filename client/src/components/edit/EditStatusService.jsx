@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, OpenModel } from "../index";
-import { updateService } from "../../Utils";
+import { updateService } from "../../utils";
 const EditStatusService = ({ handelClick, isOpen, service }) => {
   const [formData, setFormData] = useState(service);
   const onSubmit = async (e) => {

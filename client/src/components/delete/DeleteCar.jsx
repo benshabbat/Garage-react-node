@@ -1,6 +1,6 @@
 import React from "react";
 import { OpenModel } from "../index";
-import { deleteCar } from "../../Utils";
+import { deleteCar } from "../../utils";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 const DeleteCar = ({
