@@ -24,6 +24,9 @@
   color: white;
   text-align: center;
 }
+.sec_title{
+  color:wheat;
+}
 .form-label {
   display: flex;
   flex-direction: column;

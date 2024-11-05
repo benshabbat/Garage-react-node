@@ -26,7 +26,7 @@ const Form = ({
         <CancelIcon onClick={handelClick} className="form-close" />
       )}
       <h1 className="header">{title}</h1>
-      <h2>{sec_title}</h2>
+      <h2 className="sec_title">{sec_title}</h2>
 
       {options && (
         <label className="form-label">
@@ -59,7 +59,7 @@ const Form = ({
         );
       })}
       <button type="submit" className="form-btn">
-        {title}
+        Save
       </button>
     </form>
   );
