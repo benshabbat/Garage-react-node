@@ -9,7 +9,7 @@ const Review = ({ customer, index }) => {
       <h1>{customer.name}</h1>
       <Rating value={customer.stars} readOnly />
       <div className="desc">{customer.description}</div>
-      <div className="desc">
+      <div className="time">
         {moment(customer.updatedAt).startOf("ss").fromNow()}
       </div>
     </div>
