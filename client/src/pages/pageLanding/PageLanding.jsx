@@ -8,12 +8,12 @@ import {
   ServicesLanding,
   Contact,
 } from "../../components";
-import Carousel from "../../components/landing/reviews/Carousel";
+// import CardSwiper from "../../components/landing/reviews/CardSwiper";
 
 const PageLanding = () => {
   return (
     <div className="main">
-      <Carousel/>
+      {/* <CardSwiper/> */}
       <Home />
       <About />
       <ServicesLanding />
