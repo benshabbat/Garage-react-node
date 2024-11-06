@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Rating } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { OpenModel } from "../../index";
@@ -9,7 +9,7 @@ const CreateReviews = ({ handelClick, isOpen }) => {
   const numRef = useRef();
   const maxLength = 80;
   const [stars, setStars] = useState(5);
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState(undefined);
   const addReview = (e) => {
     e.preventDefault();
     setFormData({
@@ -21,13 +21,13 @@ const CreateReviews = ({ handelClick, isOpen }) => {
   };
 
   useEffect(() => {
-    if (formData) {
+    if (formData !== undefined) {
       const newReview = async () => {
         await createReview(formData);
       };
       newReview();
     }
-    setFormData();
+    setFormData(undefined);
   }, [formData]);
 
   return (

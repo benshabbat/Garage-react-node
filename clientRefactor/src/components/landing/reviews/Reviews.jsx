@@ -1,6 +1,6 @@
 import "./reviews.css";
 import "react-multi-carousel/lib/styles.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CreateReviews, Review } from "../../index";
 import Carousel from "react-multi-carousel";
 import useOpenModel from "../../../hooks/useOpenModel";
@@ -53,8 +53,6 @@ const Reviews = () => {
         Add Review
       </button>
       {<CreateReviews handelClick={handleAddReview} isOpen={isOpenAddReview} />}
-
-      
     </div>
   );
 };

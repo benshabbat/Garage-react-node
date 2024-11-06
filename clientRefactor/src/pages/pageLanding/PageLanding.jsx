@@ -1,5 +1,4 @@
 import "./pageLanding.css";
-import React from "react";
 import Home from "../home/Home";
 import {
   Reviews,

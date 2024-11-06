@@ -8,10 +8,12 @@ import {
   ServicesLanding,
   Contact,
 } from "../../components";
+import Carousel from "../../components/landing/reviews/Carousel";
 
 const PageLanding = () => {
   return (
     <div className="main">
+      <Carousel/>
       <Home />
       <About />
       <ServicesLanding />

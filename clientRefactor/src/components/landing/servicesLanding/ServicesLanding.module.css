@@ -1,0 +1,13 @@
+.main {
+    background-color: #676161;
+}
+
+.main ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.main ul li {
+    color:rgb(127, 163, 255)
+}
