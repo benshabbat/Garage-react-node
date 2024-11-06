@@ -1,5 +1,6 @@
 #reviews {
   background-color: rgb(185, 206, 249);
+  align-items: center;
 }
 #reviews h1 {
   font-size: 22px;
@@ -9,7 +10,6 @@
   display: flex;
   flex-direction: column;
   background-color: rgb(185, 206, 249);
-  
 }
 
 .btn-review {
@@ -17,6 +17,11 @@
   width: 120px;
   height: 60px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 12px auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .one-review {

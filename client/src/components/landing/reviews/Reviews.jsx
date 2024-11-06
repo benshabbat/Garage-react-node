@@ -15,7 +15,7 @@ const Reviews = () => {
       setAllReviews(data);
     };
     reviews();
-    console.log("model")
+    console.log("model");
   }, [isOpenAddReview]);
   const handelClick = () => {
     handleAddReview();
@@ -53,8 +53,6 @@ const Reviews = () => {
         Add Review
       </button>
       {<CreateReviews handelClick={handleAddReview} isOpen={isOpenAddReview} />}
-
-      
     </div>
   );
 };
