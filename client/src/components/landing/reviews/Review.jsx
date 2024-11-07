@@ -1,4 +1,3 @@
-import React from "react";
 import moment from "moment";
 import StarRating from "./StarRating";
 const Review = ({ customer }) => {
