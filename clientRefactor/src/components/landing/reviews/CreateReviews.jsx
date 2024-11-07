@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { OpenModel } from "../../index";
 import { createReview } from "../../../utils";
