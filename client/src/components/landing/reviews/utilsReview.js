@@ -26,13 +26,17 @@ export function useSwiper(children, numCardsPreview) {
   return { getVisibleCards, nextCard, prevCard, currentIndex, indexPagination };
 }
 
-
-export function useRating(defaultRating,maxRating,disabled,onRatingChange,size){
+export function useRating({
+  defaultRating = 0,
+  maxRating = 5,
+  disabled = false,
+  onRatingChange,
+  size = "medium"}
+) {
   const [rating, setRating] = useState(defaultRating);
   const [hover, setHover] = useState(0);
   const stars = [...Array(maxRating)];
-
-  
+  const isDisabled = disabled;
   const getFontSize = () => {
     switch (size) {
       case "small":
@@ -43,8 +47,8 @@ export function useRating(defaultRating,maxRating,disabled,onRatingChange,size){
         return "28px";
     }
   };
-  const fontSize = getFontSize()
-  
+  const fontSize = getFontSize();
+
   const handleClick = (value) => {
     if (!disabled) {
       setRating(value);
@@ -56,12 +60,10 @@ export function useRating(defaultRating,maxRating,disabled,onRatingChange,size){
     }
   };
 
+  const isActive = (starValue) => (hover || rating) >= starValue;
 
+  const mouseOnStar = (starValue) => !disabled && setHover(starValue);
+  const mouseOffStar = () => !disabled && setHover(0);
 
-  const isActive =  (starValue) => (hover || rating) >= starValue;
-
-  const mouseOnStar = (starValue) => !disabled && setHover(starValue)
-  const mouseOffStar = () => !disabled && setHover(0)
-  
-  return {fontSize,handleClick,stars,mouseOnStar,mouseOffStar,isActive}
+  return { fontSize, handleClick, stars, mouseOnStar, mouseOffStar, isActive,isDisabled };
 }
