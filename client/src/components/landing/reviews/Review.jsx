@@ -1,14 +1,15 @@
-import moment from "moment";
 import StarRating from "./StarRating";
+import { getMomentFromUpdatedAt } from "./utilsReview";
 const Review = ({ customer }) => {
+  const { theTimeAgo } = getMomentFromUpdatedAt(customer.updatedAt);
+
   return (
-    <div className="one-review" >
+    <div className="one-review">
+      {console.log(customer)}
       <h1>{customer.name}</h1>
-      <StarRating defaultRating={customer.stars} disabled={true}/>
+      <StarRating defaultRating={customer.stars} disabled={true} />
       <div className="desc">{customer.description}</div>
-      <div className="time">
-        {moment(customer.updatedAt).startOf("ss").fromNow()}
-      </div>
+      <div className="time">{theTimeAgo}</div>
     </div>
   );
 };

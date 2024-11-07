@@ -31,8 +31,8 @@ export function useRating({
   maxRating = 5,
   disabled = false,
   onRatingChange,
-  size = "medium"}
-) {
+  size = "medium",
+}) {
   const [rating, setRating] = useState(defaultRating);
   const [hover, setHover] = useState(0);
   const stars = [...Array(maxRating)];
@@ -65,5 +65,69 @@ export function useRating({
   const mouseOnStar = (starValue) => !disabled && setHover(starValue);
   const mouseOffStar = () => !disabled && setHover(0);
 
-  return { fontSize, handleClick, stars, mouseOnStar, mouseOffStar, isActive,isDisabled };
+  return {
+    fontSize,
+    handleClick,
+    stars,
+    mouseOnStar,
+    mouseOffStar,
+    isActive,
+    isDisabled,
+  };
+}
+
+export function getMomentFromUpdatedAt(updatedAt) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const date = new Date(updatedAt);
+  const now = new Date();
+  const secondsAgo = Math.floor((now - date) / 1000);
+  const minutesAgo = Math.floor(secondsAgo / 60);
+  const hoursAgo = Math.floor(minutesAgo / 60);
+  const daysAgo = Math.floor(hoursAgo / 24);
+  const monthsAgo = Math.floor(daysAgo / 30);
+  const yearsAgo = Math.floor(monthsAgo / 12);
+
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const formattedHours = hours % 12 || 12;
+
+  let timeAgo;
+  if (secondsAgo < 60) {
+    timeAgo = `${secondsAgo} seconds`;
+  } else if (minutesAgo < 60) {
+    timeAgo = `${minutesAgo} minutes`;
+  } else if (hoursAgo < 24) {
+    timeAgo = `${hoursAgo} hours`;
+  } else if (daysAgo < 30) {
+    timeAgo = `${daysAgo} days`;
+  } else if (monthsAgo < 12) {
+    timeAgo = `${monthsAgo} months`;
+  } else {
+    timeAgo = `${yearsAgo} years`;
+  }
+  const theDate = `${day}/${month}/${year}`;
+  const theTime = `${formattedHours}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}${ampm}`;
+  const theTimeAgo = `${timeAgo} ago`;
+  return { theDate, theTime, theTimeAgo, months };
 }
