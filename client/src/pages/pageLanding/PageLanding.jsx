@@ -20,7 +20,7 @@ const PageLanding = () => {
         <Contact />
       </div>
       <Reviews />
-      <footer>Written By Menachem & DavidChen</footer>
+      <footer>Written By David-Chen Benshabbat</footer>
     </div>
   );
 };

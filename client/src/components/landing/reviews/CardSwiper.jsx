@@ -1,34 +1,32 @@
-// CardSwiper.jsx
-import { useState } from "react";
 import "./CardSwiper.css";
+import { useState } from "react";
 
 const CardSwiper = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerView = 4;
   const totalCards = children.length;
 
-  // פונקציה שמחזירה את המערך של הכרטיסים שצריכים להיות מוצגים כרגע
-  const getVisibleCards = () => {
+  const getVisibleCards = (data) => {
     let visibleCards = [];
     for (let i = 0; i < cardsPerView; i++) {
       const index = (currentIndex + i) % totalCards;
-      visibleCards.push(children[index]);
+      visibleCards.push(data[index]);
     }
     return visibleCards;
   };
 
   const nextCard = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalCards);
+    setCurrentIndex((prev) => prev + 1);
   };
 
   const prevCard = () => {
-    setCurrentIndex((prev) => (prev - 1 + totalCards) % totalCards);
+    setCurrentIndex((prev) => prev - 1 + totalCards);
   };
 
   return (
     <div className="swiper-container">
       <div className="swiper-wrapper">
-        <div className="swiper-slides">{getVisibleCards()}</div>
+        <div className="swiper-slides">{getVisibleCards(children)}</div>
 
         <button onClick={prevCard} className="nav-button prev-button">
           ❮
@@ -43,7 +41,9 @@ const CardSwiper = ({ children }) => {
         {children.map((_, index) => (
           <button
             key={index}
-            className={`dot ${currentIndex === index ? "active" : ""}`}
+            className={`dot ${
+              currentIndex % totalCards === index ? "active" : ""
+            }`}
             onClick={() => setCurrentIndex(index)}
           />
         ))}
