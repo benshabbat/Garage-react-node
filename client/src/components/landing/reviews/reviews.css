@@ -6,11 +6,7 @@
   font-size: 22px;
   text-align: center;
 }
-.reviews-container {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(185, 206, 249);
-}
+
 
 .btn-review {
   background-color: rgb(142, 154, 222);

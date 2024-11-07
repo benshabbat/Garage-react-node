@@ -3,17 +3,15 @@ import React from "react";
 import Home from "../home/Home";
 import {
   Reviews,
-  Address,
+  // Address,
   About,
   ServicesLanding,
   Contact,
 } from "../../components";
-// import CardSwiper from "../../components/landing/reviews/CardSwiper";
 
 const PageLanding = () => {
   return (
     <div className="main">
-      {/* <CardSwiper/> */}
       <Home />
       <About />
       <ServicesLanding />

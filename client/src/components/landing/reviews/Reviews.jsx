@@ -19,17 +19,17 @@ const Reviews = () => {
   const handelClick = () => {
     handleAddReview();
   };
-  
+
   return (
     <div id="reviews">
       <h1>Reviews</h1>
-      <div className="reviews-container">
-        <CardSwiper>
+
+      <CardSwiper>
         {allReviews?.map((customer, index) => {
-            return <Review customer={customer} key={index} />;
-          })}
-        </CardSwiper>
-      </div>
+          return <Review customer={customer} key={index} />;
+        })}
+      </CardSwiper>
+
       <button className="btn-review" onClick={handelClick}>
         Add Review
       </button>
