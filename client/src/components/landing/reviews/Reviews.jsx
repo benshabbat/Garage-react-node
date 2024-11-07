@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { CreateReviews, Review } from "../../index";
 import useOpenModel from "../../../hooks/useOpenModel";
 import { getReviews } from "../../../utils";
-import CardSwiper from "./CardSwiper";
+import Swiper from "./Swiper";
 const Reviews = () => {
   const [handleAddReview, isOpenAddReview] = useOpenModel();
   const [allReviews, setAllReviews] = useState([]);
@@ -24,11 +24,11 @@ const Reviews = () => {
     <div id="reviews">
       <h1>Reviews</h1>
 
-      <CardSwiper>
+      <Swiper>
         {allReviews?.map((customer, index) => {
           return <Review customer={customer} key={index} />;
         })}
-      </CardSwiper>
+      </Swiper>
 
       <button className="btn-review" onClick={handelClick}>
         Add Review

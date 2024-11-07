@@ -1,7 +1,7 @@
-import "./CardSwiper.css";
+import "./swiper.css";
 import { useState } from "react";
 
-const CardSwiper = ({ children }) => {
+const Swiper = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerView = 4;
   const totalCards = children.length;
@@ -52,4 +52,4 @@ const CardSwiper = ({ children }) => {
   );
 };
 
-export default CardSwiper;
+export default Swiper;
