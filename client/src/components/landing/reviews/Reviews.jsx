@@ -24,7 +24,7 @@ const Reviews = () => {
     <div id="reviews">
       <h1>Reviews</h1>
 
-      <Swiper>
+      <Swiper numCardsPreview={4}>
         {allReviews?.map((customer, index) => {
           return <Review customer={customer} key={index} />;
         })}

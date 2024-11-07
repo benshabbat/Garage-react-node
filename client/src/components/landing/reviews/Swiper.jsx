@@ -1,28 +1,9 @@
 import "./swiper.css";
-import { useState } from "react";
+import { useSwiper } from "./utilsReview";
 
-const Swiper = ({ children }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const cardsPerView = 4;
-  const totalCards = children.length;
-
-  const getVisibleCards = (data) => {
-    let visibleCards = [];
-    for (let i = 0; i < cardsPerView; i++) {
-      const index = (currentIndex + i) % totalCards;
-      visibleCards.push(data[index]);
-    }
-    return visibleCards;
-  };
-
-  const nextCard = () => {
-    setCurrentIndex((prev) => prev + 1);
-  };
-
-  const prevCard = () => {
-    setCurrentIndex((prev) => prev - 1 + totalCards);
-  };
-
+const Swiper = ({ children ,numCardsPreview}) => {
+  const { getVisibleCards, nextCard, prevCard, currentIndex, indexPagination } =
+    useSwiper(children, numCardsPreview);
   return (
     <div className="swiper-container">
       <div className="swiper-wrapper">
@@ -42,9 +23,9 @@ const Swiper = ({ children }) => {
           <button
             key={index}
             className={`dot ${
-              currentIndex % totalCards === index ? "active" : ""
+              currentIndex % children.length === index ? "active" : ""
             }`}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => indexPagination(index)}
           />
         ))}
       </div>

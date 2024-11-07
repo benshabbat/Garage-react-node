@@ -10,7 +10,7 @@ const StarRating = ({
 }) => {
   const [rating, setRating] = useState(defaultRating);
   const [hover, setHover] = useState(0);
-
+  const stars = [...Array(maxRating)];
   const getFontSize = () => {
     switch (size) {
       case "small":
@@ -21,19 +21,22 @@ const StarRating = ({
         return "28px";
     }
   };
+  const fontSize = getFontSize()
 
   const handleClick = (value) => {
     if (!disabled) {
       setRating(value);
+      console.log(`set rating ${value}`);
       if (onRatingChange) {
         onRatingChange(value);
+        console.log(`set rating change ${value}`);
       }
     }
   };
 
   return (
     <div className="star-rating-container">
-      {[...Array(maxRating)].map((_, index) => {
+      {stars.map((_, index) => {
         const starValue = index + 1;
         const isActive = (hover || rating) >= starValue;
 
@@ -44,7 +47,7 @@ const StarRating = ({
             className={`star-button ${isActive ? "active" : ""} ${
               disabled ? "disabled" : ""
             }`}
-            style={{ fontSize: getFontSize() }}
+            style={{ fontSize }}
             onClick={() => handleClick(starValue)}
             onMouseEnter={() => !disabled && setHover(starValue)}
             onMouseLeave={() => !disabled && setHover(0)}
