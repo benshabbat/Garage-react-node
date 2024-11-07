@@ -110,6 +110,7 @@ export function getMomentFromUpdatedAt(updatedAt) {
   const seconds = date.getSeconds();
   const ampm = hours >= 12 ? "PM" : "AM";
   const formattedHours = hours % 12 || 12;
+  const formatted24Hours = hours % 24;
 
   let timeAgo;
   if (secondsAgo < 60) {
