@@ -1,6 +1,5 @@
 import "./form.css";
 import Input from "../input/Input";
-import CancelIcon from "@mui/icons-material/Cancel";
 const Form = ({
   title,
   sec_title,
@@ -23,7 +22,7 @@ const Form = ({
   return (
     <form className="form" onSubmit={onSubmit}>
       {handelClick && (
-        <CancelIcon onClick={handelClick} className="form-close" />
+        <div onClick={handelClick} className="form-close" >X</div>
       )}
       <h1 className="header">{title}</h1>
       <h2 className="sec_title">{sec_title}</h2>
