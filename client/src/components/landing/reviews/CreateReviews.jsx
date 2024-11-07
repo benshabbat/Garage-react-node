@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Rating } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { OpenModel } from "../../index";
 import { createReview } from "../../../utils";
+import StarRating from "./StarRating";
 const CreateReviews = ({ handelClick, isOpen }) => {
   const nameRef = useRef();
   const descRef = useRef();
@@ -37,13 +37,7 @@ const CreateReviews = ({ handelClick, isOpen }) => {
           <CancelIcon onClick={handelClick} className="form-close" />
           <h1>garage review</h1>
           <label className="form-label">
-            <Rating
-              style={{ fontSize: 45, top: "15px" }}
-              value={stars}
-              onChange={(event, newstars) => {
-                setStars(newstars);
-              }}
-            />
+            <StarRating onRatingChange={(value) => setStars(value)} />
           </label>
           <label className="form-label">
             <span>Name</span>
