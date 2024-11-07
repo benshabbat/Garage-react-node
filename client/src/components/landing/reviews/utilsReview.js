@@ -102,6 +102,7 @@ export function getMomentFromUpdatedAt(updatedAt) {
   const yearsAgo = Math.floor(monthsAgo / 12);
 
   const month = date.getMonth() + 1;
+  const monthName = months[date.getMonth()];
   const day = date.getDate();
   const year = date.getFullYear();
   const hours = date.getHours();
@@ -129,5 +130,5 @@ export function getMomentFromUpdatedAt(updatedAt) {
     .toString()
     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}${ampm}`;
   const theTimeAgo = `${timeAgo} ago`;
-  return { theDate, theTime, theTimeAgo, months };
+  return { theDate, theTime, theTimeAgo, monthName };
 }
