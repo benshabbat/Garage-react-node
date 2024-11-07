@@ -35,7 +35,7 @@ const CreateReviews = ({ handelClick, isOpen }) => {
       comp={
         <form className="form">
           <CancelIcon onClick={handelClick} className="form-close" />
-          <h1>garage review</h1>
+          <h1>Garage review</h1>
           <label className="form-label">
             <StarRating onRatingChange={(value) => setStars(value)} />
           </label>

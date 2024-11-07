@@ -23,5 +23,45 @@ export function useSwiper(children, numCardsPreview) {
   };
   const indexPagination = (index) => setCurrentIndex(index);
 
-  return {getVisibleCards, nextCard, prevCard, currentIndex, indexPagination};
+  return { getVisibleCards, nextCard, prevCard, currentIndex, indexPagination };
+}
+
+
+export function useRating(defaultRating,maxRating,disabled,onRatingChange,size){
+  const [rating, setRating] = useState(defaultRating);
+  const [hover, setHover] = useState(0);
+  const stars = [...Array(maxRating)];
+
+  
+  const getFontSize = () => {
+    switch (size) {
+      case "small":
+        return "20px";
+      case "large":
+        return "36px";
+      default:
+        return "28px";
+    }
+  };
+  const fontSize = getFontSize()
+  
+  const handleClick = (value) => {
+    if (!disabled) {
+      setRating(value);
+      console.log(`set rating ${value}`);
+      if (onRatingChange) {
+        onRatingChange(value);
+        console.log(`set rating change ${value}`);
+      }
+    }
+  };
+
+
+
+  const isActive =  (starValue) => (hover || rating) >= starValue;
+
+  const mouseOnStar = (starValue) => !disabled && setHover(starValue)
+  const mouseOffStar = () => !disabled && setHover(0)
+  
+  return {fontSize,handleClick,stars,mouseOnStar,mouseOffStar,isActive}
 }
