@@ -1,7 +1,7 @@
 import "../components/table/table.css";
 import ManageUser from "../components/manage/ManageUser";
 import { Register } from "../components";
-import { useUsers, bodyUser } from "./utilsUsers";
+import { useUsers, bodyUserForTable } from "./utilsUsers";
 const Users = () => {
   const {
     handleUser,
@@ -39,9 +39,7 @@ const Users = () => {
               </tr>
             </thead>
             <tbody>
-              {filterUsers
-                ? filterUsers?.map((user) => bodyUser(user, handleUser))
-                : users?.map((user) => bodyUser(user, handleUser))}
+              {bodyUserForTable(filterUsers,users,handleUser)}
             </tbody>
           </table>
         </section>

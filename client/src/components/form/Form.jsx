@@ -12,7 +12,9 @@ const Form = ({
   isFocus = true,
 }) => {
   const handleChange = (e) => {
+    console.log("check")
     const { name, value, checked, type } = e.target;
+    console.log(name)
     setData((prevState) => ({
       ...prevState,
       [name]: type === "checkbox" ? checked : value,

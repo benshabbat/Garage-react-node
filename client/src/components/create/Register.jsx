@@ -14,6 +14,7 @@ const Register = ({ handelClick, isOpen }) => {
     setIsValidUser(
       users.map((user) => user.username).includes(formData?.username)
     );
+   
     if (
       validPhone(formData?.phone) &&
       !isValidUser &&

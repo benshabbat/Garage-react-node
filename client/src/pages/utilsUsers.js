@@ -13,6 +13,7 @@ export function useUsers() {
 
   useEffect(() => {
     dispatch(getUsers());
+
   }, [isOpenManageUser, isOpenCreateUser]);
 
   const filterSearch = (e) => {
@@ -29,6 +30,7 @@ export function useUsers() {
   const handleUser = (e) => {
     if (e.target.value) {
       console.log(e.target.value);
+      
       setUser(users.find((user) => user._id === e.target.value));
       handleManageUser();
     }
@@ -60,3 +62,10 @@ export const bodyUser = (user, handleUser) => {
     </tr>
   );
 };
+
+export const bodyUserForTable = (filterUsers, users, handleUser) =>
+  filterUsers
+    ? filterUsers?.map((user) => bodyUser(user, handleUser))
+    : users?.map((user) => bodyUser(user, handleUser));
+
+// const res =
