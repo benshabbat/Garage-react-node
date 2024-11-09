@@ -45,7 +45,7 @@ const Users = () => {
         </section>
         <button onClick={handleCreateUser}>Create User</button>
       </div>
-      <Register handelClick={handleCreateUser} isOpen={isOpenCreateUser} />
+      <Register users={users} handelClick={handleCreateUser} isOpen={isOpenCreateUser} />
       <ManageUser
         user={user}
         handelClick={handleManageUser}

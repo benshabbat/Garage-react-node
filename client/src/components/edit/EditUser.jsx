@@ -4,6 +4,8 @@ import { updateUser } from "../../utils";
 import { validPhone, validPass } from "../../validation/valid";
 const EditUser = ({ handelClick, isOpen, user }) => {
   const [formData, setFormData] = useState(user);
+
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validPhone(formData?.phone) && validPass(formData?.password)) {
