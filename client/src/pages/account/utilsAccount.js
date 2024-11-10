@@ -9,19 +9,43 @@ export function useAccount() {
   const navigate = useNavigate();
 
   const handelCar = (e) => {
-    const { value } = e.target;
+    const { value, name } = e.target;
     console.log(e.target.value);
-    setCar(user?.cars.find((c) => c._id === value));
+    if(name==="services"){
+      onServices(value)
+    }
+    setCar(user?.cars.find((car) => car._id === value));
     handleReqService();
   };
 
-  const onServices = (e) => {
-    const { value } = e.target;
-    console.log(e.target.value);
+  const onServices = (value) => {
     navigate(`/services/car/${value}`);
   };
+  function useFilterAccount(){
+ 
+    const [filterCars, setFilterCars] = useState();
+  
+    const filterSearch = (e) => {
+      const { value } = e.target;
+      setFilterCars(
+        user?.cars?.filter(
+          (item) =>
+            item.numberPlate.includes(value) ||
+            item.km.toString().includes(value) ||
+            item.brand.includes(value)
+        )
+      );
+    };
+  
+    const bodyAccountForTable=()=>filterCars
+    ? filterCars?.map((car) => bodyAcc(car, handelCar))
+    : user?.cars?.map((car) => bodyAcc(car, handelCar))
+  
+    return { filterSearch, bodyAccountForTable };
+  }
+
   return {
-    onServices,
+    useFilterAccount,
     handelCar,
     car,
     isOpenReqService,
@@ -33,38 +57,38 @@ export function useAccount() {
 
 
 
-export function useFilterAccount(user,onServices, handelCar){
+// export function useFilterAccount(user, handelCar){
  
-  const [filterCars, setFilterCars] = useState();
+//   const [filterCars, setFilterCars] = useState();
 
-  const filterSearch = (e) => {
-    const { value } = e.target;
-    setFilterCars(
-      user?.cars?.filter(
-        (item) =>
-          item.numberPlate.includes(value) ||
-          item.km.toString().includes(value) ||
-          item.brand.includes(value)
-      )
-    );
-  };
+//   const filterSearch = (e) => {
+//     const { value } = e.target;
+//     setFilterCars(
+//       user?.cars?.filter(
+//         (item) =>
+//           item.numberPlate.includes(value) ||
+//           item.km.toString().includes(value) ||
+//           item.brand.includes(value)
+//       )
+//     );
+//   };
 
-  const bodyAccountForTable=()=>filterCars
-  ? filterCars?.map((car) => bodyAcc(car, onServices, handelCar))
-  : user?.cars?.map((car) => bodyAcc(car, onServices, handelCar))
+//   const bodyAccountForTable=()=>filterCars
+//   ? filterCars?.map((car) => bodyAcc(car, handelCar))
+//   : user?.cars?.map((car) => bodyAcc(car, handelCar))
 
-  return { filterSearch, bodyAccountForTable };
-}
+//   return { filterSearch, bodyAccountForTable };
+// }
 
 
-const bodyAcc = (car, onServices, handelCar) => {
+const bodyAcc = (car, handelCar) => {
   return (
     <tr key={car._id}>
       <td>{car.brand}</td>
       <td>{car.numberPlate}</td>
       <td>{car.km}</td>
       <td>
-        <button value={car._id} onClick={onServices}>
+        <button value={car._id} name={"services"} onClick={handelCar}>
           services
         </button>
       </td>

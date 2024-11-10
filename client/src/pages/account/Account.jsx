@@ -1,20 +1,10 @@
 import "./account.css";
 import ReqService from "../../components/create/ReqService";
-import { useAccount, useFilterAccount } from "./utilsAccount";
+import { useAccount,  } from "./utilsAccount";
 const Account = () => {
-  const {
-    onServices,
-    handelCar,
-    car,
-    isOpenReqService,
-    handleReqService,
-    user,
-  } = useAccount();
-  const { filterSearch, bodyAccountForTable } = useFilterAccount(
-    user,
-    onServices,
-    handelCar
-  );
+  const { car, isOpenReqService, handleReqService, user,useFilterAccount } =
+    useAccount();
+  const { filterSearch, bodyAccountForTable } = useFilterAccount();
   return (
     <>
       <div className="table-container">
