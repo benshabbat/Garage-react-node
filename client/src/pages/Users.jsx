@@ -1,7 +1,8 @@
 import "../components/table/table.css";
-import ManageUser from "../components/manage/ManageUser";
-import { Register } from "../components";
+// import ManageUser from "../components/manage/ManageUser";
+// import { Register } from "../components";
 import { useUsers, useFilterUsers } from "./utilsUsers";
+import MangeUsers from "./MangeUsers";
 const Users = () => {
   const {
     handleUser,
@@ -41,7 +42,15 @@ const Users = () => {
         </section>
         <button onClick={handleCreateUser}>Create User</button>
       </div>
-      <Register
+      <MangeUsers
+        user={user}
+        // users={users}
+        handleCreateUser={handleCreateUser}
+        isOpenCreateUser={isOpenCreateUser}
+        handleManageUser={handleManageUser}
+        isOpenManageUser={isOpenManageUser}
+      />
+      {/* <Register
         users={users}
         handelClick={handleCreateUser}
         isOpen={isOpenCreateUser}
@@ -50,7 +59,7 @@ const Users = () => {
         user={user}
         handelClick={handleManageUser}
         isOpen={isOpenManageUser}
-      />
+      /> */}
     </>
   );
 };
