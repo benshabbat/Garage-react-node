@@ -33,7 +33,7 @@ const Cars = () => {
       )
     );
   };
-  const handleCar = async (e) => {
+  const handleCar = (e) => {
     const { name } = e.target;
     setCar(cars.find((car) => car._id === e.target.value));
     if (name === "editCar") {

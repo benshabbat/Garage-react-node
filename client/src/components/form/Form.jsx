@@ -60,7 +60,7 @@ const Form = ({
         );
       })}
       <button type="submit" className="form-btn">
-        Save
+      {title}
       </button>
     </form>
   );

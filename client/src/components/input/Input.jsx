@@ -49,6 +49,7 @@ const Input = ({ i, index, handleChange, isFocus }) => {
           isBlur && <span className="error">{iputsType?.errorMessage}</span>}
 
       <input
+      
         ref={ref}
         pattern={i?.pattern}
         autoFocus={index === 0 && isFocus}

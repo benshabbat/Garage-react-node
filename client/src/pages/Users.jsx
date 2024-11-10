@@ -1,12 +1,10 @@
 import "../components/table/table.css";
 import ManageUser from "../components/manage/ManageUser";
 import { Register } from "../components";
-import { useUsers, bodyUserForTable } from "./utilsUsers";
+import { useUsers, useFilterUsers } from "./utilsUsers";
 const Users = () => {
   const {
     handleUser,
-    filterSearch,
-    filterUsers,
     handleCreateUser,
     user,
     users,
@@ -14,7 +12,7 @@ const Users = () => {
     handleManageUser,
     isOpenManageUser,
   } = useUsers();
-
+  const { filterSearch, bodyUserForTable } = useFilterUsers(users, handleUser);
   return (
     <>
       <div className="table-container">
@@ -38,14 +36,16 @@ const Users = () => {
                 <th>phone number</th>
               </tr>
             </thead>
-            <tbody>
-              {bodyUserForTable(filterUsers,users,handleUser)}
-            </tbody>
+            <tbody>{bodyUserForTable()}</tbody>
           </table>
         </section>
         <button onClick={handleCreateUser}>Create User</button>
       </div>
-      <Register users={users} handelClick={handleCreateUser} isOpen={isOpenCreateUser} />
+      <Register
+        users={users}
+        handelClick={handleCreateUser}
+        isOpen={isOpenCreateUser}
+      />
       <ManageUser
         user={user}
         handelClick={handleManageUser}

@@ -8,37 +8,27 @@ export function useUsers() {
   const [user, setUser] = useState();
   const [handleManageUser, isOpenManageUser] = useOpenModel();
   const [handleCreateUser, isOpenCreateUser] = useOpenModel();
-  const [filterUsers, setFilterUsers] = useState();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsers());
-
   }, [isOpenManageUser, isOpenCreateUser]);
 
-  const filterSearch = (e) => {
-    const { value } = e.target;
-    setFilterUsers(
-      users.filter(
-        (item) =>
-          item.username.includes(value) ||
-          item.email.includes(value) ||
-          item.phone.includes(value)
-      )
-    );
-  };
+
   const handleUser = (e) => {
     if (e.target.value) {
       console.log(e.target.value);
-      
+
       setUser(users.find((user) => user._id === e.target.value));
       handleManageUser();
     }
   };
+
+
+  
   return {
     handleUser,
-    filterSearch,
-    filterUsers,
     handleCreateUser,
     user,
     users,
@@ -48,7 +38,8 @@ export function useUsers() {
   };
 }
 
-export const bodyUser = (user, handleUser) => {
+
+const bodyUser = (user, handleUser) => {
   return (
     <tr key={user?._id}>
       <td>
@@ -63,9 +54,24 @@ export const bodyUser = (user, handleUser) => {
   );
 };
 
-export const bodyUserForTable = (filterUsers, users, handleUser) =>
-  filterUsers
+
+export function useFilterUsers(users, handleUser) {
+  const [filterUsers, setFilterUsers] = useState();
+
+  const filterSearch = (e) => {
+    const { value } = e.target;
+    setFilterUsers(
+      users.filter(
+        (item) =>
+          item.username.includes(value) ||
+          item.email.includes(value) ||
+          item.phone.includes(value)
+      )
+    );
+  };
+  const bodyUserForTable = () => filterUsers
     ? filterUsers?.map((user) => bodyUser(user, handleUser))
     : users?.map((user) => bodyUser(user, handleUser));
 
-// const res =
+  return { filterSearch, bodyUserForTable };
+}
