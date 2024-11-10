@@ -2,27 +2,31 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useOpenModel from "../../hooks/useOpenModel";
-export function useAccount(){
-    const { user } = useSelector((state) => state.user);
-    const [car, setCar] = useState();
-    const [handleReqService, isOpenReqService] = useOpenModel();
-    const [filterCars, setFilterCars] = useState();
-    const navigate = useNavigate();
+export function useAccount() {
+  const { user } = useSelector((state) => state.user);
+  const [car, setCar] = useState();
+  const [handleReqService, isOpenReqService] = useOpenModel();
+  const navigate = useNavigate();
 
-    const handelCar = (e) => {
-      const { value } = e.target;
-      console.log(e.target.value);
-      setCar(user?.cars.find((c) => c._id === value));
-      handleReqService();
-    };
-    
-    
-    const onServices = (e) => {
-      const { value } = e.target;
-      console.log(e.target.value);
-      navigate(`/services/car/${value}`);
-    };
-    
+  const handelCar = (e) => {
+    const { value, name } = e.target;
+    console.log(e.target.value);
+    if(name==="services"){
+      onServices(value)
+    }
+    setCar(user?.cars.find((car) => car._id === value));
+    handleReqService();
+  };
+
+  const onServices = (value) => {
+    navigate(`/services/car/${value}`);
+  };
+
+  
+  function useFilterAccount(){
+ 
+    const [filterCars, setFilterCars] = useState();
+  
     const filterSearch = (e) => {
       const { value } = e.target;
       setFilterCars(
@@ -34,20 +38,34 @@ export function useAccount(){
         )
       );
     };
+  
+    const bodyAccountForTable=()=>filterCars
+    ? filterCars?.map((car) => bodyAcc(car, handelCar))
+    : user?.cars?.map((car) => bodyAcc(car, handelCar))
+  
+    return { filterSearch, bodyAccountForTable };
+  }
 
-    return {filterSearch,onServices,handelCar,car,isOpenReqService,filterCars,handleReqService,user}
+  return {
+    useFilterAccount,
+    handelCar,
+    car,
+    isOpenReqService,
+    handleReqService,
+    user,
+  };
 }
 
 
 
-export const bodyAcc =(car,onServices,handelCar)=>{
-    return(
-      <tr key={car._id}>
+const bodyAcc = (car, handelCar) => {
+  return (
+    <tr key={car._id}>
       <td>{car.brand}</td>
       <td>{car.numberPlate}</td>
       <td>{car.km}</td>
       <td>
-        <button value={car._id} onClick={onServices}>
+        <button value={car._id} name={"services"} onClick={handelCar}>
           services
         </button>
       </td>
@@ -57,6 +75,5 @@ export const bodyAcc =(car,onServices,handelCar)=>{
         </button>
       </td>
     </tr>
-    )
-
-  }
+  );
+};

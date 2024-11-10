@@ -1,18 +1,10 @@
 import "./account.css";
 import ReqService from "../../components/create/ReqService";
-import { useAccount, bodyAcc } from "./utilsAccount";
+import { useAccount,  } from "./utilsAccount";
 const Account = () => {
-  const {
-    filterSearch,
-    onServices,
-    handelCar,
-    car,
-    isOpenReqService,
-    filterCars,
-    handleReqService,
-    user,
-  } = useAccount();
-
+  const { car, isOpenReqService, handleReqService, user,useFilterAccount } =
+    useAccount();
+  const { filterSearch, bodyAccountForTable } = useFilterAccount();
   return (
     <>
       <div className="table-container">
@@ -37,11 +29,7 @@ const Account = () => {
                 <th>Request Service</th>
               </tr>
             </thead>
-            <tbody>
-              {filterCars
-                ? filterCars?.map((car) => bodyAcc(car, onServices, handelCar))
-                : user?.cars?.map((car) => bodyAcc(car, onServices, handelCar))}
-            </tbody>
+            <tbody>{bodyAccountForTable()}</tbody>
           </table>
         </section>
       </div>
