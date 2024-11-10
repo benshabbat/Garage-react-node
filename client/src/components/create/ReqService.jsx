@@ -8,7 +8,7 @@ const ReqService = ({ handelClick, car, isOpen, user }) => {
     e.preventDefault();
     setFormData((prevState) => ({
       ...prevState,
-      title: car?.numberPlate.toString(),
+      // title: car?.numberPlate.toString(),
       from: user?._id,
     }));
     if (formData?.title) {
@@ -23,7 +23,9 @@ const ReqService = ({ handelClick, car, isOpen, user }) => {
           setData={setFormData}
           title="Request Service"
           inputs={[
-            { name: "title" },
+            { name: "title",
+              //  value: car?.numberPlate.toString()
+               },
             {name: "description"},
           ]}
           handelClick={handelClick}
