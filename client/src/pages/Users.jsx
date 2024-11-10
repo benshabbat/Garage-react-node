@@ -44,7 +44,6 @@ const Users = () => {
       </div>
       <MangeUsers
         user={user}
-        // users={users}
         handleCreateUser={handleCreateUser}
         isOpenCreateUser={isOpenCreateUser}
         handleManageUser={handleManageUser}

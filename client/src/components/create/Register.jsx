@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { createUser } from "../../utils";
 import { Form, OpenModel } from "..";
-import { validPhone, validPass, validEmail } from "../../validation/valid";
+import { isValidUserName } from "./utilsCreate";
 
-const Register = ({ handelClick, isOpen,users }) => {
+const Register = ({ handelClick, isOpen, users }) => {
   const [formData, setFormData] = useState();
   const [isValidUser, setIsValidUser] = useState(false);
 
@@ -12,13 +12,7 @@ const Register = ({ handelClick, isOpen,users }) => {
     setIsValidUser(
       users.map((user) => user.username).includes(formData?.username)
     );
-   
-    if (
-      validPhone(formData?.phone) &&
-      !isValidUser &&
-      validPass(formData?.password) &&
-      validEmail(formData?.email)
-    ) {
+    if (isValidUserName(formData,isValidUser)) {
       await createUser(formData);
       handelClick();
     }

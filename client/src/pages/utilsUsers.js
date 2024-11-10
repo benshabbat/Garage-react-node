@@ -38,7 +38,6 @@ export function useUsers() {
   };
 }
 
-
 const bodyUser = (user, handleUser) => {
   return (
     <tr key={user?._id}>
