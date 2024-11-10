@@ -6,7 +6,6 @@ export function useAccount() {
   const { user } = useSelector((state) => state.user);
   const [car, setCar] = useState();
   const [handleReqService, isOpenReqService] = useOpenModel();
-  const [filterCars, setFilterCars] = useState();
   const navigate = useNavigate();
 
   const handelCar = (e) => {
@@ -21,6 +20,22 @@ export function useAccount() {
     console.log(e.target.value);
     navigate(`/services/car/${value}`);
   };
+  return {
+    onServices,
+    handelCar,
+    car,
+    isOpenReqService,
+    handleReqService,
+    user,
+  };
+}
+
+
+
+
+export function useFilterAccount(user,onServices, handelCar){
+ 
+  const [filterCars, setFilterCars] = useState();
 
   const filterSearch = (e) => {
     const { value } = e.target;
@@ -34,19 +49,15 @@ export function useAccount() {
     );
   };
 
-  return {
-    filterSearch,
-    onServices,
-    handelCar,
-    car,
-    isOpenReqService,
-    filterCars,
-    handleReqService,
-    user,
-  };
+  const bodyAccountForTable=()=>filterCars
+  ? filterCars?.map((car) => bodyAcc(car, onServices, handelCar))
+  : user?.cars?.map((car) => bodyAcc(car, onServices, handelCar))
+
+  return { filterSearch, bodyAccountForTable };
 }
 
-export const bodyAcc = (car, onServices, handelCar) => {
+
+const bodyAcc = (car, onServices, handelCar) => {
   return (
     <tr key={car._id}>
       <td>{car.brand}</td>

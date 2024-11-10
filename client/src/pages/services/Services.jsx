@@ -1,5 +1,5 @@
 import "./services.css";
-import React, { useState, useEffect } from "react";
+import {useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Service from "../../components/service/Service";
 import { useSelector,useDispatch} from "react-redux"
@@ -12,7 +12,7 @@ const Services = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getServicesByIdCar(carId));
-  }, [user]);
+  }, [user,carId]);
   //need to work on services for user
   const carService = (car) => {
     return (
