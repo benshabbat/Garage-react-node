@@ -2,13 +2,12 @@ import { useState } from "react";
 import { createReqService } from "../../utils";
 import { OpenModel, Form } from "..";
 const ReqService = ({ handelClick, car, isOpen, user }) => {
-  
   const [formData, setFormData] = useState();
   const onSubmit = async (e) => {
     e.preventDefault();
     setFormData((prevState) => ({
       ...prevState,
-      // title: car?.numberPlate.toString(),
+      title: car?.numberPlate.toString(),
       from: user?._id,
     }));
     if (formData?.title) {
@@ -23,10 +22,8 @@ const ReqService = ({ handelClick, car, isOpen, user }) => {
           setData={setFormData}
           title="Request Service"
           inputs={[
-            { name: "title",
-              //  value: car?.numberPlate.toString()
-               },
-            {name: "description"},
+            { name: "title", value: car?.numberPlate.toString() },
+            { name: "description" },
           ]}
           handelClick={handelClick}
           onSubmit={onSubmit}
