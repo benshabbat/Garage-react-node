@@ -54,33 +54,6 @@ export function useAccount() {
   };
 }
 
-
-
-
-// export function useFilterAccount(user, handelCar){
- 
-//   const [filterCars, setFilterCars] = useState();
-
-//   const filterSearch = (e) => {
-//     const { value } = e.target;
-//     setFilterCars(
-//       user?.cars?.filter(
-//         (item) =>
-//           item.numberPlate.includes(value) ||
-//           item.km.toString().includes(value) ||
-//           item.brand.includes(value)
-//       )
-//     );
-//   };
-
-//   const bodyAccountForTable=()=>filterCars
-//   ? filterCars?.map((car) => bodyAcc(car, handelCar))
-//   : user?.cars?.map((car) => bodyAcc(car, handelCar))
-
-//   return { filterSearch, bodyAccountForTable };
-// }
-
-
 const bodyAcc = (car, handelCar) => {
   return (
     <tr key={car._id}>
