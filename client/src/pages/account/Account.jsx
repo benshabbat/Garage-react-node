@@ -14,7 +14,7 @@ const Account = () => {
             <input
               type="search"
               placeholder="Search Data..."
-              onChange={(e) => filterSearch(e)}
+              onChange={filterSearch}
             />
           </div>
         </section>
@@ -29,16 +29,16 @@ const Account = () => {
                 <th>Request Service</th>
               </tr>
             </thead>
-            <tbody>{bodyAccountForTable()}</tbody>
+            <tbody>{bodyAccountForTable}</tbody>
           </table>
         </section>
       </div>
       {
         <ReqService
-          car={car}
+          // car={car}
           handelClick={handleReqService}
           isOpen={isOpenReqService}
-          user={user}
+          // user={user}
         />
       }
     </>

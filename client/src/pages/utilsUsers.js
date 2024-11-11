@@ -68,7 +68,7 @@ export function useFilterUsers(users, handleUser) {
       )
     );
   };
-  const bodyUserForTable = () => filterUsers
+  const bodyUserForTable = filterUsers
     ? filterUsers?.map((user) => bodyUser(user, handleUser))
     : users?.map((user) => bodyUser(user, handleUser));
 

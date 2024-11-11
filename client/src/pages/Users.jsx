@@ -37,7 +37,7 @@ const Users = () => {
                 <th>phone number</th>
               </tr>
             </thead>
-            <tbody>{bodyUserForTable()}</tbody>
+            <tbody>{bodyUserForTable}</tbody>
           </table>
         </section>
         <button onClick={handleCreateUser}>Create User</button>

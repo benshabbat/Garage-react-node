@@ -22,7 +22,7 @@ const ReqService = ({ handelClick, car, isOpen, user }) => {
           setData={setFormData}
           title="Request Service"
           inputs={[
-            { name: "title", value: car?.numberPlate.toString() },
+            // { name: "title", value: car?.numberPlate.toString() },
             { name: "description" },
           ]}
           handelClick={handelClick}

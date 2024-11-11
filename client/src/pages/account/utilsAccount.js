@@ -11,8 +11,8 @@ export function useAccount() {
   const handelCar = (e) => {
     const { value, name } = e.target;
     console.log(e.target.value);
-    if(name==="services"){
-      onServices(value)
+    if (name === "services") {
+      onServices(value);
     }
     setCar(user?.cars.find((car) => car._id === value));
     handleReqService();
@@ -21,10 +21,9 @@ export function useAccount() {
   const onServices = (value) => {
     navigate(`/services/car/${value}`);
   };
-  function useFilterAccount(){
- 
+  function useFilterAccount() {
     const [filterCars, setFilterCars] = useState();
-  
+
     const filterSearch = (e) => {
       const { value } = e.target;
       setFilterCars(
@@ -36,24 +35,22 @@ export function useAccount() {
         )
       );
     };
-  
-    const bodyAccountForTable=()=>filterCars
-    ? filterCars?.map((car) => bodyAcc(car, handelCar))
-    : user?.cars?.map((car) => bodyAcc(car, handelCar))
-  
+
+    const bodyAccountForTable = filterCars
+      ? filterCars?.map((car) => bodyAcc(car, handelCar))
+      : user?.cars?.map((car) => bodyAcc(car, handelCar));
+
     return { filterSearch, bodyAccountForTable };
   }
 
   return {
     useFilterAccount,
-    handelCar,
     car,
     isOpenReqService,
     handleReqService,
     user,
   };
 }
-
 
 const bodyAcc = (car, handelCar) => {
   return (
