@@ -35,10 +35,10 @@ const Account = () => {
       </div>
       {
         <ReqService
-          // car={car}
+          car={car}
           handelClick={handleReqService}
           isOpen={isOpenReqService}
-          // user={user}
+          user={user}
         />
       }
     </>

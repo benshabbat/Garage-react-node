@@ -1,20 +1,9 @@
-import { useState } from "react";
-import { createReqService } from "../../utils";
 import { OpenModel, Form } from "..";
+import { useReqService } from "./utilsCreate";
 const ReqService = ({ handelClick, car, isOpen, user }) => {
-  const [formData, setFormData] = useState();
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setFormData((prevState) => ({
-      ...prevState,
-      title: car?.numberPlate.toString(),
-      from: user?._id,
-    }));
-    if (formData?.title) {
-      await createReqService(formData);
-      handelClick();
-    }
-  };
+  
+  const { setFormData,onSubmit} =useReqService(handelClick, car, user) 
+
   return (
     <OpenModel
       comp={
