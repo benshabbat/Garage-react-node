@@ -5,19 +5,18 @@ import Service from "../../components/service/Service";
 import { useSelector,useDispatch} from "react-redux"
 import { getServicesByIdCar } from "../../features/user/userSlice";
 const Services = () => {
-  const { user,services} = useSelector((state) => state.user);
+  const { user} = useSelector((state) => state.user);
   const { carId } = useParams();
   const carFilter = user?.cars?.filter((car) => car._id === carId);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getServicesByIdCar(carId));
-  }, [user]);
-  //need to work on services for user
+  }, []);
   const carService = (car) => {
     return (
       <div key={car?._id}>
         <h2 className="title">{car?.numberPlate}</h2>
-        <Service carServices={services} />
+        <Service />
       </div>
     );
   };

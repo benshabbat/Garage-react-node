@@ -1,30 +1,28 @@
 import "../table/table.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-
-//TODO FIX FILTESERVICE DOSENT WORK
-const Service = ({ carServices }) => {
-  const [filterServices, setFilterServices] = useState(carServices);
+const Service = () => {
+  const {services } = useSelector((state) => state.user);
+  const [filterServices, setFilterServices] = useState();
 
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterServices(
-      carServices.filter(
-        (item) =>
-          item.car?.numberPlate.includes(value) ||
-          item?.title.includes(value) ||
-          item?.description.includes(value) ||
-          item?.price.toString().includes(value) ||
-          item?.paid.includes(value) ||
-          item?.status.includes(value)
+      services.filter(
+        (service) =>
+          service?.title.includes(value) ||
+          service?.description.includes(value) ||
+          service?.price.toString().includes(value) ||
+          service?.paid.toString().includes(value) ||
+          service?.status.includes(value)
       )
     );
   };
   const bodyService = (service) => {
-    console.log(service)
+    console.log(service);
     return (
       <tr key={service?._id}>
-        {/* <td>{service?.car?.numberPlate}</td> */}
         <td>{service?.title}</td>
         <td>{service?.description}</td>
         <td>{service?.price}</td>
@@ -52,7 +50,6 @@ const Service = ({ carServices }) => {
         <table>
           <thead>
             <tr>
-              {/* <th>car</th> */}
               <th>title</th>
               <th>description</th>
               <th>price</th>
@@ -61,8 +58,8 @@ const Service = ({ carServices }) => {
             </tr>
           </thead>
           <tbody>
-            {console.log(filterServices?.map(bodyService))}
-            {carServices && carServices?.map(bodyService)}</tbody>
+            {filterServices? filterServices?.map(bodyService): services?.map(bodyService)}
+          </tbody>
         </table>
       </section>
     </div>
