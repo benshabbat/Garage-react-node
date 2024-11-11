@@ -1,14 +1,16 @@
 import "../table/table.css";
 import { useState } from "react";
-const Service = ({ carServices }) => {
-  const [filterServices, setFilterServices] = useState(carServices);
+import { useSelector,useDispatch} from "react-redux"
+const Service = () => {
+  const { services} = useSelector((state) => state.user);
+  const [filterServices, setFilterServices] = useState(services);
 
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterServices(
-      carServices.filter(
+      services.filter(
         (item) =>
-          item.car?.numberPlate.includes(value) ||
+          // item.car?.numberPlate.includes(value) ||
           item?.title.includes(value) ||
           item?.description.includes(value) ||
           item?.price.toString().includes(value) ||
@@ -57,7 +59,9 @@ const Service = ({ carServices }) => {
               <th>status</th>
             </tr>
           </thead>
-          <tbody>{filterServices && filterServices?.map(bodyService)}</tbody>
+          <tbody>
+            {console.log(filterServices?.map(bodyService))}
+            {services && services?.map(bodyService)}</tbody>
         </table>
       </section>
     </div>
