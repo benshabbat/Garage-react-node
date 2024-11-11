@@ -17,7 +17,7 @@ const Services = () => {
     return (
       <div key={car?._id}>
         <h2 className="title">{car?.numberPlate}</h2>
-        <Service  key={car?._id} />
+        <Service carServices={services} />
       </div>
     );
   };
