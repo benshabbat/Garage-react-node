@@ -4,6 +4,7 @@ import { CreateReviews, Review } from "../../index";
 import useOpenModel from "../../../hooks/useOpenModel";
 import { getReviews } from "../../../utils";
 import Swiper from "./Swiper";
+//TODO: to move logic of reviews to external functions
 const Reviews = () => {
   const [handleAddReview, isOpenAddReview] = useOpenModel();
   const [allReviews, setAllReviews] = useState([]);
