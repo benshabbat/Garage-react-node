@@ -2,7 +2,7 @@ import "./account.css";
 import ReqService from "../../components/create/ReqService";
 import { useAccount,  } from "./utilsAccount";
 const Account = () => {
-  const { car, isOpenReqService, handleReqService, user,useFilterAccount } =
+  const { car, isOpenReqService, handleReqService,useFilterAccount } =
     useAccount();
   const { filterSearch, bodyAccountForTable } = useFilterAccount();
   return (
@@ -38,7 +38,6 @@ const Account = () => {
           car={car}
           handelClick={handleReqService}
           isOpen={isOpenReqService}
-          user={user}
         />
       }
     </>

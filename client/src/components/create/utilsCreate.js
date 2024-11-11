@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createReqService,createUser } from "../../utils";
 import { validPhone, validPass, validEmail } from "../../validation/valid";
-
+import { useSelector } from "react-redux";
 
 export function useRegister(users,handelClick){
   const [formData, setFormData] = useState();
@@ -30,7 +30,8 @@ export const isValidUserName = (formData, isValidUser) => {
 };
 
 
-export function useReqService(handelClick, car, user) {
+export function useReqService(handelClick, car) {
+  const { user } = useSelector((state) => state.user);
   const [formData, setFormData] = useState();
   const onSubmit = async (e) => {
     e.preventDefault();

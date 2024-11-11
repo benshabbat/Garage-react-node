@@ -48,7 +48,6 @@ export function useAccount() {
     car,
     isOpenReqService,
     handleReqService,
-    user,
   };
 }
 
