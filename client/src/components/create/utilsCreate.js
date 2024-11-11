@@ -13,7 +13,7 @@ export const isValidUserName = (formData, isValidUser) => {
 
 //dosent work
 export function useReqService(handelClick, car, user) {
-  const [formData, setFormData] = useState({title: car?.numberPlate.toString()});
+  const [formData, setFormData] = useState();
   const onSubmit = async (e) => {
     e.preventDefault();
     setFormData((prevState) => ({
@@ -22,7 +22,7 @@ export function useReqService(handelClick, car, user) {
       from: user?._id,
     }));
     console.log(formData?.title) 
-    if (formData&&formData?.title) {
+    if (formData?.title) {
       console.log(formData) 
       await createReqService(formData);
       handelClick();
