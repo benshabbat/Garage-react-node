@@ -5,7 +5,7 @@ import useOpenModel from "../../hooks/useOpenModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
 
-function useMessages() {
+export function useMessages() {
   const { messages, user } = useSelector((state) => state.user);
   const { users } = useSelector((state) => state.admin);
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModel();
@@ -79,5 +79,24 @@ function useMessages() {
       </>
     );
   }
-  return {};
+  function PageMessages() {
+    return (
+      <>
+        <div className="table-container">
+          {Search()}
+          <TableMessages />
+        </div>
+        {/* why i need the condition */}
+        {user && (
+          <CreateMessage
+            handelClick={handleCreateMessage}
+            isOpen={isOpenCreateMessage}
+            user={user}
+            users={user?.isAdmin ? users : null}
+          />
+        )}
+      </>
+    );
+  }
+  return {PageMessages};
 }
