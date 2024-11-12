@@ -8,7 +8,6 @@ import { Register } from "../components";
 export function useUsers() {
   const { users } = useSelector((state) => state.admin);
   const [user, setUser] = useState();
-  const [searchVal, setSearchVal] = useState("")
   const [filterUsers, setFilterUsers] = useState();
   const [handleManageUser, isOpenManageUser] = useOpenModel();
   const [handleCreateUser, isOpenCreateUser] = useOpenModel();
@@ -30,7 +29,6 @@ export function useUsers() {
 
   const filterSearch = (e) => {
     const { value } = e.target;
-    setSearchVal(value)
     setFilterUsers(
       users?.filter(
         (item) =>
@@ -99,7 +97,6 @@ export function useUsers() {
 
   };
 
-  //dosent work
   function MangeUsers() {
     return (
       <>
@@ -127,7 +124,6 @@ export function useUsers() {
               type="search"
               placeholder="Search Data..."
               onChange={filterSearch}
-              value={searchVal}
             />
           </div>
         </section>
@@ -144,11 +140,5 @@ export function useUsers() {
     TableUsers,
     MangeUsers,
     filterSearch,
-    handleCreateUser,
-    user,
-    users,
-    isOpenCreateUser,
-    handleManageUser,
-    isOpenManageUser,
   };
 }
