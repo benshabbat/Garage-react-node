@@ -29,7 +29,45 @@ export function useSwiper(children, numCardsPreview) {
   };
   const indexPagination = (index) => setCurrentIndex(index);
 
-  return { getVisibleCards, nextCard, prevCard, currentIndex, indexPagination };
+
+
+  const PrevCard = () => {
+    return (
+      <button onClick={prevCard} className="nav-button prev-button">
+        ❮
+      </button>
+    );
+  };
+  const NextCard = () => {
+    return (
+      <button onClick={nextCard} className="nav-button next-button">
+        ❯
+      </button>
+    );
+  };
+
+  const Pagination = () => {
+    return (
+      <div className="pagination">
+        {children.map((_, index) => (
+          <button
+            key={index}
+            className={`dot ${
+              currentIndex % children.length === index ? "active" : ""
+            }`}
+            onClick={() => indexPagination(index)}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const Slides=()=>{
+    return (<div className="swiper-slides">{getVisibleCards(children)}</div>)
+  }
+  
+
+  return { Slides, NextCard, PrevCard, Pagination };
 }
 
 export function useRating({
