@@ -1,3 +1,12 @@
+import { useState, useEffect } from "react";
+import useOpenModel from "../hooks/useOpenModel";
+
+import { getCarsByType } from "../features/admin/adminSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import { BiSolidCarCrash, BiTrash } from "react-icons/bi";
+
+export function useCars() {
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
   const [car, setCar] = useState();
@@ -9,7 +18,8 @@
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCarsByType(user?._id));
-  }, [isOpenManageCar,isOpenModelDeleteCar,isOpenModelEditCar]);
+  }, [isOpenManageCar, isOpenModelDeleteCar, isOpenModelEditCar]);
+
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterCars(
@@ -27,10 +37,79 @@
     setCar(cars.find((car) => car._id === e.target.value));
     if (name === "editCar") {
       handleEditCar();
-    }
-    if (name === "createService") handleCreateService();
-    if (name === "deleteCar") {
+    } else if (name === "createService") {
+      handleCreateService();
+    } else if (name === "deleteCar") {
       handleDeleteCar();
+    } else {
+      handleManageCar();
     }
-    handleManageCar()
   };
+
+  const bodyCars = (car) => {
+    return (
+      <tr key={car?._id}>
+        <td>
+          <button name="deleteCar" value={car?._id} onClick={handleCar}>
+            <BiTrash />
+            Delete
+          </button>
+        </td>
+        <td>
+          <button value={car?._id} onClick={handleCar}>
+            Manage
+          </button>
+        </td>
+        <td>{car?.owner?.username}</td>
+        <td>
+          <button name="createService" value={car?._id} onClick={handleCar}>
+            <BiSolidCarCrash /> {car?.numberPlate}
+          </button>
+        </td>
+        <td>
+          <button name="editCar" value={car?._id} onClick={handleCar}>
+            {car?.km}
+          </button>
+        </td>
+        <td>{car?.brand}</td>
+      </tr>
+    );
+  };
+
+  const TableCars = () => {
+    return (
+      <section className="table__body">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>owner</th>
+              <th>numberPlate</th>
+              <th>km</th>
+              <th>brand</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filterCars ? filterCars?.map(bodyCars) : cars?.map(bodyCars)}
+          </tbody>
+        </table>
+      </section>
+    );
+  };
+
+  return {
+    car,
+    filterSearch,
+    TableCars,
+    handleEditCar,
+    isOpenModelEditCar,
+    handleCreateService,
+    isOpenModelCreateService,
+
+    handleDeleteCar,
+    isOpenModelDeleteCar,
+    handleManageCar,
+    isOpenManageCar,
+  };
+}
