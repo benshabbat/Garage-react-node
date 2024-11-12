@@ -1,19 +1,33 @@
 import "../components/table/table.css";
-// import ManageUser from "../components/manage/ManageUser";
-// import { Register } from "../components";
-import { useUsers, useFilterUsers } from "./utilsUsers";
-import MangeUsers from "./MangeUsers";
+import ManageUser from "../components/manage/ManageUser";
+import { Register } from "../components";
+import { useUsers } from "./utilsUsers";
+// import MangeUsers from "./MangeUsers";
 const Users = () => {
   const {
-    handleUser,
+    TableUsers,
     handleCreateUser,
     user,
     users,
     isOpenCreateUser,
     handleManageUser,
     isOpenManageUser,
+    filterSearch,Search
   } = useUsers();
-  const { filterSearch, bodyUserForTable } = useFilterUsers(users, handleUser);
+  // function Search() {
+  //   return (
+  //     <section className="table__header">
+  //       <h1>Users</h1>
+  //       <div className="input-group">
+  //         <input
+  //           type="search"
+  //           placeholder="Search Data..."
+  //           onChange={filterSearch}
+  //         />
+  //       </div>
+  //     </section>
+  //   );
+  // }
   return (
     <>
       <div className="table-container">
@@ -27,38 +41,20 @@ const Users = () => {
             />
           </div>
         </section>
-        <section className="table__body">
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>user name</th>
-                <th>email</th>
-                <th>phone number</th>
-              </tr>
-            </thead>
-            <tbody>{bodyUserForTable}</tbody>
-          </table>
-        </section>
-        <button onClick={handleCreateUser}>Create User</button>
+        <TableUsers />
       </div>
-      <MangeUsers
-        user={user}
-        handleCreateUser={handleCreateUser}
-        isOpenCreateUser={isOpenCreateUser}
-        handleManageUser={handleManageUser}
-        isOpenManageUser={isOpenManageUser}
-      />
-      {/* <Register
-        users={users}
-        handelClick={handleCreateUser}
-        isOpen={isOpenCreateUser}
-      />
-      <ManageUser
-        user={user}
-        handelClick={handleManageUser}
-        isOpen={isOpenManageUser}
-      /> */}
+      <>
+        <Register
+          users={users}
+          handelClick={handleCreateUser}
+          isOpen={isOpenCreateUser}
+        />
+        <ManageUser
+          user={user}
+          handelClick={handleManageUser}
+          isOpen={isOpenManageUser}
+        />
+      </>
     </>
   );
 };

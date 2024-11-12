@@ -3,9 +3,12 @@ import useOpenModel from "../hooks/useOpenModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../features/admin/adminSlice";
 
+import ManageUser from "../components/manage/ManageUser";
+import { Register } from "../components";
 export function useUsers() {
   const { users } = useSelector((state) => state.admin);
   const [user, setUser] = useState();
+  const [filterUsers, setFilterUsers] = useState();
   const [handleManageUser, isOpenManageUser] = useOpenModel();
   const [handleCreateUser, isOpenCreateUser] = useOpenModel();
 
@@ -15,7 +18,6 @@ export function useUsers() {
     dispatch(getUsers());
   }, [isOpenManageUser, isOpenCreateUser]);
 
-
   const handleUser = (e) => {
     if (e.target.value) {
       console.log(e.target.value);
@@ -24,38 +26,6 @@ export function useUsers() {
       handleManageUser();
     }
   };
-
-
-  
-  return {
-    handleUser,
-    handleCreateUser,
-    user,
-    users,
-    isOpenCreateUser,
-    handleManageUser,
-    isOpenManageUser,
-  };
-}
-
-const bodyUser = (user, handleUser) => {
-  return (
-    <tr key={user?._id}>
-      <td>
-        <button value={user?._id} onClick={handleUser}>
-          Manage
-        </button>
-      </td>
-      <td>{user?.username}</td>
-      <td>{user?.email}</td>
-      <td>{user?.phone}</td>
-    </tr>
-  );
-};
-
-
-export function useFilterUsers(users, handleUser) {
-  const [filterUsers, setFilterUsers] = useState();
 
   const filterSearch = (e) => {
     const { value } = e.target;
@@ -68,9 +38,87 @@ export function useFilterUsers(users, handleUser) {
       )
     );
   };
-  const bodyUserForTable = filterUsers
-    ? filterUsers?.map((user) => bodyUser(user, handleUser))
-    : users?.map((user) => bodyUser(user, handleUser));
 
-  return { filterSearch, bodyUserForTable };
+  //dosent work
+  function Search() {
+    return (
+      <section className="table__header">
+        <h1>Users</h1>
+        <div className="input-group">
+          <input
+            type="search"
+            placeholder="Search Data..."
+            onChange={filterSearch}
+          />
+        </div>
+      </section>
+    );
+  }
+
+  //dosent work
+  function MangeUsers() {
+    return (
+      <>
+        <Register
+          users={users}
+          handelClick={handleCreateUser}
+          isOpen={isOpenCreateUser}
+        />
+        <ManageUser
+          user={user}
+          handelClick={handleManageUser}
+          isOpen={isOpenManageUser}
+        />
+      </>
+    );
+  }
+
+  const bodyUser = (user) => {
+    return (
+      <tr key={user?._id}>
+        <td>
+          <button value={user?._id} onClick={handleUser}>
+            Manage
+          </button>
+        </td>
+        <td>{user?.username}</td>
+        <td>{user?.email}</td>
+        <td>{user?.phone}</td>
+      </tr>
+    );
+  };
+
+  const TableUsers = () => {
+    const bodyUserForTable = filterUsers
+      ? filterUsers?.map(bodyUser)
+      : users?.map(bodyUser);
+    return (
+      <>
+        <section className="table__body">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>user name</th>
+                <th>email</th>
+                <th>phone number</th>
+              </tr>
+            </thead>
+            <tbody>{bodyUserForTable}</tbody>
+          </table>
+        </section>
+        <button onClick={handleCreateUser}>Create User</button>
+      </>
+    );
+  };
+  return {Search,
+    TableUsers,
+    MangeUsers,
+    filterSearch,   handleCreateUser,
+    user,
+    users,
+    isOpenCreateUser,
+    handleManageUser,
+    isOpenManageUser,
+  };
 }
