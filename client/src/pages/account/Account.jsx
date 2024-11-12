@@ -6,25 +6,10 @@ import { useAccount } from "./utilsAccount";
 const Account = () => {
   const { car, isOpenReqService, handleReqService, useFilterAccount } =
     useAccount();
-  const { filterSearch, bodyAccountForTable } = useFilterAccount();
-  const TableAccount = () => {
-    return (
-      <section className="table__body">
-        <table>
-          <thead>
-            <tr>
-              <th>brand</th>
-              <th>numberPlate</th>
-              <th>km</th>
-              <th>history service</th>
-              <th>Request Service</th>
-            </tr>
-          </thead>
-          <tbody>{bodyAccountForTable}</tbody>
-        </table>
-      </section>
-    );
-  };
+  const { filterSearch,TableAccount} = useFilterAccount();
+
+
+
   return (
     <>
       <div className="table-container">

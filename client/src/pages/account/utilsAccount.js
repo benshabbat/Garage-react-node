@@ -40,9 +40,26 @@ export function useAccount() {
       ? filterCars?.map((car) => bodyAcc(car, handelCar))
       : user?.cars?.map((car) => bodyAcc(car, handelCar));
       
-      
+      const TableAccount = () => {
+        return (
+          <section className="table__body">
+            <table>
+              <thead>
+                <tr>
+                  <th>brand</th>
+                  <th>numberPlate</th>
+                  <th>km</th>
+                  <th>history service</th>
+                  <th>Request Service</th>
+                </tr>
+              </thead>
+              <tbody>{bodyAccountForTable}</tbody>
+            </table>
+          </section>
+        );
+      };
 
-    return { filterSearch, bodyAccountForTable };
+    return { filterSearch, TableAccount };
   }
 
   return {
