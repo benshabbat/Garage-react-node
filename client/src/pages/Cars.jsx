@@ -1,31 +1,16 @@
 import "../components/table/table.css";
 
-import ManageCar from "../components/manage/ManageCar";
 
-import EditCar from "../components/edit/EditCar";
-import CreateService from "../components/create/CreateService";
-
-import DeleteCar from "../components/delete/DeleteCar";
 import { useCars } from "./utilsCars";
 
 //TODO: to move logic to external file
 const Cars = () => {
   const {
-    car,
     TableCars,
-
     filterSearch,
-
-    handleEditCar,
-    isOpenModelEditCar,
-    handleCreateService,
-    isOpenModelCreateService,
-
-    handleDeleteCar,
-    isOpenModelDeleteCar,
-    handleManageCar,
-    isOpenManageCar,
+    HandelCars,
   } = useCars();
+
   return (
     <>
       <div className="table-container">
@@ -41,26 +26,7 @@ const Cars = () => {
         </section>
         <TableCars />
       </div>
-      <ManageCar
-        car={car}
-        handelClick={handleManageCar}
-        isOpen={isOpenManageCar}
-      />
-      <CreateService
-        car={car}
-        handelClick={handleCreateService}
-        isOpen={isOpenModelCreateService}
-      />
-      <EditCar
-        car={car}
-        handelClick={handleEditCar}
-        isOpen={isOpenModelEditCar}
-      />
-      <DeleteCar
-        car={car}
-        handelClick={handleDeleteCar}
-        isOpen={isOpenModelDeleteCar}
-      />
+      <HandelCars/>
     </>
   );
 };

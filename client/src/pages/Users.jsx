@@ -4,7 +4,6 @@ import { Register } from "../components";
 import { useUsers } from "./utilsUsers";
 // import MangeUsers from "./MangeUsers";
 
-
 //TODO: TO MAKE CUSTOM COMPONENTS AND TO MOVE THEM TO UTILS ACCOUNT
 
 //WHY I CANT TO CREATE COMPONENT OF SEARCH WHY DOSENT WORK!
@@ -18,8 +17,25 @@ const Users = () => {
     handleManageUser,
     isOpenManageUser,
     filterSearch,
-    Search,PageUsers
+    Search,
+    PageUsers,
   } = useUsers();
+  function HandleUsers() {
+    return (
+      <>
+        <Register
+          users={users}
+          handelClick={handleCreateUser}
+          isOpen={isOpenCreateUser}
+        />
+        <ManageUser
+          user={user}
+          handelClick={handleManageUser}
+          isOpen={isOpenManageUser}
+        />
+      </>
+    );
+  }
   return (
     <>
       <div className="table-container">
@@ -35,17 +51,7 @@ const Users = () => {
         </section>
         <TableUsers />
       </div>
-
-      <Register
-        users={users}
-        handelClick={handleCreateUser}
-        isOpen={isOpenCreateUser}
-      />
-      <ManageUser
-        user={user}
-        handelClick={handleManageUser}
-        isOpen={isOpenManageUser}
-      />
+      <HandleUsers />
     </>
   );
 };

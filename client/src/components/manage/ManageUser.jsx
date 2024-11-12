@@ -14,7 +14,7 @@ const ManageUser = ({
 const [handleCreateCar,isOpenModelCreateCar] = useOpenModel();
 const [handleEditUser,isOpenModelEditUser] = useOpenModel();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleUser = async (e) => {
     e.preventDefault();
@@ -27,7 +27,8 @@ const [handleEditUser,isOpenModelEditUser] = useOpenModel();
     if (name === "editUser") {
       handleEditUser();
     }
-    dispatch(getUsers());
+    // did problem for external components
+    // dispatch(getUsers());
     
   };
 

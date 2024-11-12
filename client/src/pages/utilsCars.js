@@ -6,6 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BiSolidCarCrash, BiTrash } from "react-icons/bi";
 
+
+import ManageCar from "../components/manage/ManageCar";
+
+import EditCar from "../components/edit/EditCar";
+import CreateService from "../components/create/CreateService";
+
+import DeleteCar from "../components/delete/DeleteCar";
 export function useCars() {
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
@@ -97,6 +104,30 @@ export function useCars() {
       </section>
     );
   };
+   function HandelCars(){
+    return (<>
+    <ManageCar
+        car={car}
+        handelClick={handleManageCar}
+        isOpen={isOpenManageCar}
+      />
+      <CreateService
+        car={car}
+        handelClick={handleCreateService}
+        isOpen={isOpenModelCreateService}
+      />
+      <EditCar
+        car={car}
+        handelClick={handleEditCar}
+        isOpen={isOpenModelEditCar}
+      />
+      <DeleteCar
+        car={car}
+        handelClick={handleDeleteCar}
+        isOpen={isOpenModelDeleteCar}
+      />
+    </>)
+}
 
   return {
     car,
@@ -111,5 +142,7 @@ export function useCars() {
     isOpenModelDeleteCar,
     handleManageCar,
     isOpenManageCar,
+    HandelCars
   };
 }
+

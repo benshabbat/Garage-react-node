@@ -57,23 +57,7 @@ export function useUsers() {
     );
   }
 
-  //dosent work
-  function MangeUsers() {
-    return (
-      <>
-        <Register
-          users={users}
-          handelClick={handleCreateUser}
-          isOpen={isOpenCreateUser}
-        />
-        <ManageUser
-          user={user}
-          handelClick={handleManageUser}
-          isOpen={isOpenManageUser}
-        />
-      </>
-    );
-  }
+
 
   const bodyUser = (user) => {
     return (
@@ -115,7 +99,23 @@ export function useUsers() {
 
   };
 
-
+  //dosent work
+  function MangeUsers() {
+    return (
+      <>
+        <Register
+          users={users}
+          handelClick={handleCreateUser}
+          isOpen={isOpenCreateUser}
+        />
+        <ManageUser
+          user={user}
+          handelClick={handleManageUser}
+          isOpen={isOpenManageUser}
+        />
+      </>
+    );
+  }
    //dosent work
   const PageUsers = () => {
     return (
