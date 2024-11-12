@@ -8,6 +8,9 @@ import EditCar from "../components/edit/EditCar";
 import CreateService from "../components/create/CreateService";
 import { BiSolidCarCrash, BiTrash } from "react-icons/bi";
 import DeleteCar from "../components/delete/DeleteCar";
+
+
+//TODO: to move logic to external file
 const Cars = () => {
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
@@ -43,7 +46,7 @@ const Cars = () => {
     if (name === "deleteCar") {
       handleDeleteCar();
     }
-    // }
+    handleManageCar()
   };
   const bodyCars = (car) => {
     return (
@@ -52,6 +55,11 @@ const Cars = () => {
           <button name="deleteCar" value={car?._id} onClick={handleCar}>
             <BiTrash />
             Delete
+          </button>
+        </td>
+        <td>
+          <button value={car?._id} onClick={handleCar}>
+            Manage
           </button>
         </td>
         <td>{car?.owner?.username}</td>
@@ -86,6 +94,7 @@ const Cars = () => {
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th></th>
                 <th>owner</th>
                 <th>numberPlate</th>
