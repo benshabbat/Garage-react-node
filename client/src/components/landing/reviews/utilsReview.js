@@ -1,10 +1,6 @@
 import { useState } from "react";
 
-
 //TODO:imporve this file maybe destructure to files
-
-
-
 
 export function useSwiper(children, numCardsPreview) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,8 +24,6 @@ export function useSwiper(children, numCardsPreview) {
     setCurrentIndex((prev) => prev - 1 + totalCards);
   };
   const indexPagination = (index) => setCurrentIndex(index);
-
-
 
   const PrevCard = () => {
     return (
@@ -62,12 +56,24 @@ export function useSwiper(children, numCardsPreview) {
     );
   };
 
-  const Slides=()=>{
-    return (<div className="swiper-slides">{getVisibleCards(children)}</div>)
-  }
-  
+  const Slides = () => {
+    return <div className="swiper-slides">{getVisibleCards(children)}</div>;
+  };
 
-  return { Slides, NextCard, PrevCard, Pagination };
+  const Layout = ({ children }) => {
+    return (
+      <div className="swiper-container">
+        <div className="swiper-wrapper">
+          {children}
+          <PrevCard />
+          <NextCard />
+        </div>
+        <Pagination />
+      </div>
+    );
+  };
+
+  return { Slides, Layout };
 }
 
 export function useRating({
