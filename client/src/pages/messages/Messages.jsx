@@ -58,7 +58,6 @@ const Messages = () => {
   function TableMessages() {
     return (
       <>
-        {" "}
         <section className="table__body">
           <table>
             <thead>
@@ -81,9 +80,12 @@ const Messages = () => {
       </>
     );
   }
-  return (
+  function PageMessages(){return(
     <>
-      <div className="table-container">{Search()}</div>
+      <div className="table-container">
+        {Search()}
+        <TableMessages />
+      </div>
       {/* why i need the condition */}
       {user && (
         <CreateMessage
@@ -94,6 +96,9 @@ const Messages = () => {
         />
       )}
     </>
+  )}
+  return (
+
   );
 };
 

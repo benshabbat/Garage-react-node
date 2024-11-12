@@ -53,5 +53,31 @@ function useMessages() {
       </section>
     );
   }
+
+  function TableMessages() {
+    return (
+      <>
+        <section className="table__body">
+          <table>
+            <thead>
+              <tr>
+                <th>from</th>
+                <th>to</th>
+                <th>title</th>
+                <th>description</th>
+                <th>date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filterMessages
+                ? filterMessages?.map(bodyMessages)
+                : messages?.map(bodyMessages)}
+            </tbody>
+          </table>
+        </section>
+        <button onClick={handleCreateMessage}>New Message</button>
+      </>
+    );
+  }
   return {};
 }
