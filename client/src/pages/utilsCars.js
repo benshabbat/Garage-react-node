@@ -1,3 +1,5 @@
+import "../components/table/table.css";
+
 import { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
 
@@ -7,11 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { BiSolidCarCrash, BiTrash } from "react-icons/bi";
 
 import ManageCar from "../components/manage/ManageCar";
-
 import EditCar from "../components/edit/EditCar";
 import CreateService from "../components/create/CreateService";
-
 import DeleteCar from "../components/delete/DeleteCar";
+
+
 export function useCars() {
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);

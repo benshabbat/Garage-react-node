@@ -1,5 +1,3 @@
-import "../components/table/table.css";
-
 import { useCars } from "./utilsCars";
 
 const Cars = () => {

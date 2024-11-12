@@ -1,3 +1,4 @@
+import "../components/table/table.css";
 import { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
 import { useDispatch, useSelector } from "react-redux";
