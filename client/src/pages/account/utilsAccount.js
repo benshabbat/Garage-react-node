@@ -21,6 +21,7 @@ export function useAccount() {
   const onServices = (value) => {
     navigate(`/services/car/${value}`);
   };
+
   function useFilterAccount() {
     const [filterCars, setFilterCars] = useState();
 
@@ -35,29 +36,62 @@ export function useAccount() {
         )
       );
     };
-
+    const bodyAcc = (car) => {
+      return (
+        <tr key={car._id}>
+          <td>{car.brand}</td>
+          <td>{car.numberPlate}</td>
+          <td>{car.km}</td>
+          <td>
+            <button value={car._id} name={"services"} onClick={handelCar}>
+              services
+            </button>
+          </td>
+          <td>
+            <button value={car._id} onClick={handelCar}>
+              req services
+            </button>
+          </td>
+        </tr>
+      );
+    };
     const bodyAccountForTable = filterCars
-      ? filterCars?.map((car) => bodyAcc(car, handelCar))
-      : user?.cars?.map((car) => bodyAcc(car, handelCar));
-      
-      const TableAccount = () => {
-        return (
-          <section className="table__body">
-            <table>
-              <thead>
-                <tr>
-                  <th>brand</th>
-                  <th>numberPlate</th>
-                  <th>km</th>
-                  <th>history service</th>
-                  <th>Request Service</th>
-                </tr>
-              </thead>
-              <tbody>{bodyAccountForTable}</tbody>
-            </table>
-          </section>
-        );
-      };
+      ? filterCars?.map(bodyAcc)
+      : user?.cars?.map(bodyAcc);
+
+    const TableAccount = () => {
+      return (
+        <section className="table__body">
+          <table>
+            <thead>
+              <tr>
+                <th>brand</th>
+                <th>numberPlate</th>
+                <th>km</th>
+                <th>history service</th>
+                <th>Request Service</th>
+              </tr>
+            </thead>
+            <tbody>{bodyAccountForTable}</tbody>
+          </table>
+        </section>
+      );
+    };
+
+    const Search = () => {
+      return (
+        <section className="table__header">
+          <h1>My Cars</h1>
+          <div className="input-group">
+            <input
+              type="search"
+              placeholder="Search Data..."
+              onChange={filterSearch}
+            />
+          </div>
+        </section>
+      );
+    };
 
     return { filterSearch, TableAccount };
   }
@@ -69,23 +103,3 @@ export function useAccount() {
     handleReqService,
   };
 }
-
-const bodyAcc = (car, handelCar) => {
-  return (
-    <tr key={car._id}>
-      <td>{car.brand}</td>
-      <td>{car.numberPlate}</td>
-      <td>{car.km}</td>
-      <td>
-        <button value={car._id} name={"services"} onClick={handelCar}>
-          services
-        </button>
-      </td>
-      <td>
-        <button value={car._id} onClick={handelCar}>
-          req services
-        </button>
-      </td>
-    </tr>
-  );
-};

@@ -8,8 +8,7 @@ const Account = () => {
     useAccount();
   const { filterSearch,TableAccount} = useFilterAccount();
 
-
-
+  
   return (
     <>
       <div className="table-container">
