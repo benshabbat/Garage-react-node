@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+
+//TODO:imporve this file maybe destructure to files
+
+
+
+
 export function useSwiper(children, numCardsPreview) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerView = numCardsPreview;

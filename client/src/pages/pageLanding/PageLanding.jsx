@@ -3,7 +3,7 @@ import React from "react";
 import Home from "../home/Home";
 import {
   Reviews,
-  // Address,
+  Address,
   About,
   ServicesLanding,
   Contact,
@@ -16,7 +16,7 @@ const PageLanding = () => {
       <About />
       <ServicesLanding />
       <div className="address_and_contact">
-        {/* <Address /> */}
+        <Address />
         <Contact />
       </div>
       <Reviews />

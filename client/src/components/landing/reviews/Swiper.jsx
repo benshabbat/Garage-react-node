@@ -1,9 +1,10 @@
 import "./swiper.css";
 import { useSwiper } from "./utilsReview";
 
-const Swiper = ({ children ,numCardsPreview}) => {
+const Swiper = ({ children, numCardsPreview }) => {
   const { getVisibleCards, nextCard, prevCard, currentIndex, indexPagination } =
     useSwiper(children, numCardsPreview);
+
   return (
     <div className="swiper-container">
       <div className="swiper-wrapper">
