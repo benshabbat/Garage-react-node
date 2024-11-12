@@ -5,6 +5,7 @@ import useOpenModel from "../../hooks/useOpenModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
 import { getUsers } from "../../features/admin/adminSlice";
+import { deleteMessage } from "../../utils";
 
 export function useMessages() {
   const { messages, user } = useSelector((state) => state.user);
@@ -13,7 +14,7 @@ export function useMessages() {
   const [filterMessages, setFilterMessages] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUsers());
+    if (user?.isAdmin) dispatch(getUsers());
     if (user) dispatch(getMessagesByIdUser(user?._id));
   }, [user, isOpenCreateMessage, dispatch]);
   const filterSearch = (e) => {
@@ -32,6 +33,17 @@ export function useMessages() {
   const bodyMessages = (message) => {
     return (
       <tr key={message?._id}>
+        {user?.isAdmin && (
+          <td>
+            <button
+              name="deleteMessage"
+              value={message?._id}
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          </td>
+        )}
         <td>{message?.from?.username}</td>
         <td>{message?.to?.username}</td>
         <td>{message?.title}</td>
@@ -39,6 +51,13 @@ export function useMessages() {
         <td>{message?.updatedAt}</td>
       </tr>
     );
+  };
+
+  const handleDelete = async (e) => {
+    const { name, value } = e.target;
+    if (name === "deleteMessage") {
+      await deleteMessage(value);
+    }
   };
 
   function Search() {
@@ -63,6 +82,7 @@ export function useMessages() {
           <table>
             <thead>
               <tr>
+                {user?.isAdmin && <th>delete</th>}
                 <th>from</th>
                 <th>to</th>
                 <th>title</th>
