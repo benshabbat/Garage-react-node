@@ -10,32 +10,12 @@ import { useUsers } from "./utilsUsers";
 const Users = () => {
   const {
     TableUsers,
-    handleCreateUser,
-    user,
-    users,
-    isOpenCreateUser,
-    handleManageUser,
-    isOpenManageUser,
+    MangeUsers,
     filterSearch,
     Search,
     PageUsers,
   } = useUsers();
-  function HandleUsers() {
-    return (
-      <>
-        <Register
-          users={users}
-          handelClick={handleCreateUser}
-          isOpen={isOpenCreateUser}
-        />
-        <ManageUser
-          user={user}
-          handelClick={handleManageUser}
-          isOpen={isOpenManageUser}
-        />
-      </>
-    );
-  }
+
   return (
     <>
       <div className="table-container">
@@ -51,7 +31,7 @@ const Users = () => {
         </section>
         <TableUsers />
       </div>
-      <HandleUsers />
+      <MangeUsers />
     </>
   );
 };
