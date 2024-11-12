@@ -4,6 +4,7 @@ import CreateMessage from "../../components/create/CreateMessage";
 import useOpenModel from "../../hooks/useOpenModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
+import { getUsers } from "../../features/admin/adminSlice";
 
 export function useMessages() {
   const { messages, user } = useSelector((state) => state.user);
@@ -12,6 +13,7 @@ export function useMessages() {
   const [filterMessages, setFilterMessages] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getUsers());
     if (user) dispatch(getMessagesByIdUser(user?._id));
   }, [user, isOpenCreateMessage, dispatch]);
   const filterSearch = (e) => {
@@ -98,5 +100,5 @@ export function useMessages() {
       </>
     );
   }
-  return {PageMessages};
+  return { PageMessages };
 }
