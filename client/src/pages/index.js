@@ -1,4 +1,4 @@
-import { lazy } from "react";
+// import { lazy } from "react";
 export { default as Account } from "./account/Account";
 export { default as Home } from "./home/Home";
 export { default as PageLanding } from "./pageLanding/PageLanding";
