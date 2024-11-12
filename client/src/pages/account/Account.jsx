@@ -6,9 +6,14 @@ import { useAccount } from "./utilsAccount";
 
 //WHY I CANT TO CREATE COMPONENT OF SEARCH WHY DOSENT WORK!
 const Account = () => {
-  const { car, isOpenReqService, handleReqService, useFilterAccount } =
-    useAccount();
-  const { Search, filterSearch, TableAccount } = useFilterAccount();
+  const {
+    car,
+    isOpenReqService,
+    handleReqService,
+    // Search,
+    filterSearch,
+    TableAccount,
+  } = useAccount();
 
   return (
     <>
@@ -23,7 +28,7 @@ const Account = () => {
             />
           </div>
         </section>
-        <Search />
+        {/* <Search /> */}
         <TableAccount />
       </div>
       <ReqService
