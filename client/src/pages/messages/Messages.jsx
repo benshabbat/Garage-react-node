@@ -41,19 +41,24 @@ const Messages = () => {
       </tr>
     );
   };
-  return (
-    <>
-      <div className="table-container">
-        <section className="table__header">
-          <h1>Messages</h1>
-          <div className="input-group">
-            <input
-              type="search"
-              placeholder="Search Data..."
-              onChange={filterSearch}
-            />
-          </div>
-        </section>
+  function Search() {
+    return (
+      <section className="table__header">
+        <h1>Messages</h1>
+        <div className="input-group">
+          <input
+            type="search"
+            placeholder="Search Data..."
+            onChange={filterSearch}
+          />
+        </div>
+      </section>
+    );
+  }
+  function TableMessages() {
+    return (
+      <>
+        {" "}
         <section className="table__body">
           <table>
             <thead>
@@ -73,7 +78,12 @@ const Messages = () => {
           </table>
         </section>
         <button onClick={handleCreateMessage}>New Message</button>
-      </div>
+      </>
+    );
+  }
+  return (
+    <>
+      <div className="table-container">{Search()}</div>
       {/* why i need the condition */}
       {user && (
         <CreateMessage

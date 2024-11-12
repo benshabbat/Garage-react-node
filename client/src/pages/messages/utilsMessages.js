@@ -13,7 +13,7 @@ function useMessages() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (user) dispatch(getMessagesByIdUser(user?._id));
-  }, [user, isOpenCreateMessage]);
+  }, [user, isOpenCreateMessage, dispatch]);
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterMessages(
@@ -38,5 +38,20 @@ function useMessages() {
       </tr>
     );
   };
+
+  function Search() {
+    return (
+      <section className="table__header">
+        <h1>Messages</h1>
+        <div className="input-group">
+          <input
+            type="search"
+            placeholder="Search Data..."
+            onChange={filterSearch}
+          />
+        </div>
+      </section>
+    );
+  }
   return {};
 }
