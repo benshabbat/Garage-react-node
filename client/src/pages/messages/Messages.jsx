@@ -1,9 +1,12 @@
 import "../../components/table/table.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CreateMessage from "../../components/create/CreateMessage";
 import useOpenModel from "../../hooks/useOpenModel";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
+import { getUsers } from "../../features/admin/adminSlice";
+
+//TODO: to move logic to external file
 const Messages = () => {
   const { messages, user } = useSelector((state) => state.user);
   const { users } = useSelector((state) => state.admin);
@@ -11,8 +14,9 @@ const Messages = () => {
   const [filterMessages, setFilterMessages] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
-    if(user)dispatch(getMessagesByIdUser(user?._id));
-  }, [user,isOpenCreateMessage]);
+    dispatch(getUsers());
+    if (user) dispatch(getMessagesByIdUser(user?._id));
+  }, [user, isOpenCreateMessage, dispatch]);
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterMessages(
@@ -21,7 +25,7 @@ const Messages = () => {
           item?.from?.username.includes(value) ||
           item?.to?.username.includes(value) ||
           item?.title.includes(value) ||
-          item?.description.includes(value)||
+          item?.description.includes(value) ||
           item?.updatedAt.includes(value)
       )
     );
@@ -70,6 +74,7 @@ const Messages = () => {
         </section>
         <button onClick={handleCreateMessage}>New Message</button>
       </div>
+      {/* why i need the condition */}
       {user && (
         <CreateMessage
           handelClick={handleCreateMessage}

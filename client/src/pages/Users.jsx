@@ -1,8 +1,7 @@
-
 import { useUsers } from "./utilsUsers";
+
 const Users = () => {
-  const {PageUsers } =
-    useUsers();
+  const { PageUsers } = useUsers();
 
   return PageUsers();
 };

@@ -7,7 +7,7 @@ const Form = ({
   onSubmit,
   handelClick = null,
   setData,
-  options = null,
+  options,
   nameSelect,
   isFocus = true,
 }) => {
