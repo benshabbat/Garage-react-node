@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BiSolidCarCrash, BiTrash } from "react-icons/bi";
 
-
 import ManageCar from "../components/manage/ManageCar";
 
 import EditCar from "../components/edit/EditCar";
@@ -39,6 +38,21 @@ export function useCars() {
       )
     );
   };
+
+  function Search() {
+    return (
+      <section className="table__header">
+        <h1>Cars</h1>
+        <div className="input-group">
+          <input
+            type="search"
+            placeholder="Search Data..."
+            onChange={filterSearch}
+          />
+        </div>
+      </section>
+    );
+  }
   const handleCar = (e) => {
     const { name } = e.target;
     setCar(cars.find((car) => car._id === e.target.value));
@@ -104,45 +118,45 @@ export function useCars() {
       </section>
     );
   };
-   function HandelCars(){
-    return (<>
-    <ManageCar
-        car={car}
-        handelClick={handleManageCar}
-        isOpen={isOpenManageCar}
-      />
-      <CreateService
-        car={car}
-        handelClick={handleCreateService}
-        isOpen={isOpenModelCreateService}
-      />
-      <EditCar
-        car={car}
-        handelClick={handleEditCar}
-        isOpen={isOpenModelEditCar}
-      />
-      <DeleteCar
-        car={car}
-        handelClick={handleDeleteCar}
-        isOpen={isOpenModelDeleteCar}
-      />
-    </>)
-}
+  function HandelCars() {
+    return (
+      <>
+        <ManageCar
+          car={car}
+          handelClick={handleManageCar}
+          isOpen={isOpenManageCar}
+        />
+        <CreateService
+          car={car}
+          handelClick={handleCreateService}
+          isOpen={isOpenModelCreateService}
+        />
+        <EditCar
+          car={car}
+          handelClick={handleEditCar}
+          isOpen={isOpenModelEditCar}
+        />
+        <DeleteCar
+          car={car}
+          handelClick={handleDeleteCar}
+          isOpen={isOpenModelDeleteCar}
+        />
+      </>
+    );
+  }
 
+  function PageCars() {
+    return (
+      <>
+        <div className="table-container">
+          {Search()}
+          <TableCars />
+        </div>
+        <HandelCars />
+      </>
+    );
+  }
   return {
-    car,
-    filterSearch,
-    TableCars,
-    handleEditCar,
-    isOpenModelEditCar,
-    handleCreateService,
-    isOpenModelCreateService,
-
-    handleDeleteCar,
-    isOpenModelDeleteCar,
-    handleManageCar,
-    isOpenManageCar,
-    HandelCars
+    PageCars,
   };
 }
-
