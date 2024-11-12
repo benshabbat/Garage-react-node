@@ -12,49 +12,24 @@ const Users = () => {
     isOpenCreateUser,
     handleManageUser,
     isOpenManageUser,
-    filterSearch,Search
+    filterSearch,
+    Search,
+    PageUsers,
   } = useUsers();
-  // function Search() {
-  //   return (
-  //     <section className="table__header">
-  //       <h1>Users</h1>
-  //       <div className="input-group">
-  //         <input
-  //           type="search"
-  //           placeholder="Search Data..."
-  //           onChange={filterSearch}
-  //         />
-  //       </div>
-  //     </section>
-  //   );
-  // }
   return (
     <>
-      <div className="table-container">
-        <section className="table__header">
-          <h1>Users</h1>
-          <div className="input-group">
-            <input
-              type="search"
-              placeholder="Search Data..."
-              onChange={filterSearch}
-            />
-          </div>
-        </section>
-        <TableUsers />
-      </div>
-      <>
-        <Register
-          users={users}
-          handelClick={handleCreateUser}
-          isOpen={isOpenCreateUser}
-        />
-        <ManageUser
-          user={user}
-          handelClick={handleManageUser}
-          isOpen={isOpenManageUser}
-        />
-      </>
+      <PageUsers/>
+
+      <Register
+        users={users}
+        handelClick={handleCreateUser}
+        isOpen={isOpenCreateUser}
+      />
+      <ManageUser
+        user={user}
+        handelClick={handleManageUser}
+        isOpen={isOpenManageUser}
+      />
     </>
   );
 };

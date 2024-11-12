@@ -8,6 +8,7 @@ import { Register } from "../components";
 export function useUsers() {
   const { users } = useSelector((state) => state.admin);
   const [user, setUser] = useState();
+  const [searchVal, setSearchVal] = useState("")
   const [filterUsers, setFilterUsers] = useState();
   const [handleManageUser, isOpenManageUser] = useOpenModel();
   const [handleCreateUser, isOpenCreateUser] = useOpenModel();
@@ -29,8 +30,9 @@ export function useUsers() {
 
   const filterSearch = (e) => {
     const { value } = e.target;
+    setSearchVal(value)
     setFilterUsers(
-      users.filter(
+      users?.filter(
         (item) =>
           item.username.includes(value) ||
           item.email.includes(value) ||
@@ -110,11 +112,36 @@ export function useUsers() {
         <button onClick={handleCreateUser}>Create User</button>
       </>
     );
+
   };
-  return {Search,
+
+
+   //dosent work
+  const PageUsers = () => {
+    return (
+      <div className="table-container">
+        <section className="table__header">
+          <h1>Users</h1>
+          <div className="input-group">
+            <input
+              type="search"
+              placeholder="Search Data..."
+              onChange={filterSearch}
+              value={searchVal}
+            />
+          </div>
+        </section>
+        <TableUsers />
+      </div>
+    );
+  };
+  return {
+    PageUsers,
+    Search,
     TableUsers,
     MangeUsers,
-    filterSearch,   handleCreateUser,
+    filterSearch,
+    handleCreateUser,
     user,
     users,
     isOpenCreateUser,
