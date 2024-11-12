@@ -39,7 +39,7 @@ export function useUsers() {
     );
   };
 
-  //dosent work
+  //working as Search()
   function Search() {
     return (
       <section className="table__header">
@@ -54,8 +54,6 @@ export function useUsers() {
       </section>
     );
   }
-
-
 
   const bodyUser = (user) => {
     return (
@@ -94,7 +92,6 @@ export function useUsers() {
         <button onClick={handleCreateUser}>Create User</button>
       </>
     );
-
   };
 
   function MangeUsers() {
@@ -113,32 +110,20 @@ export function useUsers() {
       </>
     );
   }
-   //dosent work
+  //working as PageUsers()
   const PageUsers = () => {
     return (
-      <div className="table-container">
-        <section className="table__header">
-          <h1>Users</h1>
-          <div className="input-group">
-            <input
-              type="search"
-              placeholder="Search Data..."
-              onChange={filterSearch}
-            />
-          </div>
-        </section>
-        <TableUsers />
-      </div>
+      <>
+        <div className="table-container">
+          {Search()}
+          <TableUsers />
+        </div>
+        <MangeUsers />
+      </>
     );
   };
 
-
-  
   return {
     PageUsers,
-    Search,
-    TableUsers,
-    MangeUsers,
-    filterSearch,
   };
 }
