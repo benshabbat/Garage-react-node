@@ -1,30 +1,34 @@
-import "./ContactPage.css"
+import "./ContactPage.css";
+import { useState } from "react";
+import { createReqService } from "../../../features/user/userSlice";
+import { useDispatch } from "react-redux";
 
-import{ useState } from 'react';
+
+//TODO: OK NEED TO CREATE FOR ADMIN PAGE WITH MASSAGES FROM GUESTS
 
 const ContactPage = () => {
+  const ADMIN = "63e14deca4340e45d23f20b2";
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    carType: '',
-    serviceType: '',
-    message: ''
+    from: "",
+    to: ADMIN,
+    title: "",
+    description: "",
   });
+  const dispatch = useDispatch();
 
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
-
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    // כאן יהיה הטיפול בשליחת הטופס לשרת
-    console.log('Form submitted:', formData);
+    console.log(formData);
+    dispatch(createReqService(formData));
     setSubmitted(true);
   };
 
@@ -60,8 +64,8 @@ const ContactPage = () => {
             </div>
           </div>
         </div>
-
-        <form className="contact-form" onSubmit={handleSubmit}>
+        {/* <Contact/> */}
+        <form className="contact-form" onSubmit={onSubmit}>
           {submitted ? (
             <div className="success-message">
               <span className="success-icon">✅</span>
@@ -71,18 +75,17 @@ const ContactPage = () => {
           ) : (
             <>
               <div className="form-group">
-                <label htmlFor="name">שם מלא *</label>
+                <label>שם מלא *</label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  name="from"
+                  // value={formData.name}
                   onChange={handleChange}
                   required
                 />
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="phone">טלפון *</label>
                 <input
                   type="tel"
@@ -92,9 +95,9 @@ const ContactPage = () => {
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </div> */}
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="carType">סוג הרכב</label>
                 <input
                   type="text"
@@ -103,14 +106,13 @@ const ContactPage = () => {
                   value={formData.carType}
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <label htmlFor="serviceType">סוג השירות המבוקש</label>
                 <select
-                  id="serviceType"
-                  name="serviceType"
-                  value={formData.serviceType}
+                  name="title"
+                  // value={formData.serviceType}
                   onChange={handleChange}
                 >
                   <option value="">בחר שירות</option>
@@ -122,17 +124,18 @@ const ContactPage = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">הודעה</label>
+                <label>הודעה</label>
                 <textarea
-                  id="message"
-                  name="message"
+                  name="description"
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
                 />
               </div>
 
-              <button type="submit" className="submit-button">שלח טופס</button>
+              <button type="submit" className="submit-button">
+                שלח טופס
+              </button>
             </>
           )}
         </form>

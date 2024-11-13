@@ -34,9 +34,11 @@ const createMessageToAdmin = async (req) => {
   try {
     const savedMessage = await newMessage.save();
     try {
-      await User.findByIdAndUpdate(from, {
-        $push: { messages: [savedMessage._id] },
-      });
+      if (from) {
+        await User.findByIdAndUpdate(from, {
+          $push: { messages: [savedMessage._id] },
+        });
+      }
       await User.findByIdAndUpdate(to, {
         $push: { messages: [savedMessage._id] },
       });
