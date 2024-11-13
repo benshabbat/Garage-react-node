@@ -2,7 +2,7 @@ import { useServicesAdmin } from "./utilsServicesAdmin";
 
 const ServicesAdmin = () => {
   const { PageServiceAdmin } = useServicesAdmin();
-  return <PageServiceAdmin />;
+  return PageServiceAdmin()
 };
 
 export default ServicesAdmin;

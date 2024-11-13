@@ -30,6 +30,24 @@ export function useMessages() {
       )
     );
   };
+
+  
+  function Search() {
+    return (
+      <section className="table__header">
+        <h1>Messages</h1>
+        <div className="input-group">
+          <input
+            type="search"
+            placeholder="Search Data..."
+            onChange={filterSearch}
+          />
+        </div>
+      </section>
+    );
+  }
+
+  
   const bodyMessages = (message) => {
     return (
       <tr key={message?._id}>
@@ -59,21 +77,6 @@ export function useMessages() {
       await deleteMessage(value);
     }
   };
-
-  function Search() {
-    return (
-      <section className="table__header">
-        <h1>Messages</h1>
-        <div className="input-group">
-          <input
-            type="search"
-            placeholder="Search Data..."
-            onChange={filterSearch}
-          />
-        </div>
-      </section>
-    );
-  }
 
   function TableMessages() {
     return (
