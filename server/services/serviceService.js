@@ -77,9 +77,10 @@ const getServicesByCar = async (req) => {
 };
 
 //Need to get data right now is wrong
+//maybe to get idea from getMessageByUser getCarsByOwner getCarsWithService
 const getServicesByUser = async (req) => {
   try {
-    const services = await Service.find({ owner: req.params.user });
+    const services = await Service.find({ user: req.params.user });
     return services;
   } catch (error) {
     throw Error(error);
