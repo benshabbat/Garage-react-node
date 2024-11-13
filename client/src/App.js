@@ -27,7 +27,7 @@ function App() {
             <Route path="/cars" element={<Cars />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/services" element={<ServicesAdmin />} />
-            <Route path="/services/user/" element={<Services />} />
+            {/* <Route path="/services/user/" element={<Services />} /> */}
             <Route path="/services/car/:carId" element={<Services />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

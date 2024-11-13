@@ -5,9 +5,9 @@ import { MyAccount } from "../index";
 const NavUser = ({user}) => {
   return (
     <>
-      <div className="item-nav">
+      {/* <div className="item-nav">
         <Link to={`/services/user`}>Services</Link>
-      </div>
+      </div> */}
       <div className="item-nav">
         <Link to={`/account`}>Account</Link>
       </div>

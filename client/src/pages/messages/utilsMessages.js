@@ -12,11 +12,14 @@ export function useMessages() {
   const { users } = useSelector((state) => state.admin);
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModel();
   const [filterMessages, setFilterMessages] = useState();
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (user?.isAdmin) dispatch(getUsers());
     if (user) dispatch(getMessagesByIdUser(user?._id));
   }, [user, isOpenCreateMessage, dispatch]);
+
+  
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterMessages(
@@ -47,7 +50,7 @@ export function useMessages() {
     );
   }
 
-  
+
   const bodyMessages = (message) => {
     return (
       <tr key={message?._id}>

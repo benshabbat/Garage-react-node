@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export function useFiterService(){
+export function useFiterService(user){
     const {services } = useSelector((state) => state.user);
     const [filterServices, setFilterServices] = useState();
     

@@ -75,6 +75,8 @@ const getServicesByCar = async (req) => {
     throw Error(error);
   }
 };
+
+//Need to get data right now is wrong
 const getServicesByUser = async (req) => {
   try {
     const services = await Service.find({ owner: req.params.user });
