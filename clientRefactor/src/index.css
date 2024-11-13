@@ -1,6 +1,13 @@
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
-  background-image: url("../../clientRefactor/src/images/garage.jpg");
+  min-height: 100vh;
+  /* background-image: url("../../clientRefactor/src/images/garage.jpg"); */
+
   background-repeat: no-repeat;
-  background-size:100%;
+  background-size: cover;
+  background-position: center;
 }

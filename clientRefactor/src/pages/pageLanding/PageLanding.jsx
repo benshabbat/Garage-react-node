@@ -8,19 +8,21 @@ import {
   ServicesLanding,
   Contact,
 } from "../../components";
+import GarageHomepage from "../../components/landing/codeOfClaude/GarageHomePage";
 
 const PageLanding = () => {
   return (
     <div className="main">
-      <Home />
-      <About />
-      <ServicesLanding />
-      <div className="address_and_contact">
+      <GarageHomepage/>
+      {/* <Home /> */}
+      {/* <About /> */}
+      {/* <ServicesLanding /> */}
+      {/* <div className="address_and_contact"> */}
         {/* <Address /> */}
-        <Contact />
-      </div>
-      <Reviews />
-      <footer>Written By David-Chen Benshabbat</footer>
+        {/* <Contact /> */}
+      {/* </div> */}
+      {/* <Reviews /> */}
+      {/* <footer>Written By David-Chen Benshabbat</footer> */}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import React from "react";
 import Login from "../login/Login";
 import useOpenModel from "../../hooks/useOpenModel";
 import { Link } from "react-router-dom";

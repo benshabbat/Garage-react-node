@@ -1,28 +1,53 @@
-.logo {
-  font-size: 34px;
-}
 .main-header {
   position: sticky;
+  /* position: fixed; */
   top: 0;
-  margin-bottom: 40px;
-  font-size: 20px;
-  font-weight: 700;
+  left: 0;
+  width: 100%;
+  padding: 1.3rem 10%;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(50px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
 }
-.navbar {
-  overflow: hidden;
-  background-color: rgba(136, 140, 140, 0.981);
+.logo a {
+  font-size: 2rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: white;
+}
+.navbar a {
+  /* overflow: hidden;
   -webkit-box-shadow: 0px 2px 8px 5px rgba(0, 0, 0, 0.51);
   box-shadow: 0px 2px 8px 5px rgba(0, 0, 0, 0.51);
   height: 48px;
-  justify-content: space-between;
-  display: flex;
   flex-direction: row;
-  align-items: flex-end;
   font: bold;
-  top: 0;
+  top: 0; */
+
+  font-size: 1.15rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 2rem;
 }
 
 .navbar div {
   float: left;
   margin-right: 12px;
+}
+
+
+.item-nav a {
+  color: #484646;
+}
+.item-nav a:hover {
+  color: #484646;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
 }
