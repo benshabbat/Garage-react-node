@@ -2,7 +2,7 @@ import "./ContactPage.css";
 import { useState } from "react";
 import { createReqService } from "../../../features/user/userSlice";
 import { useDispatch } from "react-redux";
-
+// import Reviews from "../reviews/Reviews"
 
 //TODO: OK NEED TO CREATE FOR ADMIN PAGE WITH MASSAGES FROM GUESTS
 
@@ -140,6 +140,9 @@ const ContactPage = () => {
           )}
         </form>
       </div>
+
+
+      {/* <Reviews/> */}
     </div>
   );
 };
