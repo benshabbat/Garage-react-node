@@ -1,10 +1,20 @@
 import "./account.css";
 import ReqService from "../../components/create/ReqService";
-import { useAccount,  } from "./utilsAccount";
+import { useAccount } from "./utilsAccount";
+
+//TODO: TO MAKE CUSTOM COMPONENTS AND TO MOVE THEM TO UTILS ACCOUNT
+
+//WHY I CANT TO CREATE COMPONENT OF SEARCH WHY DOSENT WORK!
 const Account = () => {
-  const { car, isOpenReqService, handleReqService, user,useFilterAccount } =
-    useAccount();
-  const { filterSearch, bodyAccountForTable } = useFilterAccount();
+  const {
+    car,
+    isOpenReqService,
+    handleReqService,
+    // Search,
+    filterSearch,
+    TableAccount,
+  } = useAccount();
+
   return (
     <>
       <div className="table-container">
@@ -14,33 +24,18 @@ const Account = () => {
             <input
               type="search"
               placeholder="Search Data..."
-              onChange={(e) => filterSearch(e)}
+              onChange={filterSearch}
             />
           </div>
         </section>
-        <section className="table__body">
-          <table>
-            <thead>
-              <tr>
-                <th>brand</th>
-                <th>numberPlate</th>
-                <th>km</th>
-                <th>history service</th>
-                <th>Request Service</th>
-              </tr>
-            </thead>
-            <tbody>{bodyAccountForTable()}</tbody>
-          </table>
-        </section>
+        {/* <Search /> */}
+        <TableAccount />
       </div>
-      {
-        <ReqService
-          car={car}
-          handelClick={handleReqService}
-          isOpen={isOpenReqService}
-          user={user}
-        />
-      }
+      <ReqService
+        car={car}
+        handelClick={handleReqService}
+        isOpen={isOpenReqService}
+      />
     </>
   );
 };

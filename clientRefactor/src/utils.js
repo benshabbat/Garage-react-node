@@ -54,6 +54,9 @@ const deleteService = (id) => {
 const deleteCar = (idCar, idUser) => {
   axios.delete(`${API_URL_CAR}/${idCar}/${idUser}`);
 };
+const deleteMessage = (id) => {
+  axios.delete(`${API_URL_MESSAGES}/${id}`);
+};
 const getUser = (id) => {
   return axios.get(`${API_URL_USER}/${id}`);
 };
@@ -79,5 +82,5 @@ export {
   getUser,
   deleteCar,
   updateCar,
-  deleteService,
+  deleteService,deleteMessage
 };

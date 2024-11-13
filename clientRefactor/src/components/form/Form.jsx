@@ -7,12 +7,14 @@ const Form = ({
   onSubmit,
   handelClick = null,
   setData,
-  options = null,
+  options,
   nameSelect,
   isFocus = true,
 }) => {
   const handleChange = (e) => {
+    console.log("check")
     const { name, value, checked, type } = e.target;
+    console.log(name)
     setData((prevState) => ({
       ...prevState,
       [name]: type === "checkbox" ? checked : value,
@@ -58,7 +60,7 @@ const Form = ({
         );
       })}
       <button type="submit" className="form-btn">
-        Save
+      {title}
       </button>
     </form>
   );

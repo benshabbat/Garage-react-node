@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from "react";
-import CancelIcon from "@mui/icons-material/Cancel";
 import { OpenModel } from "../../index";
 import { createReview } from "../../../utils";
 import StarRating from "./StarRating";
@@ -34,7 +33,7 @@ const CreateReviews = ({ handelClick, isOpen }) => {
     <OpenModel
       comp={
         <form className="form">
-          <CancelIcon onClick={handelClick} className="form-close" />
+          <button onClick={handelClick} className="form-close" >X</button>
           <h1>Garage review</h1>
           <label className="form-label">
             <StarRating onRatingChange={(value) => setStars(value)} />

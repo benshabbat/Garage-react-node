@@ -1,5 +1,5 @@
 import StarRating from "./StarRating";
-import { getMomentFromUpdatedAt } from "./utilsReview";
+import { getMomentFromUpdatedAt } from "./utilsReview.jsx";
 const Review = ({ customer }) => {
   const { theTimeAgo } = getMomentFromUpdatedAt(customer.updatedAt);
 

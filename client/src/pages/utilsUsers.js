@@ -17,7 +17,7 @@ export function useUsers() {
 
   useEffect(() => {
     dispatch(getUsers());
-  }, [isOpenManageUser, isOpenCreateUser]);
+  }, [isOpenManageUser, isOpenCreateUser, dispatch]);
 
   const handleUser = (e) => {
     if (e.target.value) {

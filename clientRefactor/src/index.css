@@ -1,6 +1,6 @@
 
 body {
-  background-image: url("../../client/src/images/garage.jpg");
+  background-image: url("../../clientRefactor/src/images/garage.jpg");
   background-repeat: no-repeat;
   background-size:100%;
 }

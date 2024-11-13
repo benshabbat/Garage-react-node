@@ -1,3 +1,4 @@
+import React from "react";
 import classes from "./ServicesLanding.module.css";
 
 const ServicesLanding = () => {

@@ -4,10 +4,11 @@ const Input = ({ i, index, handleChange, isFocus }) => {
   const [isBlur, setIsBlur] = useState(false);
   const ref = useRef();
   const [iputsType, setIputsType] = useState({});
-    useEffect(() => {
+
+  useEffect(() => {
     inputType(i);
   }, [i?.name]);
-  
+
   const inputType = (i) => {
     switch (i?.name) {
       case "email":
@@ -37,7 +38,6 @@ const Input = ({ i, index, handleChange, isFocus }) => {
     }
   };
 
-
   return (
     <label className="form-label">
       {!i.hidden && <span>{i?.name}</span>}
@@ -49,6 +49,7 @@ const Input = ({ i, index, handleChange, isFocus }) => {
           isBlur && <span className="error">{iputsType?.errorMessage}</span>}
 
       <input
+      
         ref={ref}
         pattern={i?.pattern}
         autoFocus={index === 0 && isFocus}

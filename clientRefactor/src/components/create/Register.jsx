@@ -1,22 +1,8 @@
-import { useState } from "react";
-import { createUser } from "../../utils";
 import { Form, OpenModel } from "..";
-import { isValidUserName } from "./utilsCreate";
+import { useRegister } from "./utilsCreate";
 
 const Register = ({ handelClick, isOpen, users }) => {
-  const [formData, setFormData] = useState();
-  const [isValidUser, setIsValidUser] = useState(false);
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setIsValidUser(
-      users.map((user) => user.username).includes(formData?.username)
-    );
-    if (isValidUserName(formData,isValidUser)) {
-      await createUser(formData);
-      handelClick();
-    }
-  };
+  const {setFormData,onSubmit,isValidUser} =useRegister(users,handelClick)
   return (
     <OpenModel
       comp={

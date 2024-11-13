@@ -1,8 +1,12 @@
+import React from "react";
 import Login from "../login/Login";
 import useOpenModel from "../../hooks/useOpenModel";
 import { Link } from "react-router-dom";
 const NavLanding = () => {
-  const [handelLogin, isOpenLogin] = useOpenModel();
+  const [ 
+    handelLogin,
+    isOpenLogin,
+    ] = useOpenModel();
   return (
     <>
       <div className="item-nav">
@@ -28,6 +32,7 @@ const NavLanding = () => {
         <button onClick={handelLogin}>Login</button>
         <Login handelClick={handelLogin} isOpen={isOpenLogin} />
       </div>
+     
     </>
   );
 };

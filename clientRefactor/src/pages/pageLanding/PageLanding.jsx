@@ -1,8 +1,9 @@
 import "./pageLanding.css";
+import React from "react";
 import Home from "../home/Home";
 import {
   Reviews,
-  Address,
+  // Address,
   About,
   ServicesLanding,
   Contact,
@@ -18,8 +19,8 @@ const PageLanding = () => {
         {/* <Address /> */}
         <Contact />
       </div>
-      <Reviews />
-      <footer>Written By Menachem & DavidChen</footer>
+      {/* <Reviews /> */}
+      <footer>Written By David-Chen Benshabbat</footer>
     </div>
   );
 };

@@ -2,9 +2,9 @@ import { OpenModel, Form } from "..";
 import { useReqService } from "./utilsCreate";
 
 //TODO: to fix the bug of double click for send req the first click is an undefined
-const ReqService = ({ handelClick, car, isOpen, user }) => {
+const ReqService = ({ handelClick, car, isOpen }) => {
   
-  const { setFormData,onSubmit} =useReqService(handelClick, car, user) 
+  const { setFormData,onSubmit} =useReqService(handelClick, car) 
 
   return (
     <OpenModel
