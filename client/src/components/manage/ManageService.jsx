@@ -1,7 +1,5 @@
 import "./manage.css";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { getServices } from "../../features/admin/adminSlice";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { deleteService } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
@@ -14,7 +12,6 @@ const ManageService = ({
 }) => {
   const [handleEditService, isOpenEditService] = useOpenModel();
 
-  const dispatch = useDispatch();
 
   const handleCarID = async (e) => {
     e.preventDefault();
@@ -26,7 +23,6 @@ const ManageService = ({
     if (name === "editService") {
       handleEditService();
     }
-    dispatch(getServices());
   };
 
   return (

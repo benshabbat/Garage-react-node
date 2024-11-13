@@ -2,12 +2,12 @@ import "../components/table/table.css";
 import { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
 import ManageService from "../components/manage/ManageService";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../features/admin/adminSlice";
 import EditStatusService from "../components/edit/EditStatusService";
 import EditPaidService from "../components/edit/EditPaidService";
 const ServicesAdmin = () => {
-  const { services} = useSelector((state) => state.admin);
+  const { services } = useSelector((state) => state.admin);
   const [servicesFilter, setServicesFilter] = useState();
   const [service, setService] = useState();
   const [handelService, isOpenService] = useOpenModel();
@@ -75,6 +75,29 @@ const ServicesAdmin = () => {
       </tr>
     );
   };
+
+
+  function HandelAdminServices() {
+    return (
+      <>
+        <ManageService
+          service={service}
+          handelClick={handelService}
+          isOpen={isOpenService}
+        />
+        <EditStatusService
+          service={service}
+          handelClick={handleStatus}
+          isOpen={isOpenStatus}
+        />
+        <EditPaidService
+          service={service}
+          handelClick={handlePaid}
+          isOpen={isOpenPaid}
+        />
+      </>
+    );
+  }
   return (
     <>
       <div className="table-container">
@@ -109,23 +132,11 @@ const ServicesAdmin = () => {
           </table>
         </section>
       </div>
-      <ManageService
-        service={service}
-        handelClick={handelService}
-        isOpen={isOpenService}
-      />
-      <EditStatusService
-        service={service}
-        handelClick={handleStatus}
-        isOpen={isOpenStatus}
-      />
-      <EditPaidService
-        service={service}
-        handelClick={handlePaid}
-        isOpen={isOpenPaid}
-      />
+      <HandelAdminServices />
     </>
   );
 };
 
 export default ServicesAdmin;
+
+
