@@ -76,7 +76,6 @@ const ServicesAdmin = () => {
     );
   };
 
-
   function HandelAdminServices() {
     return (
       <>
@@ -98,19 +97,25 @@ const ServicesAdmin = () => {
       </>
     );
   }
+
+  function Search() {
+    return (
+      <section className="table__header">
+        <h1>Services</h1>
+        <div className="input-group">
+          <input
+            type="search"
+            placeholder="Search Data..."
+            onChange={filterSearch}
+          />
+        </div>
+      </section>
+    );
+  }
   return (
     <>
       <div className="table-container">
-        <section className="table__header">
-          <h1>Services</h1>
-          <div className="input-group">
-            <input
-              type="search"
-              placeholder="Search Data..."
-              onChange={filterSearch}
-            />
-          </div>
-        </section>
+        {Search()}
         <section className="table__body">
           <table>
             <thead>
@@ -138,5 +143,3 @@ const ServicesAdmin = () => {
 };
 
 export default ServicesAdmin;
-
-
