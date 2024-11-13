@@ -112,30 +112,35 @@ const ServicesAdmin = () => {
       </section>
     );
   }
+  function TableServiceAdmin() {
+    return (
+      <section className="table__body">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>car</th>
+              <th>title</th>
+              <th>description</th>
+              <th>price</th>
+              <th>paid</th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {servicesFilter
+              ? servicesFilter?.map(bodyServices)
+              : services?.map(bodyServices)}
+          </tbody>
+        </table>
+      </section>
+    );
+  }
   return (
     <>
       <div className="table-container">
         {Search()}
-        <section className="table__body">
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>car</th>
-                <th>title</th>
-                <th>description</th>
-                <th>price</th>
-                <th>paid</th>
-                <th>status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {servicesFilter
-                ? servicesFilter?.map(bodyServices)
-                : services?.map(bodyServices)}
-            </tbody>
-          </table>
-        </section>
+        <TableServiceAdmin />
       </div>
       <HandelAdminServices />
     </>
