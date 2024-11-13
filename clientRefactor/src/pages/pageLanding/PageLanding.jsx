@@ -19,7 +19,7 @@ const PageLanding = () => {
         {/* <Address /> */}
         <Contact />
       </div>
-      {/* <Reviews /> */}
+      <Reviews />
       <footer>Written By David-Chen Benshabbat</footer>
     </div>
   );

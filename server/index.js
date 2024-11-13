@@ -22,7 +22,11 @@ dotenv.config();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // הפורט שבו רץ שרת ה-Vite
+  credentials: true
+}));
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);

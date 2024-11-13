@@ -12,14 +12,14 @@ export function useMessages() {
   const { users } = useSelector((state) => state.admin);
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModel();
   const [filterMessages, setFilterMessages] = useState();
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
     if (user?.isAdmin) dispatch(getUsers());
     if (user) dispatch(getMessagesByIdUser(user?._id));
-  }, [user, isOpenCreateMessage, dispatch,handleDelete]);
+  }, [user, isOpenCreateMessage, dispatch, isDeleted]);
 
-  
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterMessages(
@@ -34,7 +34,6 @@ export function useMessages() {
     );
   };
 
-  
   function Search() {
     return (
       <section className="table__header">
@@ -49,7 +48,6 @@ export function useMessages() {
       </section>
     );
   }
-
 
   const bodyMessages = (message) => {
     return (
@@ -78,6 +76,7 @@ export function useMessages() {
     const { name, value } = e.target;
     if (name === "deleteMessage") {
       await deleteMessage(value);
+      setIsDeleted(true);
     }
   };
 

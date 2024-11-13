@@ -1,50 +1,48 @@
+// הוספת תצורת ברירת מחדל ל-axios
 import axios from "axios";
-
+// authService.js - עדכון הנתיבים
 const API_URL_REGISTER = "/auth/register";
 const API_URL_LOGIN = "/auth/login";
 const API_URL_LOGOUT = "/auth/logout";
-// const API_URL_USERS = "/api/users";
 
-//Create a new User
-const register = async (userData) => {
-  const { data } = await axios.post(API_URL_REGISTER, userData);
-
-  // if (data) {
-  //   localStorage.setItem("user", JSON.stringify(data));
-  // }
-  return data;
-};
-
-//login
-const login = async (userData) => {
-  const { data } = await axios.post(API_URL_LOGIN, userData);
-
-  if (data) {
-    localStorage.setItem("user", JSON.stringify(data));
-  }
-  return data;
-};
-
-// Logout user
-const logout = async() => {
-  await axios.post(API_URL_LOGOUT);
-  localStorage.removeItem("user");
-};
-
-// //refresh user
-// const refresh = async (userData)=>{
-//   const { data } = await axios.get(API_URL_USERS, userData);
-
-//   if (data) {
-//     localStorage.setItem("user", JSON.stringify(data));
-//   }
-//   return data;
-// }
+// אפשרות להגדיר תצורת ברירת מחדל ל-axios
+axios.defaults.baseURL = "http://localhost:8800/api";
+axios.defaults.withCredentials = true; // חשוב עבור קוקיז
 
 const authService = {
-  register,
-  logout,
-  login
+  register: async (userData) => {
+    try {
+      const response = await axios.post(API_URL_REGISTER, userData);
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  login: async (userData) => {
+    try {
+      const response = await axios.post(API_URL_LOGIN, userData);
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  logout: async () => {
+    try {
+      await axios.post(API_URL_LOGOUT);
+      localStorage.removeItem("user");
+    } catch (error) {
+      console.error("Logout error:", error);
+      localStorage.removeItem("user"); // מחיקת המידע המקומי בכל מקרה
+    }
+  },
 };
 
 export default authService;
