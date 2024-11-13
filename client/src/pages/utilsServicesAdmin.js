@@ -146,5 +146,17 @@ export function useServicesAdmin(){
           </section>
         );
       }
-      return{}
+
+      function PageServiceAdmin() {
+        return (
+          <>
+            <div className="table-container">
+              {Search()}
+              <TableServiceAdmin />
+            </div>
+            <HandelAdminServices />
+          </>
+        );
+      }
+      return{PageServiceAdmin}
 }
