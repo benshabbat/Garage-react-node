@@ -1,4 +1,4 @@
-
+import CardServiceLanding from "./CardServiceLanding";
 import "./ServicesLanding.css";
 
 const ServicesLanding = () => {
@@ -6,23 +6,23 @@ const ServicesLanding = () => {
     {
       icon: "🔧",
       title: "Car Maintenance",
-      description: "Professional auto repair services"
+      description: "Professional auto repair services",
     },
     {
       icon: "⚡",
       title: "Quick Service",
-      description: "Efficient and reliable repairs"
+      description: "Efficient and reliable repairs",
     },
     {
       icon: "📋",
       title: "Vehicle Reports",
-      description: "Detailed service history"
+      description: "Detailed service history",
     },
     {
       icon: "📅",
       title: "Online Booking",
-      description: "Easy appointment scheduling"
-    }
+      description: "Easy appointment scheduling",
+    },
   ];
 
   return (
@@ -31,11 +31,7 @@ const ServicesLanding = () => {
         <h2 className="section-title">Our Services</h2>
         <div className="servicesLanding-grid">
           {ServicesLandingList.map((service, index) => (
-            <div key={index} className="servicesLanding-card">
-              <div className="servicesLanding-icon">{service.icon}</div>
-              <h3 className="servicesLanding-title">{service.title}</h3>
-              <p>{service.description}</p>
-            </div>
+            <CardServiceLanding key={index} service={service} />
           ))}
         </div>
       </div>
