@@ -10,22 +10,24 @@ import {
   ServicesAdmin,
 } from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
+import Home from "./components/landing/codeOfClaude/Home";
 function App() {
   return (
     <>
       <BrowserRouter>
+        <Header />
+        
         <Routes>
-          <Route path="/" element={<Header />}>
-            <Route path="/" element={<PageLanding />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/cars" element={<Cars />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/services" element={<ServicesAdmin />} />
-            {/* <Route path="/services/user/" element={<Services />} /> */}
-            <Route path="/services/car/:carId" element={<Services />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
+          <Route path="/" element={<PageLanding />} />
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/account" element={<Account />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/cars" element={<Cars />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/services" element={<ServicesAdmin />} />
+          {/* <Route path="/services/user/" element={<Services />} /> */}
+          <Route path="/services/car/:carId" element={<Services />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </>
