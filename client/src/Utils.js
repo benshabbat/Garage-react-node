@@ -51,11 +51,17 @@ const deleteUser = (id) => {
 const deleteService = (id) => {
   axios.delete(`${API_URL_SERVICE}/${id}`);
 };
+const deleteMessage = (id) => {
+  axios.delete(`${API_URL_MESSAGES}/${id}`);
+};
 const deleteCar = (idCar, idUser) => {
   axios.delete(`${API_URL_CAR}/${idCar}/${idUser}`);
 };
 const getUser = (id) => {
   return axios.get(`${API_URL_USER}/${id}`);
+};
+const getUsers = () => {
+  return axios.get(`${API_URL_USER}`);
 };
 const getReviews = () => {
   return axios.get(`${API_URL_REVIEWS}`);
@@ -80,4 +86,5 @@ export {
   deleteCar,
   updateCar,
   deleteService,
+  getUsers,deleteMessage
 };
