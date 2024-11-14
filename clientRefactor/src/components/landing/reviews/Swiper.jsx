@@ -1,5 +1,5 @@
 import "./swiper.css";
-import { useSwiper } from "./utilsReview";
+import { useSwiper } from "./useSwiper";
 
 const Swiper = ({ children, numCardsPreview }) => {
   const { Layout } = useSwiper(children, numCardsPreview);

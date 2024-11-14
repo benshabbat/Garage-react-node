@@ -31,9 +31,11 @@ const Reviews = () => {
         })}
       </Swiper>
 
-      <button className="btn-review" onClick={handelClick}>
-        Add Review
+      <button className="btn-add-review" onClick={handelClick}>
+        <span>✏️</span>
+        Share Your Experience
       </button>
+
       {<CreateReviews handelClick={handleAddReview} isOpen={isOpenAddReview} />}
     </div>
   );
