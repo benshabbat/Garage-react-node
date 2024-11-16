@@ -89,14 +89,6 @@
   line-height: 1.6;
 }
 
-/* Social Links */
-.social-links {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .social-icon {
   color: white;
   text-decoration: none;

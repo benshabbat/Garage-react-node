@@ -11,12 +11,13 @@ import {
 } from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import Home from "./components/landing/codeOfClaude/Home";
+import { Navigation } from "./components/landing/codeOfClaude/Navigation";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Header />
-        
+        {/* <Navigation/> */}
         <Routes>
           <Route path="/" element={<PageLanding />} />
           {/* <Route path="/" element={<Home />} /> */}

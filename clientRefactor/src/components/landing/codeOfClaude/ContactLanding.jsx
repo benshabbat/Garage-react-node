@@ -1,13 +1,13 @@
-import "./contactLanding.css"
-import {useState} from 'react'
+import "./contactLanding.css";
+import { useState } from "react";
 
 export default function ContactLanding() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
 
   const handleSubmit = (e) => {
@@ -18,7 +18,7 @@ export default function ContactLanding() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -32,10 +32,10 @@ export default function ContactLanding() {
       <div className="contact-content">
         <div className="contact-info">
           <h2>Contact Information</h2>
-          
+
           <div className="info-items">
             <div className="info-item">
-              <span className="info-icon">📍</span>
+              {/* <span className="info-icon">📍</span> */}
               <div>
                 <h3>Our Location</h3>
                 <p>123 Auto Street, City, Country</p>
@@ -43,38 +43,21 @@ export default function ContactLanding() {
             </div>
 
             <div className="info-item">
-              <span className="info-icon">📞</span>
+              {/* <span className="info-icon">📞</span> */}
               <div>
                 <h3>Phone Number</h3>
-                <p>+1 234 567 8900</p>
-                <p>+1 234 567 8901</p>
+                <p>(+972) 050-1234567</p>
               </div>
             </div>
 
             <div className="info-item">
-              <span className="info-icon">📧</span>
+              {/* <span className="info-icon">📧</span> */}
               <div>
                 <h3>Email Address</h3>
-                <p>service@autogarage.com</p>
-                <p>support@autogarage.com</p>
+                <p>service@garage.com</p>
+                <p>support@garage.com</p>
               </div>
             </div>
-
-            <div className="info-item">
-              <span className="info-icon">⏰</span>
-              <div>
-                <h3>Working Hours</h3>
-                <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
-                <p>Sat: 9:00 AM - 3:00 PM</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Social Media Links */}
-          <div className="social-links">
-            <a href="#" className="social-icon">👥 Facebook</a>
-            <a href="#" className="social-icon">📸 Instagram</a>
-            <a href="#" className="social-icon">🐦 Twitter</a>
           </div>
         </div>
 
@@ -83,7 +66,7 @@ export default function ContactLanding() {
           <form onSubmit={handleSubmit} className="contact-form">
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="name">👤 Full Name *</label>
+                <label htmlFor="name">Full Name *</label>
                 <input
                   type="text"
                   id="name"
@@ -91,11 +74,11 @@ export default function ContactLanding() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="John Doe"
+                  placeholder="David Smith"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">📧 Email Address *</label>
+                <label htmlFor="email">Email Address *</label>
                 <input
                   type="email"
                   id="email"
@@ -103,14 +86,14 @@ export default function ContactLanding() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder="johndoe@example.com"
+                  placeholder="David@example.com"
                 />
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="phone">📞 Phone Number</label>
+                <label htmlFor="phone">Phone Number</label>
                 <input
                   type="tel"
                   id="phone"
@@ -121,7 +104,7 @@ export default function ContactLanding() {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="subject">📝 Subject *</label>
+                <label htmlFor="subject">Subject *</label>
                 <input
                   type="text"
                   id="subject"
@@ -135,7 +118,7 @@ export default function ContactLanding() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="message">💭 Message *</label>
+              <label htmlFor="message">Message *</label>
               <textarea
                 id="message"
                 name="message"
@@ -155,7 +138,4 @@ export default function ContactLanding() {
       </div>
     </div>
   );
-};
-
-
-
+}
