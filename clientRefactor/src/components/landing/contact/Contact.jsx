@@ -15,6 +15,7 @@ const Contact = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    //TODO: create req service from contact to another page and to add check box if the req checked
     dispatch(createReqService(formData));
   };
   return (

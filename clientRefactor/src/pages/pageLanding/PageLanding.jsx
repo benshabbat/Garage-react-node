@@ -16,10 +16,10 @@ const PageLanding = () => {
       <Home />
       <About />
       <ServicesLanding />
-      <ContactLanding/>
+      {/* <ContactLanding/> */}
       <div className="address_and_contact">
         {/* <Address /> */}
-        {/* <Contact /> */}
+        <Contact />
 
       </div>
       <Reviews />

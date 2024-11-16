@@ -35,7 +35,6 @@ export default function ContactLanding() {
 
           <div className="info-items">
             <div className="info-item">
-              {/* <span className="info-icon">📍</span> */}
               <div>
                 <h3>Our Location</h3>
                 <p>123 Auto Street, City, Country</p>
@@ -43,7 +42,6 @@ export default function ContactLanding() {
             </div>
 
             <div className="info-item">
-              {/* <span className="info-icon">📞</span> */}
               <div>
                 <h3>Phone Number</h3>
                 <p>(+972) 050-1234567</p>
@@ -51,7 +49,6 @@ export default function ContactLanding() {
             </div>
 
             <div className="info-item">
-              {/* <span className="info-icon">📧</span> */}
               <div>
                 <h3>Email Address</h3>
                 <p>service@garage.com</p>
@@ -131,7 +128,7 @@ export default function ContactLanding() {
             </div>
 
             <button type="submit" className="submit-button">
-              📤 Send Message
+              Send Message
             </button>
           </form>
         </div>
