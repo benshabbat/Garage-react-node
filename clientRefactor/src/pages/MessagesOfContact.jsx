@@ -5,6 +5,7 @@ import { getContacts } from "../utils";
 export default function MessagesOfContact() {
   const [contacts, setContacts] = useState();
   const [filterContacts, setFilterContacts] = useState();
+  
   useEffect(() => {
     const getData = async () => {
       const { data } = await getContacts();

@@ -16,7 +16,7 @@ const NavAdmin = ({user}) => {
         <Link to={`/messages`}>Messages</Link>
       </div>
       <div className="item-nav">
-        <Link to={`/messagescontact`}>Messages Contact</Link>
+        <Link to={`/messages-contact`}>Messages-Contact</Link>
       </div>
       <div className="item-nav dropdown">
         <MyAccount user={user} />
