@@ -13,11 +13,11 @@ const MessageSchema = new Schema(
       ref: "User",
       required: true,
     },
-    title: {
+    subject: {
       type: String,
       required: true,
     },
-    description: {
+    message: {
       type: String,
       required: true,
     },  
