@@ -5,6 +5,7 @@ const API_URL_SERVICE = "/services";
 const API_URL_MESSAGES = "/messages";
 const API_URL_REGISTER = "/auth/register";
 const API_URL_REVIEWS = "/reviews";
+const API_URL_CONTACTS = "/contacts";
 const ADMIN = "63e14deca4340e45d23f20b2";
 const getAll = (url) => {
   axios.get(url);
@@ -63,6 +64,12 @@ const getUser = (id) => {
 const getReviews = () => {
   return axios.get(`${API_URL_REVIEWS}`);
 };
+const getContacts = () => {
+  return axios.get(`${API_URL_CONTACTS}`);
+};
+const createContact = (obj) => {
+  axios.post(`${API_URL_CONTACTS}`, obj);
+};
 
 export {
   createReview,
@@ -82,5 +89,8 @@ export {
   getUser,
   deleteCar,
   updateCar,
-  deleteService,deleteMessage
+  deleteService,
+  deleteMessage,
+  getContacts,
+  createContact,
 };

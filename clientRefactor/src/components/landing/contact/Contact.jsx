@@ -1,22 +1,22 @@
 import { useState } from "react";
-import { createReqService } from "../../../features/user/userSlice";
-import { useDispatch } from "react-redux";
+// import { createReqService } from "../../../features/user/userSlice";
+// import { useDispatch } from "react-redux";
 import "./contact.css";
 import { Form } from "../../index";
+import { createContact } from "../../../utils";
 const Contact = () => {
-  const ADMIN = "63e14deca4340e45d23f20b2";
   const [formData, setFormData] = useState({
     from: "",
-    to: ADMIN,
     title: "",
     description: "",
   });
-  const dispatch = useDispatch();
-  const onSubmit = (e) => {
+  // const dispatch = useDispatch();
+  const onSubmit = async(e) => {
     e.preventDefault();
     console.log(formData);
+    await createContact(formData);
     //TODO: create req service from contact to another page and to add check box if the req checked
-    dispatch(createReqService(formData));
+    // dispatch(createReqService(formData));
   };
   return (
     <div id="contact">
@@ -27,8 +27,8 @@ const Contact = () => {
         sec_title="Send for contact with admin"
         inputs={[
           { name: "from", type: "text" },
-          { name: "title", type: "text" },
-          { name: "description", type: "text" },
+          { name: "subject", type: "text" },
+          { name: "message", type: "text" },
         ]}
         onSubmit={onSubmit}
       />
