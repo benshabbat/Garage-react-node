@@ -2,7 +2,7 @@
 import { memo } from "react";
 import PropTypes from "prop-types";
 import StarRating from "./StarRating";
-import { getMomentFromUpdatedAt } from "./utilsReview.jsx";
+import { getMomentFromUpdatedAt } from "../../../utils";
 import "./reviews.css";
 
 const Review = memo(({ customer }) => {

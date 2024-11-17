@@ -1,23 +1,23 @@
-import { useState } from "react";
-// import { createReqService } from "../../../features/user/userSlice";
-// import { useDispatch } from "react-redux";
 import "./contact.css";
+import { useState } from "react";
 import { Form } from "../../index";
 import { createContact } from "../../../utils";
+
+
+//TODO:MAYBE TO ADD PHONE
 const Contact = () => {
   const [formData, setFormData] = useState({
     from: "",
     title: "",
     description: "",
   });
-  // const dispatch = useDispatch();
+
   const onSubmit = async(e) => {
     e.preventDefault();
     console.log(formData);
     await createContact(formData);
-    //TODO: create req service from contact to another page and to add check box if the req checked
-    // dispatch(createReqService(formData));
   };
+  
   return (
     <div id="contact">
       <Form

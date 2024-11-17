@@ -1,7 +1,9 @@
 import "../components/table/table.css";
 import { useState, useEffect } from "react";
-import { getContacts } from "../utils";
-import { getMomentFromUpdatedAt } from "../components/landing/reviews/utilsReview";
+import { getContacts,getMomentFromUpdatedAt } from "../utils";
+
+
+//TODO:MAYBE TO ADD PHONE
 
 export default function MessagesOfContact() {
   const [contacts, setContacts] = useState();
@@ -22,13 +24,13 @@ export default function MessagesOfContact() {
         (item) =>
           item?.from.includes(value) ||
           item?.subject.includes(value) ||
-          item?.message.includes(value) ||
-          // item?.updatedAt.includes(value)
+          item?.message.includes(value)
+          // item?.updatedAt.includes(value)// need to check how to include
       )
     );
   };
-  const bodyMessages = (message) => {
-    const { theTimeAgo, theDate } = getMomentFromUpdatedAt(message.updatedAt);
+  const bodyMessagesContact = (message) => {
+    const { theDate } = getMomentFromUpdatedAt(message.updatedAt);
     return (
       <tr key={message?._id}>
         <td>{message?.from}</td>
@@ -62,8 +64,8 @@ export default function MessagesOfContact() {
           </thead>
           <tbody>
             {filterContacts
-              ? filterContacts.map(bodyMessages)
-              : contacts?.map(bodyMessages)}
+              ? filterContacts.map(bodyMessagesContact)
+              : contacts?.map(bodyMessagesContact)}
           </tbody>
         </table>
       </section>
