@@ -122,6 +122,8 @@ export function useMessages() {
       </>
     );
   }
+
+  // want to use with layout
   function LayoutMessages({ children }) {
     return (
       <>
