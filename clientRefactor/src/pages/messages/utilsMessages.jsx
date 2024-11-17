@@ -113,17 +113,30 @@ export function useMessages() {
           {Search()}
           <TableMessages />
         </div>
-        {/* why i need the condition */}
-        {user && (
-          <CreateMessage
-            handelClick={handleCreateMessage}
-            isOpen={isOpenCreateMessage}
-            user={user}
-            users={user?.isAdmin ? users : null}
-          />
-        )}
+        <CreateMessage
+          handelClick={handleCreateMessage}
+          isOpen={isOpenCreateMessage}
+          user={user}
+          users={user?.isAdmin ? users : null}
+        />
       </>
     );
   }
-  return { PageMessages };
+  function LayoutMessages({ children }) {
+    return (
+      <>
+        <div className="table-container">
+          {Search()}
+          {children}
+        </div>
+        <CreateMessage
+          handelClick={handleCreateMessage}
+          isOpen={isOpenCreateMessage}
+          user={user}
+          users={user?.isAdmin ? users : null}
+        />
+      </>
+    );
+  }
+  return { PageMessages, TableMessages, Search, LayoutMessages };
 }
