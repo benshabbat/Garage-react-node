@@ -1,5 +1,66 @@
+import "../components/table/table.css";
+import { useState, useEffect } from "react";
+import { getContacts } from "../utils";
+
 export default function MessagesOfContact() {
+  const [contacts, setContacts] = useState();
+  const [filterContacts, setFilterContacts] = useState();
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await getContacts();
+      setContacts(data);
+    };
+    getData();
+  }, []);
+
+  const filterSearch = (e) => {
+    const { value } = e.target;
+    setFilterContacts(
+      contacts.filter(
+        (item) =>
+          item?.from.includes(value) ||
+          item?.subject.includes(value) ||
+          item?.message.includes(value)
+      )
+    );
+  };
+  const bodyMessages = (message) => {
+    return (
+      <tr key={message?._id}>
+        <td>{message?.from}</td>
+        <td>{message?.subject}</td>
+        <td>{message?.message}</td>
+      </tr>
+    );
+  };
   return (
-    <div>This page get the Messages from contact</div>
-  )
+    <div className="table-container">
+      <section className="table__header">
+        <h1>Messages From Contact</h1>
+        <div className="input-group">
+          <input
+            type="search"
+            placeholder="Search Data..."
+            onChange={filterSearch}
+          />
+        </div>
+      </section>
+      <section className="table__body">
+        <table>
+          <thead>
+            <tr>
+              <th>from</th>
+              <th>subject</th>
+              <th>message</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filterContacts
+              ? filterContacts.map(bodyMessages)
+              : contacts?.map(bodyMessages)}
+          </tbody>
+        </table>
+      </section>
+    </div>
+  );
 }
