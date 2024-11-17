@@ -4,8 +4,7 @@ const {model, Schema, SchemaTypes } = mongoose;
 const MessageSchema = new Schema(
   {
     from: {
-      type: SchemaTypes.ObjectId,
-      ref: "User",
+      type: String,
       required: true,
     },
     to: {
