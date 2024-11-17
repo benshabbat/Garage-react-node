@@ -6,6 +6,7 @@ import carsRoute from "./routes/cars.js";
 import servicesRoute from "./routes/services.js";
 import messagesRoute from "./routes/messages.js";
 import reviewsRoute from "./routes/reviews.js";
+// import contactsRoute from "./routes/contacts.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectDB from "./config/db.js";
@@ -34,6 +35,7 @@ app.use("/api/cars", carsRoute);
 app.use("/api/services", servicesRoute);
 app.use("/api/messages", messagesRoute);
 app.use("/api/reviews", reviewsRoute);
+// app.use("/api/contacts", contactsRoute);
 
 // app.use(errorHandler())
 app.listen(port, () => {
