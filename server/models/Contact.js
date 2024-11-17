@@ -1,15 +1,10 @@
 import mongoose from "mongoose";
-const {model, Schema, SchemaTypes } = mongoose;
+const {model, Schema } = mongoose;
 
-const MessageSchema = new Schema(
+const ContactSchema = new Schema(
   {
     from: {
       type: String,
-      required: true,
-    },
-    to: {
-      type: SchemaTypes.ObjectId,
-      ref: "User",
       required: true,
     },
     title: {
@@ -30,4 +25,4 @@ const MessageSchema = new Schema(
   { timestamps: true }
 );
 
-export default model("Message", MessageSchema);
+export default model("Contact", ContactSchema);
