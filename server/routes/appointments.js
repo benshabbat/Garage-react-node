@@ -1,31 +1,12 @@
 import express from "express";
-import {
-    updateCar,
-    deleteCar,
-    getCar,
-    getCars,
-    createCar,
-    getCarsByType,getCarsWithService,getCarsByOwner
-  } from "../controllers/appointment.js";
-//   import { verifyAdmin, verifyToken,verifyUser } from "../utils/verifyToken.js";
-  const router = express.Router();
+import { getAppointments, createAppointment } from "../controllers/appointment.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
+const router = express.Router();
 
 //GET ALL
-router.get("/",verifyAdmin, getCars);
-//GET ALL BY POPULATE
-router.get("/service",verifyUser, getCarsWithService);
-router.get("/populate", verifyAdmin, getCarsByType);
-router.get("/user/:user", verifyUser, getCarsByOwner);
-//CREATE
-router.post("/:userId",verifyAdmin,createCar);
+router.get("/", verifyAdmin,getAppointments);
 
-//UPDATE
-router.put("/:id",verifyAdmin, updateCar);
-//DELETE
-router.delete("/:id/:userId",verifyAdmin, deleteCar);
-//GET
-router.get("/:id",verifyUser, getCar);
+//POST
+router.post("/", createAppointment);
 
-
-
-export default router
+export default router;
