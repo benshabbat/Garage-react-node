@@ -1,6 +1,5 @@
 import "./manage.css";
-import React from "react";
-import CancelIcon from "@mui/icons-material/Cancel";
+
 import { deleteService } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { OpenModel } from "../index";
@@ -30,7 +29,7 @@ const ManageService = ({
       comp={
         <>
           <form className="form">
-            <CancelIcon onClick={handelClickManage} className="form-close" />
+          <button onClick={handelClickManage} className="form-close" >X</button>
             <h1 className="header">Manage Admin</h1>
             <h2>{`Hello ${service?.car?.numberPlate}`}</h2>
             <label className="form-label">

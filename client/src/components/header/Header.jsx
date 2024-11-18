@@ -10,17 +10,17 @@ const Header = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (userAuth?._id) dispatch(getUser(userAuth?._id));
-  }, [userAuth]);
+  }, [dispatch, userAuth]);
 
   return (
     <>
       <div className="main-header">
+        <div className="logo">
+          <Link to="/">Garage770</Link>
+        </div>
         <div className="navbar">
-          <div className="logo">
-            <Link to="/">Garage770</Link>
-          </div>
           <div>
-          {console.log(userAuth)}
+            {console.log(userAuth)}
             {user ? (
               user?.isAdmin ? (
                 <NavAdmin user={user} />

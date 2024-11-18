@@ -1,4 +1,3 @@
-import React from "react";
 
 const Table = (search=null, name, trTh, trTd=null) => {
   return (

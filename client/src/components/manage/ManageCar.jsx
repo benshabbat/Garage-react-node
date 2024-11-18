@@ -1,11 +1,9 @@
 import "./manage.css";
-import React from "react";
-import CancelIcon from "@mui/icons-material/Cancel";
 import CreateService from "../create/CreateService";
 import { deleteCar } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { OpenModel, EditCar } from "../index";
-import {BsPencilSquare} from "react-icons/bs"
+// import {BsPencilSquare} from "react-icons/bs"
 const ManageCar = ({
   handelClick: handelClickManage = null,
   isOpen,
@@ -35,7 +33,7 @@ const ManageCar = ({
       comp={
         <>
           <form className="form">
-            <CancelIcon onClick={handelClickManage} className="form-close" />
+            <button onClick={handelClickManage} className="form-close" >X</button>
             <h1 className="header">Manage Admin</h1>
             <h2>{`Hello ${car?.owner?.username}`}</h2>
             <label className="form-label">
@@ -49,7 +47,7 @@ const ManageCar = ({
             </label>
             <label className="form-label">
               <button name="editCar" className="edit" onClick={handleCar}>
-                <BsPencilSquare/>
+                {/* <BsPencilSquare/> */}
                 Edit Car
               </button>
             </label>

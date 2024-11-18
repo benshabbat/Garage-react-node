@@ -1,5 +1,4 @@
 import "./address.css";
-import React from "react";
 import AddressLink from "./AddressLink";
 const Address = () => {
   return (

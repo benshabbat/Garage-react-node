@@ -1,0 +1,44 @@
+.star-rating-container {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 4px;
+  direction: rtl;
+}
+
+.star-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #ddd;
+  transition: color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.star-button.active {
+  color: #ffd700;
+}
+
+.star-button.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.star-button:not(.disabled):hover {
+  transform: scale(1.1);
+}
+
+.star-button:not(.disabled):active {
+  transform: scale(0.95);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

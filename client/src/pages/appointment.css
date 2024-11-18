@@ -1,0 +1,38 @@
+.calendar-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .appointment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  .appointment-form input,
+  .appointment-form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .appointment-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .appointment-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .calendar {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  

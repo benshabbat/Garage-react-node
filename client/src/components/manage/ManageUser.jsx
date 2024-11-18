@@ -1,6 +1,4 @@
 import "./manage.css";
-import React from "react";
-import CancelIcon from "@mui/icons-material/Cancel";
 import { deleteUser } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { CreateCar, OpenModel, EditUser } from "../index";
@@ -35,7 +33,7 @@ const [handleEditUser,isOpenModelEditUser] = useOpenModel();
       comp={
         <>
           <form className="form">
-            <CancelIcon onClick={handelClickManage} className="form-close" />
+          <button onClick={handelClickManage} className="form-close" >X</button>
             <h1 className="header">Manage Admin</h1>
             <h2>{`Hello ${user?.username}`}</h2>
             <label className="form-label">

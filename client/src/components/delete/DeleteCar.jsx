@@ -1,8 +1,7 @@
-import React from "react";
 import { OpenModel } from "../index";
 import { deleteCar } from "../../utils";
 
-import CancelIcon from "@mui/icons-material/Cancel";
+// import CancelIcon from "@mui/icons-material/Cancel";
 const DeleteCar = ({
   handelClick: handelClickManage = null,
   isOpen,
@@ -24,7 +23,7 @@ const DeleteCar = ({
       comp={
         <>
           <form className="form">
-            <CancelIcon onClick={handelClickManage} className="form-close" />
+            <button onClick={handelClickManage} className="form-close" >X</button>
             <h1 className="header">Manage Admin</h1>
             <h2>{`Hello ${car?.owner?.username}`}</h2>
             <label className="form-label">

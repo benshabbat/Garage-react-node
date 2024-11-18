@@ -1,10 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
-    background-image: url("../../client/src/images/garage.jpg");
-    background-repeat: no-repeat;
-    background-size:100%;
+  min-height: 100vh;
+  /* background-image: url("../../clientRefactor/src/images/garage.jpg"); */
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }

@@ -1,0 +1,100 @@
+.services-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.services-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.services-header p {
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.service-item {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.service-description {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.service-details {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.service-details li {
+  margin-bottom: 0.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+}
+
+.service-details li::before {
+  content: "✓";
+  position: absolute;
+  right: 0;
+  color: #2563eb;
+}
+
+.service-price {
+  font-weight: bold;
+  color: #2563eb;
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.service-note {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.service-note h3 {
+  margin-bottom: 1rem;
+}
+
+.service-note ul {
+  list-style: none;
+}
+
+.service-note li {
+  margin-bottom: 0.5rem;
+}
+@media (max-width: 768px) {
+  .services-list {
+    grid-template-columns: 1fr;
+  }
+}

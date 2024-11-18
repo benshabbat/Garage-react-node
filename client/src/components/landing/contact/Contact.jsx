@@ -1,22 +1,23 @@
-import { useState } from "react";
-import { createReqService } from "../../../features/user/userSlice";
-import { useDispatch } from "react-redux";
 import "./contact.css";
+import { useState } from "react";
 import { Form } from "../../index";
+import { createContact } from "../../../utils";
+
+
+//TODO:MAYBE TO ADD PHONE
 const Contact = () => {
-  const ADMIN = "63e14deca4340e45d23f20b2";
   const [formData, setFormData] = useState({
     from: "",
-    to: ADMIN,
     title: "",
     description: "",
   });
-  const dispatch = useDispatch();
-  const onSubmit = (e) => {
+
+  const onSubmit = async(e) => {
     e.preventDefault();
     console.log(formData);
-    dispatch(createReqService(formData));
+    await createContact(formData);
   };
+  
   return (
     <div id="contact">
       <Form
@@ -26,8 +27,8 @@ const Contact = () => {
         sec_title="Send for contact with admin"
         inputs={[
           { name: "from", type: "text" },
-          { name: "title", type: "text" },
-          { name: "description", type: "text" },
+          { name: "subject", type: "text" },
+          { name: "message", type: "text" },
         ]}
         onSubmit={onSubmit}
       />

@@ -1,5 +1,5 @@
 import "./reviews.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CreateReviews, Review } from "../../index";
 import useOpenModel from "../../../hooks/useOpenModel";
 import { getReviews } from "../../../utils";
@@ -23,17 +23,19 @@ const Reviews = () => {
 
   return (
     <div id="reviews">
-      <h1>Reviews</h1>
-{/* not responsive */}
+      <h1 className="reviews-header">Reviews</h1>
+      {/* not responsive */}
       <Swiper numCardsPreview={4}>
         {allReviews?.map((customer, index) => {
           return <Review customer={customer} key={index} />;
         })}
       </Swiper>
 
-      <button className="btn-review" onClick={handelClick}>
-        Add Review
+      <button className="btn-add-review" onClick={handelClick}>
+        <span>✏️</span>
+        Share Your Experience
       </button>
+
       {<CreateReviews handelClick={handleAddReview} isOpen={isOpenAddReview} />}
     </div>
   );

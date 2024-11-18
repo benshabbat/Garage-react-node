@@ -1,28 +1,41 @@
-import React from "react";
-import classes from "./ServicesLanding.module.css";
+import CardServiceLanding from "./CardServiceLanding";
+import "./ServicesLanding.css";
 
 const ServicesLanding = () => {
+  const ServicesLandingList = [
+    {
+      icon: "🔧",
+      title: "Car Maintenance",
+      description: "Professional auto repair services",
+    },
+    {
+      icon: "⚡",
+      title: "Quick Service",
+      description: "Efficient and reliable repairs",
+    },
+    {
+      icon: "📋",
+      title: "Vehicle Reports",
+      description: "Detailed service history",
+    },
+    {
+      icon: "📅",
+      title: "Online Booking",
+      description: "Easy appointment scheduling",
+    },
+  ];
+
   return (
-    <div className={classes.main} id="services">
-      <h1>Our Services</h1>
-      <ul>
-        <li>Car Air Conditioning</li>
-        <li>Car Batteries</li>
-        <li>Car Brakes</li>
-        <li>Car Exhausts</li>
-        <li>Car Gearbox Repairs</li>
-        <li>Car Repairs</li>
-        <li>Car Servicing</li>
-        <li>Car Tyres</li>
-        <li>Car Welding</li>
-        <li>Classic Car Service</li>
-        <li>Clutch Replacement</li>
-        <li>Courtesy Car</li>
-        <li>Engine Diagnostics</li>
-        <li>Fleet Maintenance</li>
-        <li>Mechanical Repairs</li>
-      </ul>
-    </div>
+    <section className="servicesLanding">
+      <div className="container">
+        <h2 className="section-title">Our Services</h2>
+        <div className="servicesLanding-grid">
+          {ServicesLandingList.map((service, index) => (
+            <CardServiceLanding key={index} service={service} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 
