@@ -3,6 +3,7 @@ import "./appointment.css"
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAppointments } from '../features/appointments/appointmentSlice';
+import AppointmentForm from "./AppointmentForm";
 
 const Calendar = () => {
   const dispatch = useDispatch();
@@ -25,12 +26,16 @@ const Calendar = () => {
   };
 
   return (
+
+    <>
     <div className="calendar">
       <h2>Appointments Calendar</h2>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && renderAppointments()}
       {status === 'failed' && <div>Error loading appointments</div>}
     </div>
+    <AppointmentForm/>
+    </>
   );
 };
 
