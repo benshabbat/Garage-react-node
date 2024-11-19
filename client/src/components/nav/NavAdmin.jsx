@@ -19,7 +19,7 @@ const NavAdmin = ({user}) => {
         <Link to={`/messages-contact`}>Messages-Contact</Link>
       </div>
       <div className="item-nav">
-        <Link to={`/calandar`}>Clandar</Link>
+        <Link to={`/calendar`}>Calendar</Link>
       </div>
       <div className="item-nav dropdown">
         <MyAccount user={user} />
