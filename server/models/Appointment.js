@@ -10,8 +10,20 @@ const AppointmentSchema = new Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
+    required: true,
+  },
+  time: {
+    type: String,
+    required: true,
+  },
+  notes: {
+    type: String,
     required: true,
   },
   status: {

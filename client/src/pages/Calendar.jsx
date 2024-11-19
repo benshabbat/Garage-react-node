@@ -3,6 +3,7 @@ import "./appointment.css"
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAppointments } from '../features/appointments/appointmentSlice';
+import AppointmentForm from "./AppointmentForm"
 
 const Calendar = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const Calendar = () => {
 
   return (
     <div className="calendar-wrapper">
+      <AppointmentForm/>
       <div className="calendar-header">
         <button onClick={() => changeMonth(-1)}>&lt;</button>
         <h2>{months[currentDate.getMonth()]} {currentDate.getFullYear()}</h2>

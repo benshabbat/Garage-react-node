@@ -190,3 +190,149 @@
     margin: 10px 0;
   }
 }
+
+
+
+
+.appointment-form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-form-container h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.appointment-form input,
+.appointment-form textarea {
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.appointment-form input:focus,
+.appointment-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.appointment-form input.error {
+  border-color: #dc3545;
+  background-color: #fff8f8;
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .appointment-form-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .appointment-form input,
+  .appointment-form textarea {
+    font-size: 16px; /* מונע זום אוטומטי במובייל */
+  }
+}
+
+/* תמיכה ב-RTL */
+.appointment-form-container,
+.appointment-form input,
+.appointment-form textarea {
+  direction: rtl;
+}
