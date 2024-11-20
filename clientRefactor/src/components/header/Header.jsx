@@ -19,8 +19,6 @@ const Header = () => {
           <Link to="/">Garage770</Link>
         </div>
         <div className="navbar">
-          <div>
-            {console.log(userAuth)}
             {user ? (
               user?.isAdmin ? (
                 <NavAdmin user={user} />
@@ -32,7 +30,6 @@ const Header = () => {
             )}
           </div>
         </div>
-      </div>
       <Suspense fallback={<h1>Loading..</h1>}>
         <Outlet />
       </Suspense>

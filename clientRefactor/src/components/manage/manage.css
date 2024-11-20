@@ -1,16 +1,41 @@
-.create{
-    margin-top: 20px;
-    background-color: greenyellow;
-    margin-bottom: 20px;
+.create, .edit, .delete {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.edit{
-    background-color: skyblue;
-    margin-bottom: 20px;
+
+.create {
+    background-color: #4CAF50;  /* ירוק יותר מקצועי */
+    color: white;
 }
-.delete{
-    background-color: red;
-    margin-bottom: 20px;
+
+.create:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
 }
-/* .header,.form-label{
-    margin-bottom: 24px;
-} */
+
+.edit {
+    background-color: #3498db;  /* כחול יותר מקצועי */
+    color: white;
+}
+
+.edit:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.delete {
+    background-color: #e74c3c;  /* אדום יותר מקצועי */
+    color: white;
+}
+
+.delete:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
