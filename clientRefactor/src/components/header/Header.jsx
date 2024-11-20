@@ -15,33 +15,24 @@ const Header = () => {
     if (userAuth?._id) dispatch(getUser(userAuth?._id));
   }, [dispatch, userAuth]);
 
-  useEffect(() => {
-    const closeNav = (e) => {
-      if (isNavOpen && !e.target.closest('.navbar') && !e.target.closest('.mobile-nav-toggle')) {
-        setIsNavOpen(false);
-      }
-    };
-
-    document.addEventListener('click', closeNav);
-    return () => document.removeEventListener('click', closeNav);
-  }, [isNavOpen]);
+  const handleOutsideClick = () => setIsNavOpen(!isNavOpen);
 
   return (
-    <>
+    <div onClick={handleOutsideClick}>
       <div className="main-header">
         <div className="logo">
           <Link to="/">Garage770</Link>
         </div>
-        
-        <button 
-          className="mobile-nav-toggle" 
-          onClick={() => setIsNavOpen(!isNavOpen)}
+
+        <button
+          className="mobile-nav-toggle"
+          onClick={handleOutsideClick}
           aria-label="toggle navigation"
         >
-          {isNavOpen ? '×' : '☰'}
+          {isNavOpen ? "×" : "☰"}
         </button>
 
-        <div className={`navbar ${isNavOpen ? 'active' : ''}`}>
+        <div className={`navbar ${isNavOpen ? "active" : ""}`}>
           {user ? (
             user?.isAdmin ? (
               <NavAdmin user={user} setIsNavOpen={setIsNavOpen} />
@@ -49,14 +40,16 @@ const Header = () => {
               <NavUser user={user} setIsNavOpen={setIsNavOpen} />
             )
           ) : (
-            (userAuth === null || userAuth === undefined) && <NavLanding setIsNavOpen={setIsNavOpen} />
+            (userAuth === null || userAuth === undefined) && (
+              <NavLanding setIsNavOpen={setIsNavOpen} />
+            )
           )}
         </div>
       </div>
       <Suspense fallback={<h1>Loading..</h1>}>
         <Outlet />
       </Suspense>
-    </>
+    </div>
   );
 };
 

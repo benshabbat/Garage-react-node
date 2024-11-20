@@ -4,7 +4,7 @@ const NavUser = (props ) => {
   const { setIsNavOpen,user } = props; 
 
   const handleClick = () => {
-    setIsNavOpen(false); // סוגר את התפריט אחרי בחירה
+    setIsNavOpen(false); 
   };
   return (
     <>

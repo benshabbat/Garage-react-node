@@ -13,7 +13,7 @@ const MyAccount = ({ setIsNavOpen, user }) => {
   const { onLogout } = useLogout();
   return (
     <div className="dropdown">
-      <button className="dropbtn">My Account</button>
+      <button>My Account</button>
       <div className="dropdown-content">
         <Link to={`/account`} onClick={handleClick}>
           {user?.username}
