@@ -1,4 +1,3 @@
-// Review.jsx
 import { memo } from "react";
 import PropTypes from "prop-types";
 import StarRating from "./StarRating";

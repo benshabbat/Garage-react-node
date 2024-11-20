@@ -1,5 +1,5 @@
 import "./reviews.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CreateReviews, Review } from "../../index";
 import useOpenModel from "../../../hooks/useOpenModel";
 import { getReviews } from "../../../utils";
