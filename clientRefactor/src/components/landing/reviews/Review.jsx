@@ -17,15 +17,13 @@ const Review = memo(({ customer }) => {
           <div className="review-date">{theDate}</div>
         </div>
       </div>
-      
+
       <div className="review-rating">
         <StarRating defaultRating={customer.stars} disabled={true} />
         <span className="review-stars-text">{customer.stars}/5</span>
       </div>
 
-      <div className="review-content">
-        <p className="review-description">{customer.description}</p>
-      </div>
+      <p className="review-description">{customer.description}</p>
 
       <div className="review-footer">
         <span className="review-time">{theTimeAgo}</span>
@@ -40,8 +38,7 @@ Review.propTypes = {
     stars: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
-    
-  }).isRequired
+  }).isRequired,
 };
 
 Review.displayName = "Review";
