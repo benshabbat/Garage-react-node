@@ -3,22 +3,20 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 0;
+  overflow: hidden;  
 }
 
 .swiper-container {
-  --num-cards-preview: 4;
   position: relative;
   width: 100%;
   padding: 0 40px;
-  overflow: visible; /* חשוב */
+  margin-right: -20px;
 }
 
 .swiper-content {
   overflow: hidden;
-  width: calc(100% + 20px); /* מרחיב את האזור הנראה */
-  margin-right: -20px; /* מאזן את ההרחבה */
+  padding-right: 20px; 
 }
-
 
 .swiper-slides {
   display: flex;

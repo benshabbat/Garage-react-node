@@ -10,7 +10,6 @@ export function useSwiper(children, numCardsPreview) {
     return children.slice(start, end);
   };
 
-
   const nextCard = () => {
     if (currentIndex + numCardsPreview < totalCards) {
       setCurrentIndex((prev) => prev + numCardsPreview);
@@ -28,7 +27,6 @@ export function useSwiper(children, numCardsPreview) {
       setCurrentIndex(lastGroupStart);
     }
   };
-
 
   const indexPagination = (index) => {
     setCurrentIndex(index * numCardsPreview);
@@ -52,23 +50,22 @@ export function useSwiper(children, numCardsPreview) {
   const Pagination = () => {
     return (
       <div className="pagination">
-      {Array(Math.ceil(totalCards / numCardsPreview))
-        .fill()
-        .map((_, index) => (
-          <button
-            key={index}
-            className={`dot ${
-              Math.floor(currentIndex / numCardsPreview) === index
-                ? "active"
-                : ""
-            }`}
-            onClick={() => indexPagination(index)}
-          />
-        ))}
-    </div>
+        {Array(Math.ceil(totalCards / numCardsPreview))
+          .fill()
+          .map((_, index) => (
+            <button
+              key={index}
+              className={`dot ${
+                Math.floor(currentIndex / numCardsPreview) === index
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() => indexPagination(index)}
+            />
+          ))}
+      </div>
     );
   };
-
 
   const Slides = ({ children }) => {
     return <div className="swiper-slides">{getVisibleCards(children)}</div>;
@@ -77,7 +74,7 @@ export function useSwiper(children, numCardsPreview) {
   const Layout = ({ children }) => {
     return (
       <div className="swiper-outer-container">
-              <div
+        <div
           className="swiper-container"
           style={{ "--num-cards-preview": numCardsPreview }}
         >
@@ -94,4 +91,3 @@ export function useSwiper(children, numCardsPreview) {
 
   return { Layout };
 }
-
