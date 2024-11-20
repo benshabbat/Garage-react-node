@@ -32,7 +32,6 @@ const Reviews = () => {
       </Swiper>
 
       <button className="btn-add-review" onClick={handelClick}>
-        <span>✏️</span>
         Share Your Experience
       </button>
 

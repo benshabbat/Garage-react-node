@@ -138,7 +138,7 @@
 .btn-add-review {
   background: var(--review-primary);
   color: white;
-  padding: 16px 32px;
+  padding: 1rem 2rem;
   border-radius: 50px;
   border: none;
   font-size: 1.1rem;
@@ -146,24 +146,14 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 40px auto;
+  gap: 0.5rem;
+  margin: 2.5rem auto;
   transition: var(--review-transition);
   box-shadow: 0 4px 12px rgba(83, 114, 240, 0.2);
 }
 
 .btn-add-review:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(83, 114, 240, 0.3);
-  background: darken(var(--review-primary), 5%);
-}
-
-.btn-add-review:active {
-  transform: translateY(0);
-}
-
-.btn-add-review span {
-  font-size: 1.2rem;
 }
 
 /* Animations */
@@ -239,7 +229,7 @@
   .btn-add-review {
     width: 100%;
     justify-content: center;
-    padding: 14px 24px;
+    padding: 0.8rem 1.5rem;
   }
 }
 
