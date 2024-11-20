@@ -1,20 +1,18 @@
 import { Link } from "react-router-dom";
 import { MyAccount } from "../index";
-const NavUser = ({user}) => {
+const NavUser = (props ) => {
+  const { setIsNavOpen,user } = props; 
+
+  const handleClick = () => {
+    setIsNavOpen(false); // סוגר את התפריט אחרי בחירה
+  };
   return (
     <>
-      {/* <div className="item-nav">
-        <Link to={`/services/user`}>Services</Link>
-      </div> */}
-      <div className="item-nav">
-        <Link to={`/account`}>Account</Link>
-      </div>
-      <div className="item-nav">
-        <Link to={`/messages`}>Messages</Link>
-      </div>
-      <div className="item-nav dropdown">
-        <MyAccount user={user} />
-      </div>
+      <Link to={`/account`} onClick={handleClick}>Account</Link>
+
+      <Link to={`/messages`} onClick={handleClick}>Messages</Link>
+
+      <MyAccount user={user} setIsNavOpen={setIsNavOpen} />
     </>
   );
 };

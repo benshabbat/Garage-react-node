@@ -1,37 +1,27 @@
 import Login from "../login/Login";
 import useOpenModel from "../../hooks/useOpenModel";
 import { Link } from "react-router-dom";
-const NavLanding = () => {
-  const [ 
-    handelLogin,
-    isOpenLogin,
-    ] = useOpenModel();
+
+const NavLanding = ({ setIsNavOpen }) => {
+  const [handelLogin, isOpenLogin] = useOpenModel();
+  
+  const handleClick = () => {
+    setIsNavOpen(false);
+  };
+
   return (
     <>
-      <div className="item-nav">
-        <Link to="#home">Home</Link>
-      </div>
-      <div className="item-nav">
-        <a href="#reviews">Reviews</a>
-      </div>
-      <div className="item-nav">
-        <a href="#address">Address</a>
-      </div>
-      <div className="item-nav">
-        <a href="#about">About</a>
-      </div>
-      <div className="item-nav">
-        <a href="#services">Services</a>
-      </div>
-      <div className="item-nav">
-        <a href="#contact">Contact</a>
-      </div>
-
-      <div className="item-nav">
-        <button onClick={handelLogin}>Login</button>
-        <Login handelClick={handelLogin} isOpen={isOpenLogin} />
-      </div>
-     
+      <Link to="#home" onClick={handleClick}>Home</Link>
+      <a href="#reviews" onClick={handleClick}>Reviews</a>
+      <a href="#address" onClick={handleClick}>Address</a>
+      <a href="#about" onClick={handleClick}>About</a>
+      <a href="#services" onClick={handleClick}>Services</a>
+      <a href="#contact" onClick={handleClick}>Contact</a>
+      <button onClick={() => {
+        handleClick();
+        handelLogin();
+      }}>Login</button>
+      <Login handelClick={handelLogin} isOpen={isOpenLogin} />
     </>
   );
 };

@@ -26,16 +26,18 @@ const ServicesLanding = () => {
   ];
 
   return (
-    <section className="servicesLanding">
-      <div className="container">
-        <h2 className="section-title">Our Services</h2>
-        <div className="servicesLanding-grid">
-          {ServicesLandingList.map((service, index) => (
-            <CardServiceLanding key={index} service={service} />
-          ))}
+    <div id="services">
+      <section className="servicesLanding">
+        <div className="container">
+          <h2 className="section-title">Our Services</h2>
+          <div className="servicesLanding-grid">
+            {ServicesLandingList.map((service, index) => (
+              <CardServiceLanding key={index} service={service} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

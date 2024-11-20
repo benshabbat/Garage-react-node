@@ -4,10 +4,11 @@
   box-sizing: border-box;
 }
 body {
-  min-height: 100vh;
-  /* background-image: url("../../clientRefactor/src/images/garage.jpg"); */
-
+  min-height: 100vh; /* גובה מינימלי של 100% מגובה החלון */
+  background-image: url("../../clientRefactor/src/images/garage.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed; /* הרקע יישאר קבוע בעת גלילה */
+
 }
