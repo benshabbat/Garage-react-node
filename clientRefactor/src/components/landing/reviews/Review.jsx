@@ -1,9 +1,7 @@
-// Review.jsx
 import { memo } from "react";
 import PropTypes from "prop-types";
 import StarRating from "./StarRating";
 import { getMomentFromUpdatedAt } from "../../../utils";
-import "./reviews.css";
 
 const Review = memo(({ customer }) => {
   const { theTimeAgo, theDate } = getMomentFromUpdatedAt(customer.updatedAt);
@@ -12,7 +10,7 @@ const Review = memo(({ customer }) => {
     <div className="review-card">
       <div className="review-header">
         <div className="review-avatar">
-          {customer.avatar || customer.name.charAt(0).toUpperCase()}
+          {customer.name.charAt(0).toUpperCase()}
         </div>
         <div className="review-info">
           <h3 className="review-name">{customer.name}</h3>
@@ -31,9 +29,6 @@ const Review = memo(({ customer }) => {
 
       <div className="review-footer">
         <span className="review-time">{theTimeAgo}</span>
-        {customer.verified && (
-          <span className="review-verified">✓ Verified Customer</span>
-        )}
       </div>
     </div>
   );
@@ -45,8 +40,7 @@ Review.propTypes = {
     stars: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
-    avatar: PropTypes.string,
-    verified: PropTypes.bool
+    
   }).isRequired
 };
 

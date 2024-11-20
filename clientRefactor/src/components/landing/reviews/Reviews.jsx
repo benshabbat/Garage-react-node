@@ -36,7 +36,7 @@ const Reviews = () => {
         Share Your Experience
       </button>
 
-      {<CreateReviews handelClick={handleAddReview} isOpen={isOpenAddReview} />}
+      <CreateReviews handelClick={handleAddReview} isOpen={isOpenAddReview} />
     </div>
   );
 };

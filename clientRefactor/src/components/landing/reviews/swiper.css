@@ -1,39 +1,51 @@
-.swiper-container {
+.swiper-outer-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  position: relative;
   padding: 20px 0;
 }
 
-.swiper-slides {
-  display: flex;
-  transition: transform 0.3s ease-in-out;
+.swiper-container {
+  --num-cards-preview: 4;
+  position: relative;
   width: 100%;
-  gap: 20px;
-  padding: 10px;
+  padding: 0 40px;
+  overflow: visible; /* חשוב */
 }
 
-.swiper-slide {
-  min-width: calc(33.33% - 14px); /* שליש מהרוחב פחות הרווח */
-  flex-shrink: 0;
+.swiper-content {
+  overflow: hidden;
+  width: calc(100% + 20px); /* מרחיב את האזור הנראה */
+  margin-right: -20px; /* מאזן את ההרחבה */
+}
+
+
+.swiper-slides {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.swiper-slides > * {
+  flex: 0 0 calc((100% - (var(--num-cards-preview, 4) - 1) * 20px) / var(--num-cards-preview, 4));
+  max-width: calc((100% - (var(--num-cards-preview, 4) - 1) * 20px) / var(--num-cards-preview, 4));
 }
 
 .nav-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: white;
-  border: none;
-  border-radius: 50%;
   width: 40px;
   height: 40px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
+  z-index: 10;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
-  z-index: 1;
 }
 
 .nav-button:hover {
@@ -42,11 +54,11 @@
 }
 
 .prev-button {
-  left: -20px;
+  left: 0;
 }
 
 .next-button {
-  right: -20px;
+  right: 0;
 }
 
 .pagination {
@@ -60,40 +72,37 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #ddd;
+  background: #ddd;
   border: none;
-  padding: 0;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.dot:hover {
-  transform: scale(1.2);
 }
 
 .dot.active {
-  background-color: #2196f3;
-  transform: scale(1.2);
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .swiper-slide {
-    min-width: calc(50% - 10px); /* שני כרטיסים בשורה */
-  }
-
-  .swiper-slides {
-    gap: 15px;
-  }
+  background: #2196f3;
 }
 
 @media (max-width: 768px) {
-  .swiper-slide {
-    min-width: calc(100% - 10px); /* כרטיס אחד בשורה */
+  .swiper-slides > * {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
+}
 
-  .nav-button {
-    width: 35px;
-    height: 35px;
+@media (min-width: 769px) and (max-width: 1024px) {
+  .swiper-slides > * {
+    flex: 0 0 calc(50% - 10px);
+    max-width: calc(50% - 10px);
   }
+}
+
+@media (min-width: 1025px) {
+  .swiper-slides > * {
+    flex: 0 0 calc(100% / var(--num-cards-preview, 4) - 14px);
+    max-width: calc(100% / var(--num-cards-preview, 4) - 14px);
+  }
+}
+
+/* Add to the container */
+.swiper-container {
+  --num-cards-preview: 4;
 }

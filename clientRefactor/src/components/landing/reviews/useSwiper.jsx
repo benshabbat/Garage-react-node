@@ -1,35 +1,38 @@
 import { useState } from "react";
 
-
-//TODO:imporve this file maybe destructure to files
-
-
-
-
 export function useSwiper(children, numCardsPreview) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cardsPerView = numCardsPreview;
   const totalCards = children.length;
 
-  const getVisibleCards = (children) => {
-    let visibleCards = [];
-    for (let i = 0; i < cardsPerView; i++) {
-      const index = (currentIndex + i) % totalCards;
-      visibleCards.push(children[index]);
-    }
-    return visibleCards;
+  const getVisibleCards = () => {
+    const start = currentIndex;
+    const end = Math.min(start + numCardsPreview, totalCards);
+    return children.slice(start, end);
   };
 
+
   const nextCard = () => {
-    setCurrentIndex((prev) => prev + 1);
+    if (currentIndex + numCardsPreview < totalCards) {
+      setCurrentIndex((prev) => prev + numCardsPreview);
+    } else {
+      setCurrentIndex(0);
+    }
   };
 
   const prevCard = () => {
-    setCurrentIndex((prev) => prev - 1 + totalCards);
+    if (currentIndex - numCardsPreview >= 0) {
+      setCurrentIndex((prev) => prev - numCardsPreview);
+    } else {
+      const lastGroupStart =
+        Math.floor((totalCards - 1) / numCardsPreview) * numCardsPreview;
+      setCurrentIndex(lastGroupStart);
+    }
   };
-  const indexPagination = (index) => setCurrentIndex(index);
 
 
+  const indexPagination = (index) => {
+    setCurrentIndex(index * numCardsPreview);
+  };
 
   const PrevCard = () => {
     return (
@@ -49,38 +52,46 @@ export function useSwiper(children, numCardsPreview) {
   const Pagination = () => {
     return (
       <div className="pagination">
-        {children.map((_, index) => (
+      {Array(Math.ceil(totalCards / numCardsPreview))
+        .fill()
+        .map((_, index) => (
           <button
             key={index}
             className={`dot ${
-              currentIndex % children.length === index ? "active" : ""
+              Math.floor(currentIndex / numCardsPreview) === index
+                ? "active"
+                : ""
             }`}
             onClick={() => indexPagination(index)}
           />
         ))}
-      </div>
+    </div>
     );
   };
 
-//children with {} is children into 2 elements
 
-  const Slides=({children})=>{
-    return (<div className="swiper-slides">{getVisibleCards(children)}</div>)
-  }
-  
+  const Slides = ({ children }) => {
+    return <div className="swiper-slides">{getVisibleCards(children)}</div>;
+  };
 
-  const Layout = ({children}) => {
+  const Layout = ({ children }) => {
     return (
-      <div className="swiper-container">
-        <div className="swiper-wrapper">
-          <Slides children={children}/>
+      <div className="swiper-outer-container">
+              <div
+          className="swiper-container"
+          style={{ "--num-cards-preview": numCardsPreview }}
+        >
           <PrevCard />
+          <div className="swiper-content">
+            <Slides children={children} />
+          </div>
           <NextCard />
+          <Pagination />
         </div>
-        <Pagination />
       </div>
     );
   };
 
   return { Layout };
 }
+

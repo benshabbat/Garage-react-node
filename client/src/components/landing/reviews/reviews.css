@@ -13,39 +13,6 @@
   --review-transition: 0.3s ease;
 }
 
-/* Reviews Section */
-.reviews-section {
-  background: linear-gradient(135deg, var(--review-secondary) 0%, #ffffff 100%);
-  padding: 60px 20px;
-  min-height: 100vh;
-  animation: slideUp 0.6s ease-out;
-}
-
-.reviews-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Header Styles */
-.reviews-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.reviews-title {
-  font-size: 2.5rem;
-  color: var(--review-text);
-  margin-bottom: 16px;
-  font-weight: 700;
-}
-
-.reviews-subtitle {
-  font-size: 1.1rem;
-  color: var(--review-text-light);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
 /* Review Card */
 .review-card {
   background: var(--review-background);
@@ -247,9 +214,15 @@
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Dark Mode Support */
@@ -263,45 +236,28 @@
     --review-secondary: #2d3748;
   }
 
-  .reviews-section {
-    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  }
-
   .reviews-error {
     background-color: rgba(229, 62, 62, 0.1);
   }
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-  .reviews-section {
-    padding: 40px 16px;
-  }
-
-  .reviews-title {
-    font-size: 2.2rem;
-  }
-}
 
 @media (max-width: 768px) {
   .review-card {
     padding: 20px;
     margin: 16px;
   }
-  
-  .reviews-title {
-    font-size: 2rem;
-  }
-  
+
   .review-header {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .review-avatar {
     margin: 0 auto 12px;
   }
-  
+
   .review-footer {
     flex-direction: column;
     gap: 12px;
@@ -316,10 +272,6 @@
 }
 
 @media (max-width: 480px) {
-  .reviews-title {
-    font-size: 1.8rem;
-  }
-
   .review-card {
     padding: 16px;
     margin: 12px;
@@ -336,7 +288,6 @@
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .reviews-section,
   .review-card,
   .btn-add-review {
     animation: none;
@@ -346,11 +297,6 @@
 
 /* Print Styles */
 @media print {
-  .reviews-section {
-    background: none;
-    padding: 0;
-  }
-
   .btn-add-review {
     display: none;
   }
