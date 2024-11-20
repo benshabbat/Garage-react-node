@@ -9,6 +9,10 @@ const NavLanding = ({ setIsNavOpen }) => {
     setIsNavOpen(false);
   };
 
+  const handleLogin = () => {
+    handleClick();
+    handelLogin();
+  }
   return (
     <>
       <Link to="#home" onClick={handleClick}>Home</Link>
@@ -17,10 +21,7 @@ const NavLanding = ({ setIsNavOpen }) => {
       <a href="#about" onClick={handleClick}>About</a>
       <a href="#services" onClick={handleClick}>Services</a>
       <a href="#contact" onClick={handleClick}>Contact</a>
-      <button onClick={() => {
-        handleClick();
-        handelLogin();
-      }}>Login</button>
+      <button onClick={handleLogin}>Login</button>
       <Login handelClick={handelLogin} isOpen={isOpenLogin} />
     </>
   );

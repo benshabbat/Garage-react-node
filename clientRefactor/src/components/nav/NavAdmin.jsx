@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { MyAccount } from "../index";
-const NavAdmin = (props ) => {
-  const { setIsNavOpen,user } = props; // צריך להעביר את זה כפרופס
-
+const NavAdmin = ({ setIsNavOpen,user }  ) => {
   const handleClick = () => {
     setIsNavOpen(false); // סוגר את התפריט אחרי בחירה
   };
