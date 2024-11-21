@@ -18,7 +18,7 @@ const Header = () => {
   const handleOutsideClick = () => setIsNavOpen(!isNavOpen);
 
   return (
-    <div onClick={handleOutsideClick}>
+    <>
       <div className="main-header">
         <div className="logo">
           <Link to="/">Garage770</Link>
@@ -49,7 +49,7 @@ const Header = () => {
       <Suspense fallback={<h1>Loading..</h1>}>
         <Outlet />
       </Suspense>
-    </div>
+    </>
   );
 };
 
