@@ -40,7 +40,6 @@ export function useUsers() {
     );
   };
 
-  //working as Search()
   function Search() {
     return (
       <section className="table__header">
@@ -52,9 +51,43 @@ export function useUsers() {
             onChange={filterSearch}
           />
         </div>
+        <button onClick={handleCreateUser} className="create-button">
+          Create User
+        </button>
       </section>
     );
   }
+  
+  const TableUsers = () => {
+    return (
+      <section className="table__body">
+        <table>
+          <thead>
+            <tr>
+              <th>Actions</th>
+              <th>User Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            {(filterUsers ? filterUsers : users)?.map((user) => (
+              <tr key={user?._id}>
+                <td data-label="Actions">
+                  <button value={user?._id} onClick={handleUser}>
+                    Manage
+                  </button>
+                </td>
+                <td data-label="User Name">{user?.username}</td>
+                <td data-label="Email">{user?.email}</td>
+                <td data-label="Phone Number">{user?.phone}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    );
+  };
 
   const bodyUser = (user) => {
     return (
@@ -71,29 +104,7 @@ export function useUsers() {
     );
   };
 
-  const TableUsers = () => {
-    const bodyUserForTable = filterUsers
-      ? filterUsers?.map(bodyUser)
-      : users?.map(bodyUser);
-    return (
-      <>
-        <section className="table__body">
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>user name</th>
-                <th>email</th>
-                <th>phone number</th>
-              </tr>
-            </thead>
-            <tbody>{bodyUserForTable}</tbody>
-          </table>
-        </section>
-        <button onClick={handleCreateUser}>Create User</button>
-      </>
-    );
-  };
+ 
 
   function MangeUsers() {
     return (

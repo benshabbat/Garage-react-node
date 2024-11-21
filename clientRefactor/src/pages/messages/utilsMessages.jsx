@@ -13,132 +13,119 @@ export function useMessages() {
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModel();
   const [filterMessages, setFilterMessages] = useState();
   const [isDeleted, setIsDeleted] = useState(false);
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (user?.isAdmin) dispatch(getUsers());
     if (user) dispatch(getMessagesByIdUser(user?._id));
-  }, [user, isOpenCreateMessage, dispatch, isDeleted]);
+  }, [user, isOpenCreateMessage, isDeleted]);
 
   const filterSearch = (e) => {
-    const { value } = e.target;
     setFilterMessages(
-      messages.filter(
-        (item) =>
-          item?.from?.username.includes(value) ||
-          item?.to?.username.includes(value) ||
-          item?.title.includes(value) ||
-          item?.description.includes(value) ||
-          item?.updatedAt.includes(value)
+      messages?.filter(item => 
+        Object.values({
+          username: item?.from?.username,
+          toUsername: item?.to?.username,
+          title: item?.title,
+          description: item?.description,
+          date: item?.updatedAt
+        }).some(value => value?.toLowerCase().includes(e.target.value.toLowerCase()))
       )
     );
   };
 
-  function Search() {
-    return (
-      <section className="table__header">
-        <h1>Messages</h1>
-        <div className="input-group">
-          <input
-            type="search"
-            placeholder="Search Data..."
-            onChange={filterSearch}
-          />
-        </div>
-      </section>
-    );
-  }
-
-  const bodyMessages = (message) => {
-    return (
-      <tr key={message?._id}>
-        {user?.isAdmin && (
-          <td>
-            <button
-              name="deleteMessage"
-              value={message?._id}
-              onClick={handleDelete}
-            >
-              Delete
-            </button>
-          </td>
-        )}
-        <td>{message?.from?.username}</td>
-        <td>{message?.to?.username}</td>
-        <td>{message?.title}</td>
-        <td>{message?.description}</td>
-        <td>{message?.updatedAt}</td>
-      </tr>
-    );
+  const handleDelete = async (messageId) => {
+    await deleteMessage(messageId);
+    setIsDeleted(prev => !prev);
   };
 
-  const handleDelete = async (e) => {
-    const { name, value } = e.target;
-    if (name === "deleteMessage") {
-      await deleteMessage(value);
-      setIsDeleted(true);
-    }
-  };
+  const MessageRow = ({ message }) => (
+    <tr key={message?._id}>
+      {user?.isAdmin && (
+        <td data-label="Actions">
+          <button
+            name="deleteMessage"
+            onClick={() => handleDelete(message?._id)}
+          >
+            Delete
+          </button>
+        </td>
+      )}
+      <td data-label="From">{message?.from?.username}</td>
+      <td data-label="To">{message?.to?.username}</td>
+      <td data-label="Title">{message?.title}</td>
+      <td data-label="Description">{message?.description}</td>
+      <td data-label="Date">{message?.updatedAt}</td>
+    </tr>
+  );
 
-  function TableMessages() {
-    return (
-      <>
-        <section className="table__body">
-          <table>
-            <thead>
-              <tr>
-                {user?.isAdmin && <th>delete</th>}
-                <th>from</th>
-                <th>to</th>
-                <th>title</th>
-                <th>description</th>
-                <th>date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filterMessages
-                ? filterMessages?.map(bodyMessages)
-                : messages?.map(bodyMessages)}
-            </tbody>
-          </table>
-        </section>
-        <button onClick={handleCreateMessage}>New Message</button>
-      </>
-    );
-  }
-  function PageMessages() {
-    return (
-      <>
-        <div className="table-container">
-          {Search()}
-          <TableMessages />
-        </div>
-        <CreateMessage
-          handelClick={handleCreateMessage}
-          isOpen={isOpenCreateMessage}
-          user={user}
-          users={user?.isAdmin ? users : null}
+  const Search = () => (
+    <section className="table__header">
+      <h1>Messages</h1>
+      <div className="input-group">
+        <input
+          type="search"
+          placeholder="Search messages..."
+          onChange={filterSearch}
         />
-      </>
-    );
-  }
+      </div>
+      <button onClick={handleCreateMessage} className="create-button">
+        New Message
+      </button>
+    </section>
+  );
 
-  // want to use with layout
-  function LayoutMessages({ children }) {
-    return (
-      <>
-        <div className="table-container">
-          {Search()}
-          {children}
-        </div>
-        <CreateMessage
-          handelClick={handleCreateMessage}
-          isOpen={isOpenCreateMessage}
-          user={user}
-          users={user?.isAdmin ? users : null}
-        />
-      </>
-    );
-  }
+  const TableMessages = () => (
+    <section className="table__body">
+      <table>
+        <thead>
+          <tr>
+            {user?.isAdmin && <th>Actions</th>}
+            <th>From</th>
+            <th>To</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {(filterMessages || messages)?.map(message => 
+            <MessageRow key={message._id} message={message} />
+          )}
+        </tbody>
+      </table>
+    </section>
+  );
+
+  const PageMessages = () => (
+    <>
+      <div className="table-container">
+        <Search />
+        <TableMessages />
+      </div>
+      <CreateMessage
+        handelClick={handleCreateMessage}
+        isOpen={isOpenCreateMessage}
+        user={user}
+        users={user?.isAdmin ? users : null}
+      />
+    </>
+  );
+
+  const LayoutMessages = ({ children }) => (
+    <>
+      <div className="table-container">
+        <Search />
+        {children}
+      </div>
+      <CreateMessage
+        handelClick={handleCreateMessage}
+        isOpen={isOpenCreateMessage}
+        user={user}
+        users={user?.isAdmin ? users : null}
+      />
+    </>
+  );
+
   return { PageMessages, TableMessages, Search, LayoutMessages };
 }

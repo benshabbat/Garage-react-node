@@ -1,9 +1,6 @@
 import "../components/table/table.css";
 import { useState, useEffect } from "react";
-import { getContacts,getMomentFromUpdatedAt } from "../utils";
-
-
-//TODO:MAYBE TO ADD PHONE
+import { getContacts, getMomentFromUpdatedAt } from "../utils";
 
 export default function MessagesOfContact() {
   const [contacts, setContacts] = useState();
@@ -20,26 +17,25 @@ export default function MessagesOfContact() {
   const filterSearch = (e) => {
     const { value } = e.target;
     setFilterContacts(
-      contacts.filter(
-        (item) =>
-          item?.from.includes(value) ||
-          item?.subject.includes(value) ||
-          item?.message.includes(value)
-          // item?.updatedAt.includes(value)// need to check how to include
+      contacts?.filter(item => 
+        [item.from, item.subject, item.message]
+          .some(field => field?.toLowerCase().includes(value.toLowerCase()))
       )
     );
   };
-  const bodyMessagesContact = (message) => {
+
+  const MessageRow = ({ message }) => {
     const { theDate } = getMomentFromUpdatedAt(message.updatedAt);
     return (
-      <tr key={message?._id}>
-        <td>{message?.from}</td>
-        <td>{message?.subject}</td>
-        <td>{message?.message}</td>
-        <td>{theDate}</td>
+      <tr key={message._id}>
+        <td data-label="From">{message.from}</td>
+        <td data-label="Subject">{message.subject}</td>
+        <td data-label="Message">{message.message}</td>
+        <td data-label="Date">{theDate}</td>
       </tr>
     );
   };
+
   return (
     <div className="table-container">
       <section className="table__header">
@@ -47,7 +43,7 @@ export default function MessagesOfContact() {
         <div className="input-group">
           <input
             type="search"
-            placeholder="Search Data..."
+            placeholder="Search in messages..."
             onChange={filterSearch}
           />
         </div>
@@ -56,16 +52,16 @@ export default function MessagesOfContact() {
         <table>
           <thead>
             <tr>
-              <th>from</th>
-              <th>subject</th>
-              <th>message</th>
-              <th>date</th>
+              <th>From</th>
+              <th>Subject</th>
+              <th>Message</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>
-            {filterContacts
-              ? filterContacts.map(bodyMessagesContact)
-              : contacts?.map(bodyMessagesContact)}
+            {(filterContacts || contacts)?.map(message => 
+              <MessageRow key={message._id} message={message} />
+            )}
           </tbody>
         </table>
       </section>

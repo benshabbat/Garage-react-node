@@ -106,16 +106,41 @@ export function useCars() {
         <table>
           <thead>
             <tr>
-              <th></th>
-              <th></th>
-              <th>owner</th>
-              <th>numberPlate</th>
-              <th>km</th>
-              <th>brand</th>
+              <th>Actions</th>
+              <th>Management</th>
+              <th>Owner</th>
+              <th>License Plate</th>
+              <th>Mileage</th>
+              <th>Brand</th>
             </tr>
           </thead>
           <tbody>
-            {filterCars ? filterCars?.map(bodyCars) : cars?.map(bodyCars)}
+            {(filterCars ? filterCars : cars)?.map((car) => (
+              <tr key={car?._id}>
+                <td data-label="Actions">
+                  <button name="deleteCar" value={car?._id} onClick={handleCar}>
+                    Delete
+                  </button>
+                </td>
+                <td data-label="Management">
+                  <button value={car?._id} onClick={handleCar}>
+                    Manage
+                  </button>
+                </td>
+                <td data-label="Owner">{car?.owner?.username}</td>
+                <td data-label="License Plate">
+                  <button name="createService" value={car?._id} onClick={handleCar}>
+                    {car?.numberPlate}
+                  </button>
+                </td>
+                <td data-label="Mileage">
+                  <button name="editCar" value={car?._id} onClick={handleCar}>
+                    {car?.km}
+                  </button>
+                </td>
+                <td data-label="Brand">{car?.brand}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </section>
