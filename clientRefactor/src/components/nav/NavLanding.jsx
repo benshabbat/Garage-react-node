@@ -1,4 +1,5 @@
 import Login from "../login/Login";
+// import NewLogin from "../login/NewLogin";
 import useOpenModel from "../../hooks/useOpenModel";
 import { Link } from "react-router-dom";
 
@@ -23,6 +24,7 @@ const NavLanding = ({ setIsNavOpen }) => {
       <a href="#contact" onClick={handleClick}>Contact</a>
       <button onClick={handleLogin}>Login</button>
       <Login handelClick={handelLogin} isOpen={isOpenLogin} />
+      {/* <NewLogin isOpen={isOpenLogin} /> */}
     </>
   );
 };
