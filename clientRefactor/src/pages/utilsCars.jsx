@@ -1,18 +1,14 @@
 import "../components/table/table.css";
-
 import { useState, useEffect } from "react";
 import useOpenModel from "../hooks/useOpenModel";
-
 import { getCarsByType } from "../features/admin/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-// import { BiSolidCarCrash, BiTrash } from "react-icons/bi";
-
 import ManageCar from "../components/manage/ManageCar";
 import EditCar from "../components/edit/EditCar";
 import CreateService from "../components/create/CreateService";
 import DeleteCar from "../components/delete/DeleteCar";
 
+//TODO: Components cant to be into hook castum bc when i use with hook castum they rendering this bad practice.
 
 export function useCars() {
   const { user } = useSelector((state) => state.user);
@@ -69,36 +65,6 @@ export function useCars() {
     }
   };
 
-  const bodyCars = (car) => {
-    return (
-      <tr key={car?._id}>
-        <td>
-          <button name="deleteCar" value={car?._id} onClick={handleCar}>
-            {/* <BiTrash /> */}
-            Delete
-          </button>
-        </td>
-        <td>
-          <button value={car?._id} onClick={handleCar}>
-            Manage
-          </button>
-        </td>
-        <td>{car?.owner?.username}</td>
-        <td>
-          <button name="createService" value={car?._id} onClick={handleCar}>
-            {/* <BiSolidCarCrash />  */}
-            {car?.numberPlate}
-          </button>
-        </td>
-        <td>
-          <button name="editCar" value={car?._id} onClick={handleCar}>
-            {car?.km}
-          </button>
-        </td>
-        <td>{car?.brand}</td>
-      </tr>
-    );
-  };
 
   const TableCars = () => {
     return (
