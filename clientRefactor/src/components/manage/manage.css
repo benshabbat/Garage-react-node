@@ -1,41 +1,43 @@
+
 .create, .edit, .delete {
-    padding: 10px 20px;
+    width: 100%;
+    height: 45px;
     border: none;
-    border-radius: 5px;
+    border-radius: 40px;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    backdrop-filter: blur(20px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
-    margin-bottom: 15px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.create {
-    background-color: #4CAF50;  /* ירוק יותר מקצועי */
-    color: white;
-}
-
-.create:hover {
-    background-color: #45a049;
+  }
+  
+  .create {
+    background: rgba(34, 197, 94, 0.9);  /* בהיר יותר */
+  }
+  
+  .edit {
+    background: rgba(59, 130, 246, 0.9);  /* בהיר יותר */
+  }
+  
+  .delete {
+    background: rgba(239, 68, 68, 0.9);  /* בהיר יותר */
+  }
+  
+  .create:hover {
+    background: rgb(34, 197, 94);  /* 100% אטום בhover */
     transform: translateY(-2px);
-}
-
-.edit {
-    background-color: #3498db;  /* כחול יותר מקצועי */
-    color: white;
-}
-
-.edit:hover {
-    background-color: #2980b9;
+  }
+  
+  .edit:hover {
+    background: rgb(59, 130, 246);  /* 100% אטום בhover */
     transform: translateY(-2px);
-}
-
-.delete {
-    background-color: #e74c3c;  /* אדום יותר מקצועי */
-    color: white;
-}
-
-.delete:hover {
-    background-color: #c0392b;
+  }
+  
+  .delete:hover {
+    background: rgb(239, 68, 68);  /* 100% אטום בhover */
     transform: translateY(-2px);
-}
+  }
+  
+ 

@@ -31,7 +31,6 @@ const ManageService = ({
           <form className="form">
           <button onClick={handelClickManage} className="form-close" >X</button>
             <h1 className="header">Manage Admin</h1>
-            <h2>{`Hello ${service?.car?.numberPlate}`}</h2>
             <label className="form-label">
               <button name="editService" className="edit" onClick={handleCarID}>
                 Edit Service

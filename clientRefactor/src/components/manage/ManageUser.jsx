@@ -7,10 +7,8 @@ const ManageUser = ({
   isOpen,
   user = null,
 }) => {
-const [handleCreateCar,isOpenModelCreateCar] = useOpenModel();
-const [handleEditUser,isOpenModelEditUser] = useOpenModel();
-
-  // const dispatch = useDispatch();
+  const [handleCreateCar, isOpenModelCreateCar] = useOpenModel();
+  const [handleEditUser, isOpenModelEditUser] = useOpenModel();
 
   const handleUser = async (e) => {
     e.preventDefault();
@@ -23,9 +21,6 @@ const [handleEditUser,isOpenModelEditUser] = useOpenModel();
     if (name === "editUser") {
       handleEditUser();
     }
-    // did problem for external components
-    // dispatch(getUsers());
-    
   };
 
   return (
@@ -33,33 +28,22 @@ const [handleEditUser,isOpenModelEditUser] = useOpenModel();
       comp={
         <>
           <form className="form">
-          <button onClick={handelClickManage} className="form-close" >X</button>
+            <button onClick={handelClickManage} className="form-close">
+              X
+            </button>
             <h1 className="header">Manage Admin</h1>
-            <h2>{`Hello ${user?.username}`}</h2>
             <label className="form-label">
-              <button
-                name="createCar"
-                className="create"
-                onClick={handleUser}
-              >
+              <button name="createCar" className="create" onClick={handleUser}>
                 Create Car
               </button>
             </label>
             <label className="form-label">
-              <button
-                name="editUser"
-                className="edit"
-                onClick={handleUser}
-              >
+              <button name="editUser" className="edit" onClick={handleUser}>
                 Edit User
               </button>
             </label>
             <label className="form-label">
-              <button
-                name="deleteUser"
-                className="delete"
-                onClick={handleUser}
-              >
+              <button name="deleteUser" className="delete" onClick={handleUser}>
                 Delete User
               </button>
             </label>
