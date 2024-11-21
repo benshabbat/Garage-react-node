@@ -1,5 +1,8 @@
 import "./form.css";
 import Input from "../input/Input";
+
+
+//MAYBE TO IMPROVE THIS CODE
 const Form = ({
   title,
   sec_title,
