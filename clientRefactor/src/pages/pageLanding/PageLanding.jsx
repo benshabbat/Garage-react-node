@@ -1,14 +1,6 @@
 import "./pageLanding.css";
 import Home from "../home/Home";
-import {
-  Reviews,
-  // Address,
-  About,
-  ServicesLanding,
-  Contact,
-} from "../../components";
-import ContactLanding from "../../components/landing/codeOfClaude/ContactLanding";
-
+import { Reviews, About, ServicesLanding, Contact } from "../../components";
 
 const PageLanding = () => {
   return (
@@ -16,12 +8,7 @@ const PageLanding = () => {
       <Home />
       <About />
       <ServicesLanding />
-      {/* <ContactLanding/> */}
-      <div className="address_and_contact">
-        {/* <Address /> */}
-        <Contact />
-
-      </div>
+      <Contact />
       <Reviews />
       <footer>Written By David-Chen Benshabbat</footer>
     </div>

@@ -1,16 +1,15 @@
 .main-header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.5rem 10%;
+  padding: 1rem 10%;
   background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  margin-bottom: 2rem;
 }
 
 .logo a {
@@ -23,6 +22,7 @@
 .navbar {
   display: flex;
   align-items: center;
+  gap: 2rem;
 }
 
 .navbar a,
@@ -31,50 +31,29 @@
   color: rgb(222, 185, 185);
   text-decoration: none;
   font-weight: 500;
-  margin-left: 2rem;
   border: none;
   background: none;
-  float: left;
-  margin-right: 12px;
+  cursor: pointer;
 }
 
 .mobile-nav-toggle {
-  display: none; /* רק זה נשאר פה */
+  display: none;
   background: none;
   border: none;
   color: rgb(222, 185, 185);
   font-size: 1.8rem;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
-  z-index: 1001;
-}
-
-@media screen and (max-width: 1024px) {
-  .main-header {
-    padding: 0.5rem 5%;
-  }
-
-  .navbar a,
-  .navbar button {
-    margin-left: 1.5rem;
-    font-size: 1rem;
-  }
-
-  .logo a {
-    font-size: 1.7rem;
-  }
+  padding: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
   .mobile-nav-toggle {
-    display: flex; /* רק במובייל נראה את הכפתור */
-    align-items: center;
-    justify-content: center;
+    display: block;
+    z-index: 1001;
   }
 
   .main-header {
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.5rem;
   }
 
   .navbar {
@@ -84,85 +63,38 @@
     height: 100vh;
     width: 80%;
     max-width: 400px;
-    background-color: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
     flex-direction: column;
     align-items: flex-start;
     padding: 5rem 2rem;
-    transition: 0.3s ease-in-out;
-    z-index: 1000;
+    transition: 0.3s ease;
   }
 
   .navbar.active {
     right: 0;
   }
 
-  .navbar.active::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-  }
-
   .navbar a,
   .navbar button {
-    margin: 1rem 0;
-    font-size: 1.1rem;
+    display: block;
     width: 100%;
     text-align: left;
-  }
-
-  .dropdown {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .dropdown-content {
-    position: static;
-    width: 100%;
-    transform: none;
-    background-color: rgba(255, 255, 255, 0.1);
-    margin-top: 0.5rem;
-    padding: 0.5rem 0;
-    box-shadow: none;
-  }
-
-  .dropdown:hover .dropdown-content {
-    transform: none;
-  }
-
-  .dropdown-content a,
-  .dropdown-content button {
-    color: rgb(222, 185, 185);
-    padding: 0.8rem 1rem;
-  }
-
-  .dropdown-content a:hover,
-  .dropdown-content button:hover {
-    background-color: rgba(221, 221, 221, 0.2);
+    padding: 0.75rem 0;
   }
 }
 
 @media screen and (max-width: 480px) {
   .main-header {
-    padding: 0.5rem;
-  }
-
-  .navbar {
-    width: 100%;
-    padding: 4rem 1rem;
+    padding: 0.8rem 1rem;
   }
 
   .logo a {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
-
-  .navbar a,
-  .navbar button {
-    font-size: 1rem;
+  
+  .navbar {
+    width: 100%;
+    max-width: none;
   }
 }
