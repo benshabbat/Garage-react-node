@@ -2,9 +2,8 @@ import "./contact.css";
 import { useState } from "react";
 import { Form } from "../../index";
 import { createContact } from "../../../utils";
-
-
-//TODO:MAYBE TO ADD PHONE
+//TODO: CONTACT US ON VALIDATE PHONE,EMAIL 
+//TODO: SERVER:MODEL,ROUTES,SERVICES,CONTROLLERS
 const Contact = () => {
   const [formData, setFormData] = useState({
     from: "",
@@ -23,11 +22,11 @@ const Contact = () => {
       <Form
         isFocus={false}
         setData={setFormData}
-        title="Contact"
-        sec_title="Send for contact with admin"
+        title="Contact Us"
         inputs={[
-          { name: "from", type: "text" },
-          { name: "subject", type: "text" },
+          { name: "name", type: "text" },
+          { name: "email", type: "email" },
+          { name: "phone", type: "tel" },
           { name: "message", type: "text" },
         ]}
         onSubmit={onSubmit}
