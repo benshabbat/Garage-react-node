@@ -1,12 +1,12 @@
 import "../components/table/table.css";
 import { useState, useEffect } from "react";
-import useOpenModel from "../hooks/useOpenModel";
-import { getCarsByType } from "../features/admin/adminSlice";
+import useOpenModel from "../../hooks/useOpenModel";
+import { getCarsByType } from "../../features/admin/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ManageCar from "../components/manage/ManageCar";
-import EditCar from "../components/edit/EditCar";
-import CreateService from "../components/create/CreateService";
-import DeleteCar from "../components/delete/DeleteCar";
+import ManageCar from "../../components/manage/ManageCar";
+import EditCar from "../../components/edit/EditCar";
+import CreateService from "../../components/create/CreateService";
+import DeleteCar from "../../components/delete/DeleteCar";
 
 //TODO: Components cant to be into hook castum bc when i use with hook castum they rendering this bad practice.
 
