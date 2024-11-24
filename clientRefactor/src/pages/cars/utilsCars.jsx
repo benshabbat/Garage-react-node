@@ -13,18 +13,21 @@ import DeleteCar from "../../components/delete/DeleteCar";
 export function useCars() {
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
+
   const [selectedCar, setSelectedCar] = useState(null);
+  const [filterCars, setFilterCars] = useState(null);
+
   const [handleManageCar, isOpenManageCar] = useOpenModel();
-  const [filterCars, setFilterCars] = useState();
   const [handleEditCar, isOpenModelEditCar] = useOpenModel();
-  const [handleCreateService, isOpenModelCreateService] = useOpenModel();
   const [handleDeleteCar, isOpenModelDeleteCar] = useOpenModel();
+  const [handleCreateService, isOpenModelCreateService] = useOpenModel();
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCarsByType(user?._id));
-  }, [isOpenManageCar, isOpenModelDeleteCar, isOpenModelEditCar]);
+  }, [dispatch, isOpenManageCar, isOpenModelDeleteCar, isOpenModelEditCar, user?._id]);
 
-  const filterSearch = (e) => {
+  const handleSearch = (e) => {
     const { value } = e.target;
     setFilterCars(
       cars.filter(
@@ -45,25 +48,13 @@ export function useCars() {
           <input
             type="search"
             placeholder="Search Data..."
-            onChange={filterSearch}
+            onChange={handleSearch}
           />
         </div>
       </section>
     );
   }
-  // const handleCar = (e) => {
-  //   const { name } = e.target;
-  //   setCar(cars.find((car) => car._id === e.target.value));
-  //   if (name === "editCar") {
-  //     handleEditCar();
-  //   } else if (name === "createService") {
-  //     handleCreateService();
-  //   } else if (name === "deleteCar") {
-  //     handleDeleteCar();
-  //   } else {
-  //     handleManageCar();
-  //   }
-  // };
+
   const handleCarAction = (e) => {
     const { name, value } = e.target;
     const car = cars.find((car) => car._id === value);
