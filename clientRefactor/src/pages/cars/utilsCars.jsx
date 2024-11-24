@@ -13,7 +13,7 @@ import DeleteCar from "../../components/delete/DeleteCar";
 export function useCars() {
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
-  const [car, setCar] = useState();
+  const [selectedCar, setSelectedCar] = useState(null);
   const [handleManageCar, isOpenManageCar] = useOpenModel();
   const [filterCars, setFilterCars] = useState();
   const [handleEditCar, isOpenModelEditCar] = useOpenModel();
@@ -51,20 +51,38 @@ export function useCars() {
       </section>
     );
   }
-  const handleCar = (e) => {
-    const { name } = e.target;
-    setCar(cars.find((car) => car._id === e.target.value));
-    if (name === "editCar") {
-      handleEditCar();
-    } else if (name === "createService") {
-      handleCreateService();
-    } else if (name === "deleteCar") {
-      handleDeleteCar();
-    } else {
-      handleManageCar();
+  // const handleCar = (e) => {
+  //   const { name } = e.target;
+  //   setCar(cars.find((car) => car._id === e.target.value));
+  //   if (name === "editCar") {
+  //     handleEditCar();
+  //   } else if (name === "createService") {
+  //     handleCreateService();
+  //   } else if (name === "deleteCar") {
+  //     handleDeleteCar();
+  //   } else {
+  //     handleManageCar();
+  //   }
+  // };
+  const handleCarAction = (e) => {
+    const { name, value } = e.target;
+    const car = cars.find((car) => car._id === value);
+    setSelectedCar(car);
+
+    switch (name) {
+      case "editCar":
+        handleEditCar();
+        break;
+      case "createService":
+        handleCreateService();
+        break;
+      case "deleteCar":
+        handleDeleteCar();
+        break;
+      default:
+        handleManageCar();
     }
   };
-
 
   const TableCars = () => {
     return (
@@ -84,23 +102,23 @@ export function useCars() {
             {(filterCars ? filterCars : cars)?.map((car) => (
               <tr key={car?._id}>
                 <td data-label="Actions">
-                  <button name="deleteCar" value={car?._id} onClick={handleCar}>
+                  <button name="deleteCar" value={car?._id} onClick={handleCarAction}>
                     Delete
                   </button>
                 </td>
                 <td data-label="Management">
-                  <button value={car?._id} onClick={handleCar}>
+                  <button value={car?._id} onClick={handleCarAction}>
                     Manage
                   </button>
                 </td>
                 <td data-label="Owner">{car?.owner?.username}</td>
                 <td data-label="License Plate">
-                  <button name="createService" value={car?._id} onClick={handleCar}>
+                  <button name="createService" value={car?._id} onClick={handleCarAction}>
                     {car?.numberPlate}
                   </button>
                 </td>
                 <td data-label="Mileage">
-                  <button name="editCar" value={car?._id} onClick={handleCar}>
+                  <button name="editCar" value={car?._id} onClick={handleCarAction}>
                     {car?.km}
                   </button>
                 </td>
@@ -116,22 +134,22 @@ export function useCars() {
     return (
       <>
         <ManageCar
-          car={car}
+          car={selectedCar}
           handelClick={handleManageCar}
           isOpen={isOpenManageCar}
         />
         <CreateService
-          car={car}
+          car={selectedCar}
           handelClick={handleCreateService}
           isOpen={isOpenModelCreateService}
         />
         <EditCar
-          car={car}
+          car={selectedCar}
           handelClick={handleEditCar}
           isOpen={isOpenModelEditCar}
         />
         <DeleteCar
-          car={car}
+          car={selectedCar}
           handelClick={handleDeleteCar}
           isOpen={isOpenModelDeleteCar}
         />
