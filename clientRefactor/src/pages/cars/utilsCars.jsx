@@ -3,10 +3,7 @@ import { useState, useEffect } from "react";
 import useOpenModel from "../../hooks/useOpenModel";
 import { getCarsByType } from "../../features/admin/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ManageCar from "../../components/manage/ManageCar";
-import EditCar from "../../components/edit/EditCar";
-import CreateService from "../../components/create/CreateService";
-import DeleteCar from "../../components/delete/DeleteCar";
+
 
 //TODO: Components cant to be into hook castum bc when i use with hook castum they rendering this bad practice.
 //TODO:THE COMPONENTS OUTSIDE FROM USECARS OR MOVE TO ANOTHER FILE
@@ -40,20 +37,20 @@ export function useCars() {
     );
   };
 
-  function Search() {
-    return (
-      <section className="table__header">
-        <h1>Cars</h1>
-        <div className="input-group">
-          <input
-            type="search"
-            placeholder="Search Data..."
-            onChange={handleSearch}
-          />
-        </div>
-      </section>
-    );
-  }
+  // function Search() {
+  //   return (
+  //     <section className="table__header">
+  //       <h1>Cars</h1>
+  //       <div className="input-group">
+  //         <input
+  //           type="search"
+  //           placeholder="Search Data..."
+  //           onChange={handleSearch}
+  //         />
+  //       </div>
+  //     </section>
+  //   );
+  // }
 
   const handleCarAction = (e) => {
     const { name, value } = e.target;
@@ -121,32 +118,32 @@ export function useCars() {
       </section>
     );
   };
-  function HandelCars() {
-    return (
-      <>
-        <ManageCar
-          car={selectedCar}
-          handelClick={handleManageCar}
-          isOpen={isOpenManageCar}
-        />
-        <CreateService
-          car={selectedCar}
-          handelClick={handleCreateService}
-          isOpen={isOpenModelCreateService}
-        />
-        <EditCar
-          car={selectedCar}
-          handelClick={handleEditCar}
-          isOpen={isOpenModelEditCar}
-        />
-        <DeleteCar
-          car={selectedCar}
-          handelClick={handleDeleteCar}
-          isOpen={isOpenModelDeleteCar}
-        />
-      </>
-    );
-  }
+  // function HandelCars() {
+  //   return (
+  //     <>
+  //       <ManageCar
+  //         car={selectedCar}
+  //         handelClick={handleManageCar}
+  //         isOpen={isOpenManageCar}
+  //       />
+  //       <CreateService
+  //         car={selectedCar}
+  //         handelClick={handleCreateService}
+  //         isOpen={isOpenModelCreateService}
+  //       />
+  //       <EditCar
+  //         car={selectedCar}
+  //         handelClick={handleEditCar}
+  //         isOpen={isOpenModelEditCar}
+  //       />
+  //       <DeleteCar
+  //         car={selectedCar}
+  //         handelClick={handleDeleteCar}
+  //         isOpen={isOpenModelDeleteCar}
+  //       />
+  //     </>
+  //   );
+  // }
 
   function PageCars() {
     return (
