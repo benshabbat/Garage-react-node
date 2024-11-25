@@ -1,11 +1,11 @@
-import "../components/table/table.css";
+import "../../components/table/table.css";
 import { useState, useEffect } from "react";
-import useOpenModel from "../hooks/useOpenModel";
+import useOpenModel from "../../hooks/useOpenModel";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../features/admin/adminSlice";
+import { getUsers } from "../../features/admin/adminSlice";
 
-import ManageUser from "../components/manage/ManageUser";
-import { Register } from "../components";
+import ManageUser from "../../components/manage/ManageUser";
+import { Register } from "../../components";
 export function useUsers() {
   const { users } = useSelector((state) => state.admin);
   const [user, setUser] = useState();

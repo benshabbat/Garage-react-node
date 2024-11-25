@@ -7,7 +7,7 @@ const Cars = () => {
   return (
     <CarsProvider>
       <div className="table-container">
-        <Search />
+        <Search/>
         <CarsTable />
       </div>
       <CarModals />
