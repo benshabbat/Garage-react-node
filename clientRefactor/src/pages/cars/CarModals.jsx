@@ -17,18 +17,18 @@ export default function CarModals() {
     />
     <CreateService
       car={selectedCar}
-      handelClick={handleCreateService}
-      isOpen={isOpenModelCreateService}
+      handelClick={modals.createService.onClose}
+      isOpen={modals.createService.isOpen}
     />
     <EditCar
       car={selectedCar}
-      handelClick={handleEditCar}
-      isOpen={isOpenModelEditCar}
+      handelClick={modals.editCar.onClose}
+      isOpen={modals.editCar.isOpen}
     />
     <DeleteCar
       car={selectedCar}
-      handelClick={handleDeleteCar}
-      isOpen={isOpenModelDeleteCar}
+      handelClick={modals.deleteCar.onClose}
+      isOpen={modals.deleteCar.isOpen}
     />
   </>
   )
