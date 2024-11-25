@@ -95,8 +95,6 @@ export {
   createContact,
 };
 
-
-
 export function getMomentFromUpdatedAt(updatedAt) {
   const months = [
     "January",

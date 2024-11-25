@@ -1,7 +1,7 @@
 import Service from "../models/Service.js";
 import Car from "../models/Car.js";
 
-//test create user
+//test create service
 const createService = async (req) => {
   const carId = req.params.carId;
   const newService = new Service({ ...req.body, car: carId });

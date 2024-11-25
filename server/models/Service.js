@@ -3,11 +3,6 @@ const { Schema, SchemaTypes } = mongoose;
 
 const ServiceSchema = new mongoose.Schema(
   {
-    user: {
-      type: SchemaTypes.ObjectId,
-      ref: "User",
-      required: true,
-    },
     car: {
       type: SchemaTypes.ObjectId,
       ref: "Car",
@@ -22,16 +17,16 @@ const ServiceSchema = new mongoose.Schema(
       required: true,
     },
     price: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
     paid: {
-        type: Boolean,
-        required: true,
+      type: Boolean,
+      default: false,
     },
-    //Pending(red), On Work(yellow), Done(green)
     status: {
       type: String,
+      default: "pending",
       required: true,
     },
   },
