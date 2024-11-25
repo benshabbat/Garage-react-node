@@ -56,7 +56,7 @@ export function useServicesAdmin() {
       handelService();
     }
     if (name === "editStatus") handleStatus();
-    if (name === "editPadid") handlePaid();
+    if (name === "editPaid") handlePaid();
   };
 
   const bodyServices = (service) => {
@@ -73,8 +73,8 @@ export function useServicesAdmin() {
         <td data-label="Price">{service?.price}</td>
         <td data-label="Payment Status">
           <button
-            name="editPadid"
-            value={service?.paid ? "true" : "false"}
+            name="editPaid"
+            value={service?._id}
             onClick={handleServiceId}
           >
             {service?.paid ? "Paid" : "Unpaid"}

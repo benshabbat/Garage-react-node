@@ -16,9 +16,8 @@ const EditPaidService = ({ handelClick, isOpen, service }) => {
               title="Edit Pay"
               sec_title="Edit Pay"
               inputs={[
-                { name: "paid", type: "checkbox", checked: formData?.paid },
+                { name: "paid", type: "checkbox", checked: formData?.paid }
               ]}
-              nameSelect="status"
               handelClick={handelClick}
               onSubmit={onSubmit}
             />
@@ -29,3 +28,6 @@ const EditPaidService = ({ handelClick, isOpen, service }) => {
 }
 
 export default EditPaidService
+
+
+
