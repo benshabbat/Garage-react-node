@@ -1,20 +1,21 @@
-
 import ManageUser from "../../components/manage/ManageUser";
 import { Register } from "../../components";
+import { useUsersContext } from "./UsersContext";
 
 export default function UserModals() {
-    return (
-        <>
-          <Register
-            users={users}
-            handelClick={handleCreateUser}
-            isOpen={isOpenCreateUser}
-          />
-          <ManageUser
-            user={selectedUser}
-            handelClick={handleManageUser}
-            isOpen={isOpenManageUser}
-          />
-        </>
-      );
+  const { modals, users, selectedUser } = useUsersContext();
+  return (
+    <>
+      <Register
+        users={users}
+        handelClick={modals.createUser.onClose}
+        isOpen={modals.createUser.isOpen}
+      />
+      <ManageUser
+        user={selectedUser}
+        handelClick={modals.manageUser.onClose}
+        isOpen={modals.manageUser.isOpen}
+      />
+    </>
+  );
 }
