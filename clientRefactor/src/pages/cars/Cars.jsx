@@ -1,9 +1,18 @@
-import { useCars } from "./utilsCars";
+import CarsProvider from "./CarsProvider";
+import CarsTable from "./CarsTable";
+import Search from "./Search";
+import CarModals from "./CarModals";
 
 const Cars = () => {
-  const { PageCars } = useCars();
-// will want to know why with parentheses and cant to write as component
-  return PageCars();
+  return (
+    <CarsProvider>
+      <div className="table-container">
+        <Search />
+        <CarsTable />
+      </div>
+      <CarModals />
+    </CarsProvider>
+  );
 };
 
 export default Cars;

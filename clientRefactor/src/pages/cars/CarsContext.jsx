@@ -1,9 +1,9 @@
 import { createContext, useContext} from "react";
 
-
-//TODO:TO CREATE CARSCONTEXT : USECONTEXT AND PROVIDER (useCarsContext , CarsProvider)
-
 export const CarsContext = createContext(null);
+
+//Provider then
+//useCarsContext have the values of logic
 
 export const useCarsContext = () => {
   const context = useContext(CarsContext);

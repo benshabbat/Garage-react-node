@@ -1,10 +1,10 @@
 import {CarsContext} from "./CarsContext"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCarsByType } from "../features/admin/adminSlice";
-import useOpenModel from "../hooks/useOpenModel";
+import { getCarsByType } from "../../features/admin/adminSlice";
+import useOpenModel from "../../hooks/useOpenModel";
 
-export const CarsProvider = ({ children }) => {
+export default function CarsProvider ({ children }) {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user);
     const { cars } = useSelector((state) => state.admin);

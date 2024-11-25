@@ -1,5 +1,6 @@
 import { useCarsContext } from "./CarsContext";
-export const CarsTable = () => {
+
+export default function CarsTable() {
   const { cars, filteredCars, handleCarAction } = useCarsContext();
   const displayCars = filteredCars || cars;
 
@@ -59,4 +60,4 @@ export const CarsTable = () => {
       </table>
     </section>
   );
-};
+}
