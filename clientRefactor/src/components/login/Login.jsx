@@ -21,7 +21,7 @@ const Login = ({ handelClick, isOpen }) => {
         <Form
           setData={setFormData}
           title="Login"
-          sec_title="enter your name & password"
+          // sec_title="enter your name & password"
           inputs={[
             {
               name: "username",
