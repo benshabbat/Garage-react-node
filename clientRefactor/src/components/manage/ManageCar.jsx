@@ -3,7 +3,7 @@ import CreateService from "../create/CreateService";
 import { deleteCar } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { OpenModel, EditCar } from "../index";
-// import {BsPencilSquare} from "react-icons/bs"
+
 const ManageCar = ({
   handelClick: handelClickManage = null,
   isOpen,
@@ -12,20 +12,26 @@ const ManageCar = ({
   const [handleEditCar, isOpenModelEditCar] = useOpenModel();
   const [handleCreateService, isOpenModelCreateService] = useOpenModel();
 
-  const handleCar = async (e) => {
+
+  const handleCarAction = async (e) => {
     e.preventDefault();
     const { name } = e.target;
-    if (name === "createService") handleCreateService();
 
-    if (name === "deleteCar") {
-      await deleteCar(car?._id, car?.owner._id.toString());
-      handelClickManage();
-    }
-    if (name === "editCar") {
-      handleEditCar();
+    switch (name) {
+      case "createService":
+        handleCreateService();
+        break;
+      case "editCar":
+        handleEditCar();
+        break;
+      case "deleteCar":
+        await deleteCar(car?._id, car?.owner._id.toString());
+        handelClickManage();
+        break;
+      default:
+        handelClickManage();
     }
   };
-
   return (
     <OpenModel
       comp={
@@ -39,18 +45,22 @@ const ManageCar = ({
               <button
                 name="createService"
                 className="create"
-                onClick={handleCar}
+                onClick={handleCarAction}
               >
                 Create Service
               </button>
             </label>
             <label className="form-label">
-              <button name="editCar" className="edit" onClick={handleCar}>
+              <button name="editCar" className="edit" onClick={handleCarAction}>
                 Edit Car
               </button>
             </label>
             <label className="form-label">
-              <button name="deleteCar" className="delete" onClick={handleCar}>
+              <button
+                name="deleteCar"
+                className="delete"
+                onClick={handleCarAction}
+              >
                 Delete Car
               </button>
             </label>

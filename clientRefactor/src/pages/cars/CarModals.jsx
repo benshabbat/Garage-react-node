@@ -1,6 +1,4 @@
 import ManageCar from "../../components/manage/ManageCar";
-import EditCar from "../../components/edit/EditCar";
-import CreateService from "../../components/create/CreateService";
 import DeleteCar from "../../components/delete/DeleteCar";
 import { useCarsContext } from "./CarsContext";
 
@@ -13,7 +11,7 @@ export default function CarModals() {
       handelClick={modals.manageCar.onClose}
       isOpen={modals.manageCar.isOpen}
     />
-    <CreateService
+    {/* <CreateService
       car={selectedCar}
       handelClick={modals.createService.onClose}
       isOpen={modals.createService.isOpen}
@@ -22,7 +20,7 @@ export default function CarModals() {
       car={selectedCar}
       handelClick={modals.editCar.onClose}
       isOpen={modals.editCar.isOpen}
-    />
+    /> */}
     <DeleteCar
       car={selectedCar}
       handelClick={modals.deleteCar.onClose}

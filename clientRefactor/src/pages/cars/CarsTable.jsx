@@ -35,24 +35,8 @@ export default function CarsTable() {
                 </button>
               </td>
               <td data-label="Owner">{car?.owner?.username}</td>
-              <td data-label="License Plate">
-                <button
-                  name="createService"
-                  value={car?._id}
-                  onClick={handleCarAction}
-                >
-                  {car?.numberPlate}
-                </button>
-              </td>
-              <td data-label="Mileage">
-                <button
-                  name="editCar"
-                  value={car?._id}
-                  onClick={handleCarAction}
-                >
-                  {car?.km}
-                </button>
-              </td>
+              <td data-label="License Plate">{car?.numberPlate}</td>
+              <td data-label="Mileage">{car?.km}</td>
               <td data-label="Brand">{car?.brand}</td>
             </tr>
           ))}

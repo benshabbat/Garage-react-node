@@ -13,15 +13,13 @@ export default function CarsProvider ({ children }) {
   const [filteredCars, setFilteredCars] = useState(null);
   
   const [handleManageCar, isOpenManageCar] = useOpenModel();
-  const [handleEditCar, isOpenModelEditCar] = useOpenModel();
-  const [handleCreateService, isOpenModelCreateService] = useOpenModel();
   const [handleDeleteCar, isOpenModelDeleteCar] = useOpenModel();
   
   const dispatch = useDispatch();
 
   useEffect(() => {
       dispatch(getCarsByType(user?._id));
-    }, [isOpenManageCar, isOpenModelDeleteCar, isOpenModelEditCar, dispatch, user?._id]);
+    }, [isOpenManageCar, isOpenModelDeleteCar, dispatch, user?._id]);
   
     const handleCarAction = (e) => {
       const { name, value } = e.target;
@@ -29,12 +27,6 @@ export default function CarsProvider ({ children }) {
       setSelectedCar(car);
   
       switch (name) {
-        case "editCar":
-          handleEditCar();
-          break;
-        case "createService":
-          handleCreateService();
-          break;
         case "deleteCar":
           handleDeleteCar();
           break;
@@ -66,8 +58,6 @@ export default function CarsProvider ({ children }) {
       handleSearch,
       modals: {
         manageCar: { isOpen: isOpenManageCar, onClose: handleManageCar },
-        editCar: { isOpen: isOpenModelEditCar, onClose: handleEditCar },
-        createService: { isOpen: isOpenModelCreateService, onClose: handleCreateService },
         deleteCar: { isOpen: isOpenModelDeleteCar, onClose: handleDeleteCar },
       }
     };
