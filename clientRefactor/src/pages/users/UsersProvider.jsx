@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../features/admin/adminSlice";
 import useOpenModel from "../../hooks/useOpenModel";
-import { deleteUser } from "../../utils";
+import { deleteUser,createCar } from "../../utils";
+import { validCar } from "../../validation/valid";
 //TODO:maybe i dont need to move users as props
 export default function UsersProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
@@ -56,6 +57,20 @@ export default function UsersProvider({ children }) {
     );
   };
 
+
+
+  const [formData, setFormData] = useState();
+
+  const onSubmit = async (e,handelClick) => {
+    e.preventDefault();
+    if (validCar(formData?.numberPlate)) {
+      await createCar(selectedUser?._id, formData);
+      handelClick();
+    }
+  };
+
+
+
   const value = {
     displayUsers,
     users,
@@ -64,6 +79,8 @@ export default function UsersProvider({ children }) {
     handleCreateUser,
     handleUser,
     handleSearch,
+    setFormData,
+    onSubmit,
     modals: {
       manageUser: { isOpen: isOpenManageUser, onClose: handleManageUser },
       createUser: { isOpen: isOpenCreateUser, onClose: handleCreateUser },

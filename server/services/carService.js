@@ -4,9 +4,10 @@ import User from "../models/User.js";
 //test create Car
 function templateCar(car) {
   if (car.length === 8) {
-    return car.slice(0, 3) + "-" + car.slice(3, 5) + "-" + car.slice(5, );
+    return car.slice(0, 3) + "-" + car.slice(3, 5) + "-" + car.slice(5);
   } else if (car.length === 7) {
-    return car.slice(0, 2) + "-" + car.slice(2, 5) + "-" + car.slice(5, );
+    return car.slice(0, 2) + "-" + car.slice(2, 5) + "-" + car.slice(5);
+  }
 }
 const createCar = async (req) => {
   const userId = req.params.userId;

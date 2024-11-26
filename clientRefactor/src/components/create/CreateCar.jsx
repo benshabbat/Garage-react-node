@@ -2,13 +2,16 @@ import { useState } from "react";
 import { OpenModel, Form } from "..";
 import { createCar } from "../../utils";
 import { validCar } from "../../validation/valid";
-const CreateCar = ({ handelClick, isOpen, user }) => {
+import { useUsersContext } from "../../pages/users/UsersContext";
+const CreateCar = ({ handelClick, isOpen }) => {
+
+  const { modals,handleUser, selectedUser } = useUsersContext();
   const [formData, setFormData] = useState();
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validCar(formData?.numberPlate)) {
-      await createCar(user?._id, formData);
+      await createCar(selectedUser?._id, formData);
       handelClick();
     }
   };
