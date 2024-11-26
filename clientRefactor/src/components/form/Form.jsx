@@ -1,12 +1,11 @@
-import "./form.css";
-import Input from "../input/Input";
-
-
-//MAYBE TO IMPROVE THIS CODE
+import "./form.css"
+import FormInput from "./FormInput";
+import FormSelect from "./FormSelect";
+// Main Form Component
 const Form = ({
   title,
   sec_title,
-  inputs=[],
+  inputs = [],
   onSubmit,
   handelClick = null,
   setData,
@@ -15,55 +14,49 @@ const Form = ({
   isFocus = true,
 }) => {
   const handleChange = (e) => {
-    console.log("check")
     const { name, value, checked, type } = e.target;
-    console.log(name)
-    setData((prevState) => ({
+    setData(prevState => ({
       ...prevState,
       [name]: type === "checkbox" ? checked : value,
     }));
-    console.log(value);
   };
+
   return (
     <form className="form" onSubmit={onSubmit}>
       {handelClick && (
-        <div onClick={handelClick} className="form-close" >X</div>
+        <button 
+          type="button" 
+          onClick={handelClick} 
+          className="form-close"
+          aria-label="Close form"
+        >
+          ×
+        </button>
       )}
+      
       <h1 className="header">{title}</h1>
-      <h2 className="sec_title">{sec_title}</h2>
+      {sec_title && <h2 className="sec_title">{sec_title}</h2>}
 
-      {options && (
-        <label className="form-label">
-          <span>{nameSelect}</span>
-          <select name={nameSelect} onChange={handleChange}>
-            <option>{nameSelect}</option>
-            {options?.map((option, index) => {
-              return (
-                <option
-                  key={index}
-                  value={nameSelect === "status" ? option?.value : option?._id}
-                >
-                  {nameSelect === "status" ? option?.label : option?.username}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+      {options && nameSelect && (
+        <FormSelect 
+          name={nameSelect} 
+          options={options} 
+          handleChange={handleChange}
+        />
       )}
 
-      {inputs.map((i, index) => {
-        return (
-          <Input
-            i={i}
-            index={index}
-            key={index}
-            handleChange={handleChange}
-            isFocus={isFocus}
-          />
-        );
-      })}
+      {inputs.map((input, index) => (
+        <FormInput
+          key={input.name || index}
+          input={input}
+          index={index}
+          handleChange={handleChange}
+          isFocus={isFocus}
+        />
+      ))}
+
       <button type="submit" className="form-btn">
-      {title}
+        {title}
       </button>
     </form>
   );
