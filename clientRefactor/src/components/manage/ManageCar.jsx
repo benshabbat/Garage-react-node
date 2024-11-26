@@ -1,37 +1,11 @@
 import "./manage.css";
 import CreateService from "../create/CreateService";
-import { deleteCar } from "../../utils";
-import useOpenModel from "../../hooks/useOpenModel";
 import { OpenModel, EditCar } from "../index";
 import { useCarsContext } from "../../pages/cars/CarsContext";
 //TODO: to use with context
-const ManageCar = ({
-  handelClick: handelClickManage = null,
-  isOpen,
-}) => {
-  const { selectedCar } = useCarsContext()
-  const [handleEditCar, isOpenModelEditCar] = useOpenModel();
-  const [handleCreateService, isOpenModelCreateService] = useOpenModel();
+const ManageCar = ({ handelClick: handelClickManage = null, isOpen }) => {
+  const { handleCarAction, selectedCar, modals } = useCarsContext();
 
-  const handleCarAction = async (e) => {
-    e.preventDefault();
-    const { name } = e.target;
-
-    switch (name) {
-      case "createService":
-        handleCreateService();
-        break;
-      case "editCar":
-        handleEditCar();
-        break;
-      case "deleteCar":
-        await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
-        handelClickManage();
-        break;
-      default:
-        handelClickManage();
-    }
-  };
   return (
     <OpenModel
       comp={
@@ -43,6 +17,7 @@ const ManageCar = ({
             <h1 className="header">Manage Admin</h1>
             <label className="form-label">
               <button
+              value={selectedCar?._id}
                 name="createService"
                 className="create"
                 onClick={handleCarAction}
@@ -51,12 +26,18 @@ const ManageCar = ({
               </button>
             </label>
             <label className="form-label">
-              <button name="editCar" className="edit" onClick={handleCarAction}>
+              <button
+                value={selectedCar?._id}
+                name="editCar"
+                className="edit"
+                onClick={handleCarAction}
+              >
                 Edit Car
               </button>
             </label>
             <label className="form-label">
               <button
+                value={selectedCar?._id}
                 name="deleteCar"
                 className="delete"
                 onClick={handleCarAction}
@@ -66,14 +47,13 @@ const ManageCar = ({
             </label>
           </form>
           <CreateService
-            handelClick={handleCreateService}
-            isOpen={isOpenModelCreateService}
+            handelClick={modals.createService.onClose}
+            isOpen={modals.createService.isOpen}
           />
           <EditCar
-            handelClick={handleEditCar}
-            isOpen={isOpenModelEditCar}
+            handelClick={modals.editCar.onClose}
+            isOpen={modals.editCar.isOpen}
           />
-          
         </>
       }
       isOpen={isOpen}
