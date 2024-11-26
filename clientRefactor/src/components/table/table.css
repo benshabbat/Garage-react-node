@@ -74,12 +74,15 @@ td button {
 }
 
 button[name="deleteCar"] { background: #f56565; }
-button[name="editCar"] { background: #48bb78; }
-button[name="createService"] { background: #667eea; }
+button[name="editCar"] { rgba(59, 130, 246, 0.95); }
+button[name="createService"] { background: rgba(34, 197, 94, 0.95);  }
 
-.status.done { background: #48bb78; }
-.status.pending { background: #f56565; }
-.status["on-work"] { background: #eeb308; }
+.status.done { background: #828fee; }
+.status.pending { background: #eef681; }
+.status.on-work { background :#7ef1ae; }
+
+.editPaid.Paid { background :#7ef1ae; }
+.editPaid.Unpaid { background :#f67364; }
 
 @media screen and (max-width: 850px) {
   .table-container {

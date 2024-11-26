@@ -47,28 +47,30 @@ const Input = ({ i, index, handleChange, isFocus }) => {
 
       {i?.name === "username"
         ? i?.isError &&
-          isBlur && <span className="error">{iputsType?.errorMessage}</span>
+          isBlur && 
+          <span className="error">{iputsType?.errorMessage}</span>
         : !valid(ref?.current?.value, i?.name) &&
-          isBlur && <span className="error">{iputsType?.errorMessage}</span>}
+          isBlur && 
+          <span className="error">{iputsType?.errorMessage}</span>}
 
       <input
-      
+      {...i}
         ref={ref}
-        pattern={i?.pattern}
+        // pattern={i?.pattern}
         autoFocus={index === 0 && isFocus}
         placeholder={i?.name}
-        type={i?.type}
-        name={i?.name}
-        value={i?.value}
-        checked={i?.checked? i?.checked: false}
-        min={i?.min}
+        // type={i?.type}
+        // name={i?.name}
+        // value={i?.value}
+        // checked={i?.checked? i?.checked: false}
+        // min={i?.min}
         title={iputsType?.title}
-        hidden={i?.hidden}
+        // hidden={i?.hidden}
         onChange={handleChange}
         aria-invalid={valid(ref?.current?.value, i?.name)}
         required={i?.type !== "checkbox" ? true : false}
         autoComplete="off"
-        onBlur={() => setIsBlur(true)}
+        onBlur={() => setIsBlur(i.value?true:false)}
       />
     </label>
   );

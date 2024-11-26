@@ -76,6 +76,7 @@ export function useServicesAdmin() {
             name="editPaid"
             value={service?._id}
             onClick={handleServiceId}
+            className={`editPaid ${service?.paid ? "Paid" : "Unpaid"}`}
           >
             {service?.paid ? "Paid" : "Unpaid"}
           </button>
