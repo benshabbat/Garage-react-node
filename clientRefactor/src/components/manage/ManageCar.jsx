@@ -3,15 +3,16 @@ import CreateService from "../create/CreateService";
 import { deleteCar } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { OpenModel, EditCar } from "../index";
+import { useCarsContext } from "../../pages/cars/CarsContext";
 //TODO: to use with context
 const ManageCar = ({
   handelClick: handelClickManage = null,
   isOpen,
   car = null,
 }) => {
+ 
   const [handleEditCar, isOpenModelEditCar] = useOpenModel();
   const [handleCreateService, isOpenModelCreateService] = useOpenModel();
-
 
   const handleCarAction = async (e) => {
     e.preventDefault();
@@ -66,15 +67,14 @@ const ManageCar = ({
             </label>
           </form>
           <CreateService
-            car={car}
             handelClick={handleCreateService}
             isOpen={isOpenModelCreateService}
           />
           <EditCar
-            car={car}
             handelClick={handleEditCar}
             isOpen={isOpenModelEditCar}
           />
+          
         </>
       }
       isOpen={isOpen}

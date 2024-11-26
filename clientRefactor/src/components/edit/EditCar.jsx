@@ -1,13 +1,14 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { Form, OpenModel } from "../index";
 import { updateCar } from "../../utils";
+import { useCarsContext } from "../../pages/cars/CarsContext";
 
-const EditCar = ({ handelClick, isOpen, car }) => {
-  const [formData, setFormData] = useState(car);
+const EditCar = ({ handelClick, isOpen }) => {
+  const { selectedCar } = useCarsContext();
+  const [formData, setFormData] = useState(selectedCar);
   const onSubmit = async (e) => {
     e.preventDefault();
-    await updateCar(car?._id, formData)
-
+    await updateCar(selectedCar?._id, formData);
     handelClick();
   };
   return (
@@ -22,7 +23,7 @@ const EditCar = ({ handelClick, isOpen, car }) => {
               name: "km",
               type: "number",
               value: formData?.km,
-              min: car?.km,
+              min: selectedCar?.km,
             },
           ]}
           handelClick={handelClick}

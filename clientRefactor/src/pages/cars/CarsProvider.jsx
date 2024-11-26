@@ -24,6 +24,7 @@ export default function CarsProvider ({ children }) {
     }, [isOpenManageCar, isOpenModelDeleteCar, isOpenModelEditCar, dispatch, user?._id]);
   
     const handleCarAction = (e) => {
+      e.preventDefault();
       const { name, value } = e.target;
       const car = cars.find((car) => car._id === value);
       setSelectedCar(car);

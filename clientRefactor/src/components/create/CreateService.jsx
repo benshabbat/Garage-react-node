@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { OpenModel, Form } from "..";
 import { createService } from "../../utils";
-const CreateService = ({ handelClick, isOpen, car }) => {
+import { useCarsContext } from "../../pages/cars/CarsContext";
+const CreateService = ({ handelClick, isOpen }) => {
+  const { selectedCar } = useCarsContext()
   const [formData, setFormData] = useState();
   const onSubmit = async (e) => {
     e.preventDefault();
-    await createService(car?._id, formData);
+    await createService(selectedCar?._id, formData);
     handelClick();
   };
   const options = [
