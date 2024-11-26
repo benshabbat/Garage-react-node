@@ -3,11 +3,10 @@ import DeleteCar from "../../components/delete/DeleteCar";
 import { useCarsContext } from "./CarsContext";
 
 export default function CarModals() {
-    const {modals,selectedCar} = useCarsContext()
+    const {modals} = useCarsContext()
   return (
     <>
     <ManageCar
-      car={selectedCar}
       handelClick={modals.manageCar.onClose}
       isOpen={modals.manageCar.isOpen}
     />
@@ -22,7 +21,6 @@ export default function CarModals() {
       isOpen={modals.editCar.isOpen}
     /> */}
     <DeleteCar
-      car={selectedCar}
       handelClick={modals.deleteCar.onClose}
       isOpen={modals.deleteCar.isOpen}
     />

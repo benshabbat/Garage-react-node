@@ -8,9 +8,8 @@ import { useCarsContext } from "../../pages/cars/CarsContext";
 const ManageCar = ({
   handelClick: handelClickManage = null,
   isOpen,
-  car = null,
 }) => {
- 
+  const { selectedCar } = useCarsContext()
   const [handleEditCar, isOpenModelEditCar] = useOpenModel();
   const [handleCreateService, isOpenModelCreateService] = useOpenModel();
 
@@ -26,7 +25,7 @@ const ManageCar = ({
         handleEditCar();
         break;
       case "deleteCar":
-        await deleteCar(car?._id, car?.owner._id.toString());
+        await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
         handelClickManage();
         break;
       default:
