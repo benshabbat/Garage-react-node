@@ -1,7 +1,7 @@
 import "./form.css"
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
-// Main Form Component
+// TODO:USECONTEXT FOR FORM MAYBE
 const Form = ({
   title,
   sec_title,

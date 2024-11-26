@@ -61,11 +61,11 @@ export default function UsersProvider({ children }) {
 
   const [formData, setFormData] = useState();
 
-  const onSubmit = async (e,handelClick) => {
+  const onSubmitCreateCar = async (e) => {
     e.preventDefault();
     if (validCar(formData?.numberPlate)) {
       await createCar(selectedUser?._id, formData);
-      handelClick();
+      handleCreateCar();
     }
   };
 
@@ -80,7 +80,7 @@ export default function UsersProvider({ children }) {
     handleUser,
     handleSearch,
     setFormData,
-    onSubmit,
+    onSubmitCreateCar,
     modals: {
       manageUser: { isOpen: isOpenManageUser, onClose: handleManageUser },
       createUser: { isOpen: isOpenCreateUser, onClose: handleCreateUser },
