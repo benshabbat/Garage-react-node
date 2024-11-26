@@ -1,7 +1,4 @@
-import { useState } from "react";
 import { OpenModel, Form } from "..";
-import { createCar } from "../../utils";
-import { validCar } from "../../validation/valid";
 import { useUsersContext } from "../../pages/users/UsersContext";
 const CreateCar = ({ handelClick, isOpen }) => {
 

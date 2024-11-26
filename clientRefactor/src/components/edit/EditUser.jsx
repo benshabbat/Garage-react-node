@@ -2,14 +2,17 @@ import { useState } from "react";
 import { Form, OpenModel } from "../index";
 import { updateUser } from "../../utils";
 import { validPhone, validPass } from "../../validation/valid";
-const EditUser = ({ handelClick, isOpen, user }) => {
-  const [formData, setFormData] = useState(user);
+import { useUsersContext } from "../../pages/users/UsersContext";
 
-  
+//todo:try move logic to context
+const EditUser = ({ handelClick, isOpen }) => {
+  const { selectedUser } = useUsersContext();
+  const [formData, setFormData] = useState(selectedUser);
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validPhone(formData?.phone) && validPass(formData?.password)) {
-      await updateUser(user?._id, formData);
+      await updateUser(selectedUser?._id, formData);
       handelClick();
     }
   };

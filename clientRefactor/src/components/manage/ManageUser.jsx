@@ -39,12 +39,10 @@ const ManageUser = ({
             </label>
           </form>
           <CreateCar
-            user={selectedUser}
             handelClick={modals.createCar.onClose}
             isOpen={modals.createCar.isOpen}
           />
           <EditUser
-            user={selectedUser}
             handelClick={modals.editUser.onClose}
             isOpen={modals.editUser.isOpen}
           />

@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../features/admin/adminSlice";
 import useOpenModel from "../../hooks/useOpenModel";
-import { deleteUser,createCar } from "../../utils";
-import { validCar } from "../../validation/valid";
+import { deleteUser,createCar,updateUser } from "../../utils";
+import { validCar , validPhone, validPass} from "../../validation/valid";
 //TODO:maybe i dont need to move users as props
 export default function UsersProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
@@ -69,6 +69,13 @@ export default function UsersProvider({ children }) {
     }
   };
 
+  const onSubmitEditUser = async (e) => { 
+    e.preventDefault();
+    if (validPhone(formData?.phone) && validPass(formData?.password)) {
+      await updateUser(selectedUser?._id, formData);
+      handleEditUser();
+    }
+  };
 
 
   const value = {
@@ -80,7 +87,9 @@ export default function UsersProvider({ children }) {
     handleUser,
     handleSearch,
     setFormData,
+    formData,
     onSubmitCreateCar,
+    onSubmitEditUser,
     modals: {
       manageUser: { isOpen: isOpenManageUser, onClose: handleManageUser },
       createUser: { isOpen: isOpenCreateUser, onClose: handleCreateUser },
