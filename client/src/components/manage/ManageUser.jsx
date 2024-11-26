@@ -2,6 +2,8 @@ import "./manage.css";
 import { deleteUser } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { CreateCar, OpenModel, EditUser } from "../index";
+
+//TODO:USING USECONTEXT BUT NEED TO KNOW TO MOVING WITH PROPS
 const ManageUser = ({
   handelClick: handelClickManage = null,
   isOpen,
