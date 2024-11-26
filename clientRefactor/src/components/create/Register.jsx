@@ -1,7 +1,9 @@
 import { Form, OpenModel } from "..";
+import { useUsersContext } from "../../pages/users/UsersContext";
 import { useRegister } from "./utilsCreate";
 
-const Register = ({ handelClick, isOpen, users }) => {
+const Register = ({ handelClick, isOpen }) => {
+  const {users} = useUsersContext()
   const {setFormData,onSubmit,isValidUser} =useRegister(users,handelClick)
   return (
     <OpenModel
