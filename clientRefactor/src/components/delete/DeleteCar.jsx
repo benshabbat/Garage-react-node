@@ -27,13 +27,13 @@ const DeleteCar = ({
             <h1 className="header">Manage Admin</h1>
             <h2>{`Hello ${car?.owner?.username}`}</h2>
             <label className="form-label">
-              <button name="noDelete" className="create" onClick={handleCar}>
-                No
+              <button name="deleteCar" className="delete" onClick={handleCar}>
+                Yes
               </button>
             </label>
             <label className="form-label">
-              <button name="deleteCar" className="delete" onClick={handleCar}>
-                Yes
+              <button name="noDelete" className="create" onClick={handleCar}>
+                No
               </button>
             </label>
           </form>
