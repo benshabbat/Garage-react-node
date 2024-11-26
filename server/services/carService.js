@@ -4,43 +4,9 @@ import User from "../models/User.js";
 //test create Car
 function templateCar(car) {
   if (car.length === 8) {
-    return car.slice(0, 3) + "-" + car.slice(3, 5) + "-" + car.slice(5, 8);
+    return car.slice(0, 3) + "-" + car.slice(3, 5) + "-" + car.slice(5, );
   } else if (car.length === 7) {
-    return car.slice(0, 2) + "-" + car.slice(2, 5) + "-" + car.slice(5, 7);
-  } else if (car?.length === 10 || data?.length === 9) {
-    let flag = true;
-    for (let i = 0; i < car.length; i++) {
-      if (car?.length === 9) {
-        if ((i === 2 || i === 6) && car[i] !== "-") {
-          flag=false;
-          break;
-        }
-        else if ((i === 2 || i === 6) && car[i] === "-") {
-          continue;
-        }
-        else if (+car[i]) {
-          continue;
-        } else {
-          return null;
-        }
-      } else if (car?.length === 10) {
-        if ((i === 3 || i === 6) && car[i] !== "-") {
-          flag=false;
-          break;
-        }
-        else if ((i === 3 || i === 6) && car[i] === "-") {
-          continue;
-        }
-        else if (+car[i]) {
-          continue;
-        } else {
-          return null;
-        }
-      }
-    }
-    return flag ? car : null;
-  }
-  return null;
+    return car.slice(0, 2) + "-" + car.slice(2, 5) + "-" + car.slice(5, );
 }
 const createCar = async (req) => {
   const userId = req.params.userId;

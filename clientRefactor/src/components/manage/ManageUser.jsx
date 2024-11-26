@@ -2,29 +2,16 @@ import "./manage.css";
 import { deleteUser } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 import { CreateCar, OpenModel, EditUser } from "../index";
+import { useUsersContext } from "../../pages/users/UsersContext";
 
 
 //TODO:USING USECONTEXT BUT NEED TO KNOW TO MOVING WITH PROPS
 const ManageUser = ({
   handelClick: handelClickManage = null,
   isOpen,
-  user = null,
 }) => {
-  const [handleCreateCar, isOpenModelCreateCar] = useOpenModel();
-  const [handleEditUser, isOpenModelEditUser] = useOpenModel();
+  const { modals,handleUser, selectedUser } = useUsersContext();
 
-  const handleUser = async (e) => {
-    e.preventDefault();
-    const { name } = e.target;
-    if (name === "createCar") handleCreateCar();
-    if (name === "deleteUser") {
-      await deleteUser(user?._id);
-      handelClickManage();
-    }
-    if (name === "editUser") {
-      handleEditUser();
-    }
-  };
 
   return (
     <OpenModel
@@ -36,30 +23,30 @@ const ManageUser = ({
             </button>
             <h1 className="header">Manage Admin</h1>
             <label className="form-label">
-              <button name="createCar" className="create" onClick={handleUser}>
+              <button name="createCar" className="create" onClick={handleUser} value={selectedUser?._id}>
                 Create Car
               </button>
             </label>
             <label className="form-label">
-              <button name="editUser" className="edit" onClick={handleUser}>
+              <button name="editUser" className="edit" onClick={handleUser} value={selectedUser?._id}>
                 Edit User
               </button>
             </label>
             <label className="form-label">
-              <button name="deleteUser" className="delete" onClick={handleUser}>
+              <button name="deleteUser" className="delete" onClick={handleUser} value={selectedUser?._id}>
                 Delete User
               </button>
             </label>
           </form>
           <CreateCar
-            user={user}
-            handelClick={handleCreateCar}
-            isOpen={isOpenModelCreateCar}
+            user={selectedUser}
+            handelClick={modals.createCar.onClose}
+            isOpen={modals.createCar.isOpen}
           />
           <EditUser
-            user={user}
-            handelClick={handleEditUser}
-            isOpen={isOpenModelEditUser}
+            user={selectedUser}
+            handelClick={modals.editUser.onClose}
+            isOpen={modals.editUser.isOpen}
           />
         </>
       }

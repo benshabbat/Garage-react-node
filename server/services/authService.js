@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 function templatePhone(phone) {
   if (phone.length === 10) {
-    phone = phone.slice(0, 3) + "-" + phone.slice(3, 9);
+    phone = phone.slice(0, 3) + "-" + phone.slice(3,);
   }
 
   return phone;
