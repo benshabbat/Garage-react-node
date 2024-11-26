@@ -1,21 +1,11 @@
-import { useState } from "react";
 import { Form, OpenModel } from "../index";
-import { updateUser } from "../../utils";
-import { validPhone, validPass } from "../../validation/valid";
 import { useUsersContext } from "../../pages/users/UsersContext";
 
 //todo:try move logic to context
 const EditUser = ({ handelClick, isOpen }) => {
-  const { selectedUser } = useUsersContext();
-  const [formData, setFormData] = useState(selectedUser);
+  const { useEditCar } = useUsersContext();
+  const {onSubmitEditUser,formData,setFormData}=useEditCar()
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (validPhone(formData?.phone) && validPass(formData?.password)) {
-      await updateUser(selectedUser?._id, formData);
-      handelClick();
-    }
-  };
 
   return (
     <OpenModel
@@ -46,7 +36,7 @@ const EditUser = ({ handelClick, isOpen }) => {
             },
           ]}
           handelClick={handelClick}
-          onSubmit={onSubmit}
+          onSubmit={onSubmitEditUser}
         />
       }
       isOpen={isOpen}
