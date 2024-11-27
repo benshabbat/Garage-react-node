@@ -1,31 +1,26 @@
-import { useState } from "react";
+import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
 import { Form, OpenModel } from "../index";
-import { updateService } from "../../utils";
-const EditPaidService = ({ handelClick, isOpen, service }) => {
-    const [formData, setFormData] = useState(service);
-    const onSubmit = async (e) => {
-      e.preventDefault();
-      await updateService(service?._id, formData);
-      handelClick();
-    };
-    return (
-        <OpenModel
-          comp={
-            <Form
-              setData={setFormData}
-              title="Edit Pay"
-              sec_title="Edit Pay"
-              inputs={[
-                { name: "paid", type: "checkbox", checked: formData?.paid },
-              ]}
-              nameSelect="status"
-              handelClick={handelClick}
-              onSubmit={onSubmit}
-            />
-          }
-          isOpen={isOpen}
-        />
-      );
-}
+const EditPaidService = () => {
+  const { useEditService, modals } = useServicesAdminContext();
+  const { onSubmit, formData, setFormData } = useEditService(
+    modals.editPaid.onClose
+  );
 
-export default EditPaidService
+  return (
+    <OpenModel
+      comp={
+        <Form
+          setData={setFormData}
+          title="Edit Pay"
+          inputs={[{ name: "paid", type: "checkbox", checked: formData?.paid }]}
+          nameSelect="status"
+          handelClick={modals.editPaid.onClose}
+          onSubmit={onSubmit}
+        />
+      }
+      isOpen={modals.editPaid.isOpen}
+    />
+  );
+};
+
+export default EditPaidService;

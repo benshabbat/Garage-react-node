@@ -15,7 +15,6 @@ const EditService = () => {
         <Form
           setData={setFormData}
           title="Edit Car"
-          sec_title="enter your name & password"
           inputs={[
             // { name: "numberPlate", value: service?.car?.numberPlate },
             { name: "title", value: formData?.title },

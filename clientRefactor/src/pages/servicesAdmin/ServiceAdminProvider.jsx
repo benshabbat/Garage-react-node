@@ -72,6 +72,7 @@ export default function ServiceAdminProvider({ children }) {
       )
     );
   };
+  //i have problem with form dosent changing when i press on another service
   const useEditService = (handleClick) => {
     const [formData, setFormData] = useState(selectedService);
     const onSubmit = async (e) => {
