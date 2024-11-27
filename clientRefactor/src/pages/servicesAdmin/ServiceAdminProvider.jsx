@@ -1,35 +1,52 @@
 import "../components/table/table.css";
+import { ServiceAdminContext } from "./ServiceAdminContext";
 import { useState, useEffect } from "react";
-import useOpenModel from "../../hooks/useOpenModel";
-
 import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../../features/admin/adminSlice";
-
-import { ServiceAdminContext } from "./ServiceAdminContext";
+import useOpenModel from "../../hooks/useOpenModel";
 
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
 
-  const [service, setService] = useState();
-  const [servicesFilter, setServicesFilter] = useState();
+  const [selectedService, setSelctedService] = useState();
+  const [filteredServices, setFilteredServices] = useState();
 
-  const [handelService, isOpenService] = useOpenModel();
+  const [handelManageService, isOpenManageService] = useOpenModel();
   const [handleStatus, isOpenStatus] = useOpenModel();
   const [handlePaid, isOpenPaid] = useOpenModel();
 
-  const displayServices = servicesFilter || services;
+  const displayServices = filteredServices || selectedService;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getServicesByType());
-  }, [isOpenService, isOpenStatus, isOpenPaid, dispatch]);
+  }, [isOpenManageService, isOpenStatus, isOpenPaid, dispatch]);
 
+  const handleServiceIdAction = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setSelctedService(services.find((service) => service._id === value));
 
-  const filterSearch = (e) => {
+    switch (name) {
+      case "manage":
+        handelManageService();
+        break;
+      case "editStatus":
+        handleStatus();
+        break;
+      case "editPaid":
+        handlePaid();
+        break;
+      default:
+        handelManageService();
+    }
+  };
+
+  const handleSearch = (e) => {
     const { value } = e.target;
 
-    setServicesFilter(
+    setFilteredServices(
       services.filter(
         (item) =>
           item.car?.numberPlate.includes(value) ||
@@ -42,18 +59,23 @@ export default function ServiceAdminProvider({ children }) {
     );
   };
 
-  const handleServiceId = (e) => {
-    const { name } = e.target;
-    setService(services.find((service) => service._id === e.target.value));
-    if (name === "manage") {
-      handelService();
-    }
-    if (name === "editStatus") handleStatus();
-    if (name === "editPaid") handlePaid();
+  const value = {
+    displayServices,
+    handleServiceIdAction,
+    handleSearch,
+    selectedService,
+    modals: {
+      manageSevice: {
+        isOpen: isOpenManageService,
+        onClose: handelManageService,
+      },
+      status: { isOpen: isOpenStatus, onClose: handleStatus },
+      paid: {
+        isOpen: isOpenPaid,
+        onClose: handlePaid,
+      },
+    },
   };
-
-
-  const value = {displayServices,handleServiceId,filterSearch,service};
 
   return <ServiceAdminContext value={value}>{children}</ServiceAdminContext>;
 }
