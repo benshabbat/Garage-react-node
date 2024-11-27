@@ -1,38 +1,25 @@
 import "./manage.css";
-
-import { deleteService } from "../../utils";
-import useOpenModel from "../../hooks/useOpenModel";
 import { OpenModel } from "../index";
 import EditService from "../edit/EditService";
-const ManageService = ({
-  handelClick: handelClickManage = null,
-  isOpen,
-  service = null,
-}) => {
-  const [handleEditService, isOpenEditService] = useOpenModel();
-
-
-  const handleCarID = async (e) => {
-    e.preventDefault();
-    const { name } = e.target;
-    if (name === "deleteService") {
-      await deleteService(service?._id);
-      handelClickManage();
-    }
-    if (name === "editService") {
-      handleEditService();
-    }
-  };
+import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
+const ManageService = () => {
+  const { selectedService, modals, handleServiceIdAction } =
+    useServicesAdminContext();
 
   return (
     <OpenModel
       comp={
         <>
           <form className="form">
-          <button onClick={handelClickManage} className="form-close" >X</button>
+            <button
+              onClick={modals.manageService.onClose}
+              className="form-close"
+            >
+              X
+            </button>
             <h1 className="header">Manage Admin</h1>
             <label className="form-label">
-              <button name="editService" className="edit" onClick={handleCarID}>
+              <button name="editService" className="edit" onClick={handleServiceIdAction} value={selectedService?._id}>
                 Edit Service
               </button>
             </label>
@@ -40,20 +27,21 @@ const ManageService = ({
               <button
                 name="deleteService"
                 className="delete"
-                onClick={handleCarID}
+                onClick={handleServiceIdAction}
+                value={selectedService?._id}
               >
                 Delete Service
               </button>
             </label>
           </form>
           <EditService
-            service={service}
-            handelClick={handleEditService}
-            isOpen={isOpenEditService}
+            service={selectedService}
+            handelClick={modals.editService.onClose}
+            isOpen={modals.editService.isOpen}
           />
         </>
       }
-      isOpen={isOpen}
+      isOpen={modals.manageService.isOpen}
     />
   );
 };

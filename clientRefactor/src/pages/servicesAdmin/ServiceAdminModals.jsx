@@ -7,11 +7,7 @@ export default function ServiceAdminModals() {
     const {selectedService,modals} = useServicesAdminContext()
     return (
         <>
-          <ManageService
-            service={selectedService}
-            handelClick={modals.manageService.onClose}
-            isOpen={modals.manageService.isOpen}
-          />
+          <ManageService/>
           <EditStatusService
             service={selectedService}
             handelClick={modals.editStatusService.onClose}

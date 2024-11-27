@@ -22,7 +22,7 @@ const EditService = ({ handelClick, isOpen, service }) => {
           title="Edit Car"
           sec_title="enter your name & password"
           inputs={[
-            { name: "numberPlate", value: service?.car?.numberPlate },
+            // { name: "numberPlate", value: service?.car?.numberPlate },
             { name: "title", value: formData?.title },
             { name: "description", value: formData?.description },
             { name: "price", type: "number", value: formData?.price },
