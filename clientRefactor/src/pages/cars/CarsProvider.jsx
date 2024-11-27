@@ -17,6 +17,9 @@ export default function CarsProvider ({ children }) {
   const [handleCreateService, isOpenModelCreateService] = useOpenModel();
   const [handleDeleteCar, isOpenModelDeleteCar] = useOpenModel();
   
+
+  const displayCars = filteredCars || cars;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -65,6 +68,7 @@ export default function CarsProvider ({ children }) {
       selectedCar,
       handleCarAction,
       handleSearch,
+      displayCars,
       modals: {
         manageCar: { isOpen: isOpenManageCar, onClose: handleManageCar },
         editCar: { isOpen: isOpenModelEditCar, onClose: handleEditCar },

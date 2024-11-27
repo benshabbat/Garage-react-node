@@ -1,8 +1,8 @@
 import { useCarsContext } from "./CarsContext";
 
 export default function CarsTable() {
-  const { cars, filteredCars, handleCarAction } = useCarsContext();
-  const displayCars = filteredCars || cars;
+  const { displayCars, handleCarAction } = useCarsContext();
+
 
   return (
     <section className="table__body">
