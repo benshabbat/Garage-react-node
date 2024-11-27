@@ -1,8 +1,8 @@
 import { OpenModel, Form } from "..";
 import { useUsersContext } from "../../pages/users/UsersContext";
-const CreateCar = ({ handelClick, isOpen }) => {
+const CreateCar = () => {
 
-  const { onSubmitCreateCar,setFormData } = useUsersContext();
+  const { onSubmitCreateCar,setFormData,modals } = useUsersContext();
 
   return (
     <OpenModel
@@ -18,11 +18,11 @@ const CreateCar = ({ handelClick, isOpen }) => {
             { name: "km", type: "number", min: 0 },
             { name: "brand" },
           ]}
-          handelClick={handelClick}
+          handelClick={modals.createCar.onClose}
           onSubmit={onSubmitCreateCar}
         />
       }
-      isOpen={isOpen}
+      isOpen={modals.createCar.isOpen}
     />
   );
 };

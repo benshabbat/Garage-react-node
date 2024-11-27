@@ -2,8 +2,8 @@ import { Form, OpenModel } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
 
 
-const EditUser = ({ handelClick, isOpen }) => {
-  const { useEditCar } = useUsersContext();
+const EditUser = () => {
+  const { useEditCar,modals } = useUsersContext();
   const {onSubmitEditUser,formData,setFormData}=useEditCar()
 
   return (
@@ -34,11 +34,11 @@ const EditUser = ({ handelClick, isOpen }) => {
               value: formData?.password,
             },
           ]}
-          handelClick={handelClick}
+          handelClick={modals.editUser.onClose}
           onSubmit={onSubmitEditUser}
         />
       }
-      isOpen={isOpen}
+      isOpen={modals.editUser.isOpen}
     />
   );
 };
