@@ -9,9 +9,7 @@ export default function ServiceAdminModals() {
         <>
           <ManageService/>
           <EditStatusService
-            service={selectedService}
-            handelClick={modals.editStatusService.onClose}
-            isOpen={modals.editStatusService.isOpen}
+
           />
           <EditPaidService
             service={selectedService}

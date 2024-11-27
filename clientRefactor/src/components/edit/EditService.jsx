@@ -2,7 +2,7 @@ import { Form, OpenModel } from "../index";
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
 const EditService = () => {
   const { useEditService, modals } = useServicesAdminContext();
-  const { onSubmit,formData, setFormData } = useEditService();
+  const { onSubmit,formData, setFormData } = useEditService(modals.editService.onClose);
 
   const options = [
     { value: "pending", label: "Pending" },

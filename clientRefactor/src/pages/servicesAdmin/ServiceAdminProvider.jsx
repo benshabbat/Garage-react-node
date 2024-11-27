@@ -72,12 +72,12 @@ export default function ServiceAdminProvider({ children }) {
       )
     );
   };
-  const useEditService = () => {
+  const useEditService = (handleClick) => {
     const [formData, setFormData] = useState(selectedService);
     const onSubmit = async (e) => {
       e.preventDefault();
       await updateService(selectedService?._id, formData);
-      handleEditService();
+      handleClick();
     };
     return { onSubmit, formData, setFormData };
   };
