@@ -1,18 +1,18 @@
-import { useServicesAdmin } from "../utilsServicesAdmin";
 import Search from "./Search";
+import ServiceAdminModals from "./ServiceAdminModals";
+import ServiceAdminProvider from "./ServiceAdminProvider";
 import ServiceAdminTable from "./ServiceAdminTable";
-//TODO: TO CREATE CONTEXT FOR sERVICES OF ADMIN.
+
 const ServicesAdmin = () => {
-     return (
-    <>
+  return (
+    <ServiceAdminProvider>
       <div className="table-container">
-        <Search/>
-        <ServiceAdminTable/>
+        <Search />
+        <ServiceAdminTable />
       </div>
-      <HandelAdminServices />
-    </>
+      <ServiceAdminModals />
+    </ServiceAdminProvider>
   );
-}
 };
 
 export default ServicesAdmin;
