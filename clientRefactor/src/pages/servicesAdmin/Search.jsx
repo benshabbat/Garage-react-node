@@ -1,4 +1,7 @@
+import { useServicesAdminContext } from "./ServiceAdminContext";
+
 export default function Search() {
+    const {handleSearch} = useServicesAdminContext()
   return (
     <section className="table__header">
       <h1>Services</h1>
@@ -6,7 +9,7 @@ export default function Search() {
         <input
           type="search"
           placeholder="Search Data..."
-          onChange={filterSearch}
+          onChange={handleSearch}
         />
       </div>
     </section>
