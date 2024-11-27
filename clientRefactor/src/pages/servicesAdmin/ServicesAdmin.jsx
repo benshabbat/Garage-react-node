@@ -1,5 +1,5 @@
-import { useServicesAdmin } from "./utilsServicesAdmin";
-
+import { useServicesAdmin } from "../utilsServicesAdmin";
+//TODO: TO CREATE CONTEXT FOR sERVICES OF ADMIN.
 const ServicesAdmin = () => {
   const { PageServiceAdmin } = useServicesAdmin();
   return PageServiceAdmin()
