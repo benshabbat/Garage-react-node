@@ -1,7 +1,6 @@
 import "./manage.css";
 import { CreateCar, OpenModel, EditUser } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
-//TODO:USING USECONTEXT BUT NEED TO KNOW TO MOVING WITH PROPS
 const ManageUser = () => {
   const { modals, handleUser, selectedUser } = useUsersContext();
   return (
