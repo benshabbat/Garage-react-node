@@ -1,15 +1,8 @@
 import "./manage.css";
-import { deleteUser } from "../../utils";
-import useOpenModel from "../../hooks/useOpenModel";
 import { CreateCar, OpenModel, EditUser } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
-
-
 //TODO:USING USECONTEXT BUT NEED TO KNOW TO MOVING WITH PROPS
-const ManageUser = ({
-  handelClick: handelClickManage = null,
-  isOpen,
-}) => {
+const ManageUser = () => {
   const { modals,handleUser, selectedUser } = useUsersContext();
 
 
@@ -18,7 +11,7 @@ const ManageUser = ({
       comp={
         <>
           <form className="form">
-            <button onClick={handelClickManage} className="form-close">
+            <button onClick={modals.manageUser.onClose} className="form-close">
               X
             </button>
             <h1 className="header">Manage Admin</h1>
@@ -48,7 +41,7 @@ const ManageUser = ({
           />
         </>
       }
-      isOpen={isOpen}
+      isOpen={modals.manageUser.isOpen}
     />
   );
 };

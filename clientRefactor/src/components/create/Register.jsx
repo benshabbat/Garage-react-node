@@ -2,9 +2,9 @@ import { Form, OpenModel } from "..";
 import { useUsersContext } from "../../pages/users/UsersContext";
 import { useRegister } from "./utilsCreate";
 
-const Register = ({ handelClick, isOpen }) => {
-  const {users} = useUsersContext()
-  const {setFormData,onSubmit,isValidUser} =useRegister(users,handelClick)
+const Register = () => {
+  const {users,modals} = useUsersContext()
+  const {setFormData,onSubmit,isValidUser} =useRegister(users,modals.createUser.onClose)
   return (
     <OpenModel
       comp={
@@ -31,11 +31,11 @@ const Register = ({ handelClick, isOpen }) => {
               min: 8,
             },
           ]}
-          handelClick={handelClick}
+          handelClick={modals.createUser.onClose}
           onSubmit={onSubmit}
         />
       }
-      isOpen={isOpen}
+      isOpen={modals.createUser.isOpen}
     />
   );
 };
