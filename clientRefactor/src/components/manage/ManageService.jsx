@@ -19,7 +19,12 @@ const ManageService = () => {
             </button>
             <h1 className="header">Manage Admin</h1>
             <label className="form-label">
-              <button name="editService" className="edit" onClick={handleServiceIdAction} value={selectedService?._id}>
+              <button
+                name="editService"
+                className="edit"
+                onClick={handleServiceIdAction}
+                value={selectedService?._id}
+              >
                 Edit Service
               </button>
             </label>
@@ -34,11 +39,7 @@ const ManageService = () => {
               </button>
             </label>
           </form>
-          <EditService
-            service={selectedService}
-            handelClick={modals.editService.onClose}
-            isOpen={modals.editService.isOpen}
-          />
+          <EditService />
         </>
       }
       isOpen={modals.manageService.isOpen}

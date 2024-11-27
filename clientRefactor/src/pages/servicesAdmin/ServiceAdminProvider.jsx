@@ -3,7 +3,7 @@ import { ServiceAdminContext } from "./ServiceAdminContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../../features/admin/adminSlice";
-import { deleteService } from "../../utils";
+import { deleteService, updateService } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
@@ -22,7 +22,13 @@ export default function ServiceAdminProvider({ children }) {
 
   useEffect(() => {
     dispatch(getServicesByType());
-  }, [isOpenManageService, isOpenStatus,isOpenEditService, isOpenPaid, dispatch]);
+  }, [
+    isOpenManageService,
+    isOpenStatus,
+    isOpenEditService,
+    isOpenPaid,
+    dispatch,
+  ]);
 
   const handleServiceIdAction = async (e) => {
     e.preventDefault();
@@ -66,6 +72,15 @@ export default function ServiceAdminProvider({ children }) {
       )
     );
   };
+  const useEditService = () => {
+    const [formData, setFormData] = useState(selectedService);
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      await updateService(selectedService?._id, formData);
+      handleEditService();
+    };
+    return { onSubmit, formData, setFormData };
+  };
 
   const value = {
     displayServices,
@@ -87,7 +102,12 @@ export default function ServiceAdminProvider({ children }) {
         onClose: handleEditService,
       },
     },
+    useEditService,
   };
 
-  return <ServiceAdminContext.Provider value={value}>{children}</ServiceAdminContext.Provider>;
+  return (
+    <ServiceAdminContext.Provider value={value}>
+      {children}
+    </ServiceAdminContext.Provider>
+  );
 }

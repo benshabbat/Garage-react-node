@@ -1,13 +1,8 @@
-import { useState } from "react";
 import { Form, OpenModel } from "../index";
-import { updateService } from "../../utils";
-const EditService = ({ handelClick, isOpen, service }) => {
-  const [formData, setFormData] = useState(service);
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await updateService(service?._id, formData);
-    handelClick();
-  };
+import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
+const EditService = () => {
+  const { useEditService, modals } = useServicesAdminContext();
+  const { onSubmit,formData, setFormData } = useEditService();
 
   const options = [
     { value: "pending", label: "Pending" },
@@ -30,11 +25,11 @@ const EditService = ({ handelClick, isOpen, service }) => {
           ]}
           options={options}
           nameSelect="status"
-          handelClick={handelClick}
+          handelClick={modals.editService.onClose}
           onSubmit={onSubmit}
         />
       }
-      isOpen={isOpen}
+      isOpen={modals.editService.isOpen}
     />
   );
 };
