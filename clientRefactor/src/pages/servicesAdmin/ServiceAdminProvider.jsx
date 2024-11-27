@@ -69,8 +69,8 @@ export default function ServiceAdminProvider({ children }) {
         isOpen: isOpenManageService,
         onClose: handelManageService,
       },
-      status: { isOpen: isOpenStatus, onClose: handleStatus },
-      paid: {
+      editStatusService: { isOpen: isOpenStatus, onClose: handleStatus },
+      editPaid: {
         isOpen: isOpenPaid,
         onClose: handlePaid,
       },
