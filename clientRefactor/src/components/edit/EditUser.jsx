@@ -1,11 +1,10 @@
 import { Form, OpenModel } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
 
-//todo:try move logic to context
+
 const EditUser = ({ handelClick, isOpen }) => {
   const { useEditCar } = useUsersContext();
   const {onSubmitEditUser,formData,setFormData}=useEditCar()
-
 
   return (
     <OpenModel

@@ -1,8 +1,7 @@
 import { useUsersContext } from "./UsersContext";
 
 export default function UsersTable() {
-    const {handleUser,filteredUsers,users,displayUsers}= useUsersContext()
-    // const displayUsers = filteredUsers || users;
+    const {handleUser,displayUsers}= useUsersContext()
     return (
         <section className="table__body">
           <table>
