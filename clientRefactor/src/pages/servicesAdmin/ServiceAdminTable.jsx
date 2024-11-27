@@ -1,4 +1,7 @@
+import { useServicesAdminContext } from "./ServiceAdminContext";
+
 export default function ServiceAdminTable() {
+  const {displayServices,handleServiceIdAction} = useServicesAdminContext()
   return (
     <section className="table__body">
       <table>
@@ -18,7 +21,7 @@ export default function ServiceAdminTable() {
               return (
                 <tr key={service?._id}>
                   <td data-label="Actions">
-                    <button name="manage" value={service?._id} onClick={handleServiceId}>
+                    <button name="manage" value={service?._id} onClick={handleServiceIdAction}>
                       Manage
                     </button>
                   </td>
@@ -30,7 +33,7 @@ export default function ServiceAdminTable() {
                     <button
                       name="editPaid"
                       value={service?._id}
-                      onClick={handleServiceId}
+                      onClick={handleServiceIdAction}
                       className={`editPaid ${service?.paid ? "Paid" : "Unpaid"}`}
                     >
                       {service?.paid ? "Paid" : "Unpaid"}
@@ -41,7 +44,7 @@ export default function ServiceAdminTable() {
                       className={`status ${service?.status}`}
                       name="editStatus"
                       value={service?._id}
-                      onClick={handleServiceId}
+                      onClick={handleServiceIdAction}
                     >
                       {service?.status}
                     </button>
