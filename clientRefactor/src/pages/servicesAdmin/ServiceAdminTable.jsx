@@ -1,7 +1,7 @@
 import { useServicesAdminContext } from "./ServiceAdminContext";
 
 export default function ServiceAdminTable() {
-  const {displayServices,handleServiceIdAction} = useServicesAdminContext()
+  const { displayServices, handleServiceIdAction } = useServicesAdminContext();
   return (
     <section className="table__body">
       <table>
@@ -18,40 +18,44 @@ export default function ServiceAdminTable() {
         </thead>
         <tbody>
           {displayServices?.map((service) => {
-              return (
-                <tr key={service?._id}>
-                  <td data-label="Actions">
-                    <button name="manage" value={service?._id} onClick={handleServiceIdAction}>
-                      Manage
-                    </button>
-                  </td>
-                  <td data-label="Car">{service?.car?.numberPlate}</td>
-                  <td data-label="Title">{service?.title}</td>
-                  <td data-label="Description">{service?.description}</td>
-                  <td data-label="Price">{service?.price}</td>
-                  <td data-label="Payment Status">
-                    <button
-                      name="editPaid"
-                      value={service?._id}
-                      onClick={handleServiceIdAction}
-                      className={`editPaid ${service?.paid ? "Paid" : "Unpaid"}`}
-                    >
-                      {service?.paid ? "Paid" : "Unpaid"}
-                    </button>
-                  </td>
-                  <td data-label="Status">
-                    <button
-                      className={`status ${service?.status}`}
-                      name="editStatus"
-                      value={service?._id}
-                      onClick={handleServiceIdAction}
-                    >
-                      {service?.status}
-                    </button>
-                  </td>
-                </tr>
-              );
-            };)}
+            return (
+              <tr key={service?._id}>
+                <td data-label="Actions">
+                  <button
+                    name="manage"
+                    value={service?._id}
+                    onClick={handleServiceIdAction}
+                  >
+                    Manage
+                  </button>
+                </td>
+                <td data-label="Car">{service?.car?.numberPlate}</td>
+                <td data-label="Title">{service?.title}</td>
+                <td data-label="Description">{service?.description}</td>
+                <td data-label="Price">{service?.price}</td>
+                <td data-label="Payment Status">
+                  <button
+                    name="editPaid"
+                    value={service?._id}
+                    onClick={handleServiceIdAction}
+                    className={`editPaid ${service?.paid ? "Paid" : "Unpaid"}`}
+                  >
+                    {service?.paid ? "Paid" : "Unpaid"}
+                  </button>
+                </td>
+                <td data-label="Status">
+                  <button
+                    className={`status ${service?.status}`}
+                    name="editStatus"
+                    value={service?._id}
+                    onClick={handleServiceIdAction}
+                  >
+                    {service?.status}
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </section>

@@ -2,7 +2,7 @@
 export { default as Account } from "./account/Account";
 export { default as Home } from "./home/Home";
 export { default as PageLanding } from "./pageLanding/PageLanding";
-export { default as ServicesAdmin } from "./ServicesAdmin";
+export { default as ServicesAdmin } from "./servicesAdmin/ServicesAdmin";
 
 //Want to check what is the best practice for lazy loading
 

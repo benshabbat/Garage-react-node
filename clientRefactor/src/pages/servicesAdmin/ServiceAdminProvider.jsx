@@ -1,4 +1,4 @@
-import "../components/table/table.css";
+import "../../components/table/table.css";
 import { ServiceAdminContext } from "./ServiceAdminContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ export default function ServiceAdminProvider({ children }) {
   const [handleStatus, isOpenStatus] = useOpenModel();
   const [handlePaid, isOpenPaid] = useOpenModel();
 
-  const displayServices = filteredServices || selectedService;
+  const displayServices = filteredServices || services;
 
   const dispatch = useDispatch();
 
@@ -65,7 +65,7 @@ export default function ServiceAdminProvider({ children }) {
     handleSearch,
     selectedService,
     modals: {
-      manageSevice: {
+      manageService: {
         isOpen: isOpenManageService,
         onClose: handelManageService,
       },
@@ -77,5 +77,5 @@ export default function ServiceAdminProvider({ children }) {
     },
   };
 
-  return <ServiceAdminContext value={value}>{children}</ServiceAdminContext>;
+  return <ServiceAdminContext.Provider value={value}>{children}</ServiceAdminContext.Provider>;
 }
