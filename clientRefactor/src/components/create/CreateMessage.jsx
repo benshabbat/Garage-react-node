@@ -1,20 +1,8 @@
-import { useState } from "react";
 import { OpenModel, Form } from "..";
-import { createMessage, createMessageToAdmin } from "../../utils";
+import { useContextMessages } from "../../pages/messages/MessagesConetxt";
 
-const CreateMessage = ({ handelClick, isOpen, user, users = null }) => {
-  const [formData, setFormData] = useState({
-    from: user?._id,
-  });
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (user?.isAdmin) {
-      await createMessage(formData, formData?.to);
-    } else {
-      await createMessageToAdmin(formData);
-    }
-    handelClick();
-  };
+const CreateMessage = () => {
+  const { modals, user, users, onSubmit, setFormData } = useContextMessages();
 
   return (
     <OpenModel
@@ -28,11 +16,11 @@ const CreateMessage = ({ handelClick, isOpen, user, users = null }) => {
           ]}
           options={user?.isAdmin ? users : null}
           nameSelect="to"
-          handelClick={handelClick}
+          handelClick={modals.createMsg.onClose}
           onSubmit={onSubmit}
         />
       }
-      isOpen={isOpen}
+      isOpen={modals.createMsg.isOpen}
     />
   );
 };

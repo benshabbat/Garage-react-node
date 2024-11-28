@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
 import { getUsers } from "../../features/admin/adminSlice";
-import { deleteMessage } from "../../utils";
+import { deleteMessage,createMessage, createMessageToAdmin  } from "../../utils";
 import useOpenModel from "../../hooks/useOpenModel";
 
 export default function MessagesProvider({ children }) {
@@ -45,7 +45,25 @@ export default function MessagesProvider({ children }) {
     setIsDeleted((prev) => !prev);
   };
 
+
+
+  const [formData, setFormData] = useState({
+    from: user?._id,
+  });
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (user?.isAdmin) {
+      await createMessage(formData, formData?.to);
+    } else {
+      await createMessageToAdmin(formData);
+    }
+    handleCreateMessage();
+  };
+
   const value = {
+    onSubmit,
+    setFormData,
     user,
     users,
     displayMessages,
