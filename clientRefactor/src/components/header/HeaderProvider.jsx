@@ -5,17 +5,18 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
 import useOpenModel from "../../hooks/useOpenModel";
-
+import useLogout from "../../hooks/useLogout";
 export default function HeaderProvider({ children }) {
   const { user: userAuth,isError } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
 
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const [handelLogin, isOpenLogin] = useOpenModel();
+  const [onLogin, isOpenLogin] = useOpenModel();
+
+  const { onLogout } = useLogout();
 
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     if (userAuth?._id) dispatch(getUser(userAuth?._id));
@@ -25,7 +26,14 @@ export default function HeaderProvider({ children }) {
 
   const handleLogin = () => {
     handleOutsideClick();
-    handelLogin();
+    onLogin();
+};
+
+
+const handleLogout = () => {
+    handleOutsideClick();
+    onLogout();
+    onLogin();
   };
 
   const useLogin = () => {
@@ -48,6 +56,7 @@ export default function HeaderProvider({ children }) {
     isOpenLogin,
     useLogin,
     isError,
+    handleLogout
   };
   return (
     <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>

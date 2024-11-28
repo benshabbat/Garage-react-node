@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useHeaderContext } from "../header/HeaderContext";
 
 const NavLanding = () => {
-  const { handleOutsideClick, handleLogin, isOpenLogin } = useHeaderContext();
+  const { handleOutsideClick, handleLogin } = useHeaderContext();
 
   return (
     <>

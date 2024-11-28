@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useOpenModel = () => {
   const [isOpenModel, setIsOpenModel] = useState(false);
-  const handelOpenModel = (e) => {
+  const handelOpenModel = () => {
     setIsOpenModel(!isOpenModel);
 };
   // return { handelOpenModel, isOpenModel };

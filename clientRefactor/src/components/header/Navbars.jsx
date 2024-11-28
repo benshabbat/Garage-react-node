@@ -3,8 +3,7 @@ import { NavAdmin, NavUser, NavLanding } from "../index";
 import { useHeaderContext } from "./HeaderContext";
 
 export default function Navbars() {
-  const { user, handleOutsideClick, isNavOpen, userAuth, setIsNavOpen } =
-    useHeaderContext();
+  const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
   return (
     <div className="main-header">
       <div className="logo">
@@ -27,7 +26,7 @@ export default function Navbars() {
             <NavUser />
           )
         ) : (
-          !userAuth && <NavLanding setIsNavOpen={setIsNavOpen} />
+          !userAuth && <NavLanding />
         )}
       </div>
     </div>
