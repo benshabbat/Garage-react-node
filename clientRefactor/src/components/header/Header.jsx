@@ -4,7 +4,7 @@ import { NavAdmin, NavUser, NavLanding } from "../index";
 import { Suspense, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
-
+//TODO: Context for header with navbars
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const { user: userAuth } = useSelector((state) => state.auth);
