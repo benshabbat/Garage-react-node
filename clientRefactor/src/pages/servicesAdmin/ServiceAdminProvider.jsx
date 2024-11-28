@@ -73,7 +73,7 @@ export default function ServiceAdminProvider({ children }) {
     );
   };
   //i have problem with form dosent changing when i press on another service 
-  //i dont get the data from form
+  //i dont get the data from form,i get the previous data from
   //the problem just into edit paid
   const useEditService = (handleClick) => {
     const [formData, setFormData] = useState(selectedService);
