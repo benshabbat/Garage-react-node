@@ -24,21 +24,6 @@ export default function MessagesProvider({ children }) {
     if (user) dispatch(getMessagesByIdUser(user?._id));
   }, [user, isOpenCreateMessage, isDeleted, dispatch]);
 
-  //   const filterSearch = (e) => {
-  //     setFilterMessages(
-  //       messages?.filter((item) =>
-  //         Object.values({
-  //           username: item?.from?.username,
-  //           toUsername: item?.to?.username,
-  //           title: item?.title,
-  //           description: item?.description,
-  //           date: item?.updatedAt,
-  //         }).some((value) =>
-  //           value?.toLowerCase().includes(e.target.value.toLowerCase())
-  //         )
-  //       )
-  //     );
-  //   };
   const handleSearch = (e) => {
     const { value } = e.target;
     setFilteredMessages(
