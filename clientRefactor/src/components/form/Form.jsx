@@ -4,7 +4,6 @@ import FormSelect from "./FormSelect";
 // TODO:USECONTEXT FOR FORM MUST
 const Form = ({
   title,
-  sec_title,
   inputs = [],
   onSubmit,
   handelClick = null,
@@ -35,8 +34,7 @@ const Form = ({
       )}
       
       <h1 className="header">{title}</h1>
-      {sec_title && <h2 className="sec_title">{sec_title}</h2>}
-
+      
       {options && nameSelect && (
         <FormSelect 
           name={nameSelect} 

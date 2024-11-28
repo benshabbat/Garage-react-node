@@ -8,7 +8,6 @@ const CreateCar = () => {
     <OpenModel
       comp={
         <Form
-          data
           setData={setFormData}
           title="Create Car"
           inputs={[
