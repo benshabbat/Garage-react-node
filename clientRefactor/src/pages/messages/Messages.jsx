@@ -1,8 +1,16 @@
-import { useMessages } from "./utilsMessages";
+
 //TODO: to make context for messages
 const Messages = () => {
-  const { PageMessages } = useMessages();
-  return PageMessages();
+
+  return (
+    <>
+      <div className="table-container">
+        <Search />
+        <TableMessages />
+      </div>
+
+    </>
+  );
 };
 
 export default Messages;
