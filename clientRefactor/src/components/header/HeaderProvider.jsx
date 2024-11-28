@@ -1,17 +1,21 @@
 import "./header.css";
+import { login } from "../../features/auth/authSlice";
 import { HeaderContext } from "./HeaderContext";
-// import { Link, Outlet } from "react-router-dom";
-// import { NavAdmin, NavUser, NavLanding } from "../index";
-import useOpenModel from "../../hooks/useOpenModel";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
+import useOpenModel from "../../hooks/useOpenModel";
+
 export default function HeaderProvider({ children }) {
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const { user: userAuth } = useSelector((state) => state.auth);
-  const [handelLogin, isOpenLogin] = useOpenModel();
+  const { user: userAuth,isError } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
+
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const [handelLogin, isOpenLogin] = useOpenModel();
+
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (userAuth?._id) dispatch(getUser(userAuth?._id));
@@ -19,11 +23,21 @@ export default function HeaderProvider({ children }) {
 
   const handleOutsideClick = () => setIsNavOpen(!isNavOpen);
 
-
   const handleLogin = () => {
     handleOutsideClick();
     handelLogin();
-  }
+  };
+
+  const useLogin = () => {
+    const [formData, setFormData] = useState();
+    const onSubmit = (e) => {
+      e.preventDefault();
+      dispatch(login(formData));
+    };
+
+    return { setFormData, onSubmit };
+  };
+
   const value = {
     user,
     handleOutsideClick,
@@ -31,7 +45,9 @@ export default function HeaderProvider({ children }) {
     userAuth,
     setIsNavOpen,
     handleLogin,
-    isOpenLogin
+    isOpenLogin,
+    useLogin,
+    isError,
   };
   return (
     <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>

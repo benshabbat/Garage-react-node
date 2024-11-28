@@ -26,7 +26,7 @@ const NavLanding = () => {
         Contact
       </a>
       <button onClick={handleLogin}>Login</button>
-      <Login handelClick={handleLogin} isOpen={isOpenLogin} />
+      <Login/>
     </>
   );
 };
