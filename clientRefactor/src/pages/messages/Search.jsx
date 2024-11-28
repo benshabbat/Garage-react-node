@@ -1,5 +1,7 @@
+import { useContextMessages } from "./MessagesConetxt"
 
 export default function Search() {
+  const { modals,handleSearch } = useContextMessages()
   return (
     <section className="table__header">
     <h1>Messages</h1>
@@ -7,10 +9,10 @@ export default function Search() {
       <input
         type="search"
         placeholder="Search messages..."
-        onChange={filterSearch}
+        onChange={handleSearch}
       />
     </div>
-    <button onClick={handleCreateMessage} className="create-button">
+    <button onClick={modals.createMsg.onClose} className="create-button">
       New Message
     </button>
   </section>

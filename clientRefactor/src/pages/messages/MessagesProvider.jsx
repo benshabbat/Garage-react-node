@@ -61,11 +61,12 @@ export default function MessagesProvider({ children }) {
   };
 
   const value = {
-      users,
+    user,
+    users,
     displayMessages,
     handleDelete,
     handleSearch,
-    modlas: {
+    modals: {
       createMsg: { isOpen: isOpenCreateMessage, onClose: handleCreateMessage },
     },
   };
