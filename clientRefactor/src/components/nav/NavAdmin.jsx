@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import { MyAccount } from "../index";
-const NavAdmin = ({ setIsNavOpen,user }  ) => {
-  const handleClick = () => {
-    setIsNavOpen(false);
-  };
+import { useHeaderContext } from "../header/HeaderContext";
+const NavAdmin = () => {
 
+  const { user, handleOutsideClick,setIsNavOpen } =
+  useHeaderContext()
   return (
     <>
-      <Link to={`/users`} onClick={handleClick}>Users</Link>
-      <Link to={`/cars`} onClick={handleClick}>Cars</Link>
-      <Link to={`/services`} onClick={handleClick}>Services</Link>
-      <Link to={`/messages`} onClick={handleClick}>Messages</Link>
-      <Link to={`/messages-contact`} onClick={handleClick}>Messages-Contact</Link>
+      <Link to={`/users`} onClick={handleOutsideClick}>Users</Link>
+      <Link to={`/cars`} onClick={handleOutsideClick}>Cars</Link>
+      <Link to={`/services`} onClick={handleOutsideClick}>Services</Link>
+      <Link to={`/messages`} onClick={handleOutsideClick}>Messages</Link>
+      <Link to={`/messages-contact`} onClick={handleOutsideClick}>Messages-Contact</Link>
       <MyAccount user={user} setIsNavOpen={setIsNavOpen} />
     </>
   );

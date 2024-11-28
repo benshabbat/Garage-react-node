@@ -1,30 +1,32 @@
 import Login from "../login/Login";
-// import NewLogin from "../login/NewLogin";
-import useOpenModel from "../../hooks/useOpenModel";
 import { Link } from "react-router-dom";
+import { useHeaderContext } from "../header/HeaderContext";
 
-const NavLanding = ({ setIsNavOpen }) => {
-  const [handelLogin, isOpenLogin] = useOpenModel();
-  
-  const handleClick = () => {
-    setIsNavOpen(false);
-  };
+const NavLanding = () => {
+  const { handleOutsideClick, handleLogin, isOpenLogin } = useHeaderContext();
 
-  const handleLogin = () => {
-    handleClick();
-    handelLogin();
-  }
   return (
     <>
-      <Link to="#home" onClick={handleClick}>Home</Link>
-      <a href="#reviews" onClick={handleClick}>Reviews</a>
-      <a href="#address" onClick={handleClick}>Address</a>
-      <a href="#about" onClick={handleClick}>About</a>
-      <a href="#services" onClick={handleClick}>Services</a>
-      <a href="#contact" onClick={handleClick}>Contact</a>
+      <Link to="#home" onClick={handleOutsideClick}>
+        Home
+      </Link>
+      <a href="#reviews" onClick={handleOutsideClick}>
+        Reviews
+      </a>
+      <a href="#address" onClick={handleOutsideClick}>
+        Address
+      </a>
+      <a href="#about" onClick={handleOutsideClick}>
+        About
+      </a>
+      <a href="#services" onClick={handleOutsideClick}>
+        Services
+      </a>
+      <a href="#contact" onClick={handleOutsideClick}>
+        Contact
+      </a>
       <button onClick={handleLogin}>Login</button>
-      <Login handelClick={handelLogin} isOpen={isOpenLogin} />
-      {/* <NewLogin isOpen={isOpenLogin} /> */}
+      <Login handelClick={handleLogin} isOpen={isOpenLogin} />
     </>
   );
 };
