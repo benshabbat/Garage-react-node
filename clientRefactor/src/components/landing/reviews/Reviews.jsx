@@ -4,6 +4,8 @@ import { CreateReviews, Review } from "../../index";
 import useOpenModel from "../../../hooks/useOpenModel";
 import { getReviews } from "../../../utils";
 import Swiper from "./Swiper";
+
+//TODO:I WORKED INTO NEW CLIENT NEED TO CHANGE THE IMPORVE
 //TODO: to move logic of reviews to external functions
 const Reviews = () => {
   const [handleAddReview, isOpenAddReview] = useOpenModel();
@@ -36,8 +38,8 @@ const Reviews = () => {
       setNumCards(getNumCardsPreview());
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (

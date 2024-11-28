@@ -1,5 +1,5 @@
 import { useMessages } from "./utilsMessages";
-//TODO: to make context form messages
+//TODO: to make context for messages
 const Messages = () => {
   const { PageMessages } = useMessages();
   return PageMessages();

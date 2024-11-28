@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
 import { getUsers } from "../../features/admin/adminSlice";
 import { deleteMessage } from "../../utils";
-//TODO: to make context form messages
+//TODO: to make context for messages
 export function useMessages() {
   const { messages, user } = useSelector((state) => state.user);
   const { users } = useSelector((state) => state.admin);
