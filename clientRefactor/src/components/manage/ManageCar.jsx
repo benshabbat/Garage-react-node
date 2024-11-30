@@ -47,8 +47,6 @@ const ManageCar = () => {
             </label>
           </form>
           <CreateService
-            handelClick={modals.createService.onClose}
-            isOpen={modals.createService.isOpen}
           />
           <EditCar
             handelClick={modals.editCar.onClose}
@@ -56,7 +54,7 @@ const ManageCar = () => {
           />
         </>
       }
-      isOpen={modals.manageCar.onClose}
+      isOpen={modals.manageCar.isOpen}
     />
   );
 };

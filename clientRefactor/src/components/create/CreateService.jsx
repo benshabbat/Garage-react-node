@@ -1,20 +1,10 @@
-import { useState } from "react";
 import { OpenModel, Form } from "..";
-import { createService } from "../../utils";
+
 import { useCarsContext } from "../../pages/cars/CarsContext";
-const CreateService = ({ handelClick, isOpen }) => {
-  const { selectedCar } = useCarsContext()
-  const [formData, setFormData] = useState();
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await createService(selectedCar?._id, formData);
-    handelClick();
-  };
-  const options = [
-    { value: "pending", label: "Pending" },
-    { value: "done", label: "Done" },
-    { value: "on-work", label: "On work" },
-  ];
+const CreateService = () => {
+  const { useCreateService, options, modals } = useCarsContext();
+
+  const { onSubmit, setFormData, formData } = useCreateService();
 
   return (
     <OpenModel
@@ -26,15 +16,15 @@ const CreateService = ({ handelClick, isOpen }) => {
             { name: "title" },
             { name: "description" },
             { name: "price", type: "number", min: 0 },
-            { name: "paid", type: "checkbox", checked: formData?.paid },
+            { name: "paid", type: "checkbox" },
           ]}
           options={options}
           nameSelect="status"
-          handelClick={handelClick}
+          handelClick={modals.createService.onClose}
           onSubmit={onSubmit}
         />
       }
-      isOpen={isOpen}
+      isOpen={modals.createService.isOpen}
     />
   );
 };
