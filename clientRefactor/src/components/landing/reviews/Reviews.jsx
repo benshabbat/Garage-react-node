@@ -22,29 +22,10 @@ const Reviews = () => {
     handleAddReview();
   };
 
-  // קביעת מספר הכרטיסים בהתאם לרוחב המסך
-  const getNumCardsPreview = () => {
-    if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 1024) return 2;
-    if (window.innerWidth < 1440) return 3;
-    return 4;
-  };
-
-  const [numCards, setNumCards] = useState(getNumCardsPreview());
-
-  useEffect(() => {
-    const handleResize = () => {
-      setNumCards(getNumCardsPreview());
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <div id="reviews">
       <h1 className="reviews-header">Reviews</h1>
-      <Swiper numCardsPreview={numCards}>
+      <Swiper numCardsPreview={4}>
         {allReviews?.map((customer, index) => (
           <Review customer={customer} key={index} />
         ))}
