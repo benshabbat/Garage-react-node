@@ -8,14 +8,9 @@ export default function CarModals() {
   const { modals } = useCarsContext();
   return (
     <>
-      <ManageCar
-      />
-      <CreateService
-      />
-      <EditCar
-        handelClick={modals.editCar.onClose}
-        isOpen={modals.editCar.isOpen}
-      />
+      <ManageCar />
+      <CreateService />
+      <EditCar />
       <DeleteCar
         handelClick={modals.deleteCar.onClose}
         isOpen={modals.deleteCar.isOpen}

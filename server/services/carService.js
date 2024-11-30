@@ -35,14 +35,11 @@ const createCar = async (req) => {
 };
 
 const updateCar = async (req) => {
-  const { numberPlate } = req.body;
-  const newNumberPlate = templateCar(numberPlate);
-  console.log(newNumberPlate);
   try {
     const updatedCar = await Car.findByIdAndUpdate(
       req.params.id,
       {
-        $set: { ...req.body, numberPlate: newNumberPlate },
+        $set: { ...req.body },
       },
       { new: true }
     );

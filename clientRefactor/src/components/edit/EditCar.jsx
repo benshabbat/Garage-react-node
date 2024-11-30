@@ -1,16 +1,10 @@
-import { useState } from "react";
 import { Form, OpenModel } from "../index";
-import { updateCar } from "../../utils";
 import { useCarsContext } from "../../pages/cars/CarsContext";
 
-const EditCar = ({ handelClick, isOpen }) => {
-  const { selectedCar } = useCarsContext();
-  const [formData, setFormData] = useState(selectedCar);
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await updateCar(selectedCar?._id, formData);
-    handelClick();
-  };
+const EditCar = () => {
+  const { useEditCar,modals,selectedCar } = useCarsContext();
+  const { onSubmit, setFormData,formData } = useEditCar()
+
   return (
     <OpenModel
       comp={
@@ -26,11 +20,11 @@ const EditCar = ({ handelClick, isOpen }) => {
               min: selectedCar?.km,
             },
           ]}
-          handelClick={handelClick}
+          handelClick={modals.editCar.onClose}
           onSubmit={onSubmit}
         />
       }
-      isOpen={isOpen}
+      isOpen={modals.editCar.isOpen}
     />
   );
 };

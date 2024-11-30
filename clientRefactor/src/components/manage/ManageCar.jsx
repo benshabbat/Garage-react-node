@@ -17,7 +17,7 @@ const ManageCar = () => {
             <h1 className="header">Manage Admin</h1>
             <label className="form-label">
               <button
-              value={selectedCar?._id}
+                value={selectedCar?._id}
                 name="createService"
                 className="create"
                 onClick={handleCarAction}
@@ -46,12 +46,8 @@ const ManageCar = () => {
               </button>
             </label>
           </form>
-          <CreateService
-          />
-          <EditCar
-            handelClick={modals.editCar.onClose}
-            isOpen={modals.editCar.isOpen}
-          />
+          <CreateService />
+          <EditCar />
         </>
       }
       isOpen={modals.manageCar.isOpen}
