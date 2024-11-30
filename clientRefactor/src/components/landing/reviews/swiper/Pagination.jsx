@@ -1,4 +1,8 @@
+import { useSwiperContext } from "./SwiperContext";
+
 export default function Pagination() {
+
+  const {currentIndex,indexPagination,totalCards,numCardsPreview} = useSwiperContext()
   return (
     <div className="pagination">
       {Array(Math.ceil(totalCards / numCardsPreview))
