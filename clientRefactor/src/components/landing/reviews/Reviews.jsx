@@ -1,13 +1,13 @@
 import "./reviews.css";
 import { useState, useEffect } from "react";
-import { CreateReviews, Review } from "../../index";
-import useOpenModal from "../../../hooks/useOpenModal";
+import { Review } from "../../index";
 import { getReviews } from "../../../utils";
-import Swiper from "./Swiper";
+import Swiper from "./swiper/Swiper";
+import ReviewsProvider from "./ReviewsProvider";
+import AddReview from "./AddReview";
 
 //TODO:CONTEXT AND PROVIDER
 const Reviews = () => {
-  const [handleAddReview, isOpenAddReview] = useOpenModal();
   const [allReviews, setAllReviews] = useState([]);
 
   useEffect(() => {
@@ -16,25 +16,20 @@ const Reviews = () => {
       setAllReviews(data);
     };
     reviews();
-  }, [isOpenAddReview]);
-
-  const handelClick = () => {
-    handleAddReview();
-  };
+  }, []);
 
   return (
-    <div id="reviews">
-      <h1 className="reviews-header">Reviews</h1>
-      <Swiper numCardsPreview={4}>
-        {allReviews?.map((customer, index) => (
-          <Review customer={customer} key={index} />
-        ))}
-      </Swiper>
-      <button className="btn-add-review" onClick={handelClick}>
-        Share Your Experience
-      </button>
-      <CreateReviews handelClick={handleAddReview} isOpen={isOpenAddReview} />
-    </div>
+    <ReviewsProvider>
+      <div id="reviews">
+        <h1 className="reviews-header">Reviews</h1>
+        <Swiper numCardsPreview={4}>
+          {allReviews?.map((customer, index) => (
+            <Review customer={customer} key={index} />
+          ))}
+        </Swiper>
+        <AddReview />
+      </div>
+    </ReviewsProvider>
   );
 };
 
