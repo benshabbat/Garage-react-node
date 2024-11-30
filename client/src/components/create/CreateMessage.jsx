@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { OpenModel, Form } from "..";
+import { OpenModal, Form } from "..";
 import { createMessage, createMessageToAdmin } from "../../utils";
 
 const CreateMessage = ({ handelClick, isOpen, user, users = null }) => {
@@ -17,7 +17,7 @@ const CreateMessage = ({ handelClick, isOpen, user, users = null }) => {
   };
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

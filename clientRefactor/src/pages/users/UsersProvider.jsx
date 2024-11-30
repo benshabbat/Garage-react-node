@@ -1,22 +1,22 @@
 import "../../components/table/table.css";
+import { getUsers } from "../../features/admin/adminSlice";
 import { UsersContext } from "./UsersContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../features/admin/adminSlice";
-import useOpenModel from "../../hooks/useOpenModal";
 import { deleteUser, createCar, updateUser } from "../../utils";
 import { validCar, validPhone, validPass } from "../../validation/valid";
-//TODO:maybe i dont need to move users as props
+import useOpenModal from "../../hooks/useOpenModal";
+
 export default function UsersProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
 
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
 
-  const [handleManageUser, isOpenManageUser] = useOpenModel();
-  const [handleCreateUser, isOpenCreateUser] = useOpenModel();
-  const [handleCreateCar, isOpenModelCreateCar] = useOpenModel();
-  const [handleEditUser, isOpenModelEditUser] = useOpenModel();
+  const [handleManageUser, isOpenManageUser] = useOpenModal();
+  const [handleCreateUser, isOpenCreateUser] = useOpenModal();
+  const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
+  const [handleEditUser, isOpenModalEditUser] = useOpenModal();
   const displayUsers = filteredUsers || users;
   const dispatch = useDispatch();
 
@@ -94,8 +94,8 @@ export default function UsersProvider({ children }) {
     modals: {
       manageUser: { isOpen: isOpenManageUser, handel: handleManageUser },
       createUser: { isOpen: isOpenCreateUser, handel: handleCreateUser },
-      createCar: { isOpen: isOpenModelCreateCar, handel: handleCreateCar },
-      editUser: { isOpen: isOpenModelEditUser, handel: handleEditUser },
+      createCar: { isOpen: isOpenModalCreateCar, handel: handleCreateCar },
+      editUser: { isOpen: isOpenModalEditUser, handel: handleEditUser },
     },
   };
   return (

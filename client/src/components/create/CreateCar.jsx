@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { OpenModel, Form } from "..";
+import { OpenModal, Form } from "..";
 import { createCar } from "../../utils";
 import { validCar } from "../../validation/valid";
 const CreateCar = ({ handelClick, isOpen, user }) => {
@@ -14,7 +14,7 @@ const CreateCar = ({ handelClick, isOpen, user }) => {
   };
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           data

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { OpenModel, Form } from "..";
+import { OpenModal, Form } from "..";
 import { createService } from "../../utils";
 const CreateService = ({ handelClick, isOpen, car }) => {
   const [formData, setFormData] = useState();
@@ -15,7 +15,7 @@ const CreateService = ({ handelClick, isOpen, car }) => {
   ];
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

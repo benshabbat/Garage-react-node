@@ -1,14 +1,13 @@
 import "./reviews.css";
 import { useState, useEffect } from "react";
 import { CreateReviews, Review } from "../../index";
-import useOpenModel from "../../../hooks/useOpenModal";
+import useOpenModal from "../../../hooks/useOpenModal";
 import { getReviews } from "../../../utils";
 import Swiper from "./Swiper";
 
-//TODO:I WORKED INTO NEW CLIENT NEED TO CHANGE THE IMPORVE
-//TODO: to move logic of reviews to external functions
+//TODO:CONTEXT AND PROVIDER
 const Reviews = () => {
-  const [handleAddReview, isOpenAddReview] = useOpenModel();
+  const [handleAddReview, isOpenAddReview] = useOpenModal();
   const [allReviews, setAllReviews] = useState([]);
 
   useEffect(() => {

@@ -1,11 +1,11 @@
-import { OpenModel, Form } from "..";
+import { OpenModal, Form } from "..";
 import { useContextMessages } from "../../pages/messages/MessagesConetxt";
 
 const CreateMessage = () => {
   const { modals, user, users, onSubmit, setFormData } = useContextMessages();
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

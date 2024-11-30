@@ -7,7 +7,7 @@ export { default as Review } from "./landing/reviews/Review";
 export { default as Reviews } from "./landing/reviews/Reviews";
 export { default as Service } from "./service/Service";
 export { default as ServicesLanding } from "./landing/servicesLanding/ServicesLanding";
-export { default as OpenModel } from "./openModel/OpenModel";
+export { default as OpenModal} from "./openModal/OpenModal";
 export { default as Form } from "./form/Form";
 export { default as CreateCar } from "./create/CreateCar";
 export { default as Register } from "./create/Register";

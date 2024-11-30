@@ -1,9 +1,9 @@
-import { OpenModel } from "../index";
+import { OpenModal } from "../index";
 import { useCarsContext } from "../../pages/cars/CarsContext";
 const DeleteCar = () => {
   const { useDeleteCar, modals, selectedCar } = useCarsContext();
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <>
           <form className="form">

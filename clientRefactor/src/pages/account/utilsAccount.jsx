@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import useOpenModel from "../../hooks/useOpenModel";
+import useOpenModal from "../../hooks/useOpenModal";
 export function useAccount() {
   const { user } = useSelector((state) => state.user);
   const [car, setCar] = useState();
   const [filterCars, setFilterCars] = useState();
-  const [handleReqService, isOpenReqService] = useOpenModel();
+  const [handleReqService, isOpenReqService] = useOpenModal();
   const navigate = useNavigate();
 
   const handelCar = (e) => {

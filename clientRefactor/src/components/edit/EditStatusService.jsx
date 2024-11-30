@@ -1,15 +1,12 @@
 
-import { Form, OpenModel } from "../index";
+import { Form, OpenModal } from "../index";
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
 const EditStatusService = () => {
-
   const { useEditService, modals,options } = useServicesAdminContext();
   const { onSubmit, setFormData } = useEditService(modals.editStatusService.handel);
 
-
-
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

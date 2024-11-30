@@ -1,4 +1,4 @@
-.open-model-background {
+.open-modal-background {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.386);
@@ -11,7 +11,7 @@
   z-index: 1000; /* הוספנו z-index גבוה */
 }
 
-.open-model-container {
+.open-modal-container {
   position: relative;
   border-radius: 20px;
   width: max-content;

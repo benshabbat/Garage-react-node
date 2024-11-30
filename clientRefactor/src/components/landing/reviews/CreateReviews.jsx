@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { OpenModel } from "../../index";
+import { OpenModal } from "../../index";
 import { createReview } from "../../../utils";
 import StarRating from "./StarRating";
 const CreateReviews = ({ handelClick, isOpen }) => {
@@ -30,7 +30,7 @@ const CreateReviews = ({ handelClick, isOpen }) => {
   }, [formData]);
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <form className="form">
           <button onClick={handelClick} className="form-close" >X</button>

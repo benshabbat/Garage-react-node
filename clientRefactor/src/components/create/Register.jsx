@@ -1,4 +1,4 @@
-import { Form, OpenModel } from "..";
+import { Form, OpenModal } from "..";
 import { useUsersContext } from "../../pages/users/UsersContext";
 import { useRegister } from "./utilsCreate";
 
@@ -6,7 +6,7 @@ const Register = () => {
   const {users,modals} = useUsersContext()
   const {setFormData,onSubmit,isValidUser} =useRegister(users,modals.createUser.handel)
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

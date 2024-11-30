@@ -4,7 +4,7 @@ import { HeaderContext } from "./HeaderContext";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
-import useOpenModel from "../../hooks/useOpenModal";
+import useOpenModal from "../../hooks/useOpenModal";
 import useLogout from "../../hooks/useLogout";
 export default function HeaderProvider({ children }) {
   const { user: userAuth,isError } = useSelector((state) => state.auth);
@@ -12,7 +12,7 @@ export default function HeaderProvider({ children }) {
 
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const [onLogin, isOpenLogin] = useOpenModel();
+  const [onLogin, isOpenLogin] = useOpenModal();
 
   const { onLogout } = useLogout();
 

@@ -1,13 +1,12 @@
 import "./manage.css";
 import CreateService from "../create/CreateService";
-import { OpenModel, EditCar } from "../index";
+import { OpenModal, EditCar } from "../index";
 import { useCarsContext } from "../../pages/cars/CarsContext";
-//TODO: to use with context
 const ManageCar = () => {
   const { handleCarAction, selectedCar, modals } = useCarsContext();
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <>
           <form className="form">

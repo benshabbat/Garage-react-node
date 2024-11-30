@@ -1,10 +1,10 @@
-import { Form, OpenModel } from "..";
+import { Form, OpenModal } from "..";
 import { useHeaderContext } from "../header/HeaderContext";
 const Login = () => {
   const { handleLogin, isOpenLogin, useLogin, isError } = useHeaderContext();
   const { setFormData, onSubmit } = useLogin();
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

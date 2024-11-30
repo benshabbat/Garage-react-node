@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createService, updateCar,deleteCar } from "../../utils";
 import { getCarsByType } from "../../features/admin/adminSlice";
-import useOpenModel from "../../hooks/useOpenModel";
+import useOpenModal from "../../hooks/useOpenModal";
 
 export default function CarsProvider({ children }) {
   const { user } = useSelector((state) => state.user);
@@ -14,10 +14,10 @@ export default function CarsProvider({ children }) {
   const [filteredCars, setFilteredCars] = useState(null);
   const [formData, setFormData] = useState();
 
-  const [handleManageCar, isOpenManageCar] = useOpenModel();
-  const [handleEditCar, isOpenModelEditCar] = useOpenModel();
-  const [handleCreateService, isOpenModelCreateService] = useOpenModel();
-  const [handleDeleteCar, isOpenModelDeleteCar] = useOpenModel();
+  const [handleManageCar, isOpenManageCar] = useOpenModal();
+  const [handleEditCar, isOpenModalEditCar] = useOpenModal();
+  const [handleCreateService, isOpenModalCreateService] = useOpenModal();
+  const [handleDeleteCar, isOpenModalDeleteCar] = useOpenModal();
 
   const displayCars = filteredCars || cars;
 
@@ -27,8 +27,8 @@ export default function CarsProvider({ children }) {
     dispatch(getCarsByType(user?._id));
   }, [
     isOpenManageCar,
-    isOpenModelDeleteCar,
-    isOpenModelEditCar,
+    isOpenModalDeleteCar,
+    isOpenModalEditCar,
     dispatch,
     user?._id,
   ]);
@@ -122,12 +122,12 @@ export default function CarsProvider({ children }) {
     displayCars,
     modals: {
       manageCar: { isOpen: isOpenManageCar, handel: handleManageCar },
-      editCar: { isOpen: isOpenModelEditCar, handel: handleEditCar },
+      editCar: { isOpen: isOpenModalEditCar, handel: handleEditCar },
       createService: {
-        isOpen: isOpenModelCreateService,
+        isOpen: isOpenModalCreateService,
         handel: handleCreateService,
       },
-      deleteCar: { isOpen: isOpenModelDeleteCar, handel: handleDeleteCar },
+      deleteCar: { isOpen: isOpenModalDeleteCar, handel: handleDeleteCar },
     },
   };
 

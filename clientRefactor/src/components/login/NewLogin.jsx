@@ -3,7 +3,7 @@ import "./login.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/auth/authSlice";
-import { Form, OpenModel } from "..";
+import { Form, OpenModal } from "..";
 import { useSelector } from "react-redux";
 export default function NewLogin({ isOpen }) {
   const { isError, message } = useSelector((state) => state.auth);
@@ -18,7 +18,7 @@ export default function NewLogin({ isOpen }) {
     console.log(isError);
   }, [isError, message]);
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <div className="wrapper-login">
           <form onSubmit={onSubmit}>

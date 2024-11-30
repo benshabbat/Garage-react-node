@@ -1,13 +1,12 @@
-import { Form, OpenModel } from "../index";
+import { Form, OpenModal } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
-
 
 const EditUser = () => {
   const { useEditCar,modals } = useUsersContext();
   const {onSubmitEditUser,formData,setFormData}=useEditCar()
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

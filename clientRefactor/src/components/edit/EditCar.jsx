@@ -1,4 +1,4 @@
-import { Form, OpenModel } from "../index";
+import { Form, OpenModal } from "../index";
 import { useCarsContext } from "../../pages/cars/CarsContext";
 
 const EditCar = () => {
@@ -6,7 +6,7 @@ const EditCar = () => {
   const { onSubmit, setFormData,formData } = useEditCar()
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

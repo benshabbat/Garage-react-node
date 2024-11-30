@@ -1,5 +1,5 @@
 import "./manage.css";
-import { OpenModel } from "../index";
+import { OpenModal } from "../index";
 import EditService from "../edit/EditService";
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
 const ManageService = () => {
@@ -7,7 +7,7 @@ const ManageService = () => {
     useServicesAdminContext();
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <>
           <form className="form">

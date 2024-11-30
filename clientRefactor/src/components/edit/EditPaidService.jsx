@@ -1,5 +1,5 @@
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
-import { Form, OpenModel } from "../index";
+import { Form, OpenModal } from "../index";
 const EditPaidService = () => {
   const { useEditService, modals } = useServicesAdminContext();
   const { onSubmit, formData, setFormData } = useEditService(
@@ -7,7 +7,7 @@ const EditPaidService = () => {
   );
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

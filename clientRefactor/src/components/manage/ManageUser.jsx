@@ -1,10 +1,10 @@
 import "./manage.css";
-import { CreateCar, OpenModel, EditUser } from "../index";
+import { CreateCar, OpenModal, EditUser } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
 const ManageUser = () => {
   const { modals, handleUser, selectedUser } = useUsersContext();
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <>
           <form className="form">

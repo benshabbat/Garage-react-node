@@ -1,7 +1,7 @@
 import "../../components/table/table.css";
 import { useState, useEffect } from "react";
 import CreateMessage from "../../components/create/CreateMessage";
-import useOpenModel from "../../hooks/useOpenModel";
+import useOpenModal from "../../hooks/useOpenModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
 import { getUsers } from "../../features/admin/adminSlice";
@@ -10,7 +10,7 @@ import { deleteMessage } from "../../utils";
 export function useMessages() {
   const { messages, user } = useSelector((state) => state.user);
   const { users } = useSelector((state) => state.admin);
-  const [handleCreateMessage, isOpenCreateMessage] = useOpenModel();
+  const [handleCreateMessage, isOpenCreateMessage] = useOpenModal();
   const [filterMessages, setFilterMessages] = useState();
   const [isDeleted, setIsDeleted] = useState(false);
 

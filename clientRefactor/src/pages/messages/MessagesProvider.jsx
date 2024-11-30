@@ -4,25 +4,29 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
 import { getUsers } from "../../features/admin/adminSlice";
-import { deleteMessage,createMessage, createMessageToAdmin  } from "../../utils";
-import useOpenModel from "../../hooks/useOpenModel";
+import {
+  deleteMessage,
+  createMessage,
+  createMessageToAdmin,
+} from "../../utils";
+import useOpenModal from "../../hooks/useOpenModal";
 
 export default function MessagesProvider({ children }) {
   const { messages, user } = useSelector((state) => state.user);
   const { users } = useSelector((state) => state.admin);
 
   const [filteredMessages, setFilteredMessages] = useState();
-  const [isDeleted, setIsDeleted] = useState(false);
 
-  const [handleCreateMessage, isOpenCreateMessage] = useOpenModel();
+  const [handleCreateMessage, isOpenCreateMessage] = useOpenModal();
 
   const displayMessages = filteredMessages || messages;
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     if (user?.isAdmin) dispatch(getUsers());
     if (user) dispatch(getMessagesByIdUser(user?._id));
-  }, [user, isOpenCreateMessage, isDeleted, dispatch]);
+  }, [user, isOpenCreateMessage, dispatch]);
 
   const handleSearch = (e) => {
     const { value } = e.target;
@@ -40,13 +44,6 @@ export default function MessagesProvider({ children }) {
     );
   };
 
-  const handleDelete = async (messageId) => {
-    await deleteMessage(messageId);
-    setIsDeleted((prev) => !prev);
-  };
-
-
-
   const [formData, setFormData] = useState({
     from: user?._id,
   });
@@ -59,6 +56,11 @@ export default function MessagesProvider({ children }) {
       await createMessageToAdmin(formData);
     }
     handleCreateMessage();
+  };
+
+  //need to make pop up yes no for delete
+  const handleDelete = async (messageId) => {
+    await deleteMessage(messageId);
   };
 
   const value = {

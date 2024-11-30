@@ -1,11 +1,11 @@
-import { OpenModel, Form } from "..";
+import { OpenModal, Form } from "..";
 import { useCarsContext } from "../../pages/cars/CarsContext";
 const CreateService = () => {
   const { useCreateService, options, modals } = useCarsContext();
   const { onSubmit, setFormData } = useCreateService();
 
   return (
-    <OpenModel
+    <OpenModal
       comp={
         <Form
           setData={setFormData}

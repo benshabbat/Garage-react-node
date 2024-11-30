@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../../features/admin/adminSlice";
 import { deleteService, updateService } from "../../utils";
-import useOpenModel from "../../hooks/useOpenModel";
+import useOpenModal from "../../hooks/useOpenModal";
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
 
@@ -12,10 +12,10 @@ export default function ServiceAdminProvider({ children }) {
   const [selectedService, setSelctedService] = useState();
   const [filteredServices, setFilteredServices] = useState();
 
-  const [handelManageService, isOpenManageService] = useOpenModel();
-  const [handleEditService, isOpenEditService] = useOpenModel();
-  const [handleStatus, isOpenStatus] = useOpenModel();
-  const [handlePaid, isOpenPaid] = useOpenModel();
+  const [handelManageService, isOpenManageService] = useOpenModal();
+  const [handleEditService, isOpenEditService] = useOpenModal();
+  const [handleStatus, isOpenStatus] = useOpenModal();
+  const [handlePaid, isOpenPaid] = useOpenModal();
 
   const displayServices = filteredServices || services;
 

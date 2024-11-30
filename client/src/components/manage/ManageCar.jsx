@@ -60,12 +60,12 @@ const ManageCar = ({
           <CreateService
             car={car}
             handelClick={handleCreateService}
-            isOpen={isOpenModelCreateService}
+            isOpen={isOpenModalCreateService}
           />
           <EditCar
             car={car}
             handelClick={handleEditCar}
-            isOpen={isOpenModelEditCar}
+            isOpen={isOpenModalEditCar}
           />
         </>
       }
