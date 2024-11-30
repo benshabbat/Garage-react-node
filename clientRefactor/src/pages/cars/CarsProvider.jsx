@@ -12,6 +12,7 @@ export default function CarsProvider({ children }) {
 
   const [selectedCar, setSelectedCar] = useState(null);
   const [filteredCars, setFilteredCars] = useState(null);
+  const [formData, setFormData] = useState();
 
   const [handleManageCar, isOpenManageCar] = useOpenModel();
   const [handleEditCar, isOpenModelEditCar] = useOpenModel();
@@ -68,7 +69,6 @@ export default function CarsProvider({ children }) {
     );
   };
 
-  const [formData, setFormData] = useState();
   const useCreateService = () => {
     const onSubmit = async (e) => {
       e.preventDefault();
@@ -79,8 +79,6 @@ export default function CarsProvider({ children }) {
   };
 
   const useEditCar = () => {
-    const [formData, setFormData] = useState();
-
     useEffect(() => {
       setFormData(selectedCar);
     }, [selectedCar]);

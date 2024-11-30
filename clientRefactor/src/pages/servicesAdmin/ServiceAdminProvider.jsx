@@ -8,6 +8,7 @@ import useOpenModel from "../../hooks/useOpenModel";
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
 
+  const [formData, setFormData] = useState();
   const [selectedService, setSelctedService] = useState();
   const [filteredServices, setFilteredServices] = useState();
 
@@ -78,7 +79,6 @@ export default function ServiceAdminProvider({ children }) {
 
   //the solution working well done with useeffect.
   const useEditService = (handleClick) => {
-    const [formData, setFormData] = useState();
 
     useEffect(() => {
       setFormData(selectedService);
