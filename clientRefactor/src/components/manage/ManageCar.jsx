@@ -3,7 +3,7 @@ import CreateService from "../create/CreateService";
 import { OpenModel, EditCar } from "../index";
 import { useCarsContext } from "../../pages/cars/CarsContext";
 //TODO: to use with context
-const ManageCar = ({ handelClick: handelClickManage = null, isOpen }) => {
+const ManageCar = () => {
   const { handleCarAction, selectedCar, modals } = useCarsContext();
 
   return (
@@ -11,7 +11,7 @@ const ManageCar = ({ handelClick: handelClickManage = null, isOpen }) => {
       comp={
         <>
           <form className="form">
-            <button onClick={handelClickManage} className="form-close">
+            <button onClick={modals.manageCar.onClose} className="form-close">
               X
             </button>
             <h1 className="header">Manage Admin</h1>
@@ -56,7 +56,7 @@ const ManageCar = ({ handelClick: handelClickManage = null, isOpen }) => {
           />
         </>
       }
-      isOpen={isOpen}
+      isOpen={modals.manageCar.onClose}
     />
   );
 };

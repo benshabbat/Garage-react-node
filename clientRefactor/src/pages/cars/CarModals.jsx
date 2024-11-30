@@ -9,8 +9,6 @@ export default function CarModals() {
   return (
     <>
       <ManageCar
-        handelClick={modals.manageCar.onClose}
-        isOpen={modals.manageCar.isOpen}
       />
       <CreateService
         handelClick={modals.createService.onClose}
