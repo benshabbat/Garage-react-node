@@ -3,7 +3,7 @@ import { Form, OpenModel } from "../index";
 const EditPaidService = () => {
   const { useEditService, modals } = useServicesAdminContext();
   const { onSubmit, formData, setFormData } = useEditService(
-    modals.editPaid.onClose
+    modals.editPaid.handel
   );
 
   return (
@@ -14,7 +14,7 @@ const EditPaidService = () => {
           title="Edit Pay"
           inputs={[{ name: "paid", type: "checkbox", checked: formData?.paid }]}
           nameSelect="status"
-          handelClick={modals.editPaid.onClose}
+          handelClick={modals.editPaid.handel}
           onSubmit={onSubmit}
         />
       }

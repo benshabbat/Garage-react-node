@@ -1,7 +1,7 @@
 import "./reviews.css";
 import { useState, useEffect } from "react";
 import { CreateReviews, Review } from "../../index";
-import useOpenModel from "../../../hooks/useOpenModel";
+import useOpenModel from "../../../hooks/useOpenModal";
 import { getReviews } from "../../../utils";
 import Swiper from "./Swiper";
 

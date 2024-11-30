@@ -8,7 +8,7 @@ const ManageUser = () => {
       comp={
         <>
           <form className="form">
-            <button onClick={modals.manageUser.onClose} className="form-close">
+            <button onClick={modals.manageUser.handel} className="form-close">
               X
             </button>
             <h1 className="header">Manage Admin</h1>

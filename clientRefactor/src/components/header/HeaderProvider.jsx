@@ -4,7 +4,7 @@ import { HeaderContext } from "./HeaderContext";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
-import useOpenModel from "../../hooks/useOpenModel";
+import useOpenModel from "../../hooks/useOpenModal";
 import useLogout from "../../hooks/useLogout";
 export default function HeaderProvider({ children }) {
   const { user: userAuth,isError } = useSelector((state) => state.auth);

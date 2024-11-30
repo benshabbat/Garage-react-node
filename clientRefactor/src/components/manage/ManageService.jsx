@@ -12,7 +12,7 @@ const ManageService = () => {
         <>
           <form className="form">
             <button
-              onClick={modals.manageService.onClose}
+              onClick={modals.manageService.handel}
               className="form-close"
             >
               X

@@ -70,7 +70,7 @@ export default function MessagesProvider({ children }) {
     handleDelete,
     handleSearch,
     modals: {
-      createMsg: { isOpen: isOpenCreateMessage, onClose: handleCreateMessage },
+      createMsg: { isOpen: isOpenCreateMessage, handel: handleCreateMessage },
     },
   };
 

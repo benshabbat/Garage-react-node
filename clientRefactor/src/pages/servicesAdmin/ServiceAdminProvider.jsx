@@ -91,9 +91,14 @@ export default function ServiceAdminProvider({ children }) {
     };
     return { onSubmit, formData, setFormData };
   };
-
+  const options = [
+    { value: "pending", label: "Pending" },
+    { value: "done", label: "Done" },
+    { value: "on-work", label: "On work" },
+  ];
 
   const value = {
+    options,
     displayServices,
     handleServiceIdAction,
     handleSearch,
@@ -101,16 +106,16 @@ export default function ServiceAdminProvider({ children }) {
     modals: {
       manageService: {
         isOpen: isOpenManageService,
-        onClose: handelManageService,
+        handel: handelManageService,
       },
-      editStatusService: { isOpen: isOpenStatus, onClose: handleStatus },
+      editStatusService: { isOpen: isOpenStatus, handel: handleStatus },
       editPaid: {
         isOpen: isOpenPaid,
-        onClose: handlePaid,
+        handel: handlePaid,
       },
       editService: {
         isOpen: isOpenEditService,
-        onClose: handleEditService,
+        handel: handleEditService,
       },
     },
     useEditService,

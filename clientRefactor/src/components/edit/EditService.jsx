@@ -1,14 +1,10 @@
 import { Form, OpenModel } from "../index";
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
 const EditService = () => {
-  const { useEditService, modals } = useServicesAdminContext();
-  const { onSubmit,formData, setFormData } = useEditService(modals.editService.onClose);
+  const { useEditService, modals,options } = useServicesAdminContext();
+  const { onSubmit,formData, setFormData } = useEditService(modals.editService.handel);
 
-  const options = [
-    { value: "pending", label: "Pending" },
-    { value: "done", label: "Done" },
-    { value: "on-work", label: "On work" },
-  ];
+
   return (
     <OpenModel
       comp={
@@ -24,7 +20,7 @@ const EditService = () => {
           ]}
           options={options}
           nameSelect="status"
-          handelClick={modals.editService.onClose}
+          handelClick={modals.editService.handel}
           onSubmit={onSubmit}
         />
       }

@@ -18,7 +18,7 @@ const CreateService = () => {
           ]}
           options={options}
           nameSelect="status"
-          handelClick={modals.createService.onClose}
+          handelClick={modals.createService.handel}
           onSubmit={onSubmit}
         />
       }

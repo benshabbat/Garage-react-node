@@ -7,7 +7,7 @@ const DeleteCar = () => {
       comp={
         <>
           <form className="form">
-            <button onClick={modals.deleteCar.onClose} className="form-close">
+            <button onClick={modals.deleteCar.handel} className="form-close">
               X
             </button>
             <h1 className="header">Manage Admin</h1>

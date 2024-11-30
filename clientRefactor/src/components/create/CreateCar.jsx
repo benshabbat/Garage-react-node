@@ -17,7 +17,7 @@ const CreateCar = () => {
             { name: "km", type: "number", min: 0 },
             { name: "brand" },
           ]}
-          handelClick={modals.createCar.onClose}
+          handelClick={modals.createCar.handel}
           onSubmit={onSubmitCreateCar}
         />
       }

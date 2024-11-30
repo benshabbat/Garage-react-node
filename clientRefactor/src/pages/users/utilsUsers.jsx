@@ -1,6 +1,6 @@
 import "../../components/table/table.css";
 import { useState, useEffect } from "react";
-import useOpenModel from "../../hooks/useOpenModel";
+import useOpenModel from "../../hooks/useOpenModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../features/admin/adminSlice";
 

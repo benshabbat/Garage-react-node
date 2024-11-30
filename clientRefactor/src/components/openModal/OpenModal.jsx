@@ -1,4 +1,4 @@
-import "./openModel.css";
+import "./openModal.css";
 
 const OpenModel = ({ comp = null, isOpen = false }) => {
   return (

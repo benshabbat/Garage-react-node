@@ -121,13 +121,13 @@ export default function CarsProvider({ children }) {
     handleSearch,
     displayCars,
     modals: {
-      manageCar: { isOpen: isOpenManageCar, onClose: handleManageCar },
-      editCar: { isOpen: isOpenModelEditCar, onClose: handleEditCar },
+      manageCar: { isOpen: isOpenManageCar, handel: handleManageCar },
+      editCar: { isOpen: isOpenModelEditCar, handel: handleEditCar },
       createService: {
         isOpen: isOpenModelCreateService,
-        onClose: handleCreateService,
+        handel: handleCreateService,
       },
-      deleteCar: { isOpen: isOpenModelDeleteCar, onClose: handleDeleteCar },
+      deleteCar: { isOpen: isOpenModelDeleteCar, handel: handleDeleteCar },
     },
   };
 

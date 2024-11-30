@@ -3,7 +3,7 @@ import { UsersContext } from "./UsersContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../features/admin/adminSlice";
-import useOpenModel from "../../hooks/useOpenModel";
+import useOpenModel from "../../hooks/useOpenModal";
 import { deleteUser, createCar, updateUser } from "../../utils";
 import { validCar, validPhone, validPass } from "../../validation/valid";
 //TODO:maybe i dont need to move users as props
@@ -92,10 +92,10 @@ export default function UsersProvider({ children }) {
     onSubmitCreateCar,
     useEditCar,
     modals: {
-      manageUser: { isOpen: isOpenManageUser, onClose: handleManageUser },
-      createUser: { isOpen: isOpenCreateUser, onClose: handleCreateUser },
-      createCar: { isOpen: isOpenModelCreateCar, onClose: handleCreateCar },
-      editUser: { isOpen: isOpenModelEditUser, onClose: handleEditUser },
+      manageUser: { isOpen: isOpenManageUser, handel: handleManageUser },
+      createUser: { isOpen: isOpenCreateUser, handel: handleCreateUser },
+      createCar: { isOpen: isOpenModelCreateCar, handel: handleCreateCar },
+      editUser: { isOpen: isOpenModelEditUser, handel: handleEditUser },
     },
   };
   return (
