@@ -2,7 +2,7 @@ import "../../components/table/table.css";
 import { CarsContext } from "./CarsContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createService, updateCar } from "../../utils";
+import { createService, updateCar,deleteCar } from "../../utils";
 import { getCarsByType } from "../../features/admin/adminSlice";
 import useOpenModel from "../../hooks/useOpenModel";
 
@@ -91,6 +91,18 @@ export default function CarsProvider({ children }) {
     return { onSubmit, setFormData, formData };
   };
 
+
+  const useDeleteCar = async (e) => {
+    e.preventDefault();
+    const { name } = e.target;
+    if (name === "noDelete") handleDeleteCar();
+
+    if (name === "deleteCar") {
+      await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
+      handleDeleteCar();
+    }
+  };
+
   const options = [
     { value: "pending", label: "Pending" },
     { value: "done", label: "Done" },
@@ -98,6 +110,7 @@ export default function CarsProvider({ children }) {
   ];
 
   const value = {
+    useDeleteCar,
     useEditCar,
     useCreateService,
     options,

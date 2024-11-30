@@ -1,10 +1,8 @@
 import { OpenModel, Form } from "..";
-
 import { useCarsContext } from "../../pages/cars/CarsContext";
 const CreateService = () => {
   const { useCreateService, options, modals } = useCarsContext();
-
-  const { onSubmit, setFormData, formData } = useCreateService();
+  const { onSubmit, setFormData } = useCreateService();
 
   return (
     <OpenModel
