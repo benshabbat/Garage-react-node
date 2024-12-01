@@ -1,6 +1,6 @@
-import { useSwiperContext } from "./SwiperContext";
+import { useReviewsContext } from "../ReviewsContext";
 
 export default function Slides({ children }) {
-  const { getVisibleCards } = useSwiperContext();
+  const { getVisibleCards } = useReviewsContext();
   return <div className="swiper-slides">{getVisibleCards(children)}</div>;
 }

@@ -1,7 +1,8 @@
-import { useSwiperContext } from "./SwiperContext";
+import { useReviewsContext } from "../ReviewsContext";
+
 
 export default function NextCard() {
-  const {nextCard} = useSwiperContext()
+  const {nextCard} = useReviewsContext()
   return (
     <button onClick={nextCard} className="nav-button next-button">
       ❯

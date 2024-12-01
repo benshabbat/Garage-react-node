@@ -1,18 +1,11 @@
 import "./swiper.css";
-import { useSwiper } from "./useSwiper";
-// import NextCard from "./NextCard";
-// import Pagination from "./Pagination";
-// import PrevCard from "./Prevcard";
-// import Slides from "./Slides";
-// import SwiperProvider from "./SwiperProvider";
-
-
-//dont work with context
+import NextCard from "./NextCard";
+import Pagination from "./Pagination";
+import PrevCard from "./Prevcard";
+import Slides from "./Slides";
 const Swiper = ({ children }) => {
-  const { Slides, Pagination, PrevCard, NextCard } = useSwiper(children);
   
   return (
-    // <SwiperProvider>
       <div className="swiper-outer-container">
         <div className="swiper-container">
           <div className="swiper-wrapper">
@@ -25,7 +18,6 @@ const Swiper = ({ children }) => {
           <Pagination />
         </div>
       </div>
-    // </SwiperProvider>
   );
 };
 
