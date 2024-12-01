@@ -1,19 +1,24 @@
 .swiper-outer-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 20px 0;
-  overflow: hidden;  
+  padding: 20px;
+  position: relative;
 }
 
 .swiper-container {
-  position: relative;
   width: 100%;
-  /* padding: 0 80px; */
-  justify-content: space-between;
+}
+
+.swiper-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .swiper-content {
+  flex: 1;
   overflow: hidden;
 }
 
@@ -23,44 +28,35 @@
   transition: transform 0.3s ease;
 }
 
+
 .swiper-slides > * {
-  flex: 0 0 calc((100% - (var(--num-cards-preview, 4) - 1) * 20px) / var(--num-cards-preview, 4));
-  max-width: calc((100% - (var(--num-cards-preview, 4) - 1) * 20px) / var(--num-cards-preview, 4));
+  width: 280px !important;
+  min-width: 280px !important;
+  flex: 0 0 280px !important;
 }
 
 .nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
   background: white;
   border: 1px solid #eee;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 10;
   display: flex !important;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 
 .nav-button:hover {
   background-color: #f5f5f5;
 }
 
-.prev-button {
-  left: 0;
-}
-
-.next-button {
-  right: 0;
-}
-
 .pagination {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 20px;
 }
 
 .dot {
@@ -77,15 +73,12 @@
 }
 
 @media (max-width: 768px) {
-  .swiper-slides > * {
-    flex: 0 0 100%;
-    max-width: 100%;
+  .swiper-wrapper {
+    gap: 10px;
   }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .swiper-slides > * {
-    flex: 0 0 calc(50% - 10px);
-    max-width: calc(50% - 10px);
+  
+  .nav-button {
+    width: 35px;
+    height: 35px;
   }
 }

@@ -6,20 +6,20 @@ import { useSwiper } from "./useSwiper";
 // import Slides from "./Slides";
 import SwiperProvider from "./SwiperProvider";
 
-const Swiper = ({ children, numCardsPreview }) => {
-  const { Slides,Pagination ,PrevCard,NextCard} = useSwiper(children, numCardsPreview)
+const Swiper = ({ children }) => {
+  const { Slides, Pagination, PrevCard, NextCard } = useSwiper(children);
+  
   return (
     <SwiperProvider>
       <div className="swiper-outer-container">
-        <div
-          className="swiper-container"
-          style={{ "--num-cards-preview": numCardsPreview }}
-        >
-          <PrevCard />
-          <div className="swiper-content">
-            <Slides>{children}</Slides>
+        <div className="swiper-container">
+          <div className="swiper-wrapper">
+            <PrevCard />
+            <div className="swiper-content">
+              <Slides>{children}</Slides>
+            </div>
+            <NextCard />
           </div>
-          <NextCard />
           <Pagination />
         </div>
       </div>
@@ -28,24 +28,3 @@ const Swiper = ({ children, numCardsPreview }) => {
 };
 
 export default Swiper;
-// const Swiper = ({ children, numCardsPreview }) => {
-//   return (
-//     <SwiperProvider numCardsPreview={numCardsPreview}>
-//       <div className="swiper-outer-container">
-//         <div
-//           className="swiper-container"
-//           style={{ "--num-cards-preview": numCardsPreview }}
-//         >
-//           <PrevCard />
-//           <div className="swiper-content">
-//             <Slides>{children}</Slides>
-//           </div>
-//           <NextCard />
-//           <Pagination />
-//         </div>
-//       </div>
-//     </SwiperProvider>
-//   );
-// };
-
-// export default Swiper;
