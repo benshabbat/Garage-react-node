@@ -2,21 +2,8 @@ import { useState, useEffect } from "react";
 import { ReviewsContext } from "./ReviewsContext";
 import useOpenModal from "../../../hooks/useOpenModal";
 import { getReviews } from "../../../utils";
-export default function ReviewsProvider({ children }) {
-  const [handleAddReview, isOpenAddReview] = useOpenModal();
-  // State for current slide index and number of cards to display
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [numCardsPreview, setNumCardsPreview] = useState(4);
-  const [allReviews, setAllReviews] = useState([]);
 
-  useEffect(() => {
-    const reviews = async () => {
-      const { data } = await getReviews();
-      setAllReviews(data);
-    };
-    reviews();
-  }, []);
-  const totalCards = allReviews.length;
+
   // Screen breakpoints for responsive design
   const SCREEN_BREAKPOINTS = {
     MOBILE: 768,
@@ -31,6 +18,22 @@ export default function ReviewsProvider({ children }) {
     DESKTOP: 3,
     LARGE_DESKTOP: 4,
   };
+
+export default function ReviewsProvider({ children }) {
+  const [handleAddReview, isOpenAddReview] = useOpenModal();
+  // State for current slide index and number of cards to display
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [numCardsPreview, setNumCardsPreview] = useState(4);
+  const [allReviews, setAllReviews] = useState([]);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const { data } = await getReviews();
+      setAllReviews(data);
+    };
+    fetchReviews();
+  }, []);
+  const totalCards = allReviews.length;
 
   useEffect(() => {
     // Update number of cards based on screen width
@@ -66,40 +69,30 @@ export default function ReviewsProvider({ children }) {
     const startIndex = currentIndex;
     const endIndex = Math.min(startIndex + numCardsPreview, children.length);
     return children.slice(startIndex, endIndex);
+
+    
   };
 
   // Handle navigation to next set of cards
   const nextCard = () => {
-    const isLastSet = currentIndex + numCardsPreview >= totalCards;
-
-    if (isLastSet) {
-      // If at the end, go back to start
-      setCurrentIndex(0);
-    } else {
-      // Move forward by numCardsPreview
-      setCurrentIndex((prev) => prev + numCardsPreview);
-    }
+    setCurrentIndex((prev) => 
+      (prev + numCardsPreview) % allReviews.length
+    );
   };
 
-  // Handle navigation to previous set of cards
-  const prevCard = () => {
-    const isFirstSet = currentIndex - numCardsPreview < 0;
 
-    if (isFirstSet) {
-      // If at the start, go to last possible set
-      const lastGroupStart =
-        Math.floor((totalCards - 1) / numCardsPreview) * numCardsPreview;
-      setCurrentIndex(lastGroupStart);
-    } else {
-      // Move backward by numCardsPreview
-      setCurrentIndex((prev) => prev - numCardsPreview);
-    }
+  const prevCard = () => {
+    setCurrentIndex((prev) => {
+      const newIndex = prev - numCardsPreview;
+      return newIndex < 0 ? 
+        Math.floor((allReviews.length - 1) / numCardsPreview) * numCardsPreview : 
+        newIndex;
+    });
   };
 
   // Handle pagination dot click
   const indexPagination = (index) => {
-    const newStartIndex = index * numCardsPreview;
-    setCurrentIndex(newStartIndex);
+    setCurrentIndex(index * numCardsPreview);
   };
 
   const value = {
