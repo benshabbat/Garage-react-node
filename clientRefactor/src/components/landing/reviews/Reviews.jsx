@@ -1,9 +1,9 @@
 import "./reviews.css";
-import { useState, useEffect } from "react";
-import { CreateReviews, Review } from "../../index";
+import Swiper from "./swiper/Swiper";
 import useOpenModal from "../../../hooks/useOpenModal";
 import { getReviews } from "../../../utils";
-import Swiper from "./swiper/Swiper";
+import { useState, useEffect } from "react";
+import { CreateReviews, Review } from "../../index";
 
 //TODO:CONTEXT AND PROVIDER
 const Reviews = () => {
@@ -21,25 +21,6 @@ const Reviews = () => {
   const handelClick = () => {
     handleAddReview();
   };
-
-  // // קביעת מספר הכרטיסים בהתאם לרוחב המסך
-  // const getNumCardsPreview = () => {
-  //   if (window.innerWidth < 768) return 1;
-  //   if (window.innerWidth < 1024) return 2;
-  //   if (window.innerWidth < 1440) return 3;
-  //   return 4;
-  // };
-
-  // const [numCards, setNumCards] = useState(getNumCardsPreview());
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setNumCards(getNumCardsPreview());
-  //   };
-
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
 
   return (
     <div id="reviews">
