@@ -1,10 +1,10 @@
 import { useReviewsContext } from "../ReviewsContext";
 
 export default function Pagination() {
-  const { currentIndex, indexPagination, totalCards, numCardsPreview } =
+  const { currentIndex, indexPagination, numberOfPages, numCardsPreview } =
     useReviewsContext();
     
-  const numberOfPages = Math.ceil(totalCards / numCardsPreview);
+ 
   
   return (
     <div className="pagination">

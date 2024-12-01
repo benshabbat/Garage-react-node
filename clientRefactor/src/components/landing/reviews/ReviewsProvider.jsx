@@ -3,16 +3,19 @@ import { ReviewsContext } from "./ReviewsContext";
 import useOpenModal from "../../../hooks/useOpenModal";
 import { getReviews } from "../../../utils";
 import useCardsDisplay from "./swiper/hooks/useCardsDisplay";
-
-
+import useCardsNavigation from "./swiper/hooks/useCardsNavigation";
 
 export default function ReviewsProvider({ children }) {
   const [handleAddReview, isOpenAddReview] = useOpenModal();
-  // State for current slide index and number of cards to display
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const [allReviews, setAllReviews] = useState([]);
-  const numCardsPreview = useCardsDisplay()
+  const totalCards = allReviews.length;
+  
+  const numCardsPreview = useCardsDisplay();
+  const { currentIndex, nextCard, prevCard, indexPagination } =
+  useCardsNavigation(numCardsPreview, totalCards);
+  const numberOfPages = Math.ceil(totalCards / numCardsPreview);
+
   useEffect(() => {
     const fetchReviews = async () => {
       const { data } = await getReviews();
@@ -20,10 +23,6 @@ export default function ReviewsProvider({ children }) {
     };
     fetchReviews();
   }, []);
-  const totalCards = allReviews.length;
-
-
-
 
   // Get currently visible cards based on index and number of cards to show
   const getVisibleCards = (children) => {
@@ -31,28 +30,8 @@ export default function ReviewsProvider({ children }) {
       return children;
     }
     const startIndex = currentIndex;
-    const endIndex = Math.min(startIndex + numCardsPreview, children.length);
+    const endIndex = Math.min(startIndex + numCardsPreview, totalCards);
     return children.slice(startIndex, endIndex);
-  };
-
-  // Handle navigation to next set of cards
-  const nextCard = () => {
-    setCurrentIndex((prev) => (prev + numCardsPreview) % allReviews.length);
-  };
-
-  const prevCard = () => {
-    setCurrentIndex((prev) => {
-      const newIndex = prev - numCardsPreview;
-      return newIndex < 0
-        ? Math.floor((allReviews.length - 1) / numCardsPreview) *
-            numCardsPreview
-        : newIndex;
-    });
-  };
-
-  // Handle pagination dot click
-  const indexPagination = (index) => {
-    setCurrentIndex(index * numCardsPreview);
   };
 
   const value = {
@@ -62,8 +41,9 @@ export default function ReviewsProvider({ children }) {
     prevCard,
     nextCard,
     getVisibleCards,
-    totalCards,
+    // totalCards,
     numCardsPreview,
+    numberOfPages,
     currentIndex,
     allReviews,
   };
