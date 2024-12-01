@@ -32,6 +32,21 @@ export function useSwiper(children, numCardsPreview) {
     setCurrentIndex(index * numCardsPreview);
   };
 
+  const PrevCard = () => {
+    return (
+      <button onClick={prevCard} className="nav-button prev-button">
+        ❮
+      </button>
+    );
+  };
+  const NextCard = () => {
+    return (
+      <button onClick={nextCard} className="nav-button next-button">
+        ❯
+      </button>
+    );
+  };
+
   const Pagination = () => {
     return (
       <div className="pagination">
@@ -56,5 +71,6 @@ export function useSwiper(children, numCardsPreview) {
     return <div className="swiper-slides">{getVisibleCards(children)}</div>;
   };
 
-  return { Slides,Pagination ,prevCard,nextCard};
+
+  return { Slides,Pagination ,NextCard,PrevCard};
 }

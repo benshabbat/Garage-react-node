@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState} from "react";
 import { SwiperContext } from "./SwiperContext";
 export default function SwiperProvider({ children }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const numCardsPreview = 4;
-  const totalCards = children?.length;
+  const totalCards = children?.length || 0;
 
   const getVisibleCards = (cards) => {
     const start = currentIndex;
@@ -44,3 +44,5 @@ export default function SwiperProvider({ children }) {
     <SwiperContext.Provider value={value}>{children}</SwiperContext.Provider>
   );
 }
+
+

@@ -5,7 +5,7 @@ export default function Pagination() {
   const {currentIndex,indexPagination,totalCards,numCardsPreview} = useSwiperContext()
   return (
     <div className="pagination">
-      {Array(Math.ceil(totalCards / numCardsPreview))
+      {Array.from(Math.ceil(totalCards / numCardsPreview))
         .fill()
         .map((_, index) => (
           <button

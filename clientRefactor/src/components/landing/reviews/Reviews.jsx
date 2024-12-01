@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Review } from "../../index";
 import { getReviews } from "../../../utils";
 import Swiper from "./swiper/Swiper";
+// import TestSwiper from "./TestSwiper";
 import ReviewsProvider from "./ReviewsProvider";
 import AddReview from "./AddReview";
 
@@ -23,9 +24,11 @@ const Reviews = () => {
       <div id="reviews">
         <h1 className="reviews-header">Reviews</h1>
         <Swiper numCardsPreview={4}>
+        {/* <TestSwiper numCardsPreview={4}> */}
           {allReviews?.map((customer, index) => (
             <Review customer={customer} key={index} />
           ))}
+        {/* </TestSwiper> */}
         </Swiper>
         <AddReview />
       </div>
