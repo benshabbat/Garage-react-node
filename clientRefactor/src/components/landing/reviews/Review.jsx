@@ -1,6 +1,6 @@
 import { memo } from "react";
 import PropTypes from "prop-types";
-import StarRating from "./StarRating";
+import StarRating from "./starRating/StarRating";
 import { getMomentFromUpdatedAt } from "../../../utils";
 
 const Review = memo(({ customer }) => {

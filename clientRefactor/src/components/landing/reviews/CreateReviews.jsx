@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { OpenModal } from "../../index";
 import { createReview } from "../../../utils";
-import StarRating from "./StarRating";
+import StarRating from "./starRating/StarRating";
 const CreateReviews = ({ handelClick, isOpen }) => {
   const nameRef = useRef();
   const descRef = useRef();

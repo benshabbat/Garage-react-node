@@ -1,5 +1,5 @@
 import "./star-rating.css";
-import { useRating } from "./utilsReview";
+import { useRating } from "../utilsReview";
 const StarRating = (props) => {
   const { fontSize, handleClick, stars, mouseOnStar, mouseOffStar, isActive,isDisabled } =
     useRating({...props});
