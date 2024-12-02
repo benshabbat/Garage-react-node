@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { ReviewsContext } from "./ReviewsContext";
-import useOpenModal from "../../../hooks/useOpenModal";
 import { getReviews } from "../../../utils";
+
+import useOpenModal from "../../../hooks/useOpenModal";
 import useCardsDisplay from "./swiper/hooks/useCardsDisplay";
 import useCardsNavigation from "./swiper/hooks/useCardsNavigation";
 

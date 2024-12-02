@@ -37,6 +37,7 @@ export default function useCardsDisplay() {
       window.addEventListener("resize", updateNumCards);
       return () => window.removeEventListener("resize", updateNumCards);
     }, []);
+    
   
     return numCardsPreview;
 }
