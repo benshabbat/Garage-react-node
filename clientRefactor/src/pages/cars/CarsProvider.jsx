@@ -7,6 +7,7 @@ import { getCarsByType } from "../../features/admin/adminSlice";
 import useOpenModal from "../../hooks/useOpenModal";
 
 export default function CarsProvider({ children }) {
+  
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
 
@@ -16,8 +17,8 @@ export default function CarsProvider({ children }) {
 
   const [handleManageCar, isOpenManageCar] = useOpenModal();
   const [handleEditCar, isOpenModalEditCar] = useOpenModal();
-  const [handleCreateService, isOpenModalCreateService] = useOpenModal();
   const [handleDeleteCar, isOpenModalDeleteCar] = useOpenModal();
+  const [handleCreateService, isOpenModalCreateService] = useOpenModal();
 
   const displayCars = filteredCars || cars;
 
