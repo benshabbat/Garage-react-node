@@ -1,95 +1,171 @@
-.container {
+.container-contact {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: clamp(10px, 3vw, 30px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.container form {
-  width: 670px;
-  height: 400px;
+.container-contact form {
+  width: min(90%, 670px);
+  height: auto;
+  min-height: 400px;
   display: flex;
   justify-content: center;
+  align-items: center;
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
   border-radius: 15px;
-  background-color: rgba(255, 2550, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   flex-wrap: wrap;
+  padding: clamp(15px, 4vw, 30px);
+  gap: 20px;
 }
-.container form h1 {
+
+.container-contact form h1 {
   color: #fff;
   font-weight: 500;
-  margin-top: 20px;
-  width: 500px;
+  margin: 0;
+  width: 100%;
   text-align: center;
+  font-size: clamp(24px, 5vw, 32px);
 }
 
-.container form input {
-  width: 290px;
+.container-contact .input-group {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.container-contact form input {
+  flex: 1;
+  min-width: 250px;
   height: 40px;
-  padding-left: 10px;
+  padding: 0 10px;
   outline: none;
   border: none;
-  font-size: 15px;
-  margin-bottom: 10px;
+  font-size: clamp(14px, 2vw, 16px);
   background: none;
   border-bottom: 2px solid #fff;
+  color: #fff;
+  transition: border-color 0.3s ease;
 }
 
-.container form input::placeholder {
+.container-contact form input:focus {
+  border-color: #4a9eff;
+}
+
+.container-contact form input::placeholder {
   color: #ddd;
 }
 
-.container form #lastName,
-.container form #mobileP {
-  margin-left: 20px;
-}
-
-.container form h4 {
+.container-contact form h4 {
   color: #fff;
   font-weight: 300;
-  width: 600px;
-  margin-top: 20px;
+  width: 100%;
+  margin: 0;
+  font-size: clamp(16px, 2.5vw, 18px);
 }
 
-.container form textarea {
+.container-contact form textarea {
   background: none;
   border: none;
   border-bottom: 2px solid #fff;
   color: #fff;
   font-weight: 200;
-  font-size: 15px;
+  font-size: clamp(14px, 2vw, 16px);
   padding: 10px;
   outline: none;
-  min-width: 600px;
-  max-width: 600px;
+  width: 100%;
   min-height: 80px;
-  max-height: 80px;
+  max-height: 150px;
+  transition: border-color 0.3s ease;
+  resize: vertical;
 }
 
-textarea::-webkit-scrollbar{
-    width: 1em;
+.container-contact form textarea:focus {
+  border-color: #4a9eff;
 }
 
-textarea::-webkit-scrollbar-thumb{
-    background-color: rgba(104, 104, 104, 0.71);
+textarea::-webkit-scrollbar {
+  width: 8px;
 }
 
-.container form button{
-    border: none;
-    background: #fff;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-weight: 600;
-    font-size: 20px;
-    color:#333 ;
-    width: 100px;
-    padding: 0;
-    margin-right: 500px;
-    margin-bottom: 30px;
-    transition: 0.3s;
+textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(104, 104, 104, 0.71);
+  border-radius: 4px;
 }
 
-.container form button:hover{
-    opacity: 0.7;
+textarea::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.container-contact form .button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.container-contact form button {
+  border: none;
+  background: #fff;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: #333;
+  width: clamp(120px, 30%, 200px);
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.container-contact form button:hover {
+  background: #4a9eff;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Responsive Breakpoints */
+@media screen and (min-width: 1200px) {
+  .container-contact form {
+    max-width: 800px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container-contact form input {
+    min-width: 100%;
+  }
+  
+  .container-contact .input-group {
+    gap: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container-contact form {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .container-contact form button {
+    width: 100%;
+  }
+}
+
+@media (hover: none) {
+  .container-contact form button:hover {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .container-contact form {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
 }

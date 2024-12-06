@@ -1,15 +1,23 @@
-export default function newContact() {
+import "./newContact.css";
+
+export default function NewContact() {
   return (
-    <div className="container">
+    <div className="container-contact">
       <form>
         <h1>Contact Us</h1>
-        <input type="text" id="firstName" placeholder="first name" required />
-        <input type="text" id="lasstName" placeholder="last name" required />
-        <input type="text" id="email" placeholder="email" required />
-        <input type="text" id="phone" placeholder="phone" required />
+        <div className="input-group">
+          <input type="text" id="firstName" placeholder="First Name" required />
+          <input type="text" id="lastName" placeholder="Last Name" required />
+        </div>
+        <div className="input-group">
+          <input type="email" id="email" placeholder="Email" required />
+          <input type="tel" id="phone" placeholder="Phone" required />
+        </div>
         <h4>Type your message here...</h4>
         <textarea required></textarea>
-        <button></button>
+        <div className="button-container">
+          <button type="submit">Send</button>
+        </div>
       </form>
     </div>
   );
