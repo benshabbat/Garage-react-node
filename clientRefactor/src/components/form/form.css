@@ -119,6 +119,83 @@
   transform: translateY(-2px);
 }
 
+
+
+.toggle-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.toggle-container input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: rgba(241, 251, 252, 0.8);
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.toggle-switch::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+}
+
+.toggle-container input[type="checkbox"]:checked + .toggle-label .toggle-switch {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.toggle-container input[type="checkbox"]:checked + .toggle-label .toggle-switch::after {
+  transform: translateX(24px);
+}
+
+.toggle-container input[type="checkbox"]:focus + .toggle-label .toggle-switch {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Hover effect */
+.toggle-container:hover .toggle-switch {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Active state */
+.toggle-container input[type="checkbox"]:active + .toggle-label .toggle-switch::after {
+  width: 23px;
+}
+
+
+
+
 @media (max-width: 480px) {
   .form {
     min-width: unset;
@@ -126,6 +203,19 @@
     padding: 1.5rem;
   }
 
+  .toggle-switch {
+    width: 44px;
+    height: 24px;
+  }
+
+  .toggle-switch::after {
+    width: 18px;
+    height: 18px;
+  }
+
+  .toggle-container input[type="checkbox"]:checked + .toggle-label .toggle-switch::after {
+    transform: translateX(20px);
+  }
   .form-label input,
   .form-label textarea,
   .form-label select {

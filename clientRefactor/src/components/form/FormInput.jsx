@@ -1,5 +1,7 @@
 import { useState, useRef } from "react";
 import { valid, inputType } from "../../validation/valid";
+import FormToggle from "./FormToggle";
+
 
 export default function FormInput({ input, handleChange, isFocus, index }) {
   const [isBlur, setIsBlur] = useState(false);
@@ -11,6 +13,9 @@ export default function FormInput({ input, handleChange, isFocus, index }) {
       ? input.isError
       : !valid(inputRef?.current?.value, input.name));
 
+  if (input.type === "checkbox") {
+    return <FormToggle input={input} handleChange={handleChange} />;
+  }
   return (
     <label className="form-label">
       {!input.hidden && <span>{input.name}</span>}
