@@ -1,7 +1,6 @@
 import "./form.css"
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
-// TODO:USECONTEXT FOR FORM MUST
 
 const Form = ({
   title,
