@@ -3,7 +3,7 @@ import { Form, OpenModal } from "../index";
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
 const EditStatusService = () => {
   const { useEditService, modals,options } = useServicesAdminContext();
-  const { onSubmit, setFormData } = useEditService(modals.editStatusService.handel);
+  const { onSubmit, setFormData } = useEditService(modals.editStatusService.handle);
 
   return (
     <OpenModal
@@ -14,7 +14,7 @@ const EditStatusService = () => {
           sec_title="Edit Status"
           options={options}
           nameSelect="status"
-          handelClick={modals.editStatusService.handel}
+          handleClick={modals.editStatusService.handle}
           onSubmit={onSubmit}
         />
       }

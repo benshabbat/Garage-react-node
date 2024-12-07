@@ -3,7 +3,7 @@ import { createReqService,createUser } from "../../utils";
 import { validPhone, validPass, validEmail } from "../../validation/valid";
 import { useSelector } from "react-redux";
 
-export function useRegister(users,handelClick){
+export function useRegister(users,handleClick){
   const [formData, setFormData] = useState();
   const [isValidUser, setIsValidUser] = useState(false);
 
@@ -14,7 +14,7 @@ export function useRegister(users,handelClick){
     );
     if (isValidUserName(formData,isValidUser)) {
       await createUser(formData);
-      handelClick();
+      handleClick();
     }
   };
   return {setFormData,onSubmit,isValidUser}
@@ -30,7 +30,7 @@ export const isValidUserName = (formData, isValidUser) => {
 };
 
 
-export function useReqService(handelClick, car) {
+export function useReqService(handleClick, car) {
   const { user } = useSelector((state) => state.user);
   const [formData, setFormData] = useState();
   const onSubmit = async (e) => {
@@ -44,7 +44,7 @@ export function useReqService(handelClick, car) {
     if (formData?.title) {
       console.log(formData) 
       await createReqService(formData);
-      handelClick();
+      handleClick();
     }
   };
   return { setFormData,onSubmit};

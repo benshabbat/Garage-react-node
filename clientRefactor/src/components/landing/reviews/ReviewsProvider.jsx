@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ReviewsContext } from "./ReviewsContext";
-import { getReviews } from "../../../utils";
+import { getReviews, createReview } from "../../../utils";
 
 import useOpenModal from "../../../hooks/useOpenModal";
 import useCardsDisplay from "./swiper/hooks/useCardsDisplay";
@@ -11,10 +11,10 @@ export default function ReviewsProvider({ children }) {
 
   const [allReviews, setAllReviews] = useState([]);
   const totalCards = allReviews.length;
-  
+
   const numCardsPreview = useCardsDisplay();
   const { currentIndex, nextCard, prevCard, indexPagination } =
-  useCardsNavigation(numCardsPreview, totalCards);
+    useCardsNavigation(numCardsPreview, totalCards);
   const numberOfPages = Math.ceil(totalCards / numCardsPreview);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function ReviewsProvider({ children }) {
       setAllReviews(data);
     };
     fetchReviews();
-  }, []);
+  }, [isOpenAddReview]);
 
   // Get currently visible cards based on index and number of cards to show
   const getVisibleCards = (children) => {
@@ -35,7 +35,36 @@ export default function ReviewsProvider({ children }) {
     return children.slice(startIndex, endIndex);
   };
 
+  const useAddReview = () => {
+    const [stars, setStars] = useState(5);
+    const [formData, setFormData] = useState();
+    const nameRef = useRef();
+    const descRef = useRef();
+    const addReview = (e) => {
+      e.preventDefault();
+      setFormData({
+        name: nameRef.current.value,
+        description: descRef.current.value,
+        stars,
+      });
+      handleAddReview();
+    };
+
+    useEffect(() => {
+      if (formData) {
+        const newReview = async () => {
+          await createReview(formData);
+        };
+        newReview();
+      }
+      setFormData();
+    }, [formData]);
+
+    return { addReview, setStars, nameRef, descRef };
+  };
+
   const value = {
+    useAddReview,
     handleAddReview,
     isOpenAddReview,
     indexPagination,

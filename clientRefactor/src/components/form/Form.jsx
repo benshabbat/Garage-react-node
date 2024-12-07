@@ -6,7 +6,7 @@ const Form = ({
   title,
   inputs = [],
   onSubmit,
-  handelClick = null,
+  handleClick = null,
   setData,
   options,
   nameSelect,
@@ -22,10 +22,10 @@ const Form = ({
 
   return (
     <form className="form" onSubmit={onSubmit}>
-      {handelClick && (
+      {handleClick && (
         <button 
           type="button" 
-          onClick={handelClick} 
+          onClick={handleClick} 
           className="form-close"
           aria-label="Close form"
         >

@@ -33,7 +33,7 @@ const EditUser = () => {
               value: formData?.password,
             },
           ]}
-          handelClick={modals.editUser.handel}
+          handleClick={modals.editUser.handle}
           onSubmit={onSubmitEditUser}
         />
       }

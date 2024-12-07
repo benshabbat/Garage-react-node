@@ -21,7 +21,7 @@ const Login = () => {
               type: "password",
             },
           ]}
-          handelClick={handleLogin}
+          handleClick={handleLogin}
           onSubmit={onSubmit}
         />
       }

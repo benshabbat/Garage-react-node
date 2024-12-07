@@ -20,7 +20,7 @@ const EditCar = () => {
               min: selectedCar?.km,
             },
           ]}
-          handelClick={modals.editCar.handel}
+          handleClick={modals.editCar.handle}
           onSubmit={onSubmit}
         />
       }

@@ -3,7 +3,7 @@ import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminC
 const EditService = () => {
   const { useEditService, modals, options } = useServicesAdminContext();
   const { onSubmit, formData, setFormData } = useEditService(
-    modals.editService.handel
+    modals.editService.handle
   );
 
   return (
@@ -21,7 +21,7 @@ const EditService = () => {
           ]}
           options={options}
           nameSelect="status"
-          handelClick={modals.editService.handel}
+          handleClick={modals.editService.handle}
           onSubmit={onSubmit}
         />
       }

@@ -4,7 +4,7 @@ import { useRegister } from "./utilsCreate";
 
 const Register = () => {
   const {users,modals} = useUsersContext()
-  const {setFormData,onSubmit,isValidUser} =useRegister(users,modals.createUser.handel)
+  const {setFormData,onSubmit,isValidUser} =useRegister(users,modals.createUser.handle)
   return (
     <OpenModal
       comp={
@@ -31,7 +31,7 @@ const Register = () => {
               min: 8,
             },
           ]}
-          handelClick={modals.createUser.handel}
+          handleClick={modals.createUser.handle}
           onSubmit={onSubmit}
         />
       }

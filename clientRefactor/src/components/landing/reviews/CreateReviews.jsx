@@ -1,39 +1,23 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { OpenModal } from "../../index";
-import { createReview } from "../../../utils";
+import { useReviewsContext } from "./ReviewsContext";
 import StarRating from "./starRating/StarRating";
-const CreateReviews = ({ handelClick, isOpen }) => {
-  const nameRef = useRef();
-  const descRef = useRef();
+
+
+const CreateReviews = () => {
+  const { handleAddReview, isOpenAddReview, useAddReview } =
+    useReviewsContext();
+  const { addReview, setStars, nameRef, descRef } = useAddReview();
   const numRef = useRef();
   const maxLength = 80;
-  const [stars, setStars] = useState(5);
-  const [formData, setFormData] = useState();
-  const addReview = (e) => {
-    e.preventDefault();
-    setFormData({
-      name: nameRef.current.value,
-      description: descRef.current.value,
-      stars,
-    });
-    handelClick();
-  };
-
-  useEffect(() => {
-    if (formData) {
-      const newReview = async () => {
-        await createReview(formData);
-      };
-      newReview();
-    }
-    setFormData();
-  }, [formData]);
 
   return (
     <OpenModal
       comp={
         <form className="form">
-          <button onClick={handelClick} className="form-close" >X</button>
+          <button onClick={handleAddReview} className="form-close">
+            X
+          </button>
           <h1>Garage review</h1>
           <label className="form-label">
             <StarRating onRatingChange={(value) => setStars(value)} />
@@ -55,9 +39,9 @@ const CreateReviews = ({ handelClick, isOpen }) => {
               maxLength={maxLength}
               type="text"
               title="Description"
-              row={8}
+              rows={8}
               placeholder={`Write your review (max ${maxLength} chart)`}
-              onChange={(e) =>
+              onChange={() =>
                 (numRef.current.value =
                   maxLength - descRef.current.value.length)
               }
@@ -69,7 +53,7 @@ const CreateReviews = ({ handelClick, isOpen }) => {
           </button>
         </form>
       }
-      isOpen={isOpen}
+      isOpen={isOpenAddReview}
     />
   );
 };

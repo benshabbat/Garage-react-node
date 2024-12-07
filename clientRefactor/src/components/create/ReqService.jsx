@@ -2,9 +2,10 @@ import { OpenModal, Form } from "..";
 import { useReqService } from "./utilsCreate";
 
 //TODO: to fix the bug of double click for send req the first click is an undefined
-const ReqService = ({ handelClick, car, isOpen }) => {
+//TODO: Incorporate the related context
+const ReqService = ({ handleClick, car, isOpen }) => {
   
-  const { setFormData,onSubmit} =useReqService(handelClick, car) 
+  const { setFormData,onSubmit} =useReqService(handleClick, car) 
 
   return (
     <OpenModal
@@ -16,7 +17,7 @@ const ReqService = ({ handelClick, car, isOpen }) => {
             { name: "title", value: car?.numberPlate.toString() },
             { name: "description" },
           ]}
-          handelClick={handelClick}
+          handleClick={handleClick}
           onSubmit={onSubmit}
         />
       }
