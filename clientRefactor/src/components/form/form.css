@@ -121,15 +121,6 @@
 
 
 
-.toggle-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-
 .toggle-container input[type="checkbox"] {
   opacity: 0;
   width: 0;
