@@ -2,10 +2,9 @@ import { useState } from "react";
 
 const useOpenModal = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const handelOpenModal = () => {
+  const handleOpenModal = () => {
     setIsOpenModal(!isOpenModal);
 };
-  // return { handelOpenModal, isOpenModal };
-  return [handelOpenModal, isOpenModal];
+  return [handleOpenModal, isOpenModal];
 };
 export default useOpenModal;

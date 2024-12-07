@@ -1,6 +1,8 @@
 import "./manage.css";
 import { CreateCar, OpenModal, EditUser } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
+
+//TODO:TO CREATE DELETE USER COMPONENT
 const ManageUser = () => {
   const { modals, handleUser, selectedUser } = useUsersContext();
   return (
@@ -8,7 +10,7 @@ const ManageUser = () => {
       comp={
         <>
           <form className="form">
-            <button onClick={modals.manageUser.handel} className="form-close">
+            <button onClick={modals.manageUser.handle} className="form-close">
               X
             </button>
             <h1 className="header">Manage Admin</h1>

@@ -30,7 +30,7 @@ const Account = () => {
       </div>
       <ReqService
         car={car}
-        handelClick={handleReqService}
+        handleClick={handleReqService}
         isOpen={isOpenReqService}
       />
     </>

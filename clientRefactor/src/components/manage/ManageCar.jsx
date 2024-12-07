@@ -3,6 +3,8 @@ import CreateService from "../create/CreateService";
 import { OpenModal, EditCar } from "../index";
 import { useCarsContext } from "../../pages/cars/CarsContext";
 const ManageCar = () => {
+
+  //TODO: DELETE CAR COMPONENT
   const { handleCarAction, selectedCar, modals } = useCarsContext();
 
   return (
@@ -10,7 +12,7 @@ const ManageCar = () => {
       comp={
         <>
           <form className="form">
-            <button onClick={modals.manageCar.handel} className="form-close">
+            <button onClick={modals.manageCar.handle} className="form-close">
               X
             </button>
             <h1 className="header">Manage Admin</h1>

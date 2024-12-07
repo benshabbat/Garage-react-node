@@ -2,6 +2,9 @@ import "./manage.css";
 import { OpenModal } from "../index";
 import EditService from "../edit/EditService";
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
+
+
+//TODO:TO CREATE DELETE SERVICE COMPONENT
 const ManageService = () => {
   const { selectedService, modals, handleServiceIdAction } =
     useServicesAdminContext();
@@ -12,7 +15,7 @@ const ManageService = () => {
         <>
           <form className="form">
             <button
-              onClick={modals.manageService.handel}
+              onClick={modals.manageService.handle}
               className="form-close"
             >
               X
