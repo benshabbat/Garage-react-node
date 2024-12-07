@@ -4,7 +4,7 @@ import { OpenModal, EditCar } from "../index";
 import { useCarsContext } from "../../pages/cars/CarsContext";
 const ManageCar = () => {
 
-  //TODO: DELETE CAR COMPONENT
+  //TODO: TO CREATE DELETE CAR COMPONENT
   const { handleCarAction, selectedCar, modals } = useCarsContext();
 
   return (

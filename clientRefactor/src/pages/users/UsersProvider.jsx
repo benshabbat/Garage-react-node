@@ -92,10 +92,10 @@ export default function UsersProvider({ children }) {
     onSubmitCreateCar,
     useEditCar,
     modals: {
-      manageUser: { isOpen: isOpenManageUser, handel: handleManageUser },
-      createUser: { isOpen: isOpenCreateUser, handel: handleCreateUser },
-      createCar: { isOpen: isOpenModalCreateCar, handel: handleCreateCar },
-      editUser: { isOpen: isOpenModalEditUser, handel: handleEditUser },
+      manageUser: { isOpen: isOpenManageUser, handle: handleManageUser },
+      createUser: { isOpen: isOpenCreateUser, handle: handleCreateUser },
+      createCar: { isOpen: isOpenModalCreateCar, handle: handleCreateCar },
+      editUser: { isOpen: isOpenModalEditUser, handle: handleEditUser },
     },
   };
   return (

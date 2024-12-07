@@ -9,7 +9,7 @@ export function useAccount() {
   const [handleReqService, isOpenReqService] = useOpenModal();
   const navigate = useNavigate();
 
-  const handelCar = (e) => {
+  const handleCar = (e) => {
     const { value, name } = e.target;
     console.log(e.target.value);
     if (name === "services") {
@@ -57,12 +57,12 @@ export function useAccount() {
         <td>{car.numberPlate}</td>
         <td>{car.km}</td>
         <td>
-          <button value={car._id} name={"services"} onClick={handelCar}>
+          <button value={car._id} name={"services"} onClick={handleCar}>
             services
           </button>
         </td>
         <td>
-          <button value={car._id} onClick={handelCar}>
+          <button value={car._id} onClick={handleCar}>
             req services
           </button>
         </td>

@@ -12,7 +12,7 @@ export default function ServiceAdminProvider({ children }) {
   const [selectedService, setSelctedService] = useState();
   const [filteredServices, setFilteredServices] = useState();
 
-  const [handelManageService, isOpenManageService] = useOpenModal();
+  const [handleManageService, isOpenManageService] = useOpenModal();
   const [handleEditService, isOpenEditService] = useOpenModal();
   const [handleStatus, isOpenStatus] = useOpenModal();
   const [handlePaid, isOpenPaid] = useOpenModal();
@@ -38,7 +38,7 @@ export default function ServiceAdminProvider({ children }) {
 
     switch (name) {
       case "manage":
-        handelManageService();
+        handleManageService();
         break;
       case "editStatus":
         handleStatus();
@@ -48,13 +48,13 @@ export default function ServiceAdminProvider({ children }) {
         break;
       case "deleteService":
         await deleteService(selectedService?._id);
-        handelManageService();
+        handleManageService();
         break;
       case "editService":
         handleEditService();
         break;
       default:
-        handelManageService();
+        handleManageService();
     }
   };
 
@@ -106,16 +106,16 @@ export default function ServiceAdminProvider({ children }) {
     modals: {
       manageService: {
         isOpen: isOpenManageService,
-        handel: handelManageService,
+        handle: handleManageService,
       },
-      editStatusService: { isOpen: isOpenStatus, handel: handleStatus },
+      editStatusService: { isOpen: isOpenStatus, handle: handleStatus },
       editPaid: {
         isOpen: isOpenPaid,
-        handel: handlePaid,
+        handle: handlePaid,
       },
       editService: {
         isOpen: isOpenEditService,
-        handel: handleEditService,
+        handle: handleEditService,
       },
     },
     useEditService,

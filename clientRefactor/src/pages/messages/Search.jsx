@@ -12,7 +12,7 @@ export default function Search() {
         onChange={handleSearch}
       />
     </div>
-    <button onClick={modals.createMsg.handel} className="create-button">
+    <button onClick={modals.createMsg.handle} className="create-button">
       New Message
     </button>
   </section>

@@ -16,7 +16,7 @@ const CreateMessage = () => {
           ]}
           options={user?.isAdmin ? users : null}
           nameSelect="to"
-          handelClick={modals.createMsg.handel}
+          handleClick={modals.createMsg.handle}
           onSubmit={onSubmit}
         />
       }
