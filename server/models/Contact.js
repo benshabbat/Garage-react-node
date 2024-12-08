@@ -3,23 +3,21 @@ const {model, Schema } = mongoose;
 
 const ContactSchema = new Schema(
   {
-    from: {
+    firstName: {
       type: String,
       required: true,
     },
-    subject: {
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
       type: String,
       required: true,
     },
     message: {
       type: String,
       required: true,
-    },  
-    // read or not read  
-    read: {
-      type: Boolean,
-      default:false,
-      // required: true,
     }
   },
   { timestamps: true }
