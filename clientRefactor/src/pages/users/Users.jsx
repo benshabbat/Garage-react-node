@@ -5,7 +5,7 @@ import UserModals from "./UserModals";
 const Users = () => {
   return (
     <UsersProvider>
-        <UsersTable />
+      <UsersTable />
       <UserModals />
     </UsersProvider>
   );
