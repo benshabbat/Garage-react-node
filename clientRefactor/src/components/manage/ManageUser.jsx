@@ -2,6 +2,7 @@ import "./manage.css";
 import { CreateCar, OpenModal, EditUser } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
 import ButtonManage from "./ButtonManage";
+import FormManage from "./FormManage";
 
 //TODO:TO CREATE DELETE USER COMPONENT
 const ManageUser = () => {
@@ -10,43 +11,29 @@ const ManageUser = () => {
     <OpenModal
       comp={
         <>
-          <form className="form">
-            <button onClick={modals.manageUser.handle} className="form-close">
-              X
-            </button>
-            <h1 className="header">Manage Admin</h1>
-            <label className="form-label">
-              <button
-                name="createCar"
-                className="create"
-                onClick={handleUser}
-                value={selectedUser?._id}
-              >
-                Create Car
-              </button>
-            </label>
-            <label className="form-label">
-              <button
-                name="editUser"
-                className="edit"
-                onClick={handleUser}
-                value={selectedUser?._id}
-              >
-                Edit User
-              </button>
-            </label>
-            <ButtonManage name="deleteUser"type={"delete"} handle={handleUser}  value={selectedUser?._id} content={"Delete User"}/>
-            {/* <label className="form-label">
-              <button
-                name="deleteUser"
-                className="delete"
-                onClick={handleUser}
-                value={selectedUser?._id}
-              >
-                Delete User
-              </button>
-            </label> */}
-          </form>
+          <FormManage handle={modals.manageUser.handle}>
+            <ButtonManage
+              name="createCar"
+              type={"create"}
+              handle={handleUser}
+              value={selectedUser?._id}
+              content={"Create Car"}
+            />
+            <ButtonManage
+              name="editUser"
+              type={"edit"}
+              handle={handleUser}
+              value={selectedUser?._id}
+              content={"Edit User"}
+            />
+            <ButtonManage
+              name="deleteUser"
+              type={"delete"}
+              handle={handleUser}
+              value={selectedUser?._id}
+              content={"Delete User"}
+            />
+          </FormManage>
           <CreateCar />
           <EditUser />
         </>
