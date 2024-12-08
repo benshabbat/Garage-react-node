@@ -2,6 +2,13 @@ import "../components/table/table.css";
 import { useState, useEffect } from "react";
 import { getContacts, getMomentFromUpdatedAt } from "../utils";
 
+
+
+//TODO:CONTEXT
+//TODO:FIX TYPES
+//TODO:FIX DATA
+//TODO:FIX SERVER REQUESTS
+//TODO:FIX FORM
 export default function MessagesOfContact() {
   const [contacts, setContacts] = useState();
   const [filterContacts, setFilterContacts] = useState();

@@ -1,5 +1,7 @@
 import "./newContact.css";
 
+
+//TODO:Logic
 export default function NewContact() {
   return (
     <div className="container-contact">
