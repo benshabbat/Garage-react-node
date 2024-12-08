@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AccountContext } from "./AccountContext"
-import useOpenModal from "../../hooks/useOpenModal";
 import { createReqService } from "../../utils";
+import useOpenModal from "../../hooks/useOpenModal";
 
 export default function AccountProvider({children}) {
 
