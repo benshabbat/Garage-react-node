@@ -11,7 +11,15 @@
   display: flex;
   flex-direction: column;
 }
-
+.table-container .create-button {
+  background: #4299e1;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 120px;
+}
 .table__header {
   padding: 16px 20px;
   border-bottom: 1px solid #eee;

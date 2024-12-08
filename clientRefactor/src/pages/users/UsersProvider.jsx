@@ -89,7 +89,6 @@ export default function UsersProvider({ children }) {
     );
   };
   function useRegister(){
-    // const [formData, setFormData] = useState();
     const [isValidUser, setIsValidUser] = useState(false);
   
     const onSubmit = async (e) => {
