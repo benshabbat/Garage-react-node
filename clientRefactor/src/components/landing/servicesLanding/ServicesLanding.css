@@ -2,13 +2,16 @@
   width: 100%;
   padding: 2rem;
   border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+
 }
 
 .section-title {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #1a365d;
+  color: #94aed3;
 }
 
 .servicesLanding-grid {

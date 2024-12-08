@@ -7,12 +7,15 @@
   --review-shadow: rgba(0, 0, 0, 0.1);
   --review-background: #ffffff;
 }
-
+#reviews{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
 .reviews-header {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--review-text);
+  color: #94aed3;
   margin: 40px 0;
   text-transform: capitalize;
   letter-spacing: 0.5px;
@@ -51,6 +54,7 @@
   align-items: center;
   margin-bottom: 16px;
   flex-shrink: 0;
+ 
 }
 
 .review-avatar {
