@@ -1,6 +1,6 @@
 import "../components/table/table.css";
 import { useState, useEffect } from "react";
-import { getContacts, getMomentFromUpdatedAt } from "../utils";
+import { getContacts, getMomentFromUpdatedAt } from "../../utils";
 
 
 
@@ -9,6 +9,7 @@ import { getContacts, getMomentFromUpdatedAt } from "../utils";
 //TODO:FIX DATA
 //TODO:FIX SERVER REQUESTS
 //TODO:FIX FORM
+//TODO:DELETE THE DATA WORNGS
 export default function MessagesOfContact() {
   const [contacts, setContacts] = useState();
   const [filterContacts, setFilterContacts] = useState();
@@ -25,7 +26,7 @@ export default function MessagesOfContact() {
     const { value } = e.target;
     setFilterContacts(
       contacts?.filter(item => 
-        [item.from, item.subject, item.message]
+        [item.firstName, item.lastName, item.email,item.phone,item.message]
           .some(field => field?.toLowerCase().includes(value.toLowerCase()))
       )
     );
