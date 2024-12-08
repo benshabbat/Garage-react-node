@@ -1,6 +1,7 @@
 import "./manage.css";
 import { CreateCar, OpenModal, EditUser } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
+import ButtonManage from "./ButtonManage";
 
 //TODO:TO CREATE DELETE USER COMPONENT
 const ManageUser = () => {
@@ -34,7 +35,8 @@ const ManageUser = () => {
                 Edit User
               </button>
             </label>
-            <label className="form-label">
+            <ButtonManage name="deleteUser"type={"delete"} handle={handleUser}  value={selectedUser?._id} content={"Delete User"}/>
+            {/* <label className="form-label">
               <button
                 name="deleteUser"
                 className="delete"
@@ -43,7 +45,7 @@ const ManageUser = () => {
               >
                 Delete User
               </button>
-            </label>
+            </label> */}
           </form>
           <CreateCar />
           <EditUser />

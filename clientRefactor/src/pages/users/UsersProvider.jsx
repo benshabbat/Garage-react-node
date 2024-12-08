@@ -39,6 +39,7 @@ export default function UsersProvider({ children }) {
         break;
       case "deleteUser":
         await deleteUser(value);
+        handleManageUser();
         break;
       default:
         handleManageUser();
