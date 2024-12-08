@@ -4,6 +4,7 @@ import { useCarsContext } from "./CarsContext";
 
 export default function CarsTable() {
   const { displayCars, handleCarAction, handleSearch } = useCarsContext();
+
   const trTh = (
     <tr>
       <th>Actions</th>
@@ -14,6 +15,7 @@ export default function CarsTable() {
       <th>Brand</th>
     </tr>
   );
+
   const trTd = displayCars?.map((car) => (
     <tr key={car?._id}>
       <td data-label="Actions">
