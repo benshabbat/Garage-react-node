@@ -1,7 +1,7 @@
 import { Form, OpenModal } from "..";
 import { useUsersContext } from "../../pages/users/UsersContext";
 import { useRegister } from "./utilsCreate";
-
+//to fix useRegister
 const Register = () => {
   const {users,modals} = useUsersContext()
   const {setFormData,onSubmit,isValidUser} =useRegister(users,modals.createUser.handle)

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AccountContext } from "./AccountContext"
 import useOpenModal from "../../hooks/useOpenModal";
-
+import { createReqService } from "../../utils";
 
 export default function AccountProvider({children}) {
 
@@ -41,9 +41,22 @@ export default function AccountProvider({children}) {
         )
       );
     };
-
+    function useReqService() {
+        const [formData, setFormData] = useState();
+        const onSubmit = async (e) => {
+          e.preventDefault();
+          setFormData((prevState) => ({
+            ...prevState,
+            title: selectedCar?.numberPlate.toString(),
+            from: user?._id,
+          }));
+          await createReqService(formData);
+          handleReqService();
+        };
+        return { setFormData,onSubmit};
+      }
 
     
-const value={handleSearch,handleCar,isOpenReqService,handleReqService,displayCars}
+const value={handleSearch,handleCar,isOpenReqService,handleReqService,displayCars,selectedCar,useReqService}
 return <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
 }

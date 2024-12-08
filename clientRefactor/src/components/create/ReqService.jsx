@@ -1,11 +1,10 @@
 import { OpenModal, Form } from "..";
-import { useReqService } from "./utilsCreate";
+import { useAccountContext } from "../../pages/account/AccountContext";
 
-//TODO: to fix the bug of double click for send req the first click is an undefined
-//TODO: Incorporate the related context
-const ReqService = ({ handleClick, car, isOpen }) => {
-  
-  const { setFormData,onSubmit} =useReqService(handleClick, car) 
+const ReqService = () => {
+  const { selectedCar, isOpenReqService, handleReqService, useReqService } =
+    useAccountContext();
+  const { setFormData, onSubmit } = useReqService();
 
   return (
     <OpenModal
@@ -14,14 +13,14 @@ const ReqService = ({ handleClick, car, isOpen }) => {
           setData={setFormData}
           title="Request Service"
           inputs={[
-            { name: "title", value: car?.numberPlate.toString() },
+            { name: "title", value: selectedCar?.numberPlate.toString() },
             { name: "description" },
           ]}
-          handleClick={handleClick}
+          handleClick={handleReqService}
           onSubmit={onSubmit}
         />
       }
-      isOpen={isOpen}
+      isOpen={isOpenReqService}
     />
   );
 };
