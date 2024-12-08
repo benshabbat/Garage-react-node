@@ -3,8 +3,8 @@ import { getUsers } from "../../features/admin/adminSlice";
 import { UsersContext } from "./UsersContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, createCar, updateUser } from "../../utils";
-import { validCar, validPhone, validPass } from "../../validation/valid";
+import { deleteUser, createCar, updateUser,createUser } from "../../utils";
+import { validCar, validPhone, validPass,validEmail } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
 
 export default function UsersProvider({ children }) {
@@ -79,7 +79,34 @@ export default function UsersProvider({ children }) {
     return {formData,setFormData,onSubmitEditUser};
   };
 
+
+  const isValidUserName = (formData, isValidUser) => {
+    return (
+      validPhone(formData?.phone) &&
+      !isValidUser &&
+      validPass(formData?.password) &&
+      validEmail(formData?.email)
+    );
+  };
+  function useRegister(){
+    // const [formData, setFormData] = useState();
+    const [isValidUser, setIsValidUser] = useState(false);
+  
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      setIsValidUser(
+        users.map((user) => user.username).includes(formData?.username)
+      );
+      if (isValidUserName(formData,isValidUser)) {
+        await createUser(formData);
+        handleCreateUser();
+      }
+    };
+    return {setFormData,onSubmit,isValidUser}
+  }
+
   const value = {
+    useRegister,
     displayUsers,
     users,
     selectedUser,
