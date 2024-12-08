@@ -19,7 +19,7 @@ export default function CarsTable() {
   const trTd = displayCars?.map((car) => (
     <tr key={car?._id}>
       <td data-label="Actions">
-        <button name="deleteCar" value={car?._id} onClick={handleCarAction}>
+        <button name="deleteCar"  value={car?._id} onClick={handleCarAction} >
           Delete
         </button>
       </td>

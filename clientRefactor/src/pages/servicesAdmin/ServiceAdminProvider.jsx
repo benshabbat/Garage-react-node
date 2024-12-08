@@ -78,11 +78,12 @@ export default function ServiceAdminProvider({ children }) {
   //the problem just into edit paid
 
   //the solution working well done with useeffect.
-  const useEditService = (handleClick) => {
 
+
+  const useEditService = (handleClick) => {
     useEffect(() => {
       setFormData(selectedService);
-    }, [selectedService]);
+    }, [ isOpenStatus, isOpenEditService, isOpenPaid]);
 
     const onSubmit = async (e) => {
       e.preventDefault();

@@ -81,7 +81,8 @@
   background: #4299e1;
 }
 
-button[name="deleteCar"] { background: #f56565; }
+.table__body button[name="deleteCar"] { background: #f56565; }
+.table__body button[name="deleteMessage"] { background: #f56565; }
 button[name="editCar"] {background: rgba(59, 130, 246, 0.95); }
 button[name="createService"] { background: rgba(34, 197, 94, 0.95);  }
 
