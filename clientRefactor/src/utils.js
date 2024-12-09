@@ -67,6 +67,9 @@ const getReviews = () => {
 const getContacts = () => {
   return axios.get(`${API_URL_CONTACTS}`);
 };
+const deleteContact = (id) => {
+  axios.delete(`${API_URL_CONTACTS}/${id}`);
+};
 const createContact = (obj) => {
   axios.post(`${API_URL_CONTACTS}`, obj);
 };
@@ -93,6 +96,7 @@ export {
   deleteMessage,
   getContacts,
   createContact,
+  deleteContact
 };
 
 export function getMomentFromUpdatedAt(updatedAt) {

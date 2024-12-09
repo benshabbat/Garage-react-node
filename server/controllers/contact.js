@@ -19,7 +19,7 @@ export const getContacts = async (req, res, next) => {
 
 export const deleteContact = async (req, res, next) => {
   try {
-    await messageService.deleteContact(req);
+    await contactService.deleteContact(req);
     res.status(200).json("The Message has been removed");
   } catch (error) {
     next(error);

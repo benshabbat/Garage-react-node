@@ -1,11 +1,14 @@
 import "../../components/table/table.css";
 import { useState, useEffect } from "react";
 import { MsgOfContactContext } from "./MsgOfContactContext";
-import { getContacts } from "../../utils";
+import { getContacts, deleteContact } from "../../utils";
 export default function MsgOfContactProvider({ children }) {
+  
   const [contacts, setContacts] = useState();
   const [filterContacts, setFilterContacts] = useState();
+
   const displayContacts = filterContacts || contacts;
+
   useEffect(() => {
     const getData = async () => {
       const { data } = await getContacts();
@@ -13,6 +16,12 @@ export default function MsgOfContactProvider({ children }) {
     };
     getData();
   }, []);
+  const handleContact = async (e) => {
+    e.preventDefault();
+
+    const { value, name } = e.target;
+    if (name === "deleteContact") await deleteContact(value);
+  };
 
   const handleSearch = (e) => {
     const { value } = e.target;
@@ -28,7 +37,12 @@ export default function MsgOfContactProvider({ children }) {
       )
     );
   };
-  const value = { filterContacts, handleSearch,displayContacts };
+  const value = {
+    filterContacts,
+    handleSearch,
+    displayContacts,
+    handleContact,
+  };
   return (
     <MsgOfContactContext.Provider value={value}>
       {children}
