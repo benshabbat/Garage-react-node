@@ -3,8 +3,13 @@ import { getUsers } from "../../features/admin/adminSlice";
 import { UsersContext } from "./UsersContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, createCar, updateUser,createUser } from "../../utils";
-import { validCar, validPhone, validPass,validEmail } from "../../validation/valid";
+import { deleteUser, createCar, updateUser, createUser } from "../../utils";
+import {
+  validCar,
+  validPhone,
+  validPass,
+  validEmail,
+} from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
 
 export default function UsersProvider({ children }) {
@@ -17,12 +22,19 @@ export default function UsersProvider({ children }) {
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
   const [handleEditUser, isOpenModalEditUser] = useOpenModal();
+  const [handleDeleteUser, isOpenModalDeleteUser] = useOpenModal();
   const displayUsers = filteredUsers || users;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsers());
-  }, [isOpenManageUser, isOpenCreateUser, dispatch]);
+  }, [
+    isOpenModalEditUser,
+    isOpenModalDeleteUser,
+    isOpenManageUser,
+    isOpenCreateUser,
+    dispatch,
+  ]);
 
   const handleUser = async (e) => {
     e.preventDefault();
@@ -38,8 +50,7 @@ export default function UsersProvider({ children }) {
         handleCreateCar();
         break;
       case "deleteUser":
-        await deleteUser(value);
-        handleManageUser();
+        handleDeleteUser();
         break;
       default:
         handleManageUser();
@@ -77,9 +88,8 @@ export default function UsersProvider({ children }) {
         handleEditUser();
       }
     };
-    return {formData,setFormData,onSubmitEditUser};
+    return { formData, setFormData, onSubmitEditUser };
   };
-
 
   const isValidUserName = (formData, isValidUser) => {
     return (
@@ -89,23 +99,30 @@ export default function UsersProvider({ children }) {
       validEmail(formData?.email)
     );
   };
-  function useRegister(){
+  function useRegister() {
     const [isValidUser, setIsValidUser] = useState(false);
-  
+
     const onSubmit = async (e) => {
       e.preventDefault();
       setIsValidUser(
         users.map((user) => user.username).includes(formData?.username)
       );
-      if (isValidUserName(formData,isValidUser)) {
+      if (isValidUserName(formData, isValidUser)) {
         await createUser(formData);
         handleCreateUser();
       }
     };
-    return {setFormData,onSubmit,isValidUser}
+    return { setFormData, onSubmit, isValidUser };
   }
 
+  const useDeleteUser = async (e) => {
+    e.preventDefault();
+    await deleteUser(selectedUser?._id);
+    handleDeleteUser();
+  };
+
   const value = {
+    useDeleteUser,
     useRegister,
     displayUsers,
     users,
@@ -123,6 +140,7 @@ export default function UsersProvider({ children }) {
       createUser: { isOpen: isOpenCreateUser, handle: handleCreateUser },
       createCar: { isOpen: isOpenModalCreateCar, handle: handleCreateCar },
       editUser: { isOpen: isOpenModalEditUser, handle: handleEditUser },
+      deleteUser: { isOpen: isOpenModalDeleteUser, handle: handleDeleteUser },
     },
   };
   return (
