@@ -1,37 +1,35 @@
 import { OpenModal } from "../index";
-import { useCarsContext } from "../../pages/cars/CarsContext";
-const DeleteCar = () => {
-  const { useDeleteCar, modals, selectedCar } = useCarsContext();
+const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
   return (
     <OpenModal
       comp={
         <>
           <form className="form">
-            <button onClick={modals.deleteCar.handle} className="form-close">
+            <button onClick={handle} className="form-close">
               X
             </button>
             <h1 className="header">Delete Car</h1>
-            <h2>{`Are you sure to delete the car? :${selectedCar?.numberPlate}`}</h2>
+            <h2>{`Are you sure to delete? :${deleteData}`}</h2>
             <label className="form-label">
               <button
-                name="deleteCar"
+                name={nameData}
                 className="delete"
-                onClick={useDeleteCar}
+                onClick={handleDelete}
               >
                 Yes
               </button>
             </label>
             <label className="form-label">
-              <button name="noDelete" className="create" onClick={useDeleteCar}>
+              <button name="noDelete" className="create" onClick={handle}>
                 No
               </button>
             </label>
           </form>
         </>
       }
-      isOpen={modals.deleteCar.isOpen}
+      isOpen={isOpen}
     />
   );
 };
 
-export default DeleteCar;
+export default Delete;
