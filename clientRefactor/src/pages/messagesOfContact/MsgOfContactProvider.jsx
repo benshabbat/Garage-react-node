@@ -2,10 +2,11 @@ import "../../components/table/table.css";
 import { useState, useEffect } from "react";
 import { MsgOfContactContext } from "./MsgOfContactContext";
 import { getContacts, deleteContact } from "../../utils";
+import { useNavigate } from "react-router-dom";
 export default function MsgOfContactProvider({ children }) {
-  
   const [contacts, setContacts] = useState();
   const [filterContacts, setFilterContacts] = useState();
+  const navigate = useNavigate();
 
   const displayContacts = filterContacts || contacts;
 
@@ -21,6 +22,8 @@ export default function MsgOfContactProvider({ children }) {
 
     const { value, name } = e.target;
     if (name === "deleteContact") await deleteContact(value);
+    const { data } = await getContacts();
+    setContacts(data);
   };
 
   const handleSearch = (e) => {
