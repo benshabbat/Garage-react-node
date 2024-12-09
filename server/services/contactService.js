@@ -19,10 +19,19 @@ const createContact = async (req) => {
     }
   };
 
+  const deleteContact = async (req) => {
+    try {
+      await Contact.findByIdAndDelete(req.params.id);
+      return "The Message has been removed";
+    } catch (error) {
+      throw Error(error);
+    }
+  };
 
   const contactService = {
     createContact,
     getContacts,
+    deleteContact
    
   };
   

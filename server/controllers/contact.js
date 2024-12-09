@@ -16,3 +16,12 @@ export const getContacts = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteContact = async (req, res, next) => {
+  try {
+    await messageService.deleteContact(req);
+    res.status(200).json("The Message has been removed");
+  } catch (error) {
+    next(error);
+  }
+};

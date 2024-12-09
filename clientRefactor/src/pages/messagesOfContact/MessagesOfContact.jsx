@@ -1,7 +1,6 @@
 import MsgOfContactProvider from "./MsgOfContactProvider";
 import MsgOfContactTable from "./MsgOfContactTable";
 
-//TODO:FIX TYPES
 //TODO:FIX DATA
 //TODO:FIX SERVER REQUESTS
 //TODO:FIX FORM
