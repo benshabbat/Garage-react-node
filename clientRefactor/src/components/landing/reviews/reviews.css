@@ -11,6 +11,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   padding: 20px;
+  border-radius: 10px;
 }
 .reviews-header {
   text-align: center;

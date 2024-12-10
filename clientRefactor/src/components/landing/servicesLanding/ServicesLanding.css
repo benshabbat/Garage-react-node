@@ -1,6 +1,7 @@
 .servicesLanding {
   width: 100%;
-  padding: 2rem;
+  padding: 4em;
+  padding-top: 2em;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
