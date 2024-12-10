@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Responsive body layout */
@@ -40,7 +41,6 @@ body {
   width: 100%;
 }
 
-
 /* Responsive breakpoints */
 @media (max-width: 768px) {
   :root {
@@ -60,7 +60,6 @@ body {
   :root {
     --section-spacing: 1rem;
   }
-
 }
 
 /* Print styles */
@@ -74,7 +73,6 @@ body {
     max-width: 100%;
   }
 }
-
 
 /* EXAMPLE FOR NEW FONT */
 
