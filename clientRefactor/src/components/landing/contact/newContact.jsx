@@ -1,5 +1,4 @@
 import "./newContact.css";
-
 import { useState } from "react";
 import { createContact } from "../../../utils";
 //TODO:Logic
