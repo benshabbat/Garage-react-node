@@ -7,15 +7,12 @@ const NavLanding = () => {
 
   return (
     <>
-      <Link to="#home" onClick={handleOutsideClick}>
+      {/* <Link to="#top" onClick={handleOutsideClick}>
         Home
-      </Link>
-      <a href="#reviews" onClick={handleOutsideClick}>
-        Reviews
-      </a>
-      <a href="#address" onClick={handleOutsideClick}>
+      </Link> */}
+      {/* <a href="#address" onClick={handleOutsideClick}>
         Address
-      </a>
+        </a> */}
       <a href="#about" onClick={handleOutsideClick}>
         About
       </a>
@@ -25,8 +22,11 @@ const NavLanding = () => {
       <a href="#contact" onClick={handleOutsideClick}>
         Contact
       </a>
+      <a href="#reviews" onClick={handleOutsideClick}>
+        Reviews
+      </a>
       <button onClick={handleLogin}>Login</button>
-      <Login/>
+      <Login />
     </>
   );
 };

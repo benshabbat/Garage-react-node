@@ -2,7 +2,7 @@ import "./about.css";
 
 const About = () => {
   return (
-    <div className="about">
+    <div id="about" className="about">
       <h1 className="about-title">About Our Garage</h1>
       <p className="about-content">
         Welcome to our garage! We provide top-notch automotive services to keep
