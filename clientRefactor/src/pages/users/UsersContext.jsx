@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 import { createContextHook } from "../../components/context/useContextGeneric";
 
 export const UsersContext = createContext(null);

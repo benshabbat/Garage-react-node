@@ -6,8 +6,8 @@ import NewContact from "../../components/landing/contact/newContact";
 const PageLanding = () => {
   return (
     <div className="main">
-      {/* <Home />
-      <About /> */}
+      {/* <Home /> */}
+      <About />
       <ServicesLanding />
       {/* <Contact /> */}
       <NewContact/>
