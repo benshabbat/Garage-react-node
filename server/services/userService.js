@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import Car from "../models/Car.js";
+import Message from "../models/Message.js";
 import bcrypt from "bcryptjs";
-
 
 function templatePhone(phone) {
   if (phone.length === 10) {
@@ -24,14 +24,14 @@ const updateUser = async (req) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
   // const user = await User.findById(req.params.id)
-  const {phone}=req.body;
-  const newPhone = templatePhone(phone)
+  const { phone } = req.body;
+  const newPhone = templatePhone(phone);
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
 
       {
-        $set: { ...req.body, phone:newPhone, password: hashedPassword },
+        $set: { ...req.body, phone: newPhone, password: hashedPassword },
       },
       { new: true }
     );
@@ -43,7 +43,9 @@ const updateUser = async (req) => {
 const deleteUser = async (req) => {
   try {
     await User.findByIdAndDelete(req.params.id);
-    await Car.findOneAndDelete({owner:req.params.id});
+    await Car.findOneAndDelete({ owner: req.params.id });
+    await Message.findOneAndDelete({ from: req.params.id });
+    await Message.findOneAndDelete({ to: req.params.id });
     return "the user has been removed";
   } catch (error) {
     throw Error(error);

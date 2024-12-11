@@ -78,10 +78,6 @@ export default function MessagesProvider({ children }) {
     return{onSubmit,setFormData,formData,options}
   }
     
-  //need to make pop up yes no for delete
-  // const handleDelete = async (messageId) => {
-  //   await deleteMessage(messageId);
-  // };
   const useDeleteMsg = async (e) => {
     e.preventDefault();
     const { name } = e.target;
