@@ -2,8 +2,8 @@ import { OpenModal, Form } from "..";
 import { useContextMessages } from "../../pages/messages/MessagesConetxt";
 
 const CreateMessage = () => {
-  const { modals, user, users, onSubmit, setFormData } = useContextMessages();
-
+  const { useCreateMsg, modals } = useContextMessages();
+  const { onSubmit, setFormData, options } = useCreateMsg();
   return (
     <OpenModal
       comp={
@@ -14,7 +14,7 @@ const CreateMessage = () => {
             { name: "title" },
             { name: "description", type: "textarea" },
           ]}
-          options={user?.isAdmin ? users : null}
+          options={options}
           nameSelect="to"
           handleClick={modals.createMsg.handle}
           onSubmit={onSubmit}

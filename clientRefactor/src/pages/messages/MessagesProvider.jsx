@@ -59,20 +59,25 @@ export default function MessagesProvider({ children }) {
         break;
     }
   };
-  const [formData, setFormData] = useState({
-    from: user?._id,
-  });
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (user?.isAdmin) {
-      await createMessage(formData, formData?.to);
-    } else {
-      await createMessageToAdmin(formData);
+  
+  const useCreateMsg = ()=>{
+    const options=user?.isAdmin ? users : null
+    const [formData, setFormData] = useState({
+      from: user?._id,
+    });
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      if (user?.isAdmin) {
+        await createMessage(formData, formData?.to);
+      } else {
+        await createMessageToAdmin(formData);
+      }
+      handleCreateMessage();
+      
     }
-    handleCreateMessage();
-  };
-
+    return{onSubmit,setFormData,formData,options}
+  }
+    
   //need to make pop up yes no for delete
   // const handleDelete = async (messageId) => {
   //   await deleteMessage(messageId);
@@ -87,10 +92,9 @@ export default function MessagesProvider({ children }) {
   };
 
   const value = {
+    useCreateMsg,
     handleMsgAction,
     selectedMsg,
-    onSubmit,
-    setFormData,
     user,
     users,
     displayMessages,
