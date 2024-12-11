@@ -1,4 +1,8 @@
 import CreateMessage from "../../components/create/CreateMessage";
+import DeleteMessage from "../../components/delete/DeleteMessage";
 export default function MessagesModals() {
-  return <CreateMessage />;
+  return <>
+  <DeleteMessage/>
+  <CreateMessage />;
+  </>
 }

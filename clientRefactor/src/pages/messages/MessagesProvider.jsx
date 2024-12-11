@@ -10,23 +10,24 @@ import {
   createMessageToAdmin,
 } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
-//TODO:handle message for requests 
+//TODO:handle message for requests
 export default function MessagesProvider({ children }) {
   const { messages, user } = useSelector((state) => state.user);
   const { users } = useSelector((state) => state.admin);
 
+  const [selectedMsg, setSelectedMsg] = useState(null);
   const [filteredMessages, setFilteredMessages] = useState();
 
+  const [handleDeleteMessage, isOpenModalDeleteMessage] = useOpenModal();
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModal();
-
+  
   const displayMessages = filteredMessages || messages;
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     if (user?.isAdmin) dispatch(getUsers());
     if (user) dispatch(getMessagesByIdUser(user?._id));
-  }, [user, isOpenCreateMessage, dispatch]);
+  }, [user, isOpenCreateMessage, isOpenModalDeleteMessage, dispatch]);
 
   const handleSearch = (e) => {
     const { value } = e.target;
@@ -43,7 +44,21 @@ export default function MessagesProvider({ children }) {
         : null
     );
   };
+  const handleMsgAction = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    const message = messages.find((message) => message._id === value);
+    setSelectedMsg(message);
 
+    switch (name) {
+      case "createMessage":
+        handleCreateMessage();
+        break;
+      case "deleteMessage":
+        handleDeleteMessage();
+        break;
+    }
+  };
   const [formData, setFormData] = useState({
     from: user?._id,
   });
@@ -59,19 +74,30 @@ export default function MessagesProvider({ children }) {
   };
 
   //need to make pop up yes no for delete
-  const handleDelete = async (messageId) => {
-    await deleteMessage(messageId);
+  // const handleDelete = async (messageId) => {
+  //   await deleteMessage(messageId);
+  // };
+  const useDeleteMsg = async (e) => {
+    e.preventDefault();
+    const { name } = e.target;
+    if (name === "deleteMessage") {
+      await deleteMessage(selectedMsg?._id);
+      handleDeleteMessage();
+    }
   };
 
   const value = {
+    handleMsgAction,
+    selectedMsg,
     onSubmit,
     setFormData,
     user,
     users,
     displayMessages,
-    handleDelete,
+    useDeleteMsg,
     handleSearch,
     modals: {
+      deleteMsg: { isOpen: isOpenModalDeleteMessage, handle: handleDeleteMessage },
       createMsg: { isOpen: isOpenCreateMessage, handle: handleCreateMessage },
     },
   };

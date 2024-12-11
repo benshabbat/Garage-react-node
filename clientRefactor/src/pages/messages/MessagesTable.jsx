@@ -1,7 +1,8 @@
 import { useContextMessages } from "./MessagesConetxt";
 
+//TODO: USE WITH SEARCH AND TABLE GENERIC
 export default function MessagesTable() {
-  const { displayMessages,handleDelete,user } = useContextMessages();
+  const { displayMessages,user,handleMsgAction } = useContextMessages();
   return (
     <section className="table__body">
       <table>
@@ -22,7 +23,8 @@ export default function MessagesTable() {
                 <td data-label="Actions">
                   <button
                     name="deleteMessage"
-                    onClick={() => handleDelete(message?._id)}
+                    value={message?._id}
+                    onClick={handleMsgAction}
                   >
                     Delete
                   </button>

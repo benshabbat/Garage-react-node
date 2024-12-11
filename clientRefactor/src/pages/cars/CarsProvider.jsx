@@ -96,8 +96,6 @@ export default function CarsProvider({ children }) {
   const useDeleteCar = async (e) => {
     e.preventDefault();
     const { name } = e.target;
-
-
     if (name === "deleteCar") {
       await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
       handleDeleteCar();
