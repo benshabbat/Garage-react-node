@@ -119,6 +119,7 @@ export default function UsersProvider({ children }) {
     e.preventDefault();
     await deleteUser(selectedUser?._id);
     handleDeleteUser();
+    handleManageUser();
   };
 
   const value = {

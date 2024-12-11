@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Car from "../models/Car.js";
 import bcrypt from "bcryptjs";
 
 
@@ -41,7 +42,9 @@ const updateUser = async (req) => {
 };
 const deleteUser = async (req) => {
   try {
-    return await User.findByIdAndDelete(req.params.id);
+    await User.findByIdAndDelete(req.params.id);
+    await Car.findOneAndDelete({owner:req.params.id});
+    return "the user has been removed";
   } catch (error) {
     throw Error(error);
   }
