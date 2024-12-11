@@ -26,7 +26,7 @@ const NavLanding = () => {
         Reviews
       </a>
       <button onClick={handleLogin}>Login</button>
-      <Login />
+
     </>
   );
 };
