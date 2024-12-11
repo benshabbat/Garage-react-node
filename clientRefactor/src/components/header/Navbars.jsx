@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { NavAdmin, NavUser, NavLanding } from "../index";
 import { useHeaderContext } from "./HeaderContext";
+import Logo from "../../images/logo.jpg";
 
 export default function Navbars() {
   const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
   return (
     <div className="main-header">
       <div className="logo">
-        <Link to="/">Garage770</Link>
+        {/* <Link to="/"><img src={Logo} alt="logo for garage" className="logo"/></Link> */}
       </div>
 
       <button

@@ -18,7 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<PageLanding />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/myCars" element={<Account />} />
           <Route path="/users" element={<Users />} />
           <Route path="/cars" element={<Cars />} />
           <Route path="/messages" element={<Messages />} />

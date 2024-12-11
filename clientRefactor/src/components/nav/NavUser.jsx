@@ -6,8 +6,8 @@ const NavUser = () => {
 
   return (
     <>
-      <Link to={`/account`} onClick={handleOutsideClick}>
-        Account
+      <Link to={`/myCars`} onClick={handleOutsideClick}>
+        MyCars
       </Link>
 
       <Link to={`/messages`} onClick={handleOutsideClick}>

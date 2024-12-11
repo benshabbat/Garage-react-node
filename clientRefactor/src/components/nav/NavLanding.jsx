@@ -16,9 +16,9 @@ const NavLanding = () => {
       <a href="#about" onClick={handleOutsideClick}>
         About
       </a>
-      <a href="#services" onClick={handleOutsideClick}>
+      {/* <a href="#services" onClick={handleOutsideClick}>
         Services
-      </a>
+      </a> */}
       <a href="#contact" onClick={handleOutsideClick}>
         Contact
       </a>

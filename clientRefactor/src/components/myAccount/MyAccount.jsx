@@ -10,7 +10,7 @@ const MyAccount = () => {
     <div className="dropdown">
       <button>My Account</button>
       <div className="dropdown-content">
-        <Link to={`/account`} onClick={handleOutsideClick}>
+        <Link to={`/myCars`} onClick={handleOutsideClick}>
           {user?.username}
         </Link>
         <button onClick={handleLogout}>LogOut</button>

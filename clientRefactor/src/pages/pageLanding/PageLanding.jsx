@@ -8,7 +8,7 @@ const PageLanding = () => {
     <div className="main">
       {/* <Home /> */}
       <About />
-      <ServicesLanding />
+      {/* <ServicesLanding /> */}
       {/* <Contact /> */}
       <NewContact/>
       <Reviews />
