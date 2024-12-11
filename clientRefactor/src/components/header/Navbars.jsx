@@ -35,6 +35,7 @@ export default function Navbars() {
         </div>
       </div>
       <Login />
+      
     </>
   );
 }

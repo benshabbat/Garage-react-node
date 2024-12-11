@@ -3,7 +3,6 @@ import { useHeaderContext } from "../header/HeaderContext";
 const Login = () => {
   const { handleLogin, isOpenLogin, useLogin, isError } = useHeaderContext();
   const { setFormData, onSubmit } = useLogin();
-  console.log("Login Modal Open:", isOpenLogin); // בדיקה
   return (
     <OpenModal
       comp={

@@ -6,12 +6,14 @@ import Navbars from "./Navbars";
 
 const Header = () => {
   return (
+    <>
       <HeaderProvider>
         <Navbars />
-        <Suspense fallback={<h1>Loading..</h1>}>
-          <Outlet />
-        </Suspense>
       </HeaderProvider>
+      <Suspense fallback={<h1>Loading..</h1>}>
+        <Outlet />
+      </Suspense>
+    </>
   );
 };
 

@@ -27,20 +27,21 @@ export default function HeaderProvider({ children }) {
   const handleLogin = () => {
     handleOutsideClick();
     onLogin();
-};
-
-
-const handleLogout = () => {
+  };
+  
+  
+  const handleLogout = () => {
     handleOutsideClick();
     onLogout();
     onLogin();
   };
-
+  
   const useLogin = () => {
     const [formData, setFormData] = useState();
     const onSubmit = (e) => {
       e.preventDefault();
       dispatch(login(formData));
+      onLogin();
     };
 
     return { setFormData, onSubmit };
