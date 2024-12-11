@@ -13,13 +13,31 @@
   margin-bottom: 2rem;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;  /* גובה קבוע ללוגו */
+  width: auto;   /* שומר על יחס התמונה המקורי */
+  object-fit: contain;  /* מוודא שכל התמונה נראית */
+  transition: transform 0.3s ease;  /* אנימציה חלקה בהover */
+}
+
+.logo img:hover {
+  transform: scale(1.05);  /* אפקט hover עדין */
+}
+
+/* שאר הקוד נשאר זהה */
 .logo a {
   font-size: 2rem;
   text-decoration: none;
   font-weight: 700;
   color: rgb(222, 185, 185);
+  display: flex;
+  align-items: center;
 }
-
 .navbar {
   display: flex;
   align-items: center;
@@ -56,6 +74,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .logo img {
+    height: 40px;  /* לוגו קטן יותר במסכים קטנים */
+  }
   .mobile-nav-toggle {
     display: block;
     z-index: 1001;
@@ -106,7 +127,9 @@
   .main-header {
     padding: 0.8rem 1rem;
   }
-
+  .logo img {
+    height: 35px;  /* לוגו קטן יותר במסכים קטנים */
+  }
   .logo a {
     font-size: 1.4rem;
   }

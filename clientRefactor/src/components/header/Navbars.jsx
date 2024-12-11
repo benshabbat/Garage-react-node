@@ -8,7 +8,7 @@ export default function Navbars() {
   return (
     <div className="main-header">
       <div className="logo">
-        {/* <Link to="/"><img src={Logo} alt="logo for garage" className="logo"/></Link> */}
+        <Link to="/"><img src={Logo} alt="logo for garage" className="logo"/></Link>
       </div>
 
       <button
