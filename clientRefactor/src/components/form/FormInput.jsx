@@ -3,7 +3,7 @@ import { valid, inputType } from "../../validation/valid";
 import FormToggle from "./FormToggle";
 
 
-export default function FormInput({ input, handleChange, isFocus, index }) {
+export default function FormInput({ input, handleChange, isFocus, index,classNameLabel=false }) {
   const [isBlur, setIsBlur] = useState(false);
   const inputRef = useRef();
 
@@ -17,8 +17,8 @@ export default function FormInput({ input, handleChange, isFocus, index }) {
     return <FormToggle input={input} handleChange={handleChange} />;
   }
   return (
-    <label className="form-label">
-      {!input.hidden && <span>{input.name}</span>}
+    <label className={classNameLabel?" ":"form-label"}>
+      {!input.hidden &&!classNameLabel &&<span>{input.name}</span>}
       {showError && (
         <span className="error">{inputType(input).errorMessage}</span>
       )}
@@ -33,7 +33,7 @@ export default function FormInput({ input, handleChange, isFocus, index }) {
         hidden={input?.hidden}
         ref={inputRef}
         autoFocus={index === 0 && isFocus}
-        placeholder={input.name}
+        placeholder={input.placeholder || input.name}
         title={inputType(input).title}
         onChange={handleChange}
         aria-invalid={valid(inputRef?.current?.value, input.name)}
