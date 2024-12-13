@@ -2,6 +2,7 @@ import "./reviews.css";
 import AddReview from "./AddReview";
 import ReviewsProvider from "./ReviewsProvider";
 import SwiperReviews from "./SwiperReviews";
+import { CreateReviews } from "../../index";
 
 //TODO:CONTEXT AND PROVIDER
 const Reviews = () => {
@@ -12,6 +13,7 @@ const Reviews = () => {
         <SwiperReviews />
         <AddReview />
       </div>
+      <CreateReviews />
     </ReviewsProvider>
   );
 };

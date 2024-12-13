@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import { valid, inputType } from "../../validation/valid";
 import FormToggle from "./FormToggle";
 
-
-export default function FormInput({ input, handleChange, isFocus, index,classNameLabel=false }) {
+//ClassNameLabel is when i using with another stlyle for form and inputs
+export default function FormInput({ input, handleChange, isFocus, index,classNameLabel }) {
   const [isBlur, setIsBlur] = useState(false);
   const inputRef = useRef();
 
@@ -17,7 +17,7 @@ export default function FormInput({ input, handleChange, isFocus, index,classNam
     return <FormToggle input={input} handleChange={handleChange} />;
   }
   return (
-    <label className={classNameLabel?" ":"form-label"}>
+    <label className={classNameLabel?classNameLabel:"form-label"}>
       {!input.hidden &&!classNameLabel &&<span>{input.name}</span>}
       {showError && (
         <span className="error">{inputType(input).errorMessage}</span>

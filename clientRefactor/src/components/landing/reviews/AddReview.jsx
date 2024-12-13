@@ -1,4 +1,4 @@
-import { CreateReviews } from "../../index";
+
 import { useReviewsContext } from "./ReviewsContext";
 
 export default function AddReview() {
@@ -8,7 +8,7 @@ export default function AddReview() {
       <button className="btn-add-review" onClick={handleAddReview}>
         Share Your Experience
       </button>
-      <CreateReviews/>
+   
     </>
   );
 }
