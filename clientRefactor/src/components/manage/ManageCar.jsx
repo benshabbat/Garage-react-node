@@ -5,6 +5,7 @@ import { useCarsContext } from "../../pages/cars/CarsContext";
 const ManageCar = () => {
 
   //TODO: TO CREATE DELETE CAR COMPONENT
+  //TODO:to use with button manage generic
   const { handleCarAction, selectedCar, modals } = useCarsContext();
 
   return (

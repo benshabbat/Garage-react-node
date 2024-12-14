@@ -5,6 +5,7 @@ import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminC
 
 
 //TODO:TO CREATE DELETE SERVICE COMPONENT
+//todo:to use with button manage generic
 const ManageService = () => {
   const { selectedService, modals, handleServiceIdAction } =
     useServicesAdminContext();
