@@ -19,7 +19,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  background-image: url("../../clientRefactor/src/images/garage.jpeg");
+  background-image: url("../../client/src/images/garage.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

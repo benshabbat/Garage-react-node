@@ -1,8 +1,7 @@
 import "./newContact.css";
 import { useState } from "react";
 import { createContact } from "../../../utils";
-//TODO:Logic
-//TODO:add validate
+import FormInput from "../../form/FormInput";
 export default function NewContact() {
   const [formData, setFormData] = useState();
 
@@ -19,43 +18,47 @@ export default function NewContact() {
     await createContact(formData);
   };
   return (
-    <div className="container-contact">
+    <div id="contact" className="container-contact">
       <form onSubmit={onSubmit}>
         <h1>Contact Us</h1>
         <div className="input-group">
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
-            required
-            onChange={handleChange}
+          <FormInput
+            input={{
+              name: "firstName",
+              type: "text",
+              placeholder: "First Name",
+            }}
+            handleChange={handleChange}
+            classNameLabel={" "}
           />
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            placeholder="Last Name"
-            required
-            onChange={handleChange}
+          <FormInput
+            input={{
+              name: "lastName",
+              type: "text",
+              placeholder: "Last Name",
+            }}
+            handleChange={handleChange}
+            classNameLabel={" "}
           />
         </div>
         <div className="input-group">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required
-            onChange={handleChange}
+          <FormInput
+            input={{
+              name: "email",
+              type: "email",
+              placeholder: "Email",
+            }}
+            handleChange={handleChange}
+            classNameLabel={" "}
           />
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Phone"
-            required
-            onChange={handleChange}
+          <FormInput
+            input={{
+              name: "phone",
+              type: "tel",
+              placeholder: "Phone",
+            }}
+            handleChange={handleChange}
+            classNameLabel={" "}
           />
         </div>
         <h4>Type your message here...</h4>
