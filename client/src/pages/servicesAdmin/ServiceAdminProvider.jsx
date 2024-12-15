@@ -101,6 +101,7 @@ export default function ServiceAdminProvider({ children }) {
     handleServiceIdAction,
     handleSearch,
     selectedService,
+    useEditService,
     modals: {
       manageService: {
         isOpen: isOpenManageService,
@@ -116,7 +117,6 @@ export default function ServiceAdminProvider({ children }) {
         handle: handleEditService,
       },
     },
-    useEditService,
   };
 
   return (
