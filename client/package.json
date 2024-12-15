@@ -29,5 +29,5 @@
     "globals": "^15.9.0",
     "vite": "^5.4.1"
   },
-  "proxy": "http://localhost:8800/api"
+  "proxy": "https://garage-server-mu.vercel.app/api"
 }
