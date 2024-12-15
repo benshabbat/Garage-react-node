@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components";
 import {
   Account,
-  // Services,
   Messages,
   PageLanding,
   Users,
