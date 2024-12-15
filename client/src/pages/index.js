@@ -1,6 +1,6 @@
 // import { lazy } from "react";
 export { default as Account } from "./account/Account";
-export { default as Home } from "./home/Home";
+// export { default as Home } from "./home/Home";
 export { default as PageLanding } from "./pageLanding/PageLanding";
 export { default as ServicesAdmin } from "./servicesAdmin/ServicesAdmin";
 
