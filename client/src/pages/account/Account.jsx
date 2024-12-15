@@ -1,11 +1,12 @@
 import "./account.css";
 import ReqService from "../../components/create/ReqService";
 import AccountProvider from "./AccountProvider";
-import AccountTable from "./AccountTable";
+import AccountTables from "./AccountTables";
+
 const Account = () => {
   return (
     <AccountProvider>
-      <AccountTable />
+      <AccountTables />
       <ReqService />
     </AccountProvider>
   );

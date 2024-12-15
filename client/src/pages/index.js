@@ -7,7 +7,7 @@ export { default as ServicesAdmin } from "./servicesAdmin/ServicesAdmin";
 //Want to check what is the best practice for lazy loading
 
 export { default as Messages } from "./messages/Messages";
-export { default as Services } from "./services/Services";
+// export { default as Services } from "./services/Services";
 export { default as Users } from "./users/Users";
 export { default as Cars } from "./cars/Cars";
 

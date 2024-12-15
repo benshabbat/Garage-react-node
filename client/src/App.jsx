@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components";
 import {
   Account,
-  Services,
+  // Services,
   Messages,
   PageLanding,
   Users,
@@ -26,7 +26,6 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/services" element={<ServicesAdmin />} />
           <Route path="/messages-contact" element={<MessagesOfContact/>} />
-          <Route path="/services/car/:carId" element={<Services />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
