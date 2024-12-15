@@ -16,7 +16,7 @@ This project is a refactor of the client-side code for Garage770. The goal is to
     ```
 2. Navigate to the project directory:
     ```bash
-    cd Garage770/clientRefactor
+    cd Garage770/client
     ```
 3. Install dependencies:
     ```bash
