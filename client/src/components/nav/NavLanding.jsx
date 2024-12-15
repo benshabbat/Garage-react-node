@@ -1,7 +1,6 @@
-import Login from "../login/Login";
-import { Link } from "react-router-dom";
 import { useHeaderContext } from "../header/HeaderContext";
 
+//TODO:MAYBE MAP / OR COMP OF LINK INSIDE HANDLE
 const NavLanding = () => {
   const { handleOutsideClick, handleLogin } = useHeaderContext();
 

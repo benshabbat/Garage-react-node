@@ -1,5 +1,4 @@
 import { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import { AccountContext } from "./AccountContext";
 import { createReqService } from "../../utils";
@@ -7,12 +6,14 @@ import useOpenModal from "../../hooks/useOpenModal";
 import { getServicesByIdCar } from "../../features/user/userSlice";
 export default function AccountProvider({ children }) {
   const { user, services } = useSelector((state) => state.user);
+
   const [selectedCar, setSelectedCar] = useState(null);
   const [filteredCars, setFilteredCars] = useState(null);
   const [filteredServices, setFilteredServices] = useState(null);
+
   const [handleReqService, isOpenReqService] = useOpenModal();
   const [handleServices, isOpenServices] = useOpenModal();
-  const navigate = useNavigate();
+
   const displayServicesUser = filteredServices || services;
   const displayCars = filteredCars || user?.cars;
 
@@ -27,17 +28,12 @@ export default function AccountProvider({ children }) {
     setSelectedCar(user?.cars.find((car) => car._id === value));
     if (name === "req-services") {
       handleReqService();
-      // onServices(value);
     }
     if (name === "services") {
       handleServices();
-      // onServices(value);
     }
   };
 
-  // const onServices = (value) => {
-  //   navigate(`/services/car/${value}`);
-  // };
 
   const handleSearch = (e) => {
     const { value } = e.target;
@@ -50,6 +46,8 @@ export default function AccountProvider({ children }) {
       )
     );
   };
+
+  
   function useReqService() {
     const [formData, setFormData] = useState();
     const onSubmit = async (e) => {

@@ -1,6 +1,5 @@
-import React from 'react'
-// import "./pageNotFound.css"
 
+//TODO : change import for bg404
 const PageNotFound = () => {
   return (
     <img src={require("../../images/garage404.jpg")} alt='404' />
