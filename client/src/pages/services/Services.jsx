@@ -1,12 +1,17 @@
 import "./services.css";
 import Service from "../../components/service/Service";
-import { useServices } from "./utilsServices";
+
+
+
+//TODO:MUST REFACTOR!!!!
+
+//TODO:MAYBE USECONTEXT OF CONTACT WILL HELP OT USE WITH IT
 const Services = () => {
-  const { user } = useServices();
+
 
   return (
     <>
-      <h1 className="h-title">{`hello ${user?.username}`}</h1>
+      
       <Service />
     </>
   );

@@ -1,12 +1,13 @@
 import "../table/table.css";
 import { useFiterService } from "./utilsService";
-
+import { useServices } from "../../pages/services/utilsServices";
 const Service = () => {
   const { dataService, filterSearch } = useFiterService();
+  const { user } = useServices();
   return (
     <div className="table-container">
       <section className="table__header">
-        <h1>My Services</h1>
+        <h1>My Services of {`Car ${user?.cars[0]?.numberPlate}`}</h1>
         <div className="input-group">
           <input
             type="search"
