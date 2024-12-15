@@ -11,8 +11,5 @@
         "src": "/(.*)",
         "dest": "index.js"
       }
-    ],
-    "buildCommand": "npm install",
-    "outputDirectory": ".",
-    "installCommand": "npm install"
+    ]
   }
