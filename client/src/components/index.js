@@ -5,7 +5,7 @@ export { default as Contact } from "./landing/contact/Contact";
 export { default as CreateReviews } from "./landing/reviews/CreateReviews";
 export { default as Review } from "./landing/reviews/Review";
 export { default as Reviews } from "./landing/reviews/Reviews";
-export { default as Service } from "./service/Service";
+// export { default as Service } from "./service/Service";
 export { default as ServicesLanding } from "./landing/servicesLanding/ServicesLanding";
 export { default as OpenModal} from "./openModal/OpenModal";
 export { default as Form } from "./form/Form";
