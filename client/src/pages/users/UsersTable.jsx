@@ -2,7 +2,7 @@ import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
 import { useUsersContext } from "./UsersContext";
 export default function UsersTable() {
-  const { handleUser, displayUsers, handleSearch, handleCreateUser } =
+  const { handleUser, displayUsers, handleSearch, modals } =
     useUsersContext();
   const trTh = (
     <tr>
@@ -28,7 +28,7 @@ export default function UsersTable() {
     <div className="table-container">
       <Search handleSearch={handleSearch} name={"Users"} />
       <Table trTh={trTh} trTd={trTd} />
-      <button onClick={handleCreateUser} className="create-button">
+      <button onClick={modals.createUser.handle} className="create-button">
         Create User
       </button>
     </div>

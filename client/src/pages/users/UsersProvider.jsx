@@ -127,7 +127,6 @@ export default function UsersProvider({ children }) {
     useRegister,
     displayUsers,
     selectedUser,
-    handleCreateUser,
     handleUser,
     handleSearch,
     setFormData,
