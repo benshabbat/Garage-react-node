@@ -4,10 +4,9 @@ import DeleteUser from "../../components/delete/DeleteUser";
 export default function UserModals() {
   return (
     <>
-      <Register/>
-      <ManageUser/>
-      <DeleteUser/>
-
+      <Register />
+      <ManageUser />
+      <DeleteUser />
     </>
   );
 }

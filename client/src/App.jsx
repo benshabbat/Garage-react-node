@@ -11,6 +11,8 @@ import {
 } from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/MessagesOfContact/MessagesOfContact";
+
+//TODO:ROUTER V7
 function App() {
   return (
     <>
