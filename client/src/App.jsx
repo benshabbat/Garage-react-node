@@ -9,7 +9,7 @@ import {
   ServicesAdmin,
 } from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
-import MessagesOfContact from "./pages/MessagesOfContact/MessagesOfContact.jsx";
+import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 
 //TODO:ROUTER V7
 function App() {
