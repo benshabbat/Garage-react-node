@@ -6,7 +6,9 @@ const API_URL_LOGIN = "/auth/login";
 const API_URL_LOGOUT = "/auth/logout";
 
 // אפשרות להגדיר תצורת ברירת מחדל ל-axios
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
+//why i cant using with env how i could
+axios.defaults.baseURL = "http://localhost:8800/api";
 axios.defaults.withCredentials = true; // חשוב עבור קוקיז
 
 const authService = {
