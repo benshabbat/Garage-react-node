@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:5173', // הפורט שבו רץ שרת ה-Vite
+  origin: ['https://garage-client-gules.vercel.app', 'http://localhost:5173'],
   credentials: true
 }));
 
