@@ -8,7 +8,7 @@ const API_URL_LOGOUT = "/auth/logout";
 // אפשרות להגדיר תצורת ברירת מחדל ל-axios
 
 //why i cant using with env how i could
-axios.defaults.baseURL = "http://localhost:8800/api";
+axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
 axios.defaults.withCredentials = true; // חשוב עבור קוקיז
 
 const authService = {
