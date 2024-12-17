@@ -28,11 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(cors());
 app.use(cors({
   origin: 'https://garage-client-one.vercel.app',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  credentials: true
 }));
-
 app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
