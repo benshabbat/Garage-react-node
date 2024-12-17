@@ -26,7 +26,7 @@ app.use(express.json());
 // app.use(express.static('client/dist'));
 app.use(express.urlencoded({ extended: false }));
 // app.use(cors());
-Copyapp.use(cors({
+app.use(cors({
   origin: 'https://garage-client-one.vercel.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
