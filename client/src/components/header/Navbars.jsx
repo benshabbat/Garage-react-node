@@ -23,19 +23,18 @@ export default function Navbars() {
         </button>
 
         <div className={`navbar ${isNavOpen ? "active" : ""}`}>
-          {user ? (
-            user?.isAdmin ? (
+          {userAuth && user ? (
+            user.isAdmin ? (
               <NavAdmin />
             ) : (
               <NavUser />
             )
           ) : (
-            !userAuth && <NavLanding />
+            <NavLanding />
           )}
         </div>
       </div>
       <Login />
-      
     </>
   );
 }
