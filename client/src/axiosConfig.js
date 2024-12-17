@@ -1,8 +1,7 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
-// axios.defaults.withCredentials = true;
-
+axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
+axios.defaults.withCredentials = true;
 
 
 // // הוספת ה-interceptor שיוסיף את הטוקן לכל בקשה
@@ -35,40 +34,4 @@
 //   }
 // );
 
-// export default axios;
-
-import axios from 'axios';
-
-const instance = axios.create({
-  baseURL: 'https://garage-server-dcv1.onrender.com/api',
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
-
-// Add a request interceptor for error handling
-instance.interceptors.request.use(
-  config => {
-    return config;
-  },
-  error => {
-    console.error('Request error:', error);
-    return Promise.reject(error);
-  }
-);
-
-// Add a response interceptor for error handling
-instance.interceptors.response.use(
-  response => response,
-  error => {
-    if (error.response?.status === 401) {
-      // מטפל בשגיאות אימות
-      console.log('Authentication error');
-      localStorage.removeItem('user');
-    }
-    return Promise.reject(error);
-  }
-);
-
-export default instance;
+export default axios;
