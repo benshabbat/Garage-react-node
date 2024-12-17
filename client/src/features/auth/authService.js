@@ -24,11 +24,14 @@ const authService = {
     }
   },
 
-  login: async (userData) => {
+  login :async (userData) => {
     try {
       const response = await axios.post(API_URL_LOGIN, userData);
       if (response.data) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        // שמירת המידע המלא של המשתמש
+        const user = await axios.get(`/users/${response.data._id}`);
+        localStorage.setItem("user", JSON.stringify(user.data));
+        return user.data;
       }
       return response.data;
     } catch (error) {

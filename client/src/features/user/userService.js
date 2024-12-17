@@ -1,4 +1,5 @@
 import axios from "axios";
+import authService from "../auth/authService";
 
 const API_URL_USER = "/users";
 const API_URL_CAR = "/cars";
@@ -17,9 +18,16 @@ const createReqService = async (dataMessage) => {
 // get user by _id
 
 const getUser = async (id) => {
-  const { data } = await axios.get(`${API_URL_USER}/${id}`);
-
-  return data;
+  try {
+    const { data } = await axios.get(`${API_URL_USER}/${id}`);
+    return data;
+  } catch (error) {
+    if (error.response?.status === 401) {
+      // אם הטוקן לא תקף, נתנתק
+      await authService.logout();
+    }
+    throw error;
+  }
 };
 
 const getServicesByIdCar = async (carId) => {

@@ -21,7 +21,7 @@ dotenv.config();
 //middlewares
 // logger()
 // app.use(logger())
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(express.json());
 // app.use(express.static('client/dist'));
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +30,7 @@ app.use(cors({
   origin: 'https://garage-client-one.vercel.app',
   credentials: true
 }));
+app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
