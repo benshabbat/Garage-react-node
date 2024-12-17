@@ -54,21 +54,43 @@ export const verifyToken = (req, res, next) => {
   });
 };
 
+// export const verifyUser = (req, res, next) => {
+//   verifyToken(req, res, (err) => {
+//     if (err) {
+//       return next(err);
+//     }
+    
+//     if (!req.user) {
+//       return next(createError(403, "User not authenticated"));
+//     }
+
+//     if (req.user.id === req.params.id || req.user.isAdmin) {
+//       next();
+//     } else {
+//       next(createError(403, "You are not authorized"));
+//     }
+//   });
+// };
+
 export const verifyUser = (req, res, next) => {
   verifyToken(req, res, (err) => {
     if (err) {
+      console.log('Token verification failed:', err);
       return next(err);
     }
-    
-    if (!req.user) {
-      return next(createError(403, "User not authenticated"));
+
+    console.log('User in request:', req.user);
+    console.log('Params ID:', req.params.id);
+
+    if (!req.user || !req.user.id) {
+      return next(createError(403, "Authentication failed - no user data"));
     }
 
     if (req.user.id === req.params.id || req.user.isAdmin) {
-      next();
-    } else {
-      next(createError(403, "You are not authorized"));
+      return next();
     }
+    
+    return next(createError(403, "You are not authorized to access this resource"));
   });
 };
 
