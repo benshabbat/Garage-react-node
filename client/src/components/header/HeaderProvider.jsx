@@ -40,13 +40,12 @@ export default function HeaderProvider({ children }) {
   
   const useLogin = () => {
     const [formData, setFormData] = useState();
-    const onSubmit = async (e) => { // שים לב שהוספתי async
+    const onSubmit = async (e) => { 
       e.preventDefault();
       try {
-        await dispatch(login(formData)).unwrap(); // שים לב ל-await ו-unwrap()
-        onLogin(); // סגירת המודל רק אם הלוגין הצליח
+        await dispatch(login(formData)).unwrap(); 
+        onLogin(); 
       } catch (error) {
-        // טיפול בשגיאה אם צריך
         console.error("Login failed:", error);
       }
     };

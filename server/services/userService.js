@@ -51,12 +51,38 @@ const deleteUser = async (req) => {
     throw Error(error);
   }
 };
-const getUser = async (req) => {
+// const getUser = async (req) => {
+//   try {
+//     const user = await User.findById(req.params.id).populate("cars");
+//     return user;
+//   } catch (error) {
+//     throw Error(error);
+//   }
+// };
+
+
+const getUser = async (req, res) => {  // שים לב שהוספתי את פרמטר res
   try {
+    console.log("Getting user with ID:", req.params.id);
+    console.log("Request headers:", req.headers);  // לבדיקת ה-token
+    
     const user = await User.findById(req.params.id).populate("cars");
-    return user;
+    
+    if (!user) {
+      console.log("User not found");
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    console.log("User found:", user);
+    
+    return res.status(200).json(user);
+    
   } catch (error) {
-    throw Error(error);
+    console.error("Error in getUser:", error);
+    return res.status(500).json({ 
+      message: "Error getting user",
+      error: error.message 
+    });
   }
 };
 const getUsers = async () => {
