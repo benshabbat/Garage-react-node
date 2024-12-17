@@ -19,8 +19,10 @@ export default function HeaderProvider({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userAuth?._id) dispatch(getUser(userAuth?._id));
-  }, [dispatch, userAuth]);
+    if (userAuth?._id && !user) {
+      dispatch(getUser(userAuth._id));
+    }
+  }, [dispatch, userAuth, user]);
 
   const handleOutsideClick = () => setIsNavOpen(!isNavOpen);
 
@@ -38,12 +40,17 @@ export default function HeaderProvider({ children }) {
   
   const useLogin = () => {
     const [formData, setFormData] = useState();
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => { // שים לב שהוספתי async
       e.preventDefault();
-      dispatch(login(formData));
-      onLogin();
+      try {
+        await dispatch(login(formData)).unwrap(); // שים לב ל-await ו-unwrap()
+        onLogin(); // סגירת המודל רק אם הלוגין הצליח
+      } catch (error) {
+        // טיפול בשגיאה אם צריך
+        console.error("Login failed:", error);
+      }
     };
-
+  
     return { setFormData, onSubmit };
   };
 
