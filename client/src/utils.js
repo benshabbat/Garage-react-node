@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axiosConfig.js";
 const API_URL_CAR = "/cars";
 const API_URL_USER = "/users";
 const API_URL_SERVICE = "/services";

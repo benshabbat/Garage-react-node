@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axiosConfig.js";
 import authService from "../auth/authService";
 
 const API_URL_USER = "/users";
