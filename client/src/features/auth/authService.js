@@ -1,5 +1,5 @@
 // הוספת תצורת ברירת מחדל ל-axios
-import axios from "axios";
+import axios from "../../axiosConfig.js";
 // authService.js - עדכון הנתיבים
 const API_URL_REGISTER = "/auth/register";
 const API_URL_LOGIN = "/auth/login";
@@ -7,9 +7,9 @@ const API_URL_LOGOUT = "/auth/logout";
 
 // אפשרות להגדיר תצורת ברירת מחדל ל-axios
 
-//why i cant using with env how i could
-axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
-axios.defaults.withCredentials = true; // חשוב עבור קוקיז
+// //why i cant using with env how i could
+// axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
+// axios.defaults.withCredentials = true; // חשוב עבור קוקיז
 
 const authService = {
   register: async (userData) => {
