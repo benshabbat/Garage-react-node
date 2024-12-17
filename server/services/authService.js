@@ -40,38 +40,32 @@ const register = async (req) => {
   }
 };
 
-const login = async (req, res, next) => {
-  try {
-    const { username, password } = req.body;
-    // Check for user username
-    const user = await User.findOne({ username });
-
-    if (!user) return next(createError(404, "User not found!"));
-
-    const isPassword = await bcrypt.compare(password, user.password);
-    if (!isPassword)
-      return next(createError(400, "Wrong password or username!"));
-
-    const token = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT
-    );
-    const { isAdmin } = user._doc;
-
-    if (user && isPassword) {
-      res
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
-        .json({
-          _id: user.id,
-        });
-    } else {
-      return next(createError(400, "Invalid credentials!"));
-    }
-} catch (error) {
-    throw Error(error);
+const login = async (req, res) => {  // Remove next parameter
+  const { username, password } = req.body;
+  
+  const user = await User.findOne({ username });
+  if (!user) {
+    throw createError(404, "User not found!");
   }
+
+  const isPassword = await bcrypt.compare(password, user.password);
+  if (!isPassword) {
+    throw createError(400, "Wrong password or username!");
+  }
+
+  const token = jwt.sign(
+    { id: user._id, isAdmin: user.isAdmin },
+    process.env.JWT
+  );
+
+  res
+    .cookie("access_token", token, {
+      httpOnly: true,
+    })
+    .json({
+      _id: user.id,
+      isAdmin: user.isAdmin
+    });
 };
 
 //logout
