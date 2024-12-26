@@ -58,7 +58,8 @@ const login = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
-      path: '/'
+      path: '/',
+      domain: 'garage-server-dcv1.onrender.com'
     }).json({
       _id: user.id,
       isAdmin: user.isAdmin
