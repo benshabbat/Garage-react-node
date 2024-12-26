@@ -43,35 +43,28 @@ const register = async (req) => {
 const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    // Check for user username
     const user = await User.findOne({ username });
 
     if (!user) return next(createError(404, "User not found!"));
-
     const isPassword = await bcrypt.compare(password, user.password);
-    if (!isPassword)
-      return next(createError(400, "Wrong password or username!"));
+    if (!isPassword) return next(createError(400, "Wrong password!"));
 
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT
     );
-    const { isAdmin } = user._doc;
 
-    if (user && isPassword) {
-      res.cookie("access_token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none'
-      })
-        .json({
-          _id: user.id,
-        });
-    } else {
-      return next(createError(400, "Invalid credentials!"));
-    }
-} catch (error) {
-    throw Error(error);
+    res.cookie("access_token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      path: '/'
+    }).json({
+      _id: user.id,
+      isAdmin: user.isAdmin
+    });
+  } catch (error) {
+    next(error);
   }
 };
 

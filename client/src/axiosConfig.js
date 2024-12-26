@@ -1,47 +1,32 @@
-import axios from 'axios';
+import axios from "axios";
 
 axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
 axios.defaults.withCredentials = true;
 
-axios.interceptors.request.use(
-  (config) => {
-    const token = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('access_token='))
-      ?.split('=')[1];
-    
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+console.log("All cookies:", document.cookie);
+
+axios.interceptors.request.use((config) => {
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("access_token="))
+    ?.split("=")[1];
+
+  console.log("Token:", token);
+
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
-);
+  return config;
+});
 
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
     }
     return Promise.reject(error);
   }
 );
 
-
-axios.interceptors.request.use((config) => {
-    const token = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('access_token='))
-      ?.split('=')[1];
-    
-    console.log('Token:', token); // בדיקה
-    
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  });
 export default axios;
