@@ -30,4 +30,18 @@ axios.interceptors.response.use(
   }
 );
 
+
+axios.interceptors.request.use((config) => {
+    const token = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('access_token='))
+      ?.split('=')[1];
+    
+    console.log('Token:', token); // בדיקה
+    
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  });
 export default axios;
