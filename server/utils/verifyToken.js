@@ -104,7 +104,7 @@ export const verifyAdmin = (req, res, next) => {
       return next(createError(403, "User not authenticated"));
     }
 
-    if (req.user.isAdmin) {
+    if (req?.user?.isAdmin) {
       next();
     } else {
       next(createError(403, "You are not authorized as admin"));
