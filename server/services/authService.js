@@ -59,10 +59,11 @@ const login = async (req, res, next) => {
     const { isAdmin } = user._doc;
 
     if (user && isPassword) {
-      res
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
+      res.cookie("access_token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+      })
         .json({
           _id: user.id,
         });

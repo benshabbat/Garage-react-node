@@ -40,15 +40,15 @@ import jwt from "jsonwebtoken";
 import { createError } from "../utils/error.js";
 
 export const verifyToken = (req, res, next) => {
+  console.log("Cookies:", req.cookies);
   const token = req.cookies.access_token;
   if (!token) {
-    return next(createError(401, "You are not authenticated!"));
+    console.log("No token found");
+    return next(createError(401, "Not authenticated"));
   }
-
+  
   jwt.verify(token, process.env.JWT, (err, user) => {
-    if (err) {
-      return next(createError(403, "Token is not valid!"));
-    }
+    if (err) console.log("Token verification failed:", err);
     req.user = user;
     next();
   });
