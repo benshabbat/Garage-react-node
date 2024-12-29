@@ -1,3 +1,4 @@
+/* Container Styles */
 .container-contact {
   min-height: 100vh;
   display: flex;
@@ -8,6 +9,7 @@
   box-sizing: border-box;
 }
 
+/* Form Styles */
 .container-contact form {
   width: min(90%, 670px);
   height: auto;
@@ -24,6 +26,7 @@
   gap: 20px;
 }
 
+/* Form Headers */
 .container-contact form h1 {
   color: #fff;
   font-weight: 500;
@@ -33,6 +36,15 @@
   font-size: clamp(24px, 5vw, 32px);
 }
 
+.container-contact form h4 {
+  color: #fff;
+  font-weight: 300;
+  width: 100%;
+  margin: 0;
+  font-size: clamp(16px, 2.5vw, 18px);
+}
+
+/* Input Groups */
 .container-contact .input-group {
   display: flex;
   gap: 20px;
@@ -40,6 +52,7 @@
   flex-wrap: wrap;
 }
 
+/* Input Fields */
 .container-contact form input {
   flex: 1;
   min-width: 250px;
@@ -62,14 +75,7 @@
   color: #ddd;
 }
 
-.container-contact form h4 {
-  color: #fff;
-  font-weight: 300;
-  width: 100%;
-  margin: 0;
-  font-size: clamp(16px, 2.5vw, 18px);
-}
-
+/* Textarea */
 .container-contact form textarea {
   background: none;
   border: none;
@@ -90,6 +96,7 @@
   border-color: #4a9eff;
 }
 
+/* Textarea Scrollbar */
 textarea::-webkit-scrollbar {
   width: 8px;
 }
@@ -103,6 +110,7 @@ textarea::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
+/* Button Container */
 .container-contact form .button-container {
   width: 100%;
   display: flex;
@@ -110,6 +118,7 @@ textarea::-webkit-scrollbar-track {
   margin-top: 20px;
 }
 
+/* Submit Button */
 .container-contact form button {
   border: none;
   background: #fff;
@@ -124,6 +133,88 @@ textarea::-webkit-scrollbar-track {
 }
 
 .container-contact form button:hover {
+  background: #4a9eff;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Success Message Styles */
+.success-message {
+  width: min(90%, 670px);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: clamp(15px, 4vw, 30px);
+  text-align: center;
+}
+
+.success-icon {
+  width: clamp(64px, 10vw, 96px);
+  height: clamp(64px, 10vw, 96px);
+  color: #4a9eff;
+  margin-bottom: 2rem;
+}
+
+/* Check Animation */
+.check-circle {
+  stroke-dasharray: 70;
+  stroke-dashoffset: 70;
+  animation: drawCircle 0.6s ease-in-out forwards;
+}
+
+.check-mark {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: drawCheck 0.4s ease-in-out 0.6s forwards;
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawCheck {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Success Message Content */
+.success-title {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.success-message p {
+  color: #ddd;
+  font-weight: 300;
+  font-size: clamp(16px, 2.5vw, 18px);
+  margin-bottom: 2rem;
+}
+
+.new-message-button {
+  border: none;
+  background: #fff;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: #333;
+  width: clamp(120px, 30%, 200px);
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.new-message-button:hover {
   background: #4a9eff;
   color: #fff;
   transform: translateY(-2px);
@@ -152,13 +243,20 @@ textarea::-webkit-scrollbar-track {
     gap: 15px;
   }
 
-  .container-contact form button {
+  .container-contact form button,
+  .new-message-button {
     width: 100%;
+  }
+  
+  .success-message {
+    padding: 15px;
   }
 }
 
+/* Touch Device Support */
 @media (hover: none) {
-  .container-contact form button:hover {
+  .container-contact form button:hover,
+  .new-message-button:hover {
     transform: none;
   }
 }
