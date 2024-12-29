@@ -2,6 +2,9 @@ import "./newContact.css";
 import { useState } from "react";
 import { createContact } from "../../../utils";
 import FormInput from "../../form/FormInput";
+
+
+//When Sent Contact will will change the componenet to popup/div of sent msg...
 export default function NewContact() {
   const [formData, setFormData] = useState();
 
