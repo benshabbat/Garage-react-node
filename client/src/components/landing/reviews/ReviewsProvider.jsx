@@ -36,6 +36,7 @@ export default function ReviewsProvider({ children }) {
   };
 
   const useAddReview = () => {
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [stars, setStars] = useState(5);
     const [formData, setFormData] = useState();
     const nameRef = useRef();
@@ -54,13 +55,15 @@ export default function ReviewsProvider({ children }) {
       if (formData) {
         const newReview = async () => {
           await createReview(formData);
+          setIsSubmitted(true);
+          setFormData({}); // Reset form
         };
         newReview();
       }
       setFormData();
     }, [formData]);
 
-    return { addReview, setStars, nameRef, descRef };
+    return { addReview, setStars, nameRef, descRef,isSubmitted,setIsSubmitted };
   };
 
   const value = {
