@@ -55,12 +55,11 @@ export default function ReviewsProvider({ children }) {
       if (formData) {
         const newReview = async () => {
           await createReview(formData);
-          setIsSubmitted(true);
-          setFormData({}); // Reset form
         };
         newReview();
       }
-      setFormData();
+      setIsSubmitted(true);
+      setFormData({}); // Reset form
     }, [formData]);
 
     return { addReview, setStars, nameRef, descRef,isSubmitted,setIsSubmitted };
