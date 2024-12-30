@@ -48,6 +48,7 @@ export default function ReviewsProvider({ children }) {
         description: descRef.current.value,
         stars,
       });
+      setIsSubmitted(true);
       handleAddReview();
     };
 
@@ -58,8 +59,6 @@ export default function ReviewsProvider({ children }) {
         };
         newReview();
       }
-      setIsSubmitted(true);
-      setFormData({}); // Reset form
     }, [formData]);
 
     return { addReview, setStars, nameRef, descRef,isSubmitted,setIsSubmitted };
