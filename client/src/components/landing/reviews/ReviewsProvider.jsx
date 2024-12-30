@@ -8,8 +8,9 @@ import useCardsNavigation from "./swiper/hooks/useCardsNavigation";
 
 export default function ReviewsProvider({ children }) {
   const [handleAddReview, isOpenAddReview] = useOpenModal();
-
+  
   const [allReviews, setAllReviews] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const totalCards = allReviews.length;
 
   const numCardsPreview = useCardsDisplay();
@@ -36,7 +37,6 @@ export default function ReviewsProvider({ children }) {
   };
 
   const useAddReview = () => {
-    const [isSubmitted, setIsSubmitted] = useState(false);
     const [stars, setStars] = useState(5);
     const [formData, setFormData] = useState();
     const nameRef = useRef();
