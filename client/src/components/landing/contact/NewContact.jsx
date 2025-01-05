@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createContact } from "../../../utils";
 import FormInput from "../../form/FormInput";
 import "./newContact.css"; // Make sure to import the CSS file
-import CheckCircle from "../../../icons/CheckCircle";
+import Submitted from "../../Submitted";
 
 export default function NewContact() {
   const [formData, setFormData] = useState({});
@@ -30,21 +30,7 @@ export default function NewContact() {
   };
 
   if (isSubmitted) {
-    return (
-      <div className="container-contact">
-        <div className="success-message">
-          <CheckCircle className="success-icon" />
-          <h2 className="success-title">Thank You!</h2>
-          <p>Your message has been sent successfully. We'll contact you soon.</p>
-          <button 
-            onClick={() => setIsSubmitted(false)}
-            className="new-message-button"
-          >
-            Send Another Message
-          </button>
-        </div>
-      </div>
-    );
+    <Submitted setIsSubmitted={setIsSubmitted} />;
   }
 
   return (
@@ -92,11 +78,7 @@ export default function NewContact() {
           />
         </div>
         <h4>Type your message here...</h4>
-        <textarea 
-          name="message" 
-          required 
-          onChange={handleChange}
-        ></textarea>
+        <textarea name="message" required onChange={handleChange}></textarea>
         <div className="button-container">
           <button type="submit">Send</button>
         </div>
