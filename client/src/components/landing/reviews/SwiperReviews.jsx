@@ -1,23 +1,15 @@
 import { Review } from "../../index";
-import Submitted from "../../Submitted";
 import { useReviewsContext } from "./ReviewsContext";
 import Swiper from "./swiper/Swiper";
-//TODO: MADE COMPONENT FOR isSubmitted 
+//TODO: MADE COMPONENT FOR isSubmitted
 export default function SwiperReviews() {
-  const { allReviews, useAddReview } = useReviewsContext();
-  const { isSubmitted, setIsSubmitted } = useAddReview();
+  const { allReviews } = useReviewsContext();
 
-  if (isSubmitted) {
-    return <Submitted setIsSubmitted={setIsSubmitted} />;
-  }
-
-  if (!isSubmitted) {
-    return (
-      <Swiper>
-        {allReviews?.map((customer, index) => (
-          <Review customer={customer} key={index} />
-        ))}
-      </Swiper>
-    );
-  }
+  return (
+    <Swiper>
+      {allReviews?.map((customer, index) => (
+        <Review customer={customer} key={index} />
+      ))}
+    </Swiper>
+  );
 }
