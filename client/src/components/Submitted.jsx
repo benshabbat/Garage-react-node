@@ -1,6 +1,6 @@
 import CheckCircle from "../icons/CheckCircle";
 
-function Submitted(setIsSubmitted) {
+function Submitted({setIsSubmitted}) {
     return (
       <div className="container-contact">
         <div className="success-message">

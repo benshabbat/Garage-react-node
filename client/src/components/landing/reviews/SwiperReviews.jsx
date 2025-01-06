@@ -1,4 +1,3 @@
-import CheckCircle from "../../../icons/CheckCircle";
 import { Review } from "../../index";
 import Submitted from "../../Submitted";
 import { useReviewsContext } from "./ReviewsContext";
@@ -9,21 +8,7 @@ export default function SwiperReviews() {
   const { isSubmitted, setIsSubmitted } = useAddReview();
 
   if (isSubmitted) {
-        return (
-          <div className="container-contact">
-            <div className="success-message">
-              <CheckCircle className="success-icon" />
-              <h2 className="success-title">Thank You!</h2>
-              <p>Your message has been sent successfully. We'll contact you soon.</p>
-              <button 
-                onClick={() => setIsSubmitted(false)}
-                className="new-message-button"
-              >
-                Send Another Message
-              </button>
-            </div>
-          </div>
-        );
+    <Submitted setIsSubmitted={setIsSubmitted} />;
   }
 
   if (!isSubmitted) {

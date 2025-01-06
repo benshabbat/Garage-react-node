@@ -3,7 +3,6 @@ import { createContact } from "../../../utils";
 import FormInput from "../../form/FormInput";
 import "./newContact.css"; // Make sure to import the CSS file
 import Submitted from "../../Submitted";
-import CheckCircle from "../../../icons/CheckCircle";
 
 export default function NewContact() {
   const [formData, setFormData] = useState({});
@@ -31,21 +30,7 @@ export default function NewContact() {
   };
 
   if (isSubmitted) {
-    return (
-      <div className="container-contact">
-        <div className="success-message">
-          <CheckCircle className="success-icon" />
-          <h2 className="success-title">Thank You!</h2>
-          <p>Your message has been sent successfully. We'll contact you soon.</p>
-          <button 
-            onClick={() => setIsSubmitted(false)}
-            className="new-message-button"
-          >
-            Send Another Message
-          </button>
-        </div>
-      </div>
-    );
+    <Submitted setIsSubmitted={setIsSubmitted} />;
   }
 
   return (
