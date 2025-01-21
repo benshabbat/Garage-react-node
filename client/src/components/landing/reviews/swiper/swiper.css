@@ -24,7 +24,7 @@
 
 .swiper-slides {
   display: flex;
-  gap: 20px;
+  /* gap: 20px; */
   transition: transform 0.3s ease;
 }
 
@@ -36,7 +36,12 @@
     flex: 0 0 280px !important;
   }
 }
-
+@media (max-width: 768px) {
+  .nav-button {
+    width: 35px;
+    height: 35px;
+  }
+}
 /* Tablet view */
 @media (min-width: 481px) and (max-width: 768px) {
   .swiper-slides > * {
@@ -100,9 +105,3 @@
   background: #2196f3;
 }
 
-@media (max-width: 768px) {
-  .nav-button {
-    width: 35px;
-    height: 35px;
-  }
-}
