@@ -15,7 +15,7 @@ const Swiper = ({ children }) => {
             </div>
             <NextCard />
           </div>
-          <Pagination />
+          {/* <Pagination /> */}
         </div>
       </div>
   );
