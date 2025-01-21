@@ -58,13 +58,13 @@
 /* Mobile view */
 @media (max-width: 480px) {
   .swiper-slides > * {
-    width: 160px !important;
-    min-width: 160px !important;
-    flex: 0 0 160px !important;
+    width: 100px !important;
+    min-width: 100px !important;
+    flex: 0 0 100px !important;
   }
   
   .swiper-wrapper {
-    gap: 8px;
+    gap: 2px;
   }
 }
 
