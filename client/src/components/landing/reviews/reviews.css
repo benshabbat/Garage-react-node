@@ -70,8 +70,9 @@
   background: var(--color-background);
   border-radius: var(--border-radius-md);
   padding: var(--spacing-md);
+  box-sizing: border-box; /* להבטיח שה-padding נכלל ברוחב */
+  max-width: 100%; /* להבטיח שהכרטיס לא חורג מהמסך */
   border: 2px solid transparent;
-  max-width: 600px;
   margin: 0 auto var(--spacing-md);
   width: calc(100% - 2rem);
   min-height: 300px;
@@ -223,11 +224,16 @@
 }
 
 @media (max-width: 480px) {
+  #reviews {
+    padding: var(--spacing-sm); /* להקטין padding במובייל */
+  }
   .review-card {
     padding: var(--spacing-sm);
-    width: calc(80% - 1rem);
+    width: calc(100% - 2rem); /* שינוי ל-100% עם padding קבוע */
+    min-height: auto; /* להסיר גובה מינימלי קבוע במובייל */
   }
 
+  
   .review-name {
     font-size: var(--font-size-base);
   }
