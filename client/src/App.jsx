@@ -10,24 +10,27 @@ import {
 } from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
+import Layout from "./Layout.jsx";
 
 //TODO:ROUTER V7
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<PageLanding />} />
-          <Route path="/myCars" element={<Account />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/cars" element={<Cars />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/services" element={<ServicesAdmin />} />
-          <Route path="/messages-contact" element={<MessagesOfContact/>} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <Layout>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<PageLanding />} />
+            <Route path="/myCars" element={<Account />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/cars" element={<Cars />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/services" element={<ServicesAdmin />} />
+            <Route path="/messages-contact" element={<MessagesOfContact />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </Layout>
     </>
   );
 }
