@@ -7,14 +7,12 @@
   --review-shadow: rgba(0, 0, 0, 0.1);
   --review-background: #ffffff;
 }
-
 #reviews {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 10px;
 }
-
 .reviews-header {
   text-align: center;
   font-size: 2.5rem;
@@ -45,7 +43,10 @@
   box-shadow: 0 4px 6px var(--review-shadow);
   transition: 0.3s ease;
   border: 2px solid transparent;
-  height: 100%;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  width: calc(100% - 2rem);
+  min-height: 300px;
   display: flex;
   flex-direction: column;
 }
@@ -151,8 +152,8 @@
 @media (max-width: 768px) {
   .review-card {
     padding: 20px;
+    width: calc(100% - 1rem);
   }
-
   .reviews-header {
     font-size: 2rem;
     margin: 30px 0;
@@ -167,7 +168,6 @@
 @media (max-width: 480px) {
   .review-card {
     padding: 16px;
-    width: 100%;
   }
 
   .review-name {
