@@ -7,18 +7,23 @@
   --review-shadow: rgba(0, 0, 0, 0.1);
   --review-background: #ffffff;
 }
+
 #reviews {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  width: 95%;
+  margin: 0 auto;
+  max-width: 1200px;
 }
+
 .reviews-header {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #94aed3;
-  margin: 40px 0;
+  margin: 30px 0;
   text-transform: capitalize;
   letter-spacing: 0.5px;
   position: relative;
@@ -39,14 +44,14 @@
 .review-card {
   background: var(--review-background);
   border-radius: 16px;
-  padding: 24px;
+  padding: 20px;
   box-shadow: 0 4px 6px var(--review-shadow);
   transition: 0.3s ease;
   border: 2px solid transparent;
   max-width: 600px;
   margin: 0 auto 2rem;
   width: calc(100% - 2rem);
-  min-height: 300px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
 }
@@ -150,13 +155,20 @@
 }
 
 @media (max-width: 768px) {
+  #reviews {
+    width: 98%;
+    padding: 12px;
+  }
+
   .review-card {
     padding: 20px;
     width: calc(100% - 1rem);
+    min-height: 220px;
   }
+
   .reviews-header {
-    font-size: 2rem;
-    margin: 30px 0;
+    font-size: 1.8rem;
+    margin: 25px 0;
   }
 
   .btn-add-review {
@@ -168,6 +180,7 @@
 @media (max-width: 480px) {
   .review-card {
     padding: 16px;
+    min-height: 200px;
   }
 
   .review-name {
@@ -179,7 +192,7 @@
   }
 
   .reviews-header {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin: 20px 0;
   }
 }
