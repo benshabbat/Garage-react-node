@@ -7,7 +7,7 @@ const PageLanding = () => {
     <div className="main">
       <About />
       <NewContact/>
-      {/* <Reviews /> */}
+      <Reviews />
       <footer>Written By David-Chen Benshabbat</footer>
     </div>
   );

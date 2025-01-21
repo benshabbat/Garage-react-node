@@ -29,11 +29,11 @@
 }
 
 
-.swiper-slides > * {
+/* .swiper-slides > * {
   width: 280px !important;
   min-width: 280px !important;
   flex: 0 0 280px !important;
-}
+} */
 
 .nav-button {
   flex-shrink: 0;
@@ -80,5 +80,13 @@
   .nav-button {
     width: 35px;
     height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .swiper-slides > * {
+    width: 100% !important;
+    min-width: 100% !important;
+    flex: 0 0 100% !important;
   }
 }
