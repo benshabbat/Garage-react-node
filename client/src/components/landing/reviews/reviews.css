@@ -41,6 +41,9 @@
   backdrop-filter: blur(10px);
   padding: var(--spacing-md);
   border-radius: var(--border-radius-md);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 .reviews-header {
@@ -70,12 +73,12 @@
   background: var(--color-background);
   border-radius: var(--border-radius-md);
   padding: var(--spacing-md);
-  box-sizing: border-box; /* להבטיח שה-padding נכלל ברוחב */
-  max-width: 100%; /* להבטיח שהכרטיס לא חורג מהמסך */
   border: 2px solid transparent;
+  max-width: 600px;
   margin: 0 auto var(--spacing-md);
   width: calc(100% - 2rem);
-  min-height: 300px;
+  height: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   will-change: transform;
@@ -207,6 +210,10 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  #reviews {
+    min-height: 300px;
+  }
+
   .review-card {
     padding: var(--spacing-md);
     width: calc(100% - 1rem);
@@ -225,15 +232,16 @@
 
 @media (max-width: 480px) {
   #reviews {
-    padding: var(--spacing-sm); /* להקטין padding במובייל */
-  }
-  .review-card {
+    min-height: 250px;
     padding: var(--spacing-sm);
-    width: calc(100% - 2rem); /* שינוי ל-100% עם padding קבוע */
-    min-height: auto; /* להסיר גובה מינימלי קבוע במובייל */
   }
 
-  
+  .review-card {
+    padding: var(--spacing-sm);
+    width: 100%;
+    min-height: auto;
+  }
+
   .review-name {
     font-size: var(--font-size-base);
   }
