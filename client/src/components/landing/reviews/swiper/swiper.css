@@ -44,7 +44,7 @@
     min-width: 240px !important;
     flex: 0 0 240px !important;
   }
-  
+
   .swiper-wrapper {
     gap: 10px;
   }
@@ -55,26 +55,28 @@
   .swiper-outer-container {
     padding: 10px;
   }
-  
+
   .swiper-wrapper {
     gap: 4px;
-    margin-bottom: 0;  /* הסרת המרווח התחתון כי אין פגינציה */
+    margin-bottom: 0; /* הסרת המרווח התחתון כי אין פגינציה */
   }
-  
+
   .swiper-slides {
-    gap: 2px;  
+    gap: 2px;
   }
-  
+
   .swiper-slides > * {
     width: 100px !important;
     min-width: 100px !important;
     flex: 0 0 100px !important;
   }
-  
-  .swiper-outer-container .pagination,
-  .swiper-container .pagination,
+
   .pagination {
-    display: none !important;
+    display: none; /* הסתרת הפגינציה במובייל */
+  }
+
+  .dot {
+    display: none;
   }
 }
 
