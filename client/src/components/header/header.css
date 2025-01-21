@@ -74,7 +74,7 @@
   padding: 0.5rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .logo img {
     height: 40px;  /* לוגו קטן יותר במסכים קטנים */
   }
@@ -124,7 +124,7 @@
   }
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 480px) {
   .main-header {
     padding: 0.8rem 1rem;
   }
