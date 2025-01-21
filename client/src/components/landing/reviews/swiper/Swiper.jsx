@@ -3,9 +3,10 @@ import NextCard from "./NextCard";
 import Pagination from "./Pagination";
 import PrevCard from "./Prevcard";
 import Slides from "./Slides";
+
 const Swiper = ({ children }) => {
-  
   return (
+    <div className="swiper-section">
       <div className="swiper-outer-container">
         <div className="swiper-container">
           <div className="swiper-wrapper">
@@ -18,6 +19,7 @@ const Swiper = ({ children }) => {
           <Pagination />
         </div>
       </div>
+    </div>
   );
 };
 
