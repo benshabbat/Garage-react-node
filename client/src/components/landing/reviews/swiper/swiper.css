@@ -28,6 +28,26 @@
   transition: transform 0.3s ease;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #2196f3;
+}
+
+
 /* Desktop view */
 @media (min-width: 769px) {
   .swiper-slides > * {
@@ -105,21 +125,3 @@
   }
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ddd;
-  border: none;
-  cursor: pointer;
-}
-
-.dot.active {
-  background: #2196f3;
-}
