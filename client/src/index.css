@@ -4,43 +4,21 @@
   --section-spacing: 2rem;
   --max-width: 1440px;
   --container-padding: 1rem;
-  --font-primary: 'Poppins', sans-serif;
-  --font-secondary: 'Impact', 'Arial Black', sans-serif;
 }
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-html {
-  height: -webkit-fill-available; /* תיקון גובה למובייל */
-}
-
-/* Base Typography */
-body {
-  font-family: var(--font-primary);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, .logo a {
-  font-family: var(--font-secondary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Body Layout */
+/* Responsive body layout */
 body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
   background-image: url("../../client/src/images/garage.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -50,14 +28,12 @@ body {
   overflow-x: hidden;
 }
 
-/* Main Content */
+/* Main content layout */
 .main {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--container-padding);
-  position: relative;
-  z-index: 1;
 }
 
 .main > * {
@@ -65,7 +41,57 @@ body {
   width: 100%;
 }
 
-/* Typography Styles */
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 60px;
+    --section-spacing: 1.5rem;
+    --container-padding: 0.5rem;
+  }
+
+  body {
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: auto 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-spacing: 1rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: none;
+    padding-top: 0;
+  }
+
+  .main {
+    max-width: 100%;
+  }
+}
+
+/* EXAMPLE FOR NEW FONT */
+
+/* :root {
+  --font-primary: 'Industry', 'Roboto Condensed', sans-serif;
+  --font-secondary: 'Impact', 'Arial Black', sans-serif;
+}
+
+body {
+  font-family: var(--font-primary);
+}
+
+h1, h2, h3, .logo a {
+  font-family: var(--font-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 button, a {
   font-family: var(--font-primary);
   font-weight: 600;
@@ -82,88 +108,8 @@ button, a {
   line-height: 1.6;
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 1024px) {
-  :root {
-    --container-padding: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --header-height: 60px;
-    --section-spacing: 1.5rem;
-    --container-padding: 1rem;
-  }
-
-  body {
-    background-attachment: scroll;
-    background-position: center;
-    background-size: cover;
-    padding-top: var(--header-height);
-  }
-
+@media screen and (max-width: 768px) {
   h1, .logo a {
     letter-spacing: 0.5px;
   }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --section-spacing: 1rem;
-    --container-padding: 0.75rem;
-  }
-
-  body {
-    background-size: cover;
-  }
-
-  .main {
-    padding: 0 var(--container-padding);
-  }
-}
-
-/* Print Styles */
-@media print {
-  body {
-    background: none;
-    padding-top: 0;
-  }
-
-  .main {
-    max-width: 100%;
-  }
-
-  .no-print {
-    display: none;
-  }
-}
-
-/* Utility Classes */
-.container {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
-}
-
-.text-center {
-  text-align: center;
-}
-
-.mb-1 {
-  margin-bottom: 1rem;
-}
-
-.mb-2 {
-  margin-bottom: 2rem;
-}
-
-/* Safe Area Insets for Modern Devices */
-@supports (padding: max(0px)) {
-  body {
-    padding-left: max(var(--container-padding), env(safe-area-inset-left));
-    padding-right: max(var(--container-padding), env(safe-area-inset-right));
-    padding-bottom: max(var(--container-padding), env(safe-area-inset-bottom));
-  }
-}
+} */
