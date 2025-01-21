@@ -1,3 +1,4 @@
+
 .swiper-outer-container {
   width: 100%;
   max-width: 1440px;
@@ -57,7 +58,8 @@
   }
   
   .swiper-wrapper {
-    gap: 4px;  /* הקטנת המרווח בין nav-button לקארד */
+    gap: 4px;
+    margin-bottom: 10px;
   }
   
   .swiper-slides {
@@ -68,6 +70,16 @@
     width: 100px !important;
     min-width: 100px !important;
     flex: 0 0 100px !important;
+  }
+  
+  .pagination {
+    gap: 4px;
+    margin-top: 8px;
+  }
+  
+  .dot {
+    width: 6px;
+    height: 6px;
   }
 }
 
@@ -114,3 +126,4 @@
 .dot.active {
   background: #2196f3;
 }
+
