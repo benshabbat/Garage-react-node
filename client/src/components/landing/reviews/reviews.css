@@ -7,12 +7,14 @@
   --review-shadow: rgba(0, 0, 0, 0.1);
   --review-background: #ffffff;
 }
+
 #reviews {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 10px;
 }
+
 .reviews-header {
   text-align: center;
   font-size: 2.5rem;
@@ -44,7 +46,7 @@
   transition: 0.3s ease;
   border: 2px solid transparent;
   max-width: 600px;
-  margin: 0 auto 2rem;
+  margin: 0 auto;
   width: calc(100% - 2rem);
   min-height: 300px;
   display: flex;
@@ -154,6 +156,7 @@
     padding: 20px;
     width: calc(100% - 1rem);
   }
+  
   .reviews-header {
     font-size: 2rem;
     margin: 30px 0;
@@ -167,8 +170,10 @@
 
 @media (max-width: 480px) {
   .review-card {
-    padding: 2px;
-    margin: 0 12px;
+    padding: 12px;
+    margin: 0;
+    width: 100%;
+    min-height: auto;
   }
 
   .review-name {
