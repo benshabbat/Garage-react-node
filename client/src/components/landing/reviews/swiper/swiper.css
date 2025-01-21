@@ -71,8 +71,10 @@
     flex: 0 0 100px !important;
   }
   
+  .swiper-outer-container .pagination,
+  .swiper-container .pagination,
   .pagination {
-    display: none;  /* הסתרת הפגינציה במובייל */
+    display: none !important;
   }
 }
 
