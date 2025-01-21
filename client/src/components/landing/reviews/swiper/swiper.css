@@ -24,7 +24,7 @@
 
 .swiper-slides {
   display: flex;
-  /* gap: 20px; */
+  gap: 20px;
   transition: transform 0.3s ease;
 }
 
@@ -58,9 +58,9 @@
 /* Mobile view */
 @media (max-width: 480px) {
   .swiper-slides > * {
-    width: calc(100vw - 80px) !important;
-    min-width: calc(100vw - 80px) !important;
-    flex: 0 0 calc(100vw - 80px) !important;
+    width: 160px !important;
+    min-width: 160px !important;
+    flex: 0 0 160px !important;
   }
   
   .swiper-wrapper {
