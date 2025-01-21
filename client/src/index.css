@@ -4,13 +4,23 @@
   --section-spacing: 2rem;
   --max-width: 1440px;
   --container-padding: 1rem;
+  --font-primary: 'Industry', 'Roboto Condensed', sans-serif;
+  --font-secondary: 'Impact', 'Arial Black', sans-serif;
+}
+
+/* Load fonts with swap */
+@font-face {
+  font-family: 'Industry';
+  src: url('/fonts/Industry-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
 }
 
 /* Responsive body layout */
@@ -19,13 +29,17 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  background-image: url("../../client/src/images/garage.jpeg");
+  background-image: image-set(
+    url("/images/garage.webp") type("image/webp"),
+    url("/images/garage.jpeg") type("image/jpeg")
+  );
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   padding-top: var(--header-height);
   overflow-x: hidden;
+  font-family: var(--font-primary);
 }
 
 /* Main content layout */
@@ -39,57 +53,18 @@ body {
 .main > * {
   margin-bottom: var(--section-spacing);
   width: 100%;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+  will-change: transform;
 }
 
-/* Responsive breakpoints */
-@media (max-width: 768px) {
-  :root {
-    --header-height: 60px;
-    --section-spacing: 1.5rem;
-    --container-padding: 0.5rem;
-  }
-
-  body {
-    background-attachment: scroll;
-    background-position: center center;
-    background-size: auto 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --section-spacing: 1rem;
-  }
-}
-
-/* Print styles */
-@media print {
-  body {
-    background: none;
-    padding-top: 0;
-  }
-
-  .main {
-    max-width: 100%;
-  }
-}
-
-/* EXAMPLE FOR NEW FONT */
-
-/* :root {
-  --font-primary: 'Industry', 'Roboto Condensed', sans-serif;
-  --font-secondary: 'Impact', 'Arial Black', sans-serif;
-}
-
-body {
-  font-family: var(--font-primary);
-}
-
+/* Typography styles */
 h1, h2, h3, .logo a {
   font-family: var(--font-secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
 }
 
 button, a {
@@ -108,8 +83,66 @@ button, a {
   line-height: 1.6;
 }
 
-@media screen and (max-width: 768px) {
+/* Interactive elements */
+a:hover, button:hover {
+  opacity: 0.8;
+}
+
+:focus-visible {
+  outline: 3px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 60px;
+    --section-spacing: 1.5rem;
+    --container-padding: 0.5rem;
+  }
+
+  body {
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: auto 100%;
+  }
+
   h1, .logo a {
     letter-spacing: 0.5px;
   }
-} */
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-spacing: 1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --max-width: 1800px;
+    --section-spacing: 3rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: none;
+    padding-top: 0;
+  }
+
+  .main {
+    max-width: 100%;
+  }
+}
