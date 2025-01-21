@@ -168,6 +168,7 @@
 @media (max-width: 480px) {
   .review-card {
     padding: 2px;
+    margin: 0 12px;
   }
 
   .review-name {
