@@ -80,6 +80,17 @@
   position: sticky;
   top: 0;
 }
+.table__body th.sorted-ascending::after {
+  content: " ↑";
+}
+
+.table__body th.sorted-descending::after {
+  content: " ↓";
+}
+
+.table__body th:hover {
+  background: #edf2f7;
+}
 
 .table__body td button {
   padding: 6px 12px;
