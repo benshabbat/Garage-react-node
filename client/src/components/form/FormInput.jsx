@@ -7,12 +7,6 @@ export default function FormInput({ input, handleChange, isFocus, index,classNam
   const [isBlur, setIsBlur] = useState(false);
   const inputRef = useRef();
 
-  // const showError =
-  //   isBlur &&
-  //   (input.name === "username"
-  //     ? input.isError
-  //     : !valid(inputRef?.current?.value, input.name));
-
   const showError = isBlur && (
     input.isError || 
     (input.name !== "username" && !valid(inputRef?.current?.value, input.name))
