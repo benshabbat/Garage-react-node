@@ -1,5 +1,7 @@
 import { Children, cloneElement, useState } from "react";
 
+
+//need to understand this code about sorting
 const Table = ({ trTh, trTd }) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
