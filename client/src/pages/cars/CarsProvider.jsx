@@ -30,6 +30,7 @@ export default function CarsProvider({ children }) {
     isOpenManageCar,
     isOpenModalDeleteCar,
     isOpenModalEditCar,
+    isOpenModalCreateService,
     dispatch,
     user?._id,
   ]);
