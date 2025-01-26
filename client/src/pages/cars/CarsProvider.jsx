@@ -71,16 +71,6 @@ export default function CarsProvider({ children }) {
   };
 
   const useCreateService = () => {
-    useEffect(() => {
-      setFormData({
-        title: "",
-        description: "",
-        price: 0,
-        paid: false,
-        status: "pending"
-      });
-    }, []);
-  
     const onSubmit = async (e) => {
       e.preventDefault();
       await createService(selectedCar?._id, formData);

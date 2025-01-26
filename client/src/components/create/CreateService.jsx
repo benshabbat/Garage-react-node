@@ -14,7 +14,7 @@ const CreateService = () => {
             { name: "title" },
             { name: "description" },
             { name: "price", type: "number", min: 0 },
-            { name: "paid", type: "checkbox", },
+            { name: "paid", type: "checkbox" },
           ]}
           options={options}
           nameSelect="status"
