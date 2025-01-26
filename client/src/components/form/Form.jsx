@@ -12,14 +12,21 @@ const Form = ({
   nameSelect,
   isFocus = true,
 }) => {
+  // const handleChange = (e) => {
+  //   const { name, value, checked, type } = e.target;
+  //   setData(prevState => ({
+  //     ...prevState,
+  //     [name]: type === "checkbox" ? checked : value,
+  //   }));
+  // };
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
+    console.log('Toggle changed:', name, checked); // Add this debug log
     setData(prevState => ({
       ...prevState,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
   return (
     <form className="form" onSubmit={onSubmit}>
       {handleClick && (
