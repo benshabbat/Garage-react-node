@@ -18,9 +18,9 @@ export default function FormInput({ input, handleChange, isFocus, index,classNam
     (input.name !== "username" && !valid(inputRef?.current?.value, input.name))
   );
 
-  if (input.type === "checkbox") {
-    return <FormToggle input={input} handleChange={handleChange} />;
-  }
+  // if (input.type === "checkbox") {
+  //   return <FormToggle input={input} handleChange={handleChange} />;
+  // }
 
   
   return (
