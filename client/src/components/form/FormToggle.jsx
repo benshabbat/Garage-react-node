@@ -5,9 +5,8 @@ export default function FormToggle({ input, handleChange }) {
         type="checkbox"
         id={input.name}
         name={input.name}
-        checked={input.checked || false}
+        checked={input.checked}
         onChange={handleChange}
-        required={input.required}
       />
       <label className="toggle-label" htmlFor={input.name}>
         <span className="toggle-switch"></span>
