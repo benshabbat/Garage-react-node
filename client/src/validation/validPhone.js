@@ -1,4 +1,4 @@
-const PHONE_REGEX = /^[0-9]{3}[-][0-9]{7}|[0-9]{10}$/;
+const PHONE_REGEX = /^[0-9]{3}[-][0-9]{7}|[0-9]{10}|[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
 const validPhone = (data) => {
     if (
       (data?.length === 10 && +data) ||
