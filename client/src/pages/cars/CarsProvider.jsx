@@ -2,12 +2,11 @@ import "../../components/table/table.css";
 import { CarsContext } from "./CarsContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createService, updateCar,deleteCar } from "../../utils";
+import { createService, updateCar, deleteCar } from "../../utils";
 import { getCarsByType } from "../../features/admin/adminSlice";
 import useOpenModal from "../../hooks/useOpenModal";
 
 export default function CarsProvider({ children }) {
-  
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
 
@@ -71,6 +70,11 @@ export default function CarsProvider({ children }) {
   };
 
   const useCreateService = () => {
+    useEffect(() => {
+      setFormData({
+        paid: false,
+      });
+    }, []);
     const onSubmit = async (e) => {
       e.preventDefault();
       await createService(selectedCar?._id, formData);
@@ -91,7 +95,6 @@ export default function CarsProvider({ children }) {
     };
     return { onSubmit, setFormData, formData };
   };
-
 
   const useDeleteCar = async (e) => {
     e.preventDefault();
