@@ -4,6 +4,8 @@ import validCar from "./validCar.js";
 import validEmail from "./validEmail.js";
 import validPass from "./validPass.js";
 
+//TODO: Add more validation if existing(email, phone, username, etc)
+
 // Constants for input validation messages and patterns
 const INPUT_TYPES = {
   email: {
