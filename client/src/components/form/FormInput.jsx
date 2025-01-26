@@ -20,7 +20,8 @@ export default function FormInput({ input, handleChange, isFocus, index,classNam
     <label className={classNameLabel?classNameLabel:"form-label"}>
       {!input.hidden &&!classNameLabel &&<span>{input.name}</span>}
       {showError && (
-        <span className="error">{inputType(input).errorMessage}</span>
+        <span className="error">Check color</span>
+        // <span className="error">{inputType(input).errorMessage}</span>
       )}
       <input
         // {...input}
