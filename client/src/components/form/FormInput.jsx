@@ -17,7 +17,7 @@ export default function FormInput({ input, handleChange, isFocus, index,classNam
     return <FormToggle input={input} handleChange={handleChange} />;
   }
   return (
-    <label className={classNameLabel?classNameLabel:"form-label"}>
+    <label className={classNameLabel??"form-label"}>
       {!input.hidden &&!classNameLabel &&<span>{input.name}</span>}
       {showError && (
         <span className="error">{inputType(input).errorMessage}</span>
