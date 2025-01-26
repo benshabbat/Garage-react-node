@@ -1,8 +1,9 @@
 import { OpenModal, Form } from "..";
 import { useCarsContext } from "../../pages/cars/CarsContext";
+
 const CreateService = () => {
   const { useCreateService, options, modals } = useCarsContext();
-  const { onSubmit, setFormData } = useCreateService();
+  const { onSubmit, setFormData, formData } = useCreateService();
 
   return (
     <OpenModal
@@ -14,7 +15,7 @@ const CreateService = () => {
             { name: "title" },
             { name: "description" },
             { name: "price", type: "number", min: 0 },
-            { name: "paid", type: "checkbox" },
+            { name: "paid", type: "checkbox", checked: formData?.paid },
           ]}
           options={options}
           nameSelect="status"
