@@ -21,7 +21,7 @@ export default function MsgOfContactTable() {
     const { theDate } = getMomentFromUpdatedAt(message.updatedAt);
     return (
       <tr key={message._id}>
-        <td><button value={message._id}  name="deleteContact" onClick={handleContact}>Delete</button></td>
+        <td><button value={message._id}  name="deleteContact" onClick={handleContact} >Delete</button></td>
         <td data-label="First Name">{message.firstName}</td>
         <td data-label="Last Name">{message.lastName}</td>
         <td data-label="Email">{message.email}</td>
