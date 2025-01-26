@@ -62,23 +62,21 @@
 }
 
 /* Form Elements */
-.error {
-  color: #ef4444;
-  /* font-size: 0.85rem;
-  margin-top: 0.5rem;
-  font-weight: 500;
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  text-transform: capitalize; */
-}
-
 .form-label {
   width: 100%;
   margin-bottom: 1.5rem;
 }
 
-
+.error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
 
 .form-label span {
   display: block;
