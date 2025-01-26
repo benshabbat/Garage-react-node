@@ -7,17 +7,24 @@ export default function FormInput({ input, handleChange, isFocus, index,classNam
   const [isBlur, setIsBlur] = useState(false);
   const inputRef = useRef();
 
-  const showError =
-    isBlur &&
-    (input.name === "username"
-      ? input.isError
-      : !valid(inputRef?.current?.value, input.name));
+  // const showError =
+  //   isBlur &&
+  //   (input.name === "username"
+  //     ? input.isError
+  //     : !valid(inputRef?.current?.value, input.name));
+
+  const showError = isBlur && (
+    input.isError || 
+    (input.name !== "username" && !valid(inputRef?.current?.value, input.name))
+  );
 
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
   }
+
+  
   return (
-    <label className="form-label">
+    <label className={classNameLabel??"form-label"}>
       {!input.hidden &&!classNameLabel &&<span>{input.name}</span>}
       {showError && (
         <span className="error">{inputType(input).errorMessage}</span>
@@ -36,7 +43,7 @@ export default function FormInput({ input, handleChange, isFocus, index,classNam
         placeholder={input.placeholder || input.name}
         title={inputType(input).title}
         onChange={handleChange}
-        aria-invalid={valid(inputRef?.current?.value, input.name)}
+        aria-invalid={showError}
         required={input.type !== "checkbox"}
         autoComplete="off"
         onBlur={() => setIsBlur(true)}
