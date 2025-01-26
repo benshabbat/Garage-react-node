@@ -45,6 +45,19 @@ const authService = {
       localStorage.removeItem("user"); // מחיקת המידע המקומי בכל מקרה
     }
   },
+
+  refresh: async () => {
+    try {
+      const response = await axios.post("/auth/refresh");
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
 };
 
 export default authService;

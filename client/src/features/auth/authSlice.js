@@ -52,6 +52,15 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout();
 });
+
+
+export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
+  try {
+    return await authService.refresh();
+  } catch (error) {
+    return thunkAPI.rejectWithValue("Refresh failed");
+  }
+});
 // //Logout 
 // export const refresh = createAsyncThunk("auth/refresh", async () => {
 //   await authService.refresh();
@@ -109,6 +118,9 @@ const authSlice = createSlice({
         state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {state.user = null})
+      .addCase(refresh.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
       // .addCase(logout.refresh, (state,action) => (state.user = action.payload));
   },
 });
