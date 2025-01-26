@@ -73,10 +73,16 @@ export default function CarsProvider({ children }) {
 
   const useCreateService = () => {
     useEffect(() => {
-      if (!formData) { 
-        setFormData({ title: "", description: "", price: 0, paid: false });
+      if (!formData) {
+        setFormData({
+          title: "",
+          description: "",
+          price: 0,
+          paid: false,
+          status: "pending"
+        });
       }
-    }, [isOpenModalCreateService, selectedCar]);
+    }, [isOpenModalCreateService]);
   
     const onSubmit = async (e) => {
       e.preventDefault();
