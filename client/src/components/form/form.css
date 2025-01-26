@@ -69,12 +69,11 @@
 
 .error {
   color: #ef4444;
-  font-size: 0.85rem;
+  font-size: 0.9rem;  
   margin-top: 0.5rem;
   font-weight: 500;
   display: block;
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
   text-transform: capitalize;
 }
 
