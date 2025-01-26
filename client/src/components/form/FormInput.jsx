@@ -35,7 +35,6 @@ export default function FormInput({ input, handleChange, isFocus, index,classNam
         type={input?.type}
         name={input?.name}
         value={input?.value}
-        // checked={input?.checked ? input?.checked : false}
         min={input?.min}
         hidden={input?.hidden}
         ref={inputRef}
