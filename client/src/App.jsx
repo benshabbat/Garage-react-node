@@ -21,7 +21,7 @@ function App() {
     if (storedUser) {
       dispatch({ type: "auth/login/fulfilled", payload: storedUser });
     }
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <BrowserRouter>
