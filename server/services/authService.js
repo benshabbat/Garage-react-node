@@ -54,12 +54,22 @@ const login = async (req, res, next) => {
       process.env.JWT
     );
 
+    // res.cookie("access_token", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === 'production',
+    //   sameSite: 'lax',
+    //   path: '/'
+    // })
     res.cookie("access_token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      path: '/'
-    }).json({
+      secure: true,
+      sameSite: 'none',
+      path: '/',
+      domain: 'garage-server-dcv1.onrender.com'
+    })
+    
+    
+    .json({
       _id: user.id,
       isAdmin: user.isAdmin
     });
