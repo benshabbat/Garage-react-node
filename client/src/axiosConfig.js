@@ -1,18 +1,16 @@
 import axios from "axios";
+import store from "./app/store";
+import { refresh } from "./features/auth/authSlice";
 
 axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
 axios.defaults.withCredentials = true;
-
-console.log("All cookies:", document.cookie);
 
 axios.interceptors.request.use((config) => {
   const token = document.cookie
     .split("; ")
     .find((row) => row.startsWith("access_token="))
     ?.split("=")[1];
-
-  console.log("Token:", token);
-
+  
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
@@ -22,8 +20,17 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("user");
+    const originalRequest = error.config;
+    
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      try {
+        await store.dispatch(refresh()).unwrap();
+        return axios(originalRequest);
+      } catch (refreshError) {
+        localStorage.removeItem("user");
+        return Promise.reject(refreshError);
+      }
     }
     return Promise.reject(error);
   }

@@ -1,4 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { refresh } from "./features/auth/authSlice";
 import { Header } from "./components";
 import {
   Account,
@@ -13,6 +16,22 @@ import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 
 //TODO:ROUTER V7
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const refreshToken = async () => {
+      try {
+        await dispatch(refresh()).unwrap();
+      } catch (err) {
+        console.error("Token refresh failed");
+      }
+    };
+
+    // בדיקת טוקן בכל טעינת דף
+    refreshToken();
+  }, [dispatch]);
+
   return (
     <>
       <BrowserRouter>
