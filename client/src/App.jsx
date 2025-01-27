@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, HashRouter } from "react-router-dom";
 import { Header } from "./components";
 import {
   Account,
@@ -25,7 +25,8 @@ function App() {
   }, [dispatch]);
   return (
     <>
-      <BrowserRouter>
+      <HashRouter >
+      {/* <BrowserRouter> */}
         <Header />
         <Routes>
           <Route path="/" element={<PageLanding />} />
@@ -37,7 +38,8 @@ function App() {
           <Route path="/messages-contact" element={<MessagesOfContact />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
+      </HashRouter>
     </>
   );
 }
