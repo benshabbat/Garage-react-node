@@ -25,8 +25,8 @@ function App() {
   }, [dispatch]);
   return (
     <>
-      {/* <HashRouter > */}
-      <BrowserRouter>
+      <HashRouter >
+      {/* <BrowserRouter> */}
         <Header />
         <Routes>
           <Route path="/" element={<PageLanding />} />
@@ -38,8 +38,8 @@ function App() {
           <Route path="/messages-contact" element={<MessagesOfContact />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </BrowserRouter>
-      {/* </HashRouter> */}
+      {/* </BrowserRouter> */}
+      </HashRouter>
     </>
   );
 }
