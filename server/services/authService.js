@@ -56,10 +56,9 @@ const login = async (req, res, next) => {
 
     res.cookie("access_token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'none',
-      path: '/',
-      domain: 'garage-server-dcv1.onrender.com'
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/'
     }).json({
       _id: user.id,
       isAdmin: user.isAdmin
