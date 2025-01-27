@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components";
 import {
   Account,
@@ -35,7 +35,7 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/services" element={<ServicesAdmin />} />
           <Route path="/messages-contact" element={<MessagesOfContact />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
     </>
