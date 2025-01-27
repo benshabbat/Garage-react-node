@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createService, updateCar,deleteCar } from "../../utils";
 import { getCarsByType } from "../../features/admin/adminSlice";
+import { getUser } from "../../features/user/userSlice";
 import useOpenModal from "../../hooks/useOpenModal";
 
 export default function CarsProvider({ children }) {
   
+  const { user: userAuth } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
 
@@ -23,7 +25,11 @@ export default function CarsProvider({ children }) {
   const displayCars = filteredCars || cars;
 
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (userAuth?._id && !user) {
+      dispatch(getUser(userAuth._id));
+    }
+  }, [dispatch, userAuth, user]);
   useEffect(() => {
     dispatch(getCarsByType(user?._id));
   }, [
