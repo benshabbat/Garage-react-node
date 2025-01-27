@@ -1,11 +1,11 @@
 import axios from "axios";
-import store from "./app/store";
-import { refresh } from "./features/auth/authSlice";
 
-axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
-axios.defaults.withCredentials = true;
+const axiosInstance = axios.create({
+  baseURL: "https://garage-server-dcv1.onrender.com/api",
+  withCredentials: true
+});
 
-axios.interceptors.request.use((config) => {
+axiosInstance.interceptors.request.use((config) => {
   const token = document.cookie
     .split("; ")
     .find((row) => row.startsWith("access_token="))
@@ -17,16 +17,22 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-axios.interceptors.response.use(
+let store = null;
+export const injectStore = (_store) => {
+  store = _store;
+};
+
+axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
     
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry && store) {
       originalRequest._retry = true;
       try {
+        const { refresh } = await import('./features/auth/authSlice');
         await store.dispatch(refresh()).unwrap();
-        return axios(originalRequest);
+        return axiosInstance(originalRequest);
       } catch (refreshError) {
         localStorage.removeItem("user");
         return Promise.reject(refreshError);
@@ -36,4 +42,4 @@ axios.interceptors.response.use(
   }
 );
 
-export default axios;
+export default axiosInstance;
