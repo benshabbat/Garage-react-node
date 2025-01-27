@@ -10,19 +10,10 @@ import {
 } from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
 
 //TODO:ROUTER V7
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    console.log("check useffect app")
-    if (storedUser) {
-      dispatch({ type: "auth/login/fulfilled", payload: storedUser });
-    }
-  }, [dispatch]);
   return (
     <>
       <HashRouter >
