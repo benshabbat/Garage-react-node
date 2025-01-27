@@ -18,6 +18,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
+    console.log("check useffect app")
     if (storedUser) {
       dispatch({ type: "auth/login/fulfilled", payload: storedUser });
     }
