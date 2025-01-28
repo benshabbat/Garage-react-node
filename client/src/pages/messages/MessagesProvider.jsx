@@ -25,8 +25,8 @@ export default function MessagesProvider({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user?.isAdmin) dispatch(getUsers());
     if (user) dispatch(getMessagesByIdUser(user?._id));
+    if (user?.isAdmin) dispatch(getUsers());
   }, [user, isOpenCreateMessage, isOpenModalDeleteMessage, dispatch]);
 
   const handleSearch = (e) => {
