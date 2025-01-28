@@ -35,7 +35,7 @@ export default function MessagesTable() {
       <td data-label="Description">{message?.description}</td>
       <td data-label="Date">{message?.updatedAt}</td>
     </tr>
-  ))||[]
+  ))
 
   return (
     <div className="table-container">
