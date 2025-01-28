@@ -16,12 +16,12 @@ export default function MessagesProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
 
   const [selectedMsg, setSelectedMsg] = useState(null);
-  const [filteredMessages, setFilteredMessages] = useState();
+  const [filteredMessages, setFilteredMessages] = useState([]);
 
   const [handleDeleteMessage, isOpenModalDeleteMessage] = useOpenModal();
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModal();
   
-  const displayMessages = filteredMessages || messages;
+  const displayMessages = filteredMessages || messages||[];
   const dispatch = useDispatch();
 
   useEffect(() => {
