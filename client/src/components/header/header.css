@@ -48,7 +48,7 @@
 .navbar a,
 .navbar button {
   font-size: 1.15rem;
-  color: rgb(222, 185, 185);
+  color:rgba(222, 185, 185, 0.1);
   text-decoration: none;
   font-weight: 500;
   border: none;
@@ -68,7 +68,7 @@
   display: none;
   background: none;
   border: none;
-  color: rgb(222, 185, 185);
+  color: rgb(62, 56, 56);
   font-size: 1.8rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -129,8 +129,7 @@
     padding: 0.8rem 1rem;
   }
   .logo img {
-    height: 35px;  /* לוגו קטן יותר במסכים קטנים */
-  }
+    height: 35px;  
   .logo a {
     font-size: 1.4rem;
   }
@@ -145,5 +144,64 @@
   .navbar button {
     padding: 1rem 0.75rem;
     margin: 0.25rem 0;
+  }
+}
+
+
+@media screen and (max-width: 360px) {
+  .main-header {
+    padding: 0.6rem 0.75rem;  
+
+  .logo img {
+    height: 30px; 
+  }
+
+  .logo a {
+    font-size: 1.2rem; 
+  }
+
+  .navbar {
+    padding: 4rem 1rem;  
+  }
+
+  .navbar a,
+  .navbar button {
+    font-size: 1rem;  
+    padding: 0.75rem 0.5rem;
+    margin: 0.2rem 0;
+  }
+
+  .mobile-nav-toggle {
+    font-size: 1.5rem; 
+    padding: 0.4rem;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .main-header {
+    padding: 0.5rem;
+  }
+
+  .logo img {
+    height: 25px;
+  }
+
+  .logo a {
+    font-size: 1rem;
+  }
+
+  .navbar {
+    padding: 3.5rem 0.75rem;
+  }
+
+  .navbar a,
+  .navbar button {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.4rem;
+  }
+
+  .mobile-nav-toggle {
+    font-size: 1.3rem;
+    padding: 0.3rem;
   }
 }
