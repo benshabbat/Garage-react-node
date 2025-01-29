@@ -170,22 +170,90 @@
 
 @media (max-width: 480px) {
   .review-card {
-    padding: 12px;
-    margin: 0;
-    width: 100%;
-    min-height: auto;
+    padding: 16px;  /* הגדלתי את הpadding */
+    margin: 0 auto;  /* הוספתי margin auto לשמירה על מרכוז */
+    width: calc(100% - 1.5rem);  /* הגדלתי את הרוחב מעט */
+    min-height: 250px;  /* הוספתי min-height מינימלי */
+  }
+
+  .review-header {
+    margin-bottom: 12px;
+  }
+
+  .review-avatar {
+    width: 40px;  /* הקטנתי מעט את האווטאר */
+    height: 40px;
+    font-size: 1rem;
   }
 
   .review-name {
     font-size: 1rem;
   }
 
+  .review-date {
+    font-size: 0.85rem;
+  }
+
   .review-description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;  /* הגדלתי מעט את הפונט */
+    -webkit-line-clamp: 4;  /* הקטנתי את מספר השורות המוצגות */
+    margin-bottom: 16px;
+  }
+
+  .review-time {
+    padding: 4px 10px;
+    font-size: 0.85rem;
   }
 
   .reviews-header {
     font-size: 1.8rem;
     margin: 20px 0;
+  }
+
+  .btn-add-review {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+    margin: 2rem auto;
+  }
+}
+
+/* הוספתי breakpoint נוסף למסכים קטנים במיוחד */
+@media (max-width: 360px) {
+  .review-card {
+    padding: 14px;
+    width: calc(100% - 1rem);
+    min-height: 220px;
+  }
+
+  .review-avatar {
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+  }
+
+  .review-name {
+    font-size: 0.95rem;
+  }
+
+  .review-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .review-time {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+
+  .reviews-header {
+    font-size: 1.6rem;
+    margin: 16px 0;
+  }
+
+  .btn-add-review {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.9rem;
+    margin: 1.5rem auto;
   }
 }
