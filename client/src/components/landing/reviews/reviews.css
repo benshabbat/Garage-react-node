@@ -230,33 +230,36 @@
   }
 }
 
-@media (max-width: 360px) {
+/* מסכים קטנים יותר */
+@media (max-width: 400px) {
   #reviews {
-    padding: 8px 0;
+    padding: 8px 4px;
   }
 
   .review-card {
-    padding: 15px;
-    margin: 8px 4px; /* הוספת מרווח בצדדים */
-    width: auto; /* שינוי לauto במקום calc */
-    border-radius: 25px;
+    padding: 12px;
+    margin: 8px auto;
+    width: calc(100% - 8px);
+    gap: 4px;
+    border-radius: 16px;
   }
 
   .review-rating {
     display: flex;
-    flex-direction: column; /* סידור אנכי */
-    align-items: flex-start; /* יישור לשמאל */
+    flex-direction: column;
+    align-items: flex-start;
     gap: 4px;
   }
 
   .review-stars-text {
-    margin-left: 0; /* ביטול המרווח משמאל */
-    font-size: 0.8rem;
+    margin-left: 0;
   }
+}
 
-  /* התאמת גודל הכוכבים */
-  .star-rating-container {
-    display: flex;
-    gap: 2px;
+/* גלקסי ומסכים קטנים מאוד */
+@media (max-width: 360px) {
+  .review-card {
+    width: calc(100% - 4px);
+    padding: 10px;
   }
 }
