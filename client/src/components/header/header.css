@@ -48,7 +48,7 @@
 .navbar a,
 .navbar button {
   font-size: 1.15rem;
-  color:rgba(222, 185, 185, 0.1);
+  color: rgb(222, 185, 185);
   text-decoration: none;
   font-weight: 500;
   border: none;
@@ -68,7 +68,7 @@
   display: none;
   background: none;
   border: none;
-  color: rgb(62, 56, 56);
+  color: rgb(222, 185, 185);
   font-size: 1.8rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -129,7 +129,8 @@
     padding: 0.8rem 1rem;
   }
   .logo img {
-    height: 35px;  
+    height: 35px;  /* לוגו קטן יותר במסכים קטנים */
+  }
   .logo a {
     font-size: 1.4rem;
   }
@@ -150,29 +151,30 @@
 
 @media screen and (max-width: 360px) {
   .main-header {
-    padding: 0.6rem 0.75rem;  
+    padding: 0.6rem 0.75rem;  /* פחות padding בצדדים */
+  }
 
   .logo img {
-    height: 30px; 
+    height: 30px;  /* לוגו קטן עוד יותר */
   }
 
   .logo a {
-    font-size: 1.2rem; 
+    font-size: 1.2rem;  /* פונט קטן יותר */
   }
 
   .navbar {
-    padding: 4rem 1rem;  
+    padding: 4rem 1rem;  /* פחות padding בתפריט */
   }
 
   .navbar a,
   .navbar button {
-    font-size: 1rem;  
+    font-size: 1rem;  /* פונט קטן יותר בתפריט */
     padding: 0.75rem 0.5rem;
     margin: 0.2rem 0;
   }
 
   .mobile-nav-toggle {
-    font-size: 1.5rem; 
+    font-size: 1.5rem;  /* אייקון תפריט קטן יותר */
     padding: 0.4rem;
   }
 }
