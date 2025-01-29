@@ -8,7 +8,7 @@ export default function ViewReviews() {
   const { isSubmitted, setIsSubmitted } = useAddReview();
 
   if (isSubmitted) {
-    return <Submitted setIsSubmitted={setIsSubmitted} />;
+    return <Submitted setIsSubmitted={setIsSubmitted} review={true} name={"review"}/>;
   }
   
   return (
