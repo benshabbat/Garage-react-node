@@ -16,8 +16,8 @@ import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 function App() {
   return (
     <>
-      <HashRouter >
-      {/* <BrowserRouter> */}
+      {/* <HashRouter > */}
+      <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<PageLanding />} />
@@ -29,8 +29,8 @@ function App() {
           <Route path="/messages-contact" element={<MessagesOfContact />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      {/* </BrowserRouter> */}
-      </HashRouter>
+      </BrowserRouter>
+      {/* </HashRouter> */}
     </>
   );
 }
