@@ -64,8 +64,24 @@
 
 /* התאמה לגלקסי */
 @media (max-width: 360px) {
+  .review-rating {
+    flex-wrap: wrap; /* מאפשר שבירת שורה */
+    gap: 4px; /* מרווח בין האלמנטים */
+    margin-bottom: 8px;
+  }
+
+  .review-stars-text {
+    width: 100%; /* תופס שורה מלאה */
+    margin-left: 0;
+    text-align: left;
+    font-size: 0.8rem;
+  }
+}
+
+/* מעדכנים ב-star-rating.css */
+@media (max-width: 360px) {
   .star-button {
-    font-size: 16px;
+    font-size: 14px; /* הקטנה נוספת */
   }
   
   .star-rating-container {
@@ -73,9 +89,8 @@
   }
 }
 
-/* התאמה למסכים קטנים מאוד */
 @media (max-width: 280px) {
   .star-button {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
