@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, HashRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components";
 import {
   Account,
@@ -8,17 +8,20 @@ import {
   Cars,
   ServicesAdmin,
 } from "./pages";
-import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 
+// Layout Component
+const Layout = ({ children }) => (
+  <>
+    <Header />
+    {children}
+  </>
+);
 
-//TODO:ROUTER V7
 function App() {
   return (
-    <>
-      {/* <HashRouter > */}
-      <BrowserRouter>
-        <Header />
+    <BrowserRouter>
+      <Layout>
         <Routes>
           <Route path="/" element={<PageLanding />} />
           <Route path="/myCars" element={<Account />} />
@@ -27,11 +30,11 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/services" element={<ServicesAdmin />} />
           <Route path="/messages-contact" element={<MessagesOfContact />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </BrowserRouter>
-      {/* </HashRouter> */}
-    </>
+      </Layout>
+    </BrowserRouter>
   );
 }
+
 export default App;
