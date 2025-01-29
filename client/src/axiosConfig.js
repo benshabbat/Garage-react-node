@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// axios.defaults.baseURL = "http://localhost:8800/api";
 axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
 axios.defaults.withCredentials = true;
 
