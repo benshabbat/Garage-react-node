@@ -42,3 +42,13 @@
     transform: scale(1);
   }
 }
+
+@media (max-width: 480px) {
+  .star-rating-container {
+    gap: 2px;
+  }
+  
+  .star-button {
+    font-size: 1.2rem;
+  }
+}

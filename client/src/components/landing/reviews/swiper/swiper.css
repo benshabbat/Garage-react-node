@@ -46,6 +46,7 @@
 .dot.active {
   background: #2196f3;
 }
+
 .nav-button {
   flex-shrink: 0;
   width: 40px;
@@ -94,7 +95,7 @@
 
   .swiper-wrapper {
     gap: 4px;
-    margin-bottom: 0; /* הסרת המרווח התחתון כי אין פגינציה */
+    margin-bottom: 0;
   }
 
   .swiper-slides {
@@ -102,13 +103,13 @@
   }
 
   .swiper-slides > * {
-    width: 100px !important;
-    min-width: 100px !important;
-    flex: 0 0 100px !important;
+    width: 280px !important;
+    min-width: 280px !important;
+    flex: 0 0 280px !important;
   }
 
   .pagination {
-    display: none; /* הסתרת הפגינציה במובייל */
+    display: none;
   }
 
   .dot {

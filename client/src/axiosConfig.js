@@ -2,7 +2,7 @@ import axios from "axios";
 
 // axios.defaults.baseURL = "http://localhost:8800/api";
 // axios.defaults.baseURL = "https://garage-server-dcv1.onrender.com/api";
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8800';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8800/api';
 
 axios.defaults.withCredentials = true;
 
