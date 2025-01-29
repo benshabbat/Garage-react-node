@@ -12,6 +12,7 @@
   color: #ddd;
   transition: color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
+  font-size: 24px; /* גודל ברירת מחדל */
 }
 
 .star-button.active {
@@ -40,5 +41,41 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+
+/* התאמה למסכים בינוניים */
+@media (max-width: 768px) {
+  .star-button {
+    font-size: 20px;
+  }
+}
+
+/* התאמה למסכים קטנים */
+@media (max-width: 480px) {
+  .star-button {
+    font-size: 18px;
+  }
+  
+  .star-rating-container {
+    gap: 2px;
+  }
+}
+
+/* התאמה לגלקסי */
+@media (max-width: 360px) {
+  .star-button {
+    font-size: 16px;
+  }
+  
+  .star-rating-container {
+    gap: 1px;
+  }
+}
+
+/* התאמה למסכים קטנים מאוד */
+@media (max-width: 280px) {
+  .star-button {
+    font-size: 14px;
   }
 }
