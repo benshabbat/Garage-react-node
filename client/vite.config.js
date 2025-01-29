@@ -10,6 +10,15 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-    },
+    }
   },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  }
 });
