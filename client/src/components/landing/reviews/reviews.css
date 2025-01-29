@@ -94,12 +94,16 @@
   align-items: center;
   margin-bottom: 16px;
   flex-shrink: 0;
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 8px;
 }
 
 .review-stars-text {
   margin-left: 8px;
   font-weight: 600;
   color: var(--review-text);
+  white-space: nowrap;
 }
 
 .review-description {
@@ -177,10 +181,10 @@
   .review-card {
     padding: 16px;
     margin: 10px auto;
-    width: 100%;  /* שינוי לרוחב מלא */
+    width: 100%;
     min-height: auto;
     gap: 8px;
-    border-radius: 16px; /* הקטנת הרדיוס */
+    border-radius: 16px;
   }
 
   .review-header {
@@ -188,7 +192,7 @@
   }
 
   .review-avatar {
-    width: 35px;  /* הקטנה נוספת */
+    width: 35px;
     height: 35px;
     font-size: 0.9rem;
   }
@@ -205,7 +209,7 @@
     font-size: 0.9rem;
     line-height: 1.3;
     margin: 4px 0;
-    -webkit-line-clamp: 2; /* הגבלה ל-2 שורות */
+    -webkit-line-clamp: 2;
   }
 
   .review-time {
@@ -219,14 +223,13 @@
   }
 
   .btn-add-review {
-    width: 90%;  /* רוחב קבוע */
+    width: 90%;
     padding: 0.7rem;
     font-size: 0.9rem;
     margin: 1rem auto;
   }
 }
 
-/* התאמה ספציפית לגלקסי */
 @media (max-width: 360px) {
   #reviews {
     padding: 8px;
@@ -261,6 +264,14 @@
   .review-time {
     padding: 3px 10px;
     font-size: 0.75rem;
+  }
+
+  .review-rating {
+    gap: 4px;
+  }
+  
+  .review-stars-text {
+    font-size: 0.8rem;
   }
 
   .reviews-header {
