@@ -232,18 +232,18 @@
 
 @media (max-width: 360px) {
   #reviews {
-    padding: 8px 4px; /* הקטנת padding בצדדים */
+    padding: 8px 0;
   }
 
   .review-card {
     padding: 12px;
     margin: 8px auto;
     gap: 4px;
-    width: calc(100% - 0.5rem); /* הגדלת רוחב הקארד */
-    max-width: none; /* מבטל את ההגבלה */
+    width: calc(100% - 0.1rem);
+    max-width: none;
+    border-radius: 12px;
   }
 
-  /* שאר הסטיילים נשארים אותו דבר */
   .review-avatar {
     width: 32px;
     height: 32px;
@@ -271,20 +271,12 @@
 
   .review-rating {
     display: flex;
-    flex-direction: column;  /* סידור בטור במקום בשורה */
-    align-items: flex-start; /* יישור לשמאל */
-    gap: 2px;
+    align-items: center;
+    gap: 4px;
     width: 100%;
   }
-
-  .star-rating-container {
-    display: inline-flex;
-    max-width: 100%;  /* הגבלת רוחב מקסימלי */
-    overflow: hidden; /* מניעת גלישה */
-  }
-
+  
   .review-stars-text {
-    margin-left: 0;  /* ביטול margin שמאלי */
     font-size: 0.8rem;
   }
 
