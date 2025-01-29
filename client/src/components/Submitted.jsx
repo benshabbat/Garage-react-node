@@ -1,7 +1,7 @@
 import CheckCircle from "../icons/CheckCircle";
 
 function Submitted({
-  name="message",
+  name = "message",
   setIsSubmitted,
   text = " We'll contact you soon.",
   review,
@@ -11,7 +11,8 @@ function Submitted({
       <div className="success-message">
         <CheckCircle className="success-icon" />
         <h2 className="success-title">Thank You!</h2>
-        <p>Your {name} has been sent successfully.{text}</p>
+        <p>Your {name} has been sent successfully.</p>
+        {!review && <p>{text}</p>}
         {!review && (
           <button
             onClick={() => setIsSubmitted(false)}
