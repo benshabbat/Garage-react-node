@@ -270,10 +270,21 @@
   }
 
   .review-rating {
-    gap: 4px;
+    display: flex;
+    flex-direction: column;  /* סידור בטור במקום בשורה */
+    align-items: flex-start; /* יישור לשמאל */
+    gap: 2px;
+    width: 100%;
   }
-  
+
+  .star-rating-container {
+    display: inline-flex;
+    max-width: 100%;  /* הגבלת רוחב מקסימלי */
+    overflow: hidden; /* מניעת גלישה */
+  }
+
   .review-stars-text {
+    margin-left: 0;  /* ביטול margin שמאלי */
     font-size: 0.8rem;
   }
 
