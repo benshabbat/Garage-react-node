@@ -232,15 +232,18 @@
 
 @media (max-width: 360px) {
   #reviews {
-    padding: 8px;
+    padding: 8px 4px; /* הקטנת padding בצדדים */
   }
 
   .review-card {
     padding: 12px;
     margin: 8px auto;
     gap: 4px;
+    width: calc(100% - 0.5rem); /* הגדלת רוחב הקארד */
+    max-width: none; /* מבטל את ההגבלה */
   }
 
+  /* שאר הסטיילים נשארים אותו דבר */
   .review-avatar {
     width: 32px;
     height: 32px;
