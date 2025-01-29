@@ -40,17 +40,16 @@
 
 .review-card {
   background: var(--review-background);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 6px var(--review-shadow);
-  transition: 0.3s ease;
-  border: 2px solid transparent;
-  max-width: 600px;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 4px 12px var(--review-shadow);
+  max-width: 400px;
   margin: 0 auto;
   width: calc(100% - 2rem);
-  min-height: 300px;
+  min-height: auto;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .review-header {
@@ -58,20 +57,20 @@
   align-items: center;
   margin-bottom: 16px;
   flex-shrink: 0;
+  gap: 12px;
 }
 
 .review-avatar {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: var(--review-primary);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
-  margin-right: 16px;
 }
 
 .review-info {
@@ -105,12 +104,12 @@
 
 .review-description {
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.4;
   color: var(--review-text);
-  margin-bottom: 20px;
+  margin: 8px 0;
   flex: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -127,8 +126,8 @@
 }
 
 .review-time {
-  padding: 6px 12px;
-  background-color: var(--review-secondary);
+  padding: 6px 16px;
+  background-color: #f0f3ff;
   border-radius: 20px;
   font-size: 0.9rem;
   color: var(--review-primary);
@@ -138,17 +137,18 @@
 .btn-add-review {
   background: var(--review-primary);
   color: white;
-  padding: 1rem 2rem;
+  padding: 0.8rem 2rem;
   border-radius: 50px;
   border: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 2.5rem auto;
+  margin: 1.5rem auto;
   transition: 0.3s ease;
+  box-shadow: 0 2px 8px rgba(83, 114, 240, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -170,10 +170,11 @@
 
 @media (max-width: 480px) {
   .review-card {
-    padding: 16px;  /* הגדלתי את הpadding */
-    margin: 0 auto;  /* הוספתי margin auto לשמירה על מרכוז */
-    width: calc(100% - 1.5rem);  /* הגדלתי את הרוחב מעט */
-    min-height: 250px;  /* הוספתי min-height מינימלי */
+    padding: 16px;
+    margin: 0 auto;
+    width: calc(100% - 2rem);
+    min-height: auto;
+    gap: 8px;
   }
 
   .review-header {
@@ -181,7 +182,7 @@
   }
 
   .review-avatar {
-    width: 40px;  /* הקטנתי מעט את האווטאר */
+    width: 40px;
     height: 40px;
     font-size: 1rem;
   }
@@ -195,9 +196,9 @@
   }
 
   .review-description {
-    font-size: 0.95rem;  /* הגדלתי מעט את הפונט */
-    -webkit-line-clamp: 4;  /* הקטנתי את מספר השורות המוצגות */
-    margin-bottom: 16px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin: 6px 0;
   }
 
   .review-time {
@@ -211,18 +212,18 @@
   }
 
   .btn-add-review {
+    width: calc(100% - 32px);
     padding: 0.8rem 1.5rem;
     font-size: 0.95rem;
-    margin: 2rem auto;
+    margin: 1rem auto;
   }
 }
 
-/* הוספתי breakpoint נוסף למסכים קטנים במיוחד */
 @media (max-width: 360px) {
   .review-card {
     padding: 14px;
-    width: calc(100% - 1rem);
-    min-height: 220px;
+    width: calc(100% - 1.5rem);
+    gap: 6px;
   }
 
   .review-avatar {
