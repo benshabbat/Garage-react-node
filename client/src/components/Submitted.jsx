@@ -1,7 +1,7 @@
 import CheckCircle from "../icons/CheckCircle";
 
 function Submitted({
-  name="message"
+  name="message",
   setIsSubmitted,
   text = " We'll contact you soon.",
   review,
