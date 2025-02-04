@@ -11,6 +11,9 @@ import appointmentsRoute from "./routes/appointments.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectDB from "./config/db.js";
+
+
+//TODO handle error
 // import errorHandler from "./middleware/errorHandler.js"
 // import { logger } from "./middleware/logger.js";
 // const { logger } = require('./middleware/logger')
