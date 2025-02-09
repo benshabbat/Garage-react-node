@@ -2,8 +2,7 @@ import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
 import { useUsersContext } from "./UsersContext";
 export default function UsersTable() {
-  const { handleUser, displayUsers, handleSearch, modals } =
-    useUsersContext();
+  const { handleUser, displayUsers, handleSearch, modals } = useUsersContext();
   const trTh = (
     <tr>
       <th>Actions</th>
