@@ -11,20 +11,21 @@ const updateUser = async (req) => {
   const isPassword = await bcrypt.compare(password, user.password);
   const { phone } = req.body;
   const newPhone = templatePhone(phone);
+  const salt = await bcrypt.genSalt(10);
+  const hashpassword = await bcrypt.hash(password, salt);
   try {
-    if (!isPassword) {
-      const salt = await bcrypt.genSalt(10);
-      const password = await bcrypt.hash(password, salt);
-      return password;
-    }
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: { ...req.body, phone: newPhone, password: hashpassword },
-        },hashpassword
-        { new: true }
-      );
-      return updatedUser;
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          ...req.body,
+          phone: newPhone,
+          password: isPassword ?password: hashpassword,
+        },
+      },
+      { new: true }
+    );
+    return updatedUser;
   } catch (error) {
     throw Error(error);
   }
