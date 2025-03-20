@@ -1,12 +1,12 @@
 import axios from "axios";
-export const API_URL_CAR = "/cars";
-export const API_URL_USER = "/users";
-export const API_URL_SERVICE = "/services";
-export const API_URL_MESSAGES = "/messages";
-export const API_URL_REGISTER = "/auth/register";
-export const API_URL_REVIEWS = "/reviews";
-export const API_URL_CONTACTS = "/contacts";
-export const ADMIN = "63e14deca4340e45d23f20b2";
+const API_URL_CAR = "/cars";
+const API_URL_USER = "/users";
+const API_URL_SERVICE = "/services";
+const API_URL_MESSAGES = "/messages";
+const API_URL_REGISTER = "/auth/register";
+const API_URL_REVIEWS = "/reviews";
+const API_URL_CONTACTS = "/contacts";
+const ADMIN = "63e14deca4340e45d23f20b2";
 const getAll = (url) => {
   axios.get(url);
 };
@@ -58,7 +58,7 @@ const deleteCar = (idCar, idUser) => {
 const deleteMessage = (id) => {
   axios.delete(`${API_URL_MESSAGES}/${id}`);
 };
-const getUserId = (id) => {
+const getUser = (id) => {
   return axios.get(`${API_URL_USER}/${id}`);
 };
 const getReviews = () => {
@@ -89,7 +89,7 @@ export {
   updateUser,
   deleteUser,
   createCar,
-  getUserId,
+  getUser,
   deleteCar,
   updateCar,
   deleteService,
