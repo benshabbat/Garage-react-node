@@ -20,7 +20,7 @@ const updateUser = async (req) => {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
-        $set: { ...req.body, phone: newPhone, password },
+        $set: { ...req.body, phone: newPhone, password: password },
       },
       { new: true }
     );
