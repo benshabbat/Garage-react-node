@@ -5,15 +5,6 @@ import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 
 
-const createUser = async (req) => {
-  const newUser = new User(req.body);
-  try {
-    const savedUser = await newUser.save();
-    return savedUser;
-  } catch (error) {
-    throw Error(error);
-  }
-};
 const updateUser = async (req) => {
   // Hash password
   const salt = await bcrypt.genSalt(10);
@@ -83,7 +74,6 @@ const getUsersByType = async (req) => {
 };
 
 const userService = {
-  createUser,
   getUsersByType,
   getUsers,
   getUser,

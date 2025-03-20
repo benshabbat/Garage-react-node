@@ -4,7 +4,6 @@ import {
   deleteUser,
   getUser,
   getUsers,
-  createUser,
   getUsersByType,
 } from "../controllers/user.js";
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
@@ -23,8 +22,6 @@ router.get("/checkadmin/:id",verifyAdmin,(req,res,next)=>{
 //TEST CREATE USER
 //GET ALL BY POPULATE
 router.get("/populate", verifyAdmin, getUsersByType);
-//CREATE
-router.post("/create", createUser);
 
 //UPDATE
 router.put("/:id", verifyAdmin, updateUser);
