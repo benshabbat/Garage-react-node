@@ -5,15 +5,14 @@ import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 
 const updateUser = async (req) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username });
+  const { password } = req.body;
+  const user = await User.findById(req.params.id)
   // Hash password
   const isPassword = await bcrypt.compare(password, user.password);
   if (!isPassword) {
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
   }
-  // const user = await User.findById(req.params.id)
   const { phone } = req.body;
   const newPhone = templatePhone(phone);
   try {
