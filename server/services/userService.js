@@ -4,39 +4,13 @@ import Message from "../models/Message.js";
 import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 
-// const updateUser = async (req) => {
-//   const { password,phone } = req.body;
-//   const user = await User.findById(req.params.id);
-//   // Hash password
-//   const isPassword = await bcrypt.compare(password, user.password);
-//   const newPhone = templatePhone(phone);
-//   const salt = await bcrypt.genSalt(10);
-//   const hashpassword = await bcrypt.hash(password, salt);
-//   try {
-//     const updatedUser = await User.findByIdAndUpdate(
-//       req.params.id,
-//       {
-//         $set: {
-//           ...req.body,
-//           phone: phone? newPhone:user.phone,
-//           password: isPassword ? password : hashpassword,
-//         },
-//       },
-//       { new: true }
-//     );
-//     return updatedUser;
-//   } catch (error) {
-//     throw Error(error);
-//   }
-// };
-
 const updateUser = async (req) => {
   const { password, phone } = req.body;
   const user = await User.findById(req.params.id);
-  
+
   // Process phone number if provided
   const newPhone = phone ? templatePhone(phone) : user.phone;
-  
+
   // Process password if provided
   let updatedPassword = user.password; // Default to keeping current password
   if (password) {
@@ -47,7 +21,7 @@ const updateUser = async (req) => {
       updatedPassword = await bcrypt.hash(password, salt);
     }
   }
-  
+
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
@@ -76,14 +50,6 @@ const deleteUser = async (req) => {
     throw Error(error);
   }
 };
-// const getUser = async (req) => {
-//   try {
-//     const user = await User.findById(req.params.id).populate("cars");
-//     return user;
-//   } catch (error) {
-//     throw Error(error);
-//   }
-// };
 
 const getUser = async (req) => {
   try {
@@ -93,6 +59,7 @@ const getUser = async (req) => {
     throw Error(error);
   }
 };
+
 const getUsers = async () => {
   try {
     const users = await User.find();
@@ -101,6 +68,8 @@ const getUsers = async () => {
     throw Error(error);
   }
 };
+
+
 const getUsersByType = async (req) => {
   const type = req.query.populate;
   try {

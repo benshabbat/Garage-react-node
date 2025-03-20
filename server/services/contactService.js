@@ -1,9 +1,17 @@
 import Contact from "../models/Contact.js";
+import { templatePhone } from "../utils/templates.js";
 
 const createContact = async (req) => {
     const newContact = new Contact(req.body);
+    const {phone} = req.body;
+    const newPhone = templatePhone(phone);
     try {
-      const savedContact = await newContact.save();
+      const savedContact = await newContact.save(
+        {
+          ...req.body,
+          phone: newPhone,
+        }
+      );
       return savedContact;
     } catch (error) {
       throw Error(error);
