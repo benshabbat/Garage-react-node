@@ -1,5 +1,5 @@
 import Search from "../../components/table/Search";
-import Table from "../../components/table/Table";
+import Table from "../../components/table/TableWithSort";
 import { useContextMessages } from "./MessagesConetxt";
 
 //TODO: USE WITH SEARCH AND TABLE GENERIC

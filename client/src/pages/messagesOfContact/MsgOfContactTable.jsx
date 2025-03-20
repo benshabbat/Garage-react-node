@@ -1,5 +1,5 @@
 import Search from "../../components/table/Search";
-import Table from "../../components/table/Table";
+import Table from "../../components/table/TableWithSort";
 import { getMomentFromUpdatedAt} from "../../utils";
 import { useMsgOfContactContext } from "./MsgOfContactContext";
 export default function MsgOfContactTable() {
