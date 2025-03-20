@@ -2,7 +2,7 @@ export function templatePhone(phone) {
   if (phone.length === 10) {
     phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
   }
-  if (phone.length === 11 && phone[4] === "-") {
+  if (phone.length === 11 && phone.at(3) === "-") {
     phone = phone.slice(0, 3) + "-" + phone.slice(4, 7) + "-" + phone.slice(7);
   }
 
