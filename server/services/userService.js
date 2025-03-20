@@ -20,7 +20,7 @@ const updateUser = async (req) => {
         $set: {
           ...req.body,
           phone: newPhone,
-          password: isPassword ?password: hashpassword,
+          password: isPassword ? password : hashpassword,
         },
       },
       { new: true }
