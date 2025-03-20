@@ -5,11 +5,10 @@ import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 
 const updateUser = async (req) => {
-  const { password } = req.body;
+  const { password,phone } = req.body;
   const user = await User.findById(req.params.id);
   // Hash password
   const isPassword = await bcrypt.compare(password, user.password);
-  const { phone } = req.body;
   const newPhone = templatePhone(phone);
   const salt = await bcrypt.genSalt(10);
   const hashpassword = await bcrypt.hash(password, salt);
@@ -19,7 +18,7 @@ const updateUser = async (req) => {
       {
         $set: {
           ...req.body,
-          phone: newPhone,
+          phone: phone? newPhone:user.phone,
           password: isPassword ? password : hashpassword,
         },
       },
