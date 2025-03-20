@@ -6,24 +6,25 @@ import { templatePhone } from "../utils/templates.js";
 
 const updateUser = async (req) => {
   const { password } = req.body;
-  const user = await User.findById(req.params.id)
+  const user = await User.findById(req.params.id);
   // Hash password
   const isPassword = await bcrypt.compare(password, user.password);
-  if (!isPassword) {
-    const salt = await bcrypt.genSalt(10);
-    password = await bcrypt.hash(password, salt);
-  }
   const { phone } = req.body;
   const newPhone = templatePhone(phone);
   try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: { ...req.body, phone: newPhone, password: password },
-      },
-      { new: true }
-    );
-    return updatedUser;
+    if (!isPassword) {
+      const salt = await bcrypt.genSalt(10);
+      const password = await bcrypt.hash(password, salt);
+      return password;
+    }
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: { ...req.body, phone: newPhone, password: hashpassword },
+        },hashpassword
+        { new: true }
+      );
+      return updatedUser;
   } catch (error) {
     throw Error(error);
   }
