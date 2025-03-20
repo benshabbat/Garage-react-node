@@ -2,13 +2,8 @@ import User from "../models/User.js";
 import Car from "../models/Car.js";
 import Message from "../models/Message.js";
 import bcrypt from "bcryptjs";
+import { templatePhone } from "../utils/templates.js";
 
-function templatePhone(phone) {
-  if (phone.length === 10) {
-    phone = phone.slice(0, 3) + "-" + phone.slice(3, 10);
-  }
-  return phone;
-}
 
 const createUser = async (req) => {
   const newUser = new User(req.body);
@@ -60,8 +55,8 @@ const deleteUser = async (req) => {
 //   }
 // };
 
-
-const getUser = async (req) => {  // הסר את res
+const getUser = async (req) => {
+  // הסר את res
   try {
     const user = await User.findById(req.params.id).populate("cars");
     return user;

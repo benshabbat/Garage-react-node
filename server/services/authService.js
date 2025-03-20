@@ -2,15 +2,9 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
+import { templatePhone } from "../utils/templates.js";
 
 
-function templatePhone(phone) {
-  if (phone.length === 10) {
-    phone = phone.slice(0, 3) + "-" + phone.slice(3,3) + "-" + phone.slice(6,);
-  }
-
-  return phone;
-}
 const register = async (req) => {
   const { username, phone, email, password } = req.body;
   const newNumberPlate = templatePhone(phone);
