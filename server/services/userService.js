@@ -4,20 +4,23 @@ import Message from "../models/Message.js";
 import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 
-
 const updateUser = async (req) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
   // Hash password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  const isPassword = await bcrypt.compare(password, user.password);
+  if (!isPassword) {
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+  }
   // const user = await User.findById(req.params.id)
   const { phone } = req.body;
   const newPhone = templatePhone(phone);
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-
       {
-        $set: { ...req.body, phone: newPhone, password: hashedPassword },
+        $set: { ...req.body, phone: newPhone, password },
       },
       { new: true }
     );
@@ -47,7 +50,6 @@ const deleteUser = async (req) => {
 // };
 
 const getUser = async (req) => {
-  // הסר את res
   try {
     const user = await User.findById(req.params.id).populate("cars");
     return user;
