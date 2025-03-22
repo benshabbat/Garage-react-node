@@ -4,25 +4,37 @@ import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { templatePhone } from "../utils/templates.js";
 
-
 const register = async (req) => {
-  const { username, phone, email, password } = req.body;
-  const newNumberPlate = templatePhone(phone);
-  //Check if User Exist;
-  const userExists = await User.findOne({ username })
-  if (userExists) return next(createError(400, "User already Exists"));
-
-  // Hash password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
   try {
-    // Create user
+    const { username, phone, email, password } = req.body;
+
+    // Input validation
+    if (!username || !phone || !email || !password) {
+      throw createError(400, "All fields are required");
+    }
+    // Check if user exists
+    const userExists = await User.findOne({ username });
+    if (userExists) throw createError(400, "User already exists");
+
+    // Check if email is already in use
+    const emailExists = await User.findOne({ email });
+    if (emailExists) throw createError(400, "Email already in use");
+
+    const newNumberPlate = templatePhone(phone);
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create new user
     const newUser = await User.create({
       username,
       email,
-      phone:newNumberPlate,
+      phone: newNumberPlate,
       password: hashedPassword,
     });
+
+    // Return user info without password
     return {
       _id: newUser._id,
       username: newUser.username,
@@ -30,7 +42,8 @@ const register = async (req) => {
       email: newUser.email,
     };
   } catch (error) {
-    throw Error(error);
+    // Pass error up the chain
+    throw error;
   }
 };
 
@@ -54,19 +67,19 @@ const login = async (req, res, next) => {
     //   sameSite: 'lax',
     //   path: '/'
     // })
-    res.cookie("access_token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none',
-      path: '/',
-      domain: 'garage-server-dcv1.onrender.com'
-    })
-    
-    
-    .json({
-      _id: user.id,
-      isAdmin: user.isAdmin
-    });
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
+        domain: "garage-server-dcv1.onrender.com",
+      })
+
+      .json({
+        _id: user.id,
+        isAdmin: user.isAdmin,
+      });
   } catch (error) {
     next(error);
   }
