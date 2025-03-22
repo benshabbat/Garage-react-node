@@ -50,50 +50,74 @@ const register = async (req) => {
 const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
+
+    // Input validation
+    if (!username || !password) {
+      throw createError(400, "Username and password are required");
+    }
+
+    // Find user
     const user = await User.findOne({ username });
+    if (!user) throw createError(404, "User not found");
 
-    if (!user) return next(createError(404, "User not found!"));
+    // Check password
     const isPassword = await bcrypt.compare(password, user.password);
-    if (!isPassword) return next(createError(400, "Wrong password!"));
+    if (!isPassword) throw createError(400, "Wrong password");
 
+    // Create JWT token
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT
+      process.env.JWT,
+      { expiresIn: "24h" }
     );
+    // Cookie settings
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    };
+    // Add domain only in production
+    if (process.env.NODE_ENV === "production") {
+      cookieOptions.domain =
+        process.env.COOKIE_DOMAIN || "garage-server-dcv1.onrender.com";
+    }
+    // Set cookie and return data
+    res.cookie("access_token", token, cookieOptions);
 
-    // res.cookie("access_token", token, {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === 'production',
-    //   sameSite: 'lax',
-    //   path: '/'
-    // })
-    res
-      .cookie("access_token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        path: "/",
-        domain: "garage-server-dcv1.onrender.com",
-      })
-
-      .json({
-        _id: user.id,
-        isAdmin: user.isAdmin,
-      });
+    return {
+      _id: user._id,
+      isAdmin: user.isAdmin,
+    };
   } catch (error) {
-    next(error);
+    // Pass error up the chain
+    throw error;
   }
 };
 
 //logout
 const logout = async (req, res) => {
-  res
-    .clearCookie("access_token", {
-      sameSite: "none",
-      secure: true,
-    })
-    .status(200)
-    .send("User has been logged out.");
+  try {
+    // Use same cookie settings as login
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
+    };
+
+    if (process.env.NODE_ENV === "production") {
+      cookieOptions.domain =
+        process.env.COOKIE_DOMAIN || "garage-server-dcv1.onrender.com";
+    }
+
+    // Clear cookie
+    res.clearCookie("access_token", cookieOptions);
+    return { message: "User has been logged out successfully" };
+  } catch (error) {
+    throw error;
+  }
 };
 
 const authService = {
