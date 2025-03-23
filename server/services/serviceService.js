@@ -1,24 +1,63 @@
 import Service from "../models/Service.js";
 import Car from "../models/Car.js";
-
-//test create service
+/**
+ * Creates a new service and associates it with a car
+ * @param {Object} req - Express request object
+ * @returns {Promise<Object>} Created service
+ */
 const createService = async (req) => {
   const carId = req.params.carId;
-  const newService = new Service({ ...req.body, car: carId });
+  
+  // Create a new service object from request body but WITHOUT any _id field
+  const serviceData = { ...req.body, car: carId };
+  
+  // Delete _id property if it exists to ensure MongoDB generates a new unique ID
+  delete serviceData._id;
+  
+  const newService = new Service(serviceData);
+  
   try {
+    // Save the service
     const savedService = await newService.save();
+    
+    // Update the car with the service reference
     try {
       await Car.findByIdAndUpdate(carId, {
         $push: { services: savedService._id },
       });
     } catch (error) {
-      throw Error(error);
+      // If car update fails, delete the service we just created to maintain consistency
+      await Service.findByIdAndDelete(savedService._id);
+      throw Error(`Failed to update car with service: ${error.message}`);
     }
+    
     return savedService;
   } catch (error) {
-    throw Error(error);
+    // Provide more helpful error message for duplicate key errors
+    if (error.code === 11000) {
+      throw Error(`Duplicate service entry: ${error.message}`);
+    }
+    throw Error(`Failed to create service: ${error.message}`);
   }
 };
+// //test create service
+// const createService = async (req) => {
+//   const carId = req.params.carId;
+//   const newService = new Service({ ...req.body, car: carId });
+//   try {
+//     const savedService = await newService.save();
+//     try {
+//       await Car.findByIdAndUpdate(carId, {
+//         $push: { services: savedService._id },
+//       });
+//     } catch (error) {
+//       throw Error(error);
+//     }
+//     return savedService;
+//   } catch (error) {
+//     throw Error(error);
+//   }
+// };
 
 const updateService = async (req) => {
   try {
