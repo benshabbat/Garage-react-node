@@ -35,11 +35,11 @@ const getServicesByIdUser = async (userId) => {
 const getMessagesByIdUser = async (userId) => {
   const { data } = await axios.get(`${API_URL_MESSAGES}/user/${userId}`);
 
-  for (let index = 0; index < data.length; index++) {
-    const dateArray = data[index].updatedAt.slice(0, 10).split("-");
-    const [year, month, day] = dateArray;
-    data[index].updatedAt = `${day}/${month}/${year}`;
-  }
+  // for (let index = 0; index < data.length; index++) {
+  //   const dateArray = data[index].updatedAt.slice(0, 10).split("-");
+  //   const [year, month, day] = dateArray;
+  //   data[index].updatedAt = `${day}/${month}/${year}`;
+  // }
 
   return data;
 };
