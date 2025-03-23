@@ -7,7 +7,7 @@ export default function MessagesTable() {
     useContextMessages();
   const trTh = (
     <tr>
-      {user?.isAdmin && <th>Actions</th>}
+      <th>Actions</th>
       <th>From</th>
       <th>To</th>
       <th>Title</th>
