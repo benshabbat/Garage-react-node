@@ -4,11 +4,18 @@ import { useHeaderContext } from "./HeaderContext";
 import Logo from "../../images/logo.jpg";
 
 export default function Navbars() {
-  const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
-  const nav = () => {
-     return userAuth && user?.isAdmin ? <NavAdmin /> : <NavUser />;
+  const { user, handleOutsideClick, isNavOpen } = useHeaderContext();
+  const Nav = () => {
+    return user ? (
+      user.isAdmin ? (
+        <NavAdmin />
+      ) : (
+        <NavUser />
+      )
+    ) : (
+      <NavLanding />
+    );
   };
-
   return (
     <>
       <div className="main-header">
@@ -27,7 +34,7 @@ export default function Navbars() {
         </button>
 
         <div className={`navbar ${isNavOpen ? "active" : ""}`}>
-          {nav}
+          <Nav />
         </div>
       </div>
       <Login />
