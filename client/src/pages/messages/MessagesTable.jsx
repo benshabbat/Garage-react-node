@@ -2,8 +2,6 @@ import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
 import { getMomentFromUpdatedAt } from "../../utils";
 import { useContextMessages } from "./MessagesConetxt";
-
-//TODO: USE WITH SEARCH AND TABLE GENERIC
 export default function MessagesTable() {
   const { modals, handleSearch, displayMessages, user, handleMsgAction } =
     useContextMessages();
