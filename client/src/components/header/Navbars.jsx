@@ -4,7 +4,8 @@ import { useHeaderContext } from "./HeaderContext";
 import Logo from "../../images/logo.jpg";
 
 export default function Navbars() {
-  const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
+  const { user, handleOutsideClick, isNavOpen, userAuth, isAuthLoaded } = useHeaderContext();
+  
   return (
     <>
       <div className="main-header">
@@ -23,13 +24,18 @@ export default function Navbars() {
         </button>
 
         <div className={`navbar ${isNavOpen ? "active" : ""}`}>
-          {userAuth && user ? (
+          {!isAuthLoaded ? (
+            // Show loading indicator or nothing while auth is being determined
+            <div className="loading-nav"></div>
+          ) : userAuth && user ? (
+            // User is authenticated, show proper nav based on role
             user.isAdmin ? (
               <NavAdmin />
             ) : (
               <NavUser />
             )
           ) : (
+            // User is definitely not authenticated
             <NavLanding />
           )}
         </div>
