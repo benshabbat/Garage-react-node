@@ -73,6 +73,32 @@
   cursor: pointer;
   padding: 0.5rem;
 }
+.nav-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #666;
+  position: relative;
+  padding: 0 15px;
+}
+
+.nav-loading::after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ccc;
+  border-top-color: #007bff;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 @media screen and (max-width: 1024px) {
   .logo img {
