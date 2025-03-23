@@ -7,7 +7,7 @@ export default function Navbars() {
   const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
   const Nav = () => {
     return userAuth || user ? (
-      user.isAdmin ? (
+      user?.isAdmin ? (
         <NavAdmin />
       ) : (
         <NavUser />
