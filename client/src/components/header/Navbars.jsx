@@ -6,7 +6,7 @@ import Logo from "../../images/logo.jpg";
 export default function Navbars() {
   const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
   const nav = () => {
-     userAuth && user?.isAdmin ? <NavAdmin /> : <NavUser />;
+     return userAuth && user?.isAdmin ? <NavAdmin /> : <NavUser />;
   };
 
   return (
