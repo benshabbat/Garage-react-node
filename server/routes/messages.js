@@ -10,23 +10,21 @@ import {
   getMessageByUser,
 } from "../controllers/message.js";
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
+
 const router = express.Router();
 
-//GET ALL BY POPULATE
-router.get("/populate", verifyAdmin, getMessagesByType);
-//CREATE
-//CREATE
-router.post("/to/:to", createMessageToAdmin);
-router.post("/:from/:to", createMessage);
-//UPDATE
-router.put("/:idMessage", verifyUser, updateMessage);
-//DELETE
-router.delete("/:id", verifyUser, deleteMessage);
-//GET
-router.get("/:id", verifyUser, getMessage);
-//GET
-router.get("/user/:id", verifyUser, getMessageByUser);
-//GET ALL
+// Admin routes
 router.get("/", verifyAdmin, getMessages);
+router.get("/populate", verifyAdmin, getMessagesByType);
+
+// User routes
+router.get("/user/:id", verifyUser, getMessageByUser);
+router.put("/:idMessage", verifyUser, updateMessage);
+router.delete("/:id", verifyUser, deleteMessage);
+router.get("/:id", verifyUser, getMessage);
+
+// Public routes 
+router.post("/to/:to", createMessageToAdmin); 
+router.post("/:from/:to", createMessage);     
 
 export default router;
