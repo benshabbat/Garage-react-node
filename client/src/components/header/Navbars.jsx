@@ -5,8 +5,8 @@ import Logo from "../../images/logo.jpg";
 
 export default function Navbars() {
   const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
-  const Nav = () => {
-    return userAuth && user?.isAdmin ? <NavAdmin /> : <NavUser />;
+  const nav = () => {
+     userAuth && user?.isAdmin ? <NavAdmin /> : <NavUser />;
   };
 
   return (
@@ -27,7 +27,7 @@ export default function Navbars() {
         </button>
 
         <div className={`navbar ${isNavOpen ? "active" : ""}`}>
-          <Nav />
+          {nav}
         </div>
       </div>
       <Login />
