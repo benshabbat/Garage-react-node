@@ -19,7 +19,7 @@ export default function MessagesTable() {
   );
 
   const trTd = displayMessages?.map((message) => {
-    const { theDate } = getMomentFromUpdatedAt(message.updatedAt);
+    const { theDate } = getMomentFromUpdatedAt(message?.updatedAt);
     return (
       <tr key={message?._id}>
         {user?.isAdmin && (
