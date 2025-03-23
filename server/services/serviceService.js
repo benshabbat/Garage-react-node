@@ -9,7 +9,7 @@ const createService = async (req) => {
     const savedService = await newService.save();
     try {
       await Car.findByIdAndUpdate(carId, {
-        $push: { services: [savedService._id] },
+        $push: { services: savedService._id },
       });
     } catch (error) {
       throw Error(error);
