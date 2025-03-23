@@ -4,22 +4,13 @@ import { useHeaderContext } from "./HeaderContext";
 import Logo from "../../images/logo.jpg";
 
 export default function Navbars() {
-  const { user, handleOutsideClick, isNavOpen,userAuth } = useHeaderContext();
+  const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
   const Nav = () => {
-    
     if (userAuth && !user) {
       return <div className="nav-loading">loading...</div>;
     }
-    
-    return user ? (
-      user.isAdmin ? (
-        <NavAdmin />
-      ) : (
-        <NavUser />
-      )
-    ) : (
-      <NavLanding />
-    );
+
+    return user ? user.isAdmin ? <NavAdmin /> : <NavUser /> : <NavLanding />;
   };
   return (
     <>
