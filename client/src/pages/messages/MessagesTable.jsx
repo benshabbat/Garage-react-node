@@ -37,7 +37,6 @@ export default function MessagesTable() {
         <td data-label="To">{message?.to?.username}</td>
         <td data-label="Title">{message?.title}</td>
         <td data-label="Description">{message?.description}</td>
-        <td data-label="Date">{message?.updatedAt}</td>
         <td data-label="Date">{theDate}</td>
       </tr>
     );
