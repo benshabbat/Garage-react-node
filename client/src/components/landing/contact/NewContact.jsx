@@ -1,7 +1,7 @@
+import "./newContact.css";
 import { useState } from "react";
 import { createContact } from "../../../utils";
 import FormInput from "../../form/FormInput";
-import "./newContact.css"; // Make sure to import the CSS file
 import Submitted from "../../Submitted";
 
 export default function NewContact() {
@@ -30,7 +30,7 @@ export default function NewContact() {
   };
 
   if (isSubmitted) {
-   return <Submitted setIsSubmitted={setIsSubmitted} />;
+    return <Submitted setIsSubmitted={setIsSubmitted} />;
   }
 
   return (
