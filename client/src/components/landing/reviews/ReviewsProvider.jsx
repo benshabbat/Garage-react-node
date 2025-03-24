@@ -24,7 +24,7 @@ export default function ReviewsProvider({ children }) {
       setAllReviews(data);
     };
     fetchReviews();
-  }, [isOpenAddReview]);
+  }, [isOpenAddReview,isSubmitted]);
 
   // Get currently visible cards based on index and number of cards to show
   const getVisibleCards = (children) => {
