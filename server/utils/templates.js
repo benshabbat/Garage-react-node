@@ -15,4 +15,5 @@ export function templateCar(car) {
   } else if (car.length === 7) {
     return car.slice(0, 2) + "-" + car.slice(2, 5) + "-" + car.slice(5);
   }
+  return car;
 }
