@@ -120,22 +120,21 @@ textarea::-webkit-scrollbar-track {
 
 /* Submit Button */
 .container-contact form button {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 500;
   border: none;
-  background: #fff;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: clamp(16px, 2.5vw, 20px);
-  color: #333;
-  width: clamp(120px, 30%, 200px);
-  padding: 12px 20px;
-  transition: all 0.3s ease;
   cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  background-color: transparent;
+  color: #e5e7eb;
+  border: 2px solid #e5e7eb;
 }
 
 .container-contact form button:hover {
-  background: #4a9eff;
-  color: #fff;
-  transform: translateY(-2px);
+  background-color: rgba(229, 231, 235, 0.1);
 }
 
 /* Success Message Styles */
@@ -231,7 +230,7 @@ textarea::-webkit-scrollbar-track {
   .container-contact form input {
     min-width: 100%;
   }
-  
+
   .container-contact .input-group {
     gap: 15px;
   }
@@ -247,7 +246,7 @@ textarea::-webkit-scrollbar-track {
   .new-message-button {
     width: 100%;
   }
-  
+
   .success-message {
     padding: 15px;
   }
