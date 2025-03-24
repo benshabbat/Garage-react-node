@@ -1,4 +1,3 @@
-import "./form.css"
 import { useState, useRef } from "react";
 import { valid, inputType } from "../../validation/valid";
 import FormToggle from "./FormToggle";
