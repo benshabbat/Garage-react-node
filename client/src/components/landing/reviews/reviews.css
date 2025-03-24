@@ -134,13 +134,13 @@
   color: var(--review-primary);
   font-weight: 500;
 }
-#reviews .button-container {
+.button-container {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
 }
-#reviews .btn-add-review {
+.btn-add-review {
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   font-size: 1.125rem;
@@ -154,7 +154,7 @@
   border: 2px solid #e5e7eb;
 }
 
-#reviews .btn-add-review:hover {
+.btn-add-review:hover {
   background-color: rgba(229, 231, 235, 0.1);
 }
 
