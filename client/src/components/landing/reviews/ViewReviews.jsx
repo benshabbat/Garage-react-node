@@ -8,11 +8,13 @@ export default function ViewReviews() {
   const { isSubmitted, setIsSubmitted } = useAddReview();
 
   if (isSubmitted) {
+    return <Submitted setIsSubmitted={setIsSubmitted} review={true} name={"review"} text={"Thank you for your review!"}/>
+
+  }
+  if (isSubmitted) {
     setTimeout(() => {
       setIsSubmitted(false)
     }, 7000);
-    return <Submitted setIsSubmitted={setIsSubmitted} review={true} name={"review"} text={"Thank you for your review!"}/>
-
   }
   
   

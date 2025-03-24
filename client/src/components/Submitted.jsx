@@ -1,5 +1,5 @@
 import CheckCircle from "../icons/CheckCircle";
-//TODO:MAKE FOCUS ON CONTACT AND ANOTHERS
+
 function Submitted({
   name = "message",
   setIsSubmitted,
