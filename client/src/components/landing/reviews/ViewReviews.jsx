@@ -6,18 +6,16 @@ import { useReviewsContext } from "./ReviewsContext";
 export default function ViewReviews() {
   const { useAddReview } = useReviewsContext();
   const { isSubmitted, setIsSubmitted } = useAddReview();
-  if (isSubmitted) {
+
+  if (isSubmitted === false) {
     setTimeout(() => {
-      return (
-        <Submitted
-          setIsSubmitted={setIsSubmitted}
-          review={true}
-          name={"review"}
-        />
-      );
+      setIsSubmitted(false)
     }, 3000);
+    return <Submitted setIsSubmitted={setIsSubmitted} review={true} name={"review"} text={"Thank you for your review!"}/>
+
   }
 
+  
   return (
     <div id="reviews">
       <h1 className="reviews-header">Reviews</h1>
