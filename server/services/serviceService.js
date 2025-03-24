@@ -40,24 +40,6 @@ const createService = async (req) => {
     throw Error(`Failed to create service: ${error.message}`);
   }
 };
-// //test create service
-// const createService = async (req) => {
-//   const carId = req.params.carId;
-//   const newService = new Service({ ...req.body, car: carId });
-//   try {
-//     const savedService = await newService.save();
-//     try {
-//       await Car.findByIdAndUpdate(carId, {
-//         $push: { services: savedService._id },
-//       });
-//     } catch (error) {
-//       throw Error(error);
-//     }
-//     return savedService;
-//   } catch (error) {
-//     throw Error(error);
-//   }
-// };
 
 const updateService = async (req) => {
   try {
