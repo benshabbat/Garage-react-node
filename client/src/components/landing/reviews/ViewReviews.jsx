@@ -10,7 +10,7 @@ export default function ViewReviews() {
   if (isSubmitted) {
     setTimeout(() => {
       setIsSubmitted(false)
-    }, 3000);
+    }, 7000);
     return <Submitted setIsSubmitted={setIsSubmitted} review={true} name={"review"} text={"Thank you for your review!"}/>
 
   }
