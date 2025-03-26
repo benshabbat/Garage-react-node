@@ -84,8 +84,16 @@ export default function UsersProvider({ children }) {
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
       if (validPhone(formData?.phone) && validPass(formData?.password)) {
-        await updateUser(selectedUser?._id, formData);
-        handleEditUser();
+        try {
+          const response = await updateUser(selectedUser?._id, formData); // שליחת הנתונים לשרת
+          const updatedUser = response.data;
+          handleEditUser();
+          users?.map((user) =>
+            user._id === updatedUser._id ? updatedUser : user
+          );
+        } catch (error) {
+          console.error("Error editing user:", error);
+        }
       }
     };
     return { formData, setFormData, onSubmitEditUser };
@@ -110,7 +118,7 @@ export default function UsersProvider({ children }) {
       if (isValidUserName(formData, isValidUser)) {
         try {
           const newUser = await createUser(formData);
-          handleCreateUser(); 
+          handleCreateUser();
           setFilteredUsers(() => [...users, newUser.data]);
         } catch (error) {
           console.error("Error creating user:", error);
