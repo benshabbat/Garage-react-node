@@ -85,7 +85,7 @@ export default function ServiceAdminProvider({ children }) {
       e.preventDefault();
       await updateService(selectedService?._id, formData);
       handleClick();
-      setFilteredServices(services.filter((service) => service._id !== selectedService._id));
+      setFilteredServices(services.map((service) => (service._id === selectedService?._id ? formData : service)));
     };
     return { onSubmit, formData, setFormData };
   };
