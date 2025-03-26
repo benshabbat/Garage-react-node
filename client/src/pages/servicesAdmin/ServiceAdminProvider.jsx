@@ -22,7 +22,6 @@ export default function ServiceAdminProvider({ children }) {
 
   useEffect(() => {
     dispatch(getServicesByType());
-    console.log(displayServices);
   }, [
     isOpenManageService,
     isOpenStatus,
