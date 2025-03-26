@@ -83,7 +83,7 @@ export default function ServiceAdminProvider({ children }) {
       handleClick();
       setFilteredServices(
         services.map((service) =>
-          (service._id === selectedService?._id ?{...selectedService.car.numberplate,...updated.data} : service
+          (service._id === selectedService?._id ?{...selectedService.car.numberPlate,...updated.data} : service
         ))
       );
     };
