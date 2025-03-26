@@ -79,7 +79,7 @@ export default function UsersProvider({ children }) {
     }
   };
 
-  const useEditCar = () => {
+  const useEditUser = () => {
     const [formData, setFormData] = useState(selectedUser);
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
@@ -134,7 +134,7 @@ export default function UsersProvider({ children }) {
     handleSearch,
     setFormData,
     onSubmitCreateCar,
-    useEditCar,
+    useEditUser,
     modals: {
       manageUser: { isOpen: isOpenManageUser, handle: handleManageUser },
       createUser: { isOpen: isOpenCreateUser, handle: handleCreateUser },

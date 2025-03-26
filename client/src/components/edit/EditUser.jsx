@@ -2,8 +2,8 @@ import { Form, OpenModal } from "../index";
 import { useUsersContext } from "../../pages/users/UsersContext";
 
 const EditUser = () => {
-  const { useEditCar,modals } = useUsersContext();
-  const {onSubmitEditUser,formData,setFormData}=useEditCar()
+  const { useEditUser,modals } = useUsersContext();
+  const {onSubmitEditUser,formData,setFormData}=useEditUser()
 
   return (
     <OpenModal
