@@ -28,10 +28,10 @@ export default function UsersProvider({ children }) {
 
   useEffect(() => {
     if (
-      isOpenModalEditUser ||
-      isOpenModalDeleteUser ||
-      isOpenManageUser ||
-      isOpenCreateUser
+      !isOpenModalEditUser ||
+      !isOpenModalDeleteUser ||
+      !isOpenManageUser ||
+      !isOpenCreateUser
     )
       dispatch(getUsers());
   }, [
