@@ -7,7 +7,7 @@ import useOpenModal from "../../hooks/useOpenModal";
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
 
-  const [formData, setFormData] = useState();
+  // const [formData, setFormData] = useState();
   const [selectedService, setSelctedService] = useState();
   const [filteredServices, setFilteredServices] = useState();
 
@@ -83,8 +83,8 @@ export default function ServiceAdminProvider({ children }) {
       handleClick();
       setFilteredServices(
         services.map((service) =>
-          service._id === selectedService?._id ? updated : service
-        )
+          (service._id === selectedService?._id ? updated : service
+        ))
       );
     };
     return { onSubmit, formData, setFormData };
