@@ -85,12 +85,12 @@ export default function UsersProvider({ children }) {
       e.preventDefault();
       if (validPhone(formData?.phone) && validPass(formData?.password)) {
         try {
-          const response = await updateUser(selectedUser?._id, formData); // שליחת הנתונים לשרת
-          const updatedUser = response.data;
+          await updateUser(selectedUser?._id, formData); // שליחת הנתונים לשרת
+      
           handleEditUser();
-          users?.map((user) =>
-            user._id === updatedUser._id ? updatedUser : user
-          );
+          // users?.map((user) =>
+          //   user._id === updatedUser._id ? updatedUser : user
+          // );
         } catch (error) {
           console.error("Error editing user:", error);
         }
@@ -107,6 +107,7 @@ export default function UsersProvider({ children }) {
       validEmail(formData?.email)
     );
   };
+
   function useRegister() {
     const [isValidUser, setIsValidUser] = useState(false);
 
