@@ -17,7 +17,8 @@ export default function UsersProvider({ children }) {
 
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
-  const [areModalsClosed, setAreModalsClosed] = useState(true);
+  const [areModalsClosed, setAreModalsClosed] = useState(false);
+
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
