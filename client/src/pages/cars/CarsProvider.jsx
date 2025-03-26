@@ -10,8 +10,8 @@ export default function CarsProvider({ children }) {
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
 
-  const [selectedCar, setSelectedCar] = useState(null);
-  const [filteredCars, setFilteredCars] = useState(null);
+  const [selectedCar, setSelectedCar] = useState();
+  const [filteredCars, setFilteredCars] = useState();
   const [formData, setFormData] = useState();
 
   const [handleManageCar, isOpenManageCar] = useOpenModal();
@@ -79,6 +79,10 @@ export default function CarsProvider({ children }) {
   };
 
   const useEditCar = () => {
+    useEffect(() => {
+      setFormData(selectedCar);
+    }, [selectedCar]);
+
     const onSubmit = async (e) => {
       e.preventDefault();
       await updateCar(selectedCar?._id, formData);
