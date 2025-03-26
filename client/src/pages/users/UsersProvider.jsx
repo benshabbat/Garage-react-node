@@ -16,7 +16,7 @@ export default function UsersProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
 
   const [selectedUser, setSelctedUser] = useState();
-  const [filteredUsers, setFilteredUsers] = useState();
+  const [filteredUsers, setFilteredUsers] = useState(users);
 
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
@@ -122,7 +122,7 @@ export default function UsersProvider({ children }) {
       await deleteUser(selectedUser?._id);
       handleDeleteUser(); 
       handleManageUser();
-      
+
       setFilteredUsers((prev) =>
         prev?.filter((user) => user._id !== selectedUser?._id)
       );
