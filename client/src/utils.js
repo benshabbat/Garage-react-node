@@ -19,8 +19,8 @@ const getById = (url, id) => {
 const addItem = (url, obj) => {
   axios.post(url, obj);
 };
-const createUser = (obj) => {
-  axios.post(API_URL_REGISTER, obj);
+const createUser = async (obj) => {
+  return await axios.post(API_URL_REGISTER, obj);
 };
 const updateUser = (id, obj) => {
   axios.put(`${API_URL_USER}/${id}`, obj);

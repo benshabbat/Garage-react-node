@@ -112,7 +112,7 @@ export default function UsersProvider({ children }) {
           const newUser = await createUser(formData);
           handleCreateUser(); 
           dispatch(getUsers());
-          setFilteredUsers(() => [...users, newUser]);
+          setFilteredUsers(() => [...users, newUser.data]);
         } catch (error) {
           console.error("Error creating user:", error);
         }
