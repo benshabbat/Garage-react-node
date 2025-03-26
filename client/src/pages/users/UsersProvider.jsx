@@ -27,12 +27,6 @@ export default function UsersProvider({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (
-      !isOpenModalEditUser ||
-      !isOpenModalDeleteUser ||
-      !isOpenManageUser ||
-      !isOpenCreateUser
-    )
       dispatch(getUsers());
   }, [
     isOpenModalEditUser,
@@ -40,7 +34,10 @@ export default function UsersProvider({ children }) {
     isOpenManageUser,
     isOpenCreateUser,
     dispatch,
+    areModalsClosed,
   ]);
+
+  const areModalsClosed = !isOpenCreateUser && !isOpenModalEditUser && !isOpenModalDeleteUser && !isOpenManageUser;
 
   const handleUser = async (e) => {
     e.preventDefault();
