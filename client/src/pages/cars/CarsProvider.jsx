@@ -1,12 +1,11 @@
 import { CarsContext } from "./CarsContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createService, updateCar,deleteCar } from "../../utils";
+import { createService, updateCar, deleteCar } from "../../utils";
 import { getCarsByType } from "../../features/admin/adminSlice";
 import useOpenModal from "../../hooks/useOpenModal";
 
 export default function CarsProvider({ children }) {
-  
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
 
@@ -87,11 +86,12 @@ export default function CarsProvider({ children }) {
       e.preventDefault();
       await updateCar(selectedCar?._id, formData);
       handleEditCar();
-      setFilteredCars(cars=>cars.map((car)=>car._id===selectedCar._id?formData:car))
+      setFilteredCars(
+        cars.map((car) => (car._id === selectedCar?._id ? formData : car))
+      );
     };
     return { onSubmit, setFormData, formData };
   };
-
 
   const useDeleteCar = async (e) => {
     e.preventDefault();
@@ -99,7 +99,9 @@ export default function CarsProvider({ children }) {
     if (name === "deleteCar") {
       await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
       handleDeleteCar();
-      setFilteredCars(cars=>cars.filter((car)=>car._id!==selectedCar._id))
+      setFilteredCars((cars) =>
+        cars.filter((car) => car._id !== selectedCar._id)
+      );
     }
   };
 
