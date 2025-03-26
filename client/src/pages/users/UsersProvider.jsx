@@ -108,8 +108,14 @@ export default function UsersProvider({ children }) {
         users.map((user) => user.username).includes(formData?.username)
       );
       if (isValidUserName(formData, isValidUser)) {
-        await createUser(formData);
-        handleCreateUser();
+        try {
+          const newUser = await createUser(formData);
+          handleCreateUser(); 
+          dispatch(getUsers());
+          setFilteredUsers(() => [...users, newUser]);
+        } catch (error) {
+          console.error("Error creating user:", error);
+        }
       }
     };
     return { setFormData, onSubmit, isValidUser };
