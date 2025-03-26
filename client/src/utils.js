@@ -10,6 +10,9 @@ export const ADMIN = "63e14deca4340e45d23f20b2";
 const getAll = (url) => {
   axios.get(url);
 };
+const getUsersLocal = () => {
+  return axios.get(API_URL_USER);
+};
 const getById = (url, id) => {
   axios.get(`${url}/${id}`);
 };
@@ -96,7 +99,8 @@ export {
   deleteMessage,
   getContacts,
   createContact,
-  deleteContact
+  deleteContact,
+  getUsersLocal
 };
 
 export function getMomentFromUpdatedAt(updatedAt) {
