@@ -17,7 +17,7 @@ export default function UsersProvider({ children }) {
 
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
-
+  const [areModalsClosed, setAreModalsClosed] = useState(true);
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
@@ -27,7 +27,7 @@ export default function UsersProvider({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(getUsers());
+    dispatch(getUsers());
   }, [
     isOpenModalEditUser,
     isOpenModalDeleteUser,
@@ -37,7 +37,12 @@ export default function UsersProvider({ children }) {
     areModalsClosed,
   ]);
 
-  const areModalsClosed = !isOpenCreateUser && !isOpenModalEditUser && !isOpenModalDeleteUser && !isOpenManageUser;
+  setAreModalsClosed(
+    !isOpenCreateUser ||
+      !isOpenModalEditUser ||
+      !isOpenModalDeleteUser ||
+      !isOpenManageUser
+  );
 
   const handleUser = async (e) => {
     e.preventDefault();
