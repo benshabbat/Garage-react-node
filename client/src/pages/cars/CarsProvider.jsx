@@ -86,9 +86,6 @@ export default function CarsProvider({ children }) {
       e.preventDefault();
       await updateCar(selectedCar?._id, formData);
       handleEditCar();
-      setFilteredCars(
-        cars.map((car) => (car._id === selectedCar?._id ? formData : car))
-      );
     };
     return { onSubmit, setFormData, formData };
   };
