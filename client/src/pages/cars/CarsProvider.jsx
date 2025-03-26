@@ -79,10 +79,6 @@ export default function CarsProvider({ children }) {
   };
 
   const useEditCar = () => {
-    useEffect(() => {
-      setFormData(selectedCar);
-    }, [selectedCar]);
-
     const onSubmit = async (e) => {
       e.preventDefault();
       await updateCar(selectedCar?._id, formData);
