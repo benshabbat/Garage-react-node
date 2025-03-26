@@ -17,13 +17,14 @@ export default function UsersProvider({ children }) {
 
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
+  const [displayUsers, setDisplayUsers] = useState();
 
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
   const [handleEditUser, isOpenModalEditUser] = useOpenModal();
   const [handleDeleteUser, isOpenModalDeleteUser] = useOpenModal();
-  const displayUsers = filteredUsers || users;
+  setDisplayUsers(filteredUsers || users)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -110,7 +111,7 @@ export default function UsersProvider({ children }) {
       if (isValidUserName(formData, isValidUser)) {
         await createUser(formData);
         const newUsers = await getUsersLocal();
-        setFilteredUsers(newUsers);
+        setDisplayUsers(newUsers)
         handleCreateUser();
       }
     };
@@ -122,7 +123,7 @@ export default function UsersProvider({ children }) {
     await deleteUser(selectedUser?._id);
     handleDeleteUser();
     const newUsers = await getUsersLocal();
-    setFilteredUsers(newUsers);
+    setDisplayUsers(newUsers)
     handleManageUser();
   };
 
