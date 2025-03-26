@@ -9,7 +9,7 @@ const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
               X
             </button>
             <h1 className="header">Delete</h1>
-            <h2>{`Are you sure to delete? :${deleteData}`}</h2>
+            <h2>{`Are you sure to delete? : ${deleteData}`}</h2>
             <label className="form-label">
               <button
                 name={nameData}
