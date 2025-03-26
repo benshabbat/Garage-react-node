@@ -45,7 +45,7 @@ export default function FormInput({
         placeholder={input.placeholder || input.name}
         title={inputType(input).title}
         onChange={handleChange}
-        onBlur={() => setIsBlur(true)}
+        onBlur={handleBlur}
         aria-invalid={showError}
         aria-describedby={errorMessage ? `${input.name}-error` : undefined}
         required={input.type !== "checkbox"}
