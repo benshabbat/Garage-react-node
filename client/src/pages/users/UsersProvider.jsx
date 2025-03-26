@@ -118,9 +118,17 @@ export default function UsersProvider({ children }) {
 
   const useDeleteUser = async (e) => {
     e.preventDefault();
-    await deleteUser(selectedUser?._id);
-    handleDeleteUser();
-    handleManageUser();
+    try {
+      await deleteUser(selectedUser?._id);
+      handleDeleteUser(); 
+      handleManageUser();
+      
+      setFilteredUsers((prev) =>
+        prev?.filter((user) => user._id !== selectedUser?._id)
+      );
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
   };
 
   const value = {
