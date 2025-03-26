@@ -110,8 +110,8 @@ export default function UsersProvider({ children }) {
       if (isValidUserName(formData, isValidUser)) {
         const newUser = await createUser(formData);
         setFilteredUsers((prev) => [...(prev || users), newUser]);
+        dispatch(getUsers());
         handleCreateUser();
-        await dispatch(getUsers());
       }
     };
     return { setFormData, onSubmit, isValidUser };
