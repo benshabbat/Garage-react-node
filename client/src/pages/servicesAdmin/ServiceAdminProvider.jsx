@@ -46,7 +46,7 @@ export default function ServiceAdminProvider({ children }) {
         handlePaid();
         break;
       case "deleteService":
-        await deleteService(selectedService?._id);
+        await deleteService(selectedService?._id); //i need to make for it function
         handleManageService();
         break;
       case "editService":
@@ -75,17 +75,15 @@ export default function ServiceAdminProvider({ children }) {
 
   //the solution working well done with useeffect.
 
-
   const useEditService = (handleClick) => {
-    // useEffect(() => {
-    // }, [ isOpenStatus, isOpenEditService, isOpenPaid]);
-    
+    useEffect(() => {
+      setFormData(selectedService);
+    }, [isOpenStatus, isOpenEditService, isOpenPaid]);
+
     const onSubmit = async (e) => {
       e.preventDefault();
-      setFormData(selectedService);
       await updateService(selectedService?._id, formData);
       handleClick();
-      setFilteredServices(services.map((service) => (service._id === selectedService?._id ? formData : service)));
     };
     return { onSubmit, formData, setFormData };
   };
