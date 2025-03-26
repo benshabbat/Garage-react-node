@@ -3,7 +3,7 @@ import { getUsers } from "../../features/admin/adminSlice";
 import { UsersContext } from "./UsersContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, createCar, updateUser, createUser ,getUsersLocal} from "../../utils";
+import { deleteUser, createCar, updateUser, createUser } from "../../utils";
 import {
   validCar,
   validPhone,
@@ -17,18 +17,23 @@ export default function UsersProvider({ children }) {
 
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
-  const [displayUsers, setDisplayUsers] = useState();
 
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
   const [handleEditUser, isOpenModalEditUser] = useOpenModal();
   const [handleDeleteUser, isOpenModalDeleteUser] = useOpenModal();
-  setDisplayUsers(filteredUsers || users)
+  const displayUsers = filteredUsers || users;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUsers());
+    if (
+      isOpenModalEditUser ||
+      isOpenModalDeleteUser ||
+      isOpenManageUser ||
+      isOpenCreateUser
+    )
+      dispatch(getUsers());
   }, [
     isOpenModalEditUser,
     isOpenModalDeleteUser,
@@ -110,8 +115,6 @@ export default function UsersProvider({ children }) {
       );
       if (isValidUserName(formData, isValidUser)) {
         await createUser(formData);
-        const newUsers = await getUsersLocal();
-        setDisplayUsers(newUsers)
         handleCreateUser();
       }
     };
@@ -122,8 +125,6 @@ export default function UsersProvider({ children }) {
     e.preventDefault();
     await deleteUser(selectedUser?._id);
     handleDeleteUser();
-    const newUsers = await getUsersLocal();
-    setDisplayUsers(newUsers)
     handleManageUser();
   };
 
