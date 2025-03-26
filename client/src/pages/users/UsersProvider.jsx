@@ -84,16 +84,8 @@ export default function UsersProvider({ children }) {
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
       if (validPhone(formData?.phone) && validPass(formData?.password)) {
-        try {
-          await updateUser(selectedUser?._id, formData); // שליחת הנתונים לשרת
-      
-          handleEditUser();
-          // users?.map((user) =>
-          //   user._id === updatedUser._id ? updatedUser : user
-          // );
-        } catch (error) {
-          console.error("Error editing user:", error);
-        }
+        await updateUser(selectedUser?._id, formData); 
+        handleEditUser();
       }
     };
     return { formData, setFormData, onSubmitEditUser };
