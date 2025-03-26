@@ -86,7 +86,9 @@ export default function UsersProvider({ children }) {
       if (validPhone(formData?.phone) && validPass(formData?.password)) {
         await updateUser(selectedUser?._id, formData);
         handleEditUser();
-        users[users.indexOf(selectedUser)] = formData;
+        setFilteredUsers(
+          users.map((user) => (user._id === selectedUser?._id ? formData : user))
+        );
       }
     };
     return { formData, setFormData, onSubmitEditUser };
