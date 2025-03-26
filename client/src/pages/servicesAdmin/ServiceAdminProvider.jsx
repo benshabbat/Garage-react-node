@@ -83,10 +83,10 @@ export default function ServiceAdminProvider({ children }) {
       handleClick();
       setFilteredServices(
         services.map((service) =>
-          service._id === selectedService?._id ?  updated.data : service
-      )
-    );
-    console.log(services)
+          service._id === selectedService?._id ? updated.data : service
+        )
+      );
+      console.log(services);
     };
     return { onSubmit, formData, setFormData };
   };
