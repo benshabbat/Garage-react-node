@@ -108,7 +108,8 @@ export default function UsersProvider({ children }) {
         users.map((user) => user.username).includes(formData?.username)
       );
       if (isValidUserName(formData, isValidUser)) {
-        await createUser(formData);
+        const newUser = await createUser(formData);
+        setFilteredUsers((prev) => [...(prev || users), newUser]);
         handleCreateUser();
         await dispatch(getUsers());
       }
