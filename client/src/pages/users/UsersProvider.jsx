@@ -84,7 +84,7 @@ export default function UsersProvider({ children }) {
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
       if (validPhone(formData?.phone) && validPass(formData?.password)) {
-        await updateUser(selectedUser?._id, formData); 
+        await updateUser(selectedUser?._id, formData);
         handleEditUser();
       }
     };
@@ -109,13 +109,9 @@ export default function UsersProvider({ children }) {
         users.map((user) => user.username).includes(formData?.username)
       );
       if (isValidUserName(formData, isValidUser)) {
-        try {
-          const newUser = await createUser(formData);
-          handleCreateUser();
-          setFilteredUsers(() => [...users, newUser.data]);
-        } catch (error) {
-          console.error("Error creating user:", error);
-        }
+        const newUser = await createUser(formData);
+        handleCreateUser();
+        setFilteredUsers(() => [...users, newUser.data]);
       }
     };
     return { setFormData, onSubmit, isValidUser };
@@ -123,14 +119,10 @@ export default function UsersProvider({ children }) {
 
   const useDeleteUser = async (e) => {
     e.preventDefault();
-    try {
       await deleteUser(selectedUser?._id);
       handleDeleteUser();
       handleManageUser();
       setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
   };
 
   const value = {
