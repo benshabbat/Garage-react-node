@@ -1,4 +1,3 @@
-import "../../components/table/table.css";
 import { ServiceAdminContext } from "./ServiceAdminContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -78,14 +77,15 @@ export default function ServiceAdminProvider({ children }) {
 
 
   const useEditService = (handleClick) => {
-    useEffect(() => {
-      setFormData(selectedService);
-    }, [ isOpenStatus, isOpenEditService, isOpenPaid]);
+    // useEffect(() => {
+    //   setFormData(selectedService);
+    // }, [ isOpenStatus, isOpenEditService, isOpenPaid]);
 
     const onSubmit = async (e) => {
       e.preventDefault();
       await updateService(selectedService?._id, formData);
       handleClick();
+      setFilteredServices(services.filter((service) => service._id !== selectedService._id));
     };
     return { onSubmit, formData, setFormData };
   };
