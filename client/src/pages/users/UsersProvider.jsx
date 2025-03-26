@@ -88,11 +88,11 @@ export default function UsersProvider({ children }) {
           const response = await updateUser(selectedUser?._id, formData);
           const updatedUser = response.data;
           handleEditUser();
-          setFilteredUsers(
-            users?.map((user) =>
-              user._id === updatedUser._id ? updatedUser : user
-            )
-          );
+          // setFilteredUsers(
+          //   users?.map((user) =>
+          //     user._id === updatedUser._id ? updatedUser : user
+          //   )
+          // );
         } catch (error) {
           console.error("Error editing user:", error);
         }
