@@ -109,6 +109,7 @@ export default function UsersProvider({ children }) {
       );
       if (isValidUserName(formData, isValidUser)) {
         await createUser(formData);
+        await dispatch(getUsers());
         handleCreateUser();
       }
     };
