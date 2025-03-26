@@ -15,13 +15,14 @@ export default function ServiceAdminProvider({ children }) {
   const [handleEditService, isOpenEditService] = useOpenModal();
   const [handleStatus, isOpenStatus] = useOpenModal();
   const [handlePaid, isOpenPaid] = useOpenModal();
-
+  
   const displayServices = filteredServices || services;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getServicesByType());
+    console.log(displayServices);
   }, [
     isOpenManageService,
     isOpenStatus,
@@ -86,7 +87,6 @@ export default function ServiceAdminProvider({ children }) {
           service._id === selectedService?._id ? updated.data : service
         )
       );
-      console.log(displayServices);
     };
     return { onSubmit, formData, setFormData };
   };
