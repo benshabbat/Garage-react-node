@@ -16,7 +16,7 @@ export default function UsersProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
 
   const [selectedUser, setSelctedUser] = useState();
-  const [filteredUsers, setFilteredUsers] = useState(users);
+  const [filteredUsers, setFilteredUsers] = useState();
 
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
@@ -35,7 +35,6 @@ export default function UsersProvider({ children }) {
     isOpenCreateUser,
     dispatch,
   ]);
-
 
   const handleUser = async (e) => {
     e.preventDefault();
@@ -120,12 +119,9 @@ export default function UsersProvider({ children }) {
     e.preventDefault();
     try {
       await deleteUser(selectedUser?._id);
-      handleDeleteUser(); 
+      handleDeleteUser();
       handleManageUser();
-
-      setFilteredUsers((prev) =>
-        prev?.filter((user) => user._id !== selectedUser?._id)
-      );
+      setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
     } catch (error) {
       console.error("Error deleting user:", error);
     }
