@@ -88,8 +88,8 @@ export default function UsersProvider({ children }) {
           const response = await updateUser(selectedUser?._id, formData);
           const updatedUser = response.data;
           handleEditUser();
-          setFilteredUsers((users) =>
-            users.map((user) =>
+          setFilteredUsers(
+            users?.map((user) =>
               user._id === updatedUser._id ? updatedUser : user
             )
           );
