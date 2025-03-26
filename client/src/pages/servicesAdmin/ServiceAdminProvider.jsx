@@ -77,9 +77,9 @@ export default function ServiceAdminProvider({ children }) {
 
 
   const useEditService = (handleClick) => {
-    // useEffect(() => {
-    //   setFormData(selectedService);
-    // }, [ isOpenStatus, isOpenEditService, isOpenPaid]);
+    useEffect(() => {
+      setFormData(selectedService);
+    }, [ isOpenStatus, isOpenEditService, isOpenPaid]);
 
     const onSubmit = async (e) => {
       e.preventDefault();
