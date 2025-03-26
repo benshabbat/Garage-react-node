@@ -14,7 +14,6 @@ export default function FormInput({
   const inputRef = useRef();
 
   const showError =
-    input?.value &&
     isBlur &&
     (input.isError ||
       (input.name !== "username" &&
