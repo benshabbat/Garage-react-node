@@ -26,7 +26,7 @@ const updateUser = (id, obj) => {
   axios.put(`${API_URL_USER}/${id}`, obj);
 };
 const updateService = (id, obj) => {
-  axios.put(`${API_URL_SERVICE}/${id}`, obj);
+  return axios.put(`${API_URL_SERVICE}/${id}`, obj);
 };
 const updateCar = (id, obj) => {
   axios.put(`${API_URL_CAR}/${id}`, obj);

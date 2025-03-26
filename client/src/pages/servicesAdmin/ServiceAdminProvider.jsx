@@ -79,11 +79,11 @@ export default function ServiceAdminProvider({ children }) {
     const [formData, setFormData] = useState(selectedService);
     const onSubmit = async (e) => {
       e.preventDefault();
-      await updateService(selectedService?._id, formData);
+      const updated = await updateService(selectedService?._id, formData);
       handleClick();
       setFilteredServices(
         services.map((service) =>
-          service._id === selectedService?._id ? formData : service
+          service._id === selectedService?._id ? updated : service
         )
       );
     };
