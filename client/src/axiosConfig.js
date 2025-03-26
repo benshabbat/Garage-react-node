@@ -6,16 +6,11 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8800/
 
 axios.defaults.withCredentials = true;
 
-console.log("All cookies:", document.cookie);
-
 axios.interceptors.request.use((config) => {
   const token = document.cookie
     .split("; ")
     .find((row) => row.startsWith("access_token="))
     ?.split("=")[1];
-
-  console.log("Token:", token);
-
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
