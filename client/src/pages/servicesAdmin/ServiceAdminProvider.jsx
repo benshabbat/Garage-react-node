@@ -86,7 +86,7 @@ export default function ServiceAdminProvider({ children }) {
           service._id === selectedService?._id ? updated.data : service
         )
       );
-      console.log(services);
+      console.log(displayServices);
     };
     return { onSubmit, formData, setFormData };
   };
