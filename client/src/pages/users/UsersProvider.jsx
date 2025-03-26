@@ -1,4 +1,3 @@
-import "../../components/table/table.css";
 import { getUsers } from "../../features/admin/adminSlice";
 import { UsersContext } from "./UsersContext";
 import { useState, useEffect } from "react";
@@ -76,6 +75,7 @@ export default function UsersProvider({ children }) {
     if (validCar(formData?.numberPlate)) {
       await createCar(selectedUser?._id, formData);
       handleCreateCar();
+
     }
   };
 

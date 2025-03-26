@@ -1,3 +1,5 @@
+import "./table.css"
+
 const Table = ({ trTh, trTd }) => {
   const columnCount = trTh?.props?.children?.length || 1;
   return (

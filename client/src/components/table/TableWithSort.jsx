@@ -1,50 +1,52 @@
-import { Children, cloneElement, useState } from "react";
+import "./table.css";
+import { Children, cloneElement, useState, useMemo } from "react";
+import PropTypes from "prop-types";
 
-
-//TODO:need to understand this code about sorting
 const Table = ({ trTh, trTd }) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
-    direction: 'ascending'
+    direction: "ascending",
   });
 
   const handleSort = (key) => {
-    let direction = 'ascending';
-    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending';
-    }
-    setSortConfig({ key, direction });
+    setSortConfig((prevConfig) => ({
+      key,
+      direction:
+        prevConfig.key === key && prevConfig.direction === "ascending"
+          ? "descending"
+          : "ascending",
+    }));
   };
 
-  const getSortedData = () => {
+  const sortedData = useMemo(() => {
     if (!sortConfig.key || !trTd) return trTd;
 
     return [...trTd].sort((a, b) => {
       const aValue = a.props.children.find(
-        child => child.props['data-label'] === sortConfig.key
+        (child) => child.props["data-label"] === sortConfig.key
       )?.props.children;
       const bValue = b.props.children.find(
-        child => child.props['data-label'] === sortConfig.key
+        (child) => child.props["data-label"] === sortConfig.key
       )?.props.children;
 
-      if (aValue < bValue) return sortConfig.direction === 'ascending' ? -1 : 1;
-      if (aValue > bValue) return sortConfig.direction === 'ascending' ? 1 : -1;
+      if (aValue < bValue) return sortConfig.direction === "ascending" ? -1 : 1;
+      if (aValue > bValue) return sortConfig.direction === "ascending" ? 1 : -1;
       return 0;
     });
-  };
+  }, [sortConfig, trTd]);
 
   const columnCount = trTh?.props?.children?.length || 1;
-  const sortedData = getSortedData();
 
-  // Add click handlers to table headers
-  const headers = Children.map(trTh?.props?.children, (child) => {
-    return cloneElement(child, {
+  const headers = Children.map(trTh?.props?.children, (child) =>
+    cloneElement(child, {
       onClick: () => handleSort(child.props.children),
-      style: { cursor: 'pointer' },
-      className: sortConfig.key === child.props.children ? 
-        `sorted-${sortConfig.direction}` : ''
-    });
-  });
+      style: { cursor: "pointer" },
+      className:
+        sortConfig.key === child.props.children
+          ? `sorted-${sortConfig.direction}`
+          : "",
+    })
+  );
 
   return (
     <section className="table__body">
@@ -57,13 +59,20 @@ const Table = ({ trTh, trTd }) => {
             sortedData
           ) : (
             <tr>
-              <td className="no-data-message" colSpan={columnCount}>No Data Right now</td>
+              <td className="no-data-message" colSpan={columnCount}>
+                No Data Right now
+              </td>
             </tr>
           )}
         </tbody>
       </table>
     </section>
   );
+};
+
+Table.propTypes = {
+  trTh: PropTypes.element.isRequired,
+  trTd: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default Table;

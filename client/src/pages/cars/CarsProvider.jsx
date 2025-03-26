@@ -1,4 +1,3 @@
-import "../../components/table/table.css";
 import { CarsContext } from "./CarsContext";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -88,6 +87,7 @@ export default function CarsProvider({ children }) {
       e.preventDefault();
       await updateCar(selectedCar?._id, formData);
       handleEditCar();
+      setFilteredCars(cars=>cars.map((car)=>car._id===selectedCar._id?formData:car))
     };
     return { onSubmit, setFormData, formData };
   };
@@ -99,6 +99,7 @@ export default function CarsProvider({ children }) {
     if (name === "deleteCar") {
       await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
       handleDeleteCar();
+      setFilteredCars(cars=>cars.filter((car)=>car._id!==selectedCar._id))
     }
   };
 
