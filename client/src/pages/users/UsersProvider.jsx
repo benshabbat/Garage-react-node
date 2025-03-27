@@ -8,6 +8,7 @@ import {
   validPhone,
   validPass,
   validEmail,
+  validUserIsExist,
 } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
 import { templatePhone } from "../../../../server/utils/templates";
@@ -101,6 +102,7 @@ export default function UsersProvider({ children }) {
 
   const isValidUserName = (formData) => {
     return (
+      validUserIsExist(formData?.username, users) &&
       validPhone(formData?.phone) &&
       validPass(formData?.password) &&
       validEmail(formData?.email)
@@ -110,10 +112,9 @@ export default function UsersProvider({ children }) {
   function useRegister() {
     const onSubmit = async (e) => {
       e.preventDefault();
-      const isValidUser=users.map((user) => user.username).includes(formData?.username)
       const isValidEmail=users.map((user) => user.email).includes(formData?.email)
       const isValidPhone=users.map((user) => user.phone).includes(templatePhone(formData?.phone))
-      if (isValidUserName(formData) && !isValidUser && !isValidEmail && !isValidPhone) {
+      if (isValidUserName(formData) && !isValidEmail && !isValidPhone) {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
