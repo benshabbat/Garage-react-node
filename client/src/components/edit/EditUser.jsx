@@ -3,7 +3,7 @@ import { useUsersContext } from "../../pages/users/UsersContext";
 
 const EditUser = () => {
   const { useEditUser,modals } = useUsersContext();
-  const {onSubmitEditUser,formData,setFormData,isPhoneTaken,isEmailTaken,isUserTake}=useEditUser()
+  const {onSubmitEditUser,formData,setFormData,isExistEmail, isExistPhone, isExistUser}=useEditUser()
 
   return (
     <OpenModal
@@ -16,21 +16,21 @@ const EditUser = () => {
             {
               name: "username",
               value: formData?.username,
-              isExist: isUserTake,
+              isExist: isExistUser,
               errorExist: "Username is exist",
             },
             {
               name: "email",
               type: "email",
               errorExist: "Email is exist",
-              isExist: isEmailTaken,
+              isExist: isExistEmail,
               value: formData?.email,
             },
             {
               name: "phone",
               value: formData?.phone,
               errorExist: "Phone is exist",
-              isExist: isPhoneTaken
+              isExist: isExistPhone
             },
             {
               name: "password",

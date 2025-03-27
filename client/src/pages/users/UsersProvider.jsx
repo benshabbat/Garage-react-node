@@ -19,6 +19,10 @@ export default function UsersProvider({ children }) {
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
 
+  const [isExistEmail, setIsExistEmail] = useState(false);
+  const [isExistPhone, setIsExistPhone] = useState(false);
+  const [isExistUser, setIsExistUser] = useState(false);
+
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
@@ -82,11 +86,7 @@ export default function UsersProvider({ children }) {
 
   const useEditUser = () => {
     const [formData, setFormData] = useState(selectedUser);
-    // const isPhoneTaken = users.some(
-    //   (user) =>
-    //     user.phone === templatePhone(formData?.phone) &&
-    //     user._id !== selectedUser?._id
-    // );
+
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
       if (
@@ -109,7 +109,6 @@ export default function UsersProvider({ children }) {
 
   const isValidUserName = (formData) => {
     return (
-      validUserIsExist(formData?.username, users) &&
       validPhone(formData?.phone) &&
       validPass(formData?.password) &&
       validEmail(formData?.email)
@@ -117,29 +116,23 @@ export default function UsersProvider({ children }) {
   };
 
   function useRegister() {
-    const isValidUser = users
-      .map((user) => user.username)
-      .includes(formData?.username);
-    const isValidEmail = users
-      .map((user) => user.email)
-      .includes(formData?.email);
-    const isValidPhone = users
-      .map((user) => user.phone)
-      .includes(templatePhone(formData?.phone));
+    setIsExistEmail(users.map((user) => user.email).includes(formData?.email));
+    setIsExistPhone(users.map((user) => user.phone).includes(formData?.phone));
+    setIsExistUser(
+      users.map((user) => user.username).includes(formData?.username)
+    );
+
     const onSubmit = async (e) => {
       e.preventDefault();
       if (
-        isValidUserName(formData) &&
-        !isValidUser &&
-        !isValidEmail &&
-        !isValidPhone
+        isValidUserName(formData) && !isExistEmail && !isExistPhone && !isExistUser
       ) {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isValidUser, isValidEmail, isValidPhone };
+    return { setFormData, onSubmit, isExistEmail, isExistPhone, isExistUser };
   }
 
   const useDeleteUser = async (e) => {
