@@ -82,35 +82,24 @@ export default function UsersProvider({ children }) {
 
   const useEditUser = () => {
     const [formData, setFormData] = useState(selectedUser);
-    const isPhoneTaken = users?.some(
-      (user) =>
-        user.phone === templatePhone(formData?.phone) &&
-        user._id !== selectedUser?._id
+    const isPhoneTaken = users.some(
+      (user) => user.phone === templatePhone(formData?.phone) && user._id !== selectedUser?._id
     );
-    const isEmailTaken = users?.some(
-      (user) => user.email === formData?.email && user._id !== selectedUser?._id
-    );
+    const isEmailTaken = users.some(
+      (user) => user.email === formData?.email && user._id !== selectedUser?._id)
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
-      if (isValidUserName(formData) && !isPhoneTaken && !isEmailTaken) {
+      if (validPhone(formData?.phone) && validPass(formData?.password)&&!isPhoneTaken&&!isEmailTaken) {
         await updateUser(selectedUser?._id, formData);
         handleEditUser();
         setFilteredUsers(
           users.map((user) =>
-            user._id === selectedUser?._id
-              ? { ...formData, phone: templatePhone(formData.phone) }
-              : user
+            user._id === selectedUser?._id ? {...formData,phone:templatePhone(formData.phone)} : user
           )
         );
       }
     };
-    return {
-      formData,
-      setFormData,
-      onSubmitEditUser,
-      isPhoneTaken,
-      isEmailTaken,
-    };
+    return { formData, setFormData, onSubmitEditUser,isPhoneTaken,isEmailTaken };
   };
 
   const isValidUserName = (formData) => {
@@ -123,10 +112,8 @@ export default function UsersProvider({ children }) {
   };
 
   function useRegister() {
-    const isValidEmail = users?.map((user) => user.email)
-      .includes(formData?.email);
-    const isValidPhone = users?.map((user) => user.phone)
-      .includes(templatePhone(formData?.phone));
+    const isValidEmail=users.map((user) => user.email).includes(formData?.email)
+    const isValidPhone=users.map((user) => user.phone).includes(templatePhone(formData?.phone))
     const onSubmit = async (e) => {
       e.preventDefault();
       if (isValidUserName(formData) && !isValidEmail && !isValidPhone) {
