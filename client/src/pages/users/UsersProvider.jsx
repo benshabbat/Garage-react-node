@@ -18,10 +18,6 @@ export default function UsersProvider({ children }) {
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
 
-  const [isValidUser, setIsValidUser] = useState(false);
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [isValidPhone, setIsValidPhone] = useState(false);
-
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
@@ -106,33 +102,24 @@ export default function UsersProvider({ children }) {
   const isValidUserName = (formData) => {
     return (
       validPhone(formData?.phone) &&
-      !isValidUser &&
       validPass(formData?.password) &&
-      validEmail(formData?.email) &&
-      !isValidEmail &&
-      !isValidPhone
+      validEmail(formData?.email)
     );
   };
 
   function useRegister() {
     const onSubmit = async (e) => {
       e.preventDefault();
-      setIsValidUser(
-        users.map((user) => user.username).includes(formData?.username)
-      );
-      setIsValidEmail(
-        users.map((user) => user.email).includes(formData?.email)
-      );
-      setIsValidPhone(
-        users.map((user) => user.phone).includes(templatePhone(formData?.phone))
-      );
-      if (isValidUserName(formData)) {
+      const isValidUser=users.map((user) => user.username).includes(formData?.username)
+      const isValidEmail=users.map((user) => user.email).includes(formData?.email)
+      const isValidPhone=users.map((user) => user.phone).includes(templatePhone(formData?.phone))
+      if (isValidUserName(formData) && !isValidUser && !isValidEmail && !isValidPhone) {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData,formData, onSubmit, isValidUser, isValidEmail, isValidPhone };
+    return { setFormData, onSubmit, isValidUser, isValidEmail, isValidPhone };
   }
 
   const useDeleteUser = async (e) => {
