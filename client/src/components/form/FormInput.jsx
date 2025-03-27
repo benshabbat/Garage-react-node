@@ -18,7 +18,8 @@ export default function FormInput({
     isBlur &&
     ((input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
-      !valid(inputRef?.current?.value, input.name));
+      (input.name !== "username" &&
+        !valid(inputRef?.current?.value, input.name)));
   let errorMessage = showError ? inputType(input).errorMessage : null;
   const handleBlur = useCallback(() => setIsBlur(true), []);
   if (input.type === "checkbox") {
