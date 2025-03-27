@@ -132,7 +132,7 @@ export default function UsersProvider({ children }) {
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isValidUser, isValidEmail, isValidPhone };
+    return { setFormData,formData, onSubmit, isValidUser, isValidEmail, isValidPhone };
   }
 
   const useDeleteUser = async (e) => {
