@@ -8,6 +8,7 @@ import {
   validPhone,
   validPass,
   validEmail,
+  validUserIsExist,
 } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
 import { templatePhone } from "../../../../server/utils/templates";
@@ -17,10 +18,6 @@ export default function UsersProvider({ children }) {
 
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
-
-  const [isValidUser, setIsValidUser] = useState(false);
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [isValidPhone, setIsValidPhone] = useState(false);
 
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
@@ -88,6 +85,7 @@ export default function UsersProvider({ children }) {
     const isPhoneTaken = users.some(
       (user) => user.phone === templatePhone(formData?.phone) && user._id !== selectedUser?._id
     );
+    
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
       if (validPhone(formData?.phone) && validPass(formData?.password)&&!isPhoneTaken) {
@@ -105,34 +103,25 @@ export default function UsersProvider({ children }) {
 
   const isValidUserName = (formData) => {
     return (
+      validUserIsExist(formData?.username) &&
       validPhone(formData?.phone) &&
-      !isValidUser &&
       validPass(formData?.password) &&
-      validEmail(formData?.email) &&
-      !isValidEmail &&
-      !isValidPhone
+      validEmail(formData?.email)
     );
   };
 
   function useRegister() {
+    const isValidEmail=users.map((user) => user.email).includes(formData?.email)
+    const isValidPhone=users.map((user) => user.phone).includes(templatePhone(formData?.phone))
     const onSubmit = async (e) => {
       e.preventDefault();
-      setIsValidUser(
-        users.map((user) => user.username).includes(formData?.username)
-      );
-      setIsValidEmail(
-        users.map((user) => user.email).includes(formData?.email)
-      );
-      setIsValidPhone(
-        users.map((user) => user.phone).includes(templatePhone(formData?.phone))
-      );
-      if (isValidUserName(formData)) {
+      if (isValidUserName(formData) && !isValidEmail && !isValidPhone) {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isValidUser, isValidEmail, isValidPhone };
+    return { setFormData, onSubmit, isValidPhone, isValidEmail };
   }
 
   const useDeleteUser = async (e) => {
