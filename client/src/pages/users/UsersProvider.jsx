@@ -95,7 +95,7 @@ export default function UsersProvider({ children }) {
         handleEditUser();
         setFilteredUsers(
           users.map((user) =>
-            user._id === selectedUser?._id ? formData : user
+            user._id === selectedUser?._id ? {...formData,phone:templatePhone(formData.phone)} : user
           )
         );
       }
