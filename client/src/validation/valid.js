@@ -1,4 +1,3 @@
-import validUserIsExist from "./validUserIsExist.js";
 import validPhone from "./validPhone.js";
 import validCar from "./validCar.js";
 import validEmail from "./validEmail.js";
