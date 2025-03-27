@@ -14,7 +14,7 @@ const Register = () => {
             {
               name: "username",
               errorExist: "Username is exist",
-              isErisExistror: isExistUser,
+              isExist: isExistUser,
             },
             {
               name: "email",
