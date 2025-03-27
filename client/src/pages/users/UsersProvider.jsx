@@ -8,7 +8,6 @@ import {
   validPhone,
   validPass,
   validEmail,
-  validUserIsExist,
 } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
 import { templatePhone } from "../../../../server/utils/templates";
@@ -82,28 +81,42 @@ export default function UsersProvider({ children }) {
 
   const useEditUser = () => {
     const [formData, setFormData] = useState(selectedUser);
-    const isPhoneTaken = users.some(
-      (user) => user.phone === templatePhone(formData?.phone) && user._id !== selectedUser?._id
+    const isPhoneTaken = users?.some(
+      (user) =>
+        user.phone === templatePhone(formData?.phone) &&
+        user._id !== selectedUser?._id
     );
-    
+    const isEmailTaken = users?.some(
+      (user) => user.email === formData?.email && user._id !== selectedUser?._id
+    );
+    const isUserTake = users?.some(
+      (user) => user.username === formData?.username && user._id !== selectedUser?._id)
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
-      if (validPhone(formData?.phone) && validPass(formData?.password)&&!isPhoneTaken) {
+      if (isValidUserName(formData) && !isPhoneTaken && !isEmailTaken && !isUserTake) {
         await updateUser(selectedUser?._id, formData);
         handleEditUser();
         setFilteredUsers(
           users.map((user) =>
-            user._id === selectedUser?._id ? {...formData,phone:templatePhone(formData.phone)} : user
+            user._id === selectedUser?._id
+              ? { ...formData, phone: templatePhone(formData.phone) }
+              : user
           )
         );
       }
     };
-    return { formData, setFormData, onSubmitEditUser,isPhoneTaken };
+    return {
+      formData,
+      setFormData,
+      onSubmitEditUser,
+      isPhoneTaken,
+      isEmailTaken,
+      isUserTake
+    };
   };
 
   const isValidUserName = (formData) => {
     return (
-      validUserIsExist(formData?.username) &&
       validPhone(formData?.phone) &&
       validPass(formData?.password) &&
       validEmail(formData?.email)
@@ -111,17 +124,30 @@ export default function UsersProvider({ children }) {
   };
 
   function useRegister() {
-    const isValidEmail=users.map((user) => user.email).includes(formData?.email)
-    const isValidPhone=users.map((user) => user.phone).includes(templatePhone(formData?.phone))
+    const isValidEmail = users
+      .map((user) => user.email)
+      .includes(formData?.email);
+    const isValidPhone = users
+      .map((user) => user.phone)
+      .includes(templatePhone(formData?.phone));
+
+    const isValidUser = users
+      .map((user) => user.username)
+      .includes(formData?.username);
     const onSubmit = async (e) => {
       e.preventDefault();
-      if (isValidUserName(formData) && !isValidEmail && !isValidPhone) {
+      if (
+        isValidUserName(formData) &&
+        !isValidEmail &&
+        !isValidPhone &&
+        !isValidUser
+      ) {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isValidPhone, isValidEmail };
+    return { setFormData, onSubmit, isValidPhone, isValidEmail, isValidUser };
   }
 
   const useDeleteUser = async (e) => {
