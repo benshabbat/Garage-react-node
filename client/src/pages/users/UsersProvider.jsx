@@ -144,13 +144,13 @@ export default function UsersProvider({ children }) {
   };
 
   function useRegister() {
-    useEffect(() => {
-      setIsExistEmail(users?.some((user) => user.email === formData?.email));
-      setIsExistPhone(
-        users?.some((user) => user.phone === templatePhone(formData?.phone))
-      );
-      setIsExistUser(users?.some((user) => user.username === formData?.username));
-    }, [formData, users]);
+    const emails = users?.map((user) => user.email);
+    const phones = users?.map((user) => templatePhone(user.phone));
+    const usernames = users?.map((user) => user.username);
+
+    setIsExistEmail(emails.includes(formData?.email));
+    setIsExistPhone(phones.includes(templatePhone(formData?.phone)));
+    setIsExistUser(usernames.includes(formData?.username));
     const onSubmit = async (e) => {
       e.preventDefault();
       if (
