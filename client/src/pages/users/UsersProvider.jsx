@@ -144,11 +144,11 @@ export default function UsersProvider({ children }) {
   };
 
   function useRegister() {
-    setIsExistEmail(users.some((user) => user.email === formData?.email));
+    setIsExistEmail(users?.some((user) => user.email === formData?.email));
     setIsExistPhone(
-      users.some((user) => user.phone === templatePhone(formData?.phone))
+      users?.some((user) => user.phone === templatePhone(formData?.phone))
     );
-    setIsExistUser(users.some((user) => user.username === formData?.username));
+    setIsExistUser(users?.some((user) => user.username === formData?.username));
 
     const onSubmit = async (e) => {
       e.preventDefault();
