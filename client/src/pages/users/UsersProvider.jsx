@@ -105,11 +105,20 @@ export default function UsersProvider({ children }) {
 
   function useRegister() {
     const [isValidUser, setIsValidUser] = useState(false);
+    const [isValidEmail, setIsValidEmail] = useState(false);
+    const [isValidPhone, setIsValidPhone] = useState(false);
+
 
     const onSubmit = async (e) => {
       e.preventDefault();
       setIsValidUser(
         users.map((user) => user.username).includes(formData?.username)
+      );
+      setIsValidEmail(
+        users.map((user) => user.email).includes(formData?.email)
+      );
+      setIsValidPhone(
+        users.map((user) => user.phone).includes(formData?.phone)
       );
       if (isValidUserName(formData, isValidUser)) {
         const newUser = await createUser(formData);
@@ -117,7 +126,7 @@ export default function UsersProvider({ children }) {
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isValidUser };
+    return { setFormData, onSubmit, isValidUser ,isValidEmail ,isValidPhone};
   }
 
   const useDeleteUser = async (e) => {

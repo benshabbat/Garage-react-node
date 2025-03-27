@@ -2,7 +2,7 @@ import { Form, OpenModal } from "..";
 import { useUsersContext } from "../../pages/users/UsersContext";
 const Register = () => {
   const {modals,useRegister} = useUsersContext()
-  const {setFormData,onSubmit,isValidUser} =useRegister()
+  const {setFormData,onSubmit,isValidUser,isValidEmail ,isValidPhone} =useRegister()
   return (
     <OpenModal
       comp={
@@ -19,9 +19,13 @@ const Register = () => {
             {
               name: "email",
               type: "email",
+              errorMessage: "Email is exist",
+              isError: isValidEmail
             },
             {
               name: "phone",
+              errorMessage: "Phone is exist",
+              isError: isValidPhone
             },
             {
               name: "password",
