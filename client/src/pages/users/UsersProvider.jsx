@@ -86,7 +86,7 @@ export default function UsersProvider({ children }) {
   const useEditUser = () => {
     const [formData, setFormData] = useState(selectedUser);
     const isPhoneTaken = users.some(
-      (user) => user.phone === formData?.phone && user._id !== selectedUser?._id
+      (user) => user.phone === templatePhone(formData?.phone) && user._id !== selectedUser?._id
     );
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
