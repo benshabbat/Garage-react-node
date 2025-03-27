@@ -8,7 +8,6 @@ import {
   validPhone,
   validPass,
   validEmail,
-  validUserIsExist,
 } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
 import { templatePhone } from "../../../../server/utils/templates";
@@ -18,6 +17,10 @@ export default function UsersProvider({ children }) {
 
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
+
+  const [isValidUser, setIsValidUser] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidPhone, setIsValidPhone] = useState(false);
 
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
@@ -102,25 +105,34 @@ export default function UsersProvider({ children }) {
 
   const isValidUserName = (formData) => {
     return (
-      validUserIsExist(formData?.username) &&
       validPhone(formData?.phone) &&
+      !isValidUser &&
       validPass(formData?.password) &&
-      validEmail(formData?.email)
+      validEmail(formData?.email) &&
+      !isValidEmail &&
+      !isValidPhone
     );
   };
 
   function useRegister() {
-    const isValidEmail=users.map((user) => user.email).includes(formData?.email)
-    const isValidPhone=users.map((user) => user.phone).includes(templatePhone(formData?.phone))
     const onSubmit = async (e) => {
       e.preventDefault();
-      if (isValidUserName(formData) && !isValidEmail && !isValidPhone) {
+      setIsValidUser(
+        users.map((user) => user.username).includes(formData?.username)
+      );
+      setIsValidEmail(
+        users.map((user) => user.email).includes(formData?.email)
+      );
+      setIsValidPhone(
+        users.map((user) => user.phone).includes(templatePhone(formData?.phone))
+      );
+      if (isValidUserName(formData)) {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isValidPhone, isValidEmail };
+    return { setFormData, onSubmit, isValidUser, isValidEmail, isValidPhone };
   }
 
   const useDeleteUser = async (e) => {

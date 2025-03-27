@@ -3,7 +3,7 @@ import { useUsersContext } from "../../pages/users/UsersContext";
 
 const EditUser = () => {
   const { useEditUser,modals } = useUsersContext();
-  const {onSubmitEditUser,formData,setFormData,isPhoneTaken,isEmailTaken}=useEditUser()
+  const {onSubmitEditUser,formData,setFormData,isPhoneTaken}=useEditUser()
 
   return (
     <OpenModal
