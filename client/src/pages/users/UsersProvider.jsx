@@ -85,11 +85,9 @@ export default function UsersProvider({ children }) {
     const isPhoneTaken = users.some(
       (user) => user.phone === templatePhone(formData?.phone) && user._id !== selectedUser?._id
     );
-    const isEmailTaken = users.some(
-      (user) => user.email === formData?.email && user._id !== selectedUser?._id)
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
-      if (validPhone(formData?.phone) && validPass(formData?.password)&&!isPhoneTaken&&!isEmailTaken) {
+      if (validPhone(formData?.phone) && validPass(formData?.password)&&!isPhoneTaken) {
         await updateUser(selectedUser?._id, formData);
         handleEditUser();
         setFilteredUsers(
@@ -99,7 +97,7 @@ export default function UsersProvider({ children }) {
         );
       }
     };
-    return { formData, setFormData, onSubmitEditUser,isPhoneTaken,isEmailTaken };
+    return { formData, setFormData, onSubmitEditUser,isPhoneTaken };
   };
 
   const isValidUserName = (formData) => {
