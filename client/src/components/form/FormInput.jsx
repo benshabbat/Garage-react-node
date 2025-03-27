@@ -24,7 +24,7 @@ export default function FormInput({
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
   }
-
+  if (input.isExist) errorMessage = input.errorExist;
   return (
     <label className={classNameLabel}>
       {!input.hidden && !classNameLabel && <span>{input.name}</span>}

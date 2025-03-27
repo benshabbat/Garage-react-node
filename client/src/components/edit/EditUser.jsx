@@ -25,8 +25,8 @@ const EditUser = () => {
             {
               name: "phone",
               value: formData?.phone,
-              errorMessage: "Phone is exist",
-              isError: isPhoneTaken
+              errorExist: "Phone is exist",
+              isExist: isPhoneTaken
             },
             {
               name: "password",

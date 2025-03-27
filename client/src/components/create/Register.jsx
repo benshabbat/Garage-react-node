@@ -19,13 +19,13 @@ const Register = () => {
             {
               name: "email",
               type: "email",
-              errorMessage: "Email is exist",
-              isError: isValidEmail
+              errorExist: "Email is exist",
+              isExist: isValidEmail
             },
             {
               name: "phone",
-              errorMessage: "Phone is exist",
-              isError: isValidPhone
+              errorExist: "Phone is exist",
+              isExist: isValidPhone
             },
             {
               name: "password",
