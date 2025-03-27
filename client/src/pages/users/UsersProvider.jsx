@@ -85,9 +85,11 @@ export default function UsersProvider({ children }) {
     const isPhoneTaken = users.some(
       (user) => user.phone === templatePhone(formData?.phone) && user._id !== selectedUser?._id
     );
+    const isEmailTaken = users.some(
+      (user) => user.email === formData?.email && user._id !== selectedUser?._id)
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
-      if (validPhone(formData?.phone) && validPass(formData?.password)&&!isPhoneTaken) {
+      if (isValidUserName(formData)&&!isPhoneTaken&&!isEmailTaken) {
         await updateUser(selectedUser?._id, formData);
         handleEditUser();
         setFilteredUsers(
@@ -97,7 +99,7 @@ export default function UsersProvider({ children }) {
         );
       }
     };
-    return { formData, setFormData, onSubmitEditUser,isPhoneTaken };
+    return { formData, setFormData, onSubmitEditUser,isPhoneTaken,isEmailTaken };
   };
 
   const isValidUserName = (formData) => {
@@ -110,17 +112,17 @@ export default function UsersProvider({ children }) {
   };
 
   function useRegister() {
+    const isValidEmail=users.map((user) => user.email).includes(formData?.email)
+    const isValidPhone=users.map((user) => user.phone).includes(templatePhone(formData?.phone))
     const onSubmit = async (e) => {
       e.preventDefault();
-      const isValidEmail=users.map((user) => user.email).includes(formData?.email)
-      const isValidPhone=users.map((user) => user.phone).includes(templatePhone(formData?.phone))
       if (isValidUserName(formData) && !isValidEmail && !isValidPhone) {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isValidUser, isValidEmail, isValidPhone };
+    return { setFormData, onSubmit, isValidPhone, isValidEmail };
   }
 
   const useDeleteUser = async (e) => {
