@@ -82,17 +82,16 @@ export default function UsersProvider({ children }) {
 
   const useEditUser = () => {
     const [formData, setFormData] = useState(selectedUser);
-    const isPhoneTaken = users.some(
-      (user) =>
-        user.phone === templatePhone(formData?.phone) &&
-        user._id !== selectedUser?._id
-    );
+    // const isPhoneTaken = users.some(
+    //   (user) =>
+    //     user.phone === templatePhone(formData?.phone) &&
+    //     user._id !== selectedUser?._id
+    // );
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
       if (
         validPhone(formData?.phone) &&
-        validPass(formData?.password) &&
-        !isPhoneTaken
+        validPass(formData?.password) 
       ) {
         await updateUser(selectedUser?._id, formData);
         handleEditUser();
@@ -105,7 +104,7 @@ export default function UsersProvider({ children }) {
         );
       }
     };
-    return { formData, setFormData, onSubmitEditUser, isPhoneTaken };
+    return { formData, setFormData, onSubmitEditUser };
   };
 
   const isValidUserName = (formData) => {
