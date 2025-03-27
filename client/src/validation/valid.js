@@ -1,4 +1,4 @@
-import validUser from "./validUser.js";
+import validUserIsExist from "./validUserIsExist.js";
 import validPhone from "./validPhone.js";
 import validCar from "./validCar.js";
 import validEmail from "./validEmail.js";
@@ -37,6 +37,8 @@ const inputType = (input) => {
 
 const valid = (data, type) => {
   switch (type) {
+    case "username":
+      return !validUserIsExist(data);
     case "email":
       return validEmail(data);
     case "password":
@@ -56,6 +58,6 @@ export {
   validPhone,
   validPass,
   validEmail,
-  validUser,
+  validUserIsExist,
   inputType,
 };
