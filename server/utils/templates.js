@@ -1,5 +1,4 @@
 export function templatePhone(phone) {
-  if (!phone || typeof phone !== "string") return phone;
   if (phone.length === 10) {
     phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
   }
