@@ -8,6 +8,10 @@ import validPass from "./validPass.js";
 
 // Constants for input validation messages and patterns
 const INPUT_TYPES = {
+  username:{
+    title: "Must contain at least 3 characters",
+    errorMessage: "Your username is wrong",
+  },
   email: {
     title: "regex@gmail.com",
     errorMessage: "Your Email is wrong",
