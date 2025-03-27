@@ -102,7 +102,7 @@ export default function UsersProvider({ children }) {
 
   const isValidUserName = (formData) => {
     return (
-      validUserIsExist(formData?.username, users) &&
+      validUserIsExist(formData?.username) &&
       validPhone(formData?.phone) &&
       validPass(formData?.password) &&
       validEmail(formData?.email)
