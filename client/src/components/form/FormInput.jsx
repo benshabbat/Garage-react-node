@@ -16,10 +16,10 @@ export default function FormInput({
 
   const showError =
     isBlur &&
-    (input.isError ||
+    (input.isError ||input.isExist||
       (input.name !== "username" &&
         !valid(inputRef?.current?.value, input.name)));
-  const errorMessage = showError ? inputType(input).errorMessage : null;
+  let errorMessage = showError ? inputType(input).errorMessage : null;
   const handleBlur = useCallback(() => setIsBlur(true), []);
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
@@ -65,6 +65,8 @@ FormInput.propTypes = {
     hidden: PropTypes.bool,
     placeholder: PropTypes.string,
     isError: PropTypes.bool,
+    isExist: PropTypes.bool,
+    errorExist: PropTypes.string,
   }).isRequired,
   handleChange: PropTypes.func.isRequired,
   isFocus: PropTypes.bool,
