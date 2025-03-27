@@ -10,6 +10,7 @@ import {
   validEmail,
 } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
+import { templatePhone } from "../../../../server/utils/templates";
 
 export default function UsersProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
@@ -118,7 +119,7 @@ export default function UsersProvider({ children }) {
         users.map((user) => user.email).includes(formData?.email)
       );
       setIsValidPhone(
-        users.map((user) => user.phone).includes(formData?.phone)
+        users.map((user) => user.phone).includes(templatePhone(formData?.phone))
       );
       if (isValidUserName(formData, isValidUser)) {
         const newUser = await createUser(formData);
