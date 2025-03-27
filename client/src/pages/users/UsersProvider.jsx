@@ -18,6 +18,10 @@ export default function UsersProvider({ children }) {
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
 
+  const [isValidUser, setIsValidUser] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidPhone, setIsValidPhone] = useState(false);
+
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
@@ -76,7 +80,6 @@ export default function UsersProvider({ children }) {
     if (validCar(formData?.numberPlate)) {
       await createCar(selectedUser?._id, formData);
       handleCreateCar();
-
     }
   };
 
@@ -88,28 +91,27 @@ export default function UsersProvider({ children }) {
         await updateUser(selectedUser?._id, formData);
         handleEditUser();
         setFilteredUsers(
-          users.map((user) => (user._id === selectedUser?._id ? formData : user))
+          users.map((user) =>
+            user._id === selectedUser?._id ? formData : user
+          )
         );
       }
     };
     return { formData, setFormData, onSubmitEditUser };
   };
 
-  const isValidUserName = (formData, isValidUser) => {
+  const isValidUserName = (formData) => {
     return (
       validPhone(formData?.phone) &&
       !isValidUser &&
       validPass(formData?.password) &&
-      validEmail(formData?.email)
+      validEmail(formData?.email) &&
+      !isValidEmail &&
+      !isValidPhone
     );
   };
 
   function useRegister() {
-    const [isValidUser, setIsValidUser] = useState(false);
-    const [isValidEmail, setIsValidEmail] = useState(false);
-    const [isValidPhone, setIsValidPhone] = useState(false);
-
-
     const onSubmit = async (e) => {
       e.preventDefault();
       setIsValidUser(
@@ -121,21 +123,21 @@ export default function UsersProvider({ children }) {
       setIsValidPhone(
         users.map((user) => user.phone).includes(templatePhone(formData?.phone))
       );
-      if (isValidUserName(formData, isValidUser)) {
+      if (isValidUserName(formData)) {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isValidUser ,isValidEmail ,isValidPhone};
+    return { setFormData, onSubmit, isValidUser, isValidEmail, isValidPhone };
   }
 
   const useDeleteUser = async (e) => {
     e.preventDefault();
-      await deleteUser(selectedUser?._id);
-      handleDeleteUser();
-      handleManageUser();
-      setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
+    await deleteUser(selectedUser?._id);
+    handleDeleteUser();
+    handleManageUser();
+    setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
   };
 
   const value = {
