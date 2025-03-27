@@ -14,18 +14,18 @@ const Register = () => {
             {
               name: "username",
               errorExist: "Username is exist",
-              isErisExistror: isExistEmail,
+              isErisExistror: isExistUser,
             },
             {
               name: "email",
               type: "email",
               errorExist: "Email is exist",
-              isExist: isExistPhone
+              isExist: isExistEmail
             },
             {
               name: "phone",
               errorExist: "Phone is exist",
-              isExist: isExistUser
+              isExist: isExistPhone
             },
             {
               name: "password",
