@@ -145,7 +145,7 @@ export default function UsersProvider({ children }) {
 
   function useRegister() {
     setIsExistEmail(users.map((user) => user.email).includes(formData?.email));
-    setIsExistPhone(users.map((user) => user.phone).includes(formData?.phone));
+    setIsExistPhone(users.map((user) => user.phone).includes(templatePhone(formData.phone)));
     setIsExistUser(
       users.map((user) => user.username).includes(formData?.username)
     );
