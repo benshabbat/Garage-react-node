@@ -17,9 +17,9 @@ export default function FormInput({
   const showError =
     isBlur &&
     (
+      (input.isError &&inputRef?.current?.value === "" )||
       (input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
-      inputRef?.current?.value === "" ||
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = showError ? inputType(input).errorMessage : null;
   const handleBlur = useCallback(() => setIsBlur(true), []);
@@ -28,7 +28,7 @@ export default function FormInput({
   }
   if (input.isExist) errorMessage = input.errorExist;
 
-  if (inputRef?.current?.value === "") {
+  if (input.isError && inputRef?.current?.value === "") {
     errorMessage = `${input.name} This field is required`;
   }
   return (
