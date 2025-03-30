@@ -81,10 +81,9 @@ export default function ServiceAdminProvider({ children }) {
       e.preventDefault();
       const updated = await updateService(selectedService?._id, formData);
       handleClick();
-      updated.data = { ...updated.data, car: selectedService?.car };
       setFilteredServices(
         services.map((service) =>
-          service._id === selectedService?._id ? updated.data : service
+          service._id === selectedService?._id ? { ...updated.data, car: selectedService?.car } : service
         )
       );
     };
