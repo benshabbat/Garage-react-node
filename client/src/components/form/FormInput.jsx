@@ -25,6 +25,10 @@ export default function FormInput({
     return <FormToggle input={input} handleChange={handleChange} />;
   }
   if (input.isExist) errorMessage = input.errorExist;
+
+  if(input.isError && !input.isExist&&inputRef?.current?.value === ""){ {
+    errorMessage = input.name + "This field is required";
+  }
   return (
     <label className={classNameLabel}>
       {!input.hidden && !classNameLabel && <span>{input.name}</span>}
