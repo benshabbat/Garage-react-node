@@ -28,7 +28,7 @@ export default function FormInput({
   }
   if (input.isExist) errorMessage = input.errorExist;
 
-  if (input.isError && inputRef?.current?.value === "") {
+  if (input.isError && inputRef.current.value === "") {
     errorMessage = `${input.name} This field is required`;
   }
   return (
