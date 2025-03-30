@@ -86,7 +86,7 @@ Form.propTypes = {
 // Default props
 Form.defaultProps = {
   handleClick: null,
-  options: null,
+  options: [],
   nameSelect: null,
   isFocus: true,
 };
