@@ -16,9 +16,10 @@ export default function FormInput({
 
   const showError =
     isBlur &&
-    (inputRef?.current?.value === "" ||
+    (
       (input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
+      inputRef?.current?.value === "" ||
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = showError ? inputType(input).errorMessage : null;
   const handleBlur = useCallback(() => setIsBlur(true), []);
