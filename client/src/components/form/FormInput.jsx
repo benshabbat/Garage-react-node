@@ -16,8 +16,7 @@ export default function FormInput({
 
   const showError =
     isBlur &&
-    ((input.isError && !input.isExist && inputRef?.current?.value === "") ||
-      (input.isError && !input.isExist) ||
+    ((input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = showError ? inputType(input).errorMessage : null;
@@ -27,7 +26,7 @@ export default function FormInput({
   }
   if (input.isExist) errorMessage = input.errorExist;
 
-  if (input.isError && !input.isExist && inputRef?.current?.value === "") {
+  if (inputRef?.current?.value === "") {
     errorMessage = `${input.name} This field is required`;
   }
   return (
