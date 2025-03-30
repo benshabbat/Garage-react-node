@@ -90,11 +90,6 @@ Form.defaultProps = {
   handleClick: null,
   isFocus: true,
   inputs: [],
-  options: [
-    { value: "pending", label: "Pending" },
-    { value: "done", label: "Done" },
-    { value: "on-work", label: "On work" },
-  ],
 };
 Form.displayName = "Form";
 
