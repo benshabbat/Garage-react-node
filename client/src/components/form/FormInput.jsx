@@ -16,7 +16,8 @@ export default function FormInput({
 
   const showError =
     isBlur &&
-    ((input.isError && !input.isExist) ||
+    ((input.isError && !input.isExist && inputRef?.current?.value === "") ||
+      (input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = showError ? inputType(input).errorMessage : null;
