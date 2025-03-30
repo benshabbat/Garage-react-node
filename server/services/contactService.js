@@ -5,7 +5,7 @@ const createContact = async (req) => {
   try {
     const { phone } = req.body;
     const newPhone = templatePhone(phone);
-    newContact = new Contact({
+    const newContact = new Contact({
       ...req.body,
       phone: newPhone,
     });
