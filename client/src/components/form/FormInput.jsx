@@ -16,14 +16,13 @@ export default function FormInput({
 
   const showError =
     isBlur &&
-    (!inputRef?.current?.value ||
-      (input.isError && !input.isExist) ||
+    ((input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
-  let errorMessage = null; 
+  let errorMessage = null;
   if (showError) {
-    if (!inputRef?.current?.value && input.type !== "checkbox") {
-      errorMessage = "This field is required"; 
+    if (!inputRef?.current?.value) {
+      errorMessage = "This field is required";
     } else {
       errorMessage = inputType(input).errorMessage;
     }
