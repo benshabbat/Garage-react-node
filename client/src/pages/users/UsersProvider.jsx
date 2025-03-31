@@ -154,7 +154,7 @@ export default function UsersProvider({ children }) {
     const onSubmit = async (e) => {
       e.preventDefault();
       if (
-        // isValidUserName(formData) &&
+        isValidUserName(formData) &&
         !isExistEmail &&
         !isExistPhone &&
         !isExistUser
