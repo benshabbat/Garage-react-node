@@ -32,14 +32,9 @@ const authService = {
       }
       return response.data;
     } catch (error) {
-      const message =
-        (error.response && error.response.data && error.response.data.message) ||
-        error.message ||
-        "An unknown error occurred";
-      throw new Error(message); // זורק את הודעת השגיאה
+      throw error;
     }
   },
-};
 
   logout: async () => {
     try {
