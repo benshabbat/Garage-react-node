@@ -25,7 +25,8 @@ export default function FormInput({
   } else if (showError) {
     errorMessage = inputType(input).errorMessage;
   }
-  const handleBlur = useCallback(() => setIsBlur(!isBlur), [isBlur]);
+  const handleBlur = useCallback(() => setIsBlur(true), []);
+  const handleFocus = useCallback(() => setIsBlur(false), []);
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
   }
@@ -51,6 +52,7 @@ export default function FormInput({
         placeholder={input.placeholder || input.name}
         title={inputType(input).title}
         onChange={handleChange}
+        onFocus={handleFocus}
         onBlur={handleBlur}
         aria-invalid={showError}
         aria-describedby={errorMessage ? `${input.name}-error` : undefined}
