@@ -12,10 +12,12 @@ export default function FormInput({
   classNameLabel = "form-label",
 }) {
   const [isBlur, setIsBlur] = useState(false);
+  const [hasTyped, setHasTyped] = useState(false);
   const inputRef = useRef();
 
   const showError =
     isBlur &&
+    !hasTyped &&
     ((input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
@@ -27,13 +29,17 @@ export default function FormInput({
   }
   const handleBlur = useCallback(() => setIsBlur(true), []);
   const handleFocus = useCallback(() => {
-    if (input.isError|| input.isExist||!inputRef?.current?.value  ) {
-      setIsBlur(true);
-    }
-    else {
-      setIsBlur(false);
-    }
-  }, [input.isError, input.isExist, inputRef?.current?.value]);
+    setIsBlur(false);
+    setHasTyped(false);
+  }, []);
+
+  const handleChangeType = useCallback(
+    (e) => {
+      setHasTyped(true);
+      handleChange(e);
+    },
+    [handleChange]
+  );
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
   }
@@ -58,7 +64,7 @@ export default function FormInput({
         autoFocus={index === 0 && isFocus}
         placeholder={input.placeholder || input.name}
         title={inputType(input).title}
-        onChange={handleChange}
+        onChange={handleChangeType}
         onFocus={handleFocus}
         onBlur={handleBlur}
         aria-invalid={showError}
