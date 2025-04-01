@@ -20,8 +20,8 @@ export default function FormInput({
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = null;
-  if (showError && !inputRef?.current?.value) {
-    errorMessage = "This field is required";
+  if (showError&& !inputRef?.current?.value) {
+      errorMessage = "This field is required";
   } else if (showError) {
     errorMessage = inputType(input).errorMessage;
   }
@@ -33,12 +33,10 @@ export default function FormInput({
 
   return (
     <label className={classNameLabel}>
-      {!input.hidden && classNameLabel === "form-label" && (
-        <span>{input.name}</span>
-      )}
-      {(input.errorMessage || errorMessage) && (
+      {!input.hidden && !classNameLabel && <span>{input.name}</span>}
+      {input?.errorMessage||errorMessage && (
         <span id={`${input.name}-error`} className="error">
-          {input.errorMessage || errorMessage || "Unknown error"}
+          {input?.errorMessage??errorMessage}
         </span>
       )}
       <input
