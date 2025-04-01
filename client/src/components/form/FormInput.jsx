@@ -26,7 +26,14 @@ export default function FormInput({
     errorMessage = inputType(input).errorMessage;
   }
   const handleBlur = useCallback(() => setIsBlur(true), []);
-  const handleFocus = useCallback(() => setIsBlur(false), []);
+  const handleFocus = useCallback(() => {
+    if (input.isError|| input.isExist||!inputRef?.current?.value  ) {
+      setIsBlur(true);
+    }
+    else {
+      setIsBlur(false);
+    }
+  }, [input.isError, input.isExist, inputRef?.current?.value]);
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
   }
