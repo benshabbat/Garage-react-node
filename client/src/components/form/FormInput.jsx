@@ -16,16 +16,18 @@ export default function FormInput({
 
   const showError =
     isBlur &&
+    !input.hidden &&
     ((input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
+
   let errorMessage = null;
-  if (showError&& !inputRef?.current?.value) {
-      errorMessage = "This field is required";
+  if (showError && !inputRef?.current?.value) {
+    errorMessage = "This field is required";
   } else if (showError) {
     errorMessage = inputType(input).errorMessage;
   }
-  
+
   const handleBlur = useCallback(() => setIsBlur(true), []);
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
