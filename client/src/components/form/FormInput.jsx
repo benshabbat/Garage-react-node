@@ -12,34 +12,20 @@ export default function FormInput({
   classNameLabel = "form-label",
 }) {
   const [isBlur, setIsBlur] = useState(false);
-  const [hasTyped, setHasTyped] = useState(false);
   const inputRef = useRef();
 
   const showError =
     isBlur &&
-    !hasTyped &&
     ((input.isError && !input.isExist) ||
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = null;
-  if (showError && !inputRef?.current?.value) {
-    errorMessage = "This field is required";
+  if (showError&& !inputRef?.current?.value) {
+      errorMessage = "This field is required";
   } else if (showError) {
     errorMessage = inputType(input).errorMessage;
   }
   const handleBlur = useCallback(() => setIsBlur(true), []);
-  const handleFocus = useCallback(() => {
-    setIsBlur(false);
-    setHasTyped(false);
-  }, []);
-
-  const handleChangeType = useCallback(
-    (e) => {
-      setHasTyped(true);
-      handleChange(e);
-    },
-    [handleChange]
-  );
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
   }
@@ -64,8 +50,7 @@ export default function FormInput({
         autoFocus={index === 0 && isFocus}
         placeholder={input.placeholder || input.name}
         title={inputType(input).title}
-        onChange={handleChangeType}
-        onFocus={handleFocus}
+        onChange={handleChange}
         onBlur={handleBlur}
         aria-invalid={showError}
         aria-describedby={errorMessage ? `${input.name}-error` : undefined}

@@ -8,7 +8,6 @@ import {
   validPhone,
   validPass,
   validEmail,
-  validUserIsExist,
 } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
 import { templatePhone } from "../../../../server/utils/templates";

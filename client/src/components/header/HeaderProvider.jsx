@@ -7,7 +7,7 @@ import { getUser } from "../../features/user/userSlice";
 import useOpenModal from "../../hooks/useOpenModal";
 import useLogout from "../../hooks/useLogout";
 export default function HeaderProvider({ children }) {
-  const { user: userAuth,isError } = useSelector((state) => state.auth);
+  const { user: userAuth,isError,message } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
 
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -63,7 +63,7 @@ export default function HeaderProvider({ children }) {
     isOpenLogin,
     useLogin,
     isError,
-    handleLogout
+    handleLogout,message
   };
   return (
     <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>
