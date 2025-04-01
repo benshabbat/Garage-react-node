@@ -53,8 +53,8 @@ export default function FormInput({
         title={inputType(input).title}
         onChange={handleChange}
         onBlur={handleBlur}
-        aria-invalid={showError}
-        aria-describedby={errorMessage ? `${input.name}-error` : undefined}
+        // aria-invalid={showError}
+        // aria-describedby={errorMessage ? `${input.name}-error` : undefined}
         required={input.type !== "checkbox"}
         autoComplete="off"
       />
