@@ -30,7 +30,6 @@ export const register = createAsyncThunk(
   }
 );
 
-//Login
 export const login = createAsyncThunk(
   "auth/login",
   async (user, thunkAPI) => {
@@ -42,8 +41,8 @@ export const login = createAsyncThunk(
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
+        "An unknown error occurred";
+      return thunkAPI.rejectWithValue(message); // מעביר את הודעת השגיאה ל-state
     }
   }
 );

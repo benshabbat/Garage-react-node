@@ -51,48 +51,43 @@ const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    // Input validation
     if (!username || !password) {
       throw createError(400, "Username and password are required");
     }
 
-    // Find user
     const user = await User.findOne({ username });
     if (!user) throw createError(404, "User not found");
 
-    // Check password
     const isPassword = await bcrypt.compare(password, user.password);
     if (!isPassword) throw createError(400, "Wrong password");
 
-    // Create JWT token
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT,
       { expiresIn: "24h" }
     );
-    // Cookie settings
+
     const cookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       path: "/",
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      maxAge: 24 * 60 * 60 * 1000,
     };
-    // Add domain only in production
+
     if (process.env.NODE_ENV === "production") {
       cookieOptions.domain =
         process.env.COOKIE_DOMAIN || "garage-server-dcv1.onrender.com";
     }
-    // Set cookie and return data
+
     res.cookie("access_token", token, cookieOptions);
 
-    return {
+    res.status(200).json({
       _id: user._id,
       isAdmin: user.isAdmin,
-    };
+    });
   } catch (error) {
-    // Pass error up the chain
-    throw error;
+    next(error); // מעביר את השגיאה ל-error handler
   }
 };
 
