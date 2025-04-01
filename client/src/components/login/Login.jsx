@@ -13,7 +13,7 @@ const Login = () => {
             {
               name: "username",
               type: "text",
-              errormessage: "Your username or password is wrong",
+              errorMessage: "Your username or password is wrong",
               isError,
             },
             {
