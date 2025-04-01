@@ -34,9 +34,9 @@ export default function FormInput({
   return (
     <label className={classNameLabel}>
       {!input.hidden && !classNameLabel && <span>{input.name}</span>}
-      {errorMessage && (
+      {input?.errorMessage||errorMessage && (
         <span id={`${input.name}-error`} className="error">
-          {errorMessage}
+          {input?.errorMessage??errorMessage}
         </span>
       )}
       <input
