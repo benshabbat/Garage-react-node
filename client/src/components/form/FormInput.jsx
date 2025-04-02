@@ -2,20 +2,21 @@ import { useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { valid, inputType } from "../../validation/valid";
 import FormToggle from "./FormToggle";
-//fix bugs form with login
-//ClassNameLabel is when i using with another stlyle for form and inputs
+
 export default function FormInput({
   input,
   handleChange,
   isFocus,
   index,
   classNameLabel = "form-label",
+  isSubmitted, // Track if the form was submitted
+  validateOnBlur = false, // New prop to enable validation on blur
 }) {
   const [isBlur, setIsBlur] = useState(false);
   const inputRef = useRef();
 
   const showError =
-    isBlur &&
+    ((validateOnBlur && isBlur) || isSubmitted) && // Show error based on blur or submission
     (input.isError ||
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
@@ -25,7 +26,13 @@ export default function FormInput({
   } else if (showError) {
     errorMessage = inputType(input).errorMessage;
   }
-  const handleBlur = useCallback(() => setIsBlur(true), []);
+
+  const handleBlur = useCallback(() => {
+    if (validateOnBlur) {
+      setIsBlur(true);
+    }
+  }, [validateOnBlur]);
+
   if (input.type === "checkbox") {
     return <FormToggle input={input} handleChange={handleChange} />;
   }
@@ -78,4 +85,6 @@ FormInput.propTypes = {
   isFocus: PropTypes.bool,
   index: PropTypes.number,
   classNameLabel: PropTypes.string,
+  isSubmitted: PropTypes.bool, // Add prop type validation
+  validateOnBlur: PropTypes.bool, // Add prop type validation for blur validation
 };

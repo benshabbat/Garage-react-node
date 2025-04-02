@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./form.css";
 import PropTypes from "prop-types";
 import FormInput from "./FormInput";
@@ -13,7 +14,10 @@ const Form = memo(({
   options,
   nameSelect,
   isFocus,
+  validateOnBlur = false, // New prop to control blur validation
 }) => {
+  const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission
+
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
     setData((prevState) => ({
@@ -22,8 +26,14 @@ const Form = memo(({
     }));
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitted(true); // Set form as submitted
+    onSubmit(e);
+  };
+
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <form className="form" onSubmit={handleFormSubmit}>
       {handleClick && (
         <button
           type="button"
@@ -52,6 +62,8 @@ const Form = memo(({
           index={index}
           handleChange={handleChange}
           isFocus={isFocus}
+          isSubmitted={isSubmitted} // Pass submission state
+          validateOnBlur={validateOnBlur} // Pass blur validation state
         />
       ))}
 
@@ -61,7 +73,7 @@ const Form = memo(({
     </form>
   );
 });
-// Define PropTypes for validation
+
 Form.propTypes = {
   title: PropTypes.string.isRequired,
   inputs: PropTypes.arrayOf(
@@ -83,13 +95,14 @@ Form.propTypes = {
   ),
   nameSelect: PropTypes.string,
   isFocus: PropTypes.bool,
+  validateOnBlur: PropTypes.bool, // Add prop type validation for blur validation
 };
 
-// Default props
 Form.defaultProps = {
   handleClick: null,
   isFocus: true,
   inputs: [],
+  // validateOnBlur: false, // Default to no blur validation
 };
 Form.displayName = "Form";
 
