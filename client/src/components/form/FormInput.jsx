@@ -16,7 +16,7 @@ export default function FormInput({
 
   const showError =
     isBlur &&
-    ((input.isError && !input.isExist) ||
+    (input.isError ||
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = null;
@@ -34,16 +34,11 @@ export default function FormInput({
   return (
     <label className={classNameLabel}>
       {!input.hidden && !classNameLabel && <span>{input.name}</span>}
-      {
-      // input?.errorMessage ||
-        (errorMessage && (
-          <span id={`${input.name}-error`} className="error">
-            {
-            // input?.errorMessage ?? 
-            
-            errorMessage}
-          </span>
-        ))}
+      {errorMessage && (
+        <span id={`${input.name}-error`} className="error">
+          {errorMessage}
+        </span>
+      )}
       <input
         pattern={input?.pattern}
         type={input?.type}
