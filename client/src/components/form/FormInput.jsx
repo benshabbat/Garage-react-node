@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { valid, inputType } from "../../validation/valid";
 import FormToggle from "./FormToggle";
-
+//fix bugs form with login
 //ClassNameLabel is when i using with another stlyle for form and inputs
 export default function FormInput({
   input,
