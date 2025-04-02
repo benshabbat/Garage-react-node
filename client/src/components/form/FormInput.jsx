@@ -20,7 +20,7 @@ export default function FormInput({
       (input.isExist && !input.isError) ||
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = null;
-  if (!inputRef?.current?.value) {
+  if (showError && !inputRef?.current?.value) {
     errorMessage = "This field is required";
   } else if (showError) {
     errorMessage = inputType(input).errorMessage;
