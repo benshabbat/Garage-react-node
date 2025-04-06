@@ -4,7 +4,7 @@ const API_URL_USER = "/users";
 const API_URL_CAR = "/cars";
 const API_URL_SERVICES = "/services";
 const API_URL_MESSAGES = "/messages";
-const API_URL_MESSAGES_CONTACT = "/contact";
+const API_URL_MESSAGES_CONTACT = "/contacts";
 
 // get users
 
