@@ -36,12 +36,22 @@ export const getCarsByType = createAdminThunk(
   "getCarsByType",
   adminService.getCarsByType
 );
+export const getMessages = createAdminThunk(
+  "getMessages",
+  adminService.getMessages
+);
+export const getMessagesContact = createAdminThunk(
+  "getMessagesContact",
+  adminService.getMessagesContact
+);
 
 // Define initial state for the slice
 const initialState = {
   users: [],
   cars: [],
   services: [],
+  messages: [],
+  messagesContact : [],
   fetchState: {
     isError: false,
     isSuccess: false,
@@ -92,6 +102,10 @@ const adminSlice = createSlice({
     // Cars reducers - both regular cars and cars by type
     createStatusReducers(builder, getCars, "cars");
     createStatusReducers(builder, getCarsByType, "cars");
+
+    // Messages reducers - both regular messages and messages by type
+    createStatusReducers(builder, getMessages, "messages");
+    createStatusReducers(builder, getMessagesContact, "messagesContact");
   },
 });
 

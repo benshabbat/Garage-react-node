@@ -1,34 +1,29 @@
 import "../../components/table/table.css";
 import { useState, useEffect } from "react";
 import { MsgOfContactContext } from "./MsgOfContactContext";
-import { getContacts, deleteContact } from "../../utils";
+// import { getContacts, deleteContact } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { getMessagesContact,deleteMessageContact } from "../../features/admin/adminSlice";
 
 export default function MsgOfContactProvider({ children }) {
-  const [contacts, setContacts] = useState();
   const [filterContacts, setFilterContacts] = useState();
-
-  const displayContacts = filterContacts || contacts;
-
+  const { messagesContact } = useSelector((state) => state.admin);
+  const displayContacts = filterContacts || messagesContact;
+  const dispatch = useDispatch();
   useEffect(() => {
-    const getData = async () => {
-      const { data } = await getContacts();
-      setContacts(data);
-    };
-    getData();
-  }, []);
+    dispatch(getMessagesContact());
+  }, [dispatch]);
   const handleContact = async (e) => {
     e.preventDefault();
 
     const { value, name } = e.target;
-    if (name === "deleteContact") await deleteContact(value);
-    const { data } = await getContacts();
-    setContacts(data);
+    if (name === "deleteContact") dispatch(getMessagesContact(value));
   };
 
   const handleSearch = (e) => {
     const { value } = e.target;
     setFilterContacts(
-      contacts?.filter((item) =>
+      messagesContact?.filter((item) =>
         [
           item.firstName,
           item.lastName,
@@ -40,6 +35,7 @@ export default function MsgOfContactProvider({ children }) {
     );
   };
   const value = {
+    messagesContact,
     filterContacts,
     handleSearch,
     displayContacts,
