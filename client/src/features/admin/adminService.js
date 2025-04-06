@@ -4,7 +4,8 @@ const API_URL_USER = "/users";
 const API_URL_CAR = "/cars";
 const API_URL_SERVICES = "/services";
 const API_URL_MESSAGES = "/messages";
-const API_URL_MESSAGES_CONTACT = "/contacts";
+// const API_URL_MESSAGES_CONTACT = "/contacts";
+export const API_URL_CONTACTS = "/contacts";
 
 // get users
 
@@ -36,7 +37,7 @@ const getServicesByType = async () => {
 };
 
 const getMessagesContact = async () => {
-  const { data } = await axios.get(`${API_URL_MESSAGES_CONTACT}`);
+  const { data } = await axios.get(`${API_URL_CONTACTS}`);
 
   return data;
 }
@@ -51,7 +52,7 @@ const deleteMessage = async (id) => {
   return data;
 };
 const deleteMessageContact = async (id) => {
-  const { data } = await axios.delete(`${API_URL_MESSAGES_CONTACT}/${id}`);
+  const { data } = await axios.delete(`${API_URL_CONTACTS}/${id}`);
 
   return data;
 };
