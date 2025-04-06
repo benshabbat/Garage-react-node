@@ -17,7 +17,7 @@ export default function MsgOfContactProvider({ children }) {
     e.preventDefault();
 
     const { value, name } = e.target;
-    if (name === "deleteContact") dispatch(getMessagesContact(value));
+    if (name === "deleteContact") dispatch(deleteMessageContact(value));
   };
 
   const handleSearch = (e) => {
