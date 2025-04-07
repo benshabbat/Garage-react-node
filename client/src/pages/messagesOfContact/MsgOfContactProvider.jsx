@@ -1,9 +1,9 @@
 import "../../components/table/table.css";
 import { useState, useEffect } from "react";
 import { MsgOfContactContext } from "./MsgOfContactContext";
-// import { getContacts, deleteContact } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
-import { getMessagesContact,deleteMessageContact } from "../../features/admin/adminSlice";
+import { getMessagesContact } from "../../features/admin/adminSlice";
+import { deleteContact } from "../../utils";
 
 export default function MsgOfContactProvider({ children }) {
   const [filterContacts, setFilterContacts] = useState();
@@ -16,8 +16,8 @@ export default function MsgOfContactProvider({ children }) {
   const handleContact = async (e) => {
     e.preventDefault();
 
-    // const { value, name } = e.target;
-    // if (name === "deleteContact") dispatch(deleteMessageContact(value));
+    const { value, name } = e.target;
+    if (name === "deleteContact") await deleteContact(value);
   };
 
   const handleSearch = (e) => {
