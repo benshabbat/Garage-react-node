@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components";
 import {
   Account,
@@ -10,17 +10,10 @@ import {
 } from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
-import { useSelector } from "react-redux";
-
-// PrivateRoute component
-function PrivateRoute({ children }) {
-  const { user: userAuth } = useSelector((state) => state.auth);
-  return userAuth ? children : <Navigate to="/unauthorized" />;
-}
+import { PrivateRoute } from "./PrivateRoute.jsx";
 
 //TODO:ROUTER V7
 function App() {
-
   return (
     <>
       <BrowserRouter>
@@ -75,7 +68,10 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/unauthorized" element={<h1>אין לך הרשאה לגשת לדף זה</h1>} />
+          <Route
+            path="/unauthorized"
+            element={<h1>אין לך הרשאה לגשת לדף זה</h1>}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
