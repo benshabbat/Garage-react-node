@@ -1,7 +1,7 @@
+import "./pageNotFound.css";
+
 const PageNotFound = () => {
-  return (
-    <img src={require("../../images/garage404.jpg")} alt="404" />
-  );
+  return <div className="not-found"></div>;
 };
 
 export default PageNotFound;
