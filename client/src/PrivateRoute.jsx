@@ -1,8 +1,9 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export function PrivateRoute({ children }) {
   const { user: userAuth, isLoading } = useSelector((state) => state.auth);
+  const location = useLocation();
 
   // הצגת עמוד טעינה בזמן בדיקת ההרשאות
   if (isLoading) {
@@ -10,5 +11,10 @@ export function PrivateRoute({ children }) {
   }
 
   // בדיקת הרשאות
-  return userAuth ? children : <Navigate to="/unauthorized" />;
+  if (!userAuth) {
+    return <Navigate to="/unauthorized" state={{ from: location }} />;
+  }
+
+  // אם המשתמש מחובר, הצג את התוכן
+  return children;
 }
