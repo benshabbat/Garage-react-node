@@ -11,6 +11,7 @@ import {
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 import { PrivateRoute } from "./PrivateRoute.jsx";
+import Unauthorized from "./pages/Unauthorized";
 
 //TODO:ROUTER V7
 function App() {
@@ -68,10 +69,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route
-            path="/unauthorized"
-            element={<h1>אין לך הרשאה לגשת לדף זה</h1>}
-          />
+          <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
