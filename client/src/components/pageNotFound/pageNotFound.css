@@ -1,10 +1,12 @@
 .not-found {
-  background-image: url("../../images/garage404.jpg"); /* עדכן את הנתיב אם התמונה בתיקיית public */
+  background-image: url("/images/garage404.jpg"); /* ודא שהתמונה בתיקיית public */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh; /* גובה מלא של המסך */
-  width: 100%; /* רוחב מלא של המסך */
-  position: relative; /* או absolute אם נדרש */
-  z-index: 10; /* ודא שזה גבוה מספיק */
+  width: 100vw; /* רוחב מלא של המסך */
+  position: fixed; /* כדי לוודא שזה תופס את כל המסך */
+  top: 0;
+  left: 0;
+  z-index: 10; /* ודא שזה מעל כל רכיב אחר */
 }
