@@ -70,6 +70,7 @@ function App() {
             }
           />
           <Route path="/unauthorized" element={<Unauthorized />} />
+          {/* נתיב כללי */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
