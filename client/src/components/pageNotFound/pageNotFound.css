@@ -1,7 +1,5 @@
-body {
-  background-image: url("../../images/garage404.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
 .not-found {
+    background-image: url("../../images/garage404.jpg");
+    background-repeat: no-repeat;
+    background-size:100%;
 }
