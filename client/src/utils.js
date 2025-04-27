@@ -8,7 +8,7 @@ export const API_URL_REVIEWS = "/reviews";
 export const API_URL_CONTACTS = "/contacts";
 export const ADMIN = "63e14deca4340e45d23f20b2";
 const getAll = (url) => {
-  axios.get(url);
+ return axios.get(url);
 };
 const getUsersLocal = () => {
   return axios.get(API_URL_USER);
