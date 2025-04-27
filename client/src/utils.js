@@ -7,7 +7,7 @@ export const API_URL_REGISTER = "/auth/register";
 export const API_URL_REVIEWS = "/reviews";
 export const API_URL_CONTACTS = "/contacts";
 export const ADMIN = "63e14deca4340e45d23f20b2";
-export const getAll = (url) => {
+const getAll = (url) => {
   axios.get(url);
 };
 const getUsersLocal = () => {
