@@ -1,17 +1,10 @@
 import axios from "axios";
-import { API_URL_CAR, API_URL_CONTACTS, API_URL_MESSAGES, API_URL_SERVICE, API_URL_USER } from "../../utils";
-
-// const API_URL_USER = "/users";
-// const API_URL_CAR = "/cars";
-// const API_URL_SERVICE = "/services";
-// const API_URL_MESSAGES = "/messages";
-// const API_URL_MESSAGES_CONTACT = "/contacts";
-// export const API_URL_CONTACTS = "/contacts";
+import { API_URL_CAR, API_URL_CONTACTS, API_URL_MESSAGES, API_URL_SERVICE, API_URL_USER, getAll } from "../../utils";
 
 // get users
 
 const getUsers = async () => {
-  const { data } = await axios.get(`${API_URL_USER}`);
+  const { data } = await getAll(`${API_URL_USER}`);
 
   return data;
 };
