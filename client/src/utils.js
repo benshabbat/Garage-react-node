@@ -10,9 +10,6 @@ export const ADMIN = "63e14deca4340e45d23f20b2";
 const getAll = (url) => {
   return axios.get(url);
 };
-const getUsersLocal = () => {
-  return axios.get(API_URL_USER);
-};
 const getById = (url, id) => {
   axios.get(`${url}/${id}`);
 };
@@ -76,7 +73,11 @@ const deleteContact = (id) => {
 const createContact = (obj) => {
   axios.post(`${API_URL_CONTACTS}`, obj);
 };
+const getUsers = async () => {
+  const { data } = await getAll(`${API_URL_USER}`);
 
+  return data;
+};
 export {
   createReview,
   getReviews,
@@ -100,7 +101,7 @@ export {
   getContacts,
   createContact,
   deleteContact,
-  getUsersLocal,
+  getUsers
 };
 
 export function getMomentFromUpdatedAt(updatedAt) {

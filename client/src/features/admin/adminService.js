@@ -9,7 +9,7 @@ const getUsers = async () => {
   return data;
 };
 const getCars = async () => {
-  const { data } = await axios.get(`${API_URL_CAR}`);
+  const { data } = await getAll(`${API_URL_CAR}`);
 
   return data;
 };
@@ -20,7 +20,7 @@ const getCarsByType = async () => {
 };
 
 const getServices = async () => {
-  const { data } = await axios.get(`${API_URL_SERVICE}`);
+  const { data } = await getAll(`${API_URL_SERVICE}`);
 
   return data;
 };
@@ -31,12 +31,12 @@ const getServicesByType = async () => {
 };
 
 const getMessagesContact = async () => {
-  const { data } = await axios.get(`${API_URL_CONTACTS}`);
+  const { data } = await getAll(`${API_URL_CONTACTS}`);
 
   return data;
 }
 const getMessages = async () => {
-  const { data } = await axios.get(`${API_URL_MESSAGES}`);
+  const { data } = await getAll(`${API_URL_MESSAGES}`);
 
   return data;
 };
