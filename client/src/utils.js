@@ -11,7 +11,7 @@ const getAll = (url) => {
   return axios.get(url);
 };
 const getById = (url, id) => {
-  axios.get(`${url}/${id}`);
+  return axios.get(`${url}/${id}`);
 };
 const addItem = (url, obj) => {
   axios.post(url, obj);
@@ -55,17 +55,14 @@ const deleteService = (id) => {
 const deleteCar = (idCar, idUser) => {
   axios.delete(`${API_URL_CAR}/${idCar}/${idUser}`);
 };
-const deleteMessage = (id) => {
-  axios.delete(`${API_URL_MESSAGES}/${id}`);
-};
 const getUserId = (id) => {
-  return axios.get(`${API_URL_USER}/${id}`);
+  return getById(`${API_URL_USER}/${id}`);
 };
 const getReviews = () => {
-  return axios.get(`${API_URL_REVIEWS}`);
+  return getAll(`${API_URL_REVIEWS}`);
 };
 const getContacts = () => {
-  return axios.get(`${API_URL_CONTACTS}`);
+  return getAll(`${API_URL_CONTACTS}`);
 };
 const deleteContact = (id) => {
   axios.delete(`${API_URL_CONTACTS}/${id}`);
@@ -75,6 +72,52 @@ const createContact = (obj) => {
 };
 const getUsers = async () => {
   const { data } = await getAll(`${API_URL_USER}`);
+
+  return data;
+};
+
+const getServices = async () => {
+  const { data } = await getAll(`${API_URL_SERVICE}`);
+
+  return data;
+};
+
+const getCars = async () => {
+  const { data } = await getAll(`${API_URL_CAR}`);
+
+  return data;
+};
+
+const getCarsByType = async () => {
+  const { data } = await axios.get(`${API_URL_CAR}/populate?populate=owner`);
+
+  return data;
+};
+
+const getServicesByType = async () => {
+  const { data } = await axios.get(`${API_URL_SERVICE}/populate?populate=car`);
+
+  return data;
+};
+
+const getMessagesContact = async () => {
+  const { data } = await getAll(`${API_URL_CONTACTS}`);
+
+  return data;
+};
+const getMessages = async () => {
+  const { data } = await getAll(`${API_URL_MESSAGES}`);
+
+  return data;
+};
+
+const deleteMessage = async (id) => {
+  const { data } = await axios.delete(`${API_URL_MESSAGES}/${id}`);
+
+  return data;
+};
+const deleteMessageContact = async (id) => {
+  const { data } = await axios.delete(`${API_URL_CONTACTS}/${id}`);
 
   return data;
 };
@@ -101,7 +144,14 @@ export {
   getContacts,
   createContact,
   deleteContact,
-  getUsers
+  getUsers,
+  getServices,
+  getCars,
+  getCarsByType,
+  getServicesByType,
+  getMessagesContact,
+  getMessages,
+  deleteMessageContact,
 };
 
 export function getMomentFromUpdatedAt(updatedAt) {
