@@ -1,18 +1,10 @@
 import axios from "axios";
-import {
-  API_URL_CAR,
-  API_URL_CONTACTS,
-  API_URL_MESSAGES,
-  API_URL_SERVICE,
-  API_URL_USER,
-  getAll,
-
-} from "../../utils";
+import { API_URL_CAR, API_URL_CONTACTS, API_URL_MESSAGES, API_URL_SERVICE, API_URL_USER } from "../../utils";
 
 // get users
 
 const getUsers = async () => {
-  const { data } = await getAll(`${API_URL_USER}`);
+  const { data } = await axios.get(`${API_URL_USER}`);
 
   return data;
 };
@@ -42,7 +34,7 @@ const getMessagesContact = async () => {
   const { data } = await axios.get(`${API_URL_CONTACTS}`);
 
   return data;
-};
+}
 const getMessages = async () => {
   const { data } = await axios.get(`${API_URL_MESSAGES}`);
 
@@ -58,6 +50,7 @@ const deleteMessageContact = async (id) => {
 
   return data;
 };
+
 
 const adminService = {
   getUsers,
