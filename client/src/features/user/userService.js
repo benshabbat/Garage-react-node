@@ -1,6 +1,6 @@
 import axios from "../../axiosConfig.js";
+import { getUserId } from "../../utils.js";
 
-const API_URL_USER = "/users";
 const API_URL_CAR = "/cars";
 const API_URL_SERVICES = "/services";
 const API_URL_MESSAGES = "/messages";
@@ -17,7 +17,7 @@ const createReqService = async (dataMessage) => {
 // get user by _id
 
 const getUser = async (id) => {
-  const { data } = await axios.get(`${API_URL_USER}/${id}`);
+  const { data } = await getUserId(id);
 
   return data;
 };
