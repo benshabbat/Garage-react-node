@@ -7,11 +7,26 @@ export const API_URL_REGISTER = "/auth/register";
 export const API_URL_REVIEWS = "/reviews";
 export const API_URL_CONTACTS = "/contacts";
 export const ADMIN = "63e14deca4340e45d23f20b2";
+
+const apiRequest = async (method, url, data = null) => {
+  try {
+    const response = await axios({ method, url, data });
+    return response.data;
+  } catch (error) {
+    console.error(`Error with ${method.toUpperCase()} request to ${url}:`, error);
+    throw error;
+  }
+};
+
+
+
 const getAll = (url) => {
   return axios.get(url);
+  
 };
 const getById = (url, id) => {
   return axios.get(`${url}/${id}`);
+  
 };
 const addItem = (url, obj) => {
   axios.post(url, obj);
@@ -20,6 +35,7 @@ const createUser = async (obj) => {
   return await axios.post(API_URL_REGISTER, obj);
 };
 const updateUser = (id, obj) => {
+  
   axios.put(`${API_URL_USER}/${id}`, obj);
 };
 const updateService = (id, obj) => {
