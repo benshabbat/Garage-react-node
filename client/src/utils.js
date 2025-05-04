@@ -20,9 +20,14 @@ const apiRequest = async (method, url, data = null) => {
 
 
 
-const getAll = (url) => {
-  return axios.get(url);
-  
+const getAll = async (url) => {
+  try {
+    const response = await axios.get(url);
+    return response.data; // מחזיר את הנתונים בלבד
+  } catch (error) {
+    console.error(`Error fetching data from ${url}:`, error);
+    throw error;
+  }
 };
 const getById = (url, id) => {
   return axios.get(`${url}/${id}`);
@@ -74,9 +79,14 @@ const deleteCar = (idCar, idUser) => {
 const getUserId = (id) => {
   return axios.get(`${API_URL_USER}/${id}`);
 };
-const getReviews =async () => {
-  const { data } = await getAll(`${API_URL_REVIEWS}`);
-  return data;
+const getReviews = async () => {
+  try {
+    const data = await getAll(`${API_URL_REVIEWS}`);
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch reviews:", error);
+    throw error; // ניתן לזרוק את השגיאה כדי לטפל בה במקום אחר
+  }
 };
 const getContacts =async () => {
   const { data } = await getAll(`${API_URL_CONTACTS}`);
