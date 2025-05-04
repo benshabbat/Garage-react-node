@@ -13,12 +13,13 @@ const apiRequest = async (method, url, data = null) => {
     const response = await axios({ method, url, data });
     return response.data;
   } catch (error) {
-    console.error(`Error with ${method.toUpperCase()} request to ${url}:`, error);
+    console.error(
+      `Error with ${method.toUpperCase()} request to ${url}:`,
+      error
+    );
     throw error;
   }
 };
-
-
 
 const getAll = async (url) => {
   try {
@@ -31,7 +32,6 @@ const getAll = async (url) => {
 };
 const getById = (url, id) => {
   return axios.get(`${url}/${id}`);
-  
 };
 const addItem = (url, obj) => {
   axios.post(url, obj);
@@ -40,7 +40,6 @@ const createUser = async (obj) => {
   return await axios.post(API_URL_REGISTER, obj);
 };
 const updateUser = (id, obj) => {
-  
   axios.put(`${API_URL_USER}/${id}`, obj);
 };
 const updateService = (id, obj) => {
@@ -88,7 +87,7 @@ const getReviews = async () => {
     throw error; // ניתן לזרוק את השגיאה כדי לטפל בה במקום אחר
   }
 };
-const getContacts =async () => {
+const getContacts = async () => {
   const { data } = await getAll(`${API_URL_CONTACTS}`);
   return data;
 };
@@ -97,7 +96,6 @@ const createContact = (obj) => {
   axios.post(`${API_URL_CONTACTS}`, obj);
 };
 const getUsers = async () => {
-
   try {
     const data = await getAll(`${API_URL_USER}`);
     return data;
