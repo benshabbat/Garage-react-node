@@ -97,9 +97,14 @@ const createContact = (obj) => {
   axios.post(`${API_URL_CONTACTS}`, obj);
 };
 const getUsers = async () => {
-  const { data } = await getAll(`${API_URL_USER}`);
 
-  return data;
+  try {
+    const data = await getAll(`${API_URL_USER}`);
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch reviews:", error);
+    throw error; // ניתן לזרוק את השגיאה כדי לטפל בה במקום אחר
+  }
 };
 
 const getServices = async () => {
