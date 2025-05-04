@@ -164,7 +164,6 @@ export {
   getServicesByType,
   getMessagesContact,
   getMessages,
-
 };
 
 export function getMomentFromUpdatedAt(updatedAt) {
