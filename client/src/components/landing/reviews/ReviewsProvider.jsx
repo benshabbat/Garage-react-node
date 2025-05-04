@@ -11,7 +11,7 @@ export default function ReviewsProvider({ children }) {
   
   const [allReviews, setAllReviews] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const totalCards = allReviews.length;
+  const totalCards = Array.isArray(allReviews) ? allReviews.length : 0;
 
   const numCardsPreview = useCardsDisplay();
   const { currentIndex, nextCard, prevCard, indexPagination } =
@@ -20,11 +20,16 @@ export default function ReviewsProvider({ children }) {
 
   useEffect(() => {
     const fetchReviews = async () => {
-      const { data } = await getReviews();
-      setAllReviews(data);
+      try {
+        const data = await getReviews();
+        setAllReviews(data || []); // ודא ש-`data` הוא מערך
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+        setAllReviews([]); // במקרה של שגיאה, אתחל למערך ריק
+      }
     };
     fetchReviews();
-  }, [isOpenAddReview,isSubmitted]);
+  }, [isOpenAddReview, isSubmitted]);
 
   // Get currently visible cards based on index and number of cards to show
   const getVisibleCards = (children) => {
