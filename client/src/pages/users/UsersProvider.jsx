@@ -66,9 +66,9 @@ export default function UsersProvider({ children }) {
     setFilteredUsers(
       users?.filter(
         (item) =>
-          item.username.includes(value) ||
-          item.email.includes(value) ||
-          item.phone.includes(value)
+          item.username?.includes(value) ||
+          item.email?.includes(value) ||
+          item.phone?.includes(value)
       )
     );
   };
