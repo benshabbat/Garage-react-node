@@ -21,11 +21,11 @@ const apiRequest = async (method, url, data = null) => {
   }
 };
 
-const getAll = (url) => {
-  return axios.get(url);
+const getAll = async (url) => {
+  return await axios.get(url);
 };
-const getById = (url, id) => {
-  return axios.get(`${url}/${id}`);
+const getById = async(url, id) => {
+  return await axios.get(`${url}/${id}`);
 };
 const addItem = (url, obj) => {
   axios.post(url, obj);
@@ -69,8 +69,8 @@ const deleteService = (id) => {
 const deleteCar = (idCar, idUser) => {
   axios.delete(`${API_URL_CAR}/${idCar}/${idUser}`);
 };
-const getUserId = (id) => {
-  return axios.get(`${API_URL_USER}/${id}`);
+const getUserId = async(id) => {
+  return await axios.get(`${API_URL_USER}/${id}`);
 };
 const getReviews = async () => {
   const { data } = await getAll(`${API_URL_REVIEWS}`);
