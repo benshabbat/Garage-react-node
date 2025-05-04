@@ -80,9 +80,7 @@ const getReviews = () => {
 const getContacts = () => {
   return getAll(`${API_URL_CONTACTS}`);
 };
-const deleteContact = (id) => {
-  axios.delete(`${API_URL_CONTACTS}/${id}`);
-};
+
 const createContact = (obj) => {
   axios.post(`${API_URL_CONTACTS}`, obj);
 };
@@ -132,10 +130,9 @@ const deleteMessage = async (id) => {
 
   return data;
 };
-const deleteMessageContact = async (id) => {
-  const { data } = await axios.delete(`${API_URL_CONTACTS}/${id}`);
 
-  return data;
+const deleteContact = (id) => {
+  axios.delete(`${API_URL_CONTACTS}/${id}`);
 };
 export {
   createReview,
@@ -167,7 +164,7 @@ export {
   getServicesByType,
   getMessagesContact,
   getMessages,
-  deleteMessageContact,
+
 };
 
 export function getMomentFromUpdatedAt(updatedAt) {

@@ -1,6 +1,5 @@
 import {
   deleteMessage,
-  deleteMessageContact,
   getCars,
   getCarsByType,
   getMessages,
@@ -19,7 +18,6 @@ const adminService = {
   getMessages,
   getMessagesContact,
   deleteMessage,
-  deleteMessageContact,
 };
 
 export default adminService;
