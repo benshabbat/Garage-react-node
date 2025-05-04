@@ -132,9 +132,13 @@ const getServicesByType = async () => {
 };
 
 const getMessagesContact = async () => {
-  const { data } = await getAll(`${API_URL_CONTACTS}`);
-
-  return data;
+  try {
+    const data = await getAll(`${API_URL_CONTACTS}`);
+    return data || []; // ודא שהפונקציה מחזירה מערך גם במקרה של נתונים ריקים
+  } catch (error) {
+    console.error("Error fetching messages contact:", error);
+    return []; // במקרה של שגיאה, החזר מערך ריק
+  }
 };
 const getMessages = async () => {
   const { data } = await getAll(`${API_URL_MESSAGES}`);
