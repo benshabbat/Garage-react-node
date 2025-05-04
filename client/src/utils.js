@@ -13,20 +13,19 @@ const apiRequest = async (method, url, data = null) => {
     const response = await axios({ method, url, data });
     return response.data;
   } catch (error) {
-    console.error(`Error with ${method.toUpperCase()} request to ${url}:`, error);
+    console.error(
+      `Error with ${method.toUpperCase()} request to ${url}:`,
+      error
+    );
     throw error;
   }
 };
 
-
-
 const getAll = (url) => {
   return axios.get(url);
-  
 };
 const getById = (url, id) => {
   return axios.get(`${url}/${id}`);
-  
 };
 const addItem = (url, obj) => {
   axios.post(url, obj);
@@ -35,7 +34,6 @@ const createUser = async (obj) => {
   return await axios.post(API_URL_REGISTER, obj);
 };
 const updateUser = (id, obj) => {
-  
   axios.put(`${API_URL_USER}/${id}`, obj);
 };
 const updateService = (id, obj) => {
@@ -74,11 +72,13 @@ const deleteCar = (idCar, idUser) => {
 const getUserId = (id) => {
   return axios.get(`${API_URL_USER}/${id}`);
 };
-const getReviews = () => {
-  return getAll(`${API_URL_REVIEWS}`);
+const getReviews = async () => {
+  const { data } = await getAll(`${API_URL_REVIEWS}`);
+  return data;
 };
-const getContacts = () => {
-  return getAll(`${API_URL_CONTACTS}`);
+const getContacts = async () => {
+  const { data } = await getAll(`${API_URL_CONTACTS}`);
+  return data;
 };
 
 const createContact = (obj) => {
