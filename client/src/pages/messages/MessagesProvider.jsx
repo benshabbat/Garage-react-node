@@ -78,11 +78,11 @@ export default function MessagesProvider({ children }) {
     return{onSubmit,setFormData,formData,options}
   }
     
-  const useDeleteMsg = (e) => {
+  const useDeleteMsg = async (e) => {
     e.preventDefault();
     const { name } = e.target;
     if (name === "deleteMessage") {
-      deleteMessage(selectedMsg?._id);
+      await deleteMessage(selectedMsg?._id);
       handleDeleteMessage();
     }
   };
