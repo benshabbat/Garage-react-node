@@ -1,14 +1,31 @@
+import { useState } from "react";
 import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
 import { useUsersContext } from "./UsersContext";
 export default function UsersTable() {
-  const { handleUser, displayUsers, handleSearch, modals } = useUsersContext();
+  const { handleUser, displayUsers, handleSearch, modals ,handleSort} = useUsersContext();
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  
+    const handleSortHeader = (key) => {
+      let direction = 'asc';
+      if (sortConfig.key === key && sortConfig.direction === 'asc') {
+        direction = 'desc';
+      }
+      setSortConfig({ key, direction });
+      handleSort(key, direction);
+    };
+  
+  
+  
+  
+  
+  
   const trTh = (
     <tr>
       <th>Actions</th>
-      <th>User Name</th>
-      <th>Email</th>
-      <th>Phone Number</th>
+      <th onClick={() => handleSortHeader('username')}>User Name</th>
+      <th onClick={() => handleSortHeader('email')}>Email</th>
+      <th onClick={() => handleSortHeader('phone')}>Phone Number</th>
     </tr>
   );
   const trTd = displayUsers?.map((user) => (

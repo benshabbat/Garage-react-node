@@ -17,17 +17,19 @@ export default function UsersProvider({ children }) {
 
   const [selectedUser, setSelctedUser] = useState();
   const [filteredUsers, setFilteredUsers] = useState();
-
+  
   const [isExistEmail, setIsExistEmail] = useState(false);
   const [isExistPhone, setIsExistPhone] = useState(false);
   const [isExistUser, setIsExistUser] = useState(false);
-
+  
   const [handleManageUser, isOpenManageUser] = useOpenModal();
   const [handleCreateUser, isOpenCreateUser] = useOpenModal();
   const [handleCreateCar, isOpenModalCreateCar] = useOpenModal();
   const [handleEditUser, isOpenModalEditUser] = useOpenModal();
   const [handleDeleteUser, isOpenModalDeleteUser] = useOpenModal();
-  const displayUsers = filteredUsers || users;
+
+
+  const [displayUsers, setDisplayUsers] = useState(filteredUsers || users);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -174,6 +176,21 @@ export default function UsersProvider({ children }) {
     setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
   };
 
+  const handleSort = (key, direction) => {
+    const sortedData = [...displayUsers].sort((a, b) => {
+      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+    setDisplayUsers(sortedData);
+  };
+
+
+
+
+
+
+
   const value = {
     useDeleteUser,
     useRegister,
@@ -184,6 +201,7 @@ export default function UsersProvider({ children }) {
     setFormData,
     onSubmitCreateCar,
     useEditUser,
+    handleSort,
     modals: {
       manageUser: { isOpen: isOpenManageUser, handle: handleManageUser },
       createUser: { isOpen: isOpenCreateUser, handle: handleCreateUser },
