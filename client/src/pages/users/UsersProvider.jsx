@@ -29,7 +29,7 @@ export default function UsersProvider({ children }) {
   const [handleDeleteUser, isOpenModalDeleteUser] = useOpenModal();
 
 
-  const [displayUsers, setDisplayUsers] = useState(filteredUsers || users);
+  const displayUsers=filteredUsers || users;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -176,14 +176,14 @@ export default function UsersProvider({ children }) {
     setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
   };
 
-  const handleSort = (key, direction) => {
-    const sortedData = [...displayUsers].sort((a, b) => {
-      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
-      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
-      return 0;
-    });
-    setDisplayUsers(sortedData);
-  };
+  // const handleSort = (key, direction) => {
+  //   const sortedData = [...displayUsers].sort((a, b) => {
+  //     if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+  //     if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
+  //     return 0;
+  //   });
+  //   setDisplayUsers(sortedData);
+  // };
 
 
 
@@ -201,7 +201,7 @@ export default function UsersProvider({ children }) {
     setFormData,
     onSubmitCreateCar,
     useEditUser,
-    handleSort,
+    // handleSort,
     modals: {
       manageUser: { isOpen: isOpenManageUser, handle: handleManageUser },
       createUser: { isOpen: isOpenCreateUser, handle: handleCreateUser },
