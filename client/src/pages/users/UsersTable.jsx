@@ -16,10 +16,6 @@ export default function UsersTable() {
     };
   
   
-  
-  
-  
-  
   const trTh = (
     <tr>
       <th>Actions</th>
