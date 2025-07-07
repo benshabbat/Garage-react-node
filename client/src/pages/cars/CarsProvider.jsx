@@ -86,8 +86,8 @@ export default function CarsProvider({ children }) {
     const onSubmit = async (e) => {
       e.preventDefault();
       await updateCar(selectedCar?._id, formData);
-      setIsSubmitted(true);
       handleEditCar();
+      setIsSubmitted(true);
     };
     return { onSubmit, setFormData, formData, isSubmitted, setIsSubmitted };
   };

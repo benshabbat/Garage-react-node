@@ -6,17 +6,16 @@ const EditCar = () => {
   const { useEditCar, modals, selectedCar } = useCarsContext();
   const { onSubmit, setFormData, formData, isSubmitted, setIsSubmitted } =
     useEditCar();
-
+  //Example for a pop up modal that allows the user to edit a car's details
   if (isSubmitted) {
     setTimeout(() => {
       setIsSubmitted(false);
-    }, 7000);
+    }, 3000); // Reset after 3 seconds
     return (
       <Submitted
         setIsSubmitted={setIsSubmitted}
-        review={true}
-        name={"review"}
-        text={"Thank you for your review!"}
+        name={"Edited Car"}
+        text={"Editing was successful!"}
       />
     );
   }
