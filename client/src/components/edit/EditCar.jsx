@@ -11,32 +11,33 @@ const EditCar = () => {
     setTimeout(() => {
       setIsSubmitted(false);
     }, 3000); // Reset after 3 seconds
-    return (
-      <Submitted
-        setIsSubmitted={setIsSubmitted}
-        name={"Edited Car"}
-        text={"Editing was successful!"}
-      />
-    );
   }
   return (
     <OpenModal
       comp={
-        <Form
-          setData={setFormData}
-          title="Edit Car"
-          sec_title="enter your km"
-          inputs={[
-            {
-              name: "km",
-              type: "number",
-              value: formData?.km,
-              min: selectedCar?.km,
-            },
-          ]}
-          handleClick={modals.editCar.handle}
-          onSubmit={onSubmit}
-        />
+        isSubmitted ? (
+          <Submitted
+            setIsSubmitted={setIsSubmitted}
+            name={"Edited Car"}
+            text={"Editing was successful!"}
+          />
+        ) : (
+          <Form
+            setData={setFormData}
+            title="Edit Car"
+            sec_title="enter your km"
+            inputs={[
+              {
+                name: "km",
+                type: "number",
+                value: formData?.km,
+                min: selectedCar?.km,
+              },
+            ]}
+            handleClick={modals.editCar.handle}
+            onSubmit={onSubmit}
+          />
+        )
       }
       isOpen={modals.editCar.isOpen}
     />
