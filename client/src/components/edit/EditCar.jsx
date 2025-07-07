@@ -3,8 +3,8 @@ import { useCarsContext } from "../../pages/cars/CarsContext";
 import Submitted from "../Submitted";
 
 const EditCar = () => {
-  const { useEditCar,modals,selectedCar } = useCarsContext();
-  const { onSubmit, setFormData,formData,isSubmitted, setIsSubmitted } = useEditCar()
+  const { useEditCar,modals,selectedCar,isSubmitted, setIsSubmitted  } = useCarsContext();
+  const { onSubmit, setFormData,formData} = useEditCar()
 
 
   if (isSubmitted) {
