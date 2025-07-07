@@ -1,11 +1,20 @@
 import { Form, OpenModal } from "../index";
 import { useCarsContext } from "../../pages/cars/CarsContext";
+import Submitted from "../Submitted";
 
 const EditCar = () => {
   const { useEditCar,modals,selectedCar } = useCarsContext();
-  const { onSubmit, setFormData,formData } = useEditCar()
+  const { onSubmit, setFormData,formData,isSubmitted, setIsSubmitted } = useEditCar()
 
+
+  if (isSubmitted) {
+    setTimeout(() => {
+      setIsSubmitted(false)
+    }, 7000);
+    return <Submitted setIsSubmitted={setIsSubmitted} review={true} name={"review"} text={"Thank you for your review!"}/>
+  }
   return (
+    
     <OpenModal
       comp={
         <Form

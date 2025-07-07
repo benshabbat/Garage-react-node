@@ -12,6 +12,7 @@ export default function CarsProvider({ children }) {
   const [selectedCar, setSelectedCar] = useState();
   const [filteredCars, setFilteredCars] = useState();
   const [formData, setFormData] = useState();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [handleManageCar, isOpenManageCar] = useOpenModal();
   const [handleEditCar, isOpenModalEditCar] = useOpenModal();
@@ -81,10 +82,11 @@ export default function CarsProvider({ children }) {
     useEffect(() => {
       setFormData(selectedCar);
     }, [selectedCar]);
-
+    
     const onSubmit = async (e) => {
       e.preventDefault();
       await updateCar(selectedCar?._id, formData);
+      setIsSubmitted(true);
       handleEditCar();
     };
     return { onSubmit, setFormData, formData };
@@ -109,6 +111,8 @@ export default function CarsProvider({ children }) {
   ];
 
   const value = {
+    isSubmitted,
+    setIsSubmitted,
     useDeleteCar,
     useEditCar,
     useCreateService,
