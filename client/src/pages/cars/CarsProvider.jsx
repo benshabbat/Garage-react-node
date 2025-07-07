@@ -82,14 +82,14 @@ export default function CarsProvider({ children }) {
     useEffect(() => {
       setFormData(selectedCar);
     }, [selectedCar]);
-    
+
     const onSubmit = async (e) => {
       e.preventDefault();
       await updateCar(selectedCar?._id, formData);
       setIsSubmitted(true);
       handleEditCar();
     };
-    return { onSubmit, setFormData, formData };
+    return { onSubmit, setFormData, formData, isSubmitted, setIsSubmitted };
   };
 
   const useDeleteCar = async (e) => {
@@ -111,8 +111,6 @@ export default function CarsProvider({ children }) {
   ];
 
   const value = {
-    isSubmitted,
-    setIsSubmitted,
     useDeleteCar,
     useEditCar,
     useCreateService,
