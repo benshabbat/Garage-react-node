@@ -35,7 +35,7 @@ export default function HeaderProvider({ children }) {
   const handleLogout = () => {
     handleOutsideClick();
     onLogout();
-    onLogin();
+    // onLogin();
   };
   
   const useLogin = () => {
