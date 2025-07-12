@@ -7,7 +7,11 @@ import { getUser } from "../../features/user/userSlice";
 import useOpenModal from "../../hooks/useOpenModal";
 import useLogout from "../../hooks/useLogout";
 export default function HeaderProvider({ children }) {
-  const { user: userAuth,isError,message } = useSelector((state) => state.auth);
+  const {
+    user: userAuth,
+    isError,
+    message,
+  } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
 
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -30,26 +34,24 @@ export default function HeaderProvider({ children }) {
     handleOutsideClick();
     onLogin();
   };
-  
-  
+
   const handleLogout = () => {
     handleOutsideClick();
     onLogout();
-    // onLogin();
   };
-  
+
   const useLogin = () => {
     const [formData, setFormData] = useState();
-    const onSubmit = async (e) => { 
+    const onSubmit = async (e) => {
       e.preventDefault();
       try {
-        await dispatch(login(formData)).unwrap(); 
-        onLogin(); 
+        await dispatch(login(formData)).unwrap();
+        onLogin();
       } catch (error) {
         console.error("Login failed:", error);
       }
     };
-  
+
     return { setFormData, onSubmit };
   };
 
@@ -63,7 +65,8 @@ export default function HeaderProvider({ children }) {
     isOpenLogin,
     useLogin,
     isError,
-    handleLogout,message
+    handleLogout,
+    message,
   };
   return (
     <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>
