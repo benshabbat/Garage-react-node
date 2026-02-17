@@ -1,4 +1,5 @@
 import "./table.css";
+import PropTypes from "prop-types";
 
 const Table = ({ trTh, trTd }) => {
   const columnCount = trTh?.props?.children?.length || 1;
@@ -20,6 +21,11 @@ const Table = ({ trTh, trTd }) => {
       </table>
     </section>
   );
+};
+
+Table.propTypes = {
+  trTh: PropTypes.element.isRequired,
+  trTd: PropTypes.arrayOf(PropTypes.element),
 };
 
 export default Table;

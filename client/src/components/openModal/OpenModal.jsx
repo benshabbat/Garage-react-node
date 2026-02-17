@@ -1,4 +1,5 @@
 import "./openModal.css";
+import PropTypes from "prop-types";
 
 const OpenModal = ({ comp = null, isOpen = false }) => {
   return (
@@ -8,6 +9,11 @@ const OpenModal = ({ comp = null, isOpen = false }) => {
       </div>
     )
   );
+};
+
+OpenModal.propTypes = {
+  comp: PropTypes.node,
+  isOpen: PropTypes.bool,
 };
 
 export default OpenModal;
