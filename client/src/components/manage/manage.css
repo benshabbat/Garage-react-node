@@ -4,50 +4,82 @@
   width: 100%;
   height: 48px;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  color: var(--color-white);
+  border: 1px solid transparent;
+  transition: all var(--transition-base);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.create::before,
+.edit::before,
+.delete::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-slow);
+}
+
+.create:hover::before,
+.edit:hover::before,
+.delete:hover::before {
+  left: 100%;
 }
 
 .create {
-  background: rgba(34, 197, 94, 0.95); /* ירוק בהיר יותר */
+  background: var(--color-success);
+  border-color: var(--glass-border);
 }
 
 .edit {
-  background: rgba(59, 130, 246, 0.95); /* כחול בהיר יותר */
+  background: var(--color-info);
+  border-color: var(--glass-border);
 }
 
 .delete {
-  background: rgba(239, 68, 68, 0.95); /* אדום בהיר יותר */
+  background: var(--color-danger);
+  border-color: var(--glass-border);
 }
 
 .create:hover {
-  background: rgb(22, 163, 74); /* ירוק כהה יותר בhover */
-  border-color: rgba(34, 197, 94, 0.4);
+  background: var(--color-success-hover);
+  border-color: var(--color-success);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  box-shadow: var(--shadow-lg);
 }
 
 .edit:hover {
-  background: rgb(37, 99, 235); /* כחול כהה יותר בhover */
-  border-color: rgba(59, 130, 246, 0.4);
+  background: var(--color-info-hover);
+  border-color: var(--color-info);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: var(--shadow-lg);
 }
 
 .delete:hover {
-  background: rgb(220, 38, 38); /* אדום כהה יותר בhover */
-  border-color: rgba(239, 68, 68, 0.4);
+  background: var(--color-danger-hover);
+  border-color: var(--color-danger);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  box-shadow: var(--shadow-lg);
+}
+
+.create:active,
+.edit:active,
+.delete:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 @media (max-width: 480px) {

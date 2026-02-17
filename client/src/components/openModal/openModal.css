@@ -1,22 +1,27 @@
 .open-modal-background {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.386);
+  background-color: var(--glass-backdrop);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* הוספנו z-index גבוה */
+  z-index: var(--z-modal);
+  animation: fadeIn var(--transition-base);
 }
 
 .open-modal-container {
   position: relative;
-  border-radius: 20px;
+  border-radius: var(--radius-xl);
   width: max-content;
-  box-shadow: 1px 1px 13px 2px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 1px 1px 13px 2px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 1px 1px 13px 2px rgba(0, 0, 0, 0.75);
-  z-index: 1001; /* הוספנו z-index גבוה יותר מהרקע */
+  box-shadow: var(--shadow-xl);
+  z-index: calc(var(--z-modal) + 1);
+  animation: slideIn var(--transition-base);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
 }

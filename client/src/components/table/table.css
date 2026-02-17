@@ -1,7 +1,7 @@
 .table-container {
-  background: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
   position: fixed;
   top: 120px;
   left: 50%;
@@ -9,45 +9,74 @@
   max-height: 80vh;
   display: flex;
   flex-direction: column;
+  animation: fadeIn var(--transition-base);
 }
+
 .table-container .create-button {
-  background: #4299e1;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-white);
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   cursor: pointer;
   min-width: 120px;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
+
+.table-container .create-button:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 .table__header {
   padding: 16px 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-gray-200);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .table__header .input-group {
   width: 250px;
-  padding: 8px;
-  border: 1px solid #eee;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  transition: all var(--transition-base);
+}
+
+.table__header .input-group:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
 }
 
 .table__header .input-group input {
   width: 100%;
   border: none;
+  outline: none;
+  color: var(--color-gray-900);
+  background: transparent;
+}
+
+.table__header .input-group input::placeholder {
+  color: var(--color-gray-500);
 }
 
 .table__header .create-button {
-  background: #4299e1;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-white);
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   cursor: pointer;
   min-width: 120px;
+  font-weight: 500;
+  transition: all var(--transition-base);
 }
 
 .table__body {
@@ -55,77 +84,147 @@
   overflow-y: auto;
   padding-bottom: 20px;
 }
+
 .table__body .no-data-message {
   text-align: center;
   padding: 24px;
-  color: #666;
+  color: var(--color-gray-600);
   font-size: 16px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-gray-200);
 }
-
 
 .table__body th,
 .table__body td {
   padding: 12px 16px;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-gray-200);
+  color: var(--color-gray-900);
+  transition: background var(--transition-fast);
 }
 
 .table__body th {
-  background: #f8f9fa;
+  background: var(--color-gray-100);
   position: sticky;
   top: 0;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  z-index: var(--z-sticky);
 }
+
 .table__body th.sorted-ascending::after {
   content: " ↑";
+  color: var(--color-primary);
 }
 
 .table__body th.sorted-descending::after {
   content: " ↓";
+  color: var(--color-primary);
 }
 
 .table__body th:hover {
-  background: #edf2f7;
+  background: var(--color-gray-200);
 }
 
 .table__body td button {
   padding: 6px 12px;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  color: white;
+  color: var(--color-white);
   min-width: 80px;
-  background: #4299e1;
+  background: var(--color-primary);
+  font-weight: 500;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.table__body td button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.table__body td button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .table__body button[name="deleteCar"],
 .table__body button[name="deleteMessage"],
 .table__body button[name="deleteContact"] {
-  background: #f56565;
+  background: var(--color-danger);
+}
+
+.table__body button[name="deleteCar"]:hover,
+.table__body button[name="deleteMessage"]:hover,
+.table__body button[name="deleteContact"]:hover {
+  background: var(--color-danger-hover);
 }
 
 button[name="editCar"] {
-  background: rgba(59, 130, 246, 0.95);
+  background: var(--color-info);
 }
+
+button[name="editCar"]:hover {
+  background: var(--color-info-hover);
+}
+
 button[name="createService"] {
-  background: rgba(34, 197, 94, 0.95);
+  background: var(--color-success);
+}
+
+button[name="createService"]:hover {
+  background: var(--color-success-hover);
 }
 
 .status.done {
-  background: #828fee;
+  background: var(--color-info);
+  color: var(--color-white);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: inline-block;
 }
+
 .status.pending {
-  background: #eef681;
+  background: var(--color-warning);
+  color: var(--color-gray-900);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: inline-block;
 }
+
 .status.on-work {
-  background: #7ef1ae;
+  background: var(--color-success);
+  color: var(--color-white);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: inline-block;
 }
 
 .editPaid.Paid {
-  background: #7ef1ae;
+  background: var(--color-success);
+  color: var(--color-white);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: inline-block;
 }
+
 .editPaid.Unpaid {
-  background: #f67364;
+  background: var(--color-danger);
+  color: var(--color-white);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: inline-block;
 }
 
 @media screen and (max-width: 850px) {
@@ -138,7 +237,7 @@ button[name="createService"] {
     flex-direction: column;
   }
 
-  .input-group {
+  .table__header .input-group {
     width: 100%;
   }
 
@@ -162,8 +261,10 @@ button[name="createService"] {
     box-sizing: border-box;
     margin: 10px 0;
     padding: 10px 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    background: #fff;
+    box-shadow: var(--shadow-sm);
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray-200);
   }
 
   td {
@@ -171,12 +272,15 @@ button[name="createService"] {
     box-sizing: border-box; 
     display: flex;
     justify-content: space-between;
-    padding: 8px;
+    padding: 8px 12px;
+    border-bottom: none;
   }
 
   td::before {
     content: attr(data-label);
-    font-weight: bold;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    min-width: 120px;
   }
 
   td[data-label="Mileage"],
@@ -191,21 +295,45 @@ button[name="createService"] {
     width: 100%;
     top: 80px;
     border-radius: 0;
+    max-height: 85vh;
   }
+  
+  .table__header {
+    padding: 12px 16px;
+  }
+  
   .table__body .no-data-message {
     padding: 16px;
+    font-size: 14px;
   }
+  
+  tr {
+    margin: 8px 0;
+    padding: 8px 0;
+  }
+  
   td {
     flex-direction: column;
+    padding: 6px 12px;
   }
 
   td button {
     width: 100%;
+    margin-top: 4px;
   }
 
   td[data-label="Mileage"],
   td[data-label="Price"],
   td[data-label="Phone Number"] {
     flex-direction: row !important;
+  }
+  
+  .status.done,
+  .status.pending,
+  .status.on-work,
+  .editPaid.Paid,
+  .editPaid.Unpaid {
+    font-size: 0.8rem;
+    padding: 3px 10px;
   }
 }
