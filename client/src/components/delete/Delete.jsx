@@ -1,4 +1,6 @@
 import { OpenModal } from "../index";
+import PropTypes from "prop-types";
+
 const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
   return (
     <OpenModal
@@ -30,6 +32,14 @@ const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
       isOpen={isOpen}
     />
   );
+};
+
+Delete.propTypes = {
+  deleteData: PropTypes.string,
+  handle: PropTypes.func.isRequired,
+  nameData: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default Delete;

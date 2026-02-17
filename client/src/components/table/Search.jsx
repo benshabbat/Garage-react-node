@@ -1,4 +1,4 @@
-
+import PropTypes from "prop-types";
 
 export default function Search({name,handleSearch}) {
   return (
@@ -15,3 +15,8 @@ export default function Search({name,handleSearch}) {
     
   );
 }
+
+Search.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+};

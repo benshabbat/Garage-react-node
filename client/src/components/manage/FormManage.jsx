@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function FormManage({ children, handle }) {
   return (
     <form className="form">
@@ -9,3 +11,8 @@ export default function FormManage({ children, handle }) {
     </form>
   );
 }
+
+FormManage.propTypes = {
+  children: PropTypes.node.isRequired,
+  handle: PropTypes.func.isRequired,
+};
