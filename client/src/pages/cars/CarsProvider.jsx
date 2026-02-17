@@ -110,7 +110,6 @@ export default function CarsProvider({ children }) {
     useCreateService,
     options,
     cars,
-    filteredCars,
     selectedCar,
     handleCarAction,
     handleSearch,
