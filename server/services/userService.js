@@ -22,62 +22,42 @@ const updateUser = async (req) => {
     }
   }
 
-  try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: {
-          ...req.body,
-          phone: newPhone,
-          password: updatedPassword,
-        },
+  const updatedUser = await User.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: {
+        ...req.body,
+        phone: newPhone,
+        password: updatedPassword,
       },
-      { new: true }
-    );
-    return updatedUser;
-  } catch (error) {
-    throw Error(error);
-  }
+    },
+    { new: true }
+  );
+  return updatedUser;
 };
+
 const deleteUser = async (req) => {
-  try {
-    await User.findByIdAndDelete(req.params.id);
-    await Car.findOneAndDelete({ owner: req.params.id });
-    await Message.findOneAndDelete({ from: req.params.id });
-    await Message.findOneAndDelete({ to: req.params.id });
-    return "the user has been removed";
-  } catch (error) {
-    throw Error(error);
-  }
+  await User.findByIdAndDelete(req.params.id);
+  await Car.findOneAndDelete({ owner: req.params.id });
+  await Message.findOneAndDelete({ from: req.params.id });
+  await Message.findOneAndDelete({ to: req.params.id });
+  return "the user has been removed";
 };
 
 const getUser = async (req) => {
-  try {
-    const user = await User.findById(req.params.id).populate("cars");
-    return user;
-  } catch (error) {
-    throw Error(error);
-  }
+  const user = await User.findById(req.params.id).populate("cars");
+  return user;
 };
 
 const getUsers = async () => {
-  try {
-    const users = await User.find();
-    return users;
-  } catch (error) {
-    throw Error(error);
-  }
+  const users = await User.find();
+  return users;
 };
-
 
 const getUsersByType = async (req) => {
   const type = req.query.populate;
-  try {
-    const users = await User.find().populate(type);
-    return users;
-  } catch (error) {
-    throw Error(error);
-  }
+  const users = await User.find().populate(type);
+  return users;
 };
 
 const userService = {

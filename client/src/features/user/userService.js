@@ -17,9 +17,7 @@ const createReqService = async (dataMessage) => {
 // get user by _id
 
 const getUser = async (id) => {
-  const { data } = await getUserId(id);
-
-  return data;
+  return await getUserId(id);
 };
 
 const getServicesByIdCar = async (carId) => {

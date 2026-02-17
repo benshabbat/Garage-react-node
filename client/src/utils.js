@@ -12,47 +12,56 @@ export const ADMIN = "63e14deca4340e45d23f20b2";
 /**
  * Generic CRUD operations factory
  */
-const createCrudOperations = (baseUrl, resourceName = 'resource') => ({
+const createCrudOperations = (baseUrl) => ({
   getAll: async () => {
-    try {
-      const response = await axios.get(baseUrl);
-      return response.data;
-    } catch (error) {
-      console.error(`Failed to fetch ${resourceName}:`, error);
-      throw error;
-    }
+    const response = await axios.get(baseUrl);
+    return response.data;
   },
   
-  getById: (id) => axios.get(`${baseUrl}/${id}`),
+  getById: async (id) => {
+    const response = await axios.get(`${baseUrl}/${id}`);
+    return response.data;
+  },
   
-  create: (data) => axios.post(baseUrl, data),
+  create: async (data) => {
+    const response = await axios.post(baseUrl, data);
+    return response.data;
+  },
   
-  update: (id, data) => axios.put(`${baseUrl}/${id}`, data),
+  update: async (id, data) => {
+    const response = await axios.put(`${baseUrl}/${id}`, data);
+    return response.data;
+  },
   
-  delete: (id) => axios.delete(`${baseUrl}/${id}`),
+  delete: async (id) => {
+    const response = await axios.delete(`${baseUrl}/${id}`);
+    return response.data;
+  },
 });
 
 // Resource-specific CRUD operations
-const userOps = createCrudOperations(API_URL_USER, 'users');
-const serviceOps = createCrudOperations(API_URL_SERVICE, 'services');
-const carOps = createCrudOperations(API_URL_CAR, 'cars');
-const messageOps = createCrudOperations(API_URL_MESSAGES, 'messages');
-const reviewOps = createCrudOperations(API_URL_REVIEWS, 'reviews');
-const contactOps = createCrudOperations(API_URL_CONTACTS, 'contacts');
+const userOps = createCrudOperations(API_URL_USER);
+const serviceOps = createCrudOperations(API_URL_SERVICE);
+const carOps = createCrudOperations(API_URL_CAR);
+const messageOps = createCrudOperations(API_URL_MESSAGES);
+const reviewOps = createCrudOperations(API_URL_REVIEWS);
+const contactOps = createCrudOperations(API_URL_CONTACTS);
 
 // Legacy function names (for backwards compatibility)
 const getAll = async (url) => {
-  try {
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching data from ${url}:`, error);
-    throw error;
-  }
+  const response = await axios.get(url);
+  return response.data;
 };
 
-const getById = (url, id) => axios.get(`${url}/${id}`);
-const addItem = (url, obj) => axios.post(url, obj);
+const getById = async (url, id) => {
+  const response = await axios.get(`${url}/${id}`);
+  return response.data;
+};
+
+const addItem = async (url, obj) => {
+  const response = await axios.post(url, obj);
+  return response.data;
+};
 
 // User operations
 const createUser = (obj) => axios.post(API_URL_REGISTER, obj);
@@ -91,33 +100,18 @@ const getMessages = messageOps.getAll;
 
 // Advanced queries with population
 const getCarsByType = async () => {
-  try {
-    const response = await axios.get(`${API_URL_CAR}/populate?populate=owner`);
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch cars by type:", error);
-    throw error;
-  }
+  const response = await axios.get(`${API_URL_CAR}/populate?populate=owner`);
+  return response.data;
 };
 
 const getServicesByType = async () => {
-  try {
-    const response = await axios.get(`${API_URL_SERVICE}/populate?populate=car`);
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch services by type:", error);
-    throw error;
-  }
+  const response = await axios.get(`${API_URL_SERVICE}/populate?populate=car`);
+  return response.data;
 };
 
 const getMessagesContact = async () => {
-  try {
-    const data = await getAll(API_URL_CONTACTS);
-    return data || [];
-  } catch (error) {
-    console.error("Error fetching messages contact:", error);
-    return [];
-  }
+  const data = await getAll(API_URL_CONTACTS);
+  return data || [];
 };
 
 export {

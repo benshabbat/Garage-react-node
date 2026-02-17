@@ -11,8 +11,9 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const data = await authService.login(req, res);
-    res.status(200).json(data);
+    const { token, cookieOptions, user } = await authService.login(req);
+    res.cookie("access_token", token, cookieOptions);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
@@ -20,8 +21,9 @@ export const login = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
   try {
-    const data = await authService.logout(req, res);
-    res.status(200).json(data);
+    const { cookieOptions, message } = await authService.logout();
+    res.clearCookie("access_token", cookieOptions);
+    res.status(200).json({ message });
   } catch (error) {
     next(error);
   }

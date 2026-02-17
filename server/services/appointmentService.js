@@ -2,21 +2,13 @@ import Appointment from "../models/Appointment.js";
 
 const createAppointment = async (req) => {
   const newAppointment = new Appointment(req.body);
-  try {
-    const savedAppointment = await newAppointment.save();
-    return savedAppointment;
-  } catch (error) {
-    throw Error(error);
-  }
+  const savedAppointment = await newAppointment.save();
+  return savedAppointment;
 };
 
 const getAppointments = async () => {
-  try {
-    const Appointments = await Appointment.find();
-    return Appointments;
-  } catch (error) {
-    throw Error(error);
-  }
+  const Appointments = await Appointment.find();
+  return Appointments;
 };
 
 const appointmentService = {

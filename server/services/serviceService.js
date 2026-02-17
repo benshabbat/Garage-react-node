@@ -42,70 +42,46 @@ const createService = async (req) => {
 };
 
 const updateService = async (req) => {
-  try {
-    const updatedService = await Service.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    return updatedService;
-  } catch (error) {
-    throw Error(error);
-  }
+  const updatedService = await Service.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: req.body,
+    },
+    { new: true }
+  );
+  return updatedService;
 };
+
 const deleteService = async (req) => {
-  try {
-    await Service.findByIdAndDelete(req.params.id);
-  } catch (error) {
-    throw Error(error);
-  }
+  await Service.findByIdAndDelete(req.params.id);
 };
+
 const getService = async (req) => {
-  try {
-    const service = await Service.findById(req.params.id);
-    return service;
-  } catch (error) {
-    throw Error(error);
-  }
+  const service = await Service.findById(req.params.id);
+  return service;
 };
+
 const getServices = async () => {
-  try {
-    const services = await Service.find().populate("car");
-    return services;
-  } catch (error) {
-    throw Error(error);
-  }
+  const services = await Service.find().populate("car");
+  return services;
 };
+
 const getServicesByType = async (req) => {
   const type = req.query.populate;
-  try {
-    const services = await Service.find().populate(type);
-    return services;
-  } catch (error) {
-    throw Error(error);
-  }
+  const services = await Service.find().populate(type);
+  return services;
 };
 
 const getServicesByCar = async (req) => {
-  try {
-    const services = await Service.find({ car: req.params.car });
-    return services;
-  } catch (error) {
-    throw Error(error);
-  }
+  const services = await Service.find({ car: req.params.car });
+  return services;
 };
 
 //Need to get data right now is wrong
 //maybe to get idea from getMessageByUser getCarsByOwner getCarsWithService
 const getServicesByUser = async (req) => {
-  try {
-    const services = await Service.find({ user: req.params.user });
-    return services;
-  } catch (error) {
-    throw Error(error);
-  }
+  const services = await Service.find({ user: req.params.user });
+  return services;
 };
 
 const serviceService = {
