@@ -152,18 +152,16 @@ textarea::-webkit-scrollbar-track {
   border-radius: var(--radius-lg);
   font-size: 1.125rem;
   font-weight: 500;
-  border: 2px solid var(--color-gray-200);
+  border: none;
   cursor: pointer;
   transition: all var(--transition-base);
-  background-color: transparent;
-  color: var(--color-gray-200);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   box-shadow: var(--shadow-sm);
 }
 
 .container-contact form button:hover {
-  background-color: var(--glass-bg);
-  color: var(--color-white);
-  border-color: var(--color-white);
+  background-color: var(--color-primary-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -238,17 +236,17 @@ textarea::-webkit-scrollbar-track {
   border-radius: var(--radius-lg);
   font-size: 1.125rem;
   font-weight: 500;
-  border: none;
+  border: 2px solid var(--color-white);
   cursor: pointer;
   transition: all var(--transition-base);
-  background-color: var(--color-white);
-  color: var(--color-gray-900);
+  background-color: transparent;
+  color: var(--color-white);
   box-shadow: var(--shadow-sm);
 }
 
 .new-message-button:hover {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-gray-900);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
