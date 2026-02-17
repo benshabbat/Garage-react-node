@@ -70,7 +70,7 @@ export default function FormInput({
 
 FormInput.propTypes = {
   input: PropTypes.shape({
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string,
     name: PropTypes.string.isRequired,
     value: PropTypes.any,
     pattern: PropTypes.string,

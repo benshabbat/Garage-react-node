@@ -4,6 +4,7 @@ import { AccountContext } from "./AccountContext";
 import { createReqService } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
 import { getServicesByIdCar } from "../../features/user/userSlice";
+import PropTypes from "prop-types";
 export default function AccountProvider({ children }) {
   const { user, services } = useSelector((state) => state.user);
 
@@ -93,3 +94,7 @@ export default function AccountProvider({ children }) {
     <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
   );
 }
+
+AccountProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

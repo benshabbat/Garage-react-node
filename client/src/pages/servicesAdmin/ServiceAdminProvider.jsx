@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../../features/admin/adminSlice";
 import { deleteService, updateService } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
+import PropTypes from "prop-types";
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
 
@@ -125,3 +126,7 @@ export default function ServiceAdminProvider({ children }) {
     </ServiceAdminContext.Provider>
   );
 }
+
+ServiceAdminProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

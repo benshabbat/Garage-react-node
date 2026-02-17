@@ -4,6 +4,7 @@ import { MsgOfContactContext } from "./MsgOfContactContext";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesContact } from "../../features/admin/adminSlice";
 import { deleteContact } from "../../utils";
+import PropTypes from "prop-types";
 
 export default function MsgOfContactProvider({ children }) {
   const [filterContacts, setFilterContacts] = useState();
@@ -48,3 +49,7 @@ export default function MsgOfContactProvider({ children }) {
     </MsgOfContactContext.Provider>
   );
 }
+
+MsgOfContactProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

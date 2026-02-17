@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createService, updateCar, deleteCar } from "../../utils";
 import { getCarsByType } from "../../features/admin/adminSlice";
 import useOpenModal from "../../hooks/useOpenModal";
+import PropTypes from "prop-types";
 
 export default function CarsProvider({ children }) {
   const { user } = useSelector((state) => state.user);
@@ -133,3 +134,7 @@ export default function CarsProvider({ children }) {
 
   return <CarsContext.Provider value={value}>{children}</CarsContext.Provider>;
 }
+
+CarsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

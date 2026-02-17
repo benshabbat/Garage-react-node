@@ -10,6 +10,7 @@ import {
   createMessageToAdmin,
 } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
+import PropTypes from "prop-types";
 //TODO:handle message for requests
 export default function MessagesProvider({ children }) {
   const { messages, user } = useSelector((state) => state.user);
@@ -61,7 +62,9 @@ export default function MessagesProvider({ children }) {
   };
   
   const useCreateMsg = ()=>{
-    const options=user?.isAdmin ? users : null
+    const options = user?.isAdmin && users?.length > 0
+      ? users.map(u => ({ value: u._id, label: u.username }))
+      : undefined;
     const [formData, setFormData] = useState({
       from: user?._id,
     });
@@ -108,3 +111,7 @@ export default function MessagesProvider({ children }) {
     </MessagesContext.Provider>
   );
 }
+
+MessagesProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

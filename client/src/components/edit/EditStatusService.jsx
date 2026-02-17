@@ -1,9 +1,10 @@
-
 import { Form, OpenModal } from "../index";
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
 const EditStatusService = () => {
-  const { useEditService, modals,options } = useServicesAdminContext();
-  const { onSubmit, setFormData } = useEditService(modals.editStatusService.handle);
+  const { useEditService, modals, options } = useServicesAdminContext();
+  const { onSubmit, setFormData } = useEditService(
+    modals.editStatusService.handle,
+  );
 
   return (
     <OpenModal
@@ -13,6 +14,7 @@ const EditStatusService = () => {
           title="Edit Status"
           sec_title="Edit Status"
           options={options}
+          inputs={[]}
           nameSelect="status"
           handleClick={modals.editStatusService.handle}
           onSubmit={onSubmit}
