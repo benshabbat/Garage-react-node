@@ -9,13 +9,13 @@
   background: none;
   border: none;
   padding: 0;
-  color: #ddd;
-  transition: color 0.2s ease, transform 0.2s ease;
+  color: var(--color-gray-300);
+  transition: all var(--transition-base);
   cursor: pointer;
 }
 
 .star-button.active {
-  color: #ffd700;
+  color: var(--color-warning);
 }
 
 .star-button.disabled {
@@ -25,6 +25,7 @@
 
 .star-button:not(.disabled):hover {
   transform: scale(1.1);
+  color: var(--color-warning);
 }
 
 .star-button:not(.disabled):active {

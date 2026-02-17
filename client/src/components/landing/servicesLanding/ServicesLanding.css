@@ -6,9 +6,11 @@
   width: 100%;
   padding: 4em;
   padding-top: 2em;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-lg);
+  background-color: var(--glass-bg);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +20,7 @@
   text-align: center;
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #94aed3;
+  color: var(--color-gray-200);
 }
 
 .servicesLanding-grid {
@@ -30,26 +32,35 @@
 }
 
 .servicesLanding-card {
-  background: white;
+  background: var(--color-white);
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.servicesLanding-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .servicesLanding-icon {
   font-size: 2rem;
   margin-bottom: 0.75rem;
+  color: var(--color-primary);
 }
 
 .servicesLanding-title {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #1a365d;
+  color: var(--color-gray-900);
+  font-weight: 600;
 }
 
 .servicesLanding-card p {
   font-size: 0.9rem;
+  color: var(--color-gray-700);
 }
 
 @media (max-width: 1200px) {

@@ -17,10 +17,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-  border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-xl);
+  border-radius: var(--radius-xl);
+  background-color: var(--glass-bg);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   flex-wrap: wrap;
   padding: clamp(15px, 4vw, 30px);
   gap: 20px;
@@ -28,7 +30,7 @@
 
 /* Form Headers */
 .container-contact form h1 {
-  color: #fff;
+  color: var(--color-white);
   font-weight: 500;
   margin: 0;
   width: 100%;
@@ -37,7 +39,7 @@
 }
 
 .container-contact form h4 {
-  color: #fff;
+  color: var(--color-gray-200);
   font-weight: 300;
   width: 100%;
   margin: 0;
@@ -62,25 +64,25 @@
   border: none;
   font-size: clamp(14px, 2vw, 16px);
   background: none;
-  border-bottom: 2px solid #fff;
-  color: #fff;
-  transition: border-color 0.3s ease;
+  border-bottom: 2px solid var(--color-white);
+  color: var(--color-white);
+  transition: border-color var(--transition-base);
 }
 
 .container-contact form input:focus {
-  border-color: #4a9eff;
+  border-color: var(--color-primary);
 }
 
 .container-contact form input::placeholder {
-  color: #ddd;
+  color: var(--color-gray-300);
 }
 
 /* Textarea */
 .container-contact form textarea {
   background: none;
   border: none;
-  border-bottom: 2px solid #fff;
-  color: #fff;
+  border-bottom: 2px solid var(--color-white);
+  color: var(--color-white);
   font-weight: 200;
   font-size: clamp(14px, 2vw, 16px);
   padding: 10px;
@@ -88,12 +90,12 @@
   width: 100%;
   min-height: 80px;
   max-height: 150px;
-  transition: border-color 0.3s ease;
+  transition: border-color var(--transition-base);
   resize: vertical;
 }
 
 .container-contact form textarea:focus {
-  border-color: #4a9eff;
+  border-color: var(--color-primary);
 }
 
 /* Textarea Scrollbar */
@@ -102,12 +104,12 @@ textarea::-webkit-scrollbar {
 }
 
 textarea::-webkit-scrollbar-thumb {
-  background-color: rgba(104, 104, 104, 0.71);
-  border-radius: 4px;
+  background-color: var(--color-gray-600);
+  border-radius: var(--radius-sm);
 }
 
 textarea::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--glass-bg);
 }
 
 /* Button Container */
@@ -121,20 +123,22 @@ textarea::-webkit-scrollbar-track {
 /* Submit Button */
 .container-contact form button {
   padding: 1rem 2rem;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-lg);
   font-size: 1.125rem;
   font-weight: 500;
-  border: none;
+  border: 2px solid var(--color-gray-200);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
   text-decoration: none;
   background-color: transparent;
-  color: #e5e7eb;
-  border: 2px solid #e5e7eb;
+  color: var(--color-gray-200);
 }
 
 .container-contact form button:hover {
-  background-color: rgba(229, 231, 235, 0.1);
+  background-color: var(--glass-bg);
+  color: var(--color-white);
+  border-color: var(--color-white);
+  transform: translateY(-2px);
 }
 
 /* Success Message Styles */
@@ -145,10 +149,12 @@ textarea::-webkit-scrollbar-track {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-  border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-xl);
+  border-radius: var(--radius-xl);
+  background-color: var(--glass-bg);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   padding: clamp(15px, 4vw, 30px);
   text-align: center;
 }
@@ -156,7 +162,7 @@ textarea::-webkit-scrollbar-track {
 .success-icon {
   width: clamp(64px, 10vw, 96px);
   height: clamp(64px, 10vw, 96px);
-  color: #4a9eff;
+  color: var(--color-primary);
   margin-bottom: 2rem;
 }
 
@@ -189,12 +195,12 @@ textarea::-webkit-scrollbar-track {
 .success-title {
   font-size: clamp(24px, 5vw, 32px);
   font-weight: 500;
-  color: #fff;
+  color: var(--color-white);
   margin-bottom: 1rem;
 }
 
 .success-message p {
-  color: #ddd;
+  color: var(--color-gray-300);
   font-weight: 300;
   font-size: clamp(16px, 2.5vw, 18px);
   margin-bottom: 2rem;
@@ -202,21 +208,23 @@ textarea::-webkit-scrollbar-track {
 
 .new-message-button {
   border: none;
-  background: #fff;
-  border-radius: 5px;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
   font-weight: 600;
   font-size: clamp(16px, 2.5vw, 20px);
-  color: #333;
+  color: var(--color-gray-900);
   width: clamp(120px, 30%, 200px);
   padding: 12px 20px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 
 .new-message-button:hover {
-  background: #4a9eff;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-white);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Responsive Breakpoints */

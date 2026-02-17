@@ -2,9 +2,10 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  animation: fadeIn var(--transition-base);
 }
 
 .appointment-form {
@@ -13,57 +14,60 @@
   gap: 15px;
   max-width: 400px;
   margin: 20px auto;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .appointment-form input,
 .appointment-form button {
   padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
   font-size: 16px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
 }
 
 .appointment-form input:focus {
-  border-color: #007bff;
+  border-color: var(--color-primary);
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
 }
 
 .appointment-form button {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .appointment-form button:hover {
-  background-color: #0056b3;
+  background-color: var(--color-primary-hover);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .appointment-form button:active {
-  background-color: #003f8a;
+  background-color: var(--color-primary-hover);
   transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .calendar {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-lg);
   padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-md);
 }
 
 .calendar h2 {
   text-align: center;
-  color: #333;
+  color: var(--color-gray-900);
   margin-bottom: 20px;
 }
 
@@ -74,17 +78,19 @@
   line-height: 40px;
   text-align: center;
   margin: 5px;
-  border-radius: 50%;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.calendar .day:hover {
-  background-color: #007bff;
-  color: white;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-base);
   cursor: pointer;
 }
 
+.calendar .day:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transform: scale(1.1);
+}
+
 .calendar .day.selected {
-  background-color: #0056b3;
-  color: white;
+  background-color: var(--color-primary-hover);
+  color: var(--color-white);
+  box-shadow: var(--shadow-sm);
 }

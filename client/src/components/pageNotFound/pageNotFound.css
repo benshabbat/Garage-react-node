@@ -1,5 +1,20 @@
 .not-found {
     background-image: url("../../images/garage404.jpg");
     background-repeat: no-repeat;
-    background-size:100%;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.not-found::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--glass-backdrop);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }

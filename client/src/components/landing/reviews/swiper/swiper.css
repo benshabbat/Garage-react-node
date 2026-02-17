@@ -25,7 +25,7 @@
 .swiper-slides {
   display: flex;
   gap: 8px;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-base);
 }
 
 .pagination {
@@ -37,32 +37,38 @@
 .dot {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
-  background: #ddd;
+  border-radius: var(--radius-full);
+  background: var(--color-gray-300);
   border: none;
   cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
 .dot.active {
-  background: #2196f3;
+  background: var(--color-primary);
+  transform: scale(1.2);
 }
 
 .nav-button {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  background: white;
-  border: 1px solid #eee;
-  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-full);
   cursor: pointer;
   display: flex !important;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: var(--z-base);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav-button:hover {
-  background-color: #f5f5f5;
+  background-color: var(--color-gray-50);
+  box-shadow: var(--shadow-md);
+  transform: scale(1.05);
 }
 
 /* Desktop view */
