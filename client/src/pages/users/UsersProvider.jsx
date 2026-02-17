@@ -37,7 +37,7 @@ export default function UsersProvider({ children }) {
     []
   );
   
-  const { filteredData: filteredUsers, displayData: displayUsers, handleSearch, setFilteredData: setFilteredUsers, handleSort } = 
+  const { displayData: displayUsers, handleSearch, setFilteredData: setFilteredUsers, handleSort } = 
     useFilteredData(users, userFilterFn);
 
   const dispatch = useDispatch();
@@ -65,12 +65,12 @@ export default function UsersProvider({ children }) {
       case "createCar":
         handleCreateCar();
         break;
-      ca(item) =>
-          item.username?.includes(value) ||
-          item.email?.includes(value) ||
-          item.phone?.includes(value)
-      )
-    );
+      case "deleteUser":
+        handleDeleteUser();
+        break;
+      default:
+        handleManageUser();
+    }
   };
 
   const [formData, setFormData] = useState();
