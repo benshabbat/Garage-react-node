@@ -1,18 +1,8 @@
 import reviewService from "../services/reviewService.js";
-export const createReview = async (req, res, next) => {
-  try {
-    const savedReview = await reviewService.createReview(req);
-    res.status(200).json(savedReview);
-  } catch (err) {
-    next(err);
-  }
-};
+import { createHandler } from "../utils/controllerFactory.js";
 
-export const getReviews = async (req, res, next) => {
-  try {
-    const reviews = await reviewService.getReviews();
-    res.status(200).json(reviews);
-  } catch (error) {
-    next(error);
-  }
-};
+// Create review handler
+export const createReview = createHandler(reviewService.createReview, 201);
+
+// Get all reviews handler
+export const getReviews = createHandler(reviewService.getReviews, 200);

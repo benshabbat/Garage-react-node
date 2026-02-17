@@ -1,27 +1,15 @@
 import contactService from "../services/contactService.js";
-export const createContact = async (req, res, next) => {
-  try {
-    const savedContact = await contactService.createContact(req);
-    res.status(200).json(savedContact);
-  } catch (err) {
-    next(err);
-  }
-};
+import { createHandler } from "../utils/controllerFactory.js";
 
-export const getContacts = async (req, res, next) => {
-  try {
-    const contacts = await contactService.getContacts();
-    res.status(200).json(contacts);
-  } catch (error) {
-    next(error);
-  }
-};
+// Create contact handler
+export const createContact = createHandler(contactService.createContact, 201);
 
-export const deleteContact = async (req, res, next) => {
-  try {
-    await contactService.deleteContact(req);
-    res.status(200).json("The Message has been removed");
-  } catch (error) {
-    next(error);
-  }
-};
+// Get all contacts handler
+export const getContacts = createHandler(contactService.getContacts, 200);
+
+// Delete contact handler with custom message
+export const deleteContact = createHandler(
+  contactService.deleteContact,
+  200,
+  "The Message has been removed"
+);

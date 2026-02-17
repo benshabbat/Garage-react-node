@@ -1,19 +1,8 @@
 import appointmentService from "../services/appointmentService.js";
+import { createHandler } from "../utils/controllerFactory.js";
 
-export const createAppointment = async (req, res, next) => {
-  try {
-    const savedAppointment = await appointmentService.createAppointment(req);
-    res.status(200).json(savedAppointment);
-  } catch (err) {
-    next(err);
-  }
-};
+// Create appointment handler
+export const createAppointment = createHandler(appointmentService.createAppointment, 201);
 
-export const getAppointments = async (req, res, next) => {
-  try {
-    const appointments = await appointmentService.getAppointments();
-    res.status(200).json(appointments);
-  } catch (error) {
-    next(error);
-  }
-};
+// Get all appointments handler
+export const getAppointments = createHandler(appointmentService.getAppointments, 200);
