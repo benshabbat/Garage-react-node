@@ -11,6 +11,7 @@ import {
 } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
 import { templatePhone } from "../../../../server/utils/templates";
+import PropTypes from "prop-types";
 
 export default function UsersProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
@@ -77,6 +78,22 @@ export default function UsersProvider({ children }) {
 
   const [formData, setFormData] = useState();
 
+  // Validation wrapper for formData changes
+  const setFormDataWithValidation = (newData) => {
+    setFormData(newData);
+    
+    // Validate on change if modal is open
+    if (isOpenCreateUser && newData) {
+      const emails = users?.map((user) => user.email) || [];
+      const phones = users?.map((user) => templatePhone(user.phone)) || [];
+      const usernames = users?.map((user) => user.username) || [];
+      
+      setIsExistEmail(newData.email ? emails.includes(newData.email) : false);
+      setIsExistPhone(newData.phone ? phones.includes(templatePhone(newData.phone)) : false);
+      setIsExistUser(newData.username ? usernames.includes(newData.username) : false);
+    }
+  };
+
   const onSubmitCreateCar = async (e) => {
     e.preventDefault();
     if (validCar(formData?.numberPlate)) {
@@ -86,49 +103,57 @@ export default function UsersProvider({ children }) {
   };
 
   const useEditUser = () => {
-    const [formData, setFormData] = useState(selectedUser);
-    setIsExistEmail(
-      users?.some(
-        (user) =>
-          user.email === formData?.email && user._id !== selectedUser?._id
-      )
-    );
-    setIsExistPhone(
-      users?.some(
-        (user) =>
-          user.phone === templatePhone(formData?.phone) &&
-          user._id !== selectedUser?._id
-      )
-    );
-    setIsExistUser(
-      users?.some(
-        (user) =>
-          user.username === formData?.username && user._id !== selectedUser?._id
-      )
-    );
+    const [localFormData, setLocalFormData] = useState(selectedUser);
+    
+    // Validation wrapper for edit form
+    const setLocalFormDataWithValidation = (newData) => {
+      setLocalFormData(newData);
+      
+      if (isOpenModalEditUser && newData) {
+        setIsExistEmail(
+          users?.some(
+            (user) =>
+              user.email === newData.email && user._id !== selectedUser?._id
+          ) || false
+        );
+        setIsExistPhone(
+          users?.some(
+            (user) =>
+              user.phone === templatePhone(newData.phone) &&
+              user._id !== selectedUser?._id
+          ) || false
+        );
+        setIsExistUser(
+          users?.some(
+            (user) =>
+              user.username === newData.username && user._id !== selectedUser?._id
+          ) || false
+        );
+      }
+    };
 
     const onSubmitEditUser = async (e) => {
       e.preventDefault();
       if (
-        isValidUserName(formData) &&
+        isValidUserName(localFormData) &&
         !isExistEmail &&
         !isExistPhone &&
         !isExistUser
       ) {
-        await updateUser(selectedUser?._id, formData);
+        await updateUser(selectedUser?._id, localFormData);
         handleEditUser();
         setFilteredUsers(
           users.map((user) =>
             user._id === selectedUser?._id
-              ? { ...formData, phone: templatePhone(formData.phone) }
+              ? { ...localFormData, phone: templatePhone(localFormData.phone) }
               : user
           )
         );
       }
     };
     return {
-      formData,
-      setFormData,
+      formData: localFormData,
+      setFormData: setLocalFormDataWithValidation,
       onSubmitEditUser,
       isExistEmail,
       isExistPhone,
@@ -145,13 +170,6 @@ export default function UsersProvider({ children }) {
   };
 
   function useRegister() {
-    const emails = users?.map((user) => user.email);
-    const phones = users?.map((user) => templatePhone(user.phone));
-    const usernames = users?.map((user) => user.username);
-
-    setIsExistEmail(emails.includes(formData?.email));
-    setIsExistPhone(phones.includes(templatePhone(formData?.phone)));
-    setIsExistUser(usernames.includes(formData?.username));
     const onSubmit = async (e) => {
       e.preventDefault();
       if (
@@ -165,7 +183,7 @@ export default function UsersProvider({ children }) {
         setFilteredUsers(() => [...users, newUser.data]);
       }
     };
-    return { setFormData, onSubmit, isExistEmail, isExistPhone, isExistUser };
+    return { setFormData: setFormDataWithValidation, onSubmit, isExistEmail, isExistPhone, isExistUser };
   }
 
   const useDeleteUser = async (e) => {
@@ -214,3 +232,7 @@ export default function UsersProvider({ children }) {
     <UsersContext.Provider value={value}>{children}</UsersContext.Provider>
   );
 }
+
+UsersProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

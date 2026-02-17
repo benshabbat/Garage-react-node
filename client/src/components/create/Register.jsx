@@ -13,6 +13,7 @@ const Register = () => {
           inputs={[
             {
               name: "username",
+              type: "text",
               errorExist: "Username is exist",
               isExist: isExistUser,
             },
@@ -24,6 +25,7 @@ const Register = () => {
             },
             {
               name: "phone",
+              type: "tel",
               errorExist: "Phone is exist",
               isExist: isExistPhone
             },
