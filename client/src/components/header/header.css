@@ -165,6 +165,7 @@
     gap: 1rem;
     box-shadow: var(--shadow-xl);
     border-left: 1px solid var(--glass-border);
+    z-index: calc(var(--z-modal) + 1);
   }
 
   .navbar.active {

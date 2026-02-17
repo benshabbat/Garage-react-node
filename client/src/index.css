@@ -37,6 +37,9 @@
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-backdrop: rgba(0, 0, 0, 0.7);
+  --glass-backdrop-dark: rgba(0, 0, 0, 0.95);
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -57,12 +60,15 @@
   --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Z-index */
+  --z-base: 1;
   --z-dropdown: 1000;
   --z-sticky: 1020;
-  --z-fixed: 1030;
-  --z-modal-backdrop: 1040;
-  --z-modal: 1050;
-  --z-tooltip: 1060;
+  --z-header: 1030;
+  --z-navigation: 1031;
+  --z-fixed: 1040;
+  --z-modal-backdrop: 1050;
+  --z-modal: 1060;
+  --z-tooltip: 1070;
 }
 
 * {
