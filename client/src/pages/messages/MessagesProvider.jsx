@@ -1,6 +1,6 @@
 import "../../components/table/table.css";
 import { MessagesContext } from "./MessagesConetxt";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
 import { getUsers } from "../../features/admin/adminSlice";
@@ -10,6 +10,7 @@ import {
   createMessageToAdmin,
 } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
+import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
 //TODO:handle message for requests
 export default function MessagesProvider({ children }) {
@@ -17,34 +18,28 @@ export default function MessagesProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
 
   const [selectedMsg, setSelectedMsg] = useState(null);
-  const [filteredMessages, setFilteredMessages] = useState();
 
   const [handleDeleteMessage, isOpenModalDeleteMessage] = useOpenModal();
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModal();
   
-  const displayMessages = filteredMessages || messages;
+  // Use generic filtering hook
+  const messageFilterFn = useCallback((item, value) =>
+    item?.from?.username.includes(value) ||
+    item?.to?.username.includes(value) ||
+    item?.title.includes(value) ||
+    item?.description.includes(value) ||
+    item?.updatedAt.includes(value),
+    []
+  );
+  
+  const { displayData: displayMessages, handleSearch } = 
+    useFilteredData(messages, messageFilterFn);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (user) dispatch(getMessagesByIdUser(user?._id));
     if (user?.isAdmin) dispatch(getUsers());
   }, [user, isOpenCreateMessage, isOpenModalDeleteMessage, dispatch]);
-
-  const handleSearch = (e) => {
-    const { value } = e.target;
-    setFilteredMessages(
-      value
-        ? messages.filter(
-            (item) =>
-              item?.from?.username.includes(value) ||
-              item?.to?.username.includes(value) ||
-              item?.title.includes(value) ||
-              item?.description.includes(value) ||
-              item?.updatedAt.includes(value)
-          )
-        : null
-    );
-  };
   const handleMsgAction = (e) => {
     e.preventDefault();
     const { name, value } = e.target;

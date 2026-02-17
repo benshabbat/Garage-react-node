@@ -1,23 +1,35 @@
 import { ServiceAdminContext } from "./ServiceAdminContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../../features/admin/adminSlice";
 import { deleteService, updateService } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
+import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
 
   // const [formData, setFormData] = useState();
   const [selectedService, setSelctedService] = useState();
-  const [filteredServices, setFilteredServices] = useState();
 
   const [handleManageService, isOpenManageService] = useOpenModal();
   const [handleEditService, isOpenEditService] = useOpenModal();
   const [handleStatus, isOpenStatus] = useOpenModal();
   const [handlePaid, isOpenPaid] = useOpenModal();
 
-  const displayServices = filteredServices || services;
+  // Use generic filtering hook
+  const serviceFilterFn = useCallback((item, value) =>
+    item.car?.numberPlate.includes(value) ||
+    item.title.includes(value) ||
+    item.description.includes(value) ||
+    item.price.toString().includes(value) ||
+    item.paid.toString().includes(value) ||
+    item.status.includes(value),
+    []
+  );
+  
+  const { displayData: displayServices, handleSearch, setFilteredData: setFilteredServices } = 
+    useFilteredData(services, serviceFilterFn);
 
   const dispatch = useDispatch();
 
@@ -56,22 +68,6 @@ export default function ServiceAdminProvider({ children }) {
       default:
         handleManageService();
     }
-  };
-
-  const handleSearch = (e) => {
-    const { value } = e.target;
-
-    setFilteredServices(
-      services.filter(
-        (item) =>
-          item.car?.numberPlate.includes(value) ||
-          item.title.includes(value) ||
-          item.description.includes(value) ||
-          item.price.toString().includes(value) ||
-          item.paid.toString().includes(value) ||
-          item.status.includes(value)
-      )
-    );
   };
 
   //the solution working well done with useeffect.

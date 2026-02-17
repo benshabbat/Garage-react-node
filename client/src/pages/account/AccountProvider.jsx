@@ -1,22 +1,42 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useCallback } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { AccountContext } from "./AccountContext";
 import { createReqService } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
+import useFilteredData from "../../hooks/useFilteredData";
 import { getServicesByIdCar } from "../../features/user/userSlice";
 import PropTypes from "prop-types";
 export default function AccountProvider({ children }) {
   const { user, services } = useSelector((state) => state.user);
 
   const [selectedCar, setSelectedCar] = useState(null);
-  const [filteredCars, setFilteredCars] = useState(null);
-  const [filteredServices, setFilteredServices] = useState(null);
 
   const [handleReqService, isOpenReqService] = useOpenModal();
   const [handleServices, isOpenServices] = useOpenModal();
 
-  const displayServicesUser = filteredServices || services;
-  const displayCars = filteredCars || user?.cars;
+  // Use generic filtering hook for cars
+  const carFilterFn = useCallback((item, value) =>
+    item.numberPlate.includes(value) ||
+    item.km.toString().includes(value) ||
+    item.brand.includes(value),
+    []
+  );
+  
+  const { displayData: displayCars, handleSearch } = 
+    useFilteredData(user?.cars, carFilterFn);
+
+  // Use generic filtering hook for services
+  const serviceFilterFn = useCallback((service, value) =>
+    service?.title.includes(value) ||
+    service?.description.includes(value) ||
+    service?.price.toString().includes(value) ||
+    service?.paid.toString().includes(value) ||
+    service?.status.includes(value),
+    []
+  );
+  
+  const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } = 
+    useFilteredData(services, serviceFilterFn);
 
 
   const dispatch = useDispatch();
@@ -35,19 +55,6 @@ export default function AccountProvider({ children }) {
     }
   };
 
-
-  const handleSearch = (e) => {
-    const { value } = e.target;
-    setFilteredCars(
-      user?.cars?.filter(
-        (item) =>
-          item.numberPlate.includes(value) ||
-          item.km.toString().includes(value) ||
-          item.brand.includes(value)
-      )
-    );
-  };
-
   
   function useReqService() {
     const [formData, setFormData] = useState();
@@ -63,20 +70,6 @@ export default function AccountProvider({ children }) {
     };
     return { setFormData, onSubmit };
   }
-
-  const handleSerchServicesUser = (e) => {
-    const { value } = e.target;
-    setFilteredServices(
-      services.filter(
-        (service) =>
-          service?.title.includes(value) ||
-          service?.description.includes(value) ||
-          service?.price.toString().includes(value) ||
-          service?.paid.toString().includes(value) ||
-          service?.status.includes(value)
-      )
-    );
-  };
 
   const value = {
     isOpenServices,
