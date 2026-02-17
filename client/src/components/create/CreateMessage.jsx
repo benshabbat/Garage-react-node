@@ -3,7 +3,7 @@ import { useContextMessages } from "../../pages/messages/MessagesConetxt";
 
 const CreateMessage = () => {
   const { useCreateMsg, modals } = useContextMessages();
-  const { onSubmit, setFormData, options } = useCreateMsg();
+  const { onSubmit, setFormData, options, formData } = useCreateMsg();
   return (
     <OpenModal
       comp={
