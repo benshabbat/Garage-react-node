@@ -1,66 +1,30 @@
 import messageService from "../services/messageService.js";
-export const createMessage = async (req, res, next) => {
-  try {
-    const savedMessage = await messageService.createMessage(req);
-    res.status(200).json(savedMessage);
-  } catch (err) {
-    next(err);
-  }
-};
-export const createMessageToAdmin = async (req, res, next) => {
-  try {
-    const savedMessage = await messageService.createMessageToAdmin(req);
-    res.status(200).json(savedMessage);
-  } catch (err) {
-    next(err);
-  }
-};
+import { createHandler } from "../utils/controllerFactory.js";
 
-export const updateMessage = async (req, res, next) => {
-  try {
-    const updatedMessage = await messageService.updateMessage(req);
-    res.status(200).json(updatedMessage);
-  } catch (error) {
-    next(error);
-  }
-};
-export const deleteMessage = async (req, res, next) => {
-  try {
-    await messageService.deleteMessage(req);
-    res.status(200).json("The Message has been removed");
-  } catch (error) {
-    next(error);
-  }
-};
-export const getMessage = async (req, res, next) => {
-  try {
-    const message = await messageService.getMessage(req);
-    res.status(200).json(message);
-  } catch (error) {
-    next(error);
-  }
-};
-export const getMessageByUser = async (req, res, next) => {
-  try {
-    const messages = await messageService.getMessageByUser(req);
-    res.status(200).json(messages);
-  } catch (error) {
-    next(error);
-  }
-};
-export const getMessages = async (req, res, next) => {
-  try {
-    const messages = await messageService.getMessages();
-    res.status(200).json(messages);
-  } catch (error) {
-    next(error);
-  }
-};
-export const getMessagesByType = async (req, res, next) => {
-  try {
-    const messages = await messageService.getMessagesByType(req);
-    res.status(200).json(messages);
-  } catch (error) {
-    next(error);
-  }
-};
+// Create message handler
+export const createMessage = createHandler(messageService.createMessage, 201);
+
+// Create message to admin handler
+export const createMessageToAdmin = createHandler(messageService.createMessageToAdmin, 201);
+
+// Update message handler
+export const updateMessage = createHandler(messageService.updateMessage, 200);
+
+// Delete message handler with custom message
+export const deleteMessage = createHandler(
+  messageService.deleteMessage,
+  200,
+  "The Message has been removed"
+);
+
+// Get single message handler
+export const getMessage = createHandler(messageService.getMessage, 200);
+
+// Get message by user handler
+export const getMessageByUser = createHandler(messageService.getMessageByUser, 200);
+
+// Get all messages handler
+export const getMessages = createHandler(messageService.getMessages, 200);
+
+// Get messages by type handler
+export const getMessagesByType = createHandler(messageService.getMessagesByType, 200);

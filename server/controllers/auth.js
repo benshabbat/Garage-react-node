@@ -1,14 +1,10 @@
 import authService from "../services/authService.js";
+import { createHandler } from "../utils/controllerFactory.js";
 
-export const register = async (req, res, next) => {
-  try {
-    const data = await authService.register(req);
-    res.status(201).json(data);
-  } catch (error) {
-    next(error);
-  }
-};
+// Register handler using shared factory
+export const register = createHandler(authService.register, 201);
 
+// Login has custom cookie handling, keep it as-is
 export const login = async (req, res, next) => {
   try {
     const { token, cookieOptions, user } = await authService.login(req);
@@ -19,6 +15,7 @@ export const login = async (req, res, next) => {
   }
 };
 
+// Logout has custom cookie clearing, keep it as-is
 export const logout = async (req, res, next) => {
   try {
     const { cookieOptions, message } = await authService.logout();

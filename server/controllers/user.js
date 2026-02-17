@@ -1,55 +1,28 @@
-// import User from "../models/User.js";
 import userService from "../services/userService.js";
+import { createHandler, createHandlerWithCheck } from "../utils/controllerFactory.js";
 
-//test create user
-export const createUser = async (req, res, next) => {
-  try {
-    const savedUser = await userService.createUser(req);
-    res.status(200).json(savedUser);
-  } catch (error) {
-    next(error);
-  }
-};
+// Create user handler
+export const createUser = createHandler(userService.createUser, 201);
 
-export const updateUser = async (req, res, next) => {
-  try {
-    const updatedUser = await userService.updateUser(req);
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    next(error);
-  }
-};
-export const deleteUser = async (req, res, next) => {
-  try {
-    await userService.deleteUser(req);
-    res.status(200).json("The User has been removed");
-  } catch (error) {
-    next(error);
-  }
-};
+// Update user handler
+export const updateUser = createHandler(userService.updateUser, 200);
 
-export const getUser = async (req, res, next) => {
-  try {
-    const user = await userService.getUser(req);
-    if (!user) return res.status(404).json({message: "User not found"});
-    res.status(200).json(user);
-  } catch (error) {
-    next(error);
-  }
-};
-export const getUsers = async (req, res, next) => {
-  try {
-    const users = await userService.getUsers();
-    res.status(200).json(users);
-  } catch (error) {
-    next(error);
-  }
-};
-export const getUsersByType = async (req, res, next) => {
-  try {
-    const users = await userService.getUsersByType(req);
-    res.status(200).json(users);
-  } catch (error) {
-    next(error);
-  }
-};
+// Delete user handler with custom message
+export const deleteUser = createHandler(
+  userService.deleteUser, 
+  200, 
+  "The User has been removed"
+);
+
+// Get user handler with 404 check
+export const getUser = createHandlerWithCheck(
+  userService.getUser,
+  (user) => !user ? { status: 404, message: "User not found" } : null,
+  200
+);
+
+// Get all users handler
+export const getUsers = createHandler(userService.getUsers, 200);
+
+// Get users by type handler
+export const getUsersByType = createHandler(userService.getUsersByType, 200);
