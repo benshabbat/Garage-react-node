@@ -7,13 +7,13 @@ import { memo } from "react";
 
 const Form = memo(({
   title,
-  inputs,
+  inputs = [],
   onSubmit,
-  handleClick,
+  handleClick = null,
   setData,
   options,
   nameSelect,
-  isFocus,
+  isFocus = true,
   validateOnBlur = false, // New prop to control blur validation
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission
@@ -98,12 +98,6 @@ Form.propTypes = {
   validateOnBlur: PropTypes.bool, // Add prop type validation for blur validation
 };
 
-Form.defaultProps = {
-  handleClick: null,
-  isFocus: true,
-  inputs: [],
-  // validateOnBlur: false, // Default to no blur validation
-};
 Form.displayName = "Form";
 
 export default Form;

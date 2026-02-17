@@ -11,12 +11,12 @@ import appointmentsRoute from "./routes/appointments.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectDB from "./config/db.js";
+import errorHandler from "./middleware/errorHandler.js"
 
 // Load environment variables first
 dotenv.config();
 
 //TODO handle error
-// import errorHandler from "./middleware/errorHandler.js"
 // import { logger } from "./middleware/logger.js";
 // const { logger } = require('./middleware/logger')
 const app = express();
@@ -44,7 +44,7 @@ app.use("/api/reviews", reviewsRoute);
 app.use("/api/contacts", contactsRoute);
 app.use("/api/appointments", appointmentsRoute);
 
-// app.use(errorHandler())
+app.use(errorHandler)
 app.listen(port, () => {
   connectDB();
   console.log("connected to backend!");
