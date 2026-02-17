@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import CheckCircle from "../icons/CheckCircle";
 
 function Submitted({
@@ -25,5 +26,12 @@ function Submitted({
     </div>
   );
 }
+
+Submitted.propTypes = {
+  name: PropTypes.string,
+  setIsSubmitted: PropTypes.func.isRequired,
+  text: PropTypes.string,
+  review: PropTypes.bool,
+};
 
 export default Submitted;

@@ -10,6 +10,7 @@ export function templatePhone(phone) {
   return phone;
 }
 
+
 export function templateCar(car) {
   if (car.length === 8) {
     return car.slice(0, 3) + "-" + car.slice(3, 5) + "-" + car.slice(5);

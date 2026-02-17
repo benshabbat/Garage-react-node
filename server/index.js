@@ -12,6 +12,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectDB from "./config/db.js";
 
+// Load environment variables first
+dotenv.config();
 
 //TODO handle error
 // import errorHandler from "./middleware/errorHandler.js"
@@ -19,7 +21,6 @@ import connectDB from "./config/db.js";
 // const { logger } = require('./middleware/logger')
 const app = express();
 const port = process.env.PORT || 8800;
-dotenv.config();
 
 //middlewares
 // logger()

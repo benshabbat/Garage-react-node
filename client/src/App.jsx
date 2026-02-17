@@ -17,7 +17,12 @@ import Unauthorized from "./pages/Unauthorized";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true
+        }}
+      >
         <Header />
         <Routes>
           <Route path="/" element={<PageLanding />} />
@@ -70,7 +75,7 @@ function App() {
             }
           />
           <Route path="/unauthorized" element={<Unauthorized />} />
-          {/* נתיב כללי */}
+          
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
