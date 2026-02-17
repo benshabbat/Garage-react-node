@@ -15,17 +15,24 @@
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
+  justify-content: center;
+  width: 100%;
 }
 
 .swiper-content {
-  flex: 1;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
 }
 
 .swiper-slides {
   display: flex;
   gap: 8px;
   transition: transform var(--transition-base);
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 .pagination {

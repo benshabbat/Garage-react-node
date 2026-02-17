@@ -1,13 +1,18 @@
 #reviews {
   background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    var(--glass-backdrop) 100%
+    135deg,
+    rgba(239, 68, 68, 0.05) 0%,
+    rgba(0, 0, 0, 0.9) 50%,
+    rgba(239, 68, 68, 0.05) 100%
   );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 4rem 20px;
   position: relative;
+  border-top: 1px solid rgba(239, 68, 68, 0.2);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05),
+              inset 0 -1px 0 rgba(255, 255, 255, 0.05);
 }
 
 #reviews::before {
@@ -19,7 +24,7 @@
   height: 300px;
   background: radial-gradient(
     ellipse at top,
-    rgba(239, 68, 68, 0.1),
+    rgba(239, 68, 68, 0.15),
     transparent
   );
   pointer-events: none;
@@ -57,7 +62,7 @@
   border: 2px solid transparent;
   max-width: 600px;
   margin: 0 auto;
-  width: calc(100% - 2rem);
+  width: 100%;
   min-height: 300px;
   display: flex;
   flex-direction: column;
@@ -156,6 +161,7 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .btn-add-review {
   padding: 1rem 2rem;
   border-radius: var(--radius-lg);
@@ -173,14 +179,6 @@
   background-color: var(--color-success-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  text-decoration: none;
-  background-color: transparent;
-  color: #e5e7eb;
-  border: 2px solid #e5e7eb;
-}
-
-.btn-add-review:hover {
-  background-color: rgba(229, 231, 235, 0.1);
 }
 
 @media (max-width: 768px) {

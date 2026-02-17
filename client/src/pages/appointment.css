@@ -35,12 +35,15 @@
 }
 
 .appointment-form button {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  padding: 1rem 2rem;
+  border-radius: var(--radius-lg);
+  font-size: 1.125rem;
+  font-weight: 500;
   border: none;
   cursor: pointer;
-  font-weight: bold;
   transition: all var(--transition-base);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   box-shadow: var(--shadow-sm);
 }
 

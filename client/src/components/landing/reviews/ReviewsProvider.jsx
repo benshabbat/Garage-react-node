@@ -13,7 +13,9 @@ export default function ReviewsProvider({ children }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const totalCards = Array.isArray(allReviews) ? allReviews.length : 0;
 
-  const numCardsPreview = useCardsDisplay();
+  const cardsPreview = useCardsDisplay();
+  // Limit the number of cards to display to the total number of cards available
+  const numCardsPreview = Math.min(cardsPreview, totalCards || cardsPreview);
   const { currentIndex, nextCard, prevCard, indexPagination } =
     useCardsNavigation(numCardsPreview, totalCards);
   const numberOfPages = Math.ceil(totalCards / numCardsPreview);
