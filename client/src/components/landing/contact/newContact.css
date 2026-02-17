@@ -7,6 +7,28 @@
   padding: clamp(10px, 3vw, 30px);
   width: 100%;
   box-sizing: border-box;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    var(--glass-backdrop) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  position: relative;
+}
+
+.container-contact::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: radial-gradient(
+    ellipse at bottom,
+    rgba(34, 197, 94, 0.1),
+    transparent
+  );
+  pointer-events: none;
 }
 
 /* Form Styles */
