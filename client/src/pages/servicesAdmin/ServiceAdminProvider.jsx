@@ -78,6 +78,12 @@ export default function ServiceAdminProvider({ children }) {
 
   const useEditService = (handleClick) => {
     const [formData, setFormData] = useState(selectedService);
+    
+    // Update formData when selectedService changes
+    useEffect(() => {
+      setFormData(selectedService);
+    }, [selectedService]);
+    
     const onSubmit = async (e) => {
       e.preventDefault();
       const updated = await updateService(selectedService?._id, formData);

@@ -9,6 +9,7 @@ const CreateMessage = () => {
       comp={
         <Form
           setData={setFormData}
+          formData={formData}
           title="Create Message"
           inputs={[
             { name: "title", type: "text" },

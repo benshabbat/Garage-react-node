@@ -1,9 +1,11 @@
-export default function FormSelect({ name, options, handleChange }) {
+import PropTypes from "prop-types";
+
+export default function FormSelect({ name, options, handleChange, value }) {
   return (
     <label className="form-label">
       <span>{name}</span>
-      <select name={name} onChange={handleChange}>
-        <option>{name}</option>
+      <select name={name} onChange={handleChange} value={value || ''}>
+        <option value="">{name}</option>
         {options?.map((option, index) => (
           <option
             key={index}
@@ -16,3 +18,10 @@ export default function FormSelect({ name, options, handleChange }) {
     </label>
   );
 }
+
+FormSelect.propTypes = {
+  name: PropTypes.string.isRequired,
+  options: PropTypes.array,
+  handleChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+};

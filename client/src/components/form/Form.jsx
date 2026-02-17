@@ -15,6 +15,7 @@ const Form = memo(({
   nameSelect,
   isFocus = true,
   validateOnBlur = false, // New prop to control blur validation
+  formData, // Add formData prop to get current values
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission
 
@@ -52,6 +53,7 @@ const Form = memo(({
           name={nameSelect}
           options={options}
           handleChange={handleChange}
+          value={formData?.[nameSelect]}
         />
       )}
 
@@ -96,6 +98,7 @@ Form.propTypes = {
   nameSelect: PropTypes.string,
   isFocus: PropTypes.bool,
   validateOnBlur: PropTypes.bool, // Add prop type validation for blur validation
+  formData: PropTypes.object, // Current form data for select values
 };
 
 Form.displayName = "Form";

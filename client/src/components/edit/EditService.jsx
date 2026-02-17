@@ -11,6 +11,7 @@ const EditService = () => {
       comp={
         <Form
           setData={setFormData}
+          formData={formData}
           title="Edit Car"
           inputs={[
             // { name: "numberPlate", value: service?.car?.numberPlate },

@@ -10,6 +10,7 @@ const CreateService = () => {
       comp={
         <Form
           setData={setFormData}
+          formData={formData}
           title="Create Service"
           inputs={[
             { name: "title", type: "text" },
