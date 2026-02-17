@@ -1,9 +1,10 @@
 import { CarsContext } from "./CarsContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createService, updateCar, deleteCar } from "../../utils";
 import { getCarsByType } from "../../features/admin/adminSlice";
 import useOpenModal from "../../hooks/useOpenModal";
+import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
 
 export default function CarsProvider({ children }) {
@@ -11,16 +12,24 @@ export default function CarsProvider({ children }) {
   const { cars } = useSelector((state) => state.admin);
 
   const [selectedCar, setSelectedCar] = useState();
-  const [filteredCars, setFilteredCars] = useState();
   const [formData, setFormData] = useState();
-
 
   const [handleManageCar, isOpenManageCar] = useOpenModal();
   const [handleEditCar, isOpenModalEditCar] = useOpenModal();
   const [handleDeleteCar, isOpenModalDeleteCar] = useOpenModal();
   const [handleCreateService, isOpenModalCreateService] = useOpenModal();
 
-  const displayCars = filteredCars || cars;
+  // Use generic filtering hook
+  const carFilterFn = useCallback((item, value) =>
+    item.owner?.username.includes(value) ||
+    item.numberPlate.includes(value) ||
+    item.km.toString().includes(value) ||
+    item.brand.includes(value),
+    []
+  );
+  
+  const { displayData: displayCars, handleSearch, setFilteredData: setFilteredCars } = 
+    useFilteredData(cars, carFilterFn);
 
   const dispatch = useDispatch();
 
@@ -53,21 +62,6 @@ export default function CarsProvider({ children }) {
       default:
         handleManageCar();
     }
-  };
-
-  const handleSearch = (e) => {
-    const { value } = e.target;
-    setFilteredCars(
-      value
-        ? cars.filter(
-            (item) =>
-              item.owner?.username.includes(value) ||
-              item.numberPlate.includes(value) ||
-              item.km.toString().includes(value) ||
-              item.brand.includes(value)
-          )
-        : null
-    );
   };
 
   const useCreateService = () => {

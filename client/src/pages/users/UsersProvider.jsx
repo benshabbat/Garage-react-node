@@ -1,6 +1,6 @@
 import { getUsers } from "../../features/admin/adminSlice";
 import { UsersContext } from "./UsersContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, createCar, updateUser, createUser } from "../../utils";
 import {
@@ -10,6 +10,7 @@ import {
   validEmail,
 } from "../../validation/valid";
 import useOpenModal from "../../hooks/useOpenModal";
+import useFilteredData from "../../hooks/useFilteredData";
 import { templatePhone } from "../../../../server/utils/templates";
 import PropTypes from "prop-types";
 
@@ -17,7 +18,6 @@ export default function UsersProvider({ children }) {
   const { users } = useSelector((state) => state.admin);
 
   const [selectedUser, setSelctedUser] = useState();
-  const [filteredUsers, setFilteredUsers] = useState();
   
   const [isExistEmail, setIsExistEmail] = useState(false);
   const [isExistPhone, setIsExistPhone] = useState(false);
@@ -29,8 +29,17 @@ export default function UsersProvider({ children }) {
   const [handleEditUser, isOpenModalEditUser] = useOpenModal();
   const [handleDeleteUser, isOpenModalDeleteUser] = useOpenModal();
 
+  // Use generic filtering hook
+  const userFilterFn = useCallback((item, value) => 
+    item.username?.includes(value) ||
+    item.email?.includes(value) ||
+    item.phone?.includes(value),
+    []
+  );
+  
+  const { filteredData: filteredUsers, displayData: displayUsers, handleSearch, setFilteredData: setFilteredUsers, handleSort } = 
+    useFilteredData(users, userFilterFn);
 
-  const displayUsers=filteredUsers || users;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -56,19 +65,7 @@ export default function UsersProvider({ children }) {
       case "createCar":
         handleCreateCar();
         break;
-      case "deleteUser":
-        handleDeleteUser();
-        break;
-      default:
-        handleManageUser();
-    }
-  };
-
-  const handleSearch = (e) => {
-    const { value } = e.target;
-    setFilteredUsers(
-      users?.filter(
-        (item) =>
+      ca(item) =>
           item.username?.includes(value) ||
           item.email?.includes(value) ||
           item.phone?.includes(value)
@@ -193,21 +190,6 @@ export default function UsersProvider({ children }) {
     handleManageUser();
     setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
   };
-
-  const handleSort = (key, direction) => {
-    const sortedData = [...displayUsers].sort((a, b) => {
-      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
-      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
-      return 0;
-    });
-    setFilteredUsers(sortedData);
-  };
-
-
-
-
-
-
 
   const value = {
     useDeleteUser,
