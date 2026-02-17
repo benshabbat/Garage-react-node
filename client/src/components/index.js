@@ -9,6 +9,7 @@ export { default as Reviews } from "./landing/reviews/Reviews";
 export { default as ServicesLanding } from "./landing/servicesLanding/ServicesLanding";
 export { default as OpenModal} from "./openModal/OpenModal";
 export { default as Form } from "./form/Form";
+export { default as ModalForm } from "./common/ModalForm";
 export { default as CreateCar } from "./create/CreateCar";
 export { default as Register } from "./create/Register";
 export { default as Login } from "./login/Login";

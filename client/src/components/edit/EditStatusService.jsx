@@ -1,27 +1,23 @@
-import { Form, OpenModal } from "../index";
+import { ModalForm } from "../index";
 import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
+
 const EditStatusService = () => {
   const { useEditService, modals, options } = useServicesAdminContext();
   const { onSubmit, setFormData, formData } = useEditService(
-    modals.editStatusService.handle,
+    modals.editStatusService.handle
   );
 
   return (
-    <OpenModal
-      comp={
-        <Form
-          setData={setFormData}
-          formData={formData}
-          title="Edit Status"
-          sec_title="Edit Status"
-          options={options}
-          inputs={[]}
-          nameSelect="status"
-          handleClick={modals.editStatusService.handle}
-          onSubmit={onSubmit}
-        />
-      }
+    <ModalForm
       isOpen={modals.editStatusService.isOpen}
+      onClose={modals.editStatusService.handle}
+      onSubmit={onSubmit}
+      setFormData={setFormData}
+      formData={formData}
+      title="Edit Status"
+      inputs={[]}
+      options={options}
+      nameSelect="status"
     />
   );
 };

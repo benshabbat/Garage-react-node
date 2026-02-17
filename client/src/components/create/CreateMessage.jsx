@@ -1,27 +1,24 @@
-import { OpenModal, Form } from "..";
+import { ModalForm } from "..";
 import { useContextMessages } from "../../pages/messages/MessagesConetxt";
 
 const CreateMessage = () => {
   const { useCreateMsg, modals } = useContextMessages();
   const { onSubmit, setFormData, options, formData } = useCreateMsg();
+  
   return (
-    <OpenModal
-      comp={
-        <Form
-          setData={setFormData}
-          formData={formData}
-          title="Create Message"
-          inputs={[
-            { name: "title", type: "text" },
-            { name: "description", type: "textarea" },
-          ]}
-          options={options}
-          nameSelect="to"
-          handleClick={modals.createMsg.handle}
-          onSubmit={onSubmit}
-        />
-      }
+    <ModalForm
       isOpen={modals.createMsg.isOpen}
+      onClose={modals.createMsg.handle}
+      onSubmit={onSubmit}
+      setFormData={setFormData}
+      formData={formData}
+      title="Create Message"
+      inputs={[
+        { name: "title", type: "text" },
+        { name: "description", type: "textarea" },
+      ]}
+      options={options}
+      nameSelect="to"
     />
   );
 };
