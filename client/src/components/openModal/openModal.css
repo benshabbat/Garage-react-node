@@ -11,7 +11,6 @@
   align-items: center;
   justify-content: center;
   z-index: var(--z-modal);
-  animation: fadeIn var(--transition-base);
 }
 
 .open-modal-container {
@@ -20,7 +19,6 @@
   width: max-content;
   box-shadow: var(--shadow-xl);
   z-index: calc(var(--z-modal) + 1);
-  animation: slideIn var(--transition-base);
   max-width: 90vw;
   max-height: 90vh;
   overflow: auto;

@@ -9,7 +9,6 @@
   max-height: 80vh;
   display: flex;
   flex-direction: column;
-  animation: fadeIn var(--transition-base);
 }
 
 .table-container .create-button {

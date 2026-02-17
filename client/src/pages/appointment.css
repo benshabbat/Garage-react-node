@@ -5,7 +5,6 @@
   background-color: var(--color-gray-50);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  animation: fadeIn var(--transition-base);
 }
 
 .appointment-form {
