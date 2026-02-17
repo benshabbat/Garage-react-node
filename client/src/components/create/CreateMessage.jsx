@@ -11,7 +11,7 @@ const CreateMessage = () => {
           setData={setFormData}
           title="Create Message"
           inputs={[
-            { name: "title" },
+            { name: "title", type: "text" },
             { name: "description", type: "textarea" },
           ]}
           options={options}

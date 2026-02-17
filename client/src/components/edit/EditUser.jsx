@@ -15,6 +15,7 @@ const EditUser = () => {
           inputs={[
             {
               name: "username",
+              type: "text",
               value: formData?.username,
               isExist: isExistUser,
               errorExist: "Username is exist",
@@ -28,6 +29,7 @@ const EditUser = () => {
             },
             {
               name: "phone",
+              type: "tel",
               value: formData?.phone,
               errorExist: "Phone is exist",
               isExist: isExistPhone

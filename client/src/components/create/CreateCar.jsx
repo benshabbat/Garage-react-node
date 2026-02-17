@@ -13,9 +13,10 @@ const CreateCar = () => {
           inputs={[
             {
               name: "numberPlate",
+              type: "text",
             },
             { name: "km", type: "number", min: 0 },
-            { name: "brand" },
+            { name: "brand", type: "text" },
           ]}
           handleClick={modals.createCar.handle}
           onSubmit={onSubmitCreateCar}

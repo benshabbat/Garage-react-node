@@ -14,8 +14,8 @@ const EditService = () => {
           title="Edit Car"
           inputs={[
             // { name: "numberPlate", value: service?.car?.numberPlate },
-            { name: "title", value: formData?.title },
-            { name: "description", value: formData?.description },
+            { name: "title", type: "text", value: formData?.title },
+            { name: "description", type: "text", value: formData?.description },
             { name: "price", type: "number", value: formData?.price },
             { name: "paid", type: "checkbox", checked: formData?.paid },
           ]}

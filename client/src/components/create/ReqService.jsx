@@ -13,8 +13,8 @@ const ReqService = () => {
           setData={setFormData}
           title="Request Service"
           inputs={[
-            { name: "title", value: selectedCar?.numberPlate.toString() },
-            { name: "description" },
+            { name: "title", type: "text", value: selectedCar?.numberPlate.toString() },
+            { name: "description", type: "text" },
           ]}
           handleClick={handleReqService}
           onSubmit={onSubmit}

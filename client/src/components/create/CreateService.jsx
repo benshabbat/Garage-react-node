@@ -12,8 +12,8 @@ const CreateService = () => {
           setData={setFormData}
           title="Create Service"
           inputs={[
-            { name: "title" },
-            { name: "description" },
+            { name: "title", type: "text" },
+            { name: "description", type: "text" },
             { name: "price", type: "number", min: 0 },
             { name: "paid", type: "checkbox", checked: formData?.paid },
           ]}
