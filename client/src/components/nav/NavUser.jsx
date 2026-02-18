@@ -12,6 +12,10 @@ const NavUser = () => {
         MyCars
       </Link>
 
+      <Link to={`/appointments`} onClick={handleOutsideClick}>
+        Appointments
+      </Link>
+
       <Link to={`/messages`} onClick={handleOutsideClick}>
         Messages
       </Link>

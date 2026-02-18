@@ -7,6 +7,7 @@ export const API_URL_MESSAGES = "/messages";
 export const API_URL_REGISTER = "/auth/register";
 export const API_URL_REVIEWS = "/reviews";
 export const API_URL_CONTACTS = "/contacts";
+export const API_URL_APPOINTMENTS = "/appointments";
 export const ADMIN = "63e14deca4340e45d23f20b2";
 
 /**
@@ -46,6 +47,7 @@ const carOps = createCrudOperations(API_URL_CAR);
 const messageOps = createCrudOperations(API_URL_MESSAGES);
 const reviewOps = createCrudOperations(API_URL_REVIEWS);
 const contactOps = createCrudOperations(API_URL_CONTACTS);
+const appointmentOps = createCrudOperations(API_URL_APPOINTMENTS);
 
 // Legacy function names (for backwards compatibility)
 const getAll = async (url) => {
@@ -114,6 +116,30 @@ const getMessagesContact = async () => {
   return data || [];
 };
 
+// Appointment operations
+const createAppointment = appointmentOps.create;
+const getAppointments = appointmentOps.getAll;
+const getAppointment = appointmentOps.getById;
+const updateAppointment = (id, obj) => appointmentOps.update(id, obj);
+const deleteAppointment = appointmentOps.delete;
+
+const updateAppointmentStatus = async (id, status) => {
+  const response = await axios.patch(`${API_URL_APPOINTMENTS}/${id}/status`, { status });
+  return response.data;
+};
+
+const getAppointmentsByStatus = async (status) => {
+  const response = await axios.get(`${API_URL_APPOINTMENTS}/status?status=${status}`);
+  return response.data;
+};
+
+const getAppointmentsByDateRange = async (startDate, endDate) => {
+  const response = await axios.get(
+    `${API_URL_APPOINTMENTS}/date-range?startDate=${startDate}&endDate=${endDate}`
+  );
+  return response.data;
+};
+
 export {
   createReview,
   getReviews,
@@ -144,6 +170,15 @@ export {
   getServicesByType,
   getMessagesContact,
   getMessages,
+  // Appointments
+  createAppointment,
+  getAppointments,
+  getAppointment,
+  updateAppointment,
+  updateAppointmentStatus,
+  deleteAppointment,
+  getAppointmentsByStatus,
+  getAppointmentsByDateRange,
 };
 
 export function getMomentFromUpdatedAt(updatedAt) {

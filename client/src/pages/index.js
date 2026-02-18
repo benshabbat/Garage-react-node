@@ -10,6 +10,7 @@ export { default as Messages } from "./messages/Messages";
 // export { default as Services } from "./services/Services";
 export { default as Users } from "./users/Users";
 export { default as Cars } from "./cars/Cars";
+export { default as Appointments } from "./appointments/Appointments";
 
 // //Want to check what is the best practice for lazy loading
 // export const Users = lazy(()=>import("./Users"))

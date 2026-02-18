@@ -11,14 +11,17 @@ export { default as OpenModal} from "./openModal/OpenModal";
 export { default as Form } from "./form/Form";
 export { default as ModalForm } from "./common/ModalForm";
 export { default as CreateCar } from "./create/CreateCar";
+export { default as CreateAppointment } from "./create/CreateAppointment";
 export { default as Register } from "./create/Register";
 export { default as Login } from "./login/Login";
 export { default as MyAccount } from "./myAccount/MyAccount";
 export { default as EditUser } from "./edit/EditUser";
 export { default as EditCar } from "./edit/EditCar";
+export { default as EditAppointment } from "./edit/EditAppointment";
 export { default as ManageUser } from "./manage/ManageUser";
 export { default as ManageCar } from "./manage/ManageCar";
 export { default as NavUser } from "./nav/NavUser";
 export { default as NavLanding } from "./nav/NavLanding";
 export { default as NavAdmin } from "./nav/NavAdmin";
+export { default as Delete } from "./delete/Delete";
 

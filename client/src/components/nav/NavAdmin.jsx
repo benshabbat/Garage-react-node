@@ -17,6 +17,9 @@ const NavAdmin = () => {
       <Link to={`/services`} onClick={handleOutsideClick}>
         Services
       </Link>
+      <Link to={`/appointments`} onClick={handleOutsideClick}>
+        Appointments
+      </Link>
       <Link to={`/messages`} onClick={handleOutsideClick}>
         Messages
       </Link>

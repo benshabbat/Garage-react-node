@@ -16,6 +16,7 @@ const Form = memo(({
   isFocus = true,
   validateOnBlur = false, // New prop to control blur validation
   formData, // Add formData prop to get current values
+  comp, // Custom component to render before inputs
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission
 
@@ -48,6 +49,8 @@ const Form = memo(({
 
       <h1 className="header">{title}</h1>
 
+      {comp && comp}
+
       {options && nameSelect && (
         <FormSelect
           name={nameSelect}
@@ -57,17 +60,24 @@ const Form = memo(({
         />
       )}
 
-      {inputs.map((input, index) => (
-        <FormInput
-          key={input.name || index}
-          input={input}
-          index={index}
-          handleChange={handleChange}
-          isFocus={isFocus}
-          isSubmitted={isSubmitted} // Pass submission state
-          validateOnBlur={validateOnBlur} // Pass blur validation state
-        />
-      ))}
+      {inputs.map((input, index) => {
+        // Merge input with value from formData if available
+        const inputWithValue = {
+          ...input,
+          value: formData?.[input.name] ?? input.value ?? '',
+        };
+        return (
+          <FormInput
+            key={input.name || index}
+            input={inputWithValue}
+            index={index}
+            handleChange={handleChange}
+            isFocus={isFocus}
+            isSubmitted={isSubmitted} // Pass submission state
+            validateOnBlur={validateOnBlur} // Pass blur validation state
+          />
+        );
+      })}
 
       <button type="submit" className="form-btn">
         {title}
@@ -99,6 +109,7 @@ Form.propTypes = {
   isFocus: PropTypes.bool,
   validateOnBlur: PropTypes.bool, // Add prop type validation for blur validation
   formData: PropTypes.object, // Current form data for select values
+  comp: PropTypes.node, // Custom component
 };
 
 Form.displayName = "Form";

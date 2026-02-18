@@ -7,6 +7,7 @@ import {
   Users,
   Cars,
   ServicesAdmin,
+  Appointments,
 } from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
@@ -63,6 +64,14 @@ function App() {
             element={
               <PrivateRoute>
                 <ServicesAdmin />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/appointments"
+            element={
+              <PrivateRoute>
+                <Appointments />
               </PrivateRoute>
             }
           />

@@ -17,7 +17,33 @@ const ModalForm = ({
   setFormData,
   isFocus = true,
   validateOnBlur = false,
+  comp, // Custom component instead of Form
 }) => {
+  // If comp exists, wrap it with Form structure
+  if (comp) {
+    return (
+      <OpenModal
+        isOpen={isOpen}
+        comp={
+          <Form
+            setData={setFormData}
+            formData={formData}
+            title={title}
+            inputs={inputs}
+            options={options}
+            nameSelect={nameSelect}
+            handleClick={onClose}
+            onSubmit={onSubmit}
+            isFocus={isFocus}
+            validateOnBlur={validateOnBlur}
+            comp={comp}
+          />
+        }
+      />
+    );
+  }
+
+  // Default behavior - use Form with inputs only
   return (
     <OpenModal
       isOpen={isOpen}
@@ -48,9 +74,10 @@ ModalForm.propTypes = {
   options: PropTypes.array,
   nameSelect: PropTypes.string,
   formData: PropTypes.object,
-  setFormData: PropTypes.func.isRequired,
+  setFormData: PropTypes.func,
   isFocus: PropTypes.bool,
   validateOnBlur: PropTypes.bool,
+  comp: PropTypes.node, // Custom component
 };
 
 export default ModalForm;
