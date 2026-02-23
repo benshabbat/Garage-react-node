@@ -1,48 +1,41 @@
-import { useState,useEffect, useCallback } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useState, useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { AccountContext } from "./AccountContext";
-import { createReqService } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
 import useFilteredData from "../../hooks/useFilteredData";
 import { getServicesByIdCar } from "../../features/user/userSlice";
 import PropTypes from "prop-types";
+import { carFilterFn, serviceFilterFn } from "./utils/accountValidation";
+import { useServiceRequestForm } from "./hooks/useServiceRequestForm";
+import { useAccountActions } from "./hooks/useAccountActions";
 export default function AccountProvider({ children }) {
   const { user, services } = useSelector((state) => state.user);
-
   const [selectedCar, setSelectedCar] = useState(null);
 
+  // Modals
   const [handleReqService, isOpenReqService] = useOpenModal();
   const [handleServices, isOpenServices] = useOpenModal();
 
-  // Use generic filtering hook for cars
-  const carFilterFn = useCallback((item, value) =>
-    item.numberPlate.includes(value) ||
-    item.km.toString().includes(value) ||
-    item.brand.includes(value),
-    []
-  );
-  
+  // Filtering and search for cars
+  const memoizedCarFilterFn = useCallback(carFilterFn, []);
   const { displayData: displayCars, handleSearch } = 
-    useFilteredData(user?.cars, carFilterFn);
+    useFilteredData(user?.cars, memoizedCarFilterFn);
 
-  // Use generic filtering hook for services
-  const serviceFilterFn = useCallback((service, value) =>
-    service?.title.includes(value) ||
-    service?.description.includes(value) ||
-    service?.price.toString().includes(value) ||
-    service?.paid.toString().includes(value) ||
-    service?.status.includes(value),
-    []
-  );
-  
+  // Filtering and search for services
+  const memoizedServiceFilterFn = useCallback(serviceFilterFn, []);
   const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } = 
-    useFilteredData(services, serviceFilterFn);
+    useFilteredData(services, memoizedServiceFilterFn);
+
+  // Account actions
+  const accountActions = useAccountActions(selectedCar, user);
 
 
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(getServicesByIdCar(selectedCar?._id));
   }, [selectedCar, dispatch]);
+  
   const handleCar = (e) => {
     const { value, name } = e.target;
     console.log(e.target.value);
@@ -55,20 +48,18 @@ export default function AccountProvider({ children }) {
     }
   };
 
-  
+  // Hook for requesting service
   function useReqService() {
-    const [formData, setFormData] = useState();
-    const onSubmit = async (e) => {
-      e.preventDefault();
-      setFormData((prevState) => ({
-        ...prevState,
-        title: selectedCar?.numberPlate.toString(),
-        from: user?._id,
-      }));
-      await createReqService(formData);
-      handleReqService();
+    const requestForm = useServiceRequestForm();
+    
+    const onSubmit = (e) => {
+      accountActions.onSubmitReqService(e, requestForm.formData, handleReqService);
     };
-    return { setFormData, onSubmit };
+    
+    return { 
+      setFormData: requestForm.setFormData, 
+      onSubmit 
+    };
   }
 
   const value = {

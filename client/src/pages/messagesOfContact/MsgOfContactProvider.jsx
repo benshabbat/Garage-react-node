@@ -6,24 +6,15 @@ import { getMessagesContact } from "../../features/admin/adminSlice";
 import { deleteContact } from "../../utils";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
+import { contactFilterFn } from "./utils/contactValidation";
 
 export default function MsgOfContactProvider({ children }) {
   const { messagesContact } = useSelector((state) => state.admin);
   
-  // Use generic filtering hook
-  const contactFilterFn = useCallback((item, value) =>
-    [
-      item.firstName,
-      item.lastName,
-      item.email,
-      item.phone,
-      item.message,
-    ].some((field) => field?.toLowerCase().includes(value.toLowerCase())),
-    []
-  );
-  
+  // Filtering and search
+  const memoizedContactFilterFn = useCallback(contactFilterFn, []);
   const { displayData: displayContacts, handleSearch } = 
-    useFilteredData(messagesContact, contactFilterFn);
+    useFilteredData(messagesContact, memoizedContactFilterFn);
   
   const dispatch = useDispatch();
   useEffect(() => {

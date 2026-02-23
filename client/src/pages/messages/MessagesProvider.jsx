@@ -4,14 +4,12 @@ import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";
 import { getUsers } from "../../features/admin/adminSlice";
-import {
-  deleteMessage,
-  createMessage,
-  createMessageToAdmin,
-} from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
+import { messageFilterFn, usersToOptions } from "./utils/messageValidation";
+import { useMessageForm } from "./hooks/useMessageForm";
+import { useMessageActions } from "./hooks/useMessageActions";
 //TODO:handle message for requests
 export default function MessagesProvider({ children }) {
   const { messages, user } = useSelector((state) => state.user);
@@ -19,21 +17,17 @@ export default function MessagesProvider({ children }) {
 
   const [selectedMsg, setSelectedMsg] = useState(null);
 
+  // Modals
   const [handleDeleteMessage, isOpenModalDeleteMessage] = useOpenModal();
   const [handleCreateMessage, isOpenCreateMessage] = useOpenModal();
   
-  // Use generic filtering hook
-  const messageFilterFn = useCallback((item, value) =>
-    item?.from?.username.includes(value) ||
-    item?.to?.username.includes(value) ||
-    item?.title.includes(value) ||
-    item?.description.includes(value) ||
-    item?.updatedAt.includes(value),
-    []
-  );
-  
+  // Filtering and search
+  const memoizedMessageFilterFn = useCallback(messageFilterFn, []);
   const { displayData: displayMessages, handleSearch } = 
-    useFilteredData(messages, messageFilterFn);
+    useFilteredData(messages, memoizedMessageFilterFn);
+  
+  // Message actions
+  const messageActions = useMessageActions(selectedMsg, user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -56,33 +50,26 @@ export default function MessagesProvider({ children }) {
     }
   };
   
-  const useCreateMsg = ()=>{
-    const options = user?.isAdmin && users?.length > 0
-      ? users.map(u => ({ value: u._id, label: u.username }))
-      : undefined;
-    const [formData, setFormData] = useState({
-      from: user?._id,
-    });
-    const onSubmit = async (e) => {
-      e.preventDefault();
-      if (user?.isAdmin) {
-        await createMessage(formData, formData?.to);
-      } else {
-        await createMessageToAdmin(formData);
-      }
-      handleCreateMessage();
-      
-    }
-    return{onSubmit,setFormData,formData,options}
-  }
+  // Hook for creating message
+  const useCreateMsg = () => {
+    const options = user?.isAdmin ? usersToOptions(users) : undefined;
+    const messageForm = useMessageForm(user);
     
-  const useDeleteMsg = async (e) => {
-    e.preventDefault();
-    const { name } = e.target;
-    if (name === "deleteMessage") {
-      await deleteMessage(selectedMsg?._id);
-      handleDeleteMessage();
-    }
+    const onSubmit = (e) => {
+      messageActions.onSubmitCreateMessage(e, messageForm.formData, handleCreateMessage);
+    };
+    
+    return {
+      onSubmit,
+      setFormData: messageForm.setFormData,
+      formData: messageForm.formData,
+      options
+    };
+  };
+    
+  // Delete message handler
+  const useDeleteMsg = (e) => {
+    messageActions.onSubmitDeleteMessage(e, handleDeleteMessage);
   };
 
   const value = {

@@ -1,2 +1,12 @@
 20260222	15:10:41	0a438f78-4621-4dca-940c-c9d650ed2fd0	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
 20260222	15:10:42	1d52ac62-7c05-4337-b6fa-c92075cc8cff	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
+20260223	17:49:33	405a0734-652e-4c7e-9b5e-c563f1779cb1	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
+20260223	17:49:33	c1343dfe-4391-43dc-ac96-d03b39b05647	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
+20260223	17:49:36	cf702f11-9edd-4313-88dc-86a201953265	Error: Not authenticated	GET	/api/services/car/undefined	http://localhost:5173
+20260223	17:49:36	76e2a58e-7214-4f3d-8a64-52418b9f2b65	Error: Not authenticated	GET	/api/services/car/undefined	http://localhost:5173
+20260223	17:49:38	59808984-e54d-4591-b10a-159887670edc	Error: Not authenticated	GET	/api/messages/user/undefined	http://localhost:5173
+20260223	17:49:38	fcd7beba-b105-474b-be6f-892b3d0bb5f5	Error: Not authenticated	GET	/api/messages/user/undefined	http://localhost:5173
+20260223	17:49:40	85fa72b6-6854-4c8f-b878-18e855209cf0	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
+20260223	17:49:40	c492407d-4849-41bc-a627-67bef8c3ffae	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
+20260223	17:49:40	cef7ed23-37c6-43e2-9cee-dd9862a22eb2	Error: Not authenticated	GET	/api/messages/user/undefined	http://localhost:5173
+20260223	17:49:40	8d7c0dc7-c0cc-4efa-a42b-f69014339d41	Error: Not authenticated	GET	/api/messages/user/undefined	http://localhost:5173
