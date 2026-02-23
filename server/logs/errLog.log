@@ -1,0 +1,2 @@
+20260222	15:10:41	0a438f78-4621-4dca-940c-c9d650ed2fd0	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
+20260222	15:10:42	1d52ac62-7c05-4337-b6fa-c92075cc8cff	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173

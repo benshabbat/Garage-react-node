@@ -2,34 +2,29 @@ import { ServiceAdminContext } from "./ServiceAdminContext";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../../features/admin/adminSlice";
-import { deleteService, updateService } from "../../utils";
 import useOpenModal from "../../hooks/useOpenModal";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
+import { serviceFilterFn, serviceStatusOptions } from "./utils/serviceValidation";
+import { useServiceForm } from "./hooks/useServiceForm";
+import { useServiceActions } from "./hooks/useServiceActions";
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
-
-  // const [formData, setFormData] = useState();
   const [selectedService, setSelctedService] = useState();
 
+  // Modals
   const [handleManageService, isOpenManageService] = useOpenModal();
   const [handleEditService, isOpenEditService] = useOpenModal();
   const [handleStatus, isOpenStatus] = useOpenModal();
   const [handlePaid, isOpenPaid] = useOpenModal();
 
-  // Use generic filtering hook
-  const serviceFilterFn = useCallback((item, value) =>
-    item.car?.numberPlate.includes(value) ||
-    item.title.includes(value) ||
-    item.description.includes(value) ||
-    item.price.toString().includes(value) ||
-    item.paid.toString().includes(value) ||
-    item.status.includes(value),
-    []
-  );
-  
+  // Filtering and search
+  const memoizedServiceFilterFn = useCallback(serviceFilterFn, []);
   const { displayData: displayServices, handleSearch, setFilteredData: setFilteredServices } = 
-    useFilteredData(services, serviceFilterFn);
+    useFilteredData(services, memoizedServiceFilterFn);
+
+  // Service actions
+  const serviceActions = useServiceActions(selectedService, setFilteredServices, services);
 
   const dispatch = useDispatch();
 
@@ -59,8 +54,7 @@ export default function ServiceAdminProvider({ children }) {
         handlePaid();
         break;
       case "deleteService":
-        await deleteService(selectedService?._id); //i need to make for it function
-        handleManageService();
+        await serviceActions.onSubmitDeleteService(handleManageService);
         break;
       case "editService":
         handleEditService();
@@ -70,36 +64,23 @@ export default function ServiceAdminProvider({ children }) {
     }
   };
 
-  //the solution working well done with useeffect.
-
+  // Hook for editing service
   const useEditService = (handleClick) => {
-    const [formData, setFormData] = useState(selectedService);
+    const editServiceForm = useServiceForm(selectedService);
     
-    // Update formData when selectedService changes
-    useEffect(() => {
-      setFormData(selectedService);
-    }, [selectedService]);
-    
-    const onSubmit = async (e) => {
-      e.preventDefault();
-      const updated = await updateService(selectedService?._id, formData);
-      handleClick();
-      setFilteredServices(
-        services.map((service) =>
-          service._id === selectedService?._id ? { ...updated.data, car: selectedService?.car } : service
-        )
-      );
+    const onSubmit = (e) => {
+      serviceActions.onSubmitEditService(e, editServiceForm.formData, handleClick);
     };
-    return { onSubmit, formData, setFormData };
+    
+    return { 
+      onSubmit, 
+      formData: editServiceForm.formData, 
+      setFormData: editServiceForm.setFormData 
+    };
   };
-  const options = [
-    { value: "pending", label: "Pending" },
-    { value: "done", label: "Done" },
-    { value: "on-work", label: "On work" },
-  ];
 
   const value = {
-    options,
+    options: serviceStatusOptions,
     displayServices,
     handleServiceIdAction,
     handleSearch,

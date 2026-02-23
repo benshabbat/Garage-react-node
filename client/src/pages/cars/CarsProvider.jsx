@@ -1,35 +1,36 @@
 import { CarsContext } from "./CarsContext";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createService, updateCar, deleteCar } from "../../utils";
 import { getCarsByType } from "../../features/admin/adminSlice";
 import useOpenModal from "../../hooks/useOpenModal";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
+import { carFilterFn, serviceStatusOptions } from "./utils/carValidation";
+import { useCarForm } from "./hooks/useCarForm";
+import { useCarActions } from "./hooks/useCarActions";
 
 export default function CarsProvider({ children }) {
   const { user } = useSelector((state) => state.user);
   const { cars } = useSelector((state) => state.admin);
 
   const [selectedCar, setSelectedCar] = useState();
-  const [formData, setFormData] = useState();
 
+  // Modals
   const [handleManageCar, isOpenManageCar] = useOpenModal();
   const [handleEditCar, isOpenModalEditCar] = useOpenModal();
   const [handleDeleteCar, isOpenModalDeleteCar] = useOpenModal();
   const [handleCreateService, isOpenModalCreateService] = useOpenModal();
 
-  // Use generic filtering hook
-  const carFilterFn = useCallback((item, value) =>
-    item.owner?.username.includes(value) ||
-    item.numberPlate.includes(value) ||
-    item.km.toString().includes(value) ||
-    item.brand.includes(value),
-    []
-  );
-  
+  // Filtering and search
+  const memoizedCarFilterFn = useCallback(carFilterFn, []);
   const { displayData: displayCars, handleSearch, setFilteredData: setFilteredCars } = 
-    useFilteredData(cars, carFilterFn);
+    useFilteredData(cars, memoizedCarFilterFn);
+
+  // Form management
+  const serviceForm = useCarForm(null);
+  
+  // Car actions
+  const carActions = useCarActions(selectedCar, setFilteredCars);
 
   const dispatch = useDispatch();
 
@@ -64,51 +65,43 @@ export default function CarsProvider({ children }) {
     }
   };
 
+  // Hook for creating service
   const useCreateService = () => {
-    const onSubmit = async (e) => {
-      e.preventDefault();
-      await createService(selectedCar?._id, formData);
-      handleCreateService();
+    const onSubmit = (e) => {
+      carActions.onSubmitCreateService(e, serviceForm.formData, handleCreateService);
     };
-    return { onSubmit, setFormData, formData };
+    return { 
+      onSubmit, 
+      setFormData: serviceForm.setFormData, 
+      formData: serviceForm.formData 
+    };
   };
 
+  // Hook for editing car
   const useEditCar = () => {
-    useEffect(() => {
-      setFormData(selectedCar);
-    }, [selectedCar]);
+    const editCarForm = useCarForm(selectedCar);
 
-    const onSubmit = async (e) => {
-      e.preventDefault();
-      await updateCar(selectedCar?._id, formData);
-      handleEditCar();
+    const onSubmit = (e) => {
+      carActions.onSubmitEditCar(e, editCarForm.formData, handleEditCar);
     };
-    return { onSubmit, setFormData, formData};
+    
+    return { 
+      onSubmit, 
+      setFormData: editCarForm.setFormData, 
+      formData: editCarForm.formData
+    };
   };
 
-  const useDeleteCar = async (e) => {
-    e.preventDefault();
-    const { name } = e.target;
-    if (name === "deleteCar") {
-      await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
-      handleDeleteCar();
-      setFilteredCars((cars) =>
-        cars.filter((car) => car._id !== selectedCar._id)
-      );
-    }
+  // Delete car handler
+  const useDeleteCar = (e) => {
+    carActions.onSubmitDeleteCar(e, handleDeleteCar);
   };
-
-  const options = [
-    { value: "pending", label: "Pending" },
-    { value: "done", label: "Done" },
-    { value: "on-work", label: "On work" },
-  ];
 
   const value = {
     useDeleteCar,
     useEditCar,
     useCreateService,
-    options,
+    options: serviceStatusOptions,
     cars,
     selectedCar,
     handleCarAction,
