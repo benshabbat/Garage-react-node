@@ -3,6 +3,7 @@ import { MyAccount } from "../index";
 import { useHeaderContext } from "../header/HeaderContext";
 
 const NAV_LINKS = [
+  { to: "/dashboard", label: "Dashboard" },
   { to: "/users", label: "Users" },
   { to: "/cars", label: "Cars" },
   { to: "/services", label: "Services" },

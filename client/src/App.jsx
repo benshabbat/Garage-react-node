@@ -9,6 +9,7 @@ import {
   ServicesAdmin,
   Appointments,
 } from "./pages";
+import Dashboard from "./pages/dashboard/Dashboard";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 import { PrivateRoute } from "./PrivateRoute.jsx";
@@ -80,6 +81,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Appointments />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
               </PrivateRoute>
             }
           />
