@@ -11,3 +11,40 @@
 20260223	17:49:40	cef7ed23-37c6-43e2-9cee-dd9862a22eb2	Error: Not authenticated	GET	/api/messages/user/undefined	http://localhost:5173
 20260223	17:49:40	8d7c0dc7-c0cc-4efa-a42b-f69014339d41	Error: Not authenticated	GET	/api/messages/user/undefined	http://localhost:5173
 20260224	12:11:20	e4b7dc15-b365-4e98-a07e-9f6a841f1d0a	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Service"	PUT	/api/services/undefined	http://localhost:5173
+20260224	13:03:04	a44f5c3b-84b3-47b6-acc5-83af0219fa9a	Error: Appointment date must be in the future	POST	/api/appointments	http://localhost:5173
+20260224	13:08:22	355155b8-35d8-4949-b6c0-430d3b48d48e	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
+20260224	13:08:22	58b4920c-3568-4dd9-b324-7638ae511647	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
+20260224	13:08:26	09317010-7c3d-420a-8dfc-5339fedc5d4c	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
+20260224	13:08:26	f0f62335-628e-4058-8bd5-b19c667e3913	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
+20260224	15:51:38	a3a3b578-c1f3-4cee-bf93-5502fe13e95e	StrictPopulateError: Cannot populate path `car` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:51:39	1a02f220-6529-4eff-a50c-3e86da27fe79	StrictPopulateError: Cannot populate path `car` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:52:01	b68a5884-f9bc-45dd-8e12-37d6a19afbf9	StrictPopulateError: Cannot populate path `car` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:52:02	56402ba2-031a-4d4d-93ee-b0903378e697	StrictPopulateError: Cannot populate path `car` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:52:42	e4476c8c-a9be-4da1-b055-5c4256b9be8b	StrictPopulateError: Cannot populate path `car` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:52:43	7833ad7d-20bb-4f3f-a249-1e85c510160e	StrictPopulateError: Cannot populate path `car` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:53:21	4da85a10-99d6-4581-83d5-978a4995968f	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:53:32	e7b7398e-e7da-4c23-bf6a-ddbaa591a078	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:56:00	698f9a5d-0467-43f4-aecf-9c6776c967ca	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:56:03	2888fbad-9511-4c20-a04e-c77759e41303	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:56:09	62c0c4b9-5157-4ab3-8ae6-d1041a044883	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:56:11	1b480ffc-0a6b-4f8f-a8fa-6dedcc20589a	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:56:22	610e946c-8a6f-4a41-a46c-4fa6d27af5b1	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:56:25	7c699ed2-d29b-4818-be84-347a6d2b0352	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:56:52	a453d820-d449-44be-8160-1091caac5a8c	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:56:55	3998d82f-7798-4146-844f-96a356098d05	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:57:14	00a55871-70b1-4cf9-bbec-c61f862574dd	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:57:17	ab198dd1-cd5f-4377-ad90-346224d69737	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:57:29	1bf6f87c-d6a4-4f3e-80ef-420ee141e48b	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:57:32	62aa2ba3-a5fa-4bcd-ae3a-c0200606c81b	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:57:34	0d931c41-a705-4ceb-a81f-ae116cc01647	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:57:37	1befcc6a-4840-4644-a9f0-e05bed2eb6a6	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:58:34	e8c66d5f-2150-464c-868d-fc8b5f67e1fc	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:58:37	76504593-c4a2-409a-a16f-d2c31d32c8da	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:58:42	67684f7c-d9c3-4ed6-ba85-a961487efc03	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:58:59	c599c795-ff7c-4db6-8039-cba08f6fe788	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:59:02	09422033-6473-4d3f-a580-26dc12d4844f	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:59:45	c20d817e-e02b-420e-ad65-44898b277062	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:59:47	058f3809-ef37-4056-ad17-876cef946b7b	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	15:59:53	11fc70cb-6e80-4b9f-ad44-f2040036a18b	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	16:00:40	be36ff84-8728-4162-9e9e-a08840e55326	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260224	16:00:44	9cde2ce4-7d39-4bba-9064-ff68295ffc2e	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
