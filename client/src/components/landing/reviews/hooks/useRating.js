@@ -1,8 +1,15 @@
 import { useState } from "react";
 
-
-//TODO:imporve this file maybe destructure to files
-
+/**
+ * Custom hook for rating component functionality
+ * @param {Object} options - Configuration options
+ * @param {number} options.defaultRating - Initial rating value (default: 0)
+ * @param {number} options.maxRating - Maximum rating value (default: 5)
+ * @param {boolean} options.disabled - Whether rating is disabled (default: false)
+ * @param {Function} options.onRatingChange - Callback when rating changes
+ * @param {string} options.size - Size variant: 'small', 'medium', 'large' (default: 'medium')
+ * @returns {Object} Rating state and handlers
+ */
 export function useRating({
   defaultRating = 0,
   maxRating = 5,
@@ -14,6 +21,7 @@ export function useRating({
   const [hover, setHover] = useState(0);
   const stars = [...Array(maxRating)];
   const isDisabled = disabled;
+  
   const getFontSize = () => {
     switch (size) {
       case "small":
@@ -24,6 +32,7 @@ export function useRating({
         return "28px";
     }
   };
+  
   const fontSize = getFontSize();
 
   const handleClick = (value) => {
@@ -50,5 +59,3 @@ export function useRating({
     isDisabled,
   };
 }
-
-

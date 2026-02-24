@@ -1,21 +1,22 @@
-import { Link } from "react-router-dom";
+import NavLink from "./NavLink";
 import { MyAccount } from "../index";
 import { useHeaderContext } from "../header/HeaderContext";
 
-//TODO:MAYBE MAP / OR COMP OF LINK INSIDE HANDLE
+const NAV_LINKS = [
+  { to: "/myCars", label: "MyCars" },
+  { to: "/messages", label: "Messages" },
+];
+
 const NavUser = () => {
   const { handleOutsideClick } = useHeaderContext();
 
   return (
     <>
-      <Link to={`/myCars`} onClick={handleOutsideClick}>
-        MyCars
-      </Link>
-
-      <Link to={`/messages`} onClick={handleOutsideClick}>
-        Messages
-      </Link>
-
+      {NAV_LINKS.map((link) => (
+        <NavLink key={link.to} to={link.to} onClick={handleOutsideClick}>
+          {link.label}
+        </NavLink>
+      ))}
       <MyAccount />
     </>
   );

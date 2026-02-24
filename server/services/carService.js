@@ -8,7 +8,6 @@ const createCar = async (req) => {
   const userId = req.params.userId;
   const { numberPlate } = req.body;
   const newNumberPlate = templateCar(numberPlate);
-  console.log(newNumberPlate);
   const newCar = new Car({
     ...req.body,
     owner: userId,

@@ -16,9 +16,6 @@ import errorHandler from "./middleware/errorHandler.js"
 // Load environment variables first
 dotenv.config();
 
-//TODO handle error
-// import { logger } from "./middleware/logger.js";
-// const { logger } = require('./middleware/logger')
 const app = express();
 const port = process.env.PORT || 8800;
 
