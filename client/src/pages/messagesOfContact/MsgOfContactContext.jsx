@@ -1,11 +1,6 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
+import { createContextHook } from "../../components/context/useContextGeneric";
 
 export const MsgOfContactContext = createContext(null);
 
-export function useMsgOfContactContext(){
-    const context = useContext(MsgOfContactContext);
-    if (!context) {
-      throw new Error("useMsgOfContactContext must be used within a MsgOfContactProvider");
-    }
-    return context;
-}
+export const useMsgOfContactContext = createContextHook(MsgOfContactContext, "useMsgOfContactContext");

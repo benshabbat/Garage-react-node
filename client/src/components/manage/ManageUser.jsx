@@ -4,7 +4,6 @@ import { useUsersContext } from "../../pages/users/UsersContext";
 import ButtonManage from "./ButtonManage";
 import FormManage from "./FormManage";
 
-//TODO:TO CREATE DELETE USER COMPONENT
 const ManageUser = () => {
   const { modals, handleUser, selectedUser } = useUsersContext();
   return (

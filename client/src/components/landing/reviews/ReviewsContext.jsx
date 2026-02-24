@@ -1,11 +1,6 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
+import { createContextHook } from "../../context/useContextGeneric";
 
 export const ReviewsContext = createContext(null);
 
-export const useReviewsContext = () => {
-  const context = useContext(ReviewsContext);
-  if (!context) {
-    throw new Error("useReviewsContext must be used within a ReviewsProvider");
-  }
-  return context;
-};
+export const useReviewsContext = createContextHook(ReviewsContext, "useReviewsContext");
