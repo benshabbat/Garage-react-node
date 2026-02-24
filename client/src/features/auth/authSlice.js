@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+import { createAsyncThunkWithErrorHandling } from "../utils/asyncThunkErrorHandler";
 
 //Get User from localStorage
 const user = JSON.parse(localStorage.getItem("user"));
@@ -13,71 +14,33 @@ const initialState = {
 };
 
 //Create new User
-export const register = createAsyncThunk(
+export const register = createAsyncThunkWithErrorHandling(
   "auth/register",
-  async (user, thunkAPI) => {
-    try {
-      return await authService.register(user);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
+  authService.register
 );
 
 //Login
-export const login = createAsyncThunk(
+export const login = createAsyncThunkWithErrorHandling(
   "auth/login",
-  async (user, thunkAPI) => {
-    try {
-      return await authService.login(user);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
+  authService.login
 );
 
 //Logout 
 export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout();
 });
-// //Logout 
-// export const refresh = createAsyncThunk("auth/refresh", async () => {
-//   await authService.refresh();
-// });
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     reset: (state) => {
-      state.user=null;
+      state.user = null;
       state.isError = false;
       state.isSuccess = false;
       state.isLoading = false;
       state.message = "";
     },
-    // setCredentials: (state, action) => {
-    //   console.log(action.payload);
-    //   const { user, access_token } = action.payload;
-    //   state.user = user;
-    //   state.token = access_token;
-    // },
-    // logOut: (state, action) => {
-    //   state.user = null;
-    //   state.token = null;
-    // },
   },
   extraReducers: (builder) => {
     builder
@@ -108,14 +71,12 @@ const authSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
-      .addCase(logout.fulfilled, (state) => {state.user = null})
-      // .addCase(logout.refresh, (state,action) => (state.user = action.payload));
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
+      });
   },
 });
 
-export const { reset} = authSlice.actions;
+export const { reset } = authSlice.actions;
 
 export default authSlice.reducer;
-
-// export const selectCurrentUser = (state) => state.auth.user;
-// export const selectCurrentToken = (state) => state.auth.token;
