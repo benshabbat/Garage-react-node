@@ -5,6 +5,7 @@ import { useHeaderContext } from "../header/HeaderContext";
 const NAV_LINKS = [
   { to: "/myCars", label: "MyCars" },
   { to: "/messages", label: "Messages" },
+  { to: "/appointments", label: "Appointments" },
 ];
 
 const NavUser = () => {

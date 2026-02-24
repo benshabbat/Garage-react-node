@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-const API_URL = 'appointments';
+import { API_URL_APPOINTMENTS } from '../../api/apiEndpoints';
 
 export const fetchAppointments = createAsyncThunk(
   'appointments/fetchAll',
   async () => {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(API_URL_APPOINTMENTS);
     return response.data;
   }
 );
@@ -14,7 +13,7 @@ export const fetchAppointments = createAsyncThunk(
 export const createAppointment = createAsyncThunk(
   'appointments/create',
   async (appointmentData) => {
-    const response = await axios.post(API_URL, appointmentData);
+    const response = await axios.post(API_URL_APPOINTMENTS, appointmentData);
     return response.data;
   }
 );

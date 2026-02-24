@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { to: "/services", label: "Services" },
   { to: "/messages", label: "Messages" },
   { to: "/messages-contact", label: "Messages-Contact" },
+  { to: "/appointments", label: "Appointments" },
 ];
 
 const NavAdmin = () => {
