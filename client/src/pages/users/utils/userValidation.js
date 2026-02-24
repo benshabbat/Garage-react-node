@@ -4,7 +4,7 @@ import {
   validPass,
   validEmail,
 } from "../../../validation/valid";
-import { templatePhone } from "../../../../../server/utils/templates";
+import { formatPhone } from "../../../utils/formatters";
 
 /**
  * Check if user has valid username (email, phone, password)
@@ -53,7 +53,7 @@ export const checkDuplicateEmail = (users, email, excludeUserId = null) => {
 export const checkDuplicatePhone = (users, phone, excludeUserId = null) => {
   if (!phone) return false;
   
-  const formattedPhone = templatePhone(phone);
+  const formattedPhone = formatPhone(phone);
   return users?.some(
     (user) => user.phone === formattedPhone && user._id !== excludeUserId
   ) || false;

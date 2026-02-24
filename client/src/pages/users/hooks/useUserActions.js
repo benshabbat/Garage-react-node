@@ -1,5 +1,5 @@
 import { deleteUser, createCar, updateUser, createUser } from "../../../utils";
-import { templatePhone } from "../../../../../server/utils/templates";
+import { formatPhone } from "../../../utils/formatters";
 import { isValidUserName, isValidCar } from "../utils/userValidation";
 
 /**
@@ -59,7 +59,7 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
       setFilteredUsers(
         users.map((user) =>
           user._id === selectedUser?._id
-            ? { ...formData, phone: templatePhone(formData.phone) }
+            ? { ...formData, phone: formatPhone(formData.phone) }
             : user
         )
       );

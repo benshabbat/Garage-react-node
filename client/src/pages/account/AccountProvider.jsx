@@ -38,7 +38,6 @@ export default function AccountProvider({ children }) {
   
   const handleCar = (e) => {
     const { value, name } = e.target;
-    console.log(e.target.value);
     setSelectedCar(user?.cars.find((car) => car._id === value));
     if (name === "req-services") {
       handleReqService();

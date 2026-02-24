@@ -29,10 +29,8 @@ export function useRating({
   const handleClick = (value) => {
     if (!disabled) {
       setRating(value);
-      console.log(`set rating ${value}`);
       if (onRatingChange) {
         onRatingChange(value);
-        console.log(`set rating change ${value}`);
       }
     }
   };

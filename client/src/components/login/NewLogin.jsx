@@ -11,12 +11,8 @@ export default function NewLogin({ isOpen }) {
   const dispatch = useDispatch();
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     dispatch(login(formData));
   };
-  useEffect(() => {
-    console.log(isError);
-  }, [isError, message]);
   return (
     <OpenModal
       comp={
@@ -55,26 +51,4 @@ export default function NewLogin({ isOpen }) {
       isOpen={isOpen}
     />
   );
-}
-
-{
-  /* <Form
-  setData={setFormData}
-  title="Login"
-  sec_title="enter your name & password"
-  inputs={[
-    {
-      name: "username",
-      type: "text",
-      errorMessage: "Your username or password is wrong",
-      isError,
-    },
-    {
-      name: "password",
-      type: "password",
-    },
-  ]}
-  handelClick={handelClick}
-  onSubmit={onSubmit}
-/>; */
 }
