@@ -1,7 +1,12 @@
 import mongoose from "mongoose";
-const { Schema } = mongoose;
+const { Schema, SchemaTypes } = mongoose;
 
 const AppointmentSchema = new Schema({
+  user: {
+    type: SchemaTypes.ObjectId,
+    ref: 'User',
+    required: false,
+  },
   clientName: {
     type: String,
     required: true,

@@ -14,12 +14,15 @@ const createAppointment = async (req) => {
 };
 
 const getAppointments = async () => {
-  const appointments = await Appointment.find().sort({ date: -1, createdAt: -1 });
+  const appointments = await Appointment.find()
+    .populate('user', 'username email phone')
+    .sort({ date: -1, createdAt: -1 });
   return appointments;
 };
 
 const getAppointment = async (req) => {
-  const appointment = await Appointment.findById(req.params.id);
+  const appointment = await Appointment.findById(req.params.id)
+    .populate('user', 'username email phone');
   return appointment;
 };
 
@@ -35,7 +38,7 @@ const updateAppointment = async (req) => {
     req.params.id,
     { $set: updateData },
     { new: true }
-  );
+  ).populate('user', 'username email phone');
   return updatedAppointment;
 };
 

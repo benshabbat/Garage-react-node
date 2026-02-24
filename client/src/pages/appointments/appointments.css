@@ -65,7 +65,8 @@
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -75,10 +76,23 @@
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: #4CAF50;
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.user-select {
+  cursor: pointer;
+  background-color: white;
+}
+
+.form-hint {
+  color: #666;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 0.25rem;
 }
 
 .form-row {
@@ -200,6 +214,15 @@
 .appointment-details strong {
   color: #333;
   font-weight: 600;
+}
+
+.linked-user {
+  background: #e8f5e9;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border-left: 3px solid #4CAF50;
+  font-weight: 500;
+  color: #2e7d32 !important;
 }
 
 .no-appointments {

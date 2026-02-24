@@ -2,12 +2,15 @@ import "./appointments.css";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAppointments, createAppointment } from '../../features/appointments/appointmentSlice';
+import { getUsers } from '../../features/admin/adminSlice';
 import { useState } from 'react';
 
 const Appointments = () => {
   const dispatch = useDispatch();
-  const { appointments, status } = useSelector((state) => state.appointments);
+  const { appointments, fetchState } = useSelector((state) => state.appointments);
+  const { users } = useSelector((state) => state.admin);
   const [formData, setFormData] = useState({
+    user: '',
     clientName: '',
     email: '',
     phone: '',
@@ -17,15 +20,20 @@ const Appointments = () => {
   });
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchAppointments());
-    }
-  }, [status, dispatch]);
+    dispatch(fetchAppointments());
+    dispatch(getUsers());
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createAppointment(formData));
+    const appointmentData = { ...formData };
+    // Only include user field if a user is selected
+    if (!appointmentData.user) {
+      delete appointmentData.user;
+    }
+    dispatch(createAppointment(appointmentData));
     setFormData({ 
+      user: '',
       clientName: '', 
       email: '', 
       phone: '',
@@ -36,10 +44,26 @@ const Appointments = () => {
   };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Auto-fill email and phone if user is selected
+    if (name === 'user' && value) {
+      const selectedUser = users.find(u => u._id === value);
+      if (selectedUser) {
+        setFormData(prev => ({
+          ...prev,
+          user: value,
+          clientName: selectedUser.username || prev.clientName,
+          email: selectedUser.email || prev.email,
+          phone: selectedUser.phone || prev.phone,
+        }));
+      }
+    }
   };
 
   const renderAppointments = () => {
@@ -56,6 +80,11 @@ const Appointments = () => {
           </span>
         </div>
         <div className="appointment-details">
+          {appointment.user && (
+            <p className="linked-user">
+              <strong>👤 Linked User:</strong> {appointment.user.username || appointment.user.email}
+            </p>
+          )}
           <p><strong>Email:</strong> {appointment.email}</p>
           <p><strong>Phone:</strong> {appointment.phone}</p>
           <p><strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}</p>
@@ -77,6 +106,27 @@ const Appointments = () => {
         <section className="appointment-form-section">
           <h2>Book New Appointment</h2>
           <form className="appointment-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="user">Link to Existing User (Optional)</label>
+              <select
+                id="user"
+                name="user"
+                value={formData.user}
+                onChange={handleChange}
+                className="user-select"
+              >
+                <option value="">-- Select a user (optional) --</option>
+                {users && users.map((user) => (
+                  <option key={user._id} value={user._id}>
+                    {user.username} - {user.email}
+                  </option>
+                ))}
+              </select>
+              <small className="form-hint">
+                Select an existing user to auto-fill their details
+              </small>
+            </div>
+
             <div className="form-group">
               <label htmlFor="clientName">Full Name *</label>
               <input
@@ -164,9 +214,13 @@ const Appointments = () => {
         <section className="appointments-list-section">
           <h2>Scheduled Appointments</h2>
           <div className="appointments-list">
-            {status === 'loading' && <div className="loading">Loading appointments...</div>}
-            {status === 'succeeded' && renderAppointments()}
-            {status === 'failed' && <div className="error">Error loading appointments. Please try again.</div>}
+            {fetchState.isLoading && <div className="loading">Loading appointments...</div>}
+            {fetchState.isSuccess && renderAppointments()}
+            {fetchState.isError && (
+              <div className="error">
+                Error: {fetchState.message || 'Failed to load appointments'}
+              </div>
+            )}
           </div>
         </section>
       </div>
