@@ -3,26 +3,18 @@ import { deleteService, updateService } from "../../../utils";
 /**
  * Custom hook for service CRUD operations
  * @param {Object} selectedService - Currently selected service
- * @param {Function} setFilteredServices - Function to update filtered services list
- * @param {Array} services - List of all services
  * @returns {Object} CRUD operation functions
  */
-export const useServiceActions = (selectedService, setFilteredServices, services) => {
+export const useServiceActions = (selectedService) => {
   
   /**
    * Edit existing service
    */
   const onSubmitEditService = async (e, formData, handleClick) => {
     e.preventDefault();
-    const updated = await updateService(selectedService?._id, formData);
+    await updateService(selectedService?._id, formData);
     handleClick();
-    setFilteredServices(
-      services.map((service) =>
-        service._id === selectedService?._id 
-          ? { ...updated.data, car: selectedService?.car } 
-          : service
-      )
-    );
+    // Data will be refreshed automatically by useEffect in ServiceAdminProvider
   };
 
   /**

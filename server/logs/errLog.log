@@ -10,3 +10,4 @@
 20260223	17:49:40	c492407d-4849-41bc-a627-67bef8c3ffae	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
 20260223	17:49:40	cef7ed23-37c6-43e2-9cee-dd9862a22eb2	Error: Not authenticated	GET	/api/messages/user/undefined	http://localhost:5173
 20260223	17:49:40	8d7c0dc7-c0cc-4efa-a42b-f69014339d41	Error: Not authenticated	GET	/api/messages/user/undefined	http://localhost:5173
+20260224	12:11:20	e4b7dc15-b365-4e98-a07e-9f6a841f1d0a	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Service"	PUT	/api/services/undefined	http://localhost:5173

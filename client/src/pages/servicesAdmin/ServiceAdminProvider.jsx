@@ -20,11 +20,11 @@ export default function ServiceAdminProvider({ children }) {
 
   // Filtering and search
   const memoizedServiceFilterFn = useCallback(serviceFilterFn, []);
-  const { displayData: displayServices, handleSearch, setFilteredData: setFilteredServices } = 
+  const { displayData: displayServices, handleSearch } = 
     useFilteredData(services, memoizedServiceFilterFn);
 
   // Service actions
-  const serviceActions = useServiceActions(selectedService, setFilteredServices, services);
+  const serviceActions = useServiceActions(selectedService);
 
   const dispatch = useDispatch();
 
