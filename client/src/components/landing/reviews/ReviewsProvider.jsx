@@ -1,72 +1,43 @@
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import { ReviewsContext } from "./ReviewsContext";
-import { getReviews, createReview } from "../../../utils";
-
 import useOpenModal from "../../../hooks/useOpenModal";
 import useCardsDisplay from "./swiper/hooks/useCardsDisplay";
 import useCardsNavigation from "./swiper/hooks/useCardsNavigation";
+import { useReviewForm } from "./hooks/useReviewForm";
+import { useReviewsData } from "./hooks/useReviewsData";
+import { getVisibleCards, calculateNumberOfPages } from "./utils/reviewsUtils";
+import PropTypes from "prop-types";
 
 export default function ReviewsProvider({ children }) {
   const [handleAddReview, isOpenAddReview] = useOpenModal();
   
-  const [allReviews, setAllReviews] = useState([]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const totalCards = Array.isArray(allReviews) ? allReviews.length : 0;
+  // Temporary state for form submission tracking
+  const [isSubmittedTemp, setIsSubmittedTemp] = useState(false);
+  
+  // Get reviews data
+  const { allReviews, totalCards } = useReviewsData(isOpenAddReview, isSubmittedTemp);
 
+  // Cards display and navigation
   const numCardsPreview = useCardsDisplay();
   const { currentIndex, nextCard, prevCard, indexPagination } =
     useCardsNavigation(numCardsPreview, totalCards);
-  const numberOfPages = Math.ceil(totalCards / numCardsPreview);
+  const numberOfPages = calculateNumberOfPages(totalCards, numCardsPreview);
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const data = await getReviews();
-        setAllReviews(data || []); // ודא ש-`data` הוא מערך
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-        setAllReviews([]); // במקרה של שגיאה, אתחל למערך ריק
-      }
-    };
-    fetchReviews();
-  }, [isOpenAddReview, isSubmitted]);
-
-  // Get currently visible cards based on index and number of cards to show
-  const getVisibleCards = (children) => {
-    if (!Array.isArray(children)) {
-      return children;
-    }
-    const startIndex = currentIndex;
-    const endIndex = Math.min(startIndex + numCardsPreview, totalCards);
-    return children.slice(startIndex, endIndex);
+  // Helper function to get visible cards
+  const getVisibleCardsHelper = (children) => {
+    return getVisibleCards(children, currentIndex, numCardsPreview, totalCards);
   };
 
+  // Hook for adding review
   const useAddReview = () => {
-    const [stars, setStars] = useState(5);
-    const [formData, setFormData] = useState();
-    const nameRef = useRef();
-    const descRef = useRef();
-    const addReview = (e) => {
-      e.preventDefault();
-      setFormData({
-        name: nameRef.current.value,
-        description: descRef.current.value,
-        stars,
-      });
-      setIsSubmitted(true);
-      handleAddReview();
-    };
-
-    useEffect(() => {
-      if (formData) {
-        const newReview = async () => {
-          await createReview(formData);
-        };
-        newReview();
-      }
-    }, [formData]);
-
-    return { addReview, setStars, nameRef, descRef,isSubmitted,setIsSubmitted };
+    const reviewForm = useReviewForm(handleAddReview);
+    
+    // Sync submission state
+    if (reviewForm.isSubmitted && !isSubmittedTemp) {
+      setIsSubmittedTemp(true);
+    }
+    
+    return reviewForm;
   };
 
   const value = {
@@ -76,8 +47,7 @@ export default function ReviewsProvider({ children }) {
     indexPagination,
     prevCard,
     nextCard,
-    getVisibleCards,
-    // totalCards,
+    getVisibleCards: getVisibleCardsHelper,
     numCardsPreview,
     numberOfPages,
     currentIndex,
@@ -87,3 +57,7 @@ export default function ReviewsProvider({ children }) {
     <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>
   );
 }
+
+ReviewsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

@@ -1,11 +1,11 @@
 import "./header.css";
-import { login } from "../../features/auth/authSlice";
 import { HeaderContext } from "./HeaderContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
 import useOpenModal from "../../hooks/useOpenModal";
-import useLogout from "../../hooks/useLogout";
+import { useHeaderNav } from "./hooks/useHeaderNav";
+import { useLoginForm } from "./hooks/useLoginForm";
 export default function HeaderProvider({ children }) {
   const {
     user: userAuth,
@@ -14,11 +14,16 @@ export default function HeaderProvider({ children }) {
   } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
 
-  const [isNavOpen, setIsNavOpen] = useState(false);
-
   const [onLogin, isOpenLogin] = useOpenModal();
-
-  const { onLogout } = useLogout();
+  
+  // Navigation state management
+  const {
+    isNavOpen,
+    setIsNavOpen,
+    handleOutsideClick,
+    handleLogin,
+    handleLogout,
+  } = useHeaderNav(onLogin);
 
   const dispatch = useDispatch();
 
@@ -28,31 +33,9 @@ export default function HeaderProvider({ children }) {
     }
   }, [dispatch, userAuth, user]);
 
-  const handleOutsideClick = () => setIsNavOpen(!isNavOpen);
-
-  const handleLogin = () => {
-    handleOutsideClick();
-    onLogin();
-  };
-
-  const handleLogout = () => {
-    handleOutsideClick();
-    onLogout();
-  };
-
+  // Hook for login form
   const useLogin = () => {
-    const [formData, setFormData] = useState();
-    const onSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        await dispatch(login(formData)).unwrap();
-        onLogin();
-      } catch (error) {
-        console.error("Login failed:", error);
-      }
-    };
-
-    return { setFormData, onSubmit };
+    return useLoginForm(onLogin);
   };
 
   const value = {
