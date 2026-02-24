@@ -1,58 +1,29 @@
-import { useState } from "react";
 import { ReviewsContext } from "./ReviewsContext";
-import useOpenModal from "../../../hooks/useOpenModal";
-import useCardsDisplay from "./swiper/hooks/useCardsDisplay";
-import useCardsNavigation from "./swiper/hooks/useCardsNavigation";
-import { useReviewForm } from "./hooks/useReviewForm";
-import { useReviewsData } from "./hooks/useReviewsData";
-import { getVisibleCards, calculateNumberOfPages } from "./utils/reviewsUtils";
+import { useReviewsModals } from "./hooks/useReviewsModals";
+import { useReviewsHandlers } from "./hooks/useReviewsHandlers";
 import PropTypes from "prop-types";
 
 export default function ReviewsProvider({ children }) {
-  const [handleAddReview, isOpenAddReview] = useOpenModal();
-  
-  // Temporary state for form submission tracking
-  const [isSubmittedTemp, setIsSubmittedTemp] = useState(false);
-  
-  // Get reviews data
-  const { allReviews, totalCards } = useReviewsData(isOpenAddReview, isSubmittedTemp);
+  // Modals management
+  const modals = useReviewsModals();
 
-  // Cards display and navigation
-  const numCardsPreview = useCardsDisplay();
-  const { currentIndex, nextCard, prevCard, indexPagination } =
-    useCardsNavigation(numCardsPreview, totalCards);
-  const numberOfPages = calculateNumberOfPages(totalCards, numCardsPreview);
-
-  // Helper function to get visible cards
-  const getVisibleCardsHelper = (children) => {
-    return getVisibleCards(children, currentIndex, numCardsPreview, totalCards);
-  };
-
-  // Hook for adding review
-  const useAddReview = () => {
-    const reviewForm = useReviewForm(handleAddReview);
-    
-    // Sync submission state
-    if (reviewForm.isSubmitted && !isSubmittedTemp) {
-      setIsSubmittedTemp(true);
-    }
-    
-    return reviewForm;
-  };
+  // Reviews handlers
+  const reviewsHandlers = useReviewsHandlers(modals);
 
   const value = {
-    useAddReview,
-    handleAddReview,
-    isOpenAddReview,
-    indexPagination,
-    prevCard,
-    nextCard,
-    getVisibleCards: getVisibleCardsHelper,
-    numCardsPreview,
-    numberOfPages,
-    currentIndex,
-    allReviews,
+    useAddReview: reviewsHandlers.useAddReview,
+    handleAddReview: modals.addReview.handle,
+    isOpenAddReview: modals.addReview.isOpen,
+    indexPagination: reviewsHandlers.indexPagination,
+    prevCard: reviewsHandlers.prevCard,
+    nextCard: reviewsHandlers.nextCard,
+    getVisibleCards: reviewsHandlers.getVisibleCards,
+    numCardsPreview: reviewsHandlers.numCardsPreview,
+    numberOfPages: reviewsHandlers.numberOfPages,
+    currentIndex: reviewsHandlers.currentIndex,
+    allReviews: reviewsHandlers.allReviews,
   };
+
   return (
     <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>
   );

@@ -3,9 +3,9 @@ import { HeaderContext } from "./HeaderContext";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/user/userSlice";
-import useOpenModal from "../../hooks/useOpenModal";
-import { useHeaderNav } from "./hooks/useHeaderNav";
-import { useLoginForm } from "./hooks/useLoginForm";
+import { useHeaderModals } from "./hooks/useHeaderModals";
+import { useHeaderHandlers } from "./hooks/useHeaderHandlers";
+
 export default function HeaderProvider({ children }) {
   const {
     user: userAuth,
@@ -13,19 +13,13 @@ export default function HeaderProvider({ children }) {
     message,
   } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
-
-  const [onLogin, isOpenLogin] = useOpenModal();
-  
-  // Navigation state management
-  const {
-    isNavOpen,
-    setIsNavOpen,
-    handleOutsideClick,
-    handleLogin,
-    handleLogout,
-  } = useHeaderNav(onLogin);
-
   const dispatch = useDispatch();
+
+  // Modals management
+  const modals = useHeaderModals();
+
+  // Header handlers
+  const headerHandlers = useHeaderHandlers(modals);
 
   useEffect(() => {
     if (userAuth?._id && !user) {
@@ -33,24 +27,20 @@ export default function HeaderProvider({ children }) {
     }
   }, [dispatch, userAuth, user]);
 
-  // Hook for login form
-  const useLogin = () => {
-    return useLoginForm(onLogin);
-  };
-
   const value = {
     user,
-    handleOutsideClick,
-    isNavOpen,
+    handleOutsideClick: headerHandlers.handleOutsideClick,
+    isNavOpen: headerHandlers.isNavOpen,
     userAuth,
-    setIsNavOpen,
-    handleLogin,
-    isOpenLogin,
-    useLogin,
+    setIsNavOpen: headerHandlers.setIsNavOpen,
+    handleLogin: headerHandlers.handleLogin,
+    isOpenLogin: modals.login.isOpen,
+    useLogin: headerHandlers.useLogin,
     isError,
-    handleLogout,
+    handleLogout: headerHandlers.handleLogout,
     message,
   };
+
   return (
     <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>
   );

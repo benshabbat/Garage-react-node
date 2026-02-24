@@ -1,20 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AccountContext } from "./AccountContext";
-import useOpenModal from "../../hooks/useOpenModal";
 import useFilteredData from "../../hooks/useFilteredData";
 import { getServicesByIdCar } from "../../features/user/userSlice";
 import PropTypes from "prop-types";
 import { carFilterFn, serviceFilterFn } from "./utils/accountValidation";
-import { useServiceRequestForm } from "./hooks/useServiceRequestForm";
-import { useAccountActions } from "./hooks/useAccountActions";
+import { handleCarAction as handleCarActionUtil } from "./utils/accountHandlerUtils";
+import { useAccountModals } from "./hooks/useAccountModals";
+import { useAccountHandlers } from "./hooks/useAccountHandlers";
+
 export default function AccountProvider({ children }) {
   const { user, services } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const [selectedCar, setSelectedCar] = useState(null);
 
-  // Modals
-  const [handleReqService, isOpenReqService] = useOpenModal();
-  const [handleServices, isOpenServices] = useOpenModal();
+  // Modals management
+  const modals = useAccountModals();
 
   // Filtering and search for cars
   const memoizedCarFilterFn = useCallback(carFilterFn, []);
@@ -26,53 +28,30 @@ export default function AccountProvider({ children }) {
   const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } = 
     useFilteredData(services, memoizedServiceFilterFn);
 
-  // Account actions
-  const accountActions = useAccountActions(selectedCar, user);
-
-
-  const dispatch = useDispatch();
+  // Account handlers
+  const accountHandlers = useAccountHandlers(selectedCar, user, modals);
   
   useEffect(() => {
     dispatch(getServicesByIdCar(selectedCar?._id));
   }, [selectedCar, dispatch]);
   
   const handleCar = (e) => {
-    const { value, name } = e.target;
-    setSelectedCar(user?.cars.find((car) => car._id === value));
-    if (name === "req-services") {
-      handleReqService();
-    }
-    if (name === "services") {
-      handleServices();
-    }
+    handleCarActionUtil(e, user?.cars, setSelectedCar, modals);
   };
 
-  // Hook for requesting service
-  function useReqService() {
-    const requestForm = useServiceRequestForm();
-    
-    const onSubmit = (e) => {
-      accountActions.onSubmitReqService(e, requestForm.formData, handleReqService);
-    };
-    
-    return { 
-      setFormData: requestForm.setFormData, 
-      onSubmit 
-    };
-  }
-
   const value = {
-    isOpenServices,
+    isOpenServices: modals.services.isOpen,
     handleSerchServicesUser,
     displayServicesUser,
     handleSearch,
     handleCar,
-    isOpenReqService,
-    handleReqService,
+    isOpenReqService: modals.reqService.isOpen,
+    handleReqService: modals.reqService.handle,
     displayCars,
     selectedCar,
-    useReqService,
+    useReqService: accountHandlers.useReqService,
   };
+
   return (
     <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
   );
