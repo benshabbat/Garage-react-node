@@ -2,81 +2,42 @@ import { ServiceAdminContext } from "./ServiceAdminContext";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getServicesByType } from "../../features/admin/adminSlice";
-import useOpenModal from "../../hooks/useOpenModal";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
 import { serviceFilterFn, serviceStatusOptions } from "./utils/serviceValidation";
-import { useServiceForm } from "./hooks/useServiceForm";
-import { useServiceActions } from "./hooks/useServiceActions";
+import { handleServiceAction as handleServiceActionUtil } from "./utils/serviceHandlerUtils";
+import { useServiceModals } from "./hooks/useServiceModals";
+import { useServiceHandlers } from "./hooks/useServiceHandlers";
+
 export default function ServiceAdminProvider({ children }) {
   const { services } = useSelector((state) => state.admin);
-  const [selectedService, setSelctedService] = useState();
+  const dispatch = useDispatch();
 
-  // Modals
-  const [handleManageService, isOpenManageService] = useOpenModal();
-  const [handleEditService, isOpenEditService] = useOpenModal();
-  const [handleStatus, isOpenStatus] = useOpenModal();
-  const [handlePaid, isOpenPaid] = useOpenModal();
+  const [selectedService, setSelectedService] = useState();
+
+  // Modals management
+  const modals = useServiceModals();
 
   // Filtering and search
   const memoizedServiceFilterFn = useCallback(serviceFilterFn, []);
   const { displayData: displayServices, handleSearch } = 
     useFilteredData(services, memoizedServiceFilterFn);
 
-  // Service actions
-  const serviceActions = useServiceActions(selectedService);
-
-  const dispatch = useDispatch();
+  // Service handlers
+  const serviceHandlers = useServiceHandlers(selectedService);
 
   useEffect(() => {
     dispatch(getServicesByType());
   }, [
-    isOpenManageService,
-    isOpenStatus,
-    isOpenEditService,
-    isOpenPaid,
+    modals.manageService.isOpen,
+    modals.editStatusService.isOpen,
+    modals.editService.isOpen,
+    modals.editPaid.isOpen,
     dispatch,
   ]);
 
-  const handleServiceIdAction = async (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setSelctedService(services.find((service) => service._id === value));
-
-    switch (name) {
-      case "manage":
-        handleManageService();
-        break;
-      case "editStatus":
-        handleStatus();
-        break;
-      case "editPaid":
-        handlePaid();
-        break;
-      case "deleteService":
-        await serviceActions.onSubmitDeleteService(handleManageService);
-        break;
-      case "editService":
-        handleEditService();
-        break;
-      default:
-        handleManageService();
-    }
-  };
-
-  // Hook for editing service
-  const useEditService = (handleClick) => {
-    const editServiceForm = useServiceForm(selectedService);
-    
-    const onSubmit = (e) => {
-      serviceActions.onSubmitEditService(e, editServiceForm.formData, handleClick);
-    };
-    
-    return { 
-      onSubmit, 
-      formData: editServiceForm.formData, 
-      setFormData: editServiceForm.setFormData 
-    };
+  const handleServiceIdAction = (e) => {
+    handleServiceActionUtil(e, services, setSelectedService, modals, serviceHandlers.serviceActions);
   };
 
   const value = {
@@ -85,22 +46,8 @@ export default function ServiceAdminProvider({ children }) {
     handleServiceIdAction,
     handleSearch,
     selectedService,
-    useEditService,
-    modals: {
-      manageService: {
-        isOpen: isOpenManageService,
-        handle: handleManageService,
-      },
-      editStatusService: { isOpen: isOpenStatus, handle: handleStatus },
-      editPaid: {
-        isOpen: isOpenPaid,
-        handle: handlePaid,
-      },
-      editService: {
-        isOpen: isOpenEditService,
-        handle: handleEditService,
-      },
-    },
+    useEditService: serviceHandlers.useEditService,
+    modals,
   };
 
   return (
