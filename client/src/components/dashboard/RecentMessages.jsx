@@ -1,9 +1,13 @@
-import PropTypes from "prop-types";
+import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
 
 /**
  * RecentMessages displays table of recent messages
+ * Uses dashboard context to access data without props drilling
  */
-const RecentMessages = ({ messages }) => {
+const RecentMessages = () => {
+  const { stats } = useDashboardContext();
+  const { recent: messages } = stats.messages;
+
   if (!messages || messages.length === 0) {
     return (
       <section className="section">
@@ -54,26 +58,6 @@ const RecentMessages = ({ messages }) => {
       </div>
     </section>
   );
-};
-
-RecentMessages.propTypes = {
-  messages: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      from: PropTypes.shape({
-        name: PropTypes.string,
-        email: PropTypes.string,
-      }),
-      to: PropTypes.shape({
-        name: PropTypes.string,
-        email: PropTypes.string,
-      }),
-      title: PropTypes.string,
-      description: PropTypes.string,
-      read: PropTypes.bool,
-      createdAt: PropTypes.string.isRequired,
-    })
-  ),
 };
 
 export default RecentMessages;
