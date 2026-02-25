@@ -1,10 +1,14 @@
-import PropTypes from "prop-types";
+import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
 import StatCard from "./StatCard";
 
 /**
  * StatsOverview displays the overview statistics section with 6 stat cards
+ * Uses dashboard context to access data without props drilling
  */
-const StatsOverview = ({ overview }) => {
+const StatsOverview = () => {
+  const { stats } = useDashboardContext();
+  const { overview } = stats;
+
   return (
     <section className="stats-overview">
       <StatCard
@@ -41,20 +45,6 @@ const StatsOverview = ({ overview }) => {
       />
     </section>
   );
-};
-
-StatsOverview.propTypes = {
-  overview: PropTypes.shape({
-    totalUsers: PropTypes.number.isRequired,
-    adminCount: PropTypes.number.isRequired,
-    regularUserCount: PropTypes.number.isRequired,
-    totalCars: PropTypes.number.isRequired,
-    totalServices: PropTypes.number.isRequired,
-    totalAppointments: PropTypes.number.isRequired,
-    totalMessages: PropTypes.number.isRequired,
-    totalReviews: PropTypes.number.isRequired,
-    averageRating: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default StatsOverview;

@@ -1,9 +1,13 @@
-import PropTypes from "prop-types";
+import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
 
 /**
  * MonthlyTrends displays monthly trend charts for appointments and cars
+ * Uses dashboard context to access data without props drilling
  */
-const MonthlyTrends = ({ trends }) => {
+const MonthlyTrends = () => {
+  const { stats } = useDashboardContext();
+  const { trends } = stats;
+
   const hasAppointments = trends.monthlyAppointments?.length > 0;
   const hasCars = trends.monthlyCars?.length > 0;
 
@@ -65,29 +69,6 @@ const MonthlyTrends = ({ trends }) => {
       </div>
     </section>
   );
-};
-
-MonthlyTrends.propTypes = {
-  trends: PropTypes.shape({
-    monthlyAppointments: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.shape({
-          month: PropTypes.number.isRequired,
-          year: PropTypes.number.isRequired,
-        }).isRequired,
-        count: PropTypes.number.isRequired,
-      })
-    ),
-    monthlyCars: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.shape({
-          month: PropTypes.number.isRequired,
-          year: PropTypes.number.isRequired,
-        }).isRequired,
-        count: PropTypes.number.isRequired,
-      })
-    ),
-  }).isRequired,
 };
 
 export default MonthlyTrends;

@@ -1,9 +1,13 @@
-import PropTypes from "prop-types";
+import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
 
 /**
  * RecentAppointments displays table of recent appointments
+ * Uses dashboard context to access data without props drilling
  */
-const RecentAppointments = ({ appointments }) => {
+const RecentAppointments = () => {
+  const { stats } = useDashboardContext();
+  const { recent: appointments } = stats.appointments;
+
   if (!appointments || appointments.length === 0) {
     return (
       <section className="section">
@@ -62,21 +66,6 @@ const RecentAppointments = ({ appointments }) => {
       </div>
     </section>
   );
-};
-
-RecentAppointments.propTypes = {
-  appointments: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      clientName: PropTypes.string,
-      email: PropTypes.string,
-      phone: PropTypes.string,
-      date: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
-      notes: PropTypes.string,
-      status: PropTypes.string,
-    })
-  ),
 };
 
 export default RecentAppointments;

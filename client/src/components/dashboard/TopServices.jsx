@@ -1,10 +1,14 @@
-import PropTypes from "prop-types";
+import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
 
 /**
  * TopServices displays the list of available services
+ * Uses dashboard context to access data without props drilling
  */
-const TopServices = ({ services }) => {
-  if (!services || services.length === 0) {
+const TopServices = () => {
+  const { stats } = useDashboardContext();
+  const { topServices } = stats;
+
+  if (!topServices || topServices.length === 0) {
     return null;
   }
 
@@ -12,7 +16,7 @@ const TopServices = ({ services }) => {
     <section className="section">
       <h2>Available Services</h2>
       <div className="services-list">
-        {services.map((service) => (
+        {topServices.map((service) => (
           <div key={service._id} className="service-item">
             <div className="service-name">{service.name}</div>
             <div className="service-details">
@@ -23,16 +27,6 @@ const TopServices = ({ services }) => {
       </div>
     </section>
   );
-};
-
-TopServices.propTypes = {
-  services: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    })
-  ),
 };
 
 export default TopServices;

@@ -1,9 +1,13 @@
-import PropTypes from "prop-types";
+import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
 
 /**
  * AppointmentsByStatus displays appointments breakdown by status
+ * Uses dashboard context to access data without props drilling
  */
-const AppointmentsByStatus = ({ byStatus }) => {
+const AppointmentsByStatus = () => {
+  const { stats } = useDashboardContext();
+  const { byStatus } = stats.appointments;
+
   if (!byStatus || byStatus.length === 0) {
     return (
       <section className="section">
@@ -26,15 +30,6 @@ const AppointmentsByStatus = ({ byStatus }) => {
       </div>
     </section>
   );
-};
-
-AppointmentsByStatus.propTypes = {
-  byStatus: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string,
-      count: PropTypes.number.isRequired,
-    })
-  ),
 };
 
 export default AppointmentsByStatus;

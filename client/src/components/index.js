@@ -21,3 +21,13 @@ export { default as NavUser } from "./nav/NavUser";
 export { default as NavLanding } from "./nav/NavLanding";
 export { default as NavAdmin } from "./nav/NavAdmin";
 
+// Dashboard components
+export { 
+  StatCard,
+  StatsOverview,
+  AppointmentsByStatus,
+  TopServices,
+  RecentAppointments,
+  RecentMessages,
+  MonthlyTrends
+} from "./dashboard";

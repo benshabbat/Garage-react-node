@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getDashboardStats } from "../../features/dashboard/dashboardSlice";
+import DashboardProvider from "./DashboardProvider";
+import { useDashboardContext } from "./DashboardContext";
 import {
   StatsOverview,
   AppointmentsByStatus,
@@ -8,66 +7,43 @@ import {
   RecentAppointments,
   RecentMessages,
   MonthlyTrends,
-} from "./components";
+} from "../../components/dashboard";
 import "./Dashboard.css";
 
-const Dashboard = () => {
-  const dispatch = useDispatch();
-  const { stats, fetchState } = useSelector((state) => state.dashboard);
-  const { isLoading, isError, message } = fetchState;
-
-  useEffect(() => {
-    dispatch(getDashboardStats());
-  }, [dispatch]);
-
-  if (isLoading) {
-    return (
-      <div className="dashboard-container">
-        <div className="loading">Loading data...</div>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="dashboard-container">
-        <div className="error">Error: {message}</div>
-      </div>
-    );
-  }
-
-  if (!stats) {
-    return (
-      <div className="dashboard-container">
-        <div className="loading">No data available - loading...</div>
-      </div>
-    );
-  }
-
-  if (!stats.overview) {
-    return (
-      <div className="dashboard-container">
-        <div className="error">Error: Invalid data structure received</div>
-        <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "#666" }}>
-          Please check the server logs or contact support
-        </div>
-      </div>
-    );
-  }
-
-  const { overview, appointments, messages, trends, topServices } = stats;
+/**
+ * DashboardContent component that uses context to access data
+ * Separated from Dashboard to consume context after provider wraps it
+ */
+const DashboardContent = () => {
+  const { stats } = useDashboardContext();
 
   return (
-    <div className="dashboard-container">
-      <h1 className="dashboard-title">Dashboard</h1>
+    stats?.overview && (
+      <div className="dashboard-container">
+        <div className="dashboard-header">
+          <h1 className="dashboard-title">Dashboard</h1>
+        </div>
 
-      <StatsOverview overview={overview} />
-      <AppointmentsByStatus byStatus={appointments.byStatus} />
-      <TopServices services={topServices} />
-      <RecentAppointments appointments={appointments.recent} />
-      <RecentMessages messages={messages.recent} />
-      <MonthlyTrends trends={trends} />
-    </div>
+        <StatsOverview />
+        <AppointmentsByStatus />
+        <TopServices />
+        <RecentAppointments />
+        <RecentMessages />
+        <MonthlyTrends />
+      </div>
+    )
+  );
+};
+
+/**
+ * Dashboard page component
+ * Wraps content with DashboardProvider following the application's provider pattern
+ */
+const Dashboard = () => {
+  return (
+    <DashboardProvider>
+      <DashboardContent />
+    </DashboardProvider>
   );
 };
 
