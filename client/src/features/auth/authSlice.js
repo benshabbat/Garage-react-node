@@ -30,6 +30,17 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout();
 });
 
+// Shared case handlers for auth thunks
+const authPending = (state) => {
+  state.isLoading = true;
+};
+const authRejected = (state, action) => {
+  state.isLoading = false;
+  state.isError = true;
+  state.message = action.payload;
+  state.user = null;
+};
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -44,33 +55,19 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state) => {
-        state.isLoading = true;
-      })
+      .addCase(register.pending, authPending)
       .addCase(register.fulfilled, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
       })
-      .addCase(register.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-        state.user = null;
-      })
-      .addCase(login.pending, (state) => {
-        state.isLoading = true;
-      })
+      .addCase(register.rejected, authRejected)
+      .addCase(login.pending, authPending)
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload;
       })
-      .addCase(login.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-        state.user = null;
-      })
+      .addCase(login.rejected, authRejected)
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
       });

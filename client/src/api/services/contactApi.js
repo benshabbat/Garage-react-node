@@ -1,4 +1,4 @@
-import { createCrudOperations, getAll } from "../crudOperations.js";
+import { createCrudOperations } from "../crudOperations.js";
 import { API_URL_CONTACTS } from "../apiEndpoints.js";
 
 const contactOps = createCrudOperations(API_URL_CONTACTS);
@@ -21,7 +21,7 @@ export const contactApi = {
   
   // Get messages from contact form (alias)
   getMessages: async () => {
-    const data = await getAll(API_URL_CONTACTS);
+    const data = await contactOps.getAll();
     return data || [];
   },
 };

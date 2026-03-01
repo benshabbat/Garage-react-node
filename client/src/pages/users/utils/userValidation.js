@@ -29,50 +29,37 @@ export const isValidCar = (numberPlate) => {
 };
 
 /**
- * Check for duplicate email in users list
- * @param {Array} users - List of users
- * @param {string} email - Email to check
- * @param {string} excludeUserId - User ID to exclude from check (for edit)
- * @returns {boolean} - True if email exists
+ * Base duplicate checker across a users list.
+ * @param {Array} users
+ * @param {string} field - Field name to compare
+ * @param {string} value - Value to search for
+ * @param {string|null} excludeUserId - Skip this user (edit mode)
+ * @param {Function} [transform] - Optional transform applied to value before comparing
+ * @returns {boolean}
  */
-export const checkDuplicateEmail = (users, email, excludeUserId = null) => {
-  if (!email) return false;
-  
-  return users?.some(
-    (user) => user.email === email && user._id !== excludeUserId
-  ) || false;
+const checkDuplicate = (users, field, value, excludeUserId = null, transform = (v) => v) => {
+  if (!value) return false;
+  const normalized = transform(value);
+  return users?.some((user) => user[field] === normalized && user._id !== excludeUserId) || false;
 };
+
+/**
+ * Check for duplicate email in users list
+ */
+export const checkDuplicateEmail = (users, email, excludeUserId = null) =>
+  checkDuplicate(users, "email", email, excludeUserId);
 
 /**
  * Check for duplicate phone in users list
- * @param {Array} users - List of users
- * @param {string} phone - Phone to check
- * @param {string} excludeUserId - User ID to exclude from check (for edit)
- * @returns {boolean} - True if phone exists
  */
-export const checkDuplicatePhone = (users, phone, excludeUserId = null) => {
-  if (!phone) return false;
-  
-  const formattedPhone = formatPhone(phone);
-  return users?.some(
-    (user) => user.phone === formattedPhone && user._id !== excludeUserId
-  ) || false;
-};
+export const checkDuplicatePhone = (users, phone, excludeUserId = null) =>
+  checkDuplicate(users, "phone", phone, excludeUserId, formatPhone);
 
 /**
  * Check for duplicate username in users list
- * @param {Array} users - List of users
- * @param {string} username - Username to check
- * @param {string} excludeUserId - User ID to exclude from check (for edit)
- * @returns {boolean} - True if username exists
  */
-export const checkDuplicateUsername = (users, username, excludeUserId = null) => {
-  if (!username) return false;
-  
-  return users?.some(
-    (user) => user.username === username && user._id !== excludeUserId
-  ) || false;
-};
+export const checkDuplicateUsername = (users, username, excludeUserId = null) =>
+  checkDuplicate(users, "username", username, excludeUserId);
 
 /**
  * User filter function for search

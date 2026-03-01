@@ -48,29 +48,4 @@ export const createCrudOperations = (baseUrl) => ({
   },
 });
 
-/**
- * Legacy function - Get all items from URL
- * @deprecated Use createCrudOperations instead
- */
-export const getAll = async (url) => {
-  const response = await axios.get(url);
-  return response.data;
-};
 
-/**
- * Legacy function - Get item by ID from URL
- * @deprecated Use createCrudOperations instead
- */
-export const getById = async (url, id) => {
-  const response = await axios.get(`${url}/${id}`);
-  return response.data;
-};
-
-/**
- * Legacy function - Add item to URL
- * @deprecated Use createCrudOperations instead
- */
-export const addItem = async (url, obj) => {
-  const response = await axios.post(url, obj);
-  return response.data;
-};
