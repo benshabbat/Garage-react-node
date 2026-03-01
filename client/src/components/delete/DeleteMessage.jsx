@@ -1,4 +1,4 @@
-import { useContextMessages } from "../../pages/messages/MessagesConetxt";
+import { useContextMessages } from "../../pages/messages/MessagesContext";
 import Delete from "./Delete";
 const DeleteMessage = () => {
     const { modals,useDeleteMsg,selectedMsg } = useContextMessages();

@@ -1,5 +1,5 @@
 import "../../components/table/table.css";
-import { MessagesContext } from "./MessagesConetxt";
+import { MessagesContext } from "./MessagesContext";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesByIdUser } from "../../features/user/userSlice";

@@ -62,6 +62,19 @@ export const checkDuplicateUsername = (users, username, excludeUserId = null) =>
   checkDuplicate(users, "username", username, excludeUserId);
 
 /**
+ * Build the standard user form inputs array.
+ * @param {{ isExistEmail: boolean, isExistPhone: boolean, isExistUser: boolean }} validation
+ * @param {Object|null} [formData] - When provided, prefills value on each field (edit mode)
+ * @returns {Array} inputs array for ModalForm
+ */
+export const buildUserFormInputs = (validation, formData = null) => [
+  { name: "username", type: "text",     errorExist: "Username is exist", isExist: validation.isExistUser,  ...(formData && { value: formData.username }) },
+  { name: "email",    type: "email",    errorExist: "Email is exist",    isExist: validation.isExistEmail, ...(formData && { value: formData.email    }) },
+  { name: "phone",    type: "tel",      errorExist: "Phone is exist",    isExist: validation.isExistPhone, ...(formData && { value: formData.phone    }) },
+  { name: "password", type: "password", min: 8,                                                            ...(formData && { value: formData.password }) },
+];
+
+/**
  * User filter function for search
  * @param {Object} item - User object
  * @param {string} value - Search value

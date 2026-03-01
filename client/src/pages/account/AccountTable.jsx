@@ -20,12 +20,12 @@ export default function AccountTable() {
         <td>{car.numberPlate}</td>
         <td>{car.km}</td>
         <td>
-          <button value={car._id} name={"services"}  onClick={handleCar}>
+          <button value={car._id} name="services" onClick={handleCar}>
             services
           </button>
         </td>
         <td>
-          <button value={car._id}name={"req-services"} onClick={handleCar}>
+          <button value={car._id} name="req-services" onClick={handleCar}>
             req services
           </button>
         </td>

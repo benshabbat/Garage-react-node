@@ -5,6 +5,11 @@ import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminC
 import ButtonManage from "./ButtonManage";
 import FormManage from "./FormManage";
 
+const MANAGE_SERVICE_BUTTONS = [
+  { name: "editService",   type: "edit",   content: "Edit Service"   },
+  { name: "deleteService", type: "delete", content: "Delete Service" },
+];
+
 const ManageService = () => {
   const { selectedService, modals, handleServiceIdAction } =
     useServicesAdminContext();
@@ -14,20 +19,16 @@ const ManageService = () => {
       comp={
         <>
           <FormManage handle={modals.manageService.handle}>
-            <ButtonManage
-              name="editService"
-              type="edit"
-              handle={handleServiceIdAction}
-              value={selectedService?._id}
-              content="Edit Service"
-            />
-            <ButtonManage
-              name="deleteService"
-              type="delete"
-              handle={handleServiceIdAction}
-              value={selectedService?._id}
-              content="Delete Service"
-            />
+            {MANAGE_SERVICE_BUTTONS.map(({ name, type, content }) => (
+              <ButtonManage
+                key={name}
+                name={name}
+                type={type}
+                handle={handleServiceIdAction}
+                value={selectedService?._id}
+                content={content}
+              />
+            ))}
           </FormManage>
           <EditService />
         </>

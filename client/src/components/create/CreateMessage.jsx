@@ -1,5 +1,5 @@
 import { ModalForm } from "..";
-import { useContextMessages } from "../../pages/messages/MessagesConetxt";
+import { useContextMessages } from "../../pages/messages/MessagesContext";
 
 const CreateMessage = () => {
   const { useCreateMsg, modals } = useContextMessages();

@@ -4,6 +4,12 @@ import { useUsersContext } from "../../pages/users/UsersContext";
 import ButtonManage from "./ButtonManage";
 import FormManage from "./FormManage";
 
+const MANAGE_USER_BUTTONS = [
+  { name: "createCar",  type: "create", content: "Create Car"  },
+  { name: "editUser",   type: "edit",   content: "Edit User"   },
+  { name: "deleteUser", type: "delete", content: "Delete User" },
+];
+
 const ManageUser = () => {
   const { modals, handleUser, selectedUser } = useUsersContext();
   return (
@@ -11,27 +17,16 @@ const ManageUser = () => {
       comp={
         <>
           <FormManage handle={modals.manageUser.handle}>
-            <ButtonManage
-              name="createCar"
-              type={"create"}
-              handle={handleUser}
-              value={selectedUser?._id}
-              content={"Create Car"}
-            />
-            <ButtonManage
-              name="editUser"
-              type={"edit"}
-              handle={handleUser}
-              value={selectedUser?._id}
-              content={"Edit User"}
-            />
-            <ButtonManage
-              name="deleteUser"
-              type={"delete"}
-              handle={handleUser}
-              value={selectedUser?._id}
-              content={"Delete User"}
-            />
+            {MANAGE_USER_BUTTONS.map(({ name, type, content }) => (
+              <ButtonManage
+                key={name}
+                name={name}
+                type={type}
+                handle={handleUser}
+                value={selectedUser?._id}
+                content={content}
+              />
+            ))}
           </FormManage>
           <CreateCar />
           <EditUser />
