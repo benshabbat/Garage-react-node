@@ -20,20 +20,9 @@ export function useRating({
   const [rating, setRating] = useState(defaultRating);
   const [hover, setHover] = useState(0);
   const stars = [...Array(maxRating)];
-  const isDisabled = disabled;
-  
-  const getFontSize = () => {
-    switch (size) {
-      case "small":
-        return "20px";
-      case "large":
-        return "36px";
-      default:
-        return "28px";
-    }
-  };
-  
-  const fontSize = getFontSize();
+
+  const FONT_SIZE = { small: "20px", large: "36px" };
+  const fontSize = FONT_SIZE[size] ?? "28px";
 
   const handleClick = (value) => {
     if (!disabled) {
@@ -56,6 +45,6 @@ export function useRating({
     mouseOnStar,
     mouseOffStar,
     isActive,
-    isDisabled,
+    isDisabled: disabled,
   };
 }

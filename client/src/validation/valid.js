@@ -35,20 +35,15 @@ const inputType = (input) => {
   );
 };
 
-const valid = (data, type) => {
-  switch (type) {
-    case "email":
-      return validEmail(data);
-    case "password":
-      return validPass(data);
-    case "phone":
-      return validPhone(data);
-    case "numberPlate":
-      return validCar(data);
-    default:
-      return false;
-  }
+
+const VALIDATORS = {
+  email: validEmail,
+  password: validPass,
+  phone: validPhone,
+  numberPlate: validCar,
 };
+
+const valid = (data, type) => VALIDATORS[type]?.(data) ?? false;
 
 export {
   valid,

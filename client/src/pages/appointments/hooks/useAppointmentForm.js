@@ -1,30 +1,27 @@
 import { useState } from "react";
 
+const INITIAL_FORM = {
+  user: '',
+  clientName: '',
+  email: '',
+  phone: '',
+  date: '',
+  time: '',
+  notes: '',
+};
+
 /**
  * Custom hook for managing appointment form state
  * @param {Array} users - List of all users for auto-fill
  * @returns {Object} Form state and handlers
  */
 export const useAppointmentForm = (users) => {
-  const [formData, setFormData] = useState({
-    user: '',
-    clientName: '',
-    email: '',
-    phone: '',
-    date: '',
-    time: '',
-    notes: ''
-  });
+  const [formData, setFormData] = useState(INITIAL_FORM);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
 
-    // Auto-fill email and phone if user is selected
+    // Auto-fill details when a linked user is selected
     if (name === 'user' && value) {
       const selectedUser = users.find(u => u._id === value);
       if (selectedUser) {
@@ -35,21 +32,14 @@ export const useAppointmentForm = (users) => {
           email: selectedUser.email || prev.email,
           phone: selectedUser.phone || prev.phone,
         }));
+        return;
       }
     }
+
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const resetForm = () => {
-    setFormData({
-      user: '',
-      clientName: '',
-      email: '',
-      phone: '',
-      date: '',
-      time: '',
-      notes: ''
-    });
-  };
+  const resetForm = () => setFormData(INITIAL_FORM);
 
   const prepareSubmitData = () => {
     const appointmentData = { ...formData };
