@@ -14,10 +14,9 @@ export const useReviewsData = (isOpenAddReview, isSubmitted) => {
     const fetchReviews = async () => {
       try {
         const data = await getReviews();
-        setAllReviews(data || []); // Ensure data is an array
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-        setAllReviews([]); // Initialize to empty array on error
+        setAllReviews(data || []);
+      } catch {
+        setAllReviews([]);
       }
     };
     fetchReviews();

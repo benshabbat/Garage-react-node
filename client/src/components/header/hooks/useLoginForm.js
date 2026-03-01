@@ -16,8 +16,8 @@ export const useLoginForm = (onLogin) => {
     try {
       await dispatch(login(formData)).unwrap();
       onLogin();
-    } catch (error) {
-      console.error("Login failed:", error);
+    } catch {
+      // error is handled in Redux state (isError / message)
     }
   };
 

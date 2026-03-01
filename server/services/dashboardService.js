@@ -6,6 +6,23 @@ import Message from "../models/Message.js";
 import Review from "../models/Review.js";
 
 /**
+ * Returns a monthly aggregation pipeline for a Mongoose model since a given date.
+ * @param {import("mongoose").Model} Model
+ * @param {Date} since
+ */
+const getMonthlyTrend = (Model, since) =>
+  Model.aggregate([
+    { $match: { createdAt: { $gte: since } } },
+    {
+      $group: {
+        _id: { year: { $year: "$createdAt" }, month: { $month: "$createdAt" } },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { "_id.year": 1, "_id.month": 1 } },
+  ]);
+
+/**
  * Get comprehensive dashboard statistics
  * @returns {Object} Dashboard statistics including counts, recent data, and trends
  */
@@ -67,44 +84,9 @@ const getDashboardStats = async () => {
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
-  const monthlyAppointments = await Appointment.aggregate([
-    {
-      $match: {
-        createdAt: { $gte: sixMonthsAgo },
-      },
-    },
-    {
-      $group: {
-        _id: {
-          year: { $year: "$createdAt" },
-          month: { $month: "$createdAt" },
-        },
-        count: { $sum: 1 },
-      },
-    },
-    {
-      $sort: { "_id.year": 1, "_id.month": 1 },
-    },
-  ]);
-
-  const monthlyCars = await Car.aggregate([
-    {
-      $match: {
-        createdAt: { $gte: sixMonthsAgo },
-      },
-    },
-    {
-      $group: {
-        _id: {
-          year: { $year: "$createdAt" },
-          month: { $month: "$createdAt" },
-        },
-        count: { $sum: 1 },
-      },
-    },
-    {
-      $sort: { "_id.year": 1, "_id.month": 1 },
-    },
+  const [monthlyAppointments, monthlyCars] = await Promise.all([
+    getMonthlyTrend(Appointment, sixMonthsAgo),
+    getMonthlyTrend(Car, sixMonthsAgo),
   ]);
 
   // Get top services by name (simple count without appointments relation)

@@ -1,93 +1,70 @@
 import { createError } from "../utils/error.js";
 
+// ── Pure field validators (return error message string or null) ───────────────
+
+const validateClientName = (v) =>
+  typeof v !== "string" || v.trim().length < 2
+    ? "Client name must be at least 2 characters long"
+    : null;
+
+const validateEmail = (v) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? null : "Invalid email format";
+
+const validatePhone = (v) =>
+  /^(\+972|0)?[5-9]\d{8}$/.test(v.replace(/[-\s]/g, ""))
+    ? null
+    : "Invalid phone number format";
+
+const validateDate = (v) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return new Date(v) < today
+    ? "Appointment date must be in the future"
+    : null;
+};
+
+const validateTime = (v) =>
+  /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(v)
+    ? null
+    : "Invalid time format. Use HH:MM";
+
+// ── Middleware ────────────────────────────────────────────────────────────────
+
 /**
  * Validates appointment creation data
  */
 export const validateAppointmentCreation = (req, res, next) => {
-  const { clientName, email, phone, date, time, notes } = req.body;
+  const { clientName, email, phone, date, time } = req.body;
 
-  // Check for required fields
   if (!clientName || !email || !phone || !date || !time) {
     return next(createError(400, "All required fields must be provided"));
   }
 
-  // Validate client name
-  if (typeof clientName !== "string" || clientName.trim().length < 2) {
-    return next(createError(400, "Client name must be at least 2 characters long"));
-  }
+  const error =
+    validateClientName(clientName) ||
+    validateEmail(email) ||
+    validatePhone(phone) ||
+    validateDate(date) ||
+    validateTime(time);
 
-  // Validate email format
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return next(createError(400, "Invalid email format"));
-  }
-
-  // Validate phone format (Israeli phone)
-  const phoneRegex = /^(\+972|0)?[5-9]\d{8}$/;
-  if (!phoneRegex.test(phone.replace(/[-\s]/g, ""))) {
-    return next(createError(400, "Invalid phone number format"));
-  }
-
-  // Validate date is in the future
-  const appointmentDate = new Date(date);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  
-  if (appointmentDate < today) {
-    return next(createError(400, "Appointment date must be in the future"));
-  }
-
-  // Validate time format (HH:MM)
-  const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-  if (!timeRegex.test(time)) {
-    return next(createError(400, "Invalid time format. Use HH:MM"));
-  }
-
+  if (error) return next(createError(400, error));
   next();
 };
 
 /**
- * Validates appointment update data
+ * Validates appointment update data (all fields optional)
  */
 export const validateAppointmentUpdate = (req, res, next) => {
   const { clientName, email, phone, date, time } = req.body;
 
-  // Validate fields if provided
-  if (clientName && (typeof clientName !== "string" || clientName.trim().length < 2)) {
-    return next(createError(400, "Client name must be at least 2 characters long"));
-  }
+  const error =
+    (clientName && validateClientName(clientName)) ||
+    (email && validateEmail(email)) ||
+    (phone && validatePhone(phone)) ||
+    (date && validateDate(date)) ||
+    (time && validateTime(time));
 
-  if (email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return next(createError(400, "Invalid email format"));
-    }
-  }
-
-  if (phone) {
-    const phoneRegex = /^(\+972|0)?[5-9]\d{8}$/;
-    if (!phoneRegex.test(phone.replace(/[-\s]/g, ""))) {
-      return next(createError(400, "Invalid phone number format"));
-    }
-  }
-
-  if (date) {
-    const appointmentDate = new Date(date);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    if (appointmentDate < today) {
-      return next(createError(400, "Appointment date must be in the future"));
-    }
-  }
-
-  if (time) {
-    const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-    if (!timeRegex.test(time)) {
-      return next(createError(400, "Invalid time format. Use HH:MM"));
-    }
-  }
-
+  if (error) return next(createError(400, error));
   next();
 };
 
@@ -110,3 +87,4 @@ export const validateStatusUpdate = (req, res, next) => {
 
   next();
 };
+

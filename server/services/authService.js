@@ -4,6 +4,25 @@ import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { templatePhone } from "../utils/templates.js";
 
+const COOKIE_DOMAIN = "garage-server-dcv1.onrender.com";
+const isProd = () => process.env.NODE_ENV === "production";
+
+/**
+ * Builds cookie options shared by login and logout.
+ * @param {boolean} withMaxAge - include maxAge (true for login, false for logout)
+ */
+const buildCookieOptions = (withMaxAge = false) => {
+  const options = {
+    httpOnly: true,
+    secure: isProd(),
+    sameSite: isProd() ? "none" : "lax",
+    path: "/",
+    ...(withMaxAge && { maxAge: 24 * 60 * 60 * 1000 }),
+  };
+  if (isProd()) options.domain = process.env.COOKIE_DOMAIN || COOKIE_DOMAIN;
+  return options;
+};
+
 const register = async (req) => {
   const { username, phone, email, password } = req.body;
 
@@ -62,18 +81,7 @@ const login = async (req) => {
     { expiresIn: "24h" }
   );
 
-  const cookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    path: "/",
-    maxAge: 24 * 60 * 60 * 1000,
-  };
-
-  if (process.env.NODE_ENV === "production") {
-    cookieOptions.domain =
-      process.env.COOKIE_DOMAIN || "garage-server-dcv1.onrender.com";
-  }
+  const cookieOptions = buildCookieOptions(true);
 
   return {
     token,
@@ -86,20 +94,8 @@ const login = async (req) => {
 };
 
 const logout = async () => {
-  const cookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    path: "/",
-  };
-
-  if (process.env.NODE_ENV === "production") {
-    cookieOptions.domain =
-      process.env.COOKIE_DOMAIN || "garage-server-dcv1.onrender.com";
-  }
-
   return {
-    cookieOptions,
+    cookieOptions: buildCookieOptions(),
     message: "User has been logged out successfully",
   };
 };

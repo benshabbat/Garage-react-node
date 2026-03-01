@@ -10,12 +10,7 @@ export const dashboardApi = {
    * Requires admin authentication
    */
   getStats: async () => {
-    try {
-      const response = await axios.get(`${API_URL_DASHBOARD}/stats`);
-      return response.data;
-    } catch (error) {
-      console.error("dashboardApi.getStats - Error:", error.response?.data || error.message);
-      throw error;
-    }
+    const response = await axios.get(`${API_URL_DASHBOARD}/stats`);
+    return response.data;
   },
 };

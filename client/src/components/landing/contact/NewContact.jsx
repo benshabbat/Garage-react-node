@@ -24,8 +24,8 @@ export default function NewContact() {
       setFormData({}); // Reset form
       // Reset form fields
       e.target.reset();
-    } catch (error) {
-      console.error("Error sending message:", error);
+    } catch {
+      // submission failed silently - could add user-facing error state here
     }
   };
 

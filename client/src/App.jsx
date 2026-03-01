@@ -8,14 +8,13 @@ import {
   Cars,
   ServicesAdmin,
   Appointments,
+  Dashboard,
 } from "./pages";
-import Dashboard from "./pages/dashboard/Dashboard";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 import { PrivateRoute } from "./PrivateRoute.jsx";
 import Unauthorized from "./pages/Unauthorized";
 
-//TODO:ROUTER V7
 function App() {
   return (
     <>

@@ -48,3 +48,11 @@
 20260224	15:59:53	11fc70cb-6e80-4b9f-ad44-f2040036a18b	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
 20260224	16:00:40	be36ff84-8728-4162-9e9e-a08840e55326	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
 20260224	16:00:44	9cde2ce4-7d39-4bba-9064-ff68295ffc2e	TypeError: Cannot read properties of null (reading 'toFixed')	GET	/api/dashboard/stats	http://localhost:5173
+20260301	09:56:27	9189a587-6c40-43ef-8441-bf17c4eaf8e8	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
+20260301	09:56:27	7a842f4a-e2b1-4914-b224-c9731f72e700	Error: Not authenticated	GET	/api/users/63e14deca4340e45d23f20b2	http://localhost:5173
+20260301	09:56:32	c1c02bbf-66ab-4bfc-ae32-07ab9aee4eac	Error: Not authenticated	GET	/api/services/car/undefined	http://localhost:5173
+20260301	09:56:32	5732f140-4f74-4794-9f8b-1aeb8c4c3dac	Error: Not authenticated	GET	/api/services/car/undefined	http://localhost:5173
+20260301	09:56:40	782c79bb-2640-449e-816e-d7a8d0b54bcf	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
+20260301	09:56:40	f9afe4b0-1eae-41a4-9482-11d635e9c5a0	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
+20260301	09:57:31	ff934f16-922a-4064-9aef-f8e3562af576	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
+20260301	09:57:31	91f1a863-645b-426f-ad45-368791980a96	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
