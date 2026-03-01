@@ -2,8 +2,6 @@ import Car from "../models/Car.js";
 import User from "../models/User.js";
 import { templateCar } from "../utils/templates.js";
 
-//test create Car
-
 const createCar = async (req) => {
   const userId = req.params.userId;
   const { numberPlate } = req.body;
@@ -32,11 +30,11 @@ const updateCar = async (req) => {
 };
 
 const deleteCar = async (req) => {
-  const userId = req.params.userId;
-  await Car.findByIdAndDelete(req.params.id);
-  await User.findByIdAndUpdate(userId, {
-    $pull: { cars: req.params.id },
-  });
+  const { id, userId } = req.params;
+  await Promise.all([
+    Car.findByIdAndDelete(id),
+    User.findByIdAndUpdate(userId, { $pull: { cars: id } }),
+  ]);
   return "The Car has been removed";
 };
 const getCar = async (req) => {

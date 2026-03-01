@@ -37,10 +37,13 @@ const updateUser = async (req) => {
 };
 
 const deleteUser = async (req) => {
-  await User.findByIdAndDelete(req.params.id);
-  await Car.findOneAndDelete({ owner: req.params.id });
-  await Message.findOneAndDelete({ from: req.params.id });
-  await Message.findOneAndDelete({ to: req.params.id });
+  const { id } = req.params;
+  await Promise.all([
+    User.findByIdAndDelete(id),
+    Car.findOneAndDelete({ owner: id }),
+    Message.findOneAndDelete({ from: id }),
+    Message.findOneAndDelete({ to: id }),
+  ]);
   return "the user has been removed";
 };
 
