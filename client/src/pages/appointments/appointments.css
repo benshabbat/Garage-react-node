@@ -1,11 +1,17 @@
+/* =============================================
+   APPOINTMENTS PAGE – Landing-page theme
+   (dark glassmorphism over garage background)
+   ============================================= */
+
 .appointments-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
   min-height: calc(100vh - 80px);
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: transparent;
 }
 
+/* ── Header ─────────────────────────────────── */
 .appointments-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -13,78 +19,61 @@
 }
 
 @keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .appointments-header h1 {
   font-size: 2.5rem;
-  color: #1a1a1a;
+  color: #e5e7eb;
   margin-bottom: 0.5rem;
   font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .appointments-header p {
   font-size: 1.1rem;
-  color: #666;
+  color: #9ca3af;
 }
 
-/* Statistics Cards */
+/* ── Stats Cards ─────────────────────────────── */
 .stats-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
   margin-bottom: 2rem;
   animation: fadeIn 0.8s ease-out;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .stat-card {
-  background: white;
-  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-left: 4px solid transparent;
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
 
-.stat-total {
-  border-left-color: #2196F3;
-}
-
-.stat-pending {
-  border-left-color: #FF9800;
-}
-
-.stat-confirmed {
-  border-left-color: #4CAF50;
-}
-
-.stat-cancelled {
-  border-left-color: #f44336;
-}
+.stat-total     { border-left-color: #4a9eff; }
+.stat-pending   { border-left-color: #f59e0b; }
+.stat-confirmed { border-left-color: #34d399; }
+.stat-cancelled { border-left-color: #f87171; }
 
 .stat-icon {
   font-size: 2.5rem;
@@ -95,16 +84,17 @@
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
-  color: #1a1a1a;
+  color: #e5e7eb;
 }
 
 .stat-content p {
   margin: 0;
-  color: #666;
+  color: #9ca3af;
   font-size: 0.9rem;
   font-weight: 500;
 }
 
+/* ── Content Grid ────────────────────────────── */
 .appointments-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -114,40 +104,39 @@
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Form Section */
+/* ── Panels (form + list) ────────────────────── */
 .appointment-form-section,
 .appointments-list-section {
-  background: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease;
 }
 
 .appointment-form-section:hover,
 .appointments-list-section:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 24px 24px 60px rgba(0, 0, 0, 0.6);
 }
 
 .appointment-form-section h2,
 .appointments-list-section h2 {
-  font-size: 1.8rem;
-  color: #1a1a1a;
+  font-size: 1.6rem;
+  color: #e5e7eb;
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  font-weight: 600;
 }
 
+/* ── Form ────────────────────────────────────── */
 .appointment-form {
   display: flex;
   flex-direction: column;
@@ -157,74 +146,103 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .form-group label {
-  font-weight: 600;
-  color: #333;
-  font-size: 0.95rem;
+  font-weight: 500;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 0.6rem 0.25rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  color: #e5e7eb;
   font-size: 1rem;
   font-family: inherit;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #9ca3af;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  border-bottom-color: #4a9eff;
+}
+
+.form-group select option {
+  background-color: #1f2937;
+  color: #e5e7eb;
 }
 
 .user-select {
   cursor: pointer;
-  background-color: white;
 }
 
 .form-hint {
-  color: #666;
-  font-size: 0.85rem;
+  color: #9ca3af;
+  font-size: 0.82rem;
   font-style: italic;
-  margin-top: 0.25rem;
+  margin-top: 0.2rem;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
+/* ── Submit Button ───────────────────────────── */
 .submit-btn {
-  padding: 1rem 2rem;
- list-header {linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  padding: 0.85rem 2rem;
+  background-color: transparent;
+  color: #e5e7eb;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 0.5rem;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  width: 100%;
+  letter-spacing: 0.03em;
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+  background-color: rgba(229, 231, 235, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(74, 158, 255, 0.25);
 }
 
 .submit-btn:active {
-  transform: translateY(-1px
+  transform: translateY(0);
+}
+
+/* ── List Header (filter bar) ────────────────── */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
 .filter-buttons {
   display: flex;
   gap: 0.5rem;
@@ -232,165 +250,172 @@
 }
 
 .filter-btn {
-  padding: 0.5rem 1rem;
-  border: 2px solid #e0e0e0;
-  background: white;
+  padding: 0.4rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
   border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #666;
+  color: #9ca3af;
+  font-family: inherit;
 }
 
 .filter-btn:hover {
-  border-color: #4CAF50;
-  color: #4CAF50;
+  border-color: #4a9eff;
+  color: #4a9eff;
   transform: translateY(-2px);
 }
 
 .filter-btn.active {
-  background: #4CAF50;
-  color: white;
-  border-color: #4CAF50;
+  background-color: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
 }
 
-. background: #4CAF50;
-  color: whitelinear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 1.25rem;
-  transition: all 0.3s ease;
-  animation: cardSlideIn 0.5s ease-out;
-}
-
-@keyframes cardSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.appointment-card:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transform: translateY(-4px);
-  border-color: #4CAF50
-.submit-btn:hover {
-  background: #45a049;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-}
-
-/* Appointments List */
+/* ── Appointments List ───────────────────────── */
 .appointments-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-height: 600px;
+  max-height: 620px;
   overflow-y: auto;
-  padding-right: 0.5rem;
+  padding-right: 0.4rem;
 }
 
-.appointments-list::-webkit-scrollbar {
-  width: 8px;
-}
-
+.appointments-list::-webkit-scrollbar { width: 6px; }
 .appointments-list::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 10px;
 }
-
 .appointments-list::-webkit-scrollbar-thumb {
-  background: #888;
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
 }
-
 .appointments-list::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgba(255, 255, 255, 0.35);
 }
 
+/* ── Appointment Card ────────────────────────── */
 .appointment-card {
-  background: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background-color: rgba(31, 41, 55, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
   padding: 1.25rem;
   transition: all 0.3s ease;
+  animation: cardSlideIn 0.4s ease-out;
+}
+
+@keyframes cardSlideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .appointment-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  background-color: rgba(31, 41, 55, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(-3px);
+  border-color: rgba(74, 158, 255, 0.3);
 }
 
 .appointment-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .appointment-header h3 {
-  font-size: 1.3rem;
-  color: #1a14rem 1rem;
+  font-size: 1.1rem;
+  color: #e5e7eb;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ── Status Badges ───────────────────────────── */
+.appointment-status {
+  padding: 0.3rem 0.9rem;
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: capitalize;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .status-pending {
-  background: linear-gradient(135deg, #fff3cd 0%, #ffe082 100%);
-  color: #856404;
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.4);
 }
 
 .status-confirmed {
-  background: linear-gradient(135deg, #d4edda 0%, #a5d6a7 100%);
-  color: #155724;
+  background: rgba(52, 211, 153, 0.2);
+  color: #6ee7b7;
+  border: 1px solid rgba(52, 211, 153, 0.4);
 }
 
 .status-cancelled {
-  background: linear-gradient(135deg, #f8d7da 0%, #ef9a9a 100%);
-  color: #155724;
+  background: rgba(248, 113, 113, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(248, 113, 113, 0.4);
 }
 
-.status-cancelled {
-  background: #f8d7da;
-  color: #721c24;
+/* ── Card Details ────────────────────────────── */
+.appointment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.appointment-dlinear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-  padding: 0.75rem;
-  border-radius: 8px;
-  border-left: 4px solid #4CAF50;
+.appointment-details p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.appointment-details strong {
+  color: #d1d5db;
+  font-weight: 600;
+}
+
+.linked-user {
+  background: rgba(37, 99, 235, 0.18);
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.4rem;
+  border-left: 3px solid #4a9eff;
   font-weight: 500;
-  color: #2e7d32 !important;
-  animation: pulse 2s ease-in-out infinite;
+  color: #93c5fd !important;
+  font-size: 0.88rem;
+}
+
+/* ── Today highlight ─────────────────────────── */
+.appointment-today {
+  background: rgba(52, 211, 153, 0.12);
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #34d399;
+  font-weight: 500;
+  color: #6ee7b7 !important;
+  animation: pulse 2.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(76, 175, 80, 0);
-  }
-.appointment-details p {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #555;
-}padding: 3rem 2rem;
-  color: #999;
-  background: #f9f9f9;
-  border-radius: 12px;
-  border: 2px dashed #ddd;
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+}
+
+/* ── Empty State ─────────────────────────────── */
+.no-appointments {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #9ca3af;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 0.75rem;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
 }
 
 .empty-state-icon {
@@ -401,69 +426,41 @@
 }
 
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
 }
 
 .no-appointments p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin: 0.5rem 0;
-  color: #666;
+  color: #d1d5db;
 }
 
 .no-appointments small {
-  font-size: 0.9rem;
-  color: #999 strong {
-  color: #333;
-  font-weight: 600;
+  font-size: 0.88rem;
+  color: #9ca3af;
 }
 
-.linked-user {
-  background: #e8f5e9;
-  padding: 0.5rem;
-  border-radius: 6px;
-  border-left: 3px solid #4CAF50;
-  font-weight: 500;
-  color: #2e7d32 !important;
-}
-
-.no-appointments {
-  text-align: center;
-  color: #999;
-  padding: 2rem;
-  font-style: italic;
-}
-
+/* ── Loading / Error ─────────────────────────── */
 .loading,
 .error {
   text-align: center;
   padding: 2rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
-.loading {
-  color: #666;
-}
+.loading { color: #9ca3af; }
+.error   { color: #f87171; }
 
-.error {
-  color: #d32f2f;
-}
-
-/* Responsive Design */
+/* ── Responsive ──────────────────────────────── */
 @media (max-width: 1024px) {
   .appointments-content {
     grid-template-columns: 1fr;
   }
-
   .appointments-list {
     max-height: 500px;
   }
-
   .stats-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -472,45 +469,37 @@
 @media (max-width: 768px) {
   .appointments-container {
     padding: 1rem;
-    background: #f5f7fa;
   }
-
   .appointments-header h1 {
     font-size: 2rem;
   }
-
   .appointment-form-section,
   .appointments-list-section {
     padding: 1.5rem;
   }
-
   .form-row {
     grid-template-columns: 1fr;
   }
-
   .stats-container {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-
   .stat-card {
     padding: 1rem;
   }
-
   .list-header {
     flex-direction: column;
     align-items: flex-start;
   }
-
   .filter-buttons {
     width: 100%;
     justify-content: space-between;
   }
-
   .filter-btn {
     flex: 1;
-    padding: 0.5rem;
-    font-size: 0.85rem;
+    padding: 0.4rem;
+    font-size: 0.82rem;
+    text-align: center;
   }
 }
 
@@ -518,11 +507,9 @@
   .appointments-header h1 {
     font-size: 1.5rem;
   }
-
   .stat-content h3 {
     font-size: 1.5rem;
   }
-
   .stat-icon {
     font-size: 2rem;
   }
