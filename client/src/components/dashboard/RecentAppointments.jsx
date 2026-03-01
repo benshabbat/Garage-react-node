@@ -1,4 +1,5 @@
 import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
+import { truncate } from "../../utils/formatters";
 
 /**
  * RecentAppointments displays table of recent appointments
@@ -48,11 +49,7 @@ const RecentAppointments = () => {
                 </td>
                 <td className="time-cell">{appointment.time}</td>
                 <td className="notes-cell">
-                  {appointment.notes
-                    ? appointment.notes.length > 40
-                      ? appointment.notes.substring(0, 40) + "..."
-                      : appointment.notes
-                    : "None"}
+                  {truncate(appointment.notes, 40) || "None"}
                 </td>
                 <td>
                   <span className={`status-badge ${appointment.status}`}>

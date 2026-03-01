@@ -23,6 +23,17 @@ export function formatPhone(phone) {
 }
 
 /**
+ * Truncate a string to a maximum length, appending "..."
+ * @param {string} text
+ * @param {number} max
+ * @returns {string}
+ */
+export function truncate(text, max) {
+  if (!text) return "";
+  return text.length > max ? text.substring(0, max) + "..." : text;
+}
+
+/**
  * Format car license plate number
  * @param {string} car - Car license plate number
  * @returns {string} Formatted license plate

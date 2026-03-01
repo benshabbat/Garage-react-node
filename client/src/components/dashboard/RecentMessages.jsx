@@ -1,4 +1,5 @@
 import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
+import { truncate } from "../../utils/formatters";
 
 /**
  * RecentMessages displays table of recent messages
@@ -39,11 +40,7 @@ const RecentMessages = () => {
                 <td>{message.to?.name || message.to?.email || "User"}</td>
                 <td className="message-title">{message.title || "No Subject"}</td>
                 <td className="message-desc">
-                  {message.description
-                    ? message.description.length > 50
-                      ? message.description.substring(0, 50) + "..."
-                      : message.description
-                    : "N/A"}
+                  {truncate(message.description, 50) || "N/A"}
                 </td>
                 <td>
                   <span className={`status-badge ${message.read ? "completed" : "pending"}`}>
