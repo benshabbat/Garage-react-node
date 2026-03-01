@@ -1,10 +1,9 @@
 import "./login.css";
 
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/auth/authSlice";
-import { Form, OpenModal } from "..";
-import { useSelector } from "react-redux";
+import { OpenModal } from "..";
 export default function NewLogin({ isOpen }) {
   const { isError, message } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState();
@@ -20,13 +19,9 @@ export default function NewLogin({ isOpen }) {
           <form onSubmit={onSubmit}>
             <h1>Login</h1>
             <div className="input-box">
-              {/* <label form="username">Username</label>
-        <span className="error"></span> */}
               <input type="text" name="username" placeholder="username" />
             </div>
             <div className="input-box">
-              {/* <label form="password">Password</label>
-        <span className="error"></span> */}
               <input type="password" name="password" placeholder="password"/>
             </div>
             <div className="remember-forgot">

@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+const FILTER_STATUSES = ['all', 'pending', 'confirmed', 'cancelled'];
+
 /**
  * AppointmentsList displays the list of appointments with filters
  */
@@ -49,30 +51,15 @@ const AppointmentsList = ({
       <div className="list-header">
         <h2>📋 Scheduled Appointments</h2>
         <div className="filter-buttons">
-          <button 
-            className={`filter-btn ${filterStatus === 'all' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('all')}
-          >
-            All
-          </button>
-          <button 
-            className={`filter-btn ${filterStatus === 'pending' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('pending')}
-          >
-            Pending
-          </button>
-          <button 
-            className={`filter-btn ${filterStatus === 'confirmed' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('confirmed')}
-          >
-            Confirmed
-          </button>
-          <button 
-            className={`filter-btn ${filterStatus === 'cancelled' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('cancelled')}
-          >
-            Cancelled
-          </button>
+          {FILTER_STATUSES.map((status) => (
+            <button
+              key={status}
+              className={`filter-btn ${filterStatus === status ? 'active' : ''}`}
+              onClick={() => setFilterStatus(status)}
+            >
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </button>
+          ))}
         </div>
       </div>
       <div className="appointments-list">
