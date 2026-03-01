@@ -1,5 +1,11 @@
 import PropTypes from "prop-types";
 
+const CONTACT_FIELDS = [
+  { id: "clientName", name: "clientName", type: "text",  label: "Full Name *",       placeholder: "Enter your full name" },
+  { id: "email",      name: "email",      type: "email", label: "Email Address *",   placeholder: "Enter your email" },
+  { id: "phone",      name: "phone",      type: "tel",   label: "Phone Number *",    placeholder: "Enter your phone number" },
+];
+
 /**
  * AppointmentForm handles the booking form for new appointments
  */
@@ -29,44 +35,20 @@ const AppointmentForm = ({ formData, users, handleChange, handleSubmit }) => {
           </small>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="clientName">Full Name *</label>
-          <input
-            type="text"
-            id="clientName"
-            name="clientName"
-            placeholder="Enter your full name"
-            value={formData.clientName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email Address *</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="phone">Phone Number *</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Enter your phone number"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {CONTACT_FIELDS.map(({ id, name, type, label, placeholder }) => (
+          <div key={id} className="form-group">
+            <label htmlFor={id}>{label}</label>
+            <input
+              type={type}
+              id={id}
+              name={name}
+              placeholder={placeholder}
+              value={formData[name]}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        ))}
 
         <div className="form-row">
           <div className="form-group">

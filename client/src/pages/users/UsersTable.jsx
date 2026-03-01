@@ -16,12 +16,18 @@ export default function UsersTable() {
     };
   
   
+  const COLUMNS = [
+    { key: 'username', label: 'User Name' },
+    { key: 'email',    label: 'Email' },
+    { key: 'phone',    label: 'Phone Number' },
+  ];
+
   const trTh = (
     <tr>
       <th>Actions</th>
-      <th onClick={() => handleSortHeader('username')}>User Name</th>
-      <th onClick={() => handleSortHeader('email')}>Email</th>
-      <th onClick={() => handleSortHeader('phone')}>Phone Number</th>
+      {COLUMNS.map(({ key, label }) => (
+        <th key={key} onClick={() => handleSortHeader(key)}>{label}</th>
+      ))}
     </tr>
   );
   const trTd = displayUsers?.map((user) => (

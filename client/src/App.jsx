@@ -15,6 +15,17 @@ import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 import { PrivateRoute } from "./PrivateRoute.jsx";
 import Unauthorized from "./pages/Unauthorized";
 
+const PRIVATE_ROUTES = [
+  { path: "/myCars",           Component: Account },
+  { path: "/users",            Component: Users },
+  { path: "/cars",             Component: Cars },
+  { path: "/messages",         Component: Messages },
+  { path: "/services",         Component: ServicesAdmin },
+  { path: "/messages-contact", Component: MessagesOfContact },
+  { path: "/appointments",     Component: Appointments },
+  { path: "/dashboard",        Component: Dashboard },
+];
+
 function App() {
   return (
     <>
@@ -27,72 +38,18 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<PageLanding />} />
-          <Route
-            path="/myCars"
-            element={
-              <PrivateRoute>
-                <Account />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/users"
-            element={
-              <PrivateRoute>
-                <Users />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/cars"
-            element={
-              <PrivateRoute>
-                <Cars />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/messages"
-            element={
-              <PrivateRoute>
-                <Messages />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/services"
-            element={
-              <PrivateRoute>
-                <ServicesAdmin />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/messages-contact"
-            element={
-              <PrivateRoute>
-                <MessagesOfContact />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/appointments"
-            element={
-              <PrivateRoute>
-                <Appointments />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
+          {PRIVATE_ROUTES.map(({ path, Component }) => (
+            <Route
+              key={path}
+              path={path}
+              element={
+                <PrivateRoute>
+                  <Component />
+                </PrivateRoute>
+              }
+            />
+          ))}
           <Route path="/unauthorized" element={<Unauthorized />} />
-          
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

@@ -1,39 +1,27 @@
 import PropTypes from "prop-types";
 
+const STAT_CARDS = [
+  { key: "total",     icon: "📊", label: "Total Appointments", className: "stat-total" },
+  { key: "pending",   icon: "⏳", label: "Pending",            className: "stat-pending" },
+  { key: "confirmed", icon: "✅", label: "Confirmed",          className: "stat-confirmed" },
+  { key: "cancelled", icon: "❌", label: "Cancelled",          className: "stat-cancelled" },
+];
+
 /**
  * AppointmentStats displays statistics cards for appointments
  */
 const AppointmentStats = ({ stats }) => {
   return (
     <div className="stats-container">
-      <div className="stat-card stat-total">
-        <div className="stat-icon">📊</div>
-        <div className="stat-content">
-          <h3>{stats.total}</h3>
-          <p>Total Appointments</p>
+      {STAT_CARDS.map(({ key, icon, label, className }) => (
+        <div key={key} className={`stat-card ${className}`}>
+          <div className="stat-icon">{icon}</div>
+          <div className="stat-content">
+            <h3>{stats[key]}</h3>
+            <p>{label}</p>
+          </div>
         </div>
-      </div>
-      <div className="stat-card stat-pending">
-        <div className="stat-icon">⏳</div>
-        <div className="stat-content">
-          <h3>{stats.pending}</h3>
-          <p>Pending</p>
-        </div>
-      </div>
-      <div className="stat-card stat-confirmed">
-        <div className="stat-icon">✅</div>
-        <div className="stat-content">
-          <h3>{stats.confirmed}</h3>
-          <p>Confirmed</p>
-        </div>
-      </div>
-      <div className="stat-card stat-cancelled">
-        <div className="stat-icon">❌</div>
-        <div className="stat-content">
-          <h3>{stats.cancelled}</h3>
-          <p>Cancelled</p>
-        </div>
-      </div>
+      ))}
     </div>
   );
 };

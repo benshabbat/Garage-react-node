@@ -9,40 +9,20 @@ const StatsOverview = () => {
   const { stats } = useDashboardContext();
   const { overview } = stats;
 
+  const STAT_CARDS = [
+    { icon: "👥", title: "Users",        number: overview.totalUsers,        subtitle: `Admins: ${overview.adminCount} | Regular: ${overview.regularUserCount}` },
+    { icon: "🚗", title: "Cars",         number: overview.totalCars },
+    { icon: "🔧", title: "Services",     number: overview.totalServices },
+    { icon: "📅", title: "Appointments", number: overview.totalAppointments },
+    { icon: "💬", title: "Messages",     number: overview.totalMessages },
+    { icon: "⭐", title: "Reviews",      number: overview.totalReviews,      subtitle: `Average: ${overview.averageRating}` },
+  ];
+
   return (
     <section className="stats-overview">
-      <StatCard
-        icon="👥"
-        title="Users"
-        number={overview.totalUsers}
-        subtitle={`Admins: ${overview.adminCount} | Regular: ${overview.regularUserCount}`}
-      />
-      <StatCard
-        icon="🚗"
-        title="Cars"
-        number={overview.totalCars}
-      />
-      <StatCard
-        icon="🔧"
-        title="Services"
-        number={overview.totalServices}
-      />
-      <StatCard
-        icon="📅"
-        title="Appointments"
-        number={overview.totalAppointments}
-      />
-      <StatCard
-        icon="💬"
-        title="Messages"
-        number={overview.totalMessages}
-      />
-      <StatCard
-        icon="⭐"
-        title="Reviews"
-        number={overview.totalReviews}
-        subtitle={`Average: ${overview.averageRating}`}
-      />
+      {STAT_CARDS.map(({ icon, title, number, subtitle }) => (
+        <StatCard key={title} icon={icon} title={title} number={number} subtitle={subtitle} />
+      ))}
     </section>
   );
 };
