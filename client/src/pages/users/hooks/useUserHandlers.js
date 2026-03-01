@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUserForm } from "./useUserForm";
 import { useUserActions } from "./useUserActions";
 
@@ -16,6 +16,16 @@ export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) =
   
   // Form management for creating car
   const [carFormData, setCarFormData] = useState();
+
+  // Server-side error for registration
+  const [registerError, setRegisterError] = useState(null);
+
+  // Clear error when the create-user modal is closed
+  useEffect(() => {
+    if (!modals.createUser.isOpen) {
+      setRegisterError(null);
+    }
+  }, [modals.createUser.isOpen]);
   
   // User actions
   const userActions = useUserActions(selectedUser, setFilteredUsers, users);
@@ -24,13 +34,18 @@ export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) =
    * Hook for registering new user
    */
   const useRegister = () => {
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
       const validationState = {
         isExistEmail: createUserForm.isExistEmail,
         isExistPhone: createUserForm.isExistPhone,
         isExistUser: createUserForm.isExistUser,
       };
-      userActions.onSubmitRegister(e, createUserForm.formData, validationState, modals.createUser.handle);
+      try {
+        setRegisterError(null);
+        await userActions.onSubmitRegister(e, createUserForm.formData, validationState, modals.createUser.handle);
+      } catch (error) {
+        setRegisterError(error.message);
+      }
     };
     
     return { 
@@ -38,7 +53,8 @@ export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) =
       onSubmit, 
       isExistEmail: createUserForm.isExistEmail, 
       isExistPhone: createUserForm.isExistPhone, 
-      isExistUser: createUserForm.isExistUser 
+      isExistUser: createUserForm.isExistUser,
+      registerError,
     };
   };
 

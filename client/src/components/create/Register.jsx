@@ -4,7 +4,7 @@ import { buildUserFormInputs } from "../../pages/users/utils/userValidation";
 
 const Register = () => {
   const { modals, useRegister } = useUsersContext();
-  const { setFormData, onSubmit, isExistEmail, isExistPhone, isExistUser } = useRegister();
+  const { setFormData, onSubmit, isExistEmail, isExistPhone, isExistUser, registerError } = useRegister();
 
   return (
     <ModalForm
@@ -14,6 +14,7 @@ const Register = () => {
       setFormData={setFormData}
       title="Create User"
       inputs={buildUserFormInputs({ isExistEmail, isExistPhone, isExistUser })}
+      serverError={registerError}
     />
   );
 };

@@ -26,16 +26,17 @@ export const useUserForm = (users, initialData = null, isModalOpen = false, excl
     }
   }, [initialData]);
 
-  // Validate form data on change
-  const setFormDataWithValidation = (newData) => {
-    setFormData(newData);
-    
-    if (isModalOpen && newData) {
-      setIsExistEmail(checkDuplicateEmail(users, newData.email, excludeUserId));
-      setIsExistPhone(checkDuplicatePhone(users, newData.phone, excludeUserId));
-      setIsExistUser(checkDuplicateUsername(users, newData.username, excludeUserId));
+  // Run duplicate checks whenever formData actually changes.
+  // Using useEffect here avoids the bug where setFormDataWithValidation
+  // was called with a functional updater (prevState => ...) instead of
+  // the new data object — making newData.username always undefined.
+  useEffect(() => {
+    if (isModalOpen && formData) {
+      setIsExistEmail(checkDuplicateEmail(users, formData.email, excludeUserId));
+      setIsExistPhone(checkDuplicatePhone(users, formData.phone, excludeUserId));
+      setIsExistUser(checkDuplicateUsername(users, formData.username, excludeUserId));
     }
-  };
+  }, [formData, isModalOpen, users, excludeUserId]);
 
   // Reset validation state
   const resetValidation = () => {
@@ -46,7 +47,7 @@ export const useUserForm = (users, initialData = null, isModalOpen = false, excl
 
   return {
     formData,
-    setFormData: setFormDataWithValidation,
+    setFormData,
     isExistEmail,
     isExistPhone,
     isExistUser,

@@ -56,3 +56,6 @@
 20260301	09:56:40	f9afe4b0-1eae-41a4-9482-11d635e9c5a0	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
 20260301	09:57:31	ff934f16-922a-4064-9aef-f8e3562af576	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
 20260301	09:57:31	91f1a863-645b-426f-ad45-368791980a96	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "car" for model "Service"	GET	/api/services/car/undefined	http://localhost:5173
+20260301	15:41:50	b900696e-ec4a-403e-a300-46672e022e91	Error: User already exists	POST	/api/auth/register	http://localhost:5173
+20260301	15:46:15	5912209c-bb33-456e-80d5-fa4de48fb3e9	Error: User already exists	POST	/api/auth/register	http://localhost:5173
+20260301	15:53:41	8e68ab73-fca2-4a58-9a27-dbd7ea47f6f9	Error: User already exists	POST	/api/auth/register	http://localhost:5173

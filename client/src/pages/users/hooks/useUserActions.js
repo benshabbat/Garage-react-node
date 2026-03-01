@@ -1,6 +1,7 @@
 import { deleteUser, createCar, updateUser, createUser } from "../../../utils";
 import { formatPhone } from "../../../utils/formatters";
 import { isValidUserName, isValidCar } from "../utils/userValidation";
+import { extractErrorMessage } from "../../../features/utils/asyncThunkErrorHandler";
 
 /**
  * Custom hook for user CRUD operations
@@ -35,9 +36,15 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
       !isExistPhone &&
       !isExistUser
     ) {
-      const newUser = await createUser(formData);
-      handleCreateUser();
-      setFilteredUsers(() => [...users, newUser.data]);
+      try {
+        const newUser = await createUser(formData);
+        handleCreateUser();
+        setFilteredUsers(() => [...users, newUser.data]);
+      } catch (error) {
+        throw new Error(extractErrorMessage(error));
+      }
+    } else {
+      throw new Error("Please fix the validation errors before submitting.");
     }
   };
 

@@ -17,6 +17,7 @@ const ModalForm = ({
   setFormData,
   isFocus = true,
   validateOnBlur = false,
+  serverError = null,
 }) => {
   return (
     <OpenModal
@@ -33,6 +34,7 @@ const ModalForm = ({
           onSubmit={onSubmit}
           isFocus={isFocus}
           validateOnBlur={validateOnBlur}
+          serverError={serverError}
         />
       }
     />
@@ -51,6 +53,7 @@ ModalForm.propTypes = {
   setFormData: PropTypes.func.isRequired,
   isFocus: PropTypes.bool,
   validateOnBlur: PropTypes.bool,
+  serverError: PropTypes.string,
 };
 
 export default ModalForm;
