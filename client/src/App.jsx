@@ -14,6 +14,7 @@ import PageNotFound from "./components/pageNotFound/PageNotFound";
 import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 import { PrivateRoute } from "./PrivateRoute.jsx";
 import Unauthorized from "./pages/Unauthorized";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 const PRIVATE_ROUTES = [
   { path: "/myCars",           Component: Account },
@@ -28,7 +29,7 @@ const PRIVATE_ROUTES = [
 
 function App() {
   return (
-    <>
+    <ErrorBoundary>
       <BrowserRouter
         future={{
           v7_startTransition: true,
@@ -53,7 +54,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </ErrorBoundary>
   );
 }
 

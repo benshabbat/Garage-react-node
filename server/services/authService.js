@@ -4,7 +4,7 @@ import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { templatePhone } from "../utils/templates.js";
 
-const COOKIE_DOMAIN = "garage-server-dcv1.onrender.com";
+const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN || "garage-server-dcv1.onrender.com";
 const isProd = () => process.env.NODE_ENV === "production";
 
 /**
@@ -19,7 +19,7 @@ const buildCookieOptions = (withMaxAge = false) => {
     path: "/",
     ...(withMaxAge && { maxAge: 24 * 60 * 60 * 1000 }),
   };
-  if (isProd()) options.domain = process.env.COOKIE_DOMAIN || COOKIE_DOMAIN;
+  if (isProd()) options.domain = COOKIE_DOMAIN;
   return options;
 };
 

@@ -4,16 +4,8 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8800/
 
 axios.defaults.withCredentials = true;
 
-axios.interceptors.request.use((config) => {
-  const token = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("access_token="))
-    ?.split("=")[1];
-  if (token) {
-    config.headers["Authorization"] = `Bearer ${token}`;
-  }
-  return config;
-});
+// httpOnly cookies are sent automatically via withCredentials=true
+// No manual token handling needed here
 
 axios.interceptors.response.use(
   (response) => response,

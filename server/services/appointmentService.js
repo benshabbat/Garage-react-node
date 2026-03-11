@@ -1,5 +1,6 @@
 import Appointment from "../models/Appointment.js";
 import { templatePhone } from "../utils/templates.js";
+import { createError } from "../utils/error.js";
 
 const createAppointment = async (req) => {
   const { phone } = req.body;
@@ -65,10 +66,26 @@ const getAppointmentsByStatus = async (req) => {
 
 const getAppointmentsByDateRange = async (req) => {
   const { startDate, endDate } = req.query;
+
+  if (!startDate || !endDate) {
+    throw createError(400, "startDate and endDate are required");
+  }
+
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    throw createError(400, "Invalid date format");
+  }
+
+  if (start > end) {
+    throw createError(400, "startDate must be before endDate");
+  }
+
   const appointments = await Appointment.find({
     date: {
-      $gte: new Date(startDate),
-      $lte: new Date(endDate),
+      $gte: start,
+      $lte: end,
     },
   }).sort({ date: 1 });
   return appointments;
