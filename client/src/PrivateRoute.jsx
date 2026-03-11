@@ -11,7 +11,7 @@ export function PrivateRoute({ children }) {
   }
 
   if (!userAuth) {
-    return <Navigate to="/" state={{ from: location }} />;
+    return <Navigate to="/" />;
   }
 
   return<>

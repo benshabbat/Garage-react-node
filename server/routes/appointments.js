@@ -19,17 +19,24 @@ import {
 const router = express.Router();
 
 // Public routes
-router.post("/", validateAppointmentCreation, createAppointment); // Anyone can create an appointment
+router.post("/", validateAppointmentCreation, createAppointment);
 
 // Admin routes
-router.get("/", verifyAdmin, getAppointments); // Get all appointments
-router.get("/status", verifyAdmin, getAppointmentsByStatus); // Filter by status
-router.get("/date-range", verifyAdmin, getAppointmentsByDateRange); // Filter by date range
+const adminRouter = express.Router();
+adminRouter.use(verifyAdmin);
+adminRouter.get("/", getAppointments);
+adminRouter.get("/status", getAppointmentsByStatus);
+adminRouter.get("/date-range", getAppointmentsByDateRange);
+adminRouter.put("/:id", validateAppointmentUpdate, updateAppointment);
+adminRouter.patch("/:id/status", validateStatusUpdate, updateAppointmentStatus);
+adminRouter.delete("/:id", deleteAppointment);
 
-// Admin & User routes
-router.get("/:id", verifyUser, getAppointment); // Get single appointment
-router.put("/:id", verifyAdmin, validateAppointmentUpdate, updateAppointment); // Update appointment
-router.patch("/:id/status", verifyAdmin, validateStatusUpdate, updateAppointmentStatus); // Update status only
-router.delete("/:id", verifyAdmin, deleteAppointment); // Delete appointment
+// User routes
+const userRouter = express.Router();
+userRouter.use(verifyUser);
+userRouter.get("/:id", getAppointment);
+
+router.use(adminRouter);
+router.use(userRouter);
 
 export default router;

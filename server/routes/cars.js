@@ -7,25 +7,26 @@ import {
     createCar,
     getCarsByType,getCarsWithService,getCarsByOwner
   } from "../controllers/car.js";
-  import { verifyAdmin, verifyToken,verifyUser } from "../utils/verifyToken.js";
+  import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
   const router = express.Router();
 
-//GET ALL
-router.get("/",verifyAdmin, getCars);
-//GET ALL BY POPULATE
-router.get("/service",verifyUser, getCarsWithService);
-router.get("/populate", verifyAdmin, getCarsByType);
-router.get("/user/:user", verifyUser, getCarsByOwner);
-//CREATE
-router.post("/:userId",verifyAdmin,createCar);
+// Admin routes
+const adminRouter = express.Router();
+adminRouter.use(verifyAdmin);
+adminRouter.get("/populate", getCarsByType);
+adminRouter.get("/", getCars);
+adminRouter.post("/:userId", createCar);
+adminRouter.put("/:id", updateCar);
+adminRouter.delete("/:id/:userId", deleteCar);
 
-//UPDATE
-router.put("/:id",verifyAdmin, updateCar);
-//DELETE
-router.delete("/:id/:userId",verifyAdmin, deleteCar);
-//GET
-router.get("/:id",verifyUser, getCar);
+// User routes
+const userRouter = express.Router();
+userRouter.use(verifyUser);
+userRouter.get("/service", getCarsWithService);
+userRouter.get("/user/:user", getCarsByOwner);
+userRouter.get("/:id", getCar);
 
+router.use(adminRouter);
+router.use(userRouter);
 
-
-export default router
+export default router;

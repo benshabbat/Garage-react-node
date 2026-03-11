@@ -13,19 +13,30 @@ import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
+// Public routes
+router.post("/to/:to", createMessageToAdmin);
+
 // Admin routes
-router.get("/", verifyAdmin, getMessages);
-router.get("/populate", verifyAdmin, getMessagesByType);
+const adminRouter = express.Router();
+adminRouter.use(verifyAdmin);
+adminRouter.get("/", getMessages);
+adminRouter.get("/populate", getMessagesByType);
 
 // User routes
-router.get("/user/:id", verifyUser, getMessageByUser);
-router.put("/:id", verifyUser, updateMessage);
-router.delete("/:id", verifyUser, deleteMessage);
-router.get("/:id", verifyUser, getMessage);
+const userRouter = express.Router();
+userRouter.use(verifyUser);
+userRouter.get("/user/:id", getMessageByUser);
+userRouter.put("/:id", updateMessage);
+userRouter.delete("/:id", deleteMessage);
+userRouter.get("/:id", getMessage);
 
-// Public route - contact form (anyone can send a message to admin)
-router.post("/to/:to", createMessageToAdmin);
-// Authenticated route - message between users (requires login)
-router.post("/:from/:to", verifyToken, createMessage);     
+// Token routes
+const tokenRouter = express.Router();
+tokenRouter.use(verifyToken);
+tokenRouter.post("/:from/:to", createMessage);
+
+router.use(adminRouter);
+router.use(userRouter);
+router.use(tokenRouter);
 
 export default router;
