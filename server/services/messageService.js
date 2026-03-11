@@ -1,5 +1,8 @@
 import Message from "../models/Message.js";
 import User from "../models/User.js";
+import { createError } from "../utils/error.js";
+
+const ALLOWED_MESSAGE_POPULATE_FIELDS = ['from', 'to'];
 
 const createMessage = async (req) => {
   const from = req.params.from;
@@ -35,12 +38,13 @@ const createMessageToAdmin = async (req) => {
 
 const updateMessage = async (req) => {
   const updatedMessage = await Message.findByIdAndUpdate(
-    req.params.idMessage,
+    req.params.id,
     {
       $set: { read: true },
     },
     { new: true }
   );
+  if (!updatedMessage) throw createError(404, "Message not found");
   return updatedMessage;
 };
 
@@ -71,6 +75,9 @@ const getMessages = async () => {
 
 const getMessagesByType = async (req) => {
   const type = req.query.populate;
+  if (!ALLOWED_MESSAGE_POPULATE_FIELDS.includes(type)) {
+    throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_MESSAGE_POPULATE_FIELDS.join(', ')}`);
+  }
   const messages = await Message.find().populate(type);
   return messages;
 };

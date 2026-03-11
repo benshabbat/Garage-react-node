@@ -34,6 +34,14 @@ const authLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+const publicLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50,
+  message: { message: "Too many requests, please try again later" },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 //middlewares
 app.use(cookieParser());
 app.use(express.json());
@@ -48,8 +56,8 @@ app.use("/api/users", usersRoute);
 app.use("/api/cars", carsRoute);
 app.use("/api/services", servicesRoute);
 app.use("/api/messages", messagesRoute);
-app.use("/api/reviews", reviewsRoute);
-app.use("/api/contacts", contactsRoute);
+app.use("/api/reviews", publicLimiter, reviewsRoute);
+app.use("/api/contacts", publicLimiter, contactsRoute);
 app.use("/api/appointments", appointmentsRoute);
 app.use("/api/dashboard", dashboardRoute);
 

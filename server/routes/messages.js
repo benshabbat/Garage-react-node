@@ -19,12 +19,13 @@ router.get("/populate", verifyAdmin, getMessagesByType);
 
 // User routes
 router.get("/user/:id", verifyUser, getMessageByUser);
-router.put("/:idMessage", verifyUser, updateMessage);
+router.put("/:id", verifyUser, updateMessage);
 router.delete("/:id", verifyUser, deleteMessage);
 router.get("/:id", verifyUser, getMessage);
 
-// Public routes 
-router.post("/to/:to", createMessageToAdmin); 
-router.post("/:from/:to", createMessage);     
+// Public route - contact form (anyone can send a message to admin)
+router.post("/to/:to", createMessageToAdmin);
+// Authenticated route - message between users (requires login)
+router.post("/:from/:to", verifyToken, createMessage);     
 
 export default router;

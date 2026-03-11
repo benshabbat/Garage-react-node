@@ -19,7 +19,7 @@ const getContacts = async () => {
 
 const deleteContact = async (req) => {
   await Contact.findByIdAndDelete(req.params.id);
-  return "The Message has been removed";
+  return "The Contact has been removed";
 };
 
 const contactService = {
