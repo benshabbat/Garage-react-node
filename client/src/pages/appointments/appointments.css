@@ -514,3 +514,122 @@
     font-size: 2rem;
   }
 }
+
+/* ── List Controls (search + filter + export) ── */
+.list-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.apt-search-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.apt-search-input::placeholder { color: #6b7280; }
+
+.apt-search-input:focus {
+  outline: none;
+  border-color: #4a9eff;
+  background: rgba(74, 158, 255, 0.06);
+}
+
+.apt-export-btn {
+  align-self: flex-end;
+  padding: 0.4rem 1rem;
+  background: rgba(52, 211, 153, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 20px;
+  color: #6ee7b7;
+  font-size: 0.82rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.apt-export-btn:hover {
+  background: rgba(52, 211, 153, 0.28);
+  transform: translateY(-1px);
+}
+
+/* ── Card Action Row (status update) ─────────── */
+.appointment-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.action-label {
+  font-size: 0.78rem;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.action-status-btn {
+  padding: 0.28rem 0.8rem;
+  border-radius: 14px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  letter-spacing: 0.03em;
+}
+
+.action-status-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
+.action-status-btn.active-status {
+  opacity: 1;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.action-pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+.action-pending:not(:disabled):hover {
+  background: rgba(245, 158, 11, 0.3);
+}
+
+.action-confirmed {
+  background: rgba(52, 211, 153, 0.15);
+  color: #6ee7b7;
+  border-color: rgba(52, 211, 153, 0.35);
+}
+.action-confirmed:not(:disabled):hover {
+  background: rgba(52, 211, 153, 0.3);
+}
+
+.action-cancelled {
+  background: rgba(248, 113, 113, 0.15);
+  color: #fca5a5;
+  border-color: rgba(248, 113, 113, 0.35);
+}
+.action-cancelled:not(:disabled):hover {
+  background: rgba(248, 113, 113, 0.3);
+}
+

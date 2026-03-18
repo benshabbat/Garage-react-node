@@ -84,9 +84,20 @@ const getDashboardStats = async () => {
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
-  const [monthlyAppointments, monthlyCars] = await Promise.all([
+  const [monthlyAppointments, monthlyCars, monthlyRevenue] = await Promise.all([
     getMonthlyTrend(Appointment, sixMonthsAgo),
     getMonthlyTrend(Car, sixMonthsAgo),
+    Service.aggregate([
+      { $match: { createdAt: { $gte: sixMonthsAgo } } },
+      {
+        $group: {
+          _id: { year: { $year: "$createdAt" }, month: { $month: "$createdAt" } },
+          revenue: { $sum: "$price" },
+          paid: { $sum: { $cond: ["$paid", "$price", 0] } },
+        },
+      },
+      { $sort: { "_id.year": 1, "_id.month": 1 } },
+    ]),
   ]);
 
   // Get top services by name (simple count without appointments relation)
@@ -132,6 +143,7 @@ const getDashboardStats = async () => {
     trends: {
       monthlyAppointments,
       monthlyCars,
+      monthlyRevenue,
     },
     topServices,
   };

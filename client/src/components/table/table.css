@@ -40,6 +40,24 @@
   border: none;
 }
 
+.export-btn {
+  background: #48bb78;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 8px;
+  transition: background 0.2s ease;
+}
+
+.export-btn:hover {
+  background: #38a169;
+}
+
 .table__header .create-button {
   background: #4299e1;
   color: white;

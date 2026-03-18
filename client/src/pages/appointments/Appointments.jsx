@@ -20,6 +20,9 @@ const AppointmentsContent = () => {
     filterStatus,
     setFilterStatus,
     fetchState,
+    searchTerm,
+    setSearchTerm,
+    handleStatusChange,
   } = useAppointmentsContext();
 
   return (
@@ -44,6 +47,9 @@ const AppointmentsContent = () => {
           filterStatus={filterStatus}
           setFilterStatus={setFilterStatus}
           fetchState={fetchState}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleStatusChange={handleStatusChange}
         />
       </div>
     </div>

@@ -1,10 +1,23 @@
 import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
 import { useServicesAdminContext } from "./ServiceAdminContext";
+import { exportToCsv } from "../../utils/exportCsv";
 
 export default function ServiceAdminTable() {
   const { displayServices, handleServiceIdAction, handleSearch } =
     useServicesAdminContext();
+
+  const handleExport = () => {
+    const rows = displayServices?.map((s) => ({
+      car: s.car?.numberPlate || "",
+      title: s.title,
+      description: s.description,
+      price: s.price,
+      paid: s.paid ? "Paid" : "Unpaid",
+      status: s.status,
+    }));
+    exportToCsv(rows, "services");
+  };
   const trTh = (
     <tr>
       <th></th>
@@ -61,7 +74,7 @@ export default function ServiceAdminTable() {
   
   return (
     <div className="table-container">
-      <Search handleSearch={handleSearch} name={"Services"} />
+      <Search handleSearch={handleSearch} name={"Services"} onExport={handleExport} />
       <Table trTh={trTh} trTd={trTd} />
     </div>
   );
