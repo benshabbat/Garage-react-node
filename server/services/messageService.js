@@ -68,8 +68,10 @@ const getMessageByUser = async (req) => {
   return messagesTo.concat(messagesFrom);
 };
 
-const getMessages = async () => {
-  const messages = await Message.find();
+const getMessages = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const messages = await Message.find().skip((page - 1) * limit).limit(limit);
   return messages;
 };
 

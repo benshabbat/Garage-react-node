@@ -56,8 +56,10 @@ const getCar = async (req) => {
   return car;
 };
 
-const getCars = async () => {
-  const cars = await Car.find().populate("owner");
+const getCars = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const cars = await Car.find().populate("owner").skip((page - 1) * limit).limit(limit);
   return cars;
 };
 
@@ -66,12 +68,16 @@ const getCarsByType = async (req) => {
   if (!ALLOWED_CAR_POPULATE_FIELDS.includes(type)) {
     throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_CAR_POPULATE_FIELDS.join(', ')}`);
   }
-  const cars = await Car.find().populate(type);
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const cars = await Car.find().populate(type).skip((page - 1) * limit).limit(limit);
   return cars;
 };
 
-const getCarsWithService = async () => {
-  const cars = await Car.find().populate("services");
+const getCarsWithService = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const cars = await Car.find().populate("services").skip((page - 1) * limit).limit(limit);
   return cars;
 };
 
