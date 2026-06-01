@@ -138,6 +138,13 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
+.form-label input:focus-visible,
+.form-label textarea:focus-visible,
+.form-label select:focus-visible {
+  outline: 2px solid rgba(74, 158, 255, 0.8);
+  outline-offset: 2px;
+}
+
 /* Button Styles */
 .form-btn {
   width: 100%;
