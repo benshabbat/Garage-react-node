@@ -62,14 +62,18 @@ const getService = async (req) => {
   return service;
 };
 
-const getServices = async () => {
-  const services = await Service.find().populate("car");
+const getServices = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const services = await Service.find().populate("car").skip((page - 1) * limit).limit(limit);
   return services;
 };
 
 const getServicesByType = async (req) => {
   const type = req.query.populate;
-  const services = await Service.find().populate(type);
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const services = await Service.find().populate(type).skip((page - 1) * limit).limit(limit);
   return services;
 };
 

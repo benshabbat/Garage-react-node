@@ -64,8 +64,10 @@ const getUser = async (req) => {
   return user;
 };
 
-const getUsers = async () => {
-  const users = await User.find().select("-password");
+const getUsers = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const users = await User.find().select("-password").skip((page - 1) * limit).limit(limit);
   return users;
 };
 
@@ -74,7 +76,9 @@ const getUsersByType = async (req) => {
   if (!ALLOWED_POPULATE_FIELDS.includes(type)) {
     throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_POPULATE_FIELDS.join(', ')}`);
   }
-  const users = await User.find().populate(type);
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const users = await User.find().populate(type).skip((page - 1) * limit).limit(limit);
   return users;
 };
 

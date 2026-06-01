@@ -6,8 +6,10 @@ const createReview = async (req) => {
   return savedReview;
 };
 
-const getReviews = async () => {
-  const reviews = await Review.find();
+const getReviews = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const reviews = await Review.find().skip((page - 1) * limit).limit(limit);
   return reviews;
 };
 
