@@ -25,11 +25,13 @@ export default function Navbars() {
           className="mobile-nav-toggle"
           onClick={handleOutsideClick}
           aria-label="toggle navigation"
+          aria-expanded={isNavOpen}
+          aria-controls="main-navbar"
         >
           {isNavOpen ? "×" : "☰"}
         </button>
 
-        <div className={`navbar ${isNavOpen ? "active" : ""}`}>
+        <div id="main-navbar" className={`navbar ${isNavOpen ? "active" : ""}`}>
           <Nav />
         </div>
       </div>
