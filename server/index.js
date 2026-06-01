@@ -59,7 +59,7 @@ app.use("/api/services", servicesRoute);
 app.use("/api/messages", messagesRoute);
 app.use("/api/reviews", publicLimiter, reviewsRoute);
 app.use("/api/contacts", publicLimiter, contactsRoute);
-app.use("/api/appointments", appointmentsRoute);
+app.use("/api/appointments", publicLimiter, appointmentsRoute);
 app.use("/api/dashboard", dashboardRoute);
 app.use("/api/agent", agentRoute);
 
