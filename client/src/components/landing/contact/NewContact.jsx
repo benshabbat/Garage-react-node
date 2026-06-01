@@ -17,6 +17,7 @@ const FIELD_ROWS = [
 export default function NewContact() {
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -28,14 +29,14 @@ export default function NewContact() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError(null);
     try {
       await createContact(formData);
       setIsSubmitted(true);
-      setFormData({}); // Reset form
-      // Reset form fields
+      setFormData({});
       e.target.reset();
     } catch {
-      // submission failed silently - could add user-facing error state here
+      setSubmitError("Something went wrong. Please try again.");
     }
   };
 
@@ -59,6 +60,7 @@ export default function NewContact() {
         </div>
         <h4>Type your message here...</h4>
         <textarea name="message" required onChange={handleChange}></textarea>
+        {submitError && <p className="error">{submitError}</p>}
         <div className="button-container">
           <button type="submit">Send</button>
         </div>
