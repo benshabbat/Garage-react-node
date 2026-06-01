@@ -1,6 +1,8 @@
 import Service from "../models/Service.js";
 import Car from "../models/Car.js";
 import { createError } from "../utils/error.js";
+
+const ALLOWED_SERVICE_UPDATE_FIELDS = ['title', 'description', 'price', 'paid', 'status'];
 /**
  * Creates a new service and associates it with a car
  * @param {Object} req - Express request object
@@ -43,11 +45,12 @@ const createService = async (req) => {
 };
 
 const updateService = async (req) => {
+  const safeBody = Object.fromEntries(
+    Object.entries(req.body).filter(([k]) => ALLOWED_SERVICE_UPDATE_FIELDS.includes(k))
+  );
   const updatedService = await Service.findByIdAndUpdate(
     req.params.id,
-    {
-      $set: req.body,
-    },
+    { $set: safeBody },
     { new: true }
   );
   return updatedService;
