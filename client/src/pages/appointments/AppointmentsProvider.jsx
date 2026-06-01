@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAppointments, createAppointment } from "../../features/appointments/appointmentSlice";
+import { fetchAppointments, createAppointment, updateAppointment } from "../../features/appointments/appointmentSlice";
 import { getUsers } from "../../features/admin/adminSlice";
 import { AppointmentsContext } from "./AppointmentsContext";
 import { useAppointmentForm } from "./hooks/useAppointmentForm";
@@ -40,6 +40,13 @@ export default function AppointmentsProvider({ children }) {
     appointmentForm.resetForm();
   };
 
+  const handleStatusChange = useCallback(
+    (id, newStatus) => {
+      dispatch(updateAppointment({ id, data: { status: newStatus } }));
+    },
+    [dispatch]
+  );
+
   const value = {
     // Data
     appointments,
@@ -56,6 +63,11 @@ export default function AppointmentsProvider({ children }) {
     filteredAppointments: appointmentFilters.filteredAppointments,
     filterStatus: appointmentFilters.filterStatus,
     setFilterStatus: appointmentFilters.setFilterStatus,
+    searchTerm: appointmentFilters.searchTerm,
+    setSearchTerm: appointmentFilters.setSearchTerm,
+
+    // Actions
+    handleStatusChange,
   };
 
   return (

@@ -7,11 +7,15 @@ import {
 import { verifyAdmin } from "../utils/verifyToken.js";
 const router = express.Router();
 
-//GET ALL
-router.get("/", verifyAdmin, getContacts);
-//POST
+// Public routes
 router.post("/", createContact);
-//DELETE
-router.delete("/:id", verifyAdmin, deleteContact);
+
+// Admin routes
+const adminRouter = express.Router();
+adminRouter.use(verifyAdmin);
+adminRouter.get("/", getContacts);
+adminRouter.delete("/:id", deleteContact);
+
+router.use(adminRouter);
 
 export default router;

@@ -11,5 +11,5 @@ export const getContacts = createHandler(contactService.getContacts, 200);
 export const deleteContact = createHandler(
   contactService.deleteContact,
   200,
-  "The Message has been removed"
+  "The Contact has been removed"
 );

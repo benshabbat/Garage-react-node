@@ -9,28 +9,28 @@ import {
   getServicesByCar,
   getServicesByUser
 } from "../controllers/service.js";
-import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
+import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
 const router = express.Router();
 
-
-//GET ALL BY POPULATE
-router.get("/populate", verifyAdmin, getServicesByType);
-//CREATE
-router.post("/:carId", verifyAdmin, createService);
-
-//UPDATE
-router.put("/:id", verifyAdmin, updateService);
-//DELETE
-router.delete("/:id", verifyAdmin, deleteService);
-//GET
-router.get("/:id", verifyUser, getService);
-
-// GET by car
-router.get("/car/:car", verifyUser, getServicesByCar);
-// GET by user
+// Public routes
 router.get("/user/:user", getServicesByUser);
-//GET ALL
-router.get("/",verifyAdmin, getServices);
 
+// Admin routes
+const adminRouter = express.Router();
+adminRouter.use(verifyAdmin);
+adminRouter.get("/populate", getServicesByType);
+adminRouter.get("/", getServices);
+adminRouter.post("/:carId", createService);
+adminRouter.put("/:id", updateService);
+adminRouter.delete("/:id", deleteService);
+
+// User routes
+const userRouter = express.Router();
+userRouter.use(verifyUser);
+userRouter.get("/car/:car", getServicesByCar);
+userRouter.get("/:id", getService);
+
+router.use(adminRouter);
+router.use(userRouter);
 
 export default router;
