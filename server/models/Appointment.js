@@ -42,4 +42,8 @@ const AppointmentSchema = new Schema({
   },
 });
 
+AppointmentSchema.index({ date: 1 });
+AppointmentSchema.index({ status: 1 });
+AppointmentSchema.index({ user: 1 });
+
 export default mongoose.model("Appointment", AppointmentSchema);
