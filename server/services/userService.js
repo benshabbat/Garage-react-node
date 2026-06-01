@@ -22,9 +22,12 @@ const updateUser = async (req) => {
   // Process phone number if provided
   const newPhone = phone ? templatePhone(phone) : user.phone;
 
-  // Process password: only hash if a new (different) password is provided
+  // Process password: require current password before allowing a change
   let updatedPassword = user.password;
   if (password) {
+    if (!req.body.currentPassword) throw createError(400, "Current password is required to set a new password");
+    const isCurrentValid = await bcrypt.compare(req.body.currentPassword, user.password);
+    if (!isCurrentValid) throw createError(401, "Current password is incorrect");
     const isMatchingPassword = await bcrypt.compare(password, user.password);
     if (!isMatchingPassword) {
       const salt = await bcrypt.genSalt(10);
