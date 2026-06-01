@@ -10,7 +10,7 @@ const Header = () => {
       <HeaderProvider>
         <Navbars />
       </HeaderProvider>
-      <Suspense fallback={<h1>Loading..</h1>}>
+      <Suspense fallback={<div className="page-loader" aria-label="Loading" />}>
         <Outlet />
       </Suspense>
     </>
