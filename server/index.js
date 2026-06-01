@@ -67,8 +67,12 @@ app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-app.use(errorHandler)
-app.listen(port, () => {
-  connectDB();
-  console.log("connected to backend!");
-});
+app.use(errorHandler);
+
+async function start() {
+  await connectDB();
+  app.listen(port, () => {
+    console.log("connected to backend!");
+  });
+}
+start();
