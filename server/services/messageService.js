@@ -17,19 +17,15 @@ const createMessage = async (req) => {
   });
   return savedMessage;
 };
+const ALLOWED_PUBLIC_MESSAGE_FIELDS = ['content', 'subject'];
+
 const createMessageToAdmin = async (req) => {
   const to = req.params.to;
-  const { from } = req.body;
-  const newMessage = new Message({
-    ...req.body,
-    to,
-  });
+  const safeBody = Object.fromEntries(
+    Object.entries(req.body).filter(([k]) => ALLOWED_PUBLIC_MESSAGE_FIELDS.includes(k))
+  );
+  const newMessage = new Message({ ...safeBody, to, from: null });
   const savedMessage = await newMessage.save();
-  if (from) {
-    await User.findByIdAndUpdate(from, {
-      $push: { messages: [savedMessage._id] },
-    });
-  }
   await User.findByIdAndUpdate(to, {
     $push: { messages: [savedMessage._id] },
   });
