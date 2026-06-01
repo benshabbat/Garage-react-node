@@ -36,7 +36,9 @@ function App() {
           v7_relativeSplatPath: true
         }}
       >
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />
+        <main id="main-content">
         <Routes>
           <Route path="/" element={<PageLanding />} />
           {PRIVATE_ROUTES.map(({ path, Component }) => (
@@ -53,6 +55,7 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        </main>
       </BrowserRouter>
       <Agent />
     </ErrorBoundary>
