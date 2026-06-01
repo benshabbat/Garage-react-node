@@ -1,5 +1,6 @@
 import Service from "../models/Service.js";
 import Car from "../models/Car.js";
+import { createError } from "../utils/error.js";
 /**
  * Creates a new service and associates it with a car
  * @param {Object} req - Express request object
@@ -78,6 +79,9 @@ const getServicesByCar = async (req) => {
 };
 
 const getServicesByUser = async (req) => {
+  if (req.user.id !== req.params.user && !req.user.isAdmin) {
+    throw createError(403, "Not authorized");
+  }
   const services = await Service.find({ user: req.params.user });
   return services;
 };
