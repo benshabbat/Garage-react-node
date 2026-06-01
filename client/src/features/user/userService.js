@@ -1,14 +1,14 @@
 import axios from "../../axiosConfig.js";
 import { getUserId } from "../../utils.js";
+import { ADMIN_ID } from "../../api/apiEndpoints.js";
 
 const API_URL_CAR = "/cars";
 const API_URL_SERVICES = "/services";
 const API_URL_MESSAGES = "/messages";
-const ADMIN = "63e14deca4340e45d23f20b2";
 
 const createReqService = async (dataMessage) => {
   const { data } = await axios.post(
-    `${API_URL_MESSAGES}/to/${ADMIN}`,
+    `${API_URL_MESSAGES}/to/${ADMIN_ID}`,
     dataMessage
   );
 
