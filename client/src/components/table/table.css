@@ -138,11 +138,20 @@ button[name="createService"] {
 .status.done {
   background: #828fee;
 }
+.status.done::before {
+  content: "✓ ";
+}
 .status.pending {
   background: #eef681;
 }
+.status.pending::before {
+  content: "⏳ ";
+}
 .status.on-work {
   background: #7ef1ae;
+}
+.status.on-work::before {
+  content: "⚙ ";
 }
 
 .editPaid.Paid {
