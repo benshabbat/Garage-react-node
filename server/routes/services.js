@@ -12,8 +12,6 @@ import {
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
 const router = express.Router();
 
-// Public routes
-router.get("/user/:user", getServicesByUser);
 
 // Admin routes
 const adminRouter = express.Router();
@@ -27,6 +25,7 @@ adminRouter.delete("/:id", deleteService);
 // User routes
 const userRouter = express.Router();
 userRouter.use(verifyUser);
+userRouter.get("/user/:user", getServicesByUser);
 userRouter.get("/car/:car", getServicesByCar);
 userRouter.get("/:id", getService);
 
