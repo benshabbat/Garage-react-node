@@ -21,6 +21,8 @@ export { default as NavUser } from "./nav/NavUser";
 export { default as NavLanding } from "./nav/NavLanding";
 export { default as NavAdmin } from "./nav/NavAdmin";
 
+export { default as Agent } from "./agent/Agent";
+
 // Dashboard components
 export { 
   StatCard,

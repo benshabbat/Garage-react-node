@@ -9,6 +9,7 @@ import reviewsRoute from "./routes/reviews.js";
 import contactsRoute from "./routes/contacts.js";
 import appointmentsRoute from "./routes/appointments.js";
 import dashboardRoute from "./routes/dashboard.js";
+import agentRoute from "./routes/agent.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
@@ -60,6 +61,7 @@ app.use("/api/reviews", publicLimiter, reviewsRoute);
 app.use("/api/contacts", publicLimiter, contactsRoute);
 app.use("/api/appointments", appointmentsRoute);
 app.use("/api/dashboard", dashboardRoute);
+app.use("/api/agent", agentRoute);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
