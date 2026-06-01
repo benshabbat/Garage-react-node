@@ -17,7 +17,7 @@ export default function Navbars() {
       <div className="main-header">
         <div className="logo">
           <Link to="/">
-            <img src={Logo} alt="logo for garage" className="logo" />
+            <img src={Logo} alt="Garage770" className="logo" />
           </Link>
         </div>
 
