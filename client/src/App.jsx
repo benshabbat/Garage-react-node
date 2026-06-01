@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Header } from "./components";
+import { Header, Agent } from "./components";
 import {
   Account,
   Messages,
@@ -53,6 +53,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
+      <Agent />
     </>
   );
 }

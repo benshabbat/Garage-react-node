@@ -9,6 +9,7 @@ import reviewsRoute from "./routes/reviews.js";
 import contactsRoute from "./routes/contacts.js";
 import appointmentsRoute from "./routes/appointments.js";
 import dashboardRoute from "./routes/dashboard.js";
+import agentRoute from "./routes/agent.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectDB from "./config/db.js";
@@ -42,6 +43,7 @@ app.use("/api/reviews", reviewsRoute);
 app.use("/api/contacts", contactsRoute);
 app.use("/api/appointments", appointmentsRoute);
 app.use("/api/dashboard", dashboardRoute);
+app.use("/api/agent", agentRoute);
 
 app.use(errorHandler)
 app.listen(port, () => {
