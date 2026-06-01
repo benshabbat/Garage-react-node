@@ -56,7 +56,7 @@ app.use("/api/auth", authLimiter, authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/cars", carsRoute);
 app.use("/api/services", servicesRoute);
-app.use("/api/messages", messagesRoute);
+app.use("/api/messages", publicLimiter, messagesRoute);
 app.use("/api/reviews", publicLimiter, reviewsRoute);
 app.use("/api/contacts", publicLimiter, contactsRoute);
 app.use("/api/appointments", publicLimiter, appointmentsRoute);
