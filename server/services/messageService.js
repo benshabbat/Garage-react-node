@@ -59,13 +59,10 @@ const getMessage = async (req) => {
 };
 
 const getMessageByUser = async (req) => {
-  const messagesTo = await Message.find({ to: req.params.id })
-    .populate("to")
-    .populate("from");
-  const messagesFrom = await Message.find({ from: req.params.id })
-    .populate("from")
-    .populate("to");
-  return messagesTo.concat(messagesFrom);
+  const messages = await Message.find({
+    $or: [{ to: req.params.id }, { from: req.params.id }],
+  }).populate("to").populate("from");
+  return messages;
 };
 
 const getMessages = async () => {
