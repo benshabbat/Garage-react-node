@@ -2,14 +2,17 @@ import Appointment from "../models/Appointment.js";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
 
+const ALLOWED_APPOINTMENT_CREATE_FIELDS = ['clientName', 'email', 'phone', 'date', 'time', 'notes', 'user'];
+
 const createAppointment = async (req) => {
   const { phone } = req.body;
   const formattedPhone = phone ? templatePhone(phone) : phone;
-  
-  const newAppointment = new Appointment({
-    ...req.body,
-    phone: formattedPhone,
-  });
+
+  const safeBody = Object.fromEntries(
+    Object.entries(req.body).filter(([k]) => ALLOWED_APPOINTMENT_CREATE_FIELDS.includes(k))
+  );
+
+  const newAppointment = new Appointment({ ...safeBody, phone: formattedPhone });
   const savedAppointment = await newAppointment.save();
   return savedAppointment;
 };
