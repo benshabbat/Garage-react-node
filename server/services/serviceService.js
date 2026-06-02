@@ -2,6 +2,7 @@ import Service from "../models/Service.js";
 import Car from "../models/Car.js";
 import { createError } from "../utils/error.js";
 
+const ALLOWED_SERVICE_POPULATE_FIELDS = ['car'];
 const ALLOWED_SERVICE_UPDATE_FIELDS = ['title', 'description', 'price', 'paid', 'status'];
 /**
  * Creates a new service and associates it with a car
@@ -74,6 +75,9 @@ const getServices = async (req) => {
 
 const getServicesByType = async (req) => {
   const type = req.query.populate;
+  if (!ALLOWED_SERVICE_POPULATE_FIELDS.includes(type)) {
+    throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_SERVICE_POPULATE_FIELDS.join(', ')}`);
+  }
   const limit = Math.min(parseInt(req.query.limit) || 500, 500);
   const page = Math.max(parseInt(req.query.page) || 1, 1);
   const services = await Service.find().populate(type).skip((page - 1) * limit).limit(limit);
