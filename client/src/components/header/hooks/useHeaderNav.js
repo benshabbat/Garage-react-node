@@ -1,32 +1,15 @@
-import { useState } from "react";
 import useLogout from "../../../hooks/useLogout";
+import { useHeaderUIStore } from "../../../stores/uiStores";
 
-/**
- * Custom hook for managing header navigation state
- * @param {Function} onLogin - Login modal handler
- * @returns {Object} Navigation state and handlers
- */
-export const useHeaderNav = (onLogin) => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+export const useHeaderNav = () => {
+  const isNavOpen = useHeaderUIStore((s) => s.isNavOpen);
+  const toggleNav = useHeaderUIStore((s) => s.toggleNav);
+  const toggleLogin = useHeaderUIStore((s) => s.toggleLogin);
   const { onLogout } = useLogout();
 
-  const handleOutsideClick = () => setIsNavOpen(!isNavOpen);
+  const handleOutsideClick = () => toggleNav();
+  const handleLogin = () => { toggleNav(); toggleLogin(); };
+  const handleLogout = () => { toggleNav(); onLogout(); };
 
-  const handleLogin = () => {
-    handleOutsideClick();
-    onLogin();
-  };
-
-  const handleLogout = () => {
-    handleOutsideClick();
-    onLogout();
-  };
-
-  return {
-    isNavOpen,
-    setIsNavOpen,
-    handleOutsideClick,
-    handleLogin,
-    handleLogout,
-  };
+  return { isNavOpen, handleOutsideClick, handleLogin, handleLogout };
 };

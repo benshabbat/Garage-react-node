@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUserForm } from "./useUserForm";
 import { useUserActions } from "./useUserActions";
+import { useUsersUIStore } from "../../../stores/uiStores";
+import { useAdminStore } from "../../../stores/adminStore";
 
 /**
  * Custom hook for user action handlers
@@ -10,9 +12,13 @@ import { useUserActions } from "./useUserActions";
  * @param {Object} modals - Modal handlers
  * @returns {Object} Handler functions for user operations
  */
-export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) => {
-  // Form management for creating user
-  const createUserForm = useUserForm(users, null, modals.createUser.isOpen);
+export const useUserHandlers = (setFilteredUsers) => {
+  const users = useAdminStore((s) => s.users);
+  const selectedUser = useUsersUIStore((s) => s.selectedUser);
+  const { createUserOpen, editUserOpen, toggleCreateUser, toggleEditUser, toggleDeleteUser, toggleManageUser } =
+    useUsersUIStore();
+
+  const createUserForm = useUserForm(users, null, createUserOpen);
   
   // Form management for creating car
   const [carFormData, setCarFormData] = useState();
@@ -20,12 +26,11 @@ export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) =
   // Server-side error for registration
   const [registerError, setRegisterError] = useState(null);
 
-  // Clear error when the create-user modal is closed
   useEffect(() => {
-    if (!modals.createUser.isOpen) {
+    if (!createUserOpen) {
       setRegisterError(null);
     }
-  }, [modals.createUser.isOpen]);
+  }, [createUserOpen]);
   
   // User actions
   const userActions = useUserActions(selectedUser, setFilteredUsers, users);
@@ -42,7 +47,7 @@ export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) =
       };
       try {
         setRegisterError(null);
-        await userActions.onSubmitRegister(e, createUserForm.formData, validationState, modals.createUser.handle);
+        await userActions.onSubmitRegister(e, createUserForm.formData, validationState, toggleCreateUser);
       } catch (error) {
         setRegisterError(error.message);
       }
@@ -62,7 +67,7 @@ export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) =
    * Hook for editing user
    */
   const useEditUser = () => {
-    const editUserForm = useUserForm(users, selectedUser, modals.editUser.isOpen, selectedUser?._id);
+    const editUserForm = useUserForm(users, selectedUser, editUserOpen, selectedUser?._id);
     
     const onSubmitEditUser = (e) => {
       const validationState = {
@@ -70,7 +75,7 @@ export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) =
         isExistPhone: editUserForm.isExistPhone,
         isExistUser: editUserForm.isExistUser,
       };
-      userActions.onSubmitEditUser(e, editUserForm.formData, validationState, modals.editUser.handle);
+      userActions.onSubmitEditUser(e, editUserForm.formData, validationState, toggleEditUser);
     };
 
     return {
@@ -87,14 +92,14 @@ export const useUserHandlers = (selectedUser, setFilteredUsers, users, modals) =
    * Handle car creation
    */
   const onSubmitCreateCar = (e) => {
-    userActions.onSubmitCreateCar(e, carFormData, modals.createCar.handle);
+    userActions.onSubmitCreateCar(e, carFormData, useUsersUIStore.getState().toggleCreateCar);
   };
 
   /**
    * Hook for deleting user
    */
   const useDeleteUser = (e) => {
-    userActions.onSubmitDeleteUser(e, modals.deleteUser.handle, modals.manageUser.handle);
+    userActions.onSubmitDeleteUser(e, toggleDeleteUser, toggleManageUser);
   };
 
   return {

@@ -1,15 +1,12 @@
 import { useServiceRequestForm } from "./useServiceRequestForm";
 import { useAccountActions } from "./useAccountActions";
+import { useAccountUIStore } from "../../../stores/uiStores";
+import { useUserStore } from "../../../stores/userStore";
 
-/**
- * Custom hook for account action handlers
- * @param {Object} selectedCar - Currently selected car
- * @param {Object} user - Current user
- * @param {Object} modals - Modal handlers
- * @returns {Object} Handler functions for account operations
- */
-export const useAccountHandlers = (selectedCar, user, modals) => {
-  // Account actions
+export const useAccountHandlers = () => {
+  const selectedCar = useAccountUIStore((s) => s.selectedCar);
+  const toggleReqService = useAccountUIStore((s) => s.toggleReqService);
+  const user = useUserStore((s) => s.user);
   const accountActions = useAccountActions(selectedCar, user);
 
   /**
@@ -19,7 +16,7 @@ export const useAccountHandlers = (selectedCar, user, modals) => {
     const requestForm = useServiceRequestForm();
     
     const onSubmit = (e) => {
-      accountActions.onSubmitReqService(e, requestForm.formData, modals.reqService.handle);
+      accountActions.onSubmitReqService(e, requestForm.formData, toggleReqService);
     };
     
     return { 

@@ -1,14 +1,17 @@
 import { ModalForm } from "..";
-import { useContextMessages } from "../../pages/messages/MessagesContext";
+import { useMessagesUIStore } from "../../stores/uiStores";
+import { useMessageHandlers } from "../../pages/messages/hooks/useMessageHandlers";
 
 const CreateMessage = () => {
-  const { useCreateMsg, modals } = useContextMessages();
+  const createMsgOpen = useMessagesUIStore((s) => s.createMsgOpen);
+  const toggleCreateMsg = useMessagesUIStore((s) => s.toggleCreateMsg);
+  const { useCreateMsg } = useMessageHandlers();
   const { onSubmit, setFormData, options, formData } = useCreateMsg();
-  
+
   return (
     <ModalForm
-      isOpen={modals.createMsg.isOpen}
-      onClose={modals.createMsg.handle}
+      isOpen={createMsgOpen}
+      onClose={toggleCreateMsg}
       onSubmit={onSubmit}
       setFormData={setFormData}
       formData={formData}

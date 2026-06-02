@@ -1,22 +1,24 @@
 import { ModalForm } from "../index";
-import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
+import { useServicesUIStore } from "../../stores/uiStores";
+import { useServiceHandlers } from "../../pages/servicesAdmin/hooks/useServiceHandlers";
+import { serviceStatusOptions } from "../../utils/serviceConstants";
 
 const EditStatusService = () => {
-  const { useEditService, modals, options } = useServicesAdminContext();
-  const { onSubmit, setFormData, formData } = useEditService(
-    modals.editStatusService.handle
-  );
+  const editStatusOpen = useServicesUIStore((s) => s.editStatusOpen);
+  const toggleEditStatus = useServicesUIStore((s) => s.toggleEditStatus);
+  const { useEditService } = useServiceHandlers();
+  const { onSubmit, setFormData, formData } = useEditService(toggleEditStatus);
 
   return (
     <ModalForm
-      isOpen={modals.editStatusService.isOpen}
-      onClose={modals.editStatusService.handle}
+      isOpen={editStatusOpen}
+      onClose={toggleEditStatus}
       onSubmit={onSubmit}
       setFormData={setFormData}
       formData={formData}
       title="Edit Status"
       inputs={[]}
-      options={options}
+      options={serviceStatusOptions}
       nameSelect="status"
     />
   );

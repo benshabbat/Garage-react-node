@@ -1,7 +1,7 @@
-import { useHeaderContext } from "../header/HeaderContext";
+import { useHeaderHandlers } from "../header/hooks/useHeaderHandlers";
 
 const NavLanding = () => {
-  const { handleOutsideClick, handleLogin } = useHeaderContext();
+  const { handleOutsideClick, handleLogin } = useHeaderHandlers();
 
   return (
     <>

@@ -1,5 +1,5 @@
-import DashboardProvider from "./DashboardProvider";
-import { useDashboardContext } from "./DashboardContext";
+import { useEffect } from "react";
+import { useDashboardStore } from "../../stores/dashboardStore";
 import {
   StatsOverview,
   AppointmentsByStatus,
@@ -10,12 +10,13 @@ import {
 } from "../../components/dashboard";
 import "./Dashboard.css";
 
-/**
- * DashboardContent component that uses context to access data
- * Separated from Dashboard to consume context after provider wraps it
- */
-const DashboardContent = () => {
-  const { stats } = useDashboardContext();
+const Dashboard = () => {
+  const stats = useDashboardStore((s) => s.stats);
+  const getDashboardStats = useDashboardStore((s) => s.getDashboardStats);
+
+  useEffect(() => {
+    getDashboardStats();
+  }, [getDashboardStats]);
 
   return (
     stats?.overview && (
@@ -23,7 +24,6 @@ const DashboardContent = () => {
         <div className="dashboard-header">
           <h1 className="dashboard-title">Dashboard</h1>
         </div>
-
         <StatsOverview />
         <AppointmentsByStatus />
         <TopServices />
@@ -32,18 +32,6 @@ const DashboardContent = () => {
         <MonthlyTrends />
       </div>
     )
-  );
-};
-
-/**
- * Dashboard page component
- * Wraps content with DashboardProvider following the application's provider pattern
- */
-const Dashboard = () => {
-  return (
-    <DashboardProvider>
-      <DashboardContent />
-    </DashboardProvider>
   );
 };
 

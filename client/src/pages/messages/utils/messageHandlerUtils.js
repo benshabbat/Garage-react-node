@@ -1,14 +1,14 @@
 import { resolveActionTarget } from "../../../utils/handlerUtils";
 
-export const handleMessageAction = (e, messages, setSelectedMsg, modals) => {
+export const handleMessageAction = (
+  e,
+  messages,
+  setSelectedMsg,
+  { toggleCreateMsg, toggleDeleteMsg }
+) => {
   const name = resolveActionTarget(e, messages, setSelectedMsg);
-
   switch (name) {
-    case "createMessage":
-      modals.createMsg.handle();
-      break;
-    case "deleteMessage":
-      modals.deleteMsg.handle();
-      break;
+    case "createMessage": toggleCreateMsg(); break;
+    case "deleteMessage":  toggleDeleteMsg();  break;
   }
 };

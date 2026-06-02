@@ -1,7 +1,7 @@
 import SwiperReviews from "./SwiperReviews";
 import AddReview from "./AddReview";
 import Submitted from "../../Submitted";
-import { useReviewsContext } from "./ReviewsContext";
+import { useReviewsState as useReviewsContext } from "./hooks/useReviewsState";
 
 export default function ViewReviews() {
   const { useAddReview } = useReviewsContext();

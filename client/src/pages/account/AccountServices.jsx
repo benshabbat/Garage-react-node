@@ -1,8 +1,15 @@
+import { useCallback } from "react";
 import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
-import { useAccountContext } from "./AccountContext";
+import { useAccountUIStore } from "../../stores/uiStores";
+import { useUserStore } from "../../stores/userStore";
+import useFilteredData from "../../hooks/useFilteredData";
+import { serviceFilterFn } from "./utils/accountValidation";
 export default function AccountServices() {
-  const { displayServicesUser, handleSerchServicesUser,selectedCar } = useAccountContext();
+  const selectedCar = useAccountUIStore((s) => s.selectedCar);
+  const services = useUserStore((s) => s.services);
+  const memoizedServiceFilterFn = useCallback(serviceFilterFn, []);
+  const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } = useFilteredData(services, memoizedServiceFilterFn);
   const trTh = (
     <tr>
       <th>title</th>

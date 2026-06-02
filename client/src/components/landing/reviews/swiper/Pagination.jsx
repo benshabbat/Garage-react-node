@@ -1,4 +1,4 @@
-import { useReviewsContext } from "../ReviewsContext";
+import { useReviewsState as useReviewsContext } from "../hooks/useReviewsState";
 
 export default function Pagination() {
   const { currentIndex, indexPagination, numberOfPages, numCardsPreview } =

@@ -1,11 +1,11 @@
-import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
+import { useDashboardStore } from "../../stores/dashboardStore";
 
 /**
  * AppointmentsByStatus displays appointments breakdown by status
  * Uses dashboard context to access data without props drilling
  */
 const AppointmentsByStatus = () => {
-  const { stats } = useDashboardContext();
+  const { stats } = useDashboardStore();
   const { byStatus } = stats.appointments;
 
   if (!byStatus || byStatus.length === 0) {

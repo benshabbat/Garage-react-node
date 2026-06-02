@@ -1,4 +1,4 @@
-import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
+import { useDashboardStore } from "../../stores/dashboardStore";
 import StatCard from "./StatCard";
 
 /**
@@ -6,7 +6,7 @@ import StatCard from "./StatCard";
  * Uses dashboard context to access data without props drilling
  */
 const StatsOverview = () => {
-  const { stats } = useDashboardContext();
+  const { stats } = useDashboardStore();
   const { overview } = stats;
 
   const STAT_CARDS = [

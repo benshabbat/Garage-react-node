@@ -1,16 +1,23 @@
 import "./account.css";
+import { useEffect } from "react";
 import ReqService from "../../components/create/ReqService";
-import AccountProvider from "./AccountProvider";
 import AccountTables from "./AccountTables";
+import { useAccountUIStore } from "../../stores/uiStores";
+import { useUserStore } from "../../stores/userStore";
 
-
-  //TODO: ADD POP UP When req services, created  req of service with sign v
 const Account = () => {
+  const selectedCar = useAccountUIStore((s) => s.selectedCar);
+  const getServicesByIdCar = useUserStore((s) => s.getServicesByIdCar);
+
+  useEffect(() => {
+    getServicesByIdCar(selectedCar?._id);
+  }, [selectedCar, getServicesByIdCar]);
+
   return (
-    <AccountProvider>
+    <>
       <AccountTables />
       <ReqService />
-    </AccountProvider>
+    </>
   );
 };
 

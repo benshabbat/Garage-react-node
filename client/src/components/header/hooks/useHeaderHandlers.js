@@ -1,26 +1,16 @@
 import { useLoginForm } from "./useLoginForm";
 import { useHeaderNav } from "./useHeaderNav";
+import { useHeaderUIStore } from "../../../stores/uiStores";
 
-/**
- * Custom hook for header action handlers
- * @param {Object} modals - Modal handlers
- * @returns {Object} Handler functions for header operations
- */
-export const useHeaderHandlers = (modals) => {
-  // Navigation state management
-  const headerNav = useHeaderNav(modals.login.handle);
+export const useHeaderHandlers = () => {
+  const headerNav = useHeaderNav();
+  const toggleLogin = useHeaderUIStore((s) => s.toggleLogin);
 
-  /**
-   * Hook for login form
-   */
-  const useLogin = () => {
-    return useLoginForm(modals.login.handle);
-  };
+  const useLogin = () => useLoginForm(toggleLogin);
 
   return {
     useLogin,
     isNavOpen: headerNav.isNavOpen,
-    setIsNavOpen: headerNav.setIsNavOpen,
     handleOutsideClick: headerNav.handleOutsideClick,
     handleLogin: headerNav.handleLogin,
     handleLogout: headerNav.handleLogout,

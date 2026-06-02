@@ -1,7 +1,10 @@
 import { Form, OpenModal } from "..";
-import { useHeaderContext } from "../header/HeaderContext";
+import { useHeaderUIStore } from "../../stores/uiStores";
+import { useHeaderHandlers } from "../header/hooks/useHeaderHandlers";
 const Login = () => {
-  const { handleLogin, isOpenLogin, useLogin, isError } = useHeaderContext();
+  const isOpenLogin = useHeaderUIStore((s) => s.loginOpen);
+  const toggleLogin = useHeaderUIStore((s) => s.toggleLogin);
+  const { useLogin, handleLogin } = useHeaderHandlers();
   const { setFormData, onSubmit } = useLogin();
   return (
     <OpenModal

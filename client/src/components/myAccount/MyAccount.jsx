@@ -1,10 +1,12 @@
 import "./myAccount.css";
 import { Link } from "react-router-dom";
 
-import { useHeaderContext } from "../header/HeaderContext";
+import { useUserStore } from "../../stores/userStore";
+import { useHeaderHandlers } from "../header/hooks/useHeaderHandlers";
 
 const MyAccount = () => {
-  const { user, handleLogout, handleOutsideClick } = useHeaderContext();
+  const user = useUserStore((s) => s.user);
+  const { handleLogout, handleOutsideClick } = useHeaderHandlers();
 
   return (
     <div className="dropdown">
