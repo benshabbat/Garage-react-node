@@ -1,18 +1,18 @@
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../stores/authStore";
-import { resetAdmin } from "../features/admin/adminSlice";
-import { resetUser } from "../features/user/userSlice";
+import { useUserStore } from "../stores/userStore";
+import { useAdminStore } from "../stores/adminStore";
 
 const useLogout = () => {
   const authLogout = useAuthStore((s) => s.logout);
-  const dispatch = useDispatch();
+  const resetUser = useUserStore((s) => s.resetUser);
+  const resetAdmin = useAdminStore((s) => s.resetAdmin);
   const navigate = useNavigate();
 
   const onLogout = async () => {
     await authLogout();
-    dispatch(resetUser());
-    dispatch(resetAdmin());
+    resetUser();
+    resetAdmin();
     navigate("/");
   };
 

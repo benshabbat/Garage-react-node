@@ -1,27 +1,26 @@
 import "./header.css";
 import { HeaderContext } from "./HeaderContext";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "../../features/user/userSlice";
 import { useHeaderModals } from "./hooks/useHeaderModals";
 import { useHeaderHandlers } from "./hooks/useHeaderHandlers";
 import { useAuthStore } from "../../stores/authStore";
+import { useUserStore } from "../../stores/userStore";
 
 export default function HeaderProvider({ children }) {
   const userAuth = useAuthStore((s) => s.user);
   const isError = useAuthStore((s) => s.isError);
   const message = useAuthStore((s) => s.message);
-  const { user } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const user = useUserStore((s) => s.user);
+  const getUser = useUserStore((s) => s.getUser);
 
   const modals = useHeaderModals();
   const headerHandlers = useHeaderHandlers(modals);
 
   useEffect(() => {
     if (userAuth?._id && !user) {
-      dispatch(getUser(userAuth._id));
+      getUser(userAuth._id);
     }
-  }, [dispatch, userAuth, user]);
+  }, [userAuth, user, getUser]);
 
   const value = {
     user,

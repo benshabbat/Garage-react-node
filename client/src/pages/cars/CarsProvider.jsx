@@ -1,7 +1,7 @@
 import { CarsContext } from "./CarsContext";
 import { useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCarsByType } from "../../features/admin/adminSlice";
+import { useUserStore } from "../../stores/userStore";
+import { useAdminStore } from "../../stores/adminStore";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
 import { carFilterFn, serviceStatusOptions } from "./utils/carValidation";
@@ -10,9 +10,9 @@ import { useCarModals } from "./hooks/useCarModals";
 import { useCarHandlers } from "./hooks/useCarHandlers";
 
 export default function CarsProvider({ children }) {
-  const { user } = useSelector((state) => state.user);
-  const { cars } = useSelector((state) => state.admin);
-  const dispatch = useDispatch();
+  const user = useUserStore((s) => s.user);
+  const cars = useAdminStore((s) => s.cars);
+  const getCarsByType = useAdminStore((s) => s.getCarsByType);
 
   const [selectedCar, setSelectedCar] = useState();
 
@@ -28,12 +28,12 @@ export default function CarsProvider({ children }) {
   const carHandlers = useCarHandlers(selectedCar, setFilteredCars, modals);
 
   useEffect(() => {
-    dispatch(getCarsByType(user?._id));
+    getCarsByType(user?._id);
   }, [
     modals.manageCar.isOpen,
     modals.deleteCar.isOpen,
     modals.editCar.isOpen,
-    dispatch,
+    getCarsByType,
     user?._id,
   ]);
 

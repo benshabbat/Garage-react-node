@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { AccountContext } from "./AccountContext";
 import useFilteredData from "../../hooks/useFilteredData";
-import { getServicesByIdCar } from "../../features/user/userSlice";
+import { useUserStore } from "../../stores/userStore";
 import PropTypes from "prop-types";
 import { carFilterFn, serviceFilterFn } from "./utils/accountValidation";
 import { handleCarAction as handleCarActionUtil } from "./utils/accountHandlerUtils";
@@ -10,8 +9,9 @@ import { useAccountModals } from "./hooks/useAccountModals";
 import { useAccountHandlers } from "./hooks/useAccountHandlers";
 
 export default function AccountProvider({ children }) {
-  const { user, services } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const user = useUserStore((s) => s.user);
+  const services = useUserStore((s) => s.services);
+  const getServicesByIdCar = useUserStore((s) => s.getServicesByIdCar);
 
   const [selectedCar, setSelectedCar] = useState(null);
 
@@ -32,8 +32,8 @@ export default function AccountProvider({ children }) {
   const accountHandlers = useAccountHandlers(selectedCar, user, modals);
   
   useEffect(() => {
-    dispatch(getServicesByIdCar(selectedCar?._id));
-  }, [selectedCar, dispatch]);
+    getServicesByIdCar(selectedCar?._id);
+  }, [selectedCar, getServicesByIdCar]);
   
   const handleCar = (e) => {
     handleCarActionUtil(e, user?.cars, setSelectedCar, modals);
