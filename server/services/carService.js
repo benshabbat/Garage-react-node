@@ -52,6 +52,7 @@ const deleteCar = async (req) => {
 };
 const getCar = async (req) => {
   const car = await Car.findById(req.params.id).populate("services");
+  if (!car) throw createError(404, "Car not found");
   return car;
 };
 
@@ -78,9 +79,11 @@ const getCarsWithService = async (req) => {
 };
 
 const getCarsByOwner = async (req) => {
-  const cars = await Car.find({ owner: req.params.user }).populate(
-    "services"
-  );
+  const { limit, page } = getPaginationParams(req);
+  const cars = await Car.find({ owner: req.params.user })
+    .populate("services")
+    .skip((page - 1) * limit)
+    .limit(limit);
   return cars;
 };
 

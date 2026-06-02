@@ -18,7 +18,7 @@ const createMessage = async (req) => {
   });
   return savedMessage;
 };
-const ALLOWED_PUBLIC_MESSAGE_FIELDS = ['content', 'subject'];
+const ALLOWED_PUBLIC_MESSAGE_FIELDS = ['title', 'description'];
 
 const createMessageToAdmin = async (req) => {
   const to = req.params.to;
@@ -32,24 +32,43 @@ const createMessageToAdmin = async (req) => {
 };
 
 const updateMessage = async (req) => {
+  const message = await Message.findById(req.params.id);
+  if (!message) throw createError(404, "Message not found");
+  if (message.to.toString() !== req.user.id && !req.user.isAdmin) {
+    throw createError(403, "Not authorized to update this message");
+  }
   const updatedMessage = await Message.findByIdAndUpdate(
     req.params.id,
-    {
-      $set: { read: true },
-    },
+    { $set: { read: true } },
     { new: true }
   );
-  if (!updatedMessage) throw createError(404, "Message not found");
   return updatedMessage;
 };
 
 const deleteMessage = async (req) => {
+  const message = await Message.findById(req.params.id);
+  if (!message) throw createError(404, "Message not found");
+  const userId = req.user.id;
+  const isParticipant =
+    message.from?.toString() === userId ||
+    message.to.toString() === userId;
+  if (!isParticipant && !req.user.isAdmin) {
+    throw createError(403, "Not authorized to delete this message");
+  }
   await Message.findByIdAndDelete(req.params.id);
   return "The Message has been removed";
 };
 
 const getMessage = async (req) => {
   const message = await Message.findById(req.params.id);
+  if (!message) throw createError(404, "Message not found");
+  const userId = req.user.id;
+  const isParticipant =
+    message.from?.toString() === userId ||
+    message.to.toString() === userId;
+  if (!isParticipant && !req.user.isAdmin) {
+    throw createError(403, "Not authorized to view this message");
+  }
   return message;
 };
 
@@ -71,7 +90,8 @@ const getMessagesByType = async (req) => {
   if (!ALLOWED_MESSAGE_POPULATE_FIELDS.includes(type)) {
     throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_MESSAGE_POPULATE_FIELDS.join(', ')}`);
   }
-  const messages = await Message.find().populate(type);
+  const { limit, page } = getPaginationParams(req);
+  const messages = await Message.find().populate(type).skip((page - 1) * limit).limit(limit);
   return messages;
 };
 

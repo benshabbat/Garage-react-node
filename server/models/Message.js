@@ -6,7 +6,7 @@ const MessageSchema = new Schema(
     from: {
       type: SchemaTypes.ObjectId,
       ref: "User",
-      required: true,
+      required: false, // null for public (anonymous) messages
     },
     to: {
       type: SchemaTypes.ObjectId,

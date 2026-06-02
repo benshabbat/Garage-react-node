@@ -22,21 +22,21 @@ adminRouter.use(verifyAdmin);
 adminRouter.get("/", getMessages);
 adminRouter.get("/populate", getMessagesByType);
 
-// User routes
+// User routes — verifyUser checks req.user.id === req.params.id (user ID routes only)
 const userRouter = express.Router();
 userRouter.use(verifyUser);
 userRouter.get("/user/:id", getMessageByUser);
-userRouter.put("/:id", updateMessage);
-userRouter.delete("/:id", deleteMessage);
-userRouter.get("/:id", getMessage);
 
-// Token routes
-const tokenRouter = express.Router();
-tokenRouter.use(verifyToken);
-tokenRouter.post("/:from/:to", createMessage);
+// Auth routes — verifyToken only; ownership is enforced inside the service
+const authRouter = express.Router();
+authRouter.use(verifyToken);
+authRouter.put("/:id", updateMessage);
+authRouter.delete("/:id", deleteMessage);
+authRouter.get("/:id", getMessage);
+authRouter.post("/:from/:to", createMessage);
 
 router.use(adminRouter);
 router.use(userRouter);
-router.use(tokenRouter);
+router.use(authRouter);
 
 export default router;

@@ -1,7 +1,7 @@
 import Appointment from "../models/Appointment.js";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
-import { pickAllowed } from "../utils/queryHelpers.js";
+import { pickAllowed, getPaginationParams } from "../utils/queryHelpers.js";
 
 const ALLOWED_APPOINTMENT_CREATE_FIELDS = ['clientName', 'email', 'phone', 'date', 'time', 'notes', 'user'];
 
@@ -16,16 +16,20 @@ const createAppointment = async (req) => {
   return savedAppointment;
 };
 
-const getAppointments = async () => {
+const getAppointments = async (req) => {
+  const { limit, page } = getPaginationParams(req);
   const appointments = await Appointment.find()
     .populate('user', 'username email phone')
-    .sort({ date: -1, createdAt: -1 });
+    .sort({ date: -1, createdAt: -1 })
+    .skip((page - 1) * limit)
+    .limit(limit);
   return appointments;
 };
 
 const getAppointment = async (req) => {
   const appointment = await Appointment.findById(req.params.id)
     .populate('user', 'username email phone');
+  if (!appointment) throw createError(404, "Appointment not found");
   return appointment;
 };
 

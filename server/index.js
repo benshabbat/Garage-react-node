@@ -24,6 +24,11 @@ if (!process.env.JWT) {
   process.exit(1);
 }
 
+if (!process.env.ANTHROPIC_API_KEY) {
+  console.error("FATAL: ANTHROPIC_API_KEY is not defined in environment variables");
+  process.exit(1);
+}
+
 const app = express();
 const port = process.env.PORT || 8800;
 
@@ -69,10 +74,22 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 
+process.on("unhandledRejection", (reason) => {
+  console.error("Unhandled promise rejection:", reason);
+});
+
 async function start() {
   await connectDB();
-  app.listen(port, () => {
+  const server = app.listen(port, () => {
     console.log("connected to backend!");
   });
+
+  const shutdown = () => {
+    server.close(() => {
+      process.exit(0);
+    });
+  };
+  process.on("SIGTERM", shutdown);
+  process.on("SIGINT", shutdown);
 }
 start();
