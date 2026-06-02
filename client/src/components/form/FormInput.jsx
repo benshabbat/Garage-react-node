@@ -22,7 +22,8 @@ export default function FormInput({
       !valid(inputRef?.current?.value, input.name));
   let errorMessage = null;
   if (showError && !inputRef?.current?.value) {
-    errorMessage = "This field is required";
+    const fieldName = input.name.replace(/([A-Z])/g, " $1").trim();
+    errorMessage = `${fieldName} is required`;
   } else if (showError) {
     errorMessage = inputType(input).errorMessage;
   }
