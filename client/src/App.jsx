@@ -30,12 +30,7 @@ const PRIVATE_ROUTES = [
 function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter
-        future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true
-        }}
-      >
+      <BrowserRouter>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />
         <main id="main-content">
