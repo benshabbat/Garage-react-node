@@ -1,7 +1,7 @@
 import { deleteUser, createCar, updateUser, createUser } from "../../../utils";
 import { formatPhone } from "../../../utils/formatters";
 import { isValidUserName, isValidCar } from "../utils/userValidation";
-import { extractErrorMessage } from "../../../features/utils/asyncThunkErrorHandler";
+const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
 
 /**
  * Custom hook for user CRUD operations
