@@ -1,6 +1,7 @@
 import Message from "../models/Message.js";
 import User from "../models/User.js";
 import { createError } from "../utils/error.js";
+import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
 
 const ALLOWED_MESSAGE_POPULATE_FIELDS = ['from', 'to'];
 
@@ -21,9 +22,7 @@ const ALLOWED_PUBLIC_MESSAGE_FIELDS = ['content', 'subject'];
 
 const createMessageToAdmin = async (req) => {
   const to = req.params.to;
-  const safeBody = Object.fromEntries(
-    Object.entries(req.body).filter(([k]) => ALLOWED_PUBLIC_MESSAGE_FIELDS.includes(k))
-  );
+  const safeBody = pickAllowed(req.body, ALLOWED_PUBLIC_MESSAGE_FIELDS);
   const newMessage = new Message({ ...safeBody, to, from: null });
   const savedMessage = await newMessage.save();
   await User.findByIdAndUpdate(to, {
@@ -62,8 +61,7 @@ const getMessageByUser = async (req) => {
 };
 
 const getMessages = async (req) => {
-  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
-  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const { limit, page } = getPaginationParams(req);
   const messages = await Message.find().skip((page - 1) * limit).limit(limit);
   return messages;
 };
