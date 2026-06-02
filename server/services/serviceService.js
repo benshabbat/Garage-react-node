@@ -22,27 +22,24 @@ const createService = async (req) => {
   const newService = new Service(serviceData);
   
   try {
-    // Save the service
     const savedService = await newService.save();
-    
-    // Update the car with the service reference
+
     try {
       await Car.findByIdAndUpdate(carId, {
         $push: { services: savedService._id },
       });
     } catch (error) {
-      // If car update fails, delete the service we just created to maintain consistency
       await Service.findByIdAndDelete(savedService._id);
-      throw Error(`Failed to update car with service: ${error.message}`);
+      throw createError(500, `Failed to update car with service: ${error.message}`);
     }
-    
+
     return savedService;
   } catch (error) {
-    // Provide more helpful error message for duplicate key errors
+    if (error.status) throw error; // already a createError
     if (error.code === 11000) {
-      throw Error(`Duplicate service entry: ${error.message}`);
+      throw createError(400, "Duplicate service entry");
     }
-    throw Error(`Failed to create service: ${error.message}`);
+    throw createError(500, `Failed to create service: ${error.message}`);
   }
 };
 
@@ -53,15 +50,18 @@ const updateService = async (req) => {
     { $set: safeBody },
     { new: true }
   );
+  if (!updatedService) throw createError(404, "Service not found");
   return updatedService;
 };
 
 const deleteService = async (req) => {
-  await Service.findByIdAndDelete(req.params.id);
+  const deleted = await Service.findByIdAndDelete(req.params.id);
+  if (!deleted) throw createError(404, "Service not found");
 };
 
 const getService = async (req) => {
   const service = await Service.findById(req.params.id);
+  if (!service) throw createError(404, "Service not found");
   return service;
 };
 
@@ -90,7 +90,10 @@ const getServicesByUser = async (req) => {
   if (req.user.id !== req.params.user && !req.user.isAdmin) {
     throw createError(403, "Not authorized");
   }
-  const services = await Service.find({ user: req.params.user });
+  // Service has no user field — resolve via the user's cars
+  const cars = await Car.find({ owner: req.params.user }).select("_id").lean();
+  const carIds = cars.map((c) => c._id);
+  const services = await Service.find({ car: { $in: carIds } });
   return services;
 };
 
