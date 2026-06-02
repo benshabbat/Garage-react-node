@@ -24,7 +24,10 @@ const buildCookieOptions = (withMaxAge = false) => {
 };
 
 const register = async (req) => {
-  const { username, phone, email, password } = req.body;
+  const username = req.body.username?.trim();
+  const email = req.body.email?.trim().toLowerCase();
+  const phone = req.body.phone?.trim();
+  const { password } = req.body;
 
   // Input validation
   if (!username || !phone || !email || !password) {
@@ -63,7 +66,8 @@ const register = async (req) => {
 };
 
 const login = async (req) => {
-  const { username, password } = req.body;
+  const username = req.body.username?.trim();
+  const { password } = req.body;
 
   if (!username || !password) {
     throw createError(400, "Username and password are required");
