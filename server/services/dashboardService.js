@@ -111,7 +111,7 @@ const getDashboardStats = async () => {
     {
       $group: {
         _id: null,
-        averageRating: { $avg: "$rating" },
+        averageRating: { $avg: "$stars" },
         totalReviews: { $sum: 1 },
       },
     },
