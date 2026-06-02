@@ -1,11 +1,9 @@
 import express from "express";
 import { getReviews, createReview } from "../controllers/review.js";
+import { verifyToken } from "../utils/verifyToken.js";
 const router = express.Router();
 
-//GET ALL
 router.get("/", getReviews);
-
-//POST
-router.post("/", createReview);
+router.post("/", verifyToken, createReview);
 
 export default router;

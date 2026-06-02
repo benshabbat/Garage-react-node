@@ -1,7 +1,12 @@
 import Review from "../models/Review.js";
 
+const ALLOWED_REVIEW_FIELDS = ['name', 'description', 'stars'];
+
 const createReview = async (req) => {
-  const newReview = new Review(req.body);
+  const safeBody = Object.fromEntries(
+    Object.entries(req.body).filter(([k]) => ALLOWED_REVIEW_FIELDS.includes(k))
+  );
+  const newReview = new Review(safeBody);
   const savedReview = await newReview.save();
   return savedReview;
 };
