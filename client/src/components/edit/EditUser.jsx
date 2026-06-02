@@ -1,15 +1,18 @@
 import { ModalForm } from "../index";
-import { useUsersContext } from "../../pages/users/UsersContext";
+import { useUsersUIStore } from "../../stores/uiStores";
+import { useUserHandlers } from "../../pages/users/hooks/useUserHandlers";
 import { buildUserFormInputs } from "../../pages/users/utils/userValidation";
 
 const EditUser = () => {
-  const { useEditUser, modals } = useUsersContext();
+  const editUserOpen = useUsersUIStore((s) => s.editUserOpen);
+  const toggleEditUser = useUsersUIStore((s) => s.toggleEditUser);
+  const { useEditUser } = useUserHandlers();
   const { onSubmitEditUser, formData, setFormData, isExistEmail, isExistPhone, isExistUser } = useEditUser();
 
   return (
     <ModalForm
-      isOpen={modals.editUser.isOpen}
-      onClose={modals.editUser.handle}
+      isOpen={editUserOpen}
+      onClose={toggleEditUser}
       onSubmit={onSubmitEditUser}
       setFormData={setFormData}
       formData={formData}

@@ -1,9 +1,20 @@
+import { useCallback } from "react";
 import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
-import { useAccountContext } from "./AccountContext";
+import { useUserStore } from "../../stores/userStore";
+import { useAccountUIStore } from "../../stores/uiStores";
+import useFilteredData from "../../hooks/useFilteredData";
+import { carFilterFn } from "./utils/accountValidation";
+import { handleCarAction as handleCarActionUtil } from "./utils/accountHandlerUtils";
 
 export default function AccountTable() {
-  const { handleCar, displayCars, handleSearch } = useAccountContext();
+  const user = useUserStore((s) => s.user);
+  const { setSelectedCar, toggleReqService, toggleServices } = useAccountUIStore();
+
+  const memoizedCarFilterFn = useCallback(carFilterFn, []);
+  const { displayData: displayCars, handleSearch } = useFilteredData(user?.cars, memoizedCarFilterFn);
+
+  const handleCar = (e) => handleCarActionUtil(e, user?.cars, setSelectedCar, { toggleReqService, toggleServices });
   const trTh = (
     <tr>
       <th>brand</th>

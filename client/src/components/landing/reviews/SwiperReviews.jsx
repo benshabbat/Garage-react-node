@@ -1,5 +1,5 @@
 import { Review } from "../../index";
-import { useReviewsContext } from "./ReviewsContext";
+import { useReviewsState as useReviewsContext } from "./hooks/useReviewsState";
 import Swiper from "./swiper/Swiper";
 //TODO: MADE COMPONENT FOR isSubmitted
 export default function SwiperReviews() {

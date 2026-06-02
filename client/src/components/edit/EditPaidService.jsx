@@ -1,16 +1,17 @@
-import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
 import { ModalForm } from "../index";
+import { useServicesUIStore } from "../../stores/uiStores";
+import { useServiceHandlers } from "../../pages/servicesAdmin/hooks/useServiceHandlers";
 
 const EditPaidService = () => {
-  const { useEditService, modals } = useServicesAdminContext();
-  const { onSubmit, formData, setFormData } = useEditService(
-    modals.editPaid.handle
-  );
+  const editPaidOpen = useServicesUIStore((s) => s.editPaidOpen);
+  const toggleEditPaid = useServicesUIStore((s) => s.toggleEditPaid);
+  const { useEditService } = useServiceHandlers();
+  const { onSubmit, formData, setFormData } = useEditService(toggleEditPaid);
 
   return (
     <ModalForm
-      isOpen={modals.editPaid.isOpen}
-      onClose={modals.editPaid.handle}
+      isOpen={editPaidOpen}
+      onClose={toggleEditPaid}
       onSubmit={onSubmit}
       setFormData={setFormData}
       formData={formData}

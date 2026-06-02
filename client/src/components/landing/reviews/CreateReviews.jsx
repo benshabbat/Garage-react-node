@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { OpenModal } from "../../index";
-import { useReviewsContext } from "./ReviewsContext";
+import { useReviewsState as useReviewsContext } from "./hooks/useReviewsState";
 import StarRating from "./starRating/StarRating";
 
 

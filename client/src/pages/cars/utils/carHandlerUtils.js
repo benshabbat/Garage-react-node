@@ -1,19 +1,16 @@
 import { resolveActionTarget } from "../../../utils/handlerUtils";
 
-export const handleCarAction = (e, cars, setSelectedCar, modals) => {
+export const handleCarAction = (
+  e,
+  cars,
+  setSelectedCar,
+  { toggleManageCar, toggleEditCar, toggleCreateService, toggleDeleteCar }
+) => {
   const name = resolveActionTarget(e, cars, setSelectedCar);
-
   switch (name) {
-    case "editCar":
-      modals.editCar.handle();
-      break;
-    case "createService":
-      modals.createService.handle();
-      break;
-    case "deleteCar":
-      modals.deleteCar.handle();
-      break;
-    default:
-      modals.manageCar.handle();
+    case "editCar":        toggleEditCar();        break;
+    case "createService":  toggleCreateService();  break;
+    case "deleteCar":      toggleDeleteCar();      break;
+    default:               toggleManageCar();
   }
 };

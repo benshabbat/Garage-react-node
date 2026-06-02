@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import { NavAdmin, NavUser, NavLanding, Login } from "../index";
-import { useHeaderContext } from "./HeaderContext";
+import { useHeaderUIStore } from "../../stores/uiStores";
+import { useHeaderHandlers } from "./hooks/useHeaderHandlers";
+import { useAuthStore } from "../../stores/authStore";
+import { useUserStore } from "../../stores/userStore";
 import Logo from "../../images/logo.jpg";
 
 export default function Navbars() {
-  const { user, handleOutsideClick, isNavOpen, userAuth } = useHeaderContext();
+  const isNavOpen = useHeaderUIStore((s) => s.isNavOpen);
+  const { handleOutsideClick } = useHeaderHandlers();
+  const userAuth = useAuthStore((s) => s.user);
+  const user = useUserStore((s) => s.user);
   const Nav = () => {
     if (userAuth && !user) {
       return <div className="nav-loading">loading...</div>;

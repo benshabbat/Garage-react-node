@@ -1,14 +1,18 @@
 import { ModalForm } from "../index";
-import { useCarsContext } from "../../pages/cars/CarsContext";
+import { useCarsUIStore } from "../../stores/uiStores";
+import { useCarHandlers } from "../../pages/cars/hooks/useCarHandlers";
 
 const EditCar = () => {
-  const { useEditCar, modals, selectedCar } = useCarsContext();
+  const selectedCar = useCarsUIStore((s) => s.selectedCar);
+  const editCarOpen = useCarsUIStore((s) => s.editCarOpen);
+  const toggleEditCar = useCarsUIStore((s) => s.toggleEditCar);
+  const { useEditCar } = useCarHandlers();
   const { onSubmit, setFormData, formData } = useEditCar();
-  
+
   return (
     <ModalForm
-      isOpen={modals.editCar.isOpen}
-      onClose={modals.editCar.handle}
+      isOpen={editCarOpen}
+      onClose={toggleEditCar}
       onSubmit={onSubmit}
       setFormData={setFormData}
       formData={formData}

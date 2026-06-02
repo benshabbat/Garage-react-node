@@ -5,14 +5,14 @@
  * @param {Function} setSelectedCar - Function to set selected car
  * @param {Object} modals - Modal handlers
  */
-export const handleCarAction = (e, cars, setSelectedCar, modals) => {
+export const handleCarAction = (
+  e,
+  cars,
+  setSelectedCar,
+  { toggleReqService, toggleServices }
+) => {
   const { value, name } = e.target;
   setSelectedCar(cars.find((car) => car._id === value));
-  
-  if (name === "req-services") {
-    modals.reqService.handle();
-  }
-  if (name === "services") {
-    modals.services.handle();
-  }
+  if (name === "req-services") toggleReqService();
+  if (name === "services")     toggleServices();
 };

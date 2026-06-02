@@ -1,15 +1,18 @@
 import { ModalForm } from "..";
-import { useUsersContext } from "../../pages/users/UsersContext";
+import { useUsersUIStore } from "../../stores/uiStores";
+import { useUserHandlers } from "../../pages/users/hooks/useUserHandlers";
 
 const CreateCar = () => {
-  const { onSubmitCreateCar, setFormData, modals } = useUsersContext();
+  const createCarOpen = useUsersUIStore((s) => s.createCarOpen);
+  const toggleCreateCar = useUsersUIStore((s) => s.toggleCreateCar);
+  const { onSubmitCreateCar, setCarFormData } = useUserHandlers();
 
   return (
     <ModalForm
-      isOpen={modals.createCar.isOpen}
-      onClose={modals.createCar.handle}
+      isOpen={createCarOpen}
+      onClose={toggleCreateCar}
       onSubmit={onSubmitCreateCar}
-      setFormData={setFormData}
+      setFormData={setCarFormData}
       title="Create Car"
       inputs={[
         { name: "numberPlate", type: "text" },

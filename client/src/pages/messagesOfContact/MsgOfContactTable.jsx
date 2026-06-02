@@ -1,9 +1,30 @@
+import "../../components/table/table.css";
+import { useEffect, useCallback } from "react";
 import Search from "../../components/table/Search";
 import Table from "../../components/table/TableWithSort";
-import { getMomentFromUpdatedAt} from "../../utils";
-import { useMsgOfContactContext } from "./MsgOfContactContext";
+import { getMomentFromUpdatedAt } from "../../utils";
+import { useAdminStore } from "../../stores/adminStore";
+import useFilteredData from "../../hooks/useFilteredData";
+import { contactFilterFn } from "./utils/contactValidation";
+import { handleContactAction as handleContactActionUtil } from "./utils/contactHandlerUtils";
+
 export default function MsgOfContactTable() {
-  const { handleSearch, displayContacts,handleContact } = useMsgOfContactContext();
+  const messagesContact = useAdminStore((s) => s.messagesContact);
+  const storeGetMessagesContact = useAdminStore((s) => s.getMessagesContact);
+
+  const memoizedContactFilterFn = useCallback(contactFilterFn, []);
+  const { displayData: displayContacts, handleSearch } =
+    useFilteredData(messagesContact, memoizedContactFilterFn);
+
+  useEffect(() => {
+    storeGetMessagesContact();
+  }, [storeGetMessagesContact]);
+
+  const handleContact = async (e) => {
+    await handleContactActionUtil(e);
+    storeGetMessagesContact();
+  };
+
   const trTh = (
     <tr>
       <th></th>
@@ -16,12 +37,11 @@ export default function MsgOfContactTable() {
     </tr>
   );
 
-
   const trTd = displayContacts?.map((message) => {
     const { theDate } = getMomentFromUpdatedAt(message.updatedAt);
     return (
       <tr key={message._id}>
-        <td><button value={message._id}  name="deleteContact" onClick={handleContact} >Delete</button></td>
+        <td><button value={message._id} name="deleteContact" onClick={handleContact}>Delete</button></td>
         <td data-label="First Name">{message.firstName}</td>
         <td data-label="Last Name">{message.lastName}</td>
         <td data-label="Email">{message.email}</td>
@@ -31,6 +51,7 @@ export default function MsgOfContactTable() {
       </tr>
     );
   });
+
   return (
     <div className="table-container">
       <Search handleSearch={handleSearch} name={"Message of Contacts"} />

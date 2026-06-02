@@ -1,6 +1,6 @@
 import NavLink from "./NavLink";
 import { MyAccount } from "../index";
-import { useHeaderContext } from "../header/HeaderContext";
+import { useHeaderHandlers } from "../header/hooks/useHeaderHandlers";
 
 const NAV_LINKS = [
   { to: "/myCars", label: "MyCars" },
@@ -9,7 +9,7 @@ const NAV_LINKS = [
 ];
 
 const NavUser = () => {
-  const { handleOutsideClick } = useHeaderContext();
+  const { handleOutsideClick } = useHeaderHandlers();
 
   return (
     <>

@@ -1,7 +1,8 @@
 import "./manage.css";
 import { OpenModal } from "../index";
 import EditService from "../edit/EditService";
-import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
+import { useServicesUIStore } from "../../stores/uiStores";
+import { useServiceAdminHandlers } from "../../pages/servicesAdmin/hooks/useServiceAdminHandlers";
 import ButtonManage from "./ButtonManage";
 import FormManage from "./FormManage";
 
@@ -11,14 +12,16 @@ const MANAGE_SERVICE_BUTTONS = [
 ];
 
 const ManageService = () => {
-  const { selectedService, modals, handleServiceIdAction } =
-    useServicesAdminContext();
+  const selectedService = useServicesUIStore((s) => s.selectedService);
+  const manageServiceOpen = useServicesUIStore((s) => s.manageServiceOpen);
+  const toggleManageService = useServicesUIStore((s) => s.toggleManageService);
+  const { handleServiceIdAction } = useServiceAdminHandlers();
 
   return (
     <OpenModal
       comp={
         <>
-          <FormManage handle={modals.manageService.handle}>
+          <FormManage handle={toggleManageService}>
             {MANAGE_SERVICE_BUTTONS.map(({ name, type, content }) => (
               <ButtonManage
                 key={name}
@@ -33,7 +36,7 @@ const ManageService = () => {
           <EditService />
         </>
       }
-      isOpen={modals.manageService.isOpen}
+      isOpen={manageServiceOpen}
     />
   );
 };

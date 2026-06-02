@@ -1,16 +1,18 @@
 import { ModalForm } from "../index";
-import { useServicesAdminContext } from "../../pages/servicesAdmin/ServiceAdminContext";
+import { useServicesUIStore } from "../../stores/uiStores";
+import { useServiceHandlers } from "../../pages/servicesAdmin/hooks/useServiceHandlers";
+import { serviceStatusOptions } from "../../utils/serviceConstants";
 
 const EditService = () => {
-  const { useEditService, modals, options } = useServicesAdminContext();
-  const { onSubmit, formData, setFormData } = useEditService(
-    modals.editService.handle
-  );
+  const editServiceOpen = useServicesUIStore((s) => s.editServiceOpen);
+  const toggleEditService = useServicesUIStore((s) => s.toggleEditService);
+  const { useEditService } = useServiceHandlers();
+  const { onSubmit, formData, setFormData } = useEditService(toggleEditService);
 
   return (
     <ModalForm
-      isOpen={modals.editService.isOpen}
-      onClose={modals.editService.handle}
+      isOpen={editServiceOpen}
+      onClose={toggleEditService}
       onSubmit={onSubmit}
       setFormData={setFormData}
       formData={formData}
@@ -21,7 +23,7 @@ const EditService = () => {
         { name: "price", type: "number", value: formData?.price },
         { name: "paid", type: "checkbox", checked: formData?.paid },
       ]}
-      options={options}
+      options={serviceStatusOptions}
       nameSelect="status"
     />
   );

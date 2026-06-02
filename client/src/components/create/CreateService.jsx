@@ -1,14 +1,18 @@
 import { ModalForm } from "..";
-import { useCarsContext } from "../../pages/cars/CarsContext";
+import { useCarsUIStore } from "../../stores/uiStores";
+import { useCarHandlers } from "../../pages/cars/hooks/useCarHandlers";
+import { serviceStatusOptions } from "../../utils/serviceConstants";
 
 const CreateService = () => {
-  const { useCreateService, options, modals } = useCarsContext();
+  const createServiceOpen = useCarsUIStore((s) => s.createServiceOpen);
+  const toggleCreateService = useCarsUIStore((s) => s.toggleCreateService);
+  const { useCreateService } = useCarHandlers();
   const { onSubmit, setFormData, formData } = useCreateService();
 
   return (
     <ModalForm
-      isOpen={modals.createService.isOpen}
-      onClose={modals.createService.handle}
+      isOpen={createServiceOpen}
+      onClose={toggleCreateService}
       onSubmit={onSubmit}
       setFormData={setFormData}
       formData={formData}
@@ -19,7 +23,7 @@ const CreateService = () => {
         { name: "price", type: "number", min: 0 },
         { name: "paid", type: "checkbox", checked: formData?.paid },
       ]}
-      options={options}
+      options={serviceStatusOptions}
       nameSelect="status"
     />
   );

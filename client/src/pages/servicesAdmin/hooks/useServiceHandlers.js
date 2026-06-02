@@ -1,34 +1,22 @@
 import { useServiceForm } from "./useServiceForm";
 import { useServiceActions } from "./useServiceActions";
+import { useServicesUIStore } from "../../../stores/uiStores";
 
-/**
- * Custom hook for service action handlers
- * @param {Object} selectedService - Currently selected service
- * @returns {Object} Handler functions for service operations
- */
-export const useServiceHandlers = (selectedService) => {
-  // Service actions
+export const useServiceHandlers = () => {
+  const selectedService = useServicesUIStore((s) => s.selectedService);
   const serviceActions = useServiceActions(selectedService);
 
-  /**
-   * Hook for editing service
-   */
   const useEditService = (handleClick) => {
     const editServiceForm = useServiceForm(selectedService);
-    
     const onSubmit = (e) => {
       serviceActions.onSubmitEditService(e, editServiceForm.formData, handleClick);
     };
-    
-    return { 
-      onSubmit, 
-      formData: editServiceForm.formData, 
-      setFormData: editServiceForm.setFormData 
+    return {
+      onSubmit,
+      formData: editServiceForm.formData,
+      setFormData: editServiceForm.setFormData,
     };
   };
 
-  return {
-    useEditService,
-    serviceActions,
-  };
+  return { useEditService, serviceActions };
 };

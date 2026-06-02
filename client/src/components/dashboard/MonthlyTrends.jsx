@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
+import { useDashboardStore } from "../../stores/dashboardStore";
 
 /**
  * Renders a single bar chart for a trend dataset.
@@ -54,7 +54,7 @@ TrendChart.propTypes = {
  * MonthlyTrends displays monthly trend charts for appointments, cars, and revenue.
  */
 const MonthlyTrends = () => {
-  const { stats } = useDashboardContext();
+  const { stats } = useDashboardStore();
   const { trends } = stats;
 
   const hasAppointments = trends.monthlyAppointments?.length > 0;

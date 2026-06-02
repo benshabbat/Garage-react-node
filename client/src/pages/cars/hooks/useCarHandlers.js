@@ -1,14 +1,12 @@
 import { useCarForm } from "./useCarForm";
 import { useCarActions } from "./useCarActions";
+import { useCarsUIStore } from "../../../stores/uiStores";
 
-/**
- * Custom hook for car action handlers
- * @param {Object} selectedCar - Currently selected car
- * @param {Function} setFilteredCars - Function to update filtered cars list
- * @param {Object} modals - Modal handlers
- * @returns {Object} Handler functions for car operations
- */
-export const useCarHandlers = (selectedCar, setFilteredCars, modals) => {
+export const useCarHandlers = (setFilteredCars) => {
+  const selectedCar = useCarsUIStore((s) => s.selectedCar);
+  const toggleCreateService = useCarsUIStore((s) => s.toggleCreateService);
+  const toggleEditCar = useCarsUIStore((s) => s.toggleEditCar);
+  const toggleDeleteCar = useCarsUIStore((s) => s.toggleDeleteCar);
   // Form management
   const serviceForm = useCarForm(null);
   
@@ -20,7 +18,7 @@ export const useCarHandlers = (selectedCar, setFilteredCars, modals) => {
    */
   const useCreateService = () => {
     const onSubmit = (e) => {
-      carActions.onSubmitCreateService(e, serviceForm.formData, modals.createService.handle);
+      carActions.onSubmitCreateService(e, serviceForm.formData, toggleCreateService);
     };
     return { 
       onSubmit, 
@@ -36,7 +34,7 @@ export const useCarHandlers = (selectedCar, setFilteredCars, modals) => {
     const editCarForm = useCarForm(selectedCar);
 
     const onSubmit = (e) => {
-      carActions.onSubmitEditCar(e, editCarForm.formData, modals.editCar.handle);
+      carActions.onSubmitEditCar(e, editCarForm.formData, toggleEditCar);
     };
     
     return { 
@@ -50,7 +48,7 @@ export const useCarHandlers = (selectedCar, setFilteredCars, modals) => {
    * Hook for deleting car
    */
   const useDeleteCar = (e) => {
-    carActions.onSubmitDeleteCar(e, modals.deleteCar.handle);
+    carActions.onSubmitDeleteCar(e, toggleDeleteCar);
   };
 
   return {

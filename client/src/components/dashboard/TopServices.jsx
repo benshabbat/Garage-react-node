@@ -1,11 +1,11 @@
-import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
+import { useDashboardStore } from "../../stores/dashboardStore";
 
 /**
  * TopServices displays the list of available services
  * Uses dashboard context to access data without props drilling
  */
 const TopServices = () => {
-  const { stats } = useDashboardContext();
+  const { stats } = useDashboardStore();
   const { topServices } = stats;
 
   if (!topServices || topServices.length === 0) {

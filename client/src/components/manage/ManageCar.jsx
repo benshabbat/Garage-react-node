@@ -1,7 +1,8 @@
 import "./manage.css";
 import CreateService from "../create/CreateService";
 import { OpenModal, EditCar } from "../index";
-import { useCarsContext } from "../../pages/cars/CarsContext";
+import { useCarsUIStore } from "../../stores/uiStores";
+import { useCarAdminHandlers } from "../../pages/cars/hooks/useCarAdminHandlers";
 import ButtonManage from "./ButtonManage";
 import FormManage from "./FormManage";
 
@@ -12,19 +13,22 @@ const MANAGE_CAR_BUTTONS = [
 ];
 
 const ManageCar = () => {
-  const { handleCarAction, selectedCar, modals } = useCarsContext();
+  const selectedCar = useCarsUIStore((s) => s.selectedCar);
+  const manageCarOpen = useCarsUIStore((s) => s.manageCarOpen);
+  const toggleManageCar = useCarsUIStore((s) => s.toggleManageCar);
+  const { handleCar } = useCarAdminHandlers();
 
   return (
     <OpenModal
       comp={
         <>
-          <FormManage handle={modals.manageCar.handle}>
+          <FormManage handle={toggleManageCar}>
             {MANAGE_CAR_BUTTONS.map(({ name, type, content }) => (
               <ButtonManage
                 key={name}
                 name={name}
                 type={type}
-                handle={handleCarAction}
+                handle={handleCar}
                 value={selectedCar?._id}
                 content={content}
               />
@@ -34,7 +38,7 @@ const ManageCar = () => {
           <EditCar />
         </>
       }
-      isOpen={modals.manageCar.isOpen}
+      isOpen={manageCarOpen}
     />
   );
 };

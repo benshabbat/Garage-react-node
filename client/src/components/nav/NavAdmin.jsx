@@ -1,6 +1,6 @@
 import NavLink from "./NavLink";
 import { MyAccount } from "../index";
-import { useHeaderContext } from "../header/HeaderContext";
+import { useHeaderHandlers } from "../header/hooks/useHeaderHandlers";
 
 const NAV_LINKS = [
   { to: "/dashboard", label: "Dashboard" },
@@ -13,7 +13,7 @@ const NAV_LINKS = [
 ];
 
 const NavAdmin = () => {
-  const { handleOutsideClick } = useHeaderContext();
+  const { handleOutsideClick } = useHeaderHandlers();
   
   return (
     <>

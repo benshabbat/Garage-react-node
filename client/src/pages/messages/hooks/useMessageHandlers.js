@@ -1,17 +1,16 @@
 import { useMessageForm } from "./useMessageForm";
 import { useMessageActions } from "./useMessageActions";
 import { usersToOptions } from "../utils/messageValidation";
+import { useMessagesUIStore } from "../../../stores/uiStores";
+import { useUserStore } from "../../../stores/userStore";
+import { useAdminStore } from "../../../stores/adminStore";
 
-/**
- * Custom hook for message action handlers
- * @param {Object} selectedMsg - Currently selected message
- * @param {Object} user - Current user
- * @param {Array} users - List of all users
- * @param {Object} modals - Modal handlers
- * @returns {Object} Handler functions for message operations
- */
-export const useMessageHandlers = (selectedMsg, user, users, modals) => {
-  // Message actions
+export const useMessageHandlers = () => {
+  const selectedMsg = useMessagesUIStore((s) => s.selectedMsg);
+  const toggleCreateMsg = useMessagesUIStore((s) => s.toggleCreateMsg);
+  const toggleDeleteMsg = useMessagesUIStore((s) => s.toggleDeleteMsg);
+  const user = useUserStore((s) => s.user);
+  const users = useAdminStore((s) => s.users);
   const messageActions = useMessageActions(selectedMsg, user);
 
   /**
@@ -22,7 +21,7 @@ export const useMessageHandlers = (selectedMsg, user, users, modals) => {
     const messageForm = useMessageForm(user);
     
     const onSubmit = (e) => {
-      messageActions.onSubmitCreateMessage(e, messageForm.formData, modals.createMsg.handle);
+      messageActions.onSubmitCreateMessage(e, messageForm.formData, toggleCreateMsg);
     };
     
     return {
@@ -37,7 +36,7 @@ export const useMessageHandlers = (selectedMsg, user, users, modals) => {
    * Hook for deleting message
    */
   const useDeleteMsg = (e) => {
-    messageActions.onSubmitDeleteMessage(e, modals.deleteMsg.handle);
+    messageActions.onSubmitDeleteMessage(e, toggleDeleteMsg);
   };
 
   return {

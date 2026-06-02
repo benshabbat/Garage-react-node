@@ -1,4 +1,4 @@
-import { useDashboardContext } from "../../pages/dashboard/DashboardContext";
+import { useDashboardStore } from "../../stores/dashboardStore";
 import { truncate } from "../../utils/formatters";
 
 /**
@@ -6,7 +6,7 @@ import { truncate } from "../../utils/formatters";
  * Uses dashboard context to access data without props drilling
  */
 const RecentMessages = () => {
-  const { stats } = useDashboardContext();
+  const { stats } = useDashboardStore();
   const { recent: messages } = stats.messages;
 
   if (!messages || messages.length === 0) {

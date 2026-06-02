@@ -1,13 +1,17 @@
-import { useContextMessages } from "../../pages/messages/MessagesContext";
 import Delete from "./Delete";
+import { useMessagesUIStore } from "../../stores/uiStores";
+import { useMessageHandlers } from "../../pages/messages/hooks/useMessageHandlers";
 const DeleteMessage = () => {
-    const { modals,useDeleteMsg,selectedMsg } = useContextMessages();
-    return (
+  const selectedMsg = useMessagesUIStore((s) => s.selectedMsg);
+  const deleteMsgOpen = useMessagesUIStore((s) => s.deleteMsgOpen);
+  const toggleDeleteMsg = useMessagesUIStore((s) => s.toggleDeleteMsg);
+  const { useDeleteMsg } = useMessageHandlers();
+  return (
     <Delete
       deleteData={selectedMsg?.title}
-      handle={modals.deleteMsg.handle}
+      handle={toggleDeleteMsg}
       nameData="deleteMessage"
-      isOpen={modals.deleteMsg.isOpen}
+      isOpen={deleteMsgOpen}
       handleDelete={useDeleteMsg}
     />
   );

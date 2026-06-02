@@ -1,11 +1,25 @@
 import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
-import { useServicesAdminContext } from "./ServiceAdminContext";
 import { exportToCsv } from "../../utils/exportCsv";
+import { useAdminStore } from "../../stores/adminStore";
+import useFilteredData from "../../hooks/useFilteredData";
+import { useCallback, useEffect } from "react";
+import { serviceFilterFn } from "./utils/serviceValidation";
+import { useServicesUIStore } from "../../stores/uiStores";
+import { useServiceAdminHandlers } from "./hooks/useServiceAdminHandlers";
 
 export default function ServiceAdminTable() {
-  const { displayServices, handleServiceIdAction, handleSearch } =
-    useServicesAdminContext();
+  const services = useAdminStore((s) => s.services);
+  const getServicesByType = useAdminStore((s) => s.getServicesByType);
+  const { manageServiceOpen, editStatusOpen, editServiceOpen, editPaidOpen } = useServicesUIStore();
+  const { handleServiceIdAction } = useServiceAdminHandlers();
+
+  const memoizedServiceFilterFn = useCallback(serviceFilterFn, []);
+  const { displayData: displayServices, handleSearch } = useFilteredData(services, memoizedServiceFilterFn);
+
+  useEffect(() => {
+    getServicesByType();
+  }, [manageServiceOpen, editStatusOpen, editServiceOpen, editPaidOpen, getServicesByType]);
 
   const handleExport = () => {
     const rows = displayServices?.map((s) => ({
