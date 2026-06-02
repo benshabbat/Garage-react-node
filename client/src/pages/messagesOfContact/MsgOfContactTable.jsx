@@ -1,29 +1,11 @@
 import "../../components/table/table.css";
-import { useEffect, useCallback } from "react";
 import Search from "../../components/table/Search";
 import Table from "../../components/table/TableWithSort";
 import { getMomentFromUpdatedAt } from "../../utils";
-import { useAdminStore } from "../../stores/adminStore";
-import useFilteredData from "../../hooks/useFilteredData";
-import { contactFilterFn } from "./utils/contactValidation";
-import { handleContactAction as handleContactActionUtil } from "./utils/contactHandlerUtils";
+import { useMsgOfContactTable } from "./hooks/useMsgOfContactTable";
 
 export default function MsgOfContactTable() {
-  const messagesContact = useAdminStore((s) => s.messagesContact);
-  const storeGetMessagesContact = useAdminStore((s) => s.getMessagesContact);
-
-  const memoizedContactFilterFn = useCallback(contactFilterFn, []);
-  const { displayData: displayContacts, handleSearch } =
-    useFilteredData(messagesContact, memoizedContactFilterFn);
-
-  useEffect(() => {
-    storeGetMessagesContact();
-  }, [storeGetMessagesContact]);
-
-  const handleContact = async (e) => {
-    await handleContactActionUtil(e);
-    storeGetMessagesContact();
-  };
+  const { displayContacts, handleSearch, handleContact } = useMsgOfContactTable();
 
   const trTh = (
     <tr>

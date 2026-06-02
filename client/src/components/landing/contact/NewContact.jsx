@@ -1,8 +1,7 @@
 import "./newContact.css";
-import { useState } from "react";
-import { createContact } from "../../../utils";
 import FormInput from "../../form/FormInput";
 import Submitted from "../../Submitted";
+import { useContactForm } from "./hooks/useContactForm";
 
 const FIELD_ROWS = [
   [
@@ -15,30 +14,7 @@ const FIELD_ROWS = [
   ],
 ];
 export default function NewContact() {
-  const [formData, setFormData] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value, checked, type } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitError(null);
-    try {
-      await createContact(formData);
-      setIsSubmitted(true);
-      setFormData({});
-      e.target.reset();
-    } catch {
-      setSubmitError("Something went wrong. Please try again.");
-    }
-  };
+  const { isSubmitted, setIsSubmitted, submitError, handleChange, onSubmit } = useContactForm();
 
   if (isSubmitted) {
     return <Submitted setIsSubmitted={setIsSubmitted} />;
