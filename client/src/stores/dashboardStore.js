@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { dashboardApi } from "../api/services/dashboardApi.js";
-
-const setErr = (set, err) =>
-  set({ isLoading: false, isError: true, message: err.response?.data?.message ?? err.message });
+import { setErr } from "./storeUtils.js";
 
 export const useDashboardStore = create((set) => ({
   stats: null,

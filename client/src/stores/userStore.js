@@ -2,6 +2,7 @@ import { create } from "zustand";
 import axios from "../axiosConfig.js";
 import { getUserId } from "../api/services/userApi.js";
 import { ADMIN_ID } from "../api/apiEndpoints.js";
+import { setErr } from "./storeUtils.js";
 
 const API = {
   services: "/services",
@@ -9,66 +10,56 @@ const API = {
   cars: "/cars",
 };
 
-const setErr = (set, err) =>
-  set({ isLoading: false, isError: true, message: err.response?.data?.message ?? err.message });
-
-export const useUserStore = create((set) => ({
-  user: undefined,
-  services: [],
-  messages: [],
-  isLoading: false,
-  isError: false,
-  message: "",
-
-  getUser: async (id) => {
+export const useUserStore = create((set) => {
+  // Factory for named-API calls that return data directly
+  const load = (apiFn, key) => async (...args) => {
     set({ isLoading: true });
     try {
-      const data = await getUserId(id);
-      set({ user: data, isLoading: false });
+      const data = await apiFn(...args);
+      set({ [key]: data, isLoading: false });
     } catch (err) { setErr(set, err); }
-  },
+  };
 
-  getServicesByIdCar: async (carId) => {
+  // Factory for axios GET calls where response has { data } shape
+  const loadAxios = (getUrl, key) => async (id) => {
     set({ isLoading: true });
     try {
-      const { data } = await axios.get(`${API.services}/car/${carId}`);
-      set({ services: data, isLoading: false });
+      const { data } = await axios.get(getUrl(id));
+      set({ [key]: data, isLoading: false });
     } catch (err) { setErr(set, err); }
-  },
+  };
 
-  getServicesByIdUser: async (userId) => {
-    set({ isLoading: true });
-    try {
-      const { data } = await axios.get(`${API.services}/user/${userId}`);
-      set({ services: data, isLoading: false });
-    } catch (err) { setErr(set, err); }
-  },
+  return {
+    user: undefined,
+    services: [],
+    messages: [],
+    isLoading: false,
+    isError: false,
+    message: "",
 
-  getMessagesByIdUser: async (userId) => {
-    set({ isLoading: true });
-    try {
-      const { data } = await axios.get(`${API.messages}/user/${userId}`);
-      set({ messages: data, isLoading: false });
-    } catch (err) { setErr(set, err); }
-  },
+    getUser:             load(getUserId, "user"),
+    getServicesByIdCar:  loadAxios((id) => `${API.services}/car/${id}`,  "services"),
+    getServicesByIdUser: loadAxios((id) => `${API.services}/user/${id}`, "services"),
+    getMessagesByIdUser: loadAxios((id) => `${API.messages}/user/${id}`, "messages"),
 
-  getCarsByIdUser: async (userId) => {
-    set({ isLoading: true });
-    try {
-      const { data } = await axios.get(`${API.cars}/user/${userId}`);
-      set((s) => ({ user: { ...s.user, cars: data }, isLoading: false }));
-    } catch (err) { setErr(set, err); }
-  },
+    getCarsByIdUser: async (userId) => {
+      set({ isLoading: true });
+      try {
+        const { data } = await axios.get(`${API.cars}/user/${userId}`);
+        set((s) => ({ user: { ...s.user, cars: data }, isLoading: false }));
+      } catch (err) { setErr(set, err); }
+    },
 
-  createReqService: async (dataMessage) => {
-    set({ isLoading: true });
-    try {
-      const { data } = await axios.post(`${API.messages}/to/${ADMIN_ID}`, dataMessage);
-      set({ isLoading: false });
-      return data;
-    } catch (err) { setErr(set, err); }
-  },
+    createReqService: async (dataMessage) => {
+      set({ isLoading: true });
+      try {
+        const { data } = await axios.post(`${API.messages}/to/${ADMIN_ID}`, dataMessage);
+        set({ isLoading: false });
+        return data;
+      } catch (err) { setErr(set, err); }
+    },
 
-  resetUser: () =>
-    set({ user: undefined, services: [], messages: [], isLoading: false, isError: false, message: "" }),
-}));
+    resetUser: () =>
+      set({ user: undefined, services: [], messages: [], isLoading: false, isError: false, message: "" }),
+  };
+});

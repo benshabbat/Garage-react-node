@@ -4,81 +4,74 @@
  */
 import { create } from "zustand";
 
-const modalSlice = (names) =>
-  names.reduce((acc, name) => {
-    const key = name + "Open";
-    acc[key] = false;
-    acc["toggle" + name[0].toUpperCase() + name.slice(1)] = () =>
-      acc[key] === undefined
-        ? null
-        : set((s) => ({ [key]: !s[key] }));
-    return acc;
-  }, {});
+const makeToggle = (set, key) => () => set((s) => ({ [key]: !s[key] }));
+const makeSetter = (set, key) => (val) => set({ [key]: val });
 
 // ─── Users page ────────────────────────────────────────────────────────────
 export const useUsersUIStore = create((set) => ({
   selectedUser: null,
-  setSelectedUser: (user) => set({ selectedUser: user }),
-  manageUserOpen: false,  createUserOpen: false,
-  createCarOpen: false,   editUserOpen: false,   deleteUserOpen: false,
-  toggleManageUser: () => set((s) => ({ manageUserOpen: !s.manageUserOpen })),
-  toggleCreateUser: () => set((s) => ({ createUserOpen: !s.createUserOpen })),
-  toggleCreateCar:  () => set((s) => ({ createCarOpen:  !s.createCarOpen  })),
-  toggleEditUser:   () => set((s) => ({ editUserOpen:   !s.editUserOpen   })),
-  toggleDeleteUser: () => set((s) => ({ deleteUserOpen: !s.deleteUserOpen })),
+  setSelectedUser: makeSetter(set, "selectedUser"),
+  manageUserOpen: false, createUserOpen: false,
+  createCarOpen: false,  editUserOpen: false, deleteUserOpen: false,
+  toggleManageUser: makeToggle(set, "manageUserOpen"),
+  toggleCreateUser: makeToggle(set, "createUserOpen"),
+  toggleCreateCar:  makeToggle(set, "createCarOpen"),
+  toggleEditUser:   makeToggle(set, "editUserOpen"),
+  toggleDeleteUser: makeToggle(set, "deleteUserOpen"),
 }));
 
 // ─── Cars page ─────────────────────────────────────────────────────────────
 export const useCarsUIStore = create((set) => ({
   selectedCar: null,
-  setSelectedCar: (car) => set({ selectedCar: car }),
-  manageCarOpen: false, deleteCarOpen: false, editCarOpen: false,
-  toggleManageCar: () => set((s) => ({ manageCarOpen: !s.manageCarOpen })),
-  toggleDeleteCar: () => set((s) => ({ deleteCarOpen: !s.deleteCarOpen })),
-  toggleEditCar:   () => set((s) => ({ editCarOpen:   !s.editCarOpen   })),
+  setSelectedCar:     makeSetter(set, "selectedCar"),
+  manageCarOpen: false, deleteCarOpen: false, editCarOpen: false, createServiceOpen: false,
+  toggleManageCar:     makeToggle(set, "manageCarOpen"),
+  toggleDeleteCar:     makeToggle(set, "deleteCarOpen"),
+  toggleEditCar:       makeToggle(set, "editCarOpen"),
+  toggleCreateService: makeToggle(set, "createServiceOpen"),
 }));
 
 // ─── Services Admin page ────────────────────────────────────────────────────
 export const useServicesUIStore = create((set) => ({
   selectedService: null,
-  setSelectedService: (svc) => set({ selectedService: svc }),
+  setSelectedService:  makeSetter(set, "selectedService"),
   manageServiceOpen: false, editStatusOpen: false,
   editServiceOpen: false,   editPaidOpen: false,
-  toggleManageService: () => set((s) => ({ manageServiceOpen: !s.manageServiceOpen })),
-  toggleEditStatus:    () => set((s) => ({ editStatusOpen:    !s.editStatusOpen    })),
-  toggleEditService:   () => set((s) => ({ editServiceOpen:   !s.editServiceOpen   })),
-  toggleEditPaid:      () => set((s) => ({ editPaidOpen:      !s.editPaidOpen      })),
+  toggleManageService: makeToggle(set, "manageServiceOpen"),
+  toggleEditStatus:    makeToggle(set, "editStatusOpen"),
+  toggleEditService:   makeToggle(set, "editServiceOpen"),
+  toggleEditPaid:      makeToggle(set, "editPaidOpen"),
 }));
 
 // ─── Messages page ──────────────────────────────────────────────────────────
 export const useMessagesUIStore = create((set) => ({
   selectedMsg: null,
-  setSelectedMsg: (msg) => set({ selectedMsg: msg }),
+  setSelectedMsg:  makeSetter(set, "selectedMsg"),
   createMsgOpen: false, deleteMsgOpen: false,
-  toggleCreateMsg: () => set((s) => ({ createMsgOpen: !s.createMsgOpen })),
-  toggleDeleteMsg: () => set((s) => ({ deleteMsgOpen: !s.deleteMsgOpen })),
+  toggleCreateMsg: makeToggle(set, "createMsgOpen"),
+  toggleDeleteMsg: makeToggle(set, "deleteMsgOpen"),
 }));
 
 // ─── Account page ───────────────────────────────────────────────────────────
 export const useAccountUIStore = create((set) => ({
   selectedCar: null,
-  setSelectedCar: (car) => set({ selectedCar: car }),
+  setSelectedCar:   makeSetter(set, "selectedCar"),
   servicesOpen: false, reqServiceOpen: false,
-  toggleServices:   () => set((s) => ({ servicesOpen:   !s.servicesOpen   })),
-  toggleReqService: () => set((s) => ({ reqServiceOpen: !s.reqServiceOpen })),
+  toggleServices:   makeToggle(set, "servicesOpen"),
+  toggleReqService: makeToggle(set, "reqServiceOpen"),
 }));
 
 // ─── Header ─────────────────────────────────────────────────────────────────
 export const useHeaderUIStore = create((set) => ({
   isNavOpen: false,
-  toggleNav: () => set((s) => ({ isNavOpen: !s.isNavOpen })),
+  toggleNav:   makeToggle(set, "isNavOpen"),
   closeNav: () => set({ isNavOpen: false }),
   loginOpen: false,
-  toggleLogin: () => set((s) => ({ loginOpen: !s.loginOpen })),
+  toggleLogin: makeToggle(set, "loginOpen"),
 }));
 
 // ─── Reviews ────────────────────────────────────────────────────────────────
 export const useReviewsUIStore = create((set) => ({
   addReviewOpen: false,
-  toggleAddReview: () => set((s) => ({ addReviewOpen: !s.addReviewOpen })),
+  toggleAddReview: makeToggle(set, "addReviewOpen"),
 }));
