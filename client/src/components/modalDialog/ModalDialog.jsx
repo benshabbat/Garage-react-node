@@ -1,15 +1,16 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 export default function ModalDialog() {
   const dialog = useRef();
 
-  dialog.current.showModal();
+  useEffect(() => {
+    dialog.current?.showModal();
+  }, []);
 
   return (
     <dialog ref={dialog}>
       <h1>Dialog</h1>
-
-      <button>Close</button>
+      <button onClick={() => dialog.current?.close()}>Close</button>
     </dialog>
   );
 }

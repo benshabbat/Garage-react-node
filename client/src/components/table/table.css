@@ -1,6 +1,9 @@
 .table-container {
-  background: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: #e5e7eb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
   position: fixed;
   top: 120px;
@@ -21,7 +24,7 @@
 }
 .table__header {
   padding: 16px 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,13 +34,15 @@
 .table__header .input-group {
   width: 250px;
   padding: 8px;
-  border: 1px solid #eee;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 4px;
 }
 
 .table__header .input-group input {
   width: 100%;
   border: none;
+  background: transparent;
+  color: #e5e7eb;
 }
 
 .export-btn {
@@ -76,9 +81,9 @@
 .table__body .no-data-message {
   text-align: center;
   padding: 24px;
-  color: #666;
+  color: #9ca3af;
   font-size: 16px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 
@@ -86,11 +91,12 @@
 .table__body td {
   padding: 12px 16px;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .table__body th {
-  background: #f8f9fa;
+  background: rgba(17, 24, 39, 0.7);
+  color: #9ca3af;
   position: sticky;
   top: 0;
 }
@@ -103,7 +109,7 @@
 }
 
 .table__body th:hover {
-  background: #edf2f7;
+  background: rgba(31, 41, 55, 0.8);
 }
 
 .table__body td button {
@@ -132,11 +138,20 @@ button[name="createService"] {
 .status.done {
   background: #828fee;
 }
+.status.done::before {
+  content: "✓ ";
+}
 .status.pending {
   background: #eef681;
 }
+.status.pending::before {
+  content: "⏳ ";
+}
 .status.on-work {
   background: #7ef1ae;
+}
+.status.on-work::before {
+  content: "⚙ ";
 }
 
 .editPaid.Paid {
@@ -176,12 +191,12 @@ button[name="createService"] {
 
   tr {
     display: block;
-    width: 100%;      
+    width: 100%;
     box-sizing: border-box;
     margin: 10px 0;
     padding: 10px 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
   }
 
   td {

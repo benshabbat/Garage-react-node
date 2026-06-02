@@ -29,7 +29,8 @@ const AppointmentSchema = new Schema({
   },
   notes: {
     type: String,
-    required: true,
+    required: false,
+    default: '',
   },
   status: {
     type: String,

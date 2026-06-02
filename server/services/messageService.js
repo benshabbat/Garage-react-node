@@ -17,19 +17,15 @@ const createMessage = async (req) => {
   });
   return savedMessage;
 };
+const ALLOWED_PUBLIC_MESSAGE_FIELDS = ['content', 'subject'];
+
 const createMessageToAdmin = async (req) => {
   const to = req.params.to;
-  const { from } = req.body;
-  const newMessage = new Message({
-    ...req.body,
-    to,
-  });
+  const safeBody = Object.fromEntries(
+    Object.entries(req.body).filter(([k]) => ALLOWED_PUBLIC_MESSAGE_FIELDS.includes(k))
+  );
+  const newMessage = new Message({ ...safeBody, to, from: null });
   const savedMessage = await newMessage.save();
-  if (from) {
-    await User.findByIdAndUpdate(from, {
-      $push: { messages: [savedMessage._id] },
-    });
-  }
   await User.findByIdAndUpdate(to, {
     $push: { messages: [savedMessage._id] },
   });
@@ -59,17 +55,16 @@ const getMessage = async (req) => {
 };
 
 const getMessageByUser = async (req) => {
-  const messagesTo = await Message.find({ to: req.params.id })
-    .populate("to")
-    .populate("from");
-  const messagesFrom = await Message.find({ from: req.params.id })
-    .populate("from")
-    .populate("to");
-  return messagesTo.concat(messagesFrom);
+  const messages = await Message.find({
+    $or: [{ to: req.params.id }, { from: req.params.id }],
+  }).populate("to").populate("from");
+  return messages;
 };
 
-const getMessages = async () => {
-  const messages = await Message.find();
+const getMessages = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const messages = await Message.find().skip((page - 1) * limit).limit(limit);
   return messages;
 };
 

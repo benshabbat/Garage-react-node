@@ -3,6 +3,7 @@ import Car from "../models/Car.js";
 import { createError } from "../utils/error.js";
 
 const ALLOWED_SERVICE_POPULATE_FIELDS = ['car'];
+const ALLOWED_SERVICE_UPDATE_FIELDS = ['title', 'description', 'price', 'paid', 'status'];
 /**
  * Creates a new service and associates it with a car
  * @param {Object} req - Express request object
@@ -45,11 +46,12 @@ const createService = async (req) => {
 };
 
 const updateService = async (req) => {
+  const safeBody = Object.fromEntries(
+    Object.entries(req.body).filter(([k]) => ALLOWED_SERVICE_UPDATE_FIELDS.includes(k))
+  );
   const updatedService = await Service.findByIdAndUpdate(
     req.params.id,
-    {
-      $set: req.body,
-    },
+    { $set: safeBody },
     { new: true }
   );
   return updatedService;
@@ -64,8 +66,10 @@ const getService = async (req) => {
   return service;
 };
 
-const getServices = async () => {
-  const services = await Service.find().populate("car");
+const getServices = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const services = await Service.find().populate("car").skip((page - 1) * limit).limit(limit);
   return services;
 };
 
@@ -74,7 +78,9 @@ const getServicesByType = async (req) => {
   if (!ALLOWED_SERVICE_POPULATE_FIELDS.includes(type)) {
     throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_SERVICE_POPULATE_FIELDS.join(', ')}`);
   }
-  const services = await Service.find().populate(type);
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const services = await Service.find().populate(type).skip((page - 1) * limit).limit(limit);
   return services;
 };
 

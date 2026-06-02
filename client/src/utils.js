@@ -13,6 +13,3 @@ export * from "./api/index.js";
 
 // Export date utilities
 export { getMomentFromUpdatedAt, formatDate, getRelativeTime } from "./utils/dateUtils.js";
-
-// Legacy constant (still exported for compatibility)
-export const ADMIN = "63e14deca4340e45d23f20b2";

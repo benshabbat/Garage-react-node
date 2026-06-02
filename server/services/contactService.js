@@ -12,8 +12,10 @@ const createContact = async (req) => {
   return savedContact;
 };
 
-const getContacts = async () => {
-  const contacts = await Contact.find();
+const getContacts = async (req) => {
+  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const contacts = await Contact.find().skip((page - 1) * limit).limit(limit);
   return contacts;
 };
 
