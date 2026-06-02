@@ -1,15 +1,7 @@
-/**
- * Handle user actions based on button click
- * @param {Event} e - Event object
- * @param {Array} users - List of users
- * @param {Function} setSelectedUser - Function to set selected user
- * @param {Object} modals - Modal handlers
- */
-export const handleUserAction = async (e, users, setSelectedUser, modals) => {
-  e.preventDefault();
+import { resolveActionTarget } from "../../../utils/handlerUtils";
 
-  const { value, name } = e.target;
-  setSelectedUser(users.find((user) => user._id === value));
+export const handleUserAction = (e, users, setSelectedUser, modals) => {
+  const name = resolveActionTarget(e, users, setSelectedUser);
 
   switch (name) {
     case "editUser":

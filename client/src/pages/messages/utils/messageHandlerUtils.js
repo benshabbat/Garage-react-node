@@ -1,15 +1,7 @@
-/**
- * Handle message actions based on button click
- * @param {Event} e - Event object
- * @param {Array} messages - List of messages
- * @param {Function} setSelectedMsg - Function to set selected message
- * @param {Object} modals - Modal handlers
- */
+import { resolveActionTarget } from "../../../utils/handlerUtils";
+
 export const handleMessageAction = (e, messages, setSelectedMsg, modals) => {
-  e.preventDefault();
-  const { name, value } = e.target;
-  const message = messages.find((message) => message._id === value);
-  setSelectedMsg(message);
+  const name = resolveActionTarget(e, messages, setSelectedMsg);
 
   switch (name) {
     case "createMessage":

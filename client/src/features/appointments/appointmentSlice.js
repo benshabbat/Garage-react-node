@@ -3,6 +3,13 @@ import { API_URL_APPOINTMENTS } from '../../api/apiEndpoints';
 import { createAsyncThunkWithErrorHandling, addAsyncThunkCases } from '../utils/asyncThunkErrorHandler';
 import axios from 'axios';
 
+const INITIAL_FETCH_STATE = {
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: "",
+};
+
 // Service functions
 const appointmentService = {
   fetchAppointments: async () => {
@@ -48,22 +55,12 @@ const appointmentSlice = createSlice({
   name: 'appointments',
   initialState: {
     appointments: [],
-    fetchState: {
-      isError: false,
-      isSuccess: false,
-      isLoading: false,
-      message: "",
-    },
+    fetchState: INITIAL_FETCH_STATE,
   },
   reducers: {
     resetAppointments: (state) => {
       state.appointments = [];
-      state.fetchState = {
-        isError: false,
-        isSuccess: false,
-        isLoading: false,
-        message: "",
-      };
+      state.fetchState = INITIAL_FETCH_STATE;
     },
     clearErrors: (state) => {
       state.fetchState.isError = false;

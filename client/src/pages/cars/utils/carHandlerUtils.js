@@ -1,15 +1,7 @@
-/**
- * Handle car actions based on button click
- * @param {Event} e - Event object
- * @param {Array} cars - List of cars
- * @param {Function} setSelectedCar - Function to set selected car
- * @param {Object} modals - Modal handlers
- */
+import { resolveActionTarget } from "../../../utils/handlerUtils";
+
 export const handleCarAction = (e, cars, setSelectedCar, modals) => {
-  e.preventDefault();
-  const { name, value } = e.target;
-  const car = cars.find((car) => car._id === value);
-  setSelectedCar(car);
+  const name = resolveActionTarget(e, cars, setSelectedCar);
 
   switch (name) {
     case "editCar":
