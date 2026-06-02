@@ -1,24 +1,15 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../../features/auth/authSlice";
+import { useAuthStore } from "../../../stores/authStore";
 
-/**
- * Custom hook for managing login form
- * @param {Function} onLogin - Callback to close modal after login
- * @returns {Object} Login form state and handlers
- */
 export const useLoginForm = (onLogin) => {
-  const [formData, setFormData] = useState();
-  const dispatch = useDispatch();
-  
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const login = useAuthStore((s) => s.login);
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await dispatch(login(formData)).unwrap();
-      onLogin();
-    } catch {
-      // error is handled in Redux state (isError / message)
-    }
+    await login(formData);
+    const { isError } = useAuthStore.getState();
+    if (!isError) onLogin();
   };
 
   return { setFormData, onSubmit };

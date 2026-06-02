@@ -1,18 +1,18 @@
 import "./login.css";
-
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../features/auth/authSlice";
 import { OpenModal } from "..";
+import { useAuthStore } from "../../stores/authStore";
+
 export default function NewLogin({ isOpen }) {
-  const { isError, message } = useSelector((state) => state.auth);
+  const isError = useAuthStore((s) => s.isError);
+  const message = useAuthStore((s) => s.message);
+  const login = useAuthStore((s) => s.login);
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const dispatch = useDispatch();
   const handleChange = (e) =>
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(formData));
+    login(formData);
   };
   return (
     <OpenModal
@@ -20,6 +20,7 @@ export default function NewLogin({ isOpen }) {
         <div className="wrapper-login">
           <form onSubmit={onSubmit}>
             <h1>Login</h1>
+            {isError && <p className="error">{message}</p>}
             <div className="input-box">
               <label htmlFor="login-username" className="sr-only">Username</label>
               <input
