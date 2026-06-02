@@ -1,20 +1,20 @@
+import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header, Agent } from "./components";
-import {
-  Account,
-  Messages,
-  PageLanding,
-  Users,
-  Cars,
-  ServicesAdmin,
-  Appointments,
-  Dashboard,
-} from "./pages";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
-import MessagesOfContact from "./pages/messagesOfContact/MessagesOfContact.jsx";
 import { PrivateRoute } from "./PrivateRoute.jsx";
-import Unauthorized from "./pages/Unauthorized";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
+
+const PageLanding       = lazy(() => import("./pages/pageLanding/PageLanding"));
+const Account           = lazy(() => import("./pages/account/Account"));
+const Users             = lazy(() => import("./pages/users/Users"));
+const Cars              = lazy(() => import("./pages/cars/Cars"));
+const Messages          = lazy(() => import("./pages/messages/Messages"));
+const ServicesAdmin     = lazy(() => import("./pages/servicesAdmin/ServicesAdmin"));
+const MessagesOfContact = lazy(() => import("./pages/messagesOfContact/MessagesOfContact"));
+const Appointments      = lazy(() => import("./pages/appointments/Appointments"));
+const Dashboard         = lazy(() => import("./pages/dashboard/Dashboard"));
+const Unauthorized      = lazy(() => import("./pages/Unauthorized"));
 
 const PRIVATE_ROUTES = [
   { path: "/myCars",           Component: Account },
