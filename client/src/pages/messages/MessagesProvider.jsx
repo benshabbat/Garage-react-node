@@ -1,9 +1,8 @@
 import "../../components/table/table.css";
 import { MessagesContext } from "./MessagesContext";
 import { useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getMessagesByIdUser } from "../../features/user/userSlice";
-import { getUsers } from "../../features/admin/adminSlice";
+import { useUserStore } from "../../stores/userStore";
+import { useAdminStore } from "../../stores/adminStore";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
 import { messageFilterFn } from "./utils/messageValidation";
@@ -12,9 +11,11 @@ import { useMessageModals } from "./hooks/useMessageModals";
 import { useMessageHandlers } from "./hooks/useMessageHandlers";
 
 export default function MessagesProvider({ children }) {
-  const { messages, user } = useSelector((state) => state.user);
-  const { users } = useSelector((state) => state.admin);
-  const dispatch = useDispatch();
+  const messages = useUserStore((s) => s.messages);
+  const user = useUserStore((s) => s.user);
+  const getMessagesByIdUser = useUserStore((s) => s.getMessagesByIdUser);
+  const users = useAdminStore((s) => s.users);
+  const getUsers = useAdminStore((s) => s.getUsers);
 
   const [selectedMsg, setSelectedMsg] = useState(null);
 
@@ -30,9 +31,9 @@ export default function MessagesProvider({ children }) {
   const messageHandlers = useMessageHandlers(selectedMsg, user, users, modals);
 
   useEffect(() => {
-    if (user) dispatch(getMessagesByIdUser(user?._id));
-    if (user?.isAdmin) dispatch(getUsers());
-  }, [user, modals.createMsg.isOpen, modals.deleteMsg.isOpen, dispatch]);
+    if (user) getMessagesByIdUser(user?._id);
+    if (user?.isAdmin) getUsers();
+  }, [user, modals.createMsg.isOpen, modals.deleteMsg.isOpen, getMessagesByIdUser, getUsers]);
 
   const handleMsgAction = (e) => {
     handleMessageActionUtil(e, messages, setSelectedMsg, modals);

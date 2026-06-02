@@ -1,7 +1,6 @@
 import { ServiceAdminContext } from "./ServiceAdminContext";
 import { useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getServicesByType } from "../../features/admin/adminSlice";
+import { useAdminStore } from "../../stores/adminStore";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
 import { serviceFilterFn, serviceStatusOptions } from "./utils/serviceValidation";
@@ -10,8 +9,8 @@ import { useServiceModals } from "./hooks/useServiceModals";
 import { useServiceHandlers } from "./hooks/useServiceHandlers";
 
 export default function ServiceAdminProvider({ children }) {
-  const { services } = useSelector((state) => state.admin);
-  const dispatch = useDispatch();
+  const services = useAdminStore((s) => s.services);
+  const getServicesByType = useAdminStore((s) => s.getServicesByType);
 
   const [selectedService, setSelectedService] = useState();
 
@@ -27,13 +26,13 @@ export default function ServiceAdminProvider({ children }) {
   const serviceHandlers = useServiceHandlers(selectedService);
 
   useEffect(() => {
-    dispatch(getServicesByType());
+    getServicesByType();
   }, [
     modals.manageService.isOpen,
     modals.editStatusService.isOpen,
     modals.editService.isOpen,
     modals.editPaid.isOpen,
-    dispatch,
+    getServicesByType,
   ]);
 
   const handleServiceIdAction = (e) => {

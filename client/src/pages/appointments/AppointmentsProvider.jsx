@@ -1,8 +1,7 @@
 import { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAppointments, createAppointment, updateAppointment } from "../../features/appointments/appointmentSlice";
-import { getUsers } from "../../features/admin/adminSlice";
 import { AppointmentsContext } from "./AppointmentsContext";
+import { useAppointmentsStore } from "../../stores/appointmentsStore";
+import { useAdminStore } from "../../stores/adminStore";
 import { useAppointmentForm } from "./hooks/useAppointmentForm";
 import { useAppointmentStats } from "./hooks/useAppointmentStats";
 import { useAppointmentFilters } from "./hooks/useAppointmentFilters";
@@ -13,15 +12,18 @@ import PropTypes from "prop-types";
  * Following the established provider pattern used across the application
  */
 export default function AppointmentsProvider({ children }) {
-  const dispatch = useDispatch();
-  const { appointments, fetchState } = useSelector((state) => state.appointments);
-  const { users } = useSelector((state) => state.admin);
+  const appointments = useAppointmentsStore((s) => s.appointments);
+  const fetchState = { isLoading: useAppointmentsStore((s) => s.isLoading), isError: useAppointmentsStore((s) => s.isError), message: useAppointmentsStore((s) => s.message) };
+  const storeFetch = useAppointmentsStore((s) => s.fetchAppointments);
+  const storeCreate = useAppointmentsStore((s) => s.createAppointment);
+  const storeUpdate = useAppointmentsStore((s) => s.updateAppointment);
+  const users = useAdminStore((s) => s.users);
+  const storeGetUsers = useAdminStore((s) => s.getUsers);
 
-  // Load appointments and users on mount
   useEffect(() => {
-    dispatch(fetchAppointments());
-    dispatch(getUsers());
-  }, [dispatch]);
+    storeFetch();
+    storeGetUsers();
+  }, [storeFetch, storeGetUsers]);
 
   // Form management
   const appointmentForm = useAppointmentForm(users);
@@ -36,15 +38,15 @@ export default function AppointmentsProvider({ children }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const appointmentData = appointmentForm.prepareSubmitData();
-    dispatch(createAppointment(appointmentData));
+    storeCreate(appointmentData);
     appointmentForm.resetForm();
   };
 
   const handleStatusChange = useCallback(
     (id, newStatus) => {
-      dispatch(updateAppointment({ id, data: { status: newStatus } }));
+      storeUpdate({ id, data: { status: newStatus } });
     },
-    [dispatch]
+    [storeUpdate]
   );
 
   const value = {

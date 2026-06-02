@@ -1,7 +1,6 @@
-import { getUsers } from "../../features/admin/adminSlice";
 import { UsersContext } from "./UsersContext";
 import { useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAdminStore } from "../../stores/adminStore";
 import useFilteredData from "../../hooks/useFilteredData";
 import PropTypes from "prop-types";
 import { userFilterFn } from "./utils/userValidation";
@@ -10,8 +9,8 @@ import { useUserModals } from "./hooks/useUserModals";
 import { useUserHandlers } from "./hooks/useUserHandlers";
 
 export default function UsersProvider({ children }) {
-  const { users } = useSelector((state) => state.admin);
-  const dispatch = useDispatch();
+  const users = useAdminStore((s) => s.users);
+  const getUsers = useAdminStore((s) => s.getUsers);
 
   const [selectedUser, setSelectedUser] = useState();
 
@@ -27,13 +26,13 @@ export default function UsersProvider({ children }) {
   const userHandlers = useUserHandlers(selectedUser, setFilteredUsers, users, modals);
 
   useEffect(() => {
-    dispatch(getUsers());
+    getUsers();
   }, [
     modals.editUser.isOpen,
     modals.deleteUser.isOpen,
     modals.manageUser.isOpen,
     modals.createUser.isOpen,
-    dispatch,
+    getUsers,
   ]);
 
   const handleUser = (e) => {
