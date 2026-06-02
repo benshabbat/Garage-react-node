@@ -1,9 +1,7 @@
 import { create } from "zustand";
 import axios from "../axiosConfig.js";
 import { API_URL_APPOINTMENTS } from "../api/apiEndpoints.js";
-
-const setErr = (set, err) =>
-  set({ isLoading: false, isError: true, message: err.response?.data?.message ?? err.message });
+import { setErr } from "./storeUtils.js";
 
 export const useAppointmentsStore = create((set) => ({
   appointments: [],
