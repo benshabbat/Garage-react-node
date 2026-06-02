@@ -109,11 +109,17 @@
   color: var(--review-text);
   margin-bottom: 20px;
   flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.review-see-more {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--review-primary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .review-footer {
