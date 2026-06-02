@@ -1,19 +1,9 @@
 import "./login.css";
-import { useState } from "react";
 import { OpenModal } from "..";
-import { useAuthStore } from "../../stores/authStore";
+import { useLoginForm } from "./hooks/useLoginForm";
 
 export default function NewLogin({ isOpen }) {
-  const isError = useAuthStore((s) => s.isError);
-  const message = useAuthStore((s) => s.message);
-  const login = useAuthStore((s) => s.login);
-  const [formData, setFormData] = useState({ username: "", password: "" });
-  const handleChange = (e) =>
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  const onSubmit = (e) => {
-    e.preventDefault();
-    login(formData);
-  };
+  const { formData, handleChange, onSubmit, isError, message } = useLoginForm();
   return (
     <OpenModal
       comp={

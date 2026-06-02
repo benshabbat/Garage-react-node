@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useDashboardStore } from "../../stores/dashboardStore";
+import { useDashboardData } from "./hooks/useDashboardData";
 import {
   StatsOverview,
   AppointmentsByStatus,
@@ -11,12 +10,7 @@ import {
 import "./Dashboard.css";
 
 const Dashboard = () => {
-  const stats = useDashboardStore((s) => s.stats);
-  const getDashboardStats = useDashboardStore((s) => s.getDashboardStats);
-
-  useEffect(() => {
-    getDashboardStats();
-  }, [getDashboardStats]);
+  const { stats } = useDashboardData();
 
   return (
     stats?.overview && (

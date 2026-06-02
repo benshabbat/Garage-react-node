@@ -1,20 +1,11 @@
 import "./header.css";
 import { Outlet } from "react-router-dom";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import Navbars from "./Navbars";
-import { useAuthStore } from "../../stores/authStore";
-import { useUserStore } from "../../stores/userStore";
+import { useHeaderInit } from "./hooks/useHeaderInit";
 
 const Header = () => {
-  const userAuth = useAuthStore((s) => s.user);
-  const user = useUserStore((s) => s.user);
-  const getUser = useUserStore((s) => s.getUser);
-
-  useEffect(() => {
-    if (userAuth?._id && !user) {
-      getUser(userAuth._id);
-    }
-  }, [userAuth, user, getUser]);
+  useHeaderInit();
 
   return (
     <>

@@ -1,38 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
 import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
-import { useAdminStore } from "../../stores/adminStore";
-import { useUsersUIStore } from "../../stores/uiStores";
-import { useUserAdminHandlers } from "./hooks/useUserAdminHandlers";
-import useFilteredData from "../../hooks/useFilteredData";
-import { userFilterFn } from "./utils/userValidation";
+import { useUsersTableData } from "./hooks/useUsersTableData";
 
 export default function UsersTable() {
-  const users = useAdminStore((s) => s.users);
-  const getUsers = useAdminStore((s) => s.getUsers);
-  const { manageUserOpen, editUserOpen, deleteUserOpen, createUserOpen, toggleCreateUser } = useUsersUIStore();
+  const { displayUsers, handleSearch, handleUser, handleSortHeader, toggleCreateUser } =
+    useUsersTableData();
 
-  const memoizedUserFilterFn = useCallback(userFilterFn, []);
-  const { displayData: displayUsers, handleSearch, setFilteredData: setFilteredUsers, handleSort } =
-    useFilteredData(users, memoizedUserFilterFn);
 
-  const { handleUser } = useUserAdminHandlers(setFilteredUsers);
-
-  useEffect(() => {
-    getUsers();
-  }, [manageUserOpen, editUserOpen, deleteUserOpen, createUserOpen, getUsers]);
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
-  
-    const handleSortHeader = (key) => {
-      let direction = 'asc';
-      if (sortConfig.key === key && sortConfig.direction === 'asc') {
-        direction = 'desc';
-      }
-      setSortConfig({ key, direction });
-      handleSort(key, direction);
-    };
-  
-  
   const COLUMNS = [
     { key: 'username', label: 'User Name' },
     { key: 'email',    label: 'Email' },
