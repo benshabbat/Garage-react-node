@@ -29,8 +29,13 @@ const Table = ({ trTh, trTd }) => {
         (child) => child.props["data-label"] === sortConfig.key
       )?.props.children;
 
-      if (aValue < bValue) return sortConfig.direction === "ascending" ? -1 : 1;
-      if (aValue > bValue) return sortConfig.direction === "ascending" ? 1 : -1;
+      const aDate = Date.parse(aValue);
+      const bDate = Date.parse(bValue);
+      const aNum = isNaN(aDate) ? aValue : aDate;
+      const bNum = isNaN(bDate) ? bValue : bDate;
+
+      if (aNum < bNum) return sortConfig.direction === "ascending" ? -1 : 1;
+      if (aNum > bNum) return sortConfig.direction === "ascending" ? 1 : -1;
       return 0;
     });
   }, [sortConfig, trTd]);
