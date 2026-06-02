@@ -1,5 +1,6 @@
 import Contact from "../models/Contact.js";
 import { templatePhone } from "../utils/templates.js";
+import { getPaginationParams } from "../utils/queryHelpers.js";
 
 const createContact = async (req) => {
   const { phone } = req.body;
@@ -13,8 +14,7 @@ const createContact = async (req) => {
 };
 
 const getContacts = async (req) => {
-  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
-  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const { limit, page } = getPaginationParams(req);
   const contacts = await Contact.find().skip((page - 1) * limit).limit(limit);
   return contacts;
 };

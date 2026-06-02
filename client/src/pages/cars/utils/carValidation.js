@@ -10,11 +10,4 @@ export const carFilterFn = (item, value) =>
   item.km.toString().includes(value) ||
   item.brand.includes(value);
 
-/**
- * Service status options
- */
-export const serviceStatusOptions = [
-  { value: "pending", label: "Pending" },
-  { value: "done", label: "Done" },
-  { value: "on-work", label: "On work" },
-];
+export { serviceStatusOptions } from "../../../utils/serviceConstants";

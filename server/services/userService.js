@@ -4,6 +4,7 @@ import Message from "../models/Message.js";
 import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
+import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
 
 const ALLOWED_POPULATE_FIELDS = ['cars', 'messages'];
 
@@ -15,9 +16,7 @@ const updateUser = async (req) => {
   if (!user) throw createError(404, "User not found");
 
   // Only pick allowed fields from the request body
-  const safeBody = Object.fromEntries(
-    Object.entries(req.body).filter(([key]) => ALLOWED_UPDATE_FIELDS.includes(key))
-  );
+  const safeBody = pickAllowed(req.body, ALLOWED_UPDATE_FIELDS);
 
   // Process phone number if provided
   const newPhone = phone ? templatePhone(phone) : user.phone;
@@ -65,8 +64,7 @@ const getUser = async (req) => {
 };
 
 const getUsers = async (req) => {
-  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
-  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const { limit, page } = getPaginationParams(req);
   const users = await User.find().select("-password").skip((page - 1) * limit).limit(limit);
   return users;
 };
@@ -76,8 +74,7 @@ const getUsersByType = async (req) => {
   if (!ALLOWED_POPULATE_FIELDS.includes(type)) {
     throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_POPULATE_FIELDS.join(', ')}`);
   }
-  const limit = Math.min(parseInt(req.query.limit) || 500, 500);
-  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const { limit, page } = getPaginationParams(req);
   const users = await User.find().populate(type).skip((page - 1) * limit).limit(limit);
   return users;
 };
