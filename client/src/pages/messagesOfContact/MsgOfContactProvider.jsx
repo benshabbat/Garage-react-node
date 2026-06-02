@@ -21,8 +21,9 @@ export default function MsgOfContactProvider({ children }) {
     dispatch(getMessagesContact());
   }, [dispatch]);
 
-  const handleContact = (e) => {
-    handleContactActionUtil(e);
+  const handleContact = async (e) => {
+    await handleContactActionUtil(e);
+    dispatch(getMessagesContact());
   };
 
   const value = {
