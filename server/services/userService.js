@@ -12,8 +12,28 @@ const ALLOWED_UPDATE_FIELDS = ['username', 'email', 'phone', 'isAdmin', 'passwor
 
 const updateUser = async (req) => {
   const { password, phone } = req.body;
-  const user = await User.findById(req.params.id);
+  const { username, email } = req.body;
+  const userId = req.params.id;
+
+  const user = await User.findById(userId);
   if (!user) throw createError(404, "User not found");
+
+  // Check uniqueness for fields being changed
+  if (username && username !== user.username) {
+    const taken = await User.findOne({ username, _id: { $ne: userId } });
+    if (taken) throw createError(400, "Username already in use");
+  }
+  if (email && email !== user.email) {
+    const taken = await User.findOne({ email, _id: { $ne: userId } });
+    if (taken) throw createError(400, "Email already in use");
+  }
+  if (phone) {
+    const formattedPhone = templatePhone(phone);
+    if (formattedPhone !== user.phone) {
+      const taken = await User.findOne({ phone: formattedPhone, _id: { $ne: userId } });
+      if (taken) throw createError(400, "Phone number already in use");
+    }
+  }
 
   // Only pick allowed fields from the request body
   const safeBody = pickAllowed(req.body, ALLOWED_UPDATE_FIELDS);

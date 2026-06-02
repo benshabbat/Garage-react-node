@@ -34,13 +34,15 @@ const register = async (req) => {
     throw createError(400, "All fields are required");
   }
   
-  // Check if user exists
-  const userExists = await User.findOne({ username });
-  if (userExists) throw createError(400, "User already exists");
-
-  // Check if email is already in use
-  const emailExists = await User.findOne({ email });
+  // Check uniqueness of username, email, and phone
+  const [userExists, emailExists, phoneExists] = await Promise.all([
+    User.findOne({ username }),
+    User.findOne({ email }),
+    User.findOne({ phone: templatePhone(phone) }),
+  ]);
+  if (userExists)  throw createError(400, "Username already in use");
   if (emailExists) throw createError(400, "Email already in use");
+  if (phoneExists) throw createError(400, "Phone number already in use");
 
   const newNumberPlate = templatePhone(phone);
 
