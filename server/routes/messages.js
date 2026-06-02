@@ -13,9 +13,6 @@ import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-// Public routes
-router.post("/to/:to", createMessageToAdmin);
-
 // Admin routes
 const adminRouter = express.Router();
 adminRouter.use(verifyAdmin);
@@ -30,6 +27,7 @@ userRouter.get("/user/:id", getMessageByUser);
 // Auth routes — verifyToken only; ownership is enforced inside the service
 const authRouter = express.Router();
 authRouter.use(verifyToken);
+authRouter.post("/to/:to", createMessageToAdmin);
 authRouter.put("/:id", updateMessage);
 authRouter.delete("/:id", deleteMessage);
 authRouter.get("/:id", getMessage);

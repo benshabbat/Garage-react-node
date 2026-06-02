@@ -18,12 +18,12 @@ const createMessage = async (req) => {
   });
   return savedMessage;
 };
-const ALLOWED_PUBLIC_MESSAGE_FIELDS = ['title', 'description'];
+const ALLOWED_MESSAGE_FIELDS = ['title', 'description'];
 
 const createMessageToAdmin = async (req) => {
   const to = req.params.to;
-  const safeBody = pickAllowed(req.body, ALLOWED_PUBLIC_MESSAGE_FIELDS);
-  const newMessage = new Message({ ...safeBody, to, from: null });
+  const safeBody = pickAllowed(req.body, ALLOWED_MESSAGE_FIELDS);
+  const newMessage = new Message({ ...safeBody, to, from: req.user.id });
   const savedMessage = await newMessage.save();
   await User.findByIdAndUpdate(to, {
     $push: { messages: [savedMessage._id] },
