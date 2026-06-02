@@ -23,7 +23,9 @@ export const handleServiceAction = async (e, services, setSelectedService, modal
       modals.editPaid.handle();
       break;
     case "deleteService":
-      await serviceActions.onSubmitDeleteService(modals.manageService.handle);
+      if (window.confirm("Are you sure you want to delete this service?")) {
+        await serviceActions.onSubmitDeleteService(modals.manageService.handle);
+      }
       break;
     case "editService":
       modals.editService.handle();
