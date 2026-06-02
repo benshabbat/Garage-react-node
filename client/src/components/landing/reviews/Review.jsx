@@ -1,10 +1,19 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import PropTypes from "prop-types";
 import StarRating from "./starRating/StarRating";
 import { getMomentFromUpdatedAt } from "../../../utils";
 
+const MAX_CHARS = 100;
+
 const Review = memo(({ customer }) => {
   const { theTimeAgo, theDate } = getMomentFromUpdatedAt(customer.updatedAt);
+  const [expanded, setExpanded] = useState(false);
+
+  const isLong = customer.description.length > MAX_CHARS;
+  const displayText =
+    isLong && !expanded
+      ? customer.description.slice(0, MAX_CHARS) + "…"
+      : customer.description;
 
   return (
     <div className="review-card">
@@ -23,7 +32,18 @@ const Review = memo(({ customer }) => {
         <span className="review-stars-text">{customer.stars}/5</span>
       </div>
 
-      <p className="review-description">{customer.description}</p>
+      <p className="review-description">
+        {displayText}
+        {isLong && (
+          <button
+            className="review-see-more"
+            onClick={() => setExpanded((e) => !e)}
+            aria-expanded={expanded}
+          >
+            {expanded ? " see less" : " see more"}
+          </button>
+        )}
+      </p>
 
       <div className="review-footer">
         <span className="review-time">{theTimeAgo}</span>
