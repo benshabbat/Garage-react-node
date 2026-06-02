@@ -25,12 +25,9 @@ export const messageApi = {
     const response = await axios.post(`${API_URL_MESSAGES}/to/${ADMIN_ID}`, data);
     return response.data;
   },
-  
-  // Create service request (message to admin)
-  createServiceRequest: async (data) => {
-    const response = await axios.post(`${API_URL_MESSAGES}/to/${ADMIN_ID}`, data);
-    return response.data;
-  },
+
+  // Create service request — same endpoint as createToAdmin
+  createServiceRequest(data) { return messageApi.createToAdmin(data); },
   
   // Delete message
   delete: messageOps.delete,

@@ -1,16 +1,7 @@
-/**
- * Handle service actions based on button click
- * @param {Event} e - Event object
- * @param {Array} services - List of services
- * @param {Function} setSelectedService - Function to set selected service
- * @param {Object} modals - Modal handlers
- * @param {Object} serviceActions - Service action handlers
- * @returns {Promise<void>}
- */
+import { resolveActionTarget } from "../../../utils/handlerUtils";
+
 export const handleServiceAction = async (e, services, setSelectedService, modals, serviceActions) => {
-  e.preventDefault();
-  const { name, value } = e.target;
-  setSelectedService(services.find((service) => service._id === value));
+  const name = resolveActionTarget(e, services, setSelectedService);
 
   switch (name) {
     case "manage":
