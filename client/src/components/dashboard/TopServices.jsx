@@ -2,7 +2,7 @@ import { useDashboardStore } from "../../stores/dashboardStore";
 import DashboardSection from "./DashboardSection";
 
 const TopServices = () => {
-  const { stats } = useDashboardStore();
+  const stats = useDashboardStore((s) => s.stats);
   const { topServices } = stats;
 
   if (!topServices || topServices.length === 0) return null;

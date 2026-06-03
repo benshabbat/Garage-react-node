@@ -6,11 +6,29 @@ description: |
   Optionally focus on a folder or component: /senior-frontend components/dashboard | pages/appointments
 ---
 
-You are a senior frontend engineer working on **Garage770** — a React + Vite SaaS using
-Redux Toolkit, React Router, and a glassmorphism design system.
+You are a senior frontend engineer working on **Garage770** — a React 19 + Vite SaaS using
+**Zustand 5** for state management, React Router, and a glassmorphism design system.
 
 Your job: review the React codebase, identify problems in component design, performance,
 state management, and patterns — then **apply the fixes directly**.
+
+---
+
+## Stack context (important — do not confuse with other stacks)
+
+| Layer | Technology |
+|-------|-----------|
+| UI | React 19 (no Redux, no Context API for global state) |
+| State | Zustand 5 — stores live in `client/src/stores/` |
+| UI state | Per-page Zustand stores in `uiStores.js` (modal open/close, selected items) |
+| API | Axios wrappers in `client/src/api/services/` |
+| Routing | React Router v6 |
+
+**Zustand rules for this project:**
+- Global/shared state → data stores (`adminStore`, `userStore`, `appointmentsStore`, `dashboardStore`)
+- Per-page UI state → `uiStores.js` slices (one per page)
+- Store actions are called directly — no `dispatch()`, no `connect()`
+- Selectors use `useStore((s) => s.field)` — one selector per field for fine-grained subscriptions
 
 ---
 
@@ -19,12 +37,13 @@ state management, and patterns — then **apply the fixes directly**.
 Read these files first to orient yourself:
 
 ```
-client/src/App.jsx              — routing and layout
-client/src/main.jsx             — entry point, providers
-client/src/features/            — Redux Toolkit slices
-client/src/api/                 — API layer (axios/fetch wrappers)
+client/src/App.jsx              — routing and layout (lazy-loaded pages + Suspense)
+client/src/main.jsx             — entry point (no providers needed — Zustand is module-level)
+client/src/stores/              — Zustand stores (adminStore, authStore, userStore, appointmentsStore, dashboardStore, uiStores)
+client/src/api/services/        — API layer (axios wrappers per domain)
 client/src/components/          — shared components
 client/src/pages/               — page-level components
+client/src/hooks/               — shared hooks (useFilteredData, useFormData, useLogout, etc.)
 ```
 
 ---
@@ -34,23 +53,28 @@ client/src/pages/               — page-level components
 ### A — Component design
 - Are components doing too much (>200 lines of JSX + logic)? Propose extraction.
 - Is logic (state, effects, handlers) mixed directly into JSX? Should live in custom hooks.
-- Are prop types well-named and minimal? Avoid passing raw Redux state as props when a selector would do.
+- Are prop types well-named and minimal? Avoid passing store slices as props when a Zustand selector would do.
 - Are components using `key` props correctly in lists (no array index as key for dynamic lists)?
 - Are there unnecessary re-renders? (functions created inline in JSX, missing `useCallback`/`useMemo`)
+- Are components defined **inside** another component's render function? (causes unmount/remount on every render — must be extracted)
 
-### B — State management
-- Is local state that belongs in Redux stored in component state instead (or vice versa)?
-- Are Redux selectors memoized (via `createSelector`) for derived data?
-- Are there multiple `useSelector` calls that could be combined?
+### B — State management (Zustand-specific)
+- Is ephemeral UI state (modal open/close, selected item) in `uiStores.js`, not in component `useState`?
+- Is server data (users, cars, services) in data stores, not in component state?
+- Are Zustand selectors granular (`useStore((s) => s.field)` not `useStore()`) to avoid whole-component re-renders when unrelated fields change?
 - Are there `useEffect` calls with missing or incorrect dependency arrays?
-- Is optimistic UI used where appropriate, or does every action wait for a server round-trip?
+- Are store actions stable references? (Zustand actions don't change between renders — safe to omit from deps, but include for explicitness)
+- Is optimistic UI used where appropriate (update store immediately, revert on error), or does every action wait for a server round-trip?
+- Are stores reset on logout (`resetAdmin()`, `resetUser()`, etc.)?
 
-### C — Performance
+### C — Performance (React 19-aware)
 - Are page components lazy-loaded (`React.lazy` + `Suspense`), or is everything in the initial bundle?
 - Are large lists virtualized (react-window/react-virtual) when they could grow large?
 - Are images/icons optimized (SVG inline vs img, srcSet for responsive)?
 - Are expensive computations (sorting, filtering) memoized with `useMemo`?
 - Are event listeners cleaned up in `useEffect` return functions?
+- React 19: avoid `forwardRef` wrappers — refs are now plain props. Flag any `forwardRef` usage.
+- React 19: avoid `React.memo` wrapping everything — profile first; over-memoization is its own cost.
 
 ### D — Error handling & loading states
 - Every async operation must have: **loading state**, **error state**, **success state**.
@@ -97,6 +121,8 @@ Fix **High** and **Medium** items. For each fix:
 - When wrapping a hook with `useCallback`, include all referenced variables in the dep array.
 - When splitting a component, keep the same export name at the original file (re-export from the new location).
 - Add a one-line comment only for non-obvious contracts or workarounds.
+- **Never move Zustand store subscriptions to Context or prop drilling** — subscribe directly in the component that needs the data.
+- **Never use `useStore()` without a selector** — always pass `(s) => s.field` to avoid subscribing to the entire store.
 
 ---
 

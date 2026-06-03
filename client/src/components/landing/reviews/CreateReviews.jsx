@@ -8,7 +8,7 @@ const CreateReviews = () => {
 
   const { handleAddReview, isOpenAddReview, useAddReview } =
     useReviewsContext();
-  const { addReview, setStars, nameRef, descRef} = useAddReview();
+  const { addReview, setStars, nameRef, descRef, submitError } = useAddReview();
   const numRef = useRef();
   const maxLength = 80;
 
@@ -51,6 +51,7 @@ const CreateReviews = () => {
             />
             <input className="num" ref={numRef} value={maxLength} readOnly />
           </label>
+          {submitError && <p className="error">{submitError}</p>}
           <button className="form-btn" onClick={addReview}>
             Add Reviews
           </button>

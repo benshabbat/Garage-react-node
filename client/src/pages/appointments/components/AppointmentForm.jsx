@@ -9,7 +9,7 @@ const CONTACT_FIELDS = [
 /**
  * AppointmentForm handles the booking form for new appointments
  */
-const AppointmentForm = ({ formData, users, handleChange, handleSubmit }) => {
+const AppointmentForm = ({ formData, users, handleChange, handleSubmit, isLoading }) => {
   return (
     <section className="appointment-form-section">
       <h2>📝 Book New Appointment</h2>
@@ -90,8 +90,8 @@ const AppointmentForm = ({ formData, users, handleChange, handleSubmit }) => {
           />
         </div>
 
-        <button type="submit" className="submit-btn">
-          ✨ Book Appointment
+        <button type="submit" className="submit-btn" disabled={isLoading}>
+          {isLoading ? "Booking..." : "✨ Book Appointment"}
         </button>
       </form>
     </section>
@@ -111,6 +111,7 @@ AppointmentForm.propTypes = {
   users: PropTypes.array,
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };
 
 export default AppointmentForm;

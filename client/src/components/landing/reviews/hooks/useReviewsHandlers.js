@@ -15,7 +15,7 @@ export const useReviewsHandlers = (modals) => {
   const [isSubmittedTemp, setIsSubmittedTemp] = useState(false);
   
   // Get reviews data
-  const { allReviews, totalCards } = useReviewsData(modals.addReview.isOpen, isSubmittedTemp);
+  const { allReviews, totalCards } = useReviewsData(isSubmittedTemp);
 
   // Cards display and navigation
   const numCardsPreview = useCardsDisplay();
@@ -32,14 +32,7 @@ export const useReviewsHandlers = (modals) => {
    * Hook for adding review
    */
   const useAddReview = () => {
-    const reviewForm = useReviewForm(modals.addReview.handle);
-    
-    // Sync submission state
-    if (reviewForm.isSubmitted && !isSubmittedTemp) {
-      setIsSubmittedTemp(true);
-    }
-    
-    return reviewForm;
+    return useReviewForm(modals.addReview.handle, () => setIsSubmittedTemp(true));
   };
 
   return {

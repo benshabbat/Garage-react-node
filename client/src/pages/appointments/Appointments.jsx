@@ -28,6 +28,7 @@ const Appointments = () => {
           users={users}
           handleChange={appointmentForm.handleChange}
           handleSubmit={handleSubmit}
+          isLoading={fetchState.isLoading}
         />
         <AppointmentsList
           filteredAppointments={appointmentFilters.filteredAppointments}
