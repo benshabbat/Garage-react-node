@@ -4,6 +4,8 @@ import {
   createMessageToAdmin,
 } from "../../../api/services/messageApi";
 
+const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+
 /**
  * Custom hook for message CRUD operations
  * @param {Object} selectedMsg - Currently selected message
@@ -17,12 +19,16 @@ export const useMessageActions = (selectedMsg, user) => {
    */
   const onSubmitCreateMessage = async (e, formData, handleCreateMessage) => {
     e.preventDefault();
-    if (user?.isAdmin) {
-      await createMessage(formData, formData?.to);
-    } else {
-      await createMessageToAdmin(formData);
+    try {
+      if (user?.isAdmin) {
+        await createMessage(formData, formData?.to);
+      } else {
+        await createMessageToAdmin(formData);
+      }
+      handleCreateMessage();
+    } catch (err) {
+      throw new Error(extractErrorMessage(err));
     }
-    handleCreateMessage();
   };
 
   /**
@@ -32,8 +38,12 @@ export const useMessageActions = (selectedMsg, user) => {
     e.preventDefault();
     const { name } = e.target;
     if (name === "deleteMessage") {
-      await deleteMessage(selectedMsg?._id);
-      handleDeleteMessage();
+      try {
+        await deleteMessage(selectedMsg?._id);
+        handleDeleteMessage();
+      } catch (err) {
+        throw new Error(extractErrorMessage(err));
+      }
     }
   };
 

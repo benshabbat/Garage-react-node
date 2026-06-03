@@ -1,5 +1,7 @@
 import { deleteService, updateService } from "../../../api/services/serviceApi";
 
+const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+
 /**
  * Custom hook for service CRUD operations
  * @param {Object} selectedService - Currently selected service
@@ -12,17 +14,25 @@ export const useServiceActions = (selectedService) => {
    */
   const onSubmitEditService = async (e, formData, handleClick) => {
     e.preventDefault();
-    await updateService(selectedService?._id, formData);
-    handleClick();
-    // Data will be refreshed automatically by useEffect in ServiceAdminProvider
+    try {
+      await updateService(selectedService?._id, formData);
+      handleClick();
+      // Data will be refreshed automatically by useEffect in ServiceAdminProvider
+    } catch (err) {
+      throw new Error(extractErrorMessage(err));
+    }
   };
 
   /**
    * Delete a service
    */
   const onSubmitDeleteService = async (handleManageService) => {
-    await deleteService(selectedService?._id);
-    handleManageService();
+    try {
+      await deleteService(selectedService?._id);
+      handleManageService();
+    } catch (err) {
+      throw new Error(extractErrorMessage(err));
+    }
   };
 
   return {
