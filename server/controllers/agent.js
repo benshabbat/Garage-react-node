@@ -1,6 +1,9 @@
 import Anthropic from "@anthropic-ai/sdk";
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+let client = null;
+if (process.env.ANTHROPIC_API_KEY) {
+  client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 
 const SYSTEM_PROMPT = `אתה הסוכן החכם של Garage770 – מוסך שמנוהל באמצעות מערכת דיגיטלית.
 תפקידך לסייע לאנשי הצוות המנהלתי בשאלות לגבי:
@@ -15,6 +18,10 @@ const SYSTEM_PROMPT = `אתה הסוכן החכם של Garage770 – מוסך ש
 
 export const chat = async (req, res, next) => {
   try {
+    if (!client) {
+      return res.status(503).json({ error: "AI agent is not configured on this server" });
+    }
+
     const { message, history = [] } = req.body;
 
     if (!message?.trim()) {
