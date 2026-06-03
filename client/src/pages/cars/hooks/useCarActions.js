@@ -1,6 +1,8 @@
 import { updateCar, deleteCar } from "../../../api/services/carApi";
 import { createService } from "../../../api/services/serviceApi";
 
+const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+
 /**
  * Custom hook for car CRUD operations
  * @param {Object} selectedCar - Currently selected car
@@ -14,8 +16,12 @@ export const useCarActions = (selectedCar, setFilteredCars) => {
    */
   const onSubmitCreateService = async (e, formData, handleCreateService) => {
     e.preventDefault();
-    await createService(selectedCar?._id, formData);
-    handleCreateService();
+    try {
+      await createService(selectedCar?._id, formData);
+      handleCreateService();
+    } catch (err) {
+      throw new Error(extractErrorMessage(err));
+    }
   };
 
   /**
@@ -23,8 +29,12 @@ export const useCarActions = (selectedCar, setFilteredCars) => {
    */
   const onSubmitEditCar = async (e, formData, handleEditCar) => {
     e.preventDefault();
-    await updateCar(selectedCar?._id, formData);
-    handleEditCar();
+    try {
+      await updateCar(selectedCar?._id, formData);
+      handleEditCar();
+    } catch (err) {
+      throw new Error(extractErrorMessage(err));
+    }
   };
 
   /**
@@ -34,11 +44,15 @@ export const useCarActions = (selectedCar, setFilteredCars) => {
     e.preventDefault();
     const { name } = e.target;
     if (name === "deleteCar") {
-      await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
-      handleDeleteCar();
-      setFilteredCars((cars) =>
-        cars.filter((car) => car._id !== selectedCar._id)
-      );
+      try {
+        await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
+        handleDeleteCar();
+        setFilteredCars((cars) =>
+          cars.filter((car) => car._id !== selectedCar._id)
+        );
+      } catch (err) {
+        throw new Error(extractErrorMessage(err));
+      }
     }
   };
 

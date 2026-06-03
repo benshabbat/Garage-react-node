@@ -1,5 +1,7 @@
 import { createReqService } from "../../../api/services/messageApi";
 
+const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+
 /**
  * Custom hook for account service operations
  * @param {Object} selectedCar - Currently selected car
@@ -13,13 +15,17 @@ export const useAccountActions = (selectedCar, user) => {
    */
   const onSubmitReqService = async (e, formData, handleReqService) => {
     e.preventDefault();
-    const requestData = {
-      ...formData,
-      title: selectedCar?.numberPlate.toString(),
-      from: user?._id,
-    };
-    await createReqService(requestData);
-    handleReqService();
+    try {
+      const requestData = {
+        ...formData,
+        title: selectedCar?.numberPlate.toString(),
+        from: user?._id,
+      };
+      await createReqService(requestData);
+      handleReqService();
+    } catch (err) {
+      throw new Error(extractErrorMessage(err));
+    }
   };
 
   return {
