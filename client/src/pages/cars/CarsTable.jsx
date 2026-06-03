@@ -3,7 +3,7 @@ import Table from "../../components/table/Table";
 import { useCarsTableData } from "./hooks/useCarsTableData";
 
 export default function CarsTable() {
-  const { displayCars, handleSearch, handleCarAction } = useCarsTableData();
+  const { displayCars, handleSearch, handleCarAction, handleExport } = useCarsTableData();
 
   const trTh = (
     <tr>
@@ -36,7 +36,7 @@ export default function CarsTable() {
   ));
   return (
     <div className="table-container">
-      <Search handleSearch={handleSearch} name={"Cars"} />
+      <Search handleSearch={handleSearch} name={"Cars"} onExport={handleExport} />
       <Table trTh={trTh} trTd={trTd} />
     </div>
   );

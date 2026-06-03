@@ -5,6 +5,7 @@ import { useMessagesUIStore } from "../../../stores/uiStores";
 import useFilteredData from "../../../hooks/useFilteredData";
 import { messageFilterFn } from "../utils/messageValidation";
 import { handleMessageAction as handleMessageActionUtil } from "../utils/messageHandlerUtils";
+import { exportToCsv } from "../../../utils/exportCsv";
 
 export function useMessagesTable() {
   const messages = useUserStore((s) => s.messages);
@@ -29,5 +30,15 @@ export function useMessagesTable() {
     handleMessageActionUtil(e, messages, setSelectedMsg, { toggleCreateMsg, toggleDeleteMsg });
   };
 
-  return { displayMessages, handleSearch, handleMsgAction, toggleCreateMsg, user };
+  const handleExport = () => {
+    const rows = displayMessages?.map((m) => ({
+      from: m.from?.username || "",
+      to: m.to?.username || "",
+      title: m.title,
+      description: m.description,
+    }));
+    exportToCsv(rows, "messages");
+  };
+
+  return { displayMessages, handleSearch, handleMsgAction, toggleCreateMsg, user, handleExport };
 }
