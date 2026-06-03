@@ -1,3 +1,5 @@
+import { makeRegexValidator } from "./validationUtils";
+
 const CAR_REGEX = new RegExp(
   [
     "^[0-9]{3}-[0-9]{2}-[0-9]{3}$", // Format: XXX-XX-XXX
@@ -6,17 +8,6 @@ const CAR_REGEX = new RegExp(
   ].join("|")
 );
 
-/**
- * Validates a car number based on specific formats:
- * - Format 1: XXX-XX-XXX
- * - Format 2: XX-XXX-XX
- * - Format 3: 7 or 8 digits without dashes
- * @param {string} data - The car number to validate.
- * @returns {boolean} - True if the car number is valid, false otherwise.
- */
-const validCar = (data) => {
-  if (!data || typeof data !== "string") return false;
-  return CAR_REGEX.test(data);
-};
+const validCar = makeRegexValidator(CAR_REGEX);
 
 export default validCar;
