@@ -1,20 +1,10 @@
 import "./contact.css";
-import { useState } from "react";
 import { Form } from "../../index";
-import { createContact } from "../../../utils";
-//TODO: CONTACT US ON VALIDATE PHONE,EMAIL 
+import { useContactLegacyForm } from "./hooks/useContactLegacyForm";
+//TODO: CONTACT US ON VALIDATE PHONE,EMAIL
 //TODO: SERVER:MODEL,ROUTES,SERVICES,CONTROLLERS
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    from: "",
-    title: "",
-    description: "",
-  });
-
-  const onSubmit = async(e) => {
-    e.preventDefault();
-    await createContact(formData);
-  };
+  const { setFormData, onSubmit } = useContactLegacyForm();
   
   return (
     <div id="contact">
