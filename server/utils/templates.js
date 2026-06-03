@@ -12,6 +12,7 @@ export function templatePhone(phone) {
 
 
 export function templateCar(car) {
+  if (!car || typeof car !== "string") return car;
   if (car.length === 8) {
     return car.slice(0, 3) + "-" + car.slice(3, 5) + "-" + car.slice(5);
   } else if (car.length === 7) {

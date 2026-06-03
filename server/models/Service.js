@@ -33,4 +33,6 @@ const ServiceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+ServiceSchema.index({ car: 1 });
+
 export default mongoose.model("Service", ServiceSchema);
