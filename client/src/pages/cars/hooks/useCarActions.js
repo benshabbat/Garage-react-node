@@ -1,4 +1,5 @@
-import { createService, updateCar, deleteCar } from "../../../utils";
+import { updateCar, deleteCar } from "../../../api/services/carApi";
+import { createService } from "../../../api/services/serviceApi";
 
 /**
  * Custom hook for car CRUD operations

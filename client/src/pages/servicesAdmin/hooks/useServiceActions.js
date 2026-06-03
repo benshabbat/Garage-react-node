@@ -1,4 +1,4 @@
-import { deleteService, updateService } from "../../../utils";
+import { deleteService, updateService } from "../../../api/services/serviceApi";
 
 /**
  * Custom hook for service CRUD operations

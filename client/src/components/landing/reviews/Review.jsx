@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import PropTypes from "prop-types";
 import StarRating from "./starRating/StarRating";
-import { getMomentFromUpdatedAt } from "../../../utils";
+import { getMomentFromUpdatedAt } from "../../../utils/dateUtils";
 
 const MAX_CHARS = 100;
 

@@ -1,4 +1,4 @@
-import { deleteContact } from "../../../utils";
+import { deleteContact } from "../../../api/services/contactApi";
 
 /**
  * Handle contact actions based on button click

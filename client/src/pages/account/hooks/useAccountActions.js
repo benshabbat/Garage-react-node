@@ -1,4 +1,4 @@
-import { createReqService } from "../../../utils";
+import { createReqService } from "../../../api/services/messageApi";
 
 /**
  * Custom hook for account service operations
