@@ -38,4 +38,6 @@ const CarSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+CarSchema.index({ owner: 1 });
+
 export default mongoose.model("Car", CarSchema);

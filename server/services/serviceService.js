@@ -5,21 +5,12 @@ import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
 
 const ALLOWED_SERVICE_POPULATE_FIELDS = ['car'];
 const ALLOWED_SERVICE_UPDATE_FIELDS = ['title', 'description', 'price', 'paid', 'status'];
-/**
- * Creates a new service and associates it with a car
- * @param {Object} req - Express request object
- * @returns {Promise<Object>} Created service
- */
+const ALLOWED_SERVICE_CREATE_FIELDS = ['title', 'description', 'price', 'paid', 'status'];
+
 const createService = async (req) => {
   const carId = req.params.carId;
-  
-  // Create a new service object from request body but WITHOUT any _id field
-  const serviceData = { ...req.body, car: carId };
-  
-  // Delete _id property if it exists to ensure MongoDB generates a new unique ID
-  delete serviceData._id;
-  
-  const newService = new Service(serviceData);
+  const safeBody = pickAllowed(req.body, ALLOWED_SERVICE_CREATE_FIELDS);
+  const newService = new Service({ ...safeBody, car: carId });
   
   try {
     const savedService = await newService.save();
@@ -82,7 +73,10 @@ const getServicesByType = async (req) => {
 };
 
 const getServicesByCar = async (req) => {
-  const services = await Service.find({ car: req.params.car });
+  const { limit, page } = getPaginationParams(req);
+  const services = await Service.find({ car: req.params.car })
+    .skip((page - 1) * limit)
+    .limit(limit);
   return services;
 };
 
