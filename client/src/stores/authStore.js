@@ -56,6 +56,10 @@ export const useAuthStore = create(
         set({ user: null, isError: false, isSuccess: false, message: "" });
       },
 
+      // clearAuth: clears user + flags without an API call (safe to use in interceptors)
+      clearAuth: () =>
+        set({ user: null, isError: false, isSuccess: false, isLoading: false, message: "" }),
+
       reset: () =>
         set({ isError: false, isSuccess: false, isLoading: false, message: "" }),
     }),
