@@ -78,7 +78,7 @@ const AppointmentForm = ({ formData, users, handleChange, handleSubmit, isLoadin
         </div>
 
         <div className="form-group">
-          <label htmlFor="notes">Additional Notes *</label>
+          <label htmlFor="notes">Additional Notes</label>
           <textarea
             id="notes"
             name="notes"
@@ -86,7 +86,6 @@ const AppointmentForm = ({ formData, users, handleChange, handleSubmit, isLoadin
             value={formData.notes}
             onChange={handleChange}
             rows="4"
-            required
           />
         </div>
 
