@@ -4,7 +4,7 @@ import { getMomentFromUpdatedAt } from "../../utils";
 import { useMessagesTable } from "./hooks/useMessagesTable";
 
 export default function MessagesTable() {
-  const { displayMessages, handleSearch, handleMsgAction, toggleCreateMsg, user } =
+  const { displayMessages, handleSearch, handleMsgAction, toggleCreateMsg, user, handleExport } =
     useMessagesTable();
   const trTh = (
     <tr>
@@ -43,7 +43,7 @@ export default function MessagesTable() {
 
   return (
     <div className="table-container">
-      <Search handleSearch={handleSearch} name={"Messages"} />
+      <Search handleSearch={handleSearch} name={"Messages"} onExport={handleExport} />
       <Table trTh={trTh} trTd={trTd} />
       <button onClick={toggleCreateMsg} className="create-button">
         Create Message

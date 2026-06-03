@@ -4,6 +4,7 @@ import { useUsersUIStore } from "../../../stores/uiStores";
 import { useUserAdminHandlers } from "./useUserAdminHandlers";
 import useFilteredData from "../../../hooks/useFilteredData";
 import { userFilterFn } from "../utils/userValidation";
+import { exportToCsv } from "../../../utils/exportCsv";
 
 export function useUsersTableData() {
   const users = useAdminStore((s) => s.users);
@@ -36,5 +37,14 @@ export function useUsersTableData() {
     handleSort(key, direction);
   };
 
-  return { displayUsers, handleSearch, handleUser, handleSortHeader, toggleCreateUser };
+  const handleExport = () => {
+    const rows = displayUsers?.map((u) => ({
+      username: u.username,
+      email: u.email,
+      phone: u.phone,
+    }));
+    exportToCsv(rows, "users");
+  };
+
+  return { displayUsers, handleSearch, handleUser, handleSortHeader, toggleCreateUser, handleExport };
 }

@@ -5,7 +5,7 @@ import { getMomentFromUpdatedAt } from "../../utils";
 import { useMsgOfContactTable } from "./hooks/useMsgOfContactTable";
 
 export default function MsgOfContactTable() {
-  const { displayContacts, handleSearch, handleContact } = useMsgOfContactTable();
+  const { displayContacts, handleSearch, handleContact, handleExport } = useMsgOfContactTable();
 
   const trTh = (
     <tr>
@@ -36,7 +36,7 @@ export default function MsgOfContactTable() {
 
   return (
     <div className="table-container">
-      <Search handleSearch={handleSearch} name={"Message of Contacts"} />
+      <Search handleSearch={handleSearch} name={"Message of Contacts"} onExport={handleExport} />
       <Table trTh={trTh} trTd={trTd} />
     </div>
   );

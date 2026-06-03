@@ -5,6 +5,7 @@ import { useCarsUIStore } from "../../../stores/uiStores";
 import { useCarAdminHandlers } from "./useCarAdminHandlers";
 import useFilteredData from "../../../hooks/useFilteredData";
 import { carFilterFn } from "../utils/carValidation";
+import { exportToCsv } from "../../../utils/exportCsv";
 
 export function useCarsTableData() {
   const user = useUserStore((s) => s.user);
@@ -25,5 +26,15 @@ export function useCarsTableData() {
     getCarsByType(user?._id);
   }, [manageCarOpen, deleteCarOpen, editCarOpen, getCarsByType, user?._id]);
 
-  return { displayCars, handleSearch, handleCarAction };
+  const handleExport = () => {
+    const rows = displayCars?.map((c) => ({
+      numberPlate: c.numberPlate,
+      brand: c.brand,
+      km: c.km,
+      owner: c.owner?.username || "",
+    }));
+    exportToCsv(rows, "cars");
+  };
+
+  return { displayCars, handleSearch, handleCarAction, handleExport };
 }

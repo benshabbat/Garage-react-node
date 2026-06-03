@@ -3,7 +3,7 @@ import Table from "../../components/table/Table";
 import { useUsersTableData } from "./hooks/useUsersTableData";
 
 export default function UsersTable() {
-  const { displayUsers, handleSearch, handleUser, handleSortHeader, toggleCreateUser } =
+  const { displayUsers, handleSearch, handleUser, handleSortHeader, toggleCreateUser, handleExport } =
     useUsersTableData();
 
 
@@ -35,7 +35,7 @@ export default function UsersTable() {
   ));
   return (
     <div className="table-container">
-      <Search handleSearch={handleSearch} name={"Users"} />
+      <Search handleSearch={handleSearch} name={"Users"} onExport={handleExport} />
       <Table trTh={trTh} trTd={trTd} />
       <button onClick={toggleCreateUser} className="create-button">
         Create User
