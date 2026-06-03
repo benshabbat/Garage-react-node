@@ -37,12 +37,13 @@ const getAppointment = async (req) => {
 const updateAppointment = async (req) => {
   const updateData = pickAllowed(req.body, ALLOWED_APPOINTMENT_UPDATE_FIELDS);
   if (updateData.phone) updateData.phone = templatePhone(updateData.phone);
-  
+
   const updatedAppointment = await Appointment.findByIdAndUpdate(
     req.params.id,
     { $set: updateData },
     { new: true }
   ).populate('user', 'username email phone');
+  if (!updatedAppointment) throw createError(404, "Appointment not found");
   return updatedAppointment;
 };
 
@@ -53,6 +54,7 @@ const updateAppointmentStatus = async (req) => {
     { $set: { status } },
     { new: true }
   );
+  if (!updatedAppointment) throw createError(404, "Appointment not found");
   return updatedAppointment;
 };
 

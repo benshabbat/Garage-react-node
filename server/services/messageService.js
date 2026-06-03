@@ -6,7 +6,7 @@ import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
 const ALLOWED_MESSAGE_POPULATE_FIELDS = ['from', 'to'];
 
 const createMessage = async (req) => {
-  const from = req.params.from;
+  const from = req.user.id; // always use authenticated user's ID, never trust URL param
   const to = req.params.to;
   const newMessage = new Message({ ...req.body, to, from });
   const savedMessage = await newMessage.save();
@@ -73,9 +73,14 @@ const getMessage = async (req) => {
 };
 
 const getMessageByUser = async (req) => {
+  const { limit, page } = getPaginationParams(req);
   const messages = await Message.find({
     $or: [{ to: req.params.id }, { from: req.params.id }],
-  }).populate("to").populate("from");
+  })
+    .populate("to")
+    .populate("from")
+    .skip((page - 1) * limit)
+    .limit(limit);
   return messages;
 };
 

@@ -37,4 +37,7 @@ const MessageSchema = new Schema(
   { timestamps: true }
 );
 
+MessageSchema.index({ to: 1 });
+MessageSchema.index({ from: 1 });
+
 export default model("Message", MessageSchema);
