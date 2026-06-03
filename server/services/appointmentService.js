@@ -65,7 +65,11 @@ const deleteAppointment = async (req) => {
 
 const getAppointmentsByStatus = async (req) => {
   const { status } = req.query;
-  const appointments = await Appointment.find({ status }).sort({ date: -1 });
+  const { limit, page } = getPaginationParams(req);
+  const appointments = await Appointment.find({ status })
+    .sort({ date: -1 })
+    .skip((page - 1) * limit)
+    .limit(limit);
   return appointments;
 };
 
@@ -87,12 +91,16 @@ const getAppointmentsByDateRange = async (req) => {
     throw createError(400, "startDate must be before endDate");
   }
 
+  const { limit, page } = getPaginationParams(req);
   const appointments = await Appointment.find({
     date: {
       $gte: start,
       $lte: end,
     },
-  }).sort({ date: 1 });
+  })
+    .sort({ date: 1 })
+    .skip((page - 1) * limit)
+    .limit(limit);
   return appointments;
 };
 

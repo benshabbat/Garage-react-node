@@ -1,12 +1,14 @@
 import Contact from "../models/Contact.js";
 import { templatePhone } from "../utils/templates.js";
-import { getPaginationParams } from "../utils/queryHelpers.js";
+import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
+
+const ALLOWED_CONTACT_FIELDS = ['firstName', 'lastName', 'email', 'phone', 'message'];
 
 const createContact = async (req) => {
-  const { phone } = req.body;
-  const newPhone = templatePhone(phone);
+  const safeBody = pickAllowed(req.body, ALLOWED_CONTACT_FIELDS);
+  const newPhone = templatePhone(safeBody.phone);
   const newContact = new Contact({
-    ...req.body,
+    ...safeBody,
     phone: newPhone,
   });
   const savedContact = await newContact.save();

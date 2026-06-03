@@ -8,7 +8,8 @@ const ALLOWED_MESSAGE_POPULATE_FIELDS = ['from', 'to'];
 const createMessage = async (req) => {
   const from = req.user.id; // always use authenticated user's ID, never trust URL param
   const to = req.params.to;
-  const newMessage = new Message({ ...req.body, to, from });
+  const safeBody = pickAllowed(req.body, ALLOWED_MESSAGE_FIELDS);
+  const newMessage = new Message({ ...safeBody, to, from });
   const savedMessage = await newMessage.save();
   await User.findByIdAndUpdate(from, {
     $push: { messages: [savedMessage._id] },

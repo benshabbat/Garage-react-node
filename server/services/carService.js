@@ -6,13 +6,14 @@ import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
 
 const ALLOWED_CAR_POPULATE_FIELDS = ['services', 'owner'];
 const ALLOWED_CAR_UPDATE_FIELDS = ['numberPlate', 'km', 'brand'];
+const ALLOWED_CAR_CREATE_FIELDS = ['numberPlate', 'km', 'brand'];
 
 const createCar = async (req) => {
   const userId = req.params.userId;
-  const { numberPlate } = req.body;
-  const newNumberPlate = templateCar(numberPlate);
+  const safeBody = pickAllowed(req.body, ALLOWED_CAR_CREATE_FIELDS);
+  const newNumberPlate = templateCar(safeBody.numberPlate);
   const newCar = new Car({
-    ...req.body,
+    ...safeBody,
     owner: userId,
     numberPlate: newNumberPlate,
   });
