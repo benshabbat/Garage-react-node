@@ -25,8 +25,7 @@ if (!process.env.JWT) {
 }
 
 if (!process.env.ANTHROPIC_API_KEY) {
-  console.error("FATAL: ANTHROPIC_API_KEY is not defined in environment variables");
-  process.exit(1);
+  console.warn("WARNING: ANTHROPIC_API_KEY is not set — /api/agent endpoints will be unavailable");
 }
 
 const app = express();
