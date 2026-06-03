@@ -19,6 +19,7 @@ const ServiceSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
+      min: 0,
     },
     paid: {
       type: Boolean,
@@ -26,6 +27,7 @@ const ServiceSchema = new mongoose.Schema(
     },
     status: {
       type: String,
+      enum: ["pending", "in-progress", "done", "cancelled"],
       default: "pending",
       required: true,
     },

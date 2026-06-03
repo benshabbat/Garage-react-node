@@ -1,6 +1,7 @@
 import Contact from "../models/Contact.js";
 import { templatePhone } from "../utils/templates.js";
 import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
+import { createError } from "../utils/error.js";
 
 const ALLOWED_CONTACT_FIELDS = ['firstName', 'lastName', 'email', 'phone', 'message'];
 
@@ -22,7 +23,8 @@ const getContacts = async (req) => {
 };
 
 const deleteContact = async (req) => {
-  await Contact.findByIdAndDelete(req.params.id);
+  const deleted = await Contact.findByIdAndDelete(req.params.id);
+  if (!deleted) throw createError(404, "Contact not found");
   return "The Contact has been removed";
 };
 
