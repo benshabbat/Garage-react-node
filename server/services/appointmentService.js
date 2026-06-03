@@ -4,6 +4,7 @@ import { createError } from "../utils/error.js";
 import { pickAllowed, getPaginationParams } from "../utils/queryHelpers.js";
 
 const ALLOWED_APPOINTMENT_CREATE_FIELDS = ['clientName', 'email', 'phone', 'date', 'time', 'notes', 'user'];
+const ALLOWED_APPOINTMENT_UPDATE_FIELDS = ['clientName', 'email', 'phone', 'date', 'time', 'notes', 'status'];
 
 const createAppointment = async (req) => {
   const { phone } = req.body;
@@ -34,12 +35,8 @@ const getAppointment = async (req) => {
 };
 
 const updateAppointment = async (req) => {
-  const { phone } = req.body;
-  const updateData = { ...req.body };
-  
-  if (phone) {
-    updateData.phone = templatePhone(phone);
-  }
+  const updateData = pickAllowed(req.body, ALLOWED_APPOINTMENT_UPDATE_FIELDS);
+  if (updateData.phone) updateData.phone = templatePhone(updateData.phone);
   
   const updatedAppointment = await Appointment.findByIdAndUpdate(
     req.params.id,
