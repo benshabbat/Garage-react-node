@@ -104,7 +104,7 @@ const getDashboardStats = async () => {
   const topServices = await Service.find()
     .sort({ createdAt: -1 })
     .limit(5)
-    .select("name price");
+    .select("title price");
 
   // Get average review rating
   const reviewStats = await Review.aggregate([
