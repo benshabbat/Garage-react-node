@@ -59,7 +59,8 @@ const updateAppointmentStatus = async (req) => {
 };
 
 const deleteAppointment = async (req) => {
-  await Appointment.findByIdAndDelete(req.params.id);
+  const deleted = await Appointment.findByIdAndDelete(req.params.id);
+  if (!deleted) throw createError(404, "Appointment not found");
   return "Appointment has been deleted";
 };
 
