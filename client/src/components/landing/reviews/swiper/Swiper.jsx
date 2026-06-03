@@ -1,9 +1,7 @@
 import "./swiper.css";
 import NextCard from "./NextCard";
-import Pagination from "./Pagination";
 import PrevCard from "./Prevcard";
 import Slides from "./Slides";
-//TODO: PAGINATION DO PROBLEM WITH THE DOTS IN VIEW MOBILE
 const Swiper = ({ children }) => {
   
   return (
