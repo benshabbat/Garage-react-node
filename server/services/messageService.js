@@ -4,6 +4,7 @@ import { createError } from "../utils/error.js";
 import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
 
 const ALLOWED_MESSAGE_POPULATE_FIELDS = ['from', 'to'];
+const ALLOWED_MESSAGE_FIELDS = ['title', 'description'];
 
 const createMessage = async (req) => {
   const from = req.user.id; // always use authenticated user's ID, never trust URL param
@@ -19,7 +20,6 @@ const createMessage = async (req) => {
   });
   return savedMessage;
 };
-const ALLOWED_MESSAGE_FIELDS = ['title', 'description'];
 
 const createMessageToAdmin = async (req) => {
   const to = req.params.to;

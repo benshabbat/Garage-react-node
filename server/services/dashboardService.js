@@ -61,7 +61,7 @@ const getDashboardStats = async () => {
   const recentAppointments = await Appointment.find()
     .sort({ createdAt: -1 })
     .limit(10)
-    .populate("user", "name email");
+    .populate("user", "username email");
 
   // Get appointments by status
   const appointmentsByStatus = await Appointment.aggregate([
@@ -77,8 +77,8 @@ const getDashboardStats = async () => {
   const recentMessages = await Message.find()
     .sort({ createdAt: -1 })
     .limit(10)
-    .populate("from", "name email")
-    .populate("to", "name email");
+    .populate("from", "username email")
+    .populate("to", "username email");
 
   // Get monthly trends for the last 6 months
   const sixMonthsAgo = new Date();
