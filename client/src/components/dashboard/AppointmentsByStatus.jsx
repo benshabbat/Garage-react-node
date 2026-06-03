@@ -1,25 +1,20 @@
 import { useDashboardStore } from "../../stores/dashboardStore";
+import DashboardSection from "./DashboardSection";
 
-/**
- * AppointmentsByStatus displays appointments breakdown by status
- * Uses dashboard context to access data without props drilling
- */
 const AppointmentsByStatus = () => {
   const { stats } = useDashboardStore();
   const { byStatus } = stats.appointments;
 
   if (!byStatus || byStatus.length === 0) {
     return (
-      <section className="section">
-        <h2>Appointments by Status</h2>
+      <DashboardSection title="Appointments by Status">
         <div className="empty-state">No status data available</div>
-      </section>
+      </DashboardSection>
     );
   }
 
   return (
-    <section className="section">
-      <h2>Appointments by Status</h2>
+    <DashboardSection title="Appointments by Status">
       <div className="status-grid">
         {byStatus.map((item) => (
           <div key={item._id} className="status-item">
@@ -28,7 +23,7 @@ const AppointmentsByStatus = () => {
           </div>
         ))}
       </div>
-    </section>
+    </DashboardSection>
   );
 };
 

@@ -1,20 +1,14 @@
 import { useDashboardStore } from "../../stores/dashboardStore";
+import DashboardSection from "./DashboardSection";
 
-/**
- * TopServices displays the list of available services
- * Uses dashboard context to access data without props drilling
- */
 const TopServices = () => {
   const { stats } = useDashboardStore();
   const { topServices } = stats;
 
-  if (!topServices || topServices.length === 0) {
-    return null;
-  }
+  if (!topServices || topServices.length === 0) return null;
 
   return (
-    <section className="section">
-      <h2>Available Services</h2>
+    <DashboardSection title="Available Services">
       <div className="services-list">
         {topServices.map((service) => (
           <div key={service._id} className="service-item">
@@ -25,7 +19,7 @@ const TopServices = () => {
           </div>
         ))}
       </div>
-    </section>
+    </DashboardSection>
   );
 };
 

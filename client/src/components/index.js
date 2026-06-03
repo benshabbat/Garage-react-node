@@ -1,7 +1,5 @@
 export { default as About } from "./landing/about/About";
 export { default as Header } from "./header/Header";
-export { default as Address } from "./landing/address/Address";
-export { default as Contact } from "./landing/contact/Contact";
 export { default as CreateReviews } from "./landing/reviews/CreateReviews";
 export { default as Review } from "./landing/reviews/Review";
 export { default as Reviews } from "./landing/reviews/Reviews";

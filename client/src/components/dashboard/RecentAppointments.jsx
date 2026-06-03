@@ -1,26 +1,21 @@
 import { useDashboardStore } from "../../stores/dashboardStore";
 import { truncate } from "../../utils/formatters";
+import DashboardSection from "./DashboardSection";
 
-/**
- * RecentAppointments displays table of recent appointments
- * Uses dashboard context to access data without props drilling
- */
 const RecentAppointments = () => {
   const { stats } = useDashboardStore();
   const { recent: appointments } = stats.appointments;
 
   if (!appointments || appointments.length === 0) {
     return (
-      <section className="section">
-        <h2>Recent Appointments</h2>
+      <DashboardSection title="Recent Appointments">
         <div className="empty-state">No appointments to display</div>
-      </section>
+      </DashboardSection>
     );
   }
 
   return (
-    <section className="section">
-      <h2>Recent Appointments</h2>
+    <DashboardSection title="Recent Appointments">
       <div className="table-container">
         <table className="dashboard-table">
           <thead>
@@ -61,7 +56,7 @@ const RecentAppointments = () => {
           </tbody>
         </table>
       </div>
-    </section>
+    </DashboardSection>
   );
 };
 

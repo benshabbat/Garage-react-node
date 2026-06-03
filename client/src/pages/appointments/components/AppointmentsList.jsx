@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { exportToCsv } from "../../../utils/exportCsv";
+import { capitalize } from "../../../utils/formatters";
 
 const FILTER_STATUSES = ['all', 'pending', 'confirmed', 'cancelled'];
 const STATUS_OPTIONS = ['pending', 'confirmed', 'cancelled'];
@@ -69,7 +70,7 @@ const AppointmentsList = ({
               disabled={appointment.status === s}
               onClick={() => handleStatusChange(appointment._id, s)}
             >
-              {s.charAt(0).toUpperCase() + s.slice(1)}
+              {capitalize(s)}
             </button>
           ))}
         </div>
@@ -96,7 +97,7 @@ const AppointmentsList = ({
                 className={`filter-btn ${filterStatus === status ? 'active' : ''}`}
                 onClick={() => setFilterStatus(status)}
               >
-                {status.charAt(0).toUpperCase() + status.slice(1)}
+                {capitalize(status)}
               </button>
             ))}
           </div>

@@ -1,26 +1,21 @@
 import { useDashboardStore } from "../../stores/dashboardStore";
 import { truncate } from "../../utils/formatters";
+import DashboardSection from "./DashboardSection";
 
-/**
- * RecentMessages displays table of recent messages
- * Uses dashboard context to access data without props drilling
- */
 const RecentMessages = () => {
   const { stats } = useDashboardStore();
   const { recent: messages } = stats.messages;
 
   if (!messages || messages.length === 0) {
     return (
-      <section className="section">
-        <h2>Recent Messages</h2>
+      <DashboardSection title="Recent Messages">
         <div className="empty-state">No messages to display</div>
-      </section>
+      </DashboardSection>
     );
   }
 
   return (
-    <section className="section">
-      <h2>Recent Messages</h2>
+    <DashboardSection title="Recent Messages">
       <div className="table-container">
         <table className="dashboard-table">
           <thead>
@@ -53,7 +48,7 @@ const RecentMessages = () => {
           </tbody>
         </table>
       </div>
-    </section>
+    </DashboardSection>
   );
 };
 

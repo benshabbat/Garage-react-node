@@ -1,3 +1,4 @@
+export { default as DashboardSection } from "./DashboardSection";
 export { default as StatCard } from "./StatCard";
 export { default as StatsOverview } from "./StatsOverview";
 export { default as AppointmentsByStatus } from "./AppointmentsByStatus";
