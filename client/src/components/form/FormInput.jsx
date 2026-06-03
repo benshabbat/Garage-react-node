@@ -41,7 +41,11 @@ export default function FormInput({
 
   return (
     <label className={classNameLabel}>
-      {!input.hidden && !classNameLabel && <span>{input.name}</span>}
+      {!input.hidden && (
+        <span className={classNameLabel ? "sr-only" : undefined}>
+          {input.placeholder || input.name}
+        </span>
+      )}
       {errorMessage && (
         <span id={`${input.name}-error`} className="error">
           {errorMessage}

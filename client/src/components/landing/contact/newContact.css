@@ -36,7 +36,8 @@
   font-size: clamp(24px, 5vw, 32px);
 }
 
-.container-contact form h4 {
+.container-contact .message-label {
+  display: block;
   color: #fff;
   font-weight: 300;
   width: 100%;
