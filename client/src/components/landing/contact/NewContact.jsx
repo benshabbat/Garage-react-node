@@ -34,8 +34,8 @@ export default function NewContact() {
             <FormInput key={field.name} input={field} handleChange={handleChange} classNameLabel={" "} />
           ))}
         </div>
-        <h4>Type your message here...</h4>
-        <textarea name="message" required onChange={handleChange}></textarea>
+        <label htmlFor="contact-message" className="message-label">Message</label>
+        <textarea id="contact-message" name="message" placeholder="Type your message here..." required onChange={handleChange}></textarea>
         {submitError && <p className="error">{submitError}</p>}
         <div className="button-container">
           <button type="submit">Send</button>
