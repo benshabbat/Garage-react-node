@@ -71,6 +71,11 @@
   border-color: #4a9eff;
 }
 
+.container-contact form input:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: 2px;
+}
+
 .container-contact form input::placeholder {
   color: #ddd;
 }
@@ -94,6 +99,11 @@
 
 .container-contact form textarea:focus {
   border-color: #4a9eff;
+}
+
+.container-contact form textarea:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: 2px;
 }
 
 /* Textarea Scrollbar */
