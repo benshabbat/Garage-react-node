@@ -9,7 +9,7 @@ function Submitted({
 }) {
   return (
     <div className="container-contact">
-      <div className="success-message">
+      <div className="success-message" role="status" aria-live="polite">
         <CheckCircle className="success-icon" />
         <h2 className="success-title">Thank You!</h2>
         <p>Your {name} has been sent successfully.</p>
