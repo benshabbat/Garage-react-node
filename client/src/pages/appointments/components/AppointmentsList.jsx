@@ -108,7 +108,7 @@ const AppointmentsList = ({
       </div>
       <div className="appointments-list">
         {fetchState.isLoading && <div className="loading">⏳ Loading appointments...</div>}
-        {fetchState.isSuccess && renderAppointments()}
+        {!fetchState.isLoading && !fetchState.isError && renderAppointments()}
         {fetchState.isError && (
           <div className="error">
             ⚠️ Error: {fetchState.message || 'Failed to load appointments'}
@@ -125,7 +125,6 @@ AppointmentsList.propTypes = {
   setFilterStatus: PropTypes.func.isRequired,
   fetchState: PropTypes.shape({
     isLoading: PropTypes.bool,
-    isSuccess: PropTypes.bool,
     isError: PropTypes.bool,
     message: PropTypes.string,
   }).isRequired,

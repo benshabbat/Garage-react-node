@@ -1,26 +1,29 @@
 import { useState, useMemo } from "react";
 
-/**
- * Custom hook for filtering appointments
- * @param {Array} appointments - List of all appointments
- * @returns {Object} Filter state and filtered data
- */
 export const useAppointmentFilters = (appointments) => {
   const [filterStatus, setFilterStatus] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const filteredAppointments = useMemo(() => {
-    if (!appointments || !Array.isArray(appointments)) {
-      return [];
-    }
+    if (!appointments || !Array.isArray(appointments)) return [];
 
-    return filterStatus === 'all'
-      ? appointments
-      : appointments.filter(a => a.status === filterStatus);
-  }, [appointments, filterStatus]);
+    return appointments.filter((a) => {
+      const matchesStatus = filterStatus === 'all' || a.status === filterStatus;
+      const term = searchTerm.toLowerCase();
+      const matchesSearch =
+        !term ||
+        a.clientName?.toLowerCase().includes(term) ||
+        a.email?.toLowerCase().includes(term) ||
+        a.phone?.toLowerCase().includes(term);
+      return matchesStatus && matchesSearch;
+    });
+  }, [appointments, filterStatus, searchTerm]);
 
   return {
     filterStatus,
     setFilterStatus,
+    searchTerm,
+    setSearchTerm,
     filteredAppointments,
   };
 };

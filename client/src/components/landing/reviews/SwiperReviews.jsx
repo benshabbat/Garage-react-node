@@ -7,8 +7,8 @@ export default function SwiperReviews() {
 
   return (
     <Swiper>
-      {allReviews?.map((customer, index) => (
-        <Review customer={customer} key={index} />
+      {allReviews?.map((customer) => (
+        <Review customer={customer} key={customer._id} />
       ))}
     </Swiper>
   );

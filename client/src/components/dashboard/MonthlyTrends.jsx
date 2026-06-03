@@ -47,7 +47,7 @@ TrendChart.propTypes = {
 };
 
 const MonthlyTrends = () => {
-  const { stats } = useDashboardStore();
+  const stats = useDashboardStore((s) => s.stats);
   const { trends } = stats;
 
   const hasAppointments = trends.monthlyAppointments?.length > 0;

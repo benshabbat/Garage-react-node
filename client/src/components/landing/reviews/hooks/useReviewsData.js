@@ -1,26 +1,15 @@
 import { useState, useEffect } from "react";
 import { getReviews } from "../../../../api/services/reviewApi";
 
-/**
- * Custom hook for managing reviews data
- * @param {boolean} isOpenAddReview - Modal open state
- * @param {boolean} isSubmitted - Form submission state
- * @returns {Object} Reviews data and state
- */
-export const useReviewsData = (isOpenAddReview, isSubmitted) => {
+// Refetch only when a review is submitted, not on every modal open/close
+export const useReviewsData = (isSubmitted) => {
   const [allReviews, setAllReviews] = useState([]);
 
   useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const data = await getReviews();
-        setAllReviews(data || []);
-      } catch {
-        setAllReviews([]);
-      }
-    };
-    fetchReviews();
-  }, [isOpenAddReview, isSubmitted]);
+    getReviews()
+      .then((data) => setAllReviews(data || []))
+      .catch(() => setAllReviews([]));
+  }, [isSubmitted]);
 
   const totalCards = Array.isArray(allReviews) ? allReviews.length : 0;
 

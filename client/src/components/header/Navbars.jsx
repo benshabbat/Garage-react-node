@@ -6,18 +6,20 @@ import { useAuthStore } from "../../stores/authStore";
 import { useUserStore } from "../../stores/userStore";
 import Logo from "../../images/logo.jpg";
 
+// Defined outside to avoid creating a new component type on every Navbars render
+function Nav() {
+  const userAuth = useAuthStore((s) => s.user);
+  const user = useUserStore((s) => s.user);
+
+  if (userAuth && !user) {
+    return <div className="nav-loading">loading...</div>;
+  }
+  return user ? user.isAdmin ? <NavAdmin /> : <NavUser /> : <NavLanding />;
+}
+
 export default function Navbars() {
   const isNavOpen = useHeaderUIStore((s) => s.isNavOpen);
   const { handleOutsideClick } = useHeaderHandlers();
-  const userAuth = useAuthStore((s) => s.user);
-  const user = useUserStore((s) => s.user);
-  const Nav = () => {
-    if (userAuth && !user) {
-      return <div className="nav-loading">loading...</div>;
-    }
-
-    return user ? user.isAdmin ? <NavAdmin /> : <NavUser /> : <NavLanding />;
-  };
   return (
     <>
       <div className="main-header">

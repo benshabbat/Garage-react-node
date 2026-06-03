@@ -3,7 +3,7 @@ import { truncate } from "../../utils/formatters";
 import DashboardSection from "./DashboardSection";
 
 const RecentAppointments = () => {
-  const { stats } = useDashboardStore();
+  const stats = useDashboardStore((s) => s.stats);
   const { recent: appointments } = stats.appointments;
 
   if (!appointments || appointments.length === 0) {

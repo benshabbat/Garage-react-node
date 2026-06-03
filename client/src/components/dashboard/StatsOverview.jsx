@@ -6,7 +6,7 @@ import StatCard from "./StatCard";
  * Uses dashboard context to access data without props drilling
  */
 const StatsOverview = () => {
-  const { stats } = useDashboardStore();
+  const stats = useDashboardStore((s) => s.stats);
   const { overview } = stats;
 
   const STAT_CARDS = [
