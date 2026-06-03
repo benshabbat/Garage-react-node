@@ -45,7 +45,7 @@ export default function NewLogin({ isOpen }) {
             </button>
             <div className="register-link">
               <p>
-                Don't have an account?
+                Don&apos;t have an account?
                 <a> Contact Us</a>
               </p>
             </div>
