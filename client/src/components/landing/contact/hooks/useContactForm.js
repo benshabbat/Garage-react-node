@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createContact } from "../../../../utils";
+import { createContact } from "../../../../api/services/contactApi";
 
 export function useContactForm() {
   const [formData, setFormData] = useState({});

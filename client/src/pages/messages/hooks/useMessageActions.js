@@ -2,7 +2,7 @@ import {
   deleteMessage,
   createMessage,
   createMessageToAdmin,
-} from "../../../utils";
+} from "../../../api/services/messageApi";
 
 /**
  * Custom hook for message CRUD operations

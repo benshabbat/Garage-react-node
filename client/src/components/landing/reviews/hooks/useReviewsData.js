@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getReviews } from "../../../../utils";
+import { getReviews } from "../../../../api/services/reviewApi";
 
 /**
  * Custom hook for managing reviews data

@@ -1,6 +1,6 @@
 import Search from "../../components/table/Search";
 import Table from "../../components/table/TableWithSort";
-import { getMomentFromUpdatedAt } from "../../utils";
+import { getMomentFromUpdatedAt } from "../../utils/dateUtils";
 import { useMessagesTable } from "./hooks/useMessagesTable";
 
 export default function MessagesTable() {

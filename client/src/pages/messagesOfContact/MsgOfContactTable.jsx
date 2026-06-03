@@ -1,7 +1,7 @@
 import "../../components/table/table.css";
 import Search from "../../components/table/Search";
 import Table from "../../components/table/TableWithSort";
-import { getMomentFromUpdatedAt } from "../../utils";
+import { getMomentFromUpdatedAt } from "../../utils/dateUtils";
 import { useMsgOfContactTable } from "./hooks/useMsgOfContactTable";
 
 export default function MsgOfContactTable() {

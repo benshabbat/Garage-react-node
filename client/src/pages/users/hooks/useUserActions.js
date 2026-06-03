@@ -1,4 +1,5 @@
-import { deleteUser, createCar, updateUser, createUser } from "../../../utils";
+import { deleteUser, updateUser, createUser } from "../../../api/services/userApi";
+import { createCar } from "../../../api/services/carApi";
 import { formatPhone } from "../../../utils/formatters";
 import { isValidUserName, isValidCar } from "../utils/userValidation";
 const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
