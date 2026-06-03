@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const SERVICES = [
   {
     title: "Online Reports Access",
@@ -33,26 +31,15 @@ const SERVICES = [
   },
 ];
 
-const ServicesLanding = () => {
-  const [hoveredService, setHoveredService] = useState(null);
-
-  return (
-    <div className="services-grid">
-      {SERVICES.map((service, index) => (
-        <div
-          key={index}
-          className={`service-card ${
-            hoveredService === index ? "service-card-hovered" : ""
-          }`}
-          onMouseEnter={() => setHoveredService(index)}
-          onMouseLeave={() => setHoveredService(null)}
-        >
-          <h3 className="service-title">{service.title}</h3>
-          <p className="service-description">{service.description}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+const ServicesLanding = () => (
+  <div className="services-grid">
+    {SERVICES.map((service) => (
+      <div key={service.title} className="service-card">
+        <h3 className="service-title">{service.title}</h3>
+        <p className="service-description">{service.description}</p>
+      </div>
+    ))}
+  </div>
+);
 
 export default ServicesLanding;
