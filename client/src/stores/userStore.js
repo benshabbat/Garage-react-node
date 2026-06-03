@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "../axiosConfig.js";
 import { getUserId } from "../api/services/userApi.js";
-import { ADMIN_ID } from "../api/apiEndpoints.js";
+import { messageApi } from "../api/services/messageApi.js";
 import { setErr } from "./storeUtils.js";
 
 const API = {
@@ -53,7 +53,7 @@ export const useUserStore = create((set) => {
     createReqService: async (dataMessage) => {
       set({ isLoading: true });
       try {
-        const { data } = await axios.post(`${API.messages}/to/${ADMIN_ID}`, dataMessage);
+        const data = await messageApi.createToAdmin(dataMessage);
         set({ isLoading: false });
         return data;
       } catch (err) { setErr(set, err); }

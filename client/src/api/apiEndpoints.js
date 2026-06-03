@@ -8,6 +8,3 @@ export const API_URL_REVIEWS = "/reviews";
 export const API_URL_CONTACTS = "/contacts";
 export const API_URL_APPOINTMENTS = "/appointments";
 export const API_URL_DASHBOARD = "/dashboard";
-
-// Admin user ID
-export const ADMIN_ID = "63e14deca4340e45d23f20b2";

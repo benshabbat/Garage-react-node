@@ -106,10 +106,17 @@ const logout = async () => {
   };
 };
 
+const getAdminId = async () => {
+  const admin = await User.findOne({ isAdmin: true }, "_id");
+  if (!admin) throw createError(404, "Admin user not found");
+  return { adminId: admin._id };
+};
+
 const authService = {
   register,
   login,
   logout,
+  getAdminId,
 };
 
 export default authService;

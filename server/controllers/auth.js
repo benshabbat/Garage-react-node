@@ -4,6 +4,9 @@ import { createHandler } from "../utils/controllerFactory.js";
 // Register handler using shared factory
 export const register = createHandler(authService.register, 201);
 
+// Admin ID lookup — authenticated users only
+export const getAdminId = createHandler(authService.getAdminId, 200);
+
 // Login has custom cookie handling, keep it as-is
 export const login = async (req, res, next) => {
   try {

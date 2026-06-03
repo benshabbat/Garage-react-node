@@ -1,8 +1,17 @@
 import axios from "../../axiosConfig.js";
 import { createCrudOperations } from "../crudOperations.js";
-import { API_URL_MESSAGES, ADMIN_ID } from "../apiEndpoints.js";
+import { API_URL_MESSAGES } from "../apiEndpoints.js";
 
 const messageOps = createCrudOperations(API_URL_MESSAGES);
+
+let _cachedAdminId = null;
+const getAdminId = async () => {
+  if (!_cachedAdminId) {
+    const { data } = await axios.get("/auth/admin-id");
+    _cachedAdminId = data.adminId;
+  }
+  return _cachedAdminId;
+};
 
 /**
  * Message API operations
@@ -10,25 +19,26 @@ const messageOps = createCrudOperations(API_URL_MESSAGES);
 export const messageApi = {
   // Get all messages
   getAll: messageOps.getAll,
-  
+
   // Get message by ID
   getById: messageOps.getById,
-  
+
   // Create message to specific user
   create: async (data, toUserId) => {
     const response = await axios.post(`${API_URL_MESSAGES}/to/${toUserId}`, data);
     return response.data;
   },
-  
+
   // Create message to admin
   createToAdmin: async (data) => {
-    const response = await axios.post(`${API_URL_MESSAGES}/to/${ADMIN_ID}`, data);
+    const adminId = await getAdminId();
+    const response = await axios.post(`${API_URL_MESSAGES}/to/${adminId}`, data);
     return response.data;
   },
 
   // Create service request — same endpoint as createToAdmin
   createServiceRequest(data) { return messageApi.createToAdmin(data); },
-  
+
   // Delete message
   delete: messageOps.delete,
 };
