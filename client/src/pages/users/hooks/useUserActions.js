@@ -1,6 +1,5 @@
 import { deleteUser, updateUser, createUser } from "../../../api/services/userApi";
 import { createCar } from "../../../api/services/carApi";
-import { formatPhone } from "../../../utils/formatters";
 import { isValidUserName, isValidCar } from "../utils/userValidation";
 const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
 
@@ -62,13 +61,11 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
       !isExistPhone &&
       !isExistUser
     ) {
-      await updateUser(selectedUser?._id, formData);
+      const updated = await updateUser(selectedUser?._id, formData);
       handleEditUser();
       setFilteredUsers(
         users.map((user) =>
-          user._id === selectedUser?._id
-            ? { ...formData, phone: formatPhone(formData.phone) }
-            : user
+          user._id === selectedUser?._id ? updated.data : user
         )
       );
     }
@@ -79,10 +76,14 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
    */
   const onSubmitDeleteUser = async (e, handleDeleteUser, handleManageUser) => {
     e.preventDefault();
-    await deleteUser(selectedUser?._id);
-    handleDeleteUser();
-    handleManageUser();
-    setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
+    try {
+      await deleteUser(selectedUser?._id);
+      handleDeleteUser();
+      handleManageUser();
+      setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
+    } catch (err) {
+      throw new Error(extractErrorMessage(err));
+    }
   };
 
   return {

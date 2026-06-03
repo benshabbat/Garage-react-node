@@ -40,16 +40,15 @@ const CreateReviews = () => {
             <textarea
               ref={descRef}
               maxLength={maxLength}
-              type="text"
               title="Description"
               rows={8}
-              placeholder={`Write your review (max ${maxLength} chart)`}
+              placeholder={`Write your review (max ${maxLength} chars)`}
               onChange={() =>
-                (numRef.current.value =
+                (numRef.current.textContent =
                   maxLength - descRef.current.value.length)
               }
             />
-            <input className="num" ref={numRef} value={maxLength} readOnly />
+            <output className="num" ref={numRef} aria-live="polite" aria-label="Characters remaining">{maxLength}</output>
           </label>
           {submitError && <p className="error">{submitError}</p>}
           <button className="form-btn" onClick={addReview}>

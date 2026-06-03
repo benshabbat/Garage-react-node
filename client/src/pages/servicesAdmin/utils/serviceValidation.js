@@ -5,11 +5,11 @@
  * @returns {boolean} - True if matches
  */
 export const serviceFilterFn = (item, value) =>
-  item.car?.numberPlate.includes(value) ||
-  item.title.includes(value) ||
-  item.description.includes(value) ||
-  item.price.toString().includes(value) ||
-  item.paid.toString().includes(value) ||
-  item.status.includes(value);
+  item.car?.numberPlate?.includes(value) ||
+  item.title?.includes(value) ||
+  item.description?.includes(value) ||
+  item.price?.toString().includes(value) ||
+  item.paid?.toString().includes(value) ||
+  item.status?.includes(value);
 
 export { serviceStatusOptions } from "../../../utils/serviceConstants";

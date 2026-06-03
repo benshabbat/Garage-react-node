@@ -14,6 +14,7 @@ const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
             <h2>{`Are you sure to delete? : ${deleteData}`}</h2>
             <label className="form-label">
               <button
+                type="button"
                 name={nameData}
                 className="delete"
                 onClick={handleDelete}
@@ -22,7 +23,7 @@ const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
               </button>
             </label>
             <label className="form-label">
-              <button name="noDelete" className="create" onClick={handle}>
+              <button type="button" name="noDelete" className="create" onClick={handle}>
                 No
               </button>
             </label>

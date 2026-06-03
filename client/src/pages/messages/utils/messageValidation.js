@@ -5,11 +5,11 @@
  * @returns {boolean} - True if matches
  */
 export const messageFilterFn = (item, value) =>
-  item?.from?.username.includes(value) ||
-  item?.to?.username.includes(value) ||
-  item?.title.includes(value) ||
-  item?.description.includes(value) ||
-  item?.updatedAt.includes(value);
+  item?.from?.username?.includes(value) ||
+  item?.to?.username?.includes(value) ||
+  item?.title?.includes(value) ||
+  item?.description?.includes(value) ||
+  item?.updatedAt?.includes(value);
 
 /**
  * Convert users array to options for select
