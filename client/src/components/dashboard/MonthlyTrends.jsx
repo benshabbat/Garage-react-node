@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import { useDashboardStore } from "../../stores/dashboardStore";
+import DashboardSection from "./DashboardSection";
 
-/**
- * Renders a single bar chart for a trend dataset.
- * @param {string}   valueKey  - key in each data item holding the numeric value (default: "count")
- * @param {function} formatValue - optional formatter for the bar label
- */
 const TrendChart = ({ title, data, valueKey = "count", formatValue }) => {
   const getValue = (item) => item[valueKey] ?? 0;
   const max = Math.max(...data.map(getValue), 1);
@@ -50,9 +46,6 @@ TrendChart.propTypes = {
   formatValue: PropTypes.func,
 };
 
-/**
- * MonthlyTrends displays monthly trend charts for appointments, cars, and revenue.
- */
 const MonthlyTrends = () => {
   const { stats } = useDashboardStore();
   const { trends } = stats;
@@ -64,8 +57,7 @@ const MonthlyTrends = () => {
   if (!hasAppointments && !hasCars && !hasRevenue) return null;
 
   return (
-    <section className="section">
-      <h2>Monthly Trends (Last 6 Months)</h2>
+    <DashboardSection title="Monthly Trends (Last 6 Months)">
       <div className="trends-grid">
         {hasAppointments && (
           <TrendChart title="New Appointments" data={trends.monthlyAppointments} />
@@ -82,7 +74,7 @@ const MonthlyTrends = () => {
           />
         )}
       </div>
-    </section>
+    </DashboardSection>
   );
 };
 

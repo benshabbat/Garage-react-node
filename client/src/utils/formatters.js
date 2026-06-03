@@ -22,6 +22,9 @@ export function formatPhone(phone) {
   return phone;
 }
 
+/** Capitalize the first letter of a string. */
+export const capitalize = (s) => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+
 /**
  * Truncate a string to a maximum length, appending "..."
  * @param {string} text
