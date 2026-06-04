@@ -12,11 +12,20 @@ export const useReviewForm = (handleAddReview, onSubmitSuccess) => {
   const addReview = (e) => {
     e.preventDefault();
     setSubmitError(null);
-    setFormData({
-      name: nameRef.current.value,
-      description: descRef.current.value,
-      stars,
-    });
+
+    const name = nameRef.current.value.trim();
+    const description = descRef.current.value.trim();
+
+    if (!name) {
+      setSubmitError("Name is required.");
+      return;
+    }
+    if (!description) {
+      setSubmitError("Description is required.");
+      return;
+    }
+
+    setFormData({ name, description, stars });
     setIsSubmitted(true);
     handleAddReview();
     onSubmitSuccess?.();
