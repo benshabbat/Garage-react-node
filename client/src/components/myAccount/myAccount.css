@@ -48,7 +48,8 @@
   white-space: nowrap;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content,
+.dropdown.is-open .dropdown-content {
   visibility: visible;
   opacity: 1;
 }
