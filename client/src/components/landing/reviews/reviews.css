@@ -1,11 +1,11 @@
 :root {
   --review-primary: #5372f0;
-  --review-secondary: #dde4ff;
-  --review-text: #2d3748;
-  --review-text-light: #718096;
-  --review-border: #e2e8f0;
-  --review-shadow: rgba(0, 0, 0, 0.1);
-  --review-background: #ffffff;
+  --review-secondary: rgba(83, 114, 240, 0.2);
+  --review-text: #e5e7eb;
+  --review-text-light: #9ca3af;
+  --review-border: rgba(255, 255, 255, 0.1);
+  --review-shadow: rgba(0, 0, 0, 0.4);
+  --review-background: rgba(31, 41, 55, 0.8);
 }
 
 #reviews {

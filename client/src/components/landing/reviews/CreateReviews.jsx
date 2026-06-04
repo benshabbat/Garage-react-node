@@ -18,7 +18,7 @@ const CreateReviews = () => {
     <OpenModal
       comp={
         <form className="form">
-          <button onClick={handleAddReview} className="form-close">
+          <button type="button" onClick={handleAddReview} className="form-close">
             X
           </button>
           <h1>Garage review</h1>

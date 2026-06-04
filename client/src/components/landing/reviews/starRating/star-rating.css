@@ -1,8 +1,6 @@
 .star-rating-container {
   display: inline-flex;
-  flex-direction: row-reverse;
   gap: 4px;
-  direction: rtl;
 }
 
 .star-button {

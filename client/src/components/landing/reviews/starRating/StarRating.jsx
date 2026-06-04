@@ -13,6 +13,8 @@ const StarRating = (props) => {
           <button
             type="button"
             key={starValue}
+            aria-label={`${starValue} star${starValue > 1 ? "s" : ""}`}
+            aria-pressed={isActive(starValue)}
             className={`star-button ${isActive(starValue) ? "active" : ""} ${
               isDisabled ? "disabled" : ""
             }`}
