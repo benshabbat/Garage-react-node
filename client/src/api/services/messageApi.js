@@ -4,13 +4,9 @@ import { API_URL_MESSAGES } from "../apiEndpoints.js";
 
 const messageOps = createCrudOperations(API_URL_MESSAGES);
 
-let _cachedAdminId = null;
 const getAdminId = async () => {
-  if (!_cachedAdminId) {
-    const { data } = await axios.get("/auth/admin-id");
-    _cachedAdminId = data.adminId;
-  }
-  return _cachedAdminId;
+  const { data } = await axios.get("/auth/admin-id");
+  return data.adminId;
 };
 
 /**

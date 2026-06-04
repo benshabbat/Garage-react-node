@@ -184,6 +184,14 @@
   border-bottom-color: #4a9eff;
 }
 
+.form-group input:focus-visible,
+.form-group textarea:focus-visible,
+.form-group select:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 .form-group select option {
   background-color: #1f2937;
   color: #e5e7eb;
@@ -543,6 +551,11 @@
   outline: none;
   border-color: #4a9eff;
   background: rgba(74, 158, 255, 0.06);
+}
+
+.apt-search-input:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: 2px;
 }
 
 .apt-export-btn {

@@ -69,6 +69,7 @@ const AppointmentsList = ({
               className={`action-status-btn action-${s} ${appointment.status === s ? "active-status" : ""}`}
               disabled={appointment.status === s}
               onClick={() => handleStatusChange(appointment._id, s)}
+              aria-pressed={appointment.status === s}
             >
               {capitalize(s)}
             </button>
@@ -87,6 +88,7 @@ const AppointmentsList = ({
             type="search"
             className="apt-search-input"
             placeholder="Search name, email, phone..."
+            aria-label="Search appointments by name, email, or phone"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -96,6 +98,7 @@ const AppointmentsList = ({
                 key={status}
                 className={`filter-btn ${filterStatus === status ? 'active' : ''}`}
                 onClick={() => setFilterStatus(status)}
+                aria-pressed={filterStatus === status}
               >
                 {capitalize(status)}
               </button>
