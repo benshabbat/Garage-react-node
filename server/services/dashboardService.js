@@ -22,11 +22,17 @@ const getMonthlyTrend = (Model, since) =>
     { $sort: { "_id.year": 1, "_id.month": 1 } },
   ]);
 
+let _cache = { data: null, expiresAt: 0 };
+const CACHE_TTL_MS = 60_000; // 1 minute
+
 /**
  * Get comprehensive dashboard statistics
+ * Results are cached for 60 seconds to reduce DB load.
  * @returns {Object} Dashboard statistics including counts, recent data, and trends
  */
 const getDashboardStats = async () => {
+  if (_cache.data && Date.now() < _cache.expiresAt) return _cache.data;
+
   // Get total counts
   const [
     totalUsers,
@@ -121,7 +127,7 @@ const getDashboardStats = async () => {
     ? reviewStats[0].averageRating 
     : 0;
 
-  return {
+  const data = {
     overview: {
       totalUsers,
       totalCars,
@@ -147,6 +153,8 @@ const getDashboardStats = async () => {
     },
     topServices,
   };
+  _cache = { data, expiresAt: Date.now() + CACHE_TTL_MS };
+  return data;
 };
 
 export default {
