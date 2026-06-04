@@ -13,6 +13,7 @@ import appointmentsRoute from "./routes/appointments.js";
 import dashboardRoute from "./routes/dashboard.js";
 import agentRoute from "./routes/agent.js";
 import errorHandler from "./middleware/errorHandler.js";
+import { logger } from "./middleware/logger.js";
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -32,6 +33,7 @@ const publicLimiter = rateLimit({
 
 const app = express();
 
+app.use(logger);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

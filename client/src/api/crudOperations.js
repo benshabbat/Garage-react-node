@@ -11,7 +11,7 @@ export const createCrudOperations = (baseUrl) => ({
    * Get all items
    */
   getAll: async () => {
-    const response = await axios.get(baseUrl);
+    const response = await axios.get(baseUrl, { params: { limit: 500 } });
     return response.data;
   },
   
