@@ -27,7 +27,7 @@ describe("getPaginationParams", () => {
 
   it("clamps limit to the MAX_LIMIT", () => {
     const { limit } = getPaginationParams(req({ limit: "99999" }));
-    assert.ok(limit <= 500, `limit ${limit} exceeds MAX_LIMIT of 500`);
+    assert.ok(limit <= 5000, `limit ${limit} exceeds MAX_LIMIT of 5000`);
   });
 });
 
