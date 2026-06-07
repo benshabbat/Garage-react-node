@@ -1,11 +1,12 @@
 import express from "express";
-import { register, login, logout, getAdminId } from "../controllers/auth.js";
+import { register, login, logout, refresh, getAdminId } from "../controllers/auth.js";
 import { verifyAdmin, verifyToken } from "../utils/verifyToken.js";
 const router = express.Router();
 
 // Public routes
 router.post("/login", login);
 router.post("/logout", logout);
+router.post("/refresh", refresh);
 
 // Auth routes — any verified user
 const authRouter = express.Router();
