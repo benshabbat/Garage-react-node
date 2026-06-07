@@ -1,7 +1,7 @@
 import { deleteUser, updateUser, createUser } from "../../../api/services/userApi";
 import { createCar } from "../../../api/services/carApi";
 import { isValidUserName, isValidCar } from "../utils/userValidation";
-const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+import { extractErrorMessage } from "../../../utils/handlerUtils";
 
 /**
  * Custom hook for user CRUD operations
