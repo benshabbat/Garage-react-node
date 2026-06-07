@@ -48,6 +48,14 @@ const publicWriteLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+const signupLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: { message: "Too many registration attempts, please try again later" },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 const app = express();
 
 app.use(logger);
@@ -65,6 +73,7 @@ app.use(
   })
 );
 
+app.post("/api/auth/signup", signupLimiter);
 app.use("/api/auth", authLimiter, authRoute);
 app.use("/api/users", publicLimiter, usersRoute);
 app.use("/api/cars", publicLimiter, carsRoute);
