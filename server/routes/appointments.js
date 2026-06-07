@@ -15,6 +15,7 @@ import {
   validateAppointmentUpdate,
   validateStatusUpdate,
 } from "../middleware/validateAppointment.js";
+import { auditAdmin } from "../middleware/audit.js";
 
 const router = express.Router();
 
@@ -27,9 +28,19 @@ adminRouter.use(verifyAdmin);
 adminRouter.get("/", getAppointments);
 adminRouter.get("/status", getAppointmentsByStatus);
 adminRouter.get("/date-range", getAppointmentsByDateRange);
-adminRouter.put("/:id", validateAppointmentUpdate, updateAppointment);
-adminRouter.patch("/:id/status", validateStatusUpdate, updateAppointmentStatus);
-adminRouter.delete("/:id", deleteAppointment);
+adminRouter.put(
+  "/:id",
+  validateAppointmentUpdate,
+  auditAdmin("UPDATE_APPOINTMENT", "Appointment"),
+  updateAppointment
+);
+adminRouter.patch(
+  "/:id/status",
+  validateStatusUpdate,
+  auditAdmin("UPDATE_APPOINTMENT_STATUS", "Appointment"),
+  updateAppointmentStatus
+);
+adminRouter.delete("/:id", auditAdmin("DELETE_APPOINTMENT", "Appointment"), deleteAppointment);
 
 // User routes
 const userRouter = express.Router();
