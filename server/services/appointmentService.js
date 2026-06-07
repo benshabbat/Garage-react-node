@@ -37,12 +37,15 @@ const createAppointment = async (req) => {
 
 const getAppointments = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const appointments = await Appointment.find()
-    .populate("user", "username email phone")
-    .sort({ date: -1, createdAt: -1 })
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return appointments;
+  const [appointments, total] = await Promise.all([
+    Appointment.find()
+      .populate("user", "username email phone")
+      .sort({ date: -1, createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Appointment.countDocuments(),
+  ]);
+  return { data: appointments, total, page, limit };
 };
 
 const getAppointment = async (req) => {
@@ -93,11 +96,14 @@ const getAppointmentsByStatus = async (req) => {
     throw createError(400, `Status must be one of: ${VALID_STATUSES.join(", ")}`);
   }
   const { limit, page } = getPaginationParams(req);
-  const appointments = await Appointment.find({ status })
-    .sort({ date: -1 })
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return appointments;
+  const [appointments, total] = await Promise.all([
+    Appointment.find({ status })
+      .sort({ date: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Appointment.countDocuments({ status }),
+  ]);
+  return { data: appointments, total, page, limit };
 };
 
 const getAppointmentsByDateRange = async (req) => {
@@ -118,17 +124,16 @@ const getAppointmentsByDateRange = async (req) => {
     throw createError(400, "startDate must be before endDate");
   }
 
+  const dateFilter = { date: { $gte: start, $lte: end } };
   const { limit, page } = getPaginationParams(req);
-  const appointments = await Appointment.find({
-    date: {
-      $gte: start,
-      $lte: end,
-    },
-  })
-    .sort({ date: 1 })
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return appointments;
+  const [appointments, total] = await Promise.all([
+    Appointment.find(dateFilter)
+      .sort({ date: 1 })
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Appointment.countDocuments(dateFilter),
+  ]);
+  return { data: appointments, total, page, limit };
 };
 
 const appointmentService = {

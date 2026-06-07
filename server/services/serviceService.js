@@ -64,11 +64,14 @@ const getService = async (req) => {
 
 const getServices = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const services = await Service.find()
-    .populate("car")
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return services;
+  const [services, total] = await Promise.all([
+    Service.find()
+      .populate("car")
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Service.countDocuments(),
+  ]);
+  return { data: services, total, page, limit };
 };
 
 const getServicesByType = async (req) =>

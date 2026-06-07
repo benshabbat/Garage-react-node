@@ -95,11 +95,14 @@ const getUser = async (req) => {
 
 const getUsers = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const users = await User.find()
-    .select("-password")
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return users;
+  const [users, total] = await Promise.all([
+    User.find()
+      .select("-password")
+      .skip((page - 1) * limit)
+      .limit(limit),
+    User.countDocuments(),
+  ]);
+  return { data: users, total, page, limit };
 };
 
 const getUsersByType = async (req) =>

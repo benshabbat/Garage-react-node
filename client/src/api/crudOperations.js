@@ -12,7 +12,8 @@ export const createCrudOperations = (baseUrl) => ({
    */
   getAll: async () => {
     const response = await axios.get(baseUrl, { params: { limit: 5000 } });
-    return response.data;
+    const payload = response.data;
+    return Array.isArray(payload) ? payload : payload.data;
   },
 
   /**

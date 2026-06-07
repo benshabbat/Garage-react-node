@@ -19,11 +19,14 @@ const createReview = async (req) => {
 
 const getReviews = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const reviews = await Review.find()
-    .sort({ createdAt: -1 })
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return reviews;
+  const [reviews, total] = await Promise.all([
+    Review.find()
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Review.countDocuments(),
+  ]);
+  return { data: reviews, total, page, limit };
 };
 
 const reviewService = {
