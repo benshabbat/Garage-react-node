@@ -35,19 +35,23 @@ A full-stack garage management platform for client management, vehicle tracking,
 
 **Admin**
 - Dashboard with real-time stats: users, cars, services, appointments, messages, reviews
-- Monthly trend charts (last 6 months)
-- Top 5 popular services
-- Appointment management: view, filter by status/date range, update status, delete
+- Monthly trend charts (last 6 months) and top 5 popular services
+- Appointment management: view, filter by status / date range, update status, delete
 - User management: create, edit, delete
 - Vehicle management: create, edit, delete, service history
 - Messages inbox and messaging between users
-- Contact form submissions
+- Contact form submissions (review and delete)
 
 **Authenticated users**
-- View and manage own vehicles
-- Request services
+- View and manage own vehicles (`/myCars`)
+- Request services on own cars
 - Internal messaging
 - Leave reviews
+
+**AI Assistant**
+- Persistent AI chat agent powered by `@anthropic-ai/sdk` (Claude)
+- Available to all authenticated users
+- Endpoint: `POST /api/agent/chat` (JWT-protected)
 
 ### Security
 - JWT authentication with HTTP-only cookies
@@ -63,28 +67,33 @@ A full-stack garage management platform for client management, vehicle tracking,
 Garage770/
 ├── client/                     # Frontend (React 19 + Vite)
 │   └── src/
-│       ├── api/                # Axios service layer + CRUD factory
-│       ├── components/         # Reusable UI components
-│       ├── hooks/              # Shared custom hooks
-│       ├── pages/              # Page-level components + providers
-│       │   ├── users/
-│       │   ├── cars/
-│       │   ├── messages/
-│       │   ├── appointments/
-│       │   ├── servicesAdmin/
-│       │   └── account/
-│       ├── stores/             # Zustand stores
+│       ├── api/                # Axios config, endpoint constants, CRUD factory, per-domain services
+│       ├── components/         # Reusable UI components (form, table, modal, dashboard, landing, agent)
+│       ├── hooks/              # Shared custom hooks (useFilteredData, useFormData, useLogout, useRegister)
+│       ├── pages/              # Page-level components
+│       │   ├── dashboard/      # Admin dashboard
+│       │   ├── appointments/   # Appointment management (admin)
+│       │   ├── users/          # User management (admin)
+│       │   ├── cars/           # Vehicle management (admin)
+│       │   ├── messages/       # Messages inbox
+│       │   ├── messagesOfContact/  # Messages per contact
+│       │   ├── servicesAdmin/  # Service management (admin)
+│       │   └── account/        # Own vehicles & service history (/myCars)
+│       ├── stores/             # Zustand stores (adminStore, authStore, userStore,
+│       │                       #   appointmentsStore, dashboardStore, uiStores)
 │       ├── utils/              # Formatters, validators, helpers
 │       ├── validation/         # Form validation logic
+│       ├── PrivateRoute.jsx    # Auth guard (redirects to / if not logged in)
 │       └── App.jsx
 └── server/                     # Backend (Node.js + Express)
+    ├── __tests__/              # Integration tests (Node.js built-in test runner)
     ├── config/                 # DB connection
-    ├── controllers/            # Route handlers (factory pattern)
-    ├── middleware/             # Auth, rate-limit, validation
+    ├── controllers/            # Route handlers
+    ├── middleware/             # Auth, error handling, appointment validation
     ├── models/                 # Mongoose schemas
     ├── routes/                 # Express routers
     ├── services/               # Business logic
-    ├── utils/                  # Shared utilities
+    ├── utils/                  # Shared utilities (verifyToken, etc.)
     └── index.js
 ```
 
@@ -194,6 +203,37 @@ cd server && npm run dev
 | GET | `/api/contacts` | Admin |
 | POST | `/api/contacts` | Public |
 | DELETE | `/api/contacts/:id` | Admin |
+
+### AI Agent
+| Method | Endpoint | Access |
+|--------|----------|--------|
+| POST | `/api/agent/chat` | Authenticated |
+
+## Testing
+
+| Layer | Tool | Location |
+|-------|------|----------|
+| Client unit tests | Vitest | `client/src/__tests__/` |
+| Server integration tests | Node.js built-in test runner | `server/__tests__/` |
+| Server test DB | `mongodb-memory-server` | In-memory, no real DB needed |
+
+```bash
+# Run client tests
+cd client && npm test
+
+# Run server tests
+cd server && npm test
+```
+
+## CI/CD
+
+GitHub Actions (`.github/workflows/ci.yml`) runs on every push and PR to `main`:
+
+| Job | Steps |
+|-----|-------|
+| `client-lint-build` | `npm run lint` → `npm run build` |
+| `client-test` | `npm test` (Vitest) |
+| `server-test` | `npm run lint` → `npm test` |
 
 ## Authorization Middleware
 

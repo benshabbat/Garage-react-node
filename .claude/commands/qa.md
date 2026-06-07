@@ -20,21 +20,22 @@ Before testing, read these files to understand the app flows:
 
 ```
 client/src/App.jsx               — routing map
-client/src/PrivateRoute.jsx      — auth guard
-client/src/features/             — Redux slices (state)
-client/src/api/                  — API layer
+client/src/PrivateRoute.jsx      — auth guard (uses authStore)
+client/src/stores/               — Zustand stores (adminStore, authStore, userStore, appointmentsStore, dashboardStore, uiStores)
+client/src/api/                  — API layer (apiEndpoints.js, crudOperations.js, services/)
 server/routes/                   — all API routes
-server/middleware/                — auth, error handling
+server/middleware/                — auth, error handling, appointment validation
 ```
 
 Then identify the **primary user flows**:
 1. Login → Dashboard
-2. Create/Edit/Delete Appointment
-3. Create/Edit/Delete Car
-4. Create/Edit/Delete Contact / Message
+2. Create/Edit/Delete/Filter Appointment (admin)
+3. Create/Edit/Delete Car + service history (admin / user's own cars via `/myCars`)
+4. Messaging between users + public contact form
 5. Submit a Review (public)
 6. Register new user (admin flow)
-7. Service management (admin)
+7. Service management — admin (`/services`), user requests service on own car
+8. AI Agent chat (`/api/agent/chat`, authenticated)
 
 ---
 

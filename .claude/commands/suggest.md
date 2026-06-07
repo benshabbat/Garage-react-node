@@ -27,8 +27,8 @@ server/models/          (all models)
 server/routes/          (all routes)
 server/services/        (all services)
 client/src/pages/       (page structure)
-client/src/features/    (Redux slices)
-client/src/api/         (API layer)
+client/src/stores/      (Zustand stores — adminStore, authStore, userStore, appointmentsStore, dashboardStore, uiStores)
+client/src/api/         (API layer — apiEndpoints.js, crudOperations.js, services/)
 ```
 
 Also check:
@@ -64,10 +64,10 @@ before scoring.
 - Does the server shut down safely on unhandled rejections?
 
 ### D — Developer Experience (DX)
-- Is there a test suite? (look for `*.test.*`, `jest.config.*`, `vitest.config.*`)
-- Is there TypeScript? (look for `tsconfig.json`, `.ts` / `.tsx` files)
-- Is there a linter / formatter config? (`.eslintrc`, `.prettierrc`)
-- Is there a CI pipeline? (`.github/workflows/`)
+- Is there a test suite? Client uses Vitest (`client/src/__tests__/`). Server uses Node.js built-in test runner (`server/__tests__/`) with `mongodb-memory-server`. Are critical flows covered?
+- Is there TypeScript? (look for `tsconfig.json`, `.ts` / `.tsx` files — currently plain JS)
+- Is there a linter / formatter config? (`.eslintrc`, `eslint.config.js`, `.prettierrc`)
+- Is there a CI pipeline? (`.github/workflows/ci.yml` — lint + build + tests for both client and server)
 - Are environment variables documented (`.env.example`)?
 
 ### E — Feature Gaps (product value)
@@ -80,10 +80,10 @@ before scoring.
 
 ### F — Code Quality & Maintainability
 - Are there hardcoded IDs, magic strings, or production URLs embedded in source files?
-- Is the Suspense fallback a proper loading component, or a raw `<h1>`?
+- Is the Suspense fallback a proper loading component, or a bare `<div>`?
 - Are there routes in `App.jsx` that are never used (dead routes)?
-- Does `utils.js` still export a `ADMIN` constant that duplicates `apiEndpoints.js`?
-- Are React context providers following a consistent pattern across all pages?
+- Are API endpoint constants centralized in `client/src/api/apiEndpoints.js` and not duplicated elsewhere?
+- Are React Zustand selectors granular (`useStore((s) => s.field)` not `useStore()`) to avoid unnecessary re-renders?
 
 ---
 
