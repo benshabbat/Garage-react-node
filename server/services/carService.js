@@ -29,6 +29,13 @@ const updateCar = async (req) => {
   if (safeBody.numberPlate) {
     safeBody.numberPlate = templateCar(safeBody.numberPlate);
   }
+  if (safeBody.km !== undefined) {
+    const existing = await Car.findById(req.params.id).select("km");
+    if (!existing) throw createError(404, "Car not found");
+    if (safeBody.km < existing.km) {
+      throw createError(400, `km cannot be decreased (current: ${existing.km})`);
+    }
+  }
   const updatedCar = await Car.findByIdAndUpdate(
     req.params.id,
     { $set: safeBody },
