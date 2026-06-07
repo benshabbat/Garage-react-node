@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useAdminStore } from "../../../stores/adminStore";
 import { useUsersUIStore } from "../../../stores/uiStores";
 import { useUserAdminHandlers } from "./useUserAdminHandlers";
@@ -12,13 +12,12 @@ export function useUsersTableData() {
   const { manageUserOpen, editUserOpen, deleteUserOpen, createUserOpen, toggleCreateUser } =
     useUsersUIStore();
 
-  const memoizedUserFilterFn = useCallback(userFilterFn, []);
   const {
     displayData: displayUsers,
     handleSearch,
     setFilteredData: setFilteredUsers,
     handleSort,
-  } = useFilteredData(users, memoizedUserFilterFn);
+  } = useFilteredData(users, userFilterFn);
 
   const { handleUser } = useUserAdminHandlers(setFilteredUsers);
 

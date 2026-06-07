@@ -39,6 +39,7 @@ const ManageCar = () => {
         </>
       }
       isOpen={manageCarOpen}
+      onClose={toggleManageCar}
     />
   );
 };
