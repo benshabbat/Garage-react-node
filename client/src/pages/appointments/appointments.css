@@ -695,3 +695,56 @@
 .action-cancelled:not(:disabled):hover {
   background: rgba(248, 113, 113, 0.3);
 }
+
+/* ── View Toggle ─────────────────────────────── */
+.apt-view-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.apt-view-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d1d5db;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.apt-view-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #4a9eff;
+  color: #4a9eff;
+}
+
+.apt-view-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+/* ── Calendar Wrapper ────────────────────────── */
+.apt-calendar-wrapper {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.apt-calendar-wrapper .rbc-toolbar {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.apt-calendar-wrapper .rbc-toolbar button {
+  border-radius: 0.4rem;
+}
+
+.apt-calendar-wrapper .rbc-today {
+  background-color: rgba(37, 99, 235, 0.08);
+}
