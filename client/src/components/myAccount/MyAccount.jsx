@@ -20,7 +20,7 @@ const MyAccount = () => {
       }}
     >
       <button
-        aria-haspopup="true"
+        aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
       >

@@ -14,9 +14,10 @@ const Form = memo(({
   options,
   nameSelect,
   isFocus = true,
-  validateOnBlur = false, // New prop to control blur validation
-  formData, // Add formData prop to get current values
-  serverError = null, // Optional server-side error message
+  validateOnBlur = false,
+  formData,
+  serverError = null,
+  isLoading = false,
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission
 
@@ -74,8 +75,8 @@ const Form = memo(({
         <span className="error">{serverError}</span>
       )}
 
-      <button type="submit" className="form-btn">
-        {title}
+      <button type="submit" className="form-btn" disabled={isLoading}>
+        {isLoading ? "Loading..." : title}
       </button>
     </form>
   );
@@ -104,7 +105,8 @@ Form.propTypes = {
   isFocus: PropTypes.bool,
   validateOnBlur: PropTypes.bool, // Add prop type validation for blur validation
   formData: PropTypes.object, // Current form data for select values
-  serverError: PropTypes.string, // Optional server-side error message
+  serverError: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 Form.displayName = "Form";
