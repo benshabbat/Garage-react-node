@@ -10,6 +10,11 @@ if (!process.env.JWT) {
   process.exit(1);
 }
 
+if (!process.env.JWT_REFRESH) {
+  console.error("FATAL: JWT_REFRESH secret is not defined — refresh tokens require a separate secret");
+  process.exit(1);
+}
+
 if (!process.env.ANTHROPIC_API_KEY) {
   console.warn("WARNING: ANTHROPIC_API_KEY is not set — /api/agent endpoints will be unavailable");
 }
