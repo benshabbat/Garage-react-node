@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header, Agent } from "./components";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
@@ -34,6 +34,7 @@ function App() {
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />
         <main id="main-content">
+        <Suspense fallback={<div className="page-loader" />}>
         <Routes>
           <Route path="/" element={<PageLanding />} />
           {PRIVATE_ROUTES.map(({ path, Component }) => (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        </Suspense>
         </main>
       </BrowserRouter>
       <Agent />

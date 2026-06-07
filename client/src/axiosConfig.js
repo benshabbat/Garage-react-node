@@ -11,6 +11,7 @@ axios.interceptors.response.use(
     if (error.response?.status === 401) {
       // clearAuth avoids an API call so this interceptor cannot loop
       useAuthStore.getState().clearAuth();
+      window.location.replace("/");
     }
     return Promise.reject(error);
   }
