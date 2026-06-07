@@ -37,6 +37,7 @@ const ManageService = () => {
         </>
       }
       isOpen={manageServiceOpen}
+      onClose={toggleManageService}
     />
   );
 };

@@ -58,6 +58,7 @@ const CreateReviews = () => {
         </form>
       }
       isOpen={isOpenAddReview}
+      onClose={handleAddReview}
     />
   );
 };

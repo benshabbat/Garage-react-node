@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useUserStore } from "../../../stores/userStore";
 import { useAdminStore } from "../../../stores/adminStore";
 import { useMessagesUIStore } from "../../../stores/uiStores";
@@ -15,10 +15,9 @@ export function useMessagesTable() {
   const { createMsgOpen, deleteMsgOpen, toggleCreateMsg, setSelectedMsg, toggleDeleteMsg } =
     useMessagesUIStore();
 
-  const memoizedFilterFn = useCallback(messageFilterFn, []);
   const { displayData: displayMessages, handleSearch } = useFilteredData(
     messages,
-    memoizedFilterFn
+    messageFilterFn
   );
 
   useEffect(() => {

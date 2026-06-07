@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
 import { useAccountUIStore } from "../../stores/uiStores";
@@ -8,8 +7,7 @@ import { serviceFilterFn } from "./utils/accountValidation";
 export default function AccountServices() {
   const selectedCar = useAccountUIStore((s) => s.selectedCar);
   const services = useUserStore((s) => s.services);
-  const memoizedServiceFilterFn = useCallback(serviceFilterFn, []);
-  const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } = useFilteredData(services, memoizedServiceFilterFn);
+  const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } = useFilteredData(services, serviceFilterFn);
   const trTh = (
     <tr>
       <th>title</th>

@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useAdminStore } from "../../../stores/adminStore";
 import { useServicesUIStore } from "../../../stores/uiStores";
 import { useServiceAdminHandlers } from "./useServiceAdminHandlers";
@@ -13,10 +13,9 @@ export function useServiceAdminTableData() {
     useServicesUIStore();
   const { handleServiceIdAction } = useServiceAdminHandlers();
 
-  const memoizedServiceFilterFn = useCallback(serviceFilterFn, []);
   const { displayData: displayServices, handleSearch } = useFilteredData(
     services,
-    memoizedServiceFilterFn
+    serviceFilterFn
   );
 
   useEffect(() => {

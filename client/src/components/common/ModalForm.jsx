@@ -22,6 +22,7 @@ const ModalForm = ({
   return (
     <OpenModal
       isOpen={isOpen}
+      onClose={onClose}
       comp={
         <Form
           setData={setFormData}

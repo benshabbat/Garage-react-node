@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useAdminStore } from "../../../stores/adminStore";
 import { useUserStore } from "../../../stores/userStore";
 import { useCarsUIStore } from "../../../stores/uiStores";
@@ -13,12 +13,11 @@ export function useCarsTableData() {
   const getCarsByType = useAdminStore((s) => s.getCarsByType);
   const { manageCarOpen, deleteCarOpen, editCarOpen } = useCarsUIStore();
 
-  const memoizedCarFilterFn = useCallback(carFilterFn, []);
   const {
     displayData: displayCars,
     handleSearch,
     setFilteredData: setFilteredCars,
-  } = useFilteredData(cars, memoizedCarFilterFn);
+  } = useFilteredData(cars, carFilterFn);
 
   const { handleCar: handleCarAction } = useCarAdminHandlers(setFilteredCars);
 

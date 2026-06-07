@@ -37,6 +37,7 @@ const ManageUser = () => {
         </>
       }
       isOpen={manageUserOpen}
+      onClose={toggleManageUser}
     />
   );
 };

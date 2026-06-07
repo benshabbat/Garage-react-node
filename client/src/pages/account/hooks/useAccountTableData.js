@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useUserStore } from "../../../stores/userStore";
 import { useAccountUIStore } from "../../../stores/uiStores";
 import useFilteredData from "../../../hooks/useFilteredData";
@@ -9,10 +8,9 @@ export function useAccountTableData() {
   const user = useUserStore((s) => s.user);
   const { setSelectedCar, toggleReqService, toggleServices } = useAccountUIStore();
 
-  const memoizedCarFilterFn = useCallback(carFilterFn, []);
   const { displayData: displayCars, handleSearch } = useFilteredData(
     user?.cars,
-    memoizedCarFilterFn
+    carFilterFn
   );
 
   const handleCar = (e) =>
