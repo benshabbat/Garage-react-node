@@ -33,7 +33,13 @@ const register = async (req) => {
   if (!username || !phone || !email || !password) {
     throw createError(400, "All fields are required");
   }
-  
+
+  // Password complexity: min 8 chars, at least one uppercase letter and one digit
+  const passwordPolicy = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+  if (!passwordPolicy.test(password)) {
+    throw createError(400, "Password must be at least 8 characters and include at least one uppercase letter and one number");
+  }
+
   // Check uniqueness of username, email, and phone
   const [userExists, emailExists, phoneExists] = await Promise.all([
     User.findOne({ username }),
