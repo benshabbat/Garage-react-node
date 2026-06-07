@@ -2,7 +2,10 @@ import { useToastStore } from "../stores/toastStore";
 import "./toast.css";
 
 export default function Toast() {
-  const { message, type, visible, hide } = useToastStore();
+  const message = useToastStore((s) => s.message);
+  const type    = useToastStore((s) => s.type);
+  const visible = useToastStore((s) => s.visible);
+  const hide    = useToastStore((s) => s.hide);
   if (!visible) return null;
 
   return (

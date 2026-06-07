@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "../../stores/authStore";
 import "./signup.css";
 
 const FIELDS = [
-  { name: "username", type: "text", placeholder: "Username", autoComplete: "username" },
-  { name: "email", type: "email", placeholder: "Email", autoComplete: "email" },
-  { name: "phone", type: "tel", placeholder: "Phone (e.g. 050-123-4567)", autoComplete: "tel" },
-  { name: "password", type: "password", placeholder: "Password", autoComplete: "new-password" },
+  { name: "username", type: "text",     label: "Username",                      placeholder: "Username",              autoComplete: "username" },
+  { name: "email",    type: "email",    label: "Email",                         placeholder: "Email",                 autoComplete: "email" },
+  { name: "phone",    type: "tel",      label: "Phone",                         placeholder: "e.g. 050-123-4567",     autoComplete: "tel" },
+  { name: "password", type: "password", label: "Password",                      placeholder: "Password",              autoComplete: "new-password" },
 ];
 
 const Signup = () => {
@@ -24,6 +24,9 @@ const Signup = () => {
   const message = useAuthStore((s) => s.message);
   const reset = useAuthStore((s) => s.reset);
   const navigate = useNavigate();
+
+  // Reset auth flags on unmount so re-visiting doesn't show stale success screen
+  useEffect(() => () => reset(), [reset]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -58,18 +61,21 @@ const Signup = () => {
         <p className="signup-subtitle">Join Garage770 and manage your vehicle services</p>
 
         <form className="signup-form" onSubmit={handleSubmit} noValidate>
-          {FIELDS.map(({ name, type, placeholder, autoComplete }) => (
-            <input
-              key={name}
-              className="signup-input"
-              type={type}
-              name={name}
-              placeholder={placeholder}
-              autoComplete={autoComplete}
-              value={formData[name]}
-              onChange={handleChange}
-              required
-            />
+          {FIELDS.map(({ name, type, label, placeholder, autoComplete }) => (
+            <label key={name} className="signup-field">
+              <span className="sr-only">{label}</span>
+              <input
+                id={`signup-${name}`}
+                className="signup-input"
+                type={type}
+                name={name}
+                placeholder={placeholder}
+                autoComplete={autoComplete}
+                value={formData[name]}
+                onChange={handleChange}
+                required
+              />
+            </label>
           ))}
 
           {isError && <p className="signup-error">{message}</p>}

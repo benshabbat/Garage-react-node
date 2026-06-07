@@ -38,7 +38,7 @@ function App() {
         </a>
         <Header />
         <main id="main-content">
-          <Suspense fallback={<div className="page-loader" />}>
+          <Suspense fallback={<div className="page-loader" role="status" aria-label="Loading page" />}>
             <Routes>
               <Route path="/" element={<PageLanding />} />
               {PRIVATE_ROUTES.map(({ path, Component }) => (
