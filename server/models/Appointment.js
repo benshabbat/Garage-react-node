@@ -37,11 +37,7 @@ const AppointmentSchema = new Schema({
     enum: ["pending", "confirmed", "cancelled"],
     default: "pending",
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+}, { timestamps: true });
 
 AppointmentSchema.index({ date: 1 });
 AppointmentSchema.index({ status: 1 });
