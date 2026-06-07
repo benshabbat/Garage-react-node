@@ -12,7 +12,6 @@ import { extractErrorMessage } from "../../../utils/handlerUtils";
  * @returns {Object} CRUD operation functions
  */
 export const useMessageActions = (selectedMsg, user) => {
-  
   /**
    * Create a new message
    */

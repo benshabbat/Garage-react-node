@@ -19,12 +19,14 @@ export const pickAllowed = (body, allowedFields) =>
  * @param {{ baseQuery?: object, selectFields?: string, populateSelect?: string }} opts
  */
 export const getPaginatedWithPopulate = async (
-  Model, req, allowedFields,
-  { baseQuery = {}, selectFields = '', populateSelect = '' } = {}
+  Model,
+  req,
+  allowedFields,
+  { baseQuery = {}, selectFields = "", populateSelect = "" } = {}
 ) => {
   const type = req.query.populate;
   if (!allowedFields.includes(type))
-    throw createError(400, `Invalid populate field. Allowed: ${allowedFields.join(', ')}`);
+    throw createError(400, `Invalid populate field. Allowed: ${allowedFields.join(", ")}`);
   const { limit, page } = getPaginationParams(req);
   const q = Model.find(baseQuery);
   if (selectFields) q.select(selectFields);

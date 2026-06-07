@@ -10,7 +10,6 @@ export function templatePhone(phone) {
   return phone;
 }
 
-
 export function templateCar(car) {
   if (!car || typeof car !== "string") return car;
   if (car.length === 8) {

@@ -3,7 +3,7 @@ import { templatePhone } from "../utils/templates.js";
 import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
 import { createError } from "../utils/error.js";
 
-const ALLOWED_CONTACT_FIELDS = ['firstName', 'lastName', 'email', 'phone', 'message'];
+const ALLOWED_CONTACT_FIELDS = ["firstName", "lastName", "email", "phone", "message"];
 
 const createContact = async (req) => {
   const safeBody = pickAllowed(req.body, ALLOWED_CONTACT_FIELDS);
@@ -18,7 +18,9 @@ const createContact = async (req) => {
 
 const getContacts = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const contacts = await Contact.find().skip((page - 1) * limit).limit(limit);
+  const contacts = await Contact.find()
+    .skip((page - 1) * limit)
+    .limit(limit);
   return contacts;
 };
 

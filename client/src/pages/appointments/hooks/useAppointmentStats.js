@@ -18,9 +18,9 @@ export const useAppointmentStats = (appointments) => {
 
     return {
       total: appointments.length,
-      pending: appointments.filter(a => a.status === 'pending').length,
-      confirmed: appointments.filter(a => a.status === 'confirmed').length,
-      cancelled: appointments.filter(a => a.status === 'cancelled').length,
+      pending: appointments.filter((a) => a.status === "pending").length,
+      confirmed: appointments.filter((a) => a.status === "confirmed").length,
+      cancelled: appointments.filter((a) => a.status === "cancelled").length,
     };
   }, [appointments]);
 

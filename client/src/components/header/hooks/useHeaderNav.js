@@ -8,8 +8,14 @@ export const useHeaderNav = () => {
   const { onLogout } = useLogout();
 
   const handleOutsideClick = () => toggleNav();
-  const handleLogin = () => { toggleNav(); toggleLogin(); };
-  const handleLogout = () => { toggleNav(); onLogout(); };
+  const handleLogin = () => {
+    toggleNav();
+    toggleLogin();
+  };
+  const handleLogout = () => {
+    toggleNav();
+    onLogout();
+  };
 
   return { isNavOpen, handleOutsideClick, handleLogin, handleLogout };
 };

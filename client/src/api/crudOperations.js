@@ -14,7 +14,7 @@ export const createCrudOperations = (baseUrl) => ({
     const response = await axios.get(baseUrl, { params: { limit: 5000 } });
     return response.data;
   },
-  
+
   /**
    * Get item by ID
    */
@@ -22,7 +22,7 @@ export const createCrudOperations = (baseUrl) => ({
     const response = await axios.get(`${baseUrl}/${id}`);
     return response.data;
   },
-  
+
   /**
    * Create new item
    */
@@ -30,7 +30,7 @@ export const createCrudOperations = (baseUrl) => ({
     const response = await axios.post(baseUrl, data);
     return response.data;
   },
-  
+
   /**
    * Update existing item
    */
@@ -38,7 +38,7 @@ export const createCrudOperations = (baseUrl) => ({
     const response = await axios.put(`${baseUrl}/${id}`, data);
     return response.data;
   },
-  
+
   /**
    * Delete item
    */
@@ -47,5 +47,3 @@ export const createCrudOperations = (baseUrl) => ({
     return response.data;
   },
 });
-
-

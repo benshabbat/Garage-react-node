@@ -11,12 +11,22 @@ const StatsOverview = () => {
   if (!overview) return null;
 
   const STAT_CARDS = [
-    { icon: "👥", title: "Users",        number: overview.totalUsers,        subtitle: `Admins: ${overview.adminCount} | Regular: ${overview.regularUserCount}` },
-    { icon: "🚗", title: "Cars",         number: overview.totalCars },
-    { icon: "🔧", title: "Services",     number: overview.totalServices },
+    {
+      icon: "👥",
+      title: "Users",
+      number: overview.totalUsers,
+      subtitle: `Admins: ${overview.adminCount} | Regular: ${overview.regularUserCount}`,
+    },
+    { icon: "🚗", title: "Cars", number: overview.totalCars },
+    { icon: "🔧", title: "Services", number: overview.totalServices },
     { icon: "📅", title: "Appointments", number: overview.totalAppointments },
-    { icon: "💬", title: "Messages",     number: overview.totalMessages },
-    { icon: "⭐", title: "Reviews",      number: overview.totalReviews,      subtitle: `Average: ${overview.averageRating}` },
+    { icon: "💬", title: "Messages", number: overview.totalMessages },
+    {
+      icon: "⭐",
+      title: "Reviews",
+      number: overview.totalReviews,
+      subtitle: `Average: ${overview.averageRating}`,
+    },
   ];
 
   return (

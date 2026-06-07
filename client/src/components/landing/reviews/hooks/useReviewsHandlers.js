@@ -13,14 +13,16 @@ import { getVisibleCards, calculateNumberOfPages } from "../utils/reviewsUtils";
 export const useReviewsHandlers = (modals) => {
   // Temporary state for form submission tracking
   const [isSubmittedTemp, setIsSubmittedTemp] = useState(false);
-  
+
   // Get reviews data
   const { allReviews, totalCards } = useReviewsData(isSubmittedTemp);
 
   // Cards display and navigation
   const numCardsPreview = useCardsDisplay();
-  const { currentIndex, nextCard, prevCard, indexPagination } =
-    useCardsNavigation(numCardsPreview, totalCards);
+  const { currentIndex, nextCard, prevCard, indexPagination } = useCardsNavigation(
+    numCardsPreview,
+    totalCards
+  );
   const numberOfPages = calculateNumberOfPages(totalCards, numCardsPreview);
 
   // Helper function to get visible cards

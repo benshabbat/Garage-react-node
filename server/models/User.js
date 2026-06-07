@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const { Schema,SchemaTypes } = mongoose;
+const { Schema, SchemaTypes } = mongoose;
 
 const UserSchema = new Schema(
   {
@@ -19,10 +19,10 @@ const UserSchema = new Schema(
       unique: true,
     },
     cars: {
-      type: [{type:SchemaTypes.ObjectId,ref:'Car'}]
+      type: [{ type: SchemaTypes.ObjectId, ref: "Car" }],
     },
     messages: {
-      type: [{type:SchemaTypes.ObjectId,ref:'Message'}]
+      type: [{ type: SchemaTypes.ObjectId, ref: "Message" }],
     },
     password: {
       type: String,

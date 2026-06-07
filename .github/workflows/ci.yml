@@ -26,6 +26,10 @@ jobs:
         run: npm run lint
         working-directory: client
 
+      - name: Format check
+        run: npm run format:check
+        working-directory: client
+
       - name: Build
         run: npm run build
         working-directory: client
@@ -45,6 +49,9 @@ jobs:
         working-directory: server
       - name: Lint
         run: npm run lint
+        working-directory: server
+      - name: Format check
+        run: npm run format:check
         working-directory: server
       - name: Run tests
         run: npm test

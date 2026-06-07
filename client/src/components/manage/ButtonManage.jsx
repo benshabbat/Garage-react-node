@@ -13,7 +13,7 @@ export default function ButtonManage({ handle, value, type, name, content }) {
 ButtonManage.propTypes = {
   handle: PropTypes.func.isRequired,
   value: PropTypes.string,
-  type: PropTypes.oneOf(['create', 'edit', 'delete']).isRequired,
+  type: PropTypes.oneOf(["create", "edit", "delete"]).isRequired,
   name: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
 };

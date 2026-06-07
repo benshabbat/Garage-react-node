@@ -33,9 +33,7 @@ const RecentMessages = () => {
                 <td>{message.from?.name || message.from?.email || "System"}</td>
                 <td>{message.to?.name || message.to?.email || "User"}</td>
                 <td className="message-title">{message.title || "No Subject"}</td>
-                <td className="message-desc">
-                  {truncate(message.description, 50) || "N/A"}
-                </td>
+                <td className="message-desc">{truncate(message.description, 50) || "N/A"}</td>
                 <td>
                   <span className={`status-badge ${message.read ? "completed" : "pending"}`}>
                     {message.read ? "Read" : "Unread"}

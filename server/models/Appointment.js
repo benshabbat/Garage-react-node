@@ -4,7 +4,7 @@ const { Schema, SchemaTypes } = mongoose;
 const AppointmentSchema = new Schema({
   user: {
     type: SchemaTypes.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: false,
   },
   clientName: {
@@ -30,7 +30,7 @@ const AppointmentSchema = new Schema({
   notes: {
     type: String,
     required: false,
-    default: '',
+    default: "",
   },
   status: {
     type: String,

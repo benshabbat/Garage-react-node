@@ -7,8 +7,8 @@ import ManageModal from "./ManageModal";
 
 const MANAGE_CAR_BUTTONS = [
   { name: "createService", type: "create", content: "Create Service" },
-  { name: "editCar",       type: "edit",   content: "Edit Car"       },
-  { name: "deleteCar",     type: "delete", content: "Delete Car"     },
+  { name: "editCar", type: "edit", content: "Edit Car" },
+  { name: "deleteCar", type: "delete", content: "Delete Car" },
 ];
 
 const ManageCar = () => {

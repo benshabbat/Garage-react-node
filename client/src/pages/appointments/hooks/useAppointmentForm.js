@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 const INITIAL_FORM = {
-  user: '',
-  clientName: '',
-  email: '',
-  phone: '',
-  date: '',
-  time: '',
-  notes: '',
+  user: "",
+  clientName: "",
+  email: "",
+  phone: "",
+  date: "",
+  time: "",
+  notes: "",
 };
 
 /**
@@ -22,10 +22,10 @@ export const useAppointmentForm = (users) => {
     const { name, value } = e.target;
 
     // Auto-fill details when a linked user is selected
-    if (name === 'user' && value) {
-      const selectedUser = users.find(u => u._id === value);
+    if (name === "user" && value) {
+      const selectedUser = users.find((u) => u._id === value);
       if (selectedUser) {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
           user: value,
           clientName: selectedUser.username || prev.clientName,
@@ -36,7 +36,7 @@ export const useAppointmentForm = (users) => {
       }
     }
 
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const resetForm = () => setFormData(INITIAL_FORM);

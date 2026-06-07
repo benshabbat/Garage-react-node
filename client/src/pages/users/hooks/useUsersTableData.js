@@ -45,5 +45,12 @@ export function useUsersTableData() {
     exportToCsv(rows, "users");
   };
 
-  return { displayUsers, handleSearch, handleUser, handleSortHeader, toggleCreateUser, handleExport };
+  return {
+    displayUsers,
+    handleSearch,
+    handleUser,
+    handleSortHeader,
+    toggleCreateUser,
+    handleExport,
+  };
 }

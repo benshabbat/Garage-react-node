@@ -3,20 +3,19 @@ import NextCard from "./NextCard";
 import PrevCard from "./Prevcard";
 import Slides from "./Slides";
 const Swiper = ({ children }) => {
-  
   return (
-      <div className="swiper-outer-container">
-        <div className="swiper-container">
-          <div className="swiper-wrapper">
-            <PrevCard />
-            <div className="swiper-content">
-              <Slides>{children}</Slides>
-            </div>
-            <NextCard />
+    <div className="swiper-outer-container">
+      <div className="swiper-container">
+        <div className="swiper-wrapper">
+          <PrevCard />
+          <div className="swiper-content">
+            <Slides>{children}</Slides>
           </div>
-          {/* <Pagination /> */}
+          <NextCard />
         </div>
+        {/* <Pagination /> */}
       </div>
+    </div>
   );
 };
 

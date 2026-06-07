@@ -1,7 +1,9 @@
 import js from "@eslint/js";
+import prettier from "eslint-config-prettier";
 
 export default [
   js.configs.recommended,
+  prettier,
   {
     languageOptions: {
       ecmaVersion: 2022,
@@ -14,7 +16,10 @@ export default [
       },
     },
     rules: {
-      "no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" }],
+      "no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" },
+      ],
       "no-undef": "error",
     },
   },

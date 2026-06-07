@@ -1,9 +1,27 @@
 import PropTypes from "prop-types";
 
 const CONTACT_FIELDS = [
-  { id: "clientName", name: "clientName", type: "text",  label: "Full Name *",       placeholder: "Enter your full name" },
-  { id: "email",      name: "email",      type: "email", label: "Email Address *",   placeholder: "Enter your email" },
-  { id: "phone",      name: "phone",      type: "tel",   label: "Phone Number *",    placeholder: "Enter your phone number" },
+  {
+    id: "clientName",
+    name: "clientName",
+    type: "text",
+    label: "Full Name *",
+    placeholder: "Enter your full name",
+  },
+  {
+    id: "email",
+    name: "email",
+    type: "email",
+    label: "Email Address *",
+    placeholder: "Enter your email",
+  },
+  {
+    id: "phone",
+    name: "phone",
+    type: "tel",
+    label: "Phone Number *",
+    placeholder: "Enter your phone number",
+  },
 ];
 
 /**
@@ -24,15 +42,14 @@ const AppointmentForm = ({ formData, users, handleChange, handleSubmit, isLoadin
             className="user-select"
           >
             <option value="">-- Select a user (optional) --</option>
-            {users && users.map((user) => (
-              <option key={user._id} value={user._id}>
-                {user.username} - {user.email}
-              </option>
-            ))}
+            {users &&
+              users.map((user) => (
+                <option key={user._id} value={user._id}>
+                  {user.username} - {user.email}
+                </option>
+              ))}
           </select>
-          <small className="form-hint">
-            💡 Select an existing user to auto-fill their details
-          </small>
+          <small className="form-hint">💡 Select an existing user to auto-fill their details</small>
         </div>
 
         {CONTACT_FIELDS.map(({ id, name, type, label, placeholder }) => (
@@ -60,7 +77,7 @@ const AppointmentForm = ({ formData, users, handleChange, handleSubmit, isLoadin
               value={formData.date}
               onChange={handleChange}
               required
-              min={new Date().toISOString().split('T')[0]}
+              min={new Date().toISOString().split("T")[0]}
             />
           </div>
 

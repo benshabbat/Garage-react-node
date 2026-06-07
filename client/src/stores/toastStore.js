@@ -17,7 +17,10 @@ export const useToastStore = create((set) => ({
   },
 
   hide: () => {
-    if (_timerId) { clearTimeout(_timerId); _timerId = null; }
+    if (_timerId) {
+      clearTimeout(_timerId);
+      _timerId = null;
+    }
     set({ visible: false });
   },
 }));

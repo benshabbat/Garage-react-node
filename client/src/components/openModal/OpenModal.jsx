@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 const OpenModal = ({ comp = null, isOpen = false, onClose, dialogTitle }) => {
   useEffect(() => {
     if (!isOpen || !onClose) return;
-    const handleKeyDown = (e) => { if (e.key === "Escape") onClose(); };
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+    };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
@@ -15,7 +17,9 @@ const OpenModal = ({ comp = null, isOpen = false, onClose, dialogTitle }) => {
   return (
     <div
       className="open-modal-background"
-      onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose?.();
+      }}
     >
       <div
         className="open-modal-container"

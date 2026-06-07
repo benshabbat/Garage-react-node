@@ -54,7 +54,12 @@ export function useAgentChat() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        { id: Date.now() + 1, role: "assistant", content: "אירעה שגיאה. נסה שוב.", timestamp: new Date() },
+        {
+          id: Date.now() + 1,
+          role: "assistant",
+          content: "אירעה שגיאה. נסה שוב.",
+          timestamp: new Date(),
+        },
       ]);
     } finally {
       setIsLoading(false);

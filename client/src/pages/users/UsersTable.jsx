@@ -3,21 +3,28 @@ import Table from "../../components/table/Table";
 import { useUsersTableData } from "./hooks/useUsersTableData";
 
 export default function UsersTable() {
-  const { displayUsers, handleSearch, handleUser, handleSortHeader, toggleCreateUser, handleExport } =
-    useUsersTableData();
-
+  const {
+    displayUsers,
+    handleSearch,
+    handleUser,
+    handleSortHeader,
+    toggleCreateUser,
+    handleExport,
+  } = useUsersTableData();
 
   const COLUMNS = [
-    { key: 'username', label: 'User Name' },
-    { key: 'email',    label: 'Email' },
-    { key: 'phone',    label: 'Phone Number' },
+    { key: "username", label: "User Name" },
+    { key: "email", label: "Email" },
+    { key: "phone", label: "Phone Number" },
   ];
 
   const trTh = (
     <tr>
       <th>Actions</th>
       {COLUMNS.map(({ key, label }) => (
-        <th key={key} onClick={() => handleSortHeader(key)}>{label}</th>
+        <th key={key} onClick={() => handleSortHeader(key)}>
+          {label}
+        </th>
       ))}
     </tr>
   );

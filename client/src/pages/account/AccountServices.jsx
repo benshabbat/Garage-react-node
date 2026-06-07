@@ -7,7 +7,8 @@ import { serviceFilterFn } from "./utils/accountValidation";
 export default function AccountServices() {
   const selectedCar = useAccountUIStore((s) => s.selectedCar);
   const services = useUserStore((s) => s.services);
-  const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } = useFilteredData(services, serviceFilterFn);
+  const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } =
+    useFilteredData(services, serviceFilterFn);
   const trTh = (
     <tr>
       <th>title</th>
@@ -29,12 +30,15 @@ export default function AccountServices() {
           <div className={`status ${service?.status}`}>{service?.status}</div>
         </td>
       </tr>
-    )
+    );
   });
 
   return (
     <div className="table-container">
-        <Search handleSearch={handleSerchServicesUser} name={`My Services of Car ${selectedCar?.numberPlate}`} />
+      <Search
+        handleSearch={handleSerchServicesUser}
+        name={`My Services of Car ${selectedCar?.numberPlate}`}
+      />
       <Table trTh={trTh} trTd={trTd} />
     </div>
   );

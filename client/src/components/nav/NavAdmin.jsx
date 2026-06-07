@@ -14,7 +14,7 @@ const NAV_LINKS = [
 
 const NavAdmin = () => {
   const { handleOutsideClick } = useHeaderHandlers();
-  
+
   return (
     <>
       {NAV_LINKS.map((link) => (

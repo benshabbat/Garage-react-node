@@ -15,10 +15,7 @@ export function useMessagesTable() {
   const { createMsgOpen, deleteMsgOpen, toggleCreateMsg, setSelectedMsg, toggleDeleteMsg } =
     useMessagesUIStore();
 
-  const { displayData: displayMessages, handleSearch } = useFilteredData(
-    messages,
-    messageFilterFn
-  );
+  const { displayData: displayMessages, handleSearch } = useFilteredData(messages, messageFilterFn);
 
   useEffect(() => {
     if (user) getMessagesByIdUser(user?._id);

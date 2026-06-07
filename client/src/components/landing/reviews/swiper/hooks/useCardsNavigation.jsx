@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 export default function useCardsNavigation(numCardsPreview, totalCards) {
   const [currentIndex, setCurrentIndex] = useState(0);
 

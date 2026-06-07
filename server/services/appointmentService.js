@@ -3,8 +3,24 @@ import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
 import { pickAllowed, getPaginationParams } from "../utils/queryHelpers.js";
 
-const ALLOWED_APPOINTMENT_CREATE_FIELDS = ['clientName', 'email', 'phone', 'date', 'time', 'notes', 'user'];
-const ALLOWED_APPOINTMENT_UPDATE_FIELDS = ['clientName', 'email', 'phone', 'date', 'time', 'notes', 'status'];
+const ALLOWED_APPOINTMENT_CREATE_FIELDS = [
+  "clientName",
+  "email",
+  "phone",
+  "date",
+  "time",
+  "notes",
+  "user",
+];
+const ALLOWED_APPOINTMENT_UPDATE_FIELDS = [
+  "clientName",
+  "email",
+  "phone",
+  "date",
+  "time",
+  "notes",
+  "status",
+];
 
 const createAppointment = async (req) => {
   const { phone } = req.body;
@@ -20,7 +36,7 @@ const createAppointment = async (req) => {
 const getAppointments = async (req) => {
   const { limit, page } = getPaginationParams(req);
   const appointments = await Appointment.find()
-    .populate('user', 'username email phone')
+    .populate("user", "username email phone")
     .sort({ date: -1, createdAt: -1 })
     .skip((page - 1) * limit)
     .limit(limit);
@@ -28,8 +44,10 @@ const getAppointments = async (req) => {
 };
 
 const getAppointment = async (req) => {
-  const appointment = await Appointment.findById(req.params.id)
-    .populate('user', 'username email phone');
+  const appointment = await Appointment.findById(req.params.id).populate(
+    "user",
+    "username email phone"
+  );
   if (!appointment) throw createError(404, "Appointment not found");
   return appointment;
 };
@@ -42,7 +60,7 @@ const updateAppointment = async (req) => {
     req.params.id,
     { $set: updateData },
     { new: true }
-  ).populate('user', 'username email phone');
+  ).populate("user", "username email phone");
   if (!updatedAppointment) throw createError(404, "Appointment not found");
   return updatedAppointment;
 };

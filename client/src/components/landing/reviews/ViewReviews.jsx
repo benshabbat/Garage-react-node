@@ -14,7 +14,14 @@ export default function ViewReviews() {
   }, [isSubmittedTemp, setIsSubmittedTemp]);
 
   if (isSubmittedTemp) {
-    return <Submitted setIsSubmitted={setIsSubmittedTemp} review={true} name={"review"} text={"Thank you for your review!"} />;
+    return (
+      <Submitted
+        setIsSubmitted={setIsSubmittedTemp}
+        review={true}
+        name={"review"}
+        text={"Thank you for your review!"}
+      />
+    );
   }
 
   return (

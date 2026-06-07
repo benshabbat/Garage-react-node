@@ -15,11 +15,17 @@ import { useAdminStore } from "../../../stores/adminStore";
 export const useUserHandlers = (setFilteredUsers) => {
   const users = useAdminStore((s) => s.users);
   const selectedUser = useUsersUIStore((s) => s.selectedUser);
-  const { createUserOpen, editUserOpen, toggleCreateUser, toggleEditUser, toggleDeleteUser, toggleManageUser } =
-    useUsersUIStore();
+  const {
+    createUserOpen,
+    editUserOpen,
+    toggleCreateUser,
+    toggleEditUser,
+    toggleDeleteUser,
+    toggleManageUser,
+  } = useUsersUIStore();
 
   const createUserForm = useUserForm(users, null, createUserOpen);
-  
+
   // Form management for creating car
   const [carFormData, setCarFormData] = useState();
 
@@ -31,7 +37,7 @@ export const useUserHandlers = (setFilteredUsers) => {
       setRegisterError(null);
     }
   }, [createUserOpen]);
-  
+
   // User actions
   const userActions = useUserActions(selectedUser, setFilteredUsers, users);
 
@@ -47,17 +53,22 @@ export const useUserHandlers = (setFilteredUsers) => {
       };
       try {
         setRegisterError(null);
-        await userActions.onSubmitRegister(e, createUserForm.formData, validationState, toggleCreateUser);
+        await userActions.onSubmitRegister(
+          e,
+          createUserForm.formData,
+          validationState,
+          toggleCreateUser
+        );
       } catch (error) {
         setRegisterError(error.message);
       }
     };
-    
-    return { 
-      setFormData: createUserForm.setFormData, 
-      onSubmit, 
-      isExistEmail: createUserForm.isExistEmail, 
-      isExistPhone: createUserForm.isExistPhone, 
+
+    return {
+      setFormData: createUserForm.setFormData,
+      onSubmit,
+      isExistEmail: createUserForm.isExistEmail,
+      isExistPhone: createUserForm.isExistPhone,
       isExistUser: createUserForm.isExistUser,
       registerError,
     };
@@ -68,7 +79,7 @@ export const useUserHandlers = (setFilteredUsers) => {
    */
   const useEditUser = () => {
     const editUserForm = useUserForm(users, selectedUser, editUserOpen, selectedUser?._id);
-    
+
     const onSubmitEditUser = (e) => {
       const validationState = {
         isExistEmail: editUserForm.isExistEmail,

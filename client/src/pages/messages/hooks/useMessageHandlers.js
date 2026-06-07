@@ -19,19 +19,19 @@ export const useMessageHandlers = () => {
   const useCreateMsg = () => {
     const options = user?.isAdmin ? usersToOptions(users) : undefined;
     const messageForm = useMessageForm(user);
-    
+
     const onSubmit = (e) => {
       messageActions.onSubmitCreateMessage(e, messageForm.formData, toggleCreateMsg);
     };
-    
+
     return {
       onSubmit,
       setFormData: messageForm.setFormData,
       formData: messageForm.formData,
-      options
+      options,
     };
   };
-    
+
   /**
    * Hook for deleting message
    */

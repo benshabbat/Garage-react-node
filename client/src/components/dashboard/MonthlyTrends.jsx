@@ -13,13 +13,8 @@ const TrendChart = ({ title, data, valueKey = "count", formatValue }) => {
           const val = getValue(item);
           return (
             <div key={index} className="chart-bar-item">
-              <div
-                className="chart-bar"
-                style={{ height: `${(val / max) * 100}%` }}
-              >
-                <span className="bar-value">
-                  {formatValue ? formatValue(val) : val}
-                </span>
+              <div className="chart-bar" style={{ height: `${(val / max) * 100}%` }}>
+                <span className="bar-value">{formatValue ? formatValue(val) : val}</span>
               </div>
               <span className="bar-label">
                 {item._id.month}/{item._id.year}
@@ -61,9 +56,7 @@ const MonthlyTrends = () => {
         {hasAppointments && (
           <TrendChart title="New Appointments" data={trends.monthlyAppointments} />
         )}
-        {hasCars && (
-          <TrendChart title="New Cars" data={trends.monthlyCars} />
-        )}
+        {hasCars && <TrendChart title="New Cars" data={trends.monthlyCars} />}
         {hasRevenue && (
           <TrendChart
             title="Revenue (₪)"

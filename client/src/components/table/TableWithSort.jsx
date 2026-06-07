@@ -12,9 +12,7 @@ const Table = ({ trTh, trTd }) => {
     setSortConfig((prevConfig) => ({
       key,
       direction:
-        prevConfig.key === key && prevConfig.direction === "ascending"
-          ? "descending"
-          : "ascending",
+        prevConfig.key === key && prevConfig.direction === "ascending" ? "descending" : "ascending",
     }));
   };
 
@@ -22,12 +20,10 @@ const Table = ({ trTh, trTd }) => {
     if (!sortConfig.key || !trTd) return trTd;
 
     return [...trTd].sort((a, b) => {
-      const aValue = a.props.children.find(
-        (child) => child.props["data-label"] === sortConfig.key
-      )?.props.children;
-      const bValue = b.props.children.find(
-        (child) => child.props["data-label"] === sortConfig.key
-      )?.props.children;
+      const aValue = a.props.children.find((child) => child.props["data-label"] === sortConfig.key)
+        ?.props.children;
+      const bValue = b.props.children.find((child) => child.props["data-label"] === sortConfig.key)
+        ?.props.children;
 
       const aDate = Date.parse(aValue);
       const bDate = Date.parse(bValue);
@@ -46,10 +42,7 @@ const Table = ({ trTh, trTd }) => {
     cloneElement(child, {
       onClick: () => handleSort(child.props.children),
       style: { cursor: "pointer" },
-      className:
-        sortConfig.key === child.props.children
-          ? `sorted-${sortConfig.direction}`
-          : "",
+      className: sortConfig.key === child.props.children ? `sorted-${sortConfig.direction}` : "",
     })
   );
 

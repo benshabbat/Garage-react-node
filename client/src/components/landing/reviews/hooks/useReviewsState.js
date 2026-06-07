@@ -8,7 +8,9 @@ export const useReviewsState = () => {
   const addReviewOpen = useReviewsUIStore((s) => s.addReviewOpen);
   const toggleAddReview = useReviewsUIStore((s) => s.toggleAddReview);
 
-  const reviewsHandlers = useReviewsHandlers({ addReview: { isOpen: addReviewOpen, handle: toggleAddReview } });
+  const reviewsHandlers = useReviewsHandlers({
+    addReview: { isOpen: addReviewOpen, handle: toggleAddReview },
+  });
 
   return {
     useAddReview: reviewsHandlers.useAddReview,

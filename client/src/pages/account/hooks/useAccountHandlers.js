@@ -14,14 +14,14 @@ export const useAccountHandlers = () => {
    */
   const useReqService = () => {
     const requestForm = useServiceRequestForm();
-    
+
     const onSubmit = (e) => {
       accountActions.onSubmitReqService(e, requestForm.formData, toggleReqService);
     };
-    
-    return { 
-      setFormData: requestForm.setFormData, 
-      onSubmit 
+
+    return {
+      setFormData: requestForm.setFormData,
+      onSubmit,
     };
   };
 

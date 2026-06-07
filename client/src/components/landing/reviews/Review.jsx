@@ -11,16 +11,12 @@ const Review = memo(({ customer }) => {
 
   const isLong = customer.description.length > MAX_CHARS;
   const displayText =
-    isLong && !expanded
-      ? customer.description.slice(0, MAX_CHARS) + "…"
-      : customer.description;
+    isLong && !expanded ? customer.description.slice(0, MAX_CHARS) + "…" : customer.description;
 
   return (
     <div className="review-card">
       <div className="review-header">
-        <div className="review-avatar">
-          {customer.name.charAt(0).toUpperCase()}
-        </div>
+        <div className="review-avatar">{customer.name.charAt(0).toUpperCase()}</div>
         <div className="review-info">
           <h3 className="review-name">{customer.name}</h3>
           <div className="review-date">{theDate}</div>

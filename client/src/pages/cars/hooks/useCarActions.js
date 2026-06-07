@@ -9,7 +9,6 @@ import { extractErrorMessage } from "../../../utils/handlerUtils";
  * @returns {Object} CRUD operation functions
  */
 export const useCarActions = (selectedCar, setFilteredCars) => {
-  
   /**
    * Create a new service for a car
    */
@@ -46,9 +45,7 @@ export const useCarActions = (selectedCar, setFilteredCars) => {
       try {
         await deleteCar(selectedCar?._id, selectedCar?.owner._id.toString());
         handleDeleteCar();
-        setFilteredCars((cars) =>
-          cars.filter((car) => car._id !== selectedCar._id)
-        );
+        setFilteredCars((cars) => cars.filter((car) => car._id !== selectedCar._id));
       } catch (err) {
         throw new Error(extractErrorMessage(err));
       }

@@ -7,7 +7,8 @@ const Register = () => {
   const createUserOpen = useUsersUIStore((s) => s.createUserOpen);
   const toggleCreateUser = useUsersUIStore((s) => s.toggleCreateUser);
   const { useRegister } = useUserHandlers();
-  const { setFormData, onSubmit, isExistEmail, isExistPhone, isExistUser, registerError } = useRegister();
+  const { setFormData, onSubmit, isExistEmail, isExistPhone, isExistUser, registerError } =
+    useRegister();
 
   return (
     <ModalForm

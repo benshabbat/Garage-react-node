@@ -7,7 +7,6 @@ import { extractErrorMessage } from "../../../utils/handlerUtils";
  * @returns {Object} CRUD operation functions
  */
 export const useServiceActions = (selectedService) => {
-  
   /**
    * Edit existing service
    */

@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 50; 
+  z-index: 50;
   margin-bottom: 2rem;
 }
 
@@ -19,14 +19,14 @@
 }
 
 .logo img {
-  height: 50px;  /* גובה קבוע ללוגו */
-  width: auto;   /* שומר על יחס התמונה המקורי */
-  object-fit: contain;  /* מוודא שכל התמונה נראית */
-  transition: transform 0.3s ease;  /* אנימציה חלקה בהover */
+  height: 50px; /* גובה קבוע ללוגו */
+  width: auto; /* שומר על יחס התמונה המקורי */
+  object-fit: contain; /* מוודא שכל התמונה נראית */
+  transition: transform 0.3s ease; /* אנימציה חלקה בהover */
 }
 
 .logo img:hover {
-  transform: scale(1.05);  /* אפקט hover עדין */
+  transform: scale(1.05); /* אפקט hover עדין */
 }
 
 /* שאר הקוד נשאר זהה */
@@ -102,7 +102,7 @@
 
 @media screen and (max-width: 1024px) {
   .logo img {
-    height: 40px;  /* לוגו קטן יותר במסכים קטנים */
+    height: 40px; /* לוגו קטן יותר במסכים קטנים */
   }
   .mobile-nav-toggle {
     display: block;
@@ -155,12 +155,12 @@
     padding: 0.8rem 1rem;
   }
   .logo img {
-    height: 35px;  /* לוגו קטן יותר במסכים קטנים */
+    height: 35px; /* לוגו קטן יותר במסכים קטנים */
   }
   .logo a {
     font-size: 1.4rem;
   }
-  
+
   .navbar {
     width: 100%;
     max-width: none;
@@ -174,33 +174,32 @@
   }
 }
 
-
 @media screen and (max-width: 360px) {
   .main-header {
-    padding: 0.6rem 0.75rem;  /* פחות padding בצדדים */
+    padding: 0.6rem 0.75rem; /* פחות padding בצדדים */
   }
 
   .logo img {
-    height: 30px;  /* לוגו קטן עוד יותר */
+    height: 30px; /* לוגו קטן עוד יותר */
   }
 
   .logo a {
-    font-size: 1.2rem;  /* פונט קטן יותר */
+    font-size: 1.2rem; /* פונט קטן יותר */
   }
 
   .navbar {
-    padding: 4rem 1rem;  /* פחות padding בתפריט */
+    padding: 4rem 1rem; /* פחות padding בתפריט */
   }
 
   .navbar a,
   .navbar button {
-    font-size: 1rem;  /* פונט קטן יותר בתפריט */
+    font-size: 1rem; /* פונט קטן יותר בתפריט */
     padding: 0.75rem 0.5rem;
     margin: 0.2rem 0;
   }
 
   .mobile-nav-toggle {
-    font-size: 1.5rem;  /* אייקון תפריט קטן יותר */
+    font-size: 1.5rem; /* אייקון תפריט קטן יותר */
     padding: 0.4rem;
   }
 }

@@ -3,16 +3,11 @@ import { OpenModal } from "../../index";
 import { useReviewsState as useReviewsContext } from "./hooks/useReviewsState";
 import StarRating from "./starRating/StarRating";
 
-
 const CreateReviews = () => {
-
-  const { handleAddReview, isOpenAddReview, useAddReview } =
-    useReviewsContext();
+  const { handleAddReview, isOpenAddReview, useAddReview } = useReviewsContext();
   const { addReview, setStars, nameRef, descRef, submitError } = useAddReview();
   const numRef = useRef();
   const maxLength = 80;
-
-
 
   return (
     <OpenModal
@@ -45,11 +40,17 @@ const CreateReviews = () => {
               rows={8}
               placeholder={`Write your review (max ${maxLength} chars)`}
               onChange={() =>
-                (numRef.current.textContent =
-                  maxLength - descRef.current.value.length)
+                (numRef.current.textContent = maxLength - descRef.current.value.length)
               }
             />
-            <output className="num" ref={numRef} aria-live="polite" aria-label="Characters remaining">{maxLength}</output>
+            <output
+              className="num"
+              ref={numRef}
+              aria-live="polite"
+              aria-label="Characters remaining"
+            >
+              {maxLength}
+            </output>
           </label>
           {submitError && <p className="error">{submitError}</p>}
           <button className="form-btn" onClick={addReview}>

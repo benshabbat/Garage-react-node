@@ -5,12 +5,12 @@ import { useContactForm } from "./hooks/useContactForm";
 
 const FIELD_ROWS = [
   [
-    { name: "firstName", type: "text",  placeholder: "First Name" },
-    { name: "lastName",  type: "text",  placeholder: "Last Name" },
+    { name: "firstName", type: "text", placeholder: "First Name" },
+    { name: "lastName", type: "text", placeholder: "Last Name" },
   ],
   [
     { name: "email", type: "email", placeholder: "Email" },
-    { name: "phone", type: "tel",   placeholder: "Phone" },
+    { name: "phone", type: "tel", placeholder: "Phone" },
   ],
 ];
 export default function NewContact() {
@@ -26,16 +26,34 @@ export default function NewContact() {
         <h1>Contact Us</h1>
         <div className="input-group">
           {FIELD_ROWS[0].map((field) => (
-            <FormInput key={field.name} input={field} handleChange={handleChange} classNameLabel={" "} />
+            <FormInput
+              key={field.name}
+              input={field}
+              handleChange={handleChange}
+              classNameLabel={" "}
+            />
           ))}
         </div>
         <div className="input-group">
           {FIELD_ROWS[1].map((field) => (
-            <FormInput key={field.name} input={field} handleChange={handleChange} classNameLabel={" "} />
+            <FormInput
+              key={field.name}
+              input={field}
+              handleChange={handleChange}
+              classNameLabel={" "}
+            />
           ))}
         </div>
-        <label htmlFor="contact-message" className="message-label">Message</label>
-        <textarea id="contact-message" name="message" placeholder="Type your message here..." required onChange={handleChange}></textarea>
+        <label htmlFor="contact-message" className="message-label">
+          Message
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          placeholder="Type your message here..."
+          required
+          onChange={handleChange}
+        ></textarea>
         {submitError && <p className="error">{submitError}</p>}
         <div className="button-container">
           <button type="submit">Send</button>

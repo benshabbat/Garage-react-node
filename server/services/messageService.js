@@ -1,10 +1,14 @@
 import Message from "../models/Message.js";
 import User from "../models/User.js";
 import { createError } from "../utils/error.js";
-import { getPaginationParams, pickAllowed, getPaginatedWithPopulate } from "../utils/queryHelpers.js";
+import {
+  getPaginationParams,
+  pickAllowed,
+  getPaginatedWithPopulate,
+} from "../utils/queryHelpers.js";
 
-const ALLOWED_MESSAGE_POPULATE_FIELDS = ['from', 'to'];
-const ALLOWED_MESSAGE_FIELDS = ['title', 'description'];
+const ALLOWED_MESSAGE_POPULATE_FIELDS = ["from", "to"];
+const ALLOWED_MESSAGE_FIELDS = ["title", "description"];
 
 const createMessage = async (req) => {
   const from = req.user.id; // always use authenticated user's ID, never trust URL param
@@ -54,9 +58,7 @@ const deleteMessage = async (req) => {
   const message = await Message.findById(req.params.id);
   if (!message) throw createError(404, "Message not found");
   const userId = req.user.id;
-  const isParticipant =
-    message.from?.toString() === userId ||
-    message.to.toString() === userId;
+  const isParticipant = message.from?.toString() === userId || message.to.toString() === userId;
   if (!isParticipant && !req.user.isAdmin) {
     throw createError(403, "Not authorized to delete this message");
   }
@@ -68,9 +70,7 @@ const getMessage = async (req) => {
   const message = await Message.findById(req.params.id);
   if (!message) throw createError(404, "Message not found");
   const userId = req.user.id;
-  const isParticipant =
-    message.from?.toString() === userId ||
-    message.to.toString() === userId;
+  const isParticipant = message.from?.toString() === userId || message.to.toString() === userId;
   if (!isParticipant && !req.user.isAdmin) {
     throw createError(403, "Not authorized to view this message");
   }
@@ -91,12 +91,16 @@ const getMessageByUser = async (req) => {
 
 const getMessages = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const messages = await Message.find().skip((page - 1) * limit).limit(limit);
+  const messages = await Message.find()
+    .skip((page - 1) * limit)
+    .limit(limit);
   return messages;
 };
 
 const getMessagesByType = async (req) =>
-  getPaginatedWithPopulate(Message, req, ALLOWED_MESSAGE_POPULATE_FIELDS, { populateSelect: '-password' });
+  getPaginatedWithPopulate(Message, req, ALLOWED_MESSAGE_POPULATE_FIELDS, {
+    populateSelect: "-password",
+  });
 
 const messageService = {
   createMessage,

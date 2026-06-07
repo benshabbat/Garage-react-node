@@ -19,18 +19,27 @@ const MyAccount = () => {
         if (!e.currentTarget.contains(e.relatedTarget)) close();
       }}
     >
-      <button
-        aria-haspopup="menu"
-        aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
-      >
+      <button aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         {user?.username || "My Account"}
       </button>
       <div className="dropdown-content">
-        <Link to="/myCars" onClick={() => { handleOutsideClick(); close(); }}>
+        <Link
+          to="/myCars"
+          onClick={() => {
+            handleOutsideClick();
+            close();
+          }}
+        >
           {user?.username}
         </Link>
-        <button onClick={() => { handleLogout(); close(); }}>LogOut</button>
+        <button
+          onClick={() => {
+            handleLogout();
+            close();
+          }}
+        >
+          LogOut
+        </button>
       </div>
     </div>
   );

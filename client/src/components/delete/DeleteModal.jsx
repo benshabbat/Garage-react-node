@@ -10,7 +10,7 @@ const DeleteModal = ({
   displayField,
   nameData,
 }) => {
-  const item   = useStore((s) => s[selectedKey]);
+  const item = useStore((s) => s[selectedKey]);
   const isOpen = useStore((s) => s[isOpenKey]);
   const toggle = useStore((s) => s[toggleKey]);
   const handler = useHandlers()[handlerKey];

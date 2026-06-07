@@ -19,8 +19,14 @@
 }
 
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .appointments-header h1 {
@@ -46,8 +52,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .stat-card {
@@ -61,7 +71,9 @@
   align-items: center;
   gap: 1rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border-left: 4px solid transparent;
 }
 
@@ -70,10 +82,18 @@
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
 
-.stat-total     { border-left-color: #4a9eff; }
-.stat-pending   { border-left-color: #f59e0b; }
-.stat-confirmed { border-left-color: #34d399; }
-.stat-cancelled { border-left-color: #f87171; }
+.stat-total {
+  border-left-color: #4a9eff;
+}
+.stat-pending {
+  border-left-color: #f59e0b;
+}
+.stat-confirmed {
+  border-left-color: #34d399;
+}
+.stat-cancelled {
+  border-left-color: #f87171;
+}
 
 .stat-icon {
   font-size: 2.5rem;
@@ -104,8 +124,14 @@
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Panels (form + list) ────────────────────── */
@@ -293,7 +319,9 @@
   padding-right: 0.4rem;
 }
 
-.appointments-list::-webkit-scrollbar { width: 6px; }
+.appointments-list::-webkit-scrollbar {
+  width: 6px;
+}
 .appointments-list::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 10px;
@@ -317,8 +345,14 @@
 }
 
 @keyframes cardSlideIn {
-  from { opacity: 0; transform: translateX(-16px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .appointment-card:hover {
@@ -412,8 +446,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
-  50%       { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+  }
 }
 
 /* ── Empty State ─────────────────────────────── */
@@ -434,8 +473,13 @@
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .no-appointments p {
@@ -458,8 +502,12 @@
   font-size: 1.05rem;
 }
 
-.loading { color: #9ca3af; }
-.error   { color: #f87171; }
+.loading {
+  color: #9ca3af;
+}
+.error {
+  color: #f87171;
+}
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 1024px) {
@@ -545,7 +593,9 @@
   box-sizing: border-box;
 }
 
-.apt-search-input::placeholder { color: #6b7280; }
+.apt-search-input::placeholder {
+  color: #6b7280;
+}
 
 .apt-search-input:focus {
   outline: none;
@@ -645,4 +695,3 @@
 .action-cancelled:not(:disabled):hover {
   background: rgba(248, 113, 113, 0.3);
 }
-

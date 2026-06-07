@@ -7,11 +7,10 @@ import {
   getServices,
   getServicesByType,
   getServicesByCar,
-  getServicesByUser
+  getServicesByUser,
 } from "../controllers/service.js";
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
 const router = express.Router();
-
 
 // Admin routes
 const adminRouter = express.Router();

@@ -15,10 +15,7 @@ function Submitted({
         <p>Your {name} has been sent successfully.</p>
         <p>{text}</p>
         {!review && (
-          <button
-            onClick={() => setIsSubmitted(false)}
-            className="new-message-button"
-          >
+          <button onClick={() => setIsSubmitted(false)} className="new-message-button">
             Send Another Message
           </button>
         )}

@@ -8,7 +8,9 @@
   border: none;
   padding: 0;
   color: #ddd;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
   cursor: pointer;
 }
 
@@ -45,7 +47,7 @@
   .star-rating-container {
     gap: 2px;
   }
-  
+
   .star-button {
     font-size: 1.2rem;
   }

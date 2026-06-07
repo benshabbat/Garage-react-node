@@ -5,7 +5,7 @@ import { useServiceAdminHandlers } from "../../pages/servicesAdmin/hooks/useServ
 import ManageModal from "./ManageModal";
 
 const MANAGE_SERVICE_BUTTONS = [
-  { name: "editService",   type: "edit",   content: "Edit Service"   },
+  { name: "editService", type: "edit", content: "Edit Service" },
   { name: "deleteService", type: "delete", content: "Delete Service" },
 ];
 

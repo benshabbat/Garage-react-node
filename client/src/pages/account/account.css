@@ -33,7 +33,9 @@ tbody button:hover {
   color: #9ca3af;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .back-btn:hover {

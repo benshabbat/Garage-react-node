@@ -37,7 +37,10 @@ const register = async (req) => {
   // Password complexity: min 8 chars, at least one uppercase letter and one digit
   const passwordPolicy = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
   if (!passwordPolicy.test(password)) {
-    throw createError(400, "Password must be at least 8 characters and include at least one uppercase letter and one number");
+    throw createError(
+      400,
+      "Password must be at least 8 characters and include at least one uppercase letter and one number"
+    );
   }
 
   // Check uniqueness of username, email, and phone
@@ -46,7 +49,7 @@ const register = async (req) => {
     User.findOne({ email }),
     User.findOne({ phone: templatePhone(phone) }),
   ]);
-  if (userExists)  throw createError(400, "Username already in use");
+  if (userExists) throw createError(400, "Username already in use");
   if (emailExists) throw createError(400, "Email already in use");
   if (phoneExists) throw createError(400, "Phone number already in use");
 
@@ -87,11 +90,9 @@ const login = async (req) => {
   const isPassword = await bcrypt.compare(password, user.password);
   if (!isPassword) throw createError(401, "Invalid credentials");
 
-  const token = jwt.sign(
-    { id: user._id, isAdmin: user.isAdmin },
-    process.env.JWT,
-    { expiresIn: "24h" }
-  );
+  const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT, {
+    expiresIn: "24h",
+  });
 
   const cookieOptions = buildCookieOptions(true);
 

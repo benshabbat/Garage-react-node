@@ -5,8 +5,8 @@ import { useUserAdminHandlers } from "../../pages/users/hooks/useUserAdminHandle
 import ManageModal from "./ManageModal";
 
 const MANAGE_USER_BUTTONS = [
-  { name: "createCar",  type: "create", content: "Create Car"  },
-  { name: "editUser",   type: "edit",   content: "Edit User"   },
+  { name: "createCar", type: "create", content: "Create Car" },
+  { name: "editUser", type: "edit", content: "Edit User" },
   { name: "deleteUser", type: "delete", content: "Delete User" },
 ];
 

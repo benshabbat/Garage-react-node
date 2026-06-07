@@ -9,16 +9,16 @@ const reviewOps = createCrudOperations(API_URL_REVIEWS);
 export const reviewApi = {
   // Get all reviews
   getAll: reviewOps.getAll,
-  
+
   // Get review by ID
   getById: reviewOps.getById,
-  
+
   // Create new review
   create: reviewOps.create,
-  
+
   // Update review
   update: reviewOps.update,
-  
+
   // Delete review
   delete: reviewOps.delete,
 };

@@ -44,10 +44,7 @@ const makeUser = async ({ username = "tester", isAdmin = false } = {}) => {
 };
 
 const authCookie = (user) => {
-  const token = jwt.sign(
-    { id: user._id.toString(), isAdmin: user.isAdmin },
-    process.env.JWT
-  );
+  const token = jwt.sign({ id: user._id.toString(), isAdmin: user.isAdmin }, process.env.JWT);
   return `access_token=${token}`;
 };
 
@@ -69,9 +66,7 @@ describe("POST /api/appointments", () => {
   });
 
   it("returns 201 and creates appointment with valid data", async () => {
-    const res = await request(app)
-      .post("/api/appointments")
-      .send(validBody());
+    const res = await request(app).post("/api/appointments").send(validBody());
 
     expect(res.status).toBe(201);
     expect(res.body.clientName).toBe("Test Client");
@@ -79,9 +74,7 @@ describe("POST /api/appointments", () => {
   });
 
   it("returns 400 when required fields are missing", async () => {
-    const res = await request(app)
-      .post("/api/appointments")
-      .send({ clientName: "Test Client" });
+    const res = await request(app).post("/api/appointments").send({ clientName: "Test Client" });
 
     expect(res.status).toBe(400);
   });
@@ -162,9 +155,7 @@ describe("POST /api/reviews", () => {
   });
 
   it("returns 401 when unauthenticated", async () => {
-    const res = await request(app)
-      .post("/api/reviews")
-      .send({ description: "Great!", stars: 5 });
+    const res = await request(app).post("/api/reviews").send({ description: "Great!", stars: 5 });
 
     expect(res.status).toBe(401);
   });
@@ -187,9 +178,7 @@ describe("GET /api/dashboard/stats", () => {
   it("admin receives 200 with stats payload", async () => {
     const admin = await makeUser({ username: "dashAdmin", isAdmin: true });
 
-    const res = await request(app)
-      .get("/api/dashboard/stats")
-      .set("Cookie", authCookie(admin));
+    const res = await request(app).get("/api/dashboard/stats").set("Cookie", authCookie(admin));
 
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("overview");
@@ -198,9 +187,7 @@ describe("GET /api/dashboard/stats", () => {
   it("returns 403 for a non-admin user", async () => {
     const user = await makeUser({ username: "dashUser" });
 
-    const res = await request(app)
-      .get("/api/dashboard/stats")
-      .set("Cookie", authCookie(user));
+    const res = await request(app).get("/api/dashboard/stats").set("Cookie", authCookie(user));
 
     expect(res.status).toBe(403);
   });
