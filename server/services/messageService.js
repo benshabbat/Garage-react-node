@@ -78,23 +78,28 @@ const getMessage = async (req) => {
 };
 
 const getMessageByUser = async (req) => {
+  const filter = { $or: [{ to: req.params.id }, { from: req.params.id }] };
   const { limit, page } = getPaginationParams(req);
-  const messages = await Message.find({
-    $or: [{ to: req.params.id }, { from: req.params.id }],
-  })
-    .populate("to", "-password")
-    .populate("from", "-password")
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return messages;
+  const [messages, total] = await Promise.all([
+    Message.find(filter)
+      .populate("to", "-password")
+      .populate("from", "-password")
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Message.countDocuments(filter),
+  ]);
+  return { data: messages, total, page, limit };
 };
 
 const getMessages = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const messages = await Message.find()
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return messages;
+  const [messages, total] = await Promise.all([
+    Message.find()
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Message.countDocuments(),
+  ]);
+  return { data: messages, total, page, limit };
 };
 
 const getMessagesByType = async (req) =>

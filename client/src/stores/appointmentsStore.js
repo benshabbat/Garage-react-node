@@ -12,8 +12,9 @@ export const useAppointmentsStore = create((set) => ({
   fetchAppointments: async () => {
     set({ isLoading: true });
     try {
-      const { data } = await axios.get(API_URL_APPOINTMENTS);
-      set({ appointments: data, isLoading: false });
+      const { data: payload } = await axios.get(API_URL_APPOINTMENTS);
+      const appointments = Array.isArray(payload) ? payload : payload.data;
+      set({ appointments, isLoading: false });
     } catch (err) {
       setErr(set, err);
     }

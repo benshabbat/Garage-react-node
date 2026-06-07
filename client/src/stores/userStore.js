@@ -24,11 +24,12 @@ export const useUserStore = create((set) => {
       }
     };
 
-  // Factory for axios GET calls where response has { data } shape
+  // Factory for axios GET calls — handles both plain arrays and { data, total } paginated responses
   const loadAxios = (getUrl, key) => async (id) => {
     set({ isLoading: true });
     try {
-      const { data } = await axios.get(getUrl(id));
+      const { data: payload } = await axios.get(getUrl(id));
+      const data = Array.isArray(payload) ? payload : payload.data;
       set({ [key]: data, isLoading: false });
     } catch (err) {
       setErr(set, err);

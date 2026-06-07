@@ -66,11 +66,14 @@ const getCar = async (req) => {
 
 const getCars = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const cars = await Car.find()
-    .populate("owner")
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return cars;
+  const [cars, total] = await Promise.all([
+    Car.find()
+      .populate("owner")
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Car.countDocuments(),
+  ]);
+  return { data: cars, total, page, limit };
 };
 
 const getCarsByType = async (req) =>
