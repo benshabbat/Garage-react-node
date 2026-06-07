@@ -25,11 +25,14 @@ export function useAppointmentsPage() {
   const stats = useAppointmentStats(appointments);
   const appointmentFilters = useAppointmentFilters(appointments);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    storeCreate(appointmentForm.prepareSubmitData());
-    appointmentForm.resetForm();
-  };
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const created = await storeCreate(appointmentForm.prepareSubmitData());
+      if (created) appointmentForm.resetForm();
+    },
+    [storeCreate, appointmentForm]
+  );
 
   const handleStatusChange = useCallback(
     (id, newStatus) => storeUpdate({ id, data: { status: newStatus } }),

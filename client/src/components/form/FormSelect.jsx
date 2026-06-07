@@ -6,11 +6,15 @@ export default function FormSelect({ name, options, handleChange, value }) {
       <span>{name}</span>
       <select name={name} onChange={handleChange} value={value || ""}>
         <option value="">{name}</option>
-        {options?.map((option, index) => (
-          <option key={index} value={name === "status" ? option?.value : option?._id}>
-            {name === "status" ? option?.label : option?.username}
-          </option>
-        ))}
+        {options?.map((option) => {
+          const val = option?.value ?? option?._id;
+          const label = option?.label ?? option?.username;
+          return (
+            <option key={val} value={val}>
+              {label}
+            </option>
+          );
+        })}
       </select>
     </label>
   );

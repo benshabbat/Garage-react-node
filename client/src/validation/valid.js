@@ -41,6 +41,7 @@ const VALIDATORS = {
   numberPlate: validCar,
 };
 
-const valid = (data, type) => VALIDATORS[type]?.(data) ?? false;
+// Unknown field types (username, title, km…) have no regex — treat as valid
+const valid = (data, type) => VALIDATORS[type]?.(data) ?? true;
 
 export { valid, validCar, validPhone, validPass, validEmail, validUserIsExist, inputType };
