@@ -4,10 +4,28 @@ import { useAuthStore } from "../../stores/authStore";
 import "./signup.css";
 
 const FIELDS = [
-  { name: "username", type: "text",     label: "Username",                      placeholder: "Username",              autoComplete: "username" },
-  { name: "email",    type: "email",    label: "Email",                         placeholder: "Email",                 autoComplete: "email" },
-  { name: "phone",    type: "tel",      label: "Phone",                         placeholder: "e.g. 050-123-4567",     autoComplete: "tel" },
-  { name: "password", type: "password", label: "Password",                      placeholder: "Password",              autoComplete: "new-password" },
+  {
+    name: "username",
+    type: "text",
+    label: "Username",
+    placeholder: "Username",
+    autoComplete: "username",
+  },
+  { name: "email", type: "email", label: "Email", placeholder: "Email", autoComplete: "email" },
+  {
+    name: "phone",
+    type: "tel",
+    label: "Phone",
+    placeholder: "e.g. 050-123-4567",
+    autoComplete: "tel",
+  },
+  {
+    name: "password",
+    type: "password",
+    label: "Password",
+    placeholder: "Password",
+    autoComplete: "new-password",
+  },
 ];
 
 const Signup = () => {
