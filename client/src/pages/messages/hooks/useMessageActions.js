@@ -19,9 +19,12 @@ export const useMessageActions = (selectedMsg, user) => {
    */
   const onSubmitCreateMessage = async (e, formData, handleCreateMessage) => {
     e.preventDefault();
+    if (user?.isAdmin && !formData?.to) {
+      throw new Error("Please select a recipient.");
+    }
     try {
       if (user?.isAdmin) {
-        await createMessage(formData, formData?.to);
+        await createMessage(formData, formData.to);
       } else {
         await createMessageToAdmin(formData);
       }
