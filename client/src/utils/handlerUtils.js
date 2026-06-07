@@ -18,3 +18,11 @@ export const resolveActionTarget = (e, items, setSelected) => {
   setSelected(items.find((item) => item._id === value));
   return name;
 };
+
+export const createActionHandler =
+  (actionMap, defaultKey) =>
+  (e, items, setSelected, toggles) => {
+    const name = resolveActionTarget(e, items, setSelected);
+    const fn = actionMap[name] ? toggles[actionMap[name]] : toggles[defaultKey];
+    fn?.();
+  };
