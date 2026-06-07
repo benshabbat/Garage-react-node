@@ -17,7 +17,7 @@ export const auditAdmin = (action, targetModel) => (req, res, next) => {
         targetModel,
         targetId: req.params.id || req.params.userId || undefined,
         details: { method: req.method, path: req.originalUrl },
-      }).catch(() => {});
+      }).catch((err) => console.error("[audit] Failed to write log:", err.message));
     }
   });
   next();

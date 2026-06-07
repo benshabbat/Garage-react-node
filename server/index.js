@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 import connectDB from "./config/db.js";
 import app from "./app.js";
 
@@ -35,7 +36,8 @@ async function start() {
   });
 
   const shutdown = () => {
-    server.close(() => {
+    server.close(async () => {
+      await mongoose.connection.close();
       process.exit(0);
     });
   };

@@ -78,11 +78,15 @@ const getServicesByType = async (req) =>
   getPaginatedWithPopulate(Service, req, ALLOWED_SERVICE_POPULATE_FIELDS);
 
 const getServicesByCar = async (req) => {
+  const filter = { car: req.params.car };
   const { limit, page } = getPaginationParams(req);
-  const services = await Service.find({ car: req.params.car })
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return services;
+  const [services, total] = await Promise.all([
+    Service.find(filter)
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Service.countDocuments(filter),
+  ]);
+  return { data: services, total, page, limit };
 };
 
 const getServicesByUser = async (req) => {
@@ -92,8 +96,15 @@ const getServicesByUser = async (req) => {
   // Service has no user field — resolve via the user's cars
   const cars = await Car.find({ owner: req.params.user }).select("_id").lean();
   const carIds = cars.map((c) => c._id);
-  const services = await Service.find({ car: { $in: carIds } });
-  return services;
+  const filter = { car: { $in: carIds } };
+  const { limit, page } = getPaginationParams(req);
+  const [services, total] = await Promise.all([
+    Service.find(filter)
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Service.countDocuments(filter),
+  ]);
+  return { data: services, total, page, limit };
 };
 
 const serviceService = {

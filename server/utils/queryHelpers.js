@@ -1,7 +1,7 @@
 import { createError } from "./error.js";
 
 const DEFAULT_LIMIT = 50;
-const MAX_LIMIT = 5000;
+const MAX_LIMIT = 500;
 
 export const getPaginationParams = (req) => ({
   limit: Math.min(parseInt(req.query.limit) || DEFAULT_LIMIT, MAX_LIMIT),
@@ -32,5 +32,9 @@ export const getPaginatedWithPopulate = async (
   if (selectFields) q.select(selectFields);
   if (populateSelect) q.populate(type, populateSelect);
   else q.populate(type);
-  return q.skip((page - 1) * limit).limit(limit);
+  const [data, total] = await Promise.all([
+    q.skip((page - 1) * limit).limit(limit),
+    Model.countDocuments(baseQuery),
+  ]);
+  return { data, total, page, limit };
 };
