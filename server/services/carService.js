@@ -84,7 +84,10 @@ const getCarsByType = async (req) =>
 const getCarsWithService = async (req) => {
   const { limit, page } = getPaginationParams(req);
   const [cars, total] = await Promise.all([
-    Car.find().populate("services").skip((page - 1) * limit).limit(limit),
+    Car.find()
+      .populate("services")
+      .skip((page - 1) * limit)
+      .limit(limit),
     Car.countDocuments(),
   ]);
   return { data: cars, total, page, limit };
@@ -94,7 +97,10 @@ const getCarsByOwner = async (req) => {
   const filter = { owner: req.params.user };
   const { limit, page } = getPaginationParams(req);
   const [cars, total] = await Promise.all([
-    Car.find(filter).populate("services").skip((page - 1) * limit).limit(limit),
+    Car.find(filter)
+      .populate("services")
+      .skip((page - 1) * limit)
+      .limit(limit),
     Car.countDocuments(filter),
   ]);
   return { data: cars, total, page, limit };

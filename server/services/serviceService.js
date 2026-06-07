@@ -81,7 +81,9 @@ const getServicesByCar = async (req) => {
   const filter = { car: req.params.car };
   const { limit, page } = getPaginationParams(req);
   const [services, total] = await Promise.all([
-    Service.find(filter).skip((page - 1) * limit).limit(limit),
+    Service.find(filter)
+      .skip((page - 1) * limit)
+      .limit(limit),
     Service.countDocuments(filter),
   ]);
   return { data: services, total, page, limit };
@@ -97,7 +99,9 @@ const getServicesByUser = async (req) => {
   const filter = { car: { $in: carIds } };
   const { limit, page } = getPaginationParams(req);
   const [services, total] = await Promise.all([
-    Service.find(filter).skip((page - 1) * limit).limit(limit),
+    Service.find(filter)
+      .skip((page - 1) * limit)
+      .limit(limit),
     Service.countDocuments(filter),
   ]);
   return { data: services, total, page, limit };
