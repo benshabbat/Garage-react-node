@@ -5,17 +5,16 @@ import Submitted from "../../Submitted";
 import { useReviewsState as useReviewsContext } from "./hooks/useReviewsState";
 
 export default function ViewReviews() {
-  const { useAddReview } = useReviewsContext();
-  const { isSubmitted, setIsSubmitted } = useAddReview();
+  const { isSubmittedTemp, setIsSubmittedTemp } = useReviewsContext();
 
   useEffect(() => {
-    if (!isSubmitted) return;
-    const id = setTimeout(() => setIsSubmitted(false), 7000);
+    if (!isSubmittedTemp) return;
+    const id = setTimeout(() => setIsSubmittedTemp(false), 7000);
     return () => clearTimeout(id);
-  }, [isSubmitted, setIsSubmitted]);
+  }, [isSubmittedTemp, setIsSubmittedTemp]);
 
-  if (isSubmitted) {
-    return <Submitted setIsSubmitted={setIsSubmitted} review={true} name={"review"} text={"Thank you for your review!"} />;
+  if (isSubmittedTemp) {
+    return <Submitted setIsSubmitted={setIsSubmittedTemp} review={true} name={"review"} text={"Thank you for your review!"} />;
   }
 
   return (
