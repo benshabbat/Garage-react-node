@@ -7,11 +7,12 @@ const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
       comp={
         <>
           <form className="form">
-            <button onClick={handle} className="form-close">
+            <button type="button" onClick={handle} className="form-close">
               X
             </button>
             <h1 className="header">Delete</h1>
-            <h2>{`Are you sure to delete? : ${deleteData}`}</h2>
+            <h2>Delete <strong>{deleteData}</strong>?</h2>
+            <p className="delete-warning">⚠ This action cannot be undone.</p>
             <label className="form-label">
               <button
                 type="button"
@@ -19,12 +20,12 @@ const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
                 className="delete"
                 onClick={handleDelete}
               >
-                Yes
+                Yes, delete
               </button>
             </label>
             <label className="form-label">
-              <button type="button" name="noDelete" className="create" onClick={handle}>
-                No
+              <button type="button" name="noDelete" className="cancel" onClick={handle}>
+                Cancel
               </button>
             </label>
           </form>
