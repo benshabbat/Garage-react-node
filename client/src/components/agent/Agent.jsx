@@ -22,7 +22,7 @@ const Message = ({ msg }) => {
         </div>
       )}
       <div className={`agent-bubble agent-bubble--${isBot ? "bot" : "user"}`}>
-        <p>{msg.content}</p>
+        <p dir="auto">{msg.content}</p>
         <span className="agent-time">{time}</span>
       </div>
     </div>
