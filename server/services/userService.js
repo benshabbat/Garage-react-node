@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import Car from "../models/Car.js";
 import Message from "../models/Message.js";
+import Service from "../models/Service.js";
 import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
@@ -70,16 +71,20 @@ const updateUser = async (req) => {
 
 const deleteUser = async (req) => {
   const { id } = req.params;
+  const cars = await Car.find({ owner: id }).select("_id").lean();
+  const carIds = cars.map((c) => c._id);
   await Promise.all([
     User.findByIdAndDelete(id),
     Car.deleteMany({ owner: id }),
     Message.deleteMany({ $or: [{ from: id }, { to: id }] }),
+    ...(carIds.length ? [Service.deleteMany({ car: { $in: carIds } })] : []),
   ]);
   return "the user has been removed";
 };
 
 const getUser = async (req) => {
   const user = await User.findById(req.params.id).select("-password").populate("cars");
+  if (!user) throw createError(404, "User not found");
   return user;
 };
 
