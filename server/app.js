@@ -31,6 +31,14 @@ const publicLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+const agentLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  message: { message: "Too many AI requests, please try again later" },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 const app = express();
 
 app.use(logger);
@@ -51,7 +59,7 @@ app.use("/api/reviews", publicLimiter, reviewsRoute);
 app.use("/api/contacts", publicLimiter, contactsRoute);
 app.use("/api/appointments", publicLimiter, appointmentsRoute);
 app.use("/api/dashboard", dashboardRoute);
-app.use("/api/agent", agentRoute);
+app.use("/api/agent", agentLimiter, agentRoute);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });

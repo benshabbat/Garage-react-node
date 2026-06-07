@@ -49,6 +49,7 @@ const deleteService = async (req) => {
   const deleted = await Service.findByIdAndDelete(req.params.id);
   if (!deleted) throw createError(404, "Service not found");
   await Car.findByIdAndUpdate(deleted.car, { $pull: { services: deleted._id } });
+  return "The Service has been removed";
 };
 
 const getService = async (req) => {

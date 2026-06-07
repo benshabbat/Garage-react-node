@@ -22,16 +22,20 @@ export const chat = async (req, res, next) => {
       return res.status(503).json({ error: "AI agent is not configured on this server" });
     }
 
-    const { message, history = [] } = req.body;
+    const { message, history } = req.body;
 
-    if (!message?.trim()) {
+    if (typeof message !== "string" || !message.trim()) {
       return res.status(400).json({ error: "Message is required" });
     }
+    if (message.length > 2000) {
+      return res.status(400).json({ error: "Message must be under 2000 characters" });
+    }
 
-    const conversationHistory = history
+    const rawHistory = Array.isArray(history) ? history : [];
+    const conversationHistory = rawHistory
       .filter((m) => m.role === "user" || m.role === "assistant")
       .slice(-10)
-      .map((m) => ({ role: m.role, content: m.content }));
+      .map((m) => ({ role: m.role, content: String(m.content ?? "").slice(0, 2000) }));
 
     conversationHistory.push({ role: "user", content: message });
 

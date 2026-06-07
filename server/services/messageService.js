@@ -78,8 +78,8 @@ const getMessageByUser = async (req) => {
   const messages = await Message.find({
     $or: [{ to: req.params.id }, { from: req.params.id }],
   })
-    .populate("to")
-    .populate("from")
+    .populate("to", "-password")
+    .populate("from", "-password")
     .skip((page - 1) * limit)
     .limit(limit);
   return messages;
@@ -97,7 +97,7 @@ const getMessagesByType = async (req) => {
     throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_MESSAGE_POPULATE_FIELDS.join(', ')}`);
   }
   const { limit, page } = getPaginationParams(req);
-  const messages = await Message.find().populate(type).skip((page - 1) * limit).limit(limit);
+  const messages = await Message.find().populate(type, "-password").skip((page - 1) * limit).limit(limit);
   return messages;
 };
 
