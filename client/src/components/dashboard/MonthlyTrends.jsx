@@ -47,12 +47,11 @@ TrendChart.propTypes = {
 };
 
 const MonthlyTrends = () => {
-  const stats = useDashboardStore((s) => s.stats);
-  const { trends } = stats;
+  const trends = useDashboardStore((s) => s.stats?.trends);
 
-  const hasAppointments = trends.monthlyAppointments?.length > 0;
-  const hasCars = trends.monthlyCars?.length > 0;
-  const hasRevenue = trends.monthlyRevenue?.length > 0;
+  const hasAppointments = trends?.monthlyAppointments?.length > 0;
+  const hasCars = trends?.monthlyCars?.length > 0;
+  const hasRevenue = trends?.monthlyRevenue?.length > 0;
 
   if (!hasAppointments && !hasCars && !hasRevenue) return null;
 

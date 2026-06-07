@@ -6,8 +6,9 @@ import StatCard from "./StatCard";
  * Uses dashboard context to access data without props drilling
  */
 const StatsOverview = () => {
-  const stats = useDashboardStore((s) => s.stats);
-  const { overview } = stats;
+  const overview = useDashboardStore((s) => s.stats?.overview);
+
+  if (!overview) return null;
 
   const STAT_CARDS = [
     { icon: "👥", title: "Users",        number: overview.totalUsers,        subtitle: `Admins: ${overview.adminCount} | Regular: ${overview.regularUserCount}` },
