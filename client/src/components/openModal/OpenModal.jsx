@@ -2,7 +2,7 @@ import "./openModal.css";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 
-const OpenModal = ({ comp = null, isOpen = false, onClose }) => {
+const OpenModal = ({ comp = null, isOpen = false, onClose, dialogTitle }) => {
   useEffect(() => {
     if (!isOpen || !onClose) return;
     const handleKeyDown = (e) => { if (e.key === "Escape") onClose(); };
@@ -21,6 +21,7 @@ const OpenModal = ({ comp = null, isOpen = false, onClose }) => {
         className="open-modal-container"
         role="dialog"
         aria-modal="true"
+        aria-label={dialogTitle || undefined}
       >
         {comp}
       </div>
@@ -32,6 +33,7 @@ OpenModal.propTypes = {
   comp: PropTypes.node,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
+  dialogTitle: PropTypes.string,
 };
 
 export default OpenModal;

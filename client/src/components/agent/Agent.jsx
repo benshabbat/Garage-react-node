@@ -125,7 +125,7 @@ export default function Agent() {
         aria-label={isOpen ? "סגור סוכן" : "פתח סוכן AI"}
       >
         {isOpen ? <CloseIcon /> : <BotIcon />}
-        {hasUnread && !isOpen && <span className="agent-fab-badge" />}
+        {hasUnread && !isOpen && <span className="agent-fab-badge" aria-label="הודעה חדשה מהסוכן" role="status" />}
       </button>
     </>
   );
