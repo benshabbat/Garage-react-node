@@ -39,6 +39,14 @@ const agentLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+const publicWriteLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: { message: "Too many submissions, please try again later" },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 const app = express();
 
 app.use(logger);
@@ -60,7 +68,9 @@ app.use("/api/cars", publicLimiter, carsRoute);
 app.use("/api/services", publicLimiter, servicesRoute);
 app.use("/api/messages", publicLimiter, messagesRoute);
 app.use("/api/reviews", publicLimiter, reviewsRoute);
+app.post("/api/contacts", publicWriteLimiter);
 app.use("/api/contacts", publicLimiter, contactsRoute);
+app.post("/api/appointments", publicWriteLimiter);
 app.use("/api/appointments", publicLimiter, appointmentsRoute);
 app.use("/api/dashboard", publicLimiter, dashboardRoute);
 app.use("/api/agent", agentLimiter, agentRoute);
