@@ -9,6 +9,8 @@ const ALLOWED_MESSAGE_FIELDS = ['title', 'description'];
 const createMessage = async (req) => {
   const from = req.user.id; // always use authenticated user's ID, never trust URL param
   const to = req.params.to;
+  const recipientExists = await User.exists({ _id: to });
+  if (!recipientExists) throw createError(404, "Recipient not found");
   const safeBody = pickAllowed(req.body, ALLOWED_MESSAGE_FIELDS);
   const newMessage = new Message({ ...safeBody, to, from });
   const savedMessage = await newMessage.save();
@@ -23,6 +25,8 @@ const createMessage = async (req) => {
 
 const createMessageToAdmin = async (req) => {
   const to = req.params.to;
+  const recipientExists = await User.exists({ _id: to });
+  if (!recipientExists) throw createError(404, "Recipient not found");
   const safeBody = pickAllowed(req.body, ALLOWED_MESSAGE_FIELDS);
   const newMessage = new Message({ ...safeBody, to, from: req.user.id });
   const savedMessage = await newMessage.save();
