@@ -50,10 +50,29 @@
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
+.cancel {
+  background: rgba(107, 114, 128, 0.3);
+  border-color: rgba(107, 114, 128, 0.4);
+}
+
+.cancel:hover {
+  background: rgba(107, 114, 128, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.2);
+}
+
+.delete-warning {
+  color: #fca5a5;
+  font-size: 0.85rem;
+  margin: -0.5rem 0 0.5rem;
+  text-align: center;
+}
+
 @media (max-width: 480px) {
   .create,
   .edit,
-  .delete {
+  .delete,
+  .cancel {
     height: 44px;
     font-size: 0.95rem;
   }
