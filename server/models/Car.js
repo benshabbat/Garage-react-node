@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const { Schema, SchemaTypes } = mongoose;
+const { SchemaTypes } = mongoose;
 
 const CarSchema = new mongoose.Schema(
   {

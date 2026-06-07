@@ -33,7 +33,7 @@ jobs:
           VITE_API_URL: http://localhost:8800/api
 
   server-test:
-    name: Server — unit tests
+    name: Server — lint & tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,6 +42,9 @@ jobs:
           node-version: 20
       - name: Install server dependencies
         run: npm install
+        working-directory: server
+      - name: Lint
+        run: npm run lint
         working-directory: server
       - name: Run tests
         run: npm test

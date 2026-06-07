@@ -1,6 +1,6 @@
 import { logEvents } from './logger.js'
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, _next) => {
     logEvents(`${err.name}: ${err.message}\t${req.method}\t${req.url}\t${req.headers.origin}`, 'errLog.log')
 
     // Handle Mongoose validation errors
