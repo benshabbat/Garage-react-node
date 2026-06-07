@@ -1,7 +1,7 @@
 import Message from "../models/Message.js";
 import User from "../models/User.js";
 import { createError } from "../utils/error.js";
-import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
+import { getPaginationParams, pickAllowed, getPaginatedWithPopulate } from "../utils/queryHelpers.js";
 
 const ALLOWED_MESSAGE_POPULATE_FIELDS = ['from', 'to'];
 const ALLOWED_MESSAGE_FIELDS = ['title', 'description'];
@@ -95,15 +95,8 @@ const getMessages = async (req) => {
   return messages;
 };
 
-const getMessagesByType = async (req) => {
-  const type = req.query.populate;
-  if (!ALLOWED_MESSAGE_POPULATE_FIELDS.includes(type)) {
-    throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_MESSAGE_POPULATE_FIELDS.join(', ')}`);
-  }
-  const { limit, page } = getPaginationParams(req);
-  const messages = await Message.find().populate(type, "-password").skip((page - 1) * limit).limit(limit);
-  return messages;
-};
+const getMessagesByType = async (req) =>
+  getPaginatedWithPopulate(Message, req, ALLOWED_MESSAGE_POPULATE_FIELDS, { populateSelect: '-password' });
 
 const messageService = {
   createMessage,

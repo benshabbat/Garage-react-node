@@ -5,7 +5,7 @@ import Service from "../models/Service.js";
 import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
-import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
+import { getPaginationParams, pickAllowed, getPaginatedWithPopulate } from "../utils/queryHelpers.js";
 
 const ALLOWED_POPULATE_FIELDS = ['cars', 'messages'];
 
@@ -94,15 +94,8 @@ const getUsers = async (req) => {
   return users;
 };
 
-const getUsersByType = async (req) => {
-  const type = req.query.populate;
-  if (!ALLOWED_POPULATE_FIELDS.includes(type)) {
-    throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_POPULATE_FIELDS.join(', ')}`);
-  }
-  const { limit, page } = getPaginationParams(req);
-  const users = await User.find().select("-password").populate(type).skip((page - 1) * limit).limit(limit);
-  return users;
-};
+const getUsersByType = async (req) =>
+  getPaginatedWithPopulate(User, req, ALLOWED_POPULATE_FIELDS, { selectFields: '-password' });
 
 const userService = {
   getUsersByType,
