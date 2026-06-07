@@ -1,20 +1,18 @@
-import Delete from "./Delete";
+import DeleteModal from "./DeleteModal";
 import { useCarsUIStore } from "../../stores/uiStores";
 import { useCarHandlers } from "../../pages/cars/hooks/useCarHandlers";
-const DeleteCar = () => {
-  const selectedCar = useCarsUIStore((s) => s.selectedCar);
-  const deleteCarOpen = useCarsUIStore((s) => s.deleteCarOpen);
-  const toggleDeleteCar = useCarsUIStore((s) => s.toggleDeleteCar);
-  const { useDeleteCar } = useCarHandlers();
-  return (
-    <Delete
-      deleteData={selectedCar?.numberPlate}
-      handle={toggleDeleteCar}
-      nameData="deleteCar"
-      isOpen={deleteCarOpen}
-      handleDelete={useDeleteCar}
-    />
-  );
-};
+
+const DeleteCar = () => (
+  <DeleteModal
+    useStore={useCarsUIStore}
+    selectedKey="selectedCar"
+    isOpenKey="deleteCarOpen"
+    toggleKey="toggleDeleteCar"
+    useHandlers={useCarHandlers}
+    handlerKey="useDeleteCar"
+    displayField="numberPlate"
+    nameData="deleteCar"
+  />
+);
 
 export default DeleteCar;
