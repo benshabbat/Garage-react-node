@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuthStore } from "../../stores/authStore";
 import "./signup.css";
+import { useSignupForm } from "./hooks/useSignupForm";
 
 const FIELDS = [
   {
@@ -29,32 +28,9 @@ const FIELDS = [
 ];
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    phone: "",
-    password: "",
-  });
-  const signup = useAuthStore((s) => s.signup);
-  const isLoading = useAuthStore((s) => s.isLoading);
-  const isSuccess = useAuthStore((s) => s.isSuccess);
-  const isError = useAuthStore((s) => s.isError);
-  const message = useAuthStore((s) => s.message);
-  const reset = useAuthStore((s) => s.reset);
   const navigate = useNavigate();
-
-  // Reset auth flags on unmount so re-visiting doesn't show stale success screen
-  useEffect(() => () => reset(), [reset]);
-
-  const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    if (isError) reset();
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await signup(formData);
-  };
+  const { formData, isLoading, isSuccess, isError, message, handleChange, handleSubmit } =
+    useSignupForm();
 
   if (isSuccess) {
     return (
