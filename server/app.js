@@ -45,8 +45,12 @@ app.use(logger);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+const allowedOrigins = process.env.CLIENT_URL
+  ? [process.env.CLIENT_URL, 'http://localhost:5173']
+  : ['https://garage-client-one.vercel.app', 'http://localhost:5173'];
+
 app.use(cors({
-  origin: ['https://garage-client-one.vercel.app', 'http://localhost:5173'],
+  origin: allowedOrigins,
   credentials: true,
 }));
 
