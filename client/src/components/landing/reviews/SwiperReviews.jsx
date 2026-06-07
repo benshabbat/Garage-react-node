@@ -1,7 +1,6 @@
 import { Review } from "../../index";
 import { useReviewsState as useReviewsContext } from "./hooks/useReviewsState";
 import Swiper from "./swiper/Swiper";
-//TODO: MADE COMPONENT FOR isSubmitted
 export default function SwiperReviews() {
   const { allReviews } = useReviewsContext();
 
