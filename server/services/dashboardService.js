@@ -4,6 +4,7 @@ import Service from "../models/Service.js";
 import Appointment from "../models/Appointment.js";
 import Message from "../models/Message.js";
 import Review from "../models/Review.js";
+import { InMemoryCache } from "../utils/cache.js";
 
 /**
  * Returns a monthly aggregation pipeline for a Mongoose model since a given date.
@@ -22,16 +23,19 @@ const getMonthlyTrend = (Model, since) =>
     { $sort: { "_id.year": 1, "_id.month": 1 } },
   ]);
 
-let _cache = { data: null, expiresAt: 0 };
 const CACHE_TTL_MS = 60_000; // 1 minute
+// See server/utils/cache.js for the single-process constraint documentation.
+const dashboardCache = new InMemoryCache(CACHE_TTL_MS);
+const CACHE_KEY = "dashboardStats";
 
 /**
- * Get comprehensive dashboard statistics
+ * Get comprehensive dashboard statistics.
  * Results are cached for 60 seconds to reduce DB load.
  * @returns {Object} Dashboard statistics including counts, recent data, and trends
  */
 const getDashboardStats = async () => {
-  if (_cache.data && Date.now() < _cache.expiresAt) return _cache.data;
+  const cached = dashboardCache.get(CACHE_KEY);
+  if (cached) return cached;
 
   // Get total counts
   const [totalUsers, totalCars, totalServices, totalAppointments, totalMessages, totalReviews] =
@@ -143,7 +147,7 @@ const getDashboardStats = async () => {
     },
     topServices,
   };
-  _cache = { data, expiresAt: Date.now() + CACHE_TTL_MS };
+  dashboardCache.set(CACHE_KEY, data);
   return data;
 };
 
