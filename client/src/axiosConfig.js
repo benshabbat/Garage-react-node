@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useAuthStore } from "./stores/authStore.js";
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8800/api';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || "http://localhost:8800/api";
 
 axios.defaults.withCredentials = true;
 

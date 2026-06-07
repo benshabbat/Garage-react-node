@@ -1,4 +1,4 @@
-#services{
+#services {
   padding: 8em 0;
 }
 
@@ -63,7 +63,7 @@
   .servicesLanding-grid {
     grid-template-columns: minmax(200px, 280px);
   }
-  
+
   .section-title {
     font-size: 1.5rem;
   }

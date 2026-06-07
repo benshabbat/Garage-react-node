@@ -9,16 +9,16 @@ const contactOps = createCrudOperations(API_URL_CONTACTS);
 export const contactApi = {
   // Get all contacts
   getAll: contactOps.getAll,
-  
+
   // Get contact by ID
   getById: contactOps.getById,
-  
+
   // Create new contact
   create: contactOps.create,
-  
+
   // Delete contact
   delete: contactOps.delete,
-  
+
   // Get messages from contact form (alias)
   getMessages: async () => {
     const data = await contactOps.getAll();

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const {model, Schema } = mongoose;
+const { model, Schema } = mongoose;
 
 const ContactSchema = new Schema(
   {
@@ -7,22 +7,22 @@ const ContactSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: [2, 'First name must be at least 2 characters'],
-      maxlength: [50, 'First name must be at most 50 characters'],
+      minlength: [2, "First name must be at least 2 characters"],
+      maxlength: [50, "First name must be at most 50 characters"],
     },
     lastName: {
       type: String,
       required: true,
       trim: true,
-      minlength: [2, 'Last name must be at least 2 characters'],
-      maxlength: [50, 'Last name must be at most 50 characters'],
+      minlength: [2, "Last name must be at least 2 characters"],
+      maxlength: [50, "Last name must be at most 50 characters"],
     },
     email: {
       type: String,
       required: true,
       trim: true,
       lowercase: true,
-      match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Please provide a valid email address'],
+      match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Please provide a valid email address"],
     },
     phone: {
       type: String,
@@ -32,9 +32,9 @@ const ContactSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: [10, 'Message must be at least 10 characters'],
-      maxlength: [2000, 'Message must be at most 2000 characters'],
-    }
+      minlength: [10, "Message must be at least 10 characters"],
+      maxlength: [2000, "Message must be at most 2000 characters"],
+    },
   },
   { timestamps: true }
 );

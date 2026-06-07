@@ -17,14 +17,14 @@ const CarSchema = new mongoose.Schema(
     km: {
       type: Number,
       required: true,
-      min: [0, 'KM must be a non-negative number'],
+      min: [0, "KM must be a non-negative number"],
     },
     brand: {
       type: String,
       required: true,
       trim: true,
-      minlength: [2, 'Brand must be at least 2 characters'],
-      maxlength: [50, 'Brand must be at most 50 characters'],
+      minlength: [2, "Brand must be at least 2 characters"],
+      maxlength: [50, "Brand must be at most 50 characters"],
     },
     services: {
       type: [

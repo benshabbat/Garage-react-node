@@ -6,7 +6,4 @@ import { createHandler } from "../utils/controllerFactory.js";
  * @route GET /api/dashboard/stats
  * @access Admin only
  */
-export const getDashboardStats = createHandler(
-  dashboardService.getDashboardStats,
-  200
-);
+export const getDashboardStats = createHandler(dashboardService.getDashboardStats, 200);

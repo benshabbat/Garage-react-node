@@ -9,11 +9,7 @@ export default function AccountTables() {
   return (
     <>
       {servicesOpen && (
-        <button
-          className="back-btn"
-          onClick={toggleServices}
-          aria-label="Back to My Cars"
-        >
+        <button className="back-btn" onClick={toggleServices} aria-label="Back to My Cars">
           ← Back to My Cars
         </button>
       )}

@@ -8,11 +8,7 @@ export const createCar = createHandler(carService.createCar, 201);
 export const updateCar = createHandler(carService.updateCar, 200);
 
 // Delete car handler with custom message
-export const deleteCar = createHandler(
-  carService.deleteCar,
-  200,
-  "The Car has been removed"
-);
+export const deleteCar = createHandler(carService.deleteCar, 200, "The Car has been removed");
 
 // Get single car handler
 export const getCar = createHandler(carService.getCar, 200);

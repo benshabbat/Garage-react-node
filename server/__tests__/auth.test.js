@@ -27,7 +27,11 @@ beforeEach(async () => {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const makeUser = async ({ username = "testuser", password = "Password1", isAdmin = false } = {}) => {
+const makeUser = async ({
+  username = "testuser",
+  password = "Password1",
+  isAdmin = false,
+} = {}) => {
   const salt = await bcrypt.genSalt(10);
   const hashed = await bcrypt.hash(password, salt);
   return User.create({
@@ -73,9 +77,7 @@ describe("POST /api/auth/login", () => {
   });
 
   it("returns 400 when fields are missing", async () => {
-    const res = await request(app)
-      .post("/api/auth/login")
-      .send({ username: "alice" }); // no password
+    const res = await request(app).post("/api/auth/login").send({ username: "alice" }); // no password
 
     expect(res.status).toBe(400);
   });

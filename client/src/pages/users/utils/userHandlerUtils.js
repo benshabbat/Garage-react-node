@@ -8,9 +8,16 @@ export const handleUserAction = (
 ) => {
   const name = resolveActionTarget(e, users, setSelectedUser);
   switch (name) {
-    case "editUser":   toggleEditUser();   break;
-    case "createCar":  toggleCreateCar();  break;
-    case "deleteUser": toggleDeleteUser(); break;
-    default:           toggleManageUser();
+    case "editUser":
+      toggleEditUser();
+      break;
+    case "createCar":
+      toggleCreateCar();
+      break;
+    case "deleteUser":
+      toggleDeleteUser();
+      break;
+    default:
+      toggleManageUser();
   }
 };

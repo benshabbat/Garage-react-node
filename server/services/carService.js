@@ -2,11 +2,15 @@ import Car from "../models/Car.js";
 import User from "../models/User.js";
 import { templateCar } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
-import { getPaginationParams, pickAllowed, getPaginatedWithPopulate } from "../utils/queryHelpers.js";
+import {
+  getPaginationParams,
+  pickAllowed,
+  getPaginatedWithPopulate,
+} from "../utils/queryHelpers.js";
 
-const ALLOWED_CAR_POPULATE_FIELDS = ['services', 'owner'];
-const ALLOWED_CAR_UPDATE_FIELDS = ['numberPlate', 'km', 'brand'];
-const ALLOWED_CAR_CREATE_FIELDS = ['numberPlate', 'km', 'brand'];
+const ALLOWED_CAR_POPULATE_FIELDS = ["services", "owner"];
+const ALLOWED_CAR_UPDATE_FIELDS = ["numberPlate", "km", "brand"];
+const ALLOWED_CAR_CREATE_FIELDS = ["numberPlate", "km", "brand"];
 
 const createCar = async (req) => {
   const userId = req.params.userId;
@@ -36,11 +40,7 @@ const updateCar = async (req) => {
       throw createError(400, `km cannot be decreased (current: ${existing.km})`);
     }
   }
-  const updatedCar = await Car.findByIdAndUpdate(
-    req.params.id,
-    { $set: safeBody },
-    { new: true }
-  );
+  const updatedCar = await Car.findByIdAndUpdate(req.params.id, { $set: safeBody }, { new: true });
   if (!updatedCar) throw createError(404, "Car not found");
   return updatedCar;
 };
@@ -66,7 +66,10 @@ const getCar = async (req) => {
 
 const getCars = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const cars = await Car.find().populate("owner").skip((page - 1) * limit).limit(limit);
+  const cars = await Car.find()
+    .populate("owner")
+    .skip((page - 1) * limit)
+    .limit(limit);
   return cars;
 };
 
@@ -75,7 +78,10 @@ const getCarsByType = async (req) =>
 
 const getCarsWithService = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const cars = await Car.find().populate("services").skip((page - 1) * limit).limit(limit);
+  const cars = await Car.find()
+    .populate("services")
+    .skip((page - 1) * limit)
+    .limit(limit);
   return cars;
 };
 

@@ -7,8 +7,7 @@ export function useLoginForm() {
   const login = useAuthStore((s) => s.login);
   const [formData, setFormData] = useState({ username: "", password: "" });
 
-  const handleChange = (e) =>
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (e) => setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const onSubmit = (e) => {
     e.preventDefault();

@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import { exportToCsv } from "../../../utils/exportCsv";
 import { capitalize } from "../../../utils/formatters";
 
-const FILTER_STATUSES = ['all', 'pending', 'confirmed', 'cancelled'];
-const STATUS_OPTIONS = ['pending', 'confirmed', 'cancelled'];
+const FILTER_STATUSES = ["all", "pending", "confirmed", "cancelled"];
+const STATUS_OPTIONS = ["pending", "confirmed", "cancelled"];
 
 /**
  * AppointmentsList displays the list of appointments with filters, search, and quick status update
@@ -45,9 +45,7 @@ const AppointmentsList = ({
       <div key={appointment._id} className="appointment-card">
         <div className="appointment-header">
           <h3>{appointment.clientName}</h3>
-          <span className={`status status-${appointment.status}`}>
-            {appointment.status}
-          </span>
+          <span className={`status status-${appointment.status}`}>{appointment.status}</span>
         </div>
         <div className="appointment-details">
           {appointment.user && (
@@ -55,11 +53,23 @@ const AppointmentsList = ({
               <strong>👤 Linked User:</strong> {appointment.user.username || appointment.user.email}
             </p>
           )}
-          <p><strong>📧 Email:</strong> {appointment.email}</p>
-          <p><strong>📞 Phone:</strong> {appointment.phone}</p>
-          <p><strong>📅 Date:</strong> {new Date(appointment.date).toLocaleDateString()}</p>
-          <p><strong>🕐 Time:</strong> {appointment.time}</p>
-          {appointment.notes && <p><strong>📝 Notes:</strong> {appointment.notes}</p>}
+          <p>
+            <strong>📧 Email:</strong> {appointment.email}
+          </p>
+          <p>
+            <strong>📞 Phone:</strong> {appointment.phone}
+          </p>
+          <p>
+            <strong>📅 Date:</strong> {new Date(appointment.date).toLocaleDateString()}
+          </p>
+          <p>
+            <strong>🕐 Time:</strong> {appointment.time}
+          </p>
+          {appointment.notes && (
+            <p>
+              <strong>📝 Notes:</strong> {appointment.notes}
+            </p>
+          )}
         </div>
         <div className="appointment-actions">
           <span className="action-label">Update status:</span>
@@ -96,7 +106,7 @@ const AppointmentsList = ({
             {FILTER_STATUSES.map((status) => (
               <button
                 key={status}
-                className={`filter-btn ${filterStatus === status ? 'active' : ''}`}
+                className={`filter-btn ${filterStatus === status ? "active" : ""}`}
                 onClick={() => setFilterStatus(status)}
                 aria-pressed={filterStatus === status}
               >
@@ -114,7 +124,7 @@ const AppointmentsList = ({
         {!fetchState.isLoading && !fetchState.isError && renderAppointments()}
         {fetchState.isError && (
           <div className="error">
-            ⚠️ Error: {fetchState.message || 'Failed to load appointments'}
+            ⚠️ Error: {fetchState.message || "Failed to load appointments"}
           </div>
         )}
       </div>

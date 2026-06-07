@@ -33,7 +33,9 @@ export const messageApi = {
   },
 
   // Create service request — same endpoint as createToAdmin
-  createServiceRequest(data) { return messageApi.createToAdmin(data); },
+  createServiceRequest(data) {
+    return messageApi.createToAdmin(data);
+  },
 
   // Delete message
   delete: messageOps.delete,

@@ -8,16 +8,12 @@ export const createUser = createHandler(userService.createUser, 201);
 export const updateUser = createHandler(userService.updateUser, 200);
 
 // Delete user handler with custom message
-export const deleteUser = createHandler(
-  userService.deleteUser, 
-  200, 
-  "The User has been removed"
-);
+export const deleteUser = createHandler(userService.deleteUser, 200, "The User has been removed");
 
 // Get user handler with 404 check
 export const getUser = createHandlerWithCheck(
   userService.getUser,
-  (user) => !user ? { status: 404, message: "User not found" } : null,
+  (user) => (!user ? { status: 404, message: "User not found" } : null),
   200
 );
 

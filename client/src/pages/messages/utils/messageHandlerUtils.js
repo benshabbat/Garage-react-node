@@ -8,7 +8,11 @@ export const handleMessageAction = (
 ) => {
   const name = resolveActionTarget(e, messages, setSelectedMsg);
   switch (name) {
-    case "createMessage": toggleCreateMsg(); break;
-    case "deleteMessage":  toggleDeleteMsg();  break;
+    case "createMessage":
+      toggleCreateMsg();
+      break;
+    case "deleteMessage":
+      toggleDeleteMsg();
+      break;
   }
 };

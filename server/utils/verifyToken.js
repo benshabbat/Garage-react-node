@@ -4,7 +4,7 @@ import { createError } from "../utils/error.js";
 export const verifyToken = (req, res, next) => {
   try {
     const token = req.cookies.access_token;
-    
+
     if (!token) {
       return next(createError(401, "Not authenticated"));
     }
@@ -13,7 +13,7 @@ export const verifyToken = (req, res, next) => {
       if (err) {
         return next(createError(403, "Token is not valid"));
       }
-      
+
       req.user = user;
       next();
     });
@@ -25,12 +25,12 @@ export const verifyToken = (req, res, next) => {
 export const verifyUser = (req, res, next) => {
   verifyToken(req, res, (err) => {
     if (err) return next(err);
-    
+
     const routeUserId = req.params.id ?? req.params.user;
     if (req.user.id === routeUserId || req.user.isAdmin) {
       return next();
     }
-    
+
     return next(createError(403, "You are not authorized to access this resource"));
   });
 };
@@ -38,11 +38,11 @@ export const verifyUser = (req, res, next) => {
 export const verifyAdmin = (req, res, next) => {
   verifyToken(req, res, (err) => {
     if (err) return next(err);
-    
+
     if (req.user.isAdmin) {
       return next();
     }
-    
+
     return next(createError(403, "You are not authorized as admin"));
   });
 };

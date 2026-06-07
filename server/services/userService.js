@@ -5,11 +5,15 @@ import Service from "../models/Service.js";
 import bcrypt from "bcryptjs";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
-import { getPaginationParams, pickAllowed, getPaginatedWithPopulate } from "../utils/queryHelpers.js";
+import {
+  getPaginationParams,
+  pickAllowed,
+  getPaginatedWithPopulate,
+} from "../utils/queryHelpers.js";
 
-const ALLOWED_POPULATE_FIELDS = ['cars', 'messages'];
+const ALLOWED_POPULATE_FIELDS = ["cars", "messages"];
 
-const ALLOWED_UPDATE_FIELDS = ['username', 'email', 'phone', 'isAdmin', 'password'];
+const ALLOWED_UPDATE_FIELDS = ["username", "email", "phone", "isAdmin", "password"];
 
 const updateUser = async (req) => {
   const { password, phone } = req.body;
@@ -45,7 +49,8 @@ const updateUser = async (req) => {
   // Process password: require current password before allowing a change
   let updatedPassword = user.password;
   if (password) {
-    if (!req.body.currentPassword) throw createError(400, "Current password is required to set a new password");
+    if (!req.body.currentPassword)
+      throw createError(400, "Current password is required to set a new password");
     const isCurrentValid = await bcrypt.compare(req.body.currentPassword, user.password);
     if (!isCurrentValid) throw createError(401, "Current password is incorrect");
     const isMatchingPassword = await bcrypt.compare(password, user.password);
@@ -90,12 +95,15 @@ const getUser = async (req) => {
 
 const getUsers = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const users = await User.find().select("-password").skip((page - 1) * limit).limit(limit);
+  const users = await User.find()
+    .select("-password")
+    .skip((page - 1) * limit)
+    .limit(limit);
   return users;
 };
 
 const getUsersByType = async (req) =>
-  getPaginatedWithPopulate(User, req, ALLOWED_POPULATE_FIELDS, { selectFields: '-password' });
+  getPaginatedWithPopulate(User, req, ALLOWED_POPULATE_FIELDS, { selectFields: "-password" });
 
 const userService = {
   getUsersByType,

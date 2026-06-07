@@ -2,8 +2,18 @@
  * Month names for date formatting
  */
 const MONTHS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 /**
@@ -34,7 +44,7 @@ export function getMomentFromUpdatedAt(updatedAt) {
     days: Math.floor(diffSeconds / TIME_UNITS.DAY),
     hours: Math.floor(diffSeconds / TIME_UNITS.HOUR),
     minutes: Math.floor(diffSeconds / TIME_UNITS.MINUTE),
-    seconds: diffSeconds
+    seconds: diffSeconds,
   };
 
   // Determine time ago string
@@ -51,7 +61,7 @@ export function getMomentFromUpdatedAt(updatedAt) {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
   const monthName = MONTHS[date.getMonth()];
-  
+
   // Format time components
   const hours = date.getHours();
   const minutes = date.getMinutes();
@@ -63,7 +73,7 @@ export function getMomentFromUpdatedAt(updatedAt) {
     theDate: `${day}/${month}/${year}`,
     theTime: `${formattedHours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}${ampm}`,
     theTimeAgo: `${timeAgo} ago`,
-    monthName
+    monthName,
   };
 }
 

@@ -5,10 +5,6 @@
  * @returns {boolean} - True if matches
  */
 export const contactFilterFn = (item, value) =>
-  [
-    item.firstName,
-    item.lastName,
-    item.email,
-    item.phone,
-    item.message,
-  ].some((field) => field?.toLowerCase().includes(value.toLowerCase()));
+  [item.firstName, item.lastName, item.email, item.phone, item.message].some((field) =>
+    field?.toLowerCase().includes(value.toLowerCase())
+  );

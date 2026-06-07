@@ -1,14 +1,16 @@
 import express from "express";
 import {
-    updateCar,
-    deleteCar,
-    getCar,
-    getCars,
-    createCar,
-    getCarsByType,getCarsWithService,getCarsByOwner
-  } from "../controllers/car.js";
-  import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
-  const router = express.Router();
+  updateCar,
+  deleteCar,
+  getCar,
+  getCars,
+  createCar,
+  getCarsByType,
+  getCarsWithService,
+  getCarsByOwner,
+} from "../controllers/car.js";
+import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
+const router = express.Router();
 
 // Admin routes
 const adminRouter = express.Router();

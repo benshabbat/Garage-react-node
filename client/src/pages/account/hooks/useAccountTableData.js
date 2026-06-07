@@ -8,10 +8,7 @@ export function useAccountTableData() {
   const user = useUserStore((s) => s.user);
   const { setSelectedCar, toggleReqService, toggleServices } = useAccountUIStore();
 
-  const { displayData: displayCars, handleSearch } = useFilteredData(
-    user?.cars,
-    carFilterFn
-  );
+  const { displayData: displayCars, handleSearch } = useFilteredData(user?.cars, carFilterFn);
 
   const handleCar = (e) =>
     handleCarActionUtil(e, user?.cars, setSelectedCar, { toggleReqService, toggleServices });

@@ -13,7 +13,7 @@ import { useToastStore } from "../../../stores/toastStore";
  */
 export const useUserActions = (selectedUser, setFilteredUsers, users) => {
   const showToast = useToastStore((s) => s.show);
-  
+
   /**
    * Create a new car for a user
    */
@@ -31,13 +31,8 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
   const onSubmitRegister = async (e, formData, validationState, handleCreateUser) => {
     e.preventDefault();
     const { isExistEmail, isExistPhone, isExistUser } = validationState;
-    
-    if (
-      isValidUserName(formData) &&
-      !isExistEmail &&
-      !isExistPhone &&
-      !isExistUser
-    ) {
+
+    if (isValidUserName(formData) && !isExistEmail && !isExistPhone && !isExistUser) {
       try {
         const newUser = await createUser(formData);
         handleCreateUser();
@@ -57,20 +52,11 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
   const onSubmitEditUser = async (e, formData, validationState, handleEditUser) => {
     e.preventDefault();
     const { isExistEmail, isExistPhone, isExistUser } = validationState;
-    
-    if (
-      isValidUserName(formData) &&
-      !isExistEmail &&
-      !isExistPhone &&
-      !isExistUser
-    ) {
+
+    if (isValidUserName(formData) && !isExistEmail && !isExistPhone && !isExistUser) {
       const updated = await updateUser(selectedUser?._id, formData);
       handleEditUser();
-      setFilteredUsers(
-        users.map((user) =>
-          user._id === selectedUser?._id ? updated.data : user
-        )
-      );
+      setFilteredUsers(users.map((user) => (user._id === selectedUser?._id ? updated.data : user)));
       showToast("User updated successfully ✓");
     }
   };

@@ -68,7 +68,7 @@
 }
 .error {
   color: #ef4444;
-  font-size: 0.9rem;  
+  font-size: 0.9rem;
   margin-top: 0.5rem;
   font-weight: 500;
   display: block;
@@ -78,7 +78,7 @@
 
 .form-label .error {
   color: #ef4444;
-  font-size: 0.9rem;  
+  font-size: 0.9rem;
   margin-top: 0.5rem;
   font-weight: 500;
   display: block;
@@ -243,16 +243,16 @@
   .form {
     padding: 1.5rem;
   }
-  
+
   .input-group {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .input-group input {
     width: 100%;
   }
-  
+
   .toggle-switch {
     width: 44px;
     height: 24px;
@@ -263,7 +263,7 @@
   .container-contact {
     padding: 1rem;
   }
-  
+
   .form {
     width: 100%;
     padding: 1rem;
@@ -290,12 +290,12 @@
   .toggle-container input[type="checkbox"]:checked + .toggle-label .toggle-switch::after {
     transform: translateX(18px);
   }
-  
+
   .header {
     font-size: 20px;
     margin-bottom: 1.5rem;
   }
-  
+
   .form-btn {
     height: 40px;
     font-size: 14px;

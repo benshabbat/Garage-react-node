@@ -8,9 +8,16 @@ export const handleCarAction = (
 ) => {
   const name = resolveActionTarget(e, cars, setSelectedCar);
   switch (name) {
-    case "editCar":        toggleEditCar();        break;
-    case "createService":  toggleCreateService();  break;
-    case "deleteCar":      toggleDeleteCar();      break;
-    default:               toggleManageCar();
+    case "editCar":
+      toggleEditCar();
+      break;
+    case "createService":
+      toggleCreateService();
+      break;
+    case "deleteCar":
+      toggleDeleteCar();
+      break;
+    default:
+      toggleManageCar();
   }
 };

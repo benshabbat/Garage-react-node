@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 
 const STAT_CARDS = [
-  { key: "total",     icon: "📊", label: "Total Appointments", className: "stat-total" },
-  { key: "pending",   icon: "⏳", label: "Pending",            className: "stat-pending" },
-  { key: "confirmed", icon: "✅", label: "Confirmed",          className: "stat-confirmed" },
-  { key: "cancelled", icon: "❌", label: "Cancelled",          className: "stat-cancelled" },
+  { key: "total", icon: "📊", label: "Total Appointments", className: "stat-total" },
+  { key: "pending", icon: "⏳", label: "Pending", className: "stat-pending" },
+  { key: "confirmed", icon: "✅", label: "Confirmed", className: "stat-confirmed" },
+  { key: "cancelled", icon: "❌", label: "Cancelled", className: "stat-cancelled" },
 ];
 
 /**

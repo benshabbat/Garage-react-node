@@ -7,7 +7,8 @@ const EditUser = () => {
   const editUserOpen = useUsersUIStore((s) => s.editUserOpen);
   const toggleEditUser = useUsersUIStore((s) => s.toggleEditUser);
   const { useEditUser } = useUserHandlers();
-  const { onSubmitEditUser, formData, setFormData, isExistEmail, isExistPhone, isExistUser } = useEditUser();
+  const { onSubmitEditUser, formData, setFormData, isExistEmail, isExistPhone, isExistUser } =
+    useEditUser();
 
   return (
     <ModalForm

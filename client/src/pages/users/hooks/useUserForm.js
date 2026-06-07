@@ -13,7 +13,12 @@ import {
  * @param {string} excludeUserId - User ID to exclude from duplicate checks (for edit mode)
  * @returns {Object} Form state and handlers
  */
-export const useUserForm = (users, initialData = null, isModalOpen = false, excludeUserId = null) => {
+export const useUserForm = (
+  users,
+  initialData = null,
+  isModalOpen = false,
+  excludeUserId = null
+) => {
   const [formData, setFormData] = useState(initialData);
   const [isExistEmail, setIsExistEmail] = useState(false);
   const [isExistPhone, setIsExistPhone] = useState(false);

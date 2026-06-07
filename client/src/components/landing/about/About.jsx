@@ -6,11 +6,10 @@ const About = () => {
       <div className="about-container">
         <h1 className="about-title">Your Digital Auto Service Partner</h1>
         <p className="about-description">
-          Welcome to our modern automotive service center. We combine
-          professional mechanical expertise with digital convenience, offering
-          you comprehensive vehicle care through our online platform. Access
-          your reports, schedule services, and communicate with our team - all
-          from your device.
+          Welcome to our modern automotive service center. We combine professional mechanical
+          expertise with digital convenience, offering you comprehensive vehicle care through our
+          online platform. Access your reports, schedule services, and communicate with our team -
+          all from your device.
         </p>
         <ServicesLanding />
 

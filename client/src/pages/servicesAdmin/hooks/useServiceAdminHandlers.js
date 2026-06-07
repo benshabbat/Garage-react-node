@@ -5,8 +5,13 @@ import { handleServiceAction } from "../utils/serviceHandlerUtils";
 
 export const useServiceAdminHandlers = () => {
   const services = useAdminStore((s) => s.services);
-  const { setSelectedService, toggleManageService, toggleEditStatus, toggleEditPaid, toggleEditService } =
-    useServicesUIStore();
+  const {
+    setSelectedService,
+    toggleManageService,
+    toggleEditStatus,
+    toggleEditPaid,
+    toggleEditService,
+  } = useServicesUIStore();
   const { serviceActions } = useServiceHandlers();
 
   const handleServiceIdAction = (e) => {

@@ -1,17 +1,21 @@
 import Service from "../models/Service.js";
 import Car from "../models/Car.js";
 import { createError } from "../utils/error.js";
-import { getPaginationParams, pickAllowed, getPaginatedWithPopulate } from "../utils/queryHelpers.js";
+import {
+  getPaginationParams,
+  pickAllowed,
+  getPaginatedWithPopulate,
+} from "../utils/queryHelpers.js";
 
-const ALLOWED_SERVICE_POPULATE_FIELDS = ['car'];
-const ALLOWED_SERVICE_UPDATE_FIELDS = ['title', 'description', 'price', 'paid', 'status'];
-const ALLOWED_SERVICE_CREATE_FIELDS = ['title', 'description', 'price', 'paid', 'status'];
+const ALLOWED_SERVICE_POPULATE_FIELDS = ["car"];
+const ALLOWED_SERVICE_UPDATE_FIELDS = ["title", "description", "price", "paid", "status"];
+const ALLOWED_SERVICE_CREATE_FIELDS = ["title", "description", "price", "paid", "status"];
 
 const createService = async (req) => {
   const carId = req.params.carId;
   const safeBody = pickAllowed(req.body, ALLOWED_SERVICE_CREATE_FIELDS);
   const newService = new Service({ ...safeBody, car: carId });
-  
+
   try {
     const savedService = await newService.save();
 
@@ -60,7 +64,10 @@ const getService = async (req) => {
 
 const getServices = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const services = await Service.find().populate("car").skip((page - 1) * limit).limit(limit);
+  const services = await Service.find()
+    .populate("car")
+    .skip((page - 1) * limit)
+    .limit(limit);
   return services;
 };
 

@@ -18,11 +18,11 @@ const ReviewSchema = new mongoose.Schema(
     stars: {
       type: Number,
       required: true,
-      min: [1, 'Minimum rating is 1'],
-      max: [5, 'Maximum rating is 5'],
+      min: [1, "Minimum rating is 1"],
+      max: [5, "Maximum rating is 5"],
       validate: {
         validator: Number.isInteger,
-        message: 'Stars must be an integer',
+        message: "Stars must be an integer",
       },
     },
   },

@@ -10,16 +10,16 @@ const userOps = createCrudOperations(API_URL_USER);
 export const userApi = {
   // Get all users
   getAll: userOps.getAll,
-  
+
   // Get user by ID
   getById: userOps.getById,
-  
+
   // Create new user (register)
   create: (data) => axios.post(API_URL_REGISTER, data),
-  
+
   // Update user
   update: userOps.update,
-  
+
   // Delete user
   delete: userOps.delete,
 };

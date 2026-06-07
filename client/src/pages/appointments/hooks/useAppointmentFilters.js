@@ -1,14 +1,14 @@
 import { useState, useMemo } from "react";
 
 export const useAppointmentFilters = (appointments) => {
-  const [filterStatus, setFilterStatus] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const filteredAppointments = useMemo(() => {
     if (!appointments || !Array.isArray(appointments)) return [];
 
     return appointments.filter((a) => {
-      const matchesStatus = filterStatus === 'all' || a.status === filterStatus;
+      const matchesStatus = filterStatus === "all" || a.status === filterStatus;
       const term = searchTerm.toLowerCase();
       const matchesSearch =
         !term ||

@@ -4,7 +4,7 @@ export { default as CreateReviews } from "./landing/reviews/CreateReviews";
 export { default as Review } from "./landing/reviews/Review";
 export { default as Reviews } from "./landing/reviews/Reviews";
 export { default as ServicesLanding } from "./landing/servicesLanding/ServicesLanding";
-export { default as OpenModal} from "./openModal/OpenModal";
+export { default as OpenModal } from "./openModal/OpenModal";
 export { default as Form } from "./form/Form";
 export { default as ModalForm } from "./common/ModalForm";
 export { default as CreateCar } from "./create/CreateCar";
@@ -22,12 +22,12 @@ export { default as NavAdmin } from "./nav/NavAdmin";
 export { default as Agent } from "./agent/Agent";
 
 // Dashboard components
-export { 
+export {
   StatCard,
   StatsOverview,
   AppointmentsByStatus,
   TopServices,
   RecentAppointments,
   RecentMessages,
-  MonthlyTrends
+  MonthlyTrends,
 } from "./dashboard";

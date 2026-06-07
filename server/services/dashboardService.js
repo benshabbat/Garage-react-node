@@ -34,21 +34,15 @@ const getDashboardStats = async () => {
   if (_cache.data && Date.now() < _cache.expiresAt) return _cache.data;
 
   // Get total counts
-  const [
-    totalUsers,
-    totalCars,
-    totalServices,
-    totalAppointments,
-    totalMessages,
-    totalReviews,
-  ] = await Promise.all([
-    User.countDocuments(),
-    Car.countDocuments(),
-    Service.countDocuments(),
-    Appointment.countDocuments(),
-    Message.countDocuments(),
-    Review.countDocuments(),
-  ]);
+  const [totalUsers, totalCars, totalServices, totalAppointments, totalMessages, totalReviews] =
+    await Promise.all([
+      User.countDocuments(),
+      Car.countDocuments(),
+      Service.countDocuments(),
+      Appointment.countDocuments(),
+      Message.countDocuments(),
+      Review.countDocuments(),
+    ]);
 
   // Get users by role
   const usersByRole = await User.aggregate([
@@ -107,10 +101,7 @@ const getDashboardStats = async () => {
   ]);
 
   // Get top services by name (simple count without appointments relation)
-  const topServices = await Service.find()
-    .sort({ createdAt: -1 })
-    .limit(5)
-    .select("title price");
+  const topServices = await Service.find().sort({ createdAt: -1 }).limit(5).select("title price");
 
   // Get average review rating
   const reviewStats = await Review.aggregate([
@@ -123,9 +114,8 @@ const getDashboardStats = async () => {
     },
   ]);
 
-  const avgRating = reviewStats.length > 0 && reviewStats[0].averageRating 
-    ? reviewStats[0].averageRating 
-    : 0;
+  const avgRating =
+    reviewStats.length > 0 && reviewStats[0].averageRating ? reviewStats[0].averageRating : 0;
 
   const data = {
     overview: {

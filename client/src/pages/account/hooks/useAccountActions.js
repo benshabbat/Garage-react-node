@@ -8,7 +8,6 @@ import { extractErrorMessage } from "../../../utils/handlerUtils";
  * @returns {Object} Service operation functions
  */
 export const useAccountActions = (selectedCar, user) => {
-  
   /**
    * Create a service request
    */

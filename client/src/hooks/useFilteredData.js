@@ -20,7 +20,7 @@ const useFilteredData = (data, filterFn) => {
         setFilteredData(null);
         return;
       }
-      
+
       const filtered = data?.filter((item) => filterFn(item, value));
       setFilteredData(filtered);
     },

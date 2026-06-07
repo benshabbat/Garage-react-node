@@ -10,22 +10,22 @@ const serviceOps = createCrudOperations(API_URL_SERVICE);
 export const serviceApi = {
   // Get all services
   getAll: serviceOps.getAll,
-  
+
   // Get service by ID
   getById: serviceOps.getById,
-  
+
   // Create new service for car
   create: async (carId, data) => {
     const response = await axios.post(`${API_URL_SERVICE}/${carId}`, data);
     return response.data;
   },
-  
+
   // Update service
   update: serviceOps.update,
-  
+
   // Delete service
   delete: serviceOps.delete,
-  
+
   // Get services with populated car data
   getWithCar: async () => {
     const response = await axios.get(`${API_URL_SERVICE}/populate?populate=car`);

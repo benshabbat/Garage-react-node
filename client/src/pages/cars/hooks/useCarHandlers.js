@@ -9,7 +9,7 @@ export const useCarHandlers = (setFilteredCars) => {
   const toggleDeleteCar = useCarsUIStore((s) => s.toggleDeleteCar);
   // Form management
   const serviceForm = useCarForm(null);
-  
+
   // Car actions
   const carActions = useCarActions(selectedCar, setFilteredCars);
 
@@ -20,10 +20,10 @@ export const useCarHandlers = (setFilteredCars) => {
     const onSubmit = (e) => {
       carActions.onSubmitCreateService(e, serviceForm.formData, toggleCreateService);
     };
-    return { 
-      onSubmit, 
-      setFormData: serviceForm.setFormData, 
-      formData: serviceForm.formData 
+    return {
+      onSubmit,
+      setFormData: serviceForm.setFormData,
+      formData: serviceForm.formData,
     };
   };
 
@@ -36,11 +36,11 @@ export const useCarHandlers = (setFilteredCars) => {
     const onSubmit = (e) => {
       carActions.onSubmitEditCar(e, editCarForm.formData, toggleEditCar);
     };
-    
-    return { 
-      onSubmit, 
-      setFormData: editCarForm.setFormData, 
-      formData: editCarForm.formData
+
+    return {
+      onSubmit,
+      setFormData: editCarForm.setFormData,
+      formData: editCarForm.formData,
     };
   };
 

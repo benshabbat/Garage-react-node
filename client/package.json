@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,css}\"",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -26,10 +28,12 @@
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/coverage-v8": "^4.1.8",
     "eslint": "^9.9.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "prettier": "^3.8.3",
     "vite": "^5.4.1",
     "vitest": "^4.1.8"
   }

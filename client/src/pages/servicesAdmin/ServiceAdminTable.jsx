@@ -21,11 +21,7 @@ export default function ServiceAdminTable() {
     return (
       <tr key={service?._id}>
         <td data-label="Actions">
-          <button
-            name="manage"
-            value={service?._id}
-            onClick={handleServiceIdAction}
-          >
+          <button name="manage" value={service?._id} onClick={handleServiceIdAction}>
             Manage
           </button>
         </td>
@@ -57,8 +53,6 @@ export default function ServiceAdminTable() {
     );
   });
 
-
-  
   return (
     <div className="table-container">
       <Search handleSearch={handleSearch} name={"Services"} onExport={handleExport} />

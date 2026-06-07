@@ -1,8 +1,8 @@
 import "./star-rating.css";
 import { useRating } from "../hooks/useRating";
 const StarRating = (props) => {
-  const { fontSize, handleClick, stars, mouseOnStar, mouseOffStar, isActive,isDisabled } =
-    useRating({...props});
+  const { fontSize, handleClick, stars, mouseOnStar, mouseOffStar, isActive, isDisabled } =
+    useRating({ ...props });
 
   return (
     <div className="star-rating-container">

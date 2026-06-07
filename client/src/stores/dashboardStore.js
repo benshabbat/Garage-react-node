@@ -13,7 +13,9 @@ export const useDashboardStore = create((set) => ({
     try {
       const data = await dashboardApi.getStats();
       set({ stats: data, isLoading: false });
-    } catch (err) { setErr(set, err); }
+    } catch (err) {
+      setErr(set, err);
+    }
   },
 
   resetDashboard: () => set({ stats: null, isLoading: false, isError: false, message: "" }),

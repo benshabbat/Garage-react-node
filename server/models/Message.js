@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const {model, Schema, SchemaTypes } = mongoose;
+const { model, Schema, SchemaTypes } = mongoose;
 
 const MessageSchema = new Schema(
   {
@@ -17,20 +17,20 @@ const MessageSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: [2, 'Title must be at least 2 characters'],
-      maxlength: [200, 'Title must be at most 200 characters'],
+      minlength: [2, "Title must be at least 2 characters"],
+      maxlength: [200, "Title must be at most 200 characters"],
     },
     description: {
       type: String,
       required: true,
       trim: true,
-      minlength: [2, 'Description must be at least 2 characters'],
-      maxlength: [5000, 'Description must be at most 5000 characters'],
-    },  
+      minlength: [2, "Description must be at least 2 characters"],
+      maxlength: [5000, "Description must be at most 5000 characters"],
+    },
     read: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   { timestamps: true }
 );

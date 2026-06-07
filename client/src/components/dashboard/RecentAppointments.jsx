@@ -42,9 +42,7 @@ const RecentAppointments = () => {
                   })}
                 </td>
                 <td className="time-cell">{appointment.time}</td>
-                <td className="notes-cell">
-                  {truncate(appointment.notes, 40) || "None"}
-                </td>
+                <td className="notes-cell">{truncate(appointment.notes, 40) || "None"}</td>
                 <td>
                   <span className={`status-badge ${appointment.status}`}>
                     {appointment.status || "pending"}

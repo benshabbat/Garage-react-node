@@ -16,7 +16,5 @@ export const messageFilterFn = (item, value) =>
  * @param {Array} users - List of users
  * @returns {Array} Options array for select
  */
-export const usersToOptions = (users) => 
-  users?.length > 0 
-    ? users.map(u => ({ value: u._id, label: u.username }))
-    : undefined;
+export const usersToOptions = (users) =>
+  users?.length > 0 ? users.map((u) => ({ value: u._id, label: u.username })) : undefined;

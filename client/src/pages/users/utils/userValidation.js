@@ -1,9 +1,4 @@
-import {
-  validCar,
-  validPhone,
-  validPass,
-  validEmail,
-} from "../../../validation/valid";
+import { validCar, validPhone, validPass, validEmail } from "../../../validation/valid";
 import { formatPhone } from "../../../utils/formatters";
 
 /**
@@ -13,9 +8,7 @@ import { formatPhone } from "../../../utils/formatters";
  */
 export const isValidUserName = (formData) => {
   return (
-    validPhone(formData?.phone) &&
-    validPass(formData?.password) &&
-    validEmail(formData?.email)
+    validPhone(formData?.phone) && validPass(formData?.password) && validEmail(formData?.email)
   );
 };
 
@@ -68,10 +61,28 @@ export const checkDuplicateUsername = (users, username, excludeUserId = null) =>
  * @returns {Array} inputs array for ModalForm
  */
 export const buildUserFormInputs = (validation, formData = null) => [
-  { name: "username", type: "text",     errorExist: "Username is exist", isExist: validation.isExistUser,  ...(formData && { value: formData.username }) },
-  { name: "email",    type: "email",    errorExist: "Email is exist",    isExist: validation.isExistEmail, ...(formData && { value: formData.email    }) },
-  { name: "phone",    type: "tel",      errorExist: "Phone is exist",    isExist: validation.isExistPhone, ...(formData && { value: formData.phone    }) },
-  { name: "password", type: "password", min: 8,                                                            ...(formData && { value: formData.password }) },
+  {
+    name: "username",
+    type: "text",
+    errorExist: "Username is exist",
+    isExist: validation.isExistUser,
+    ...(formData && { value: formData.username }),
+  },
+  {
+    name: "email",
+    type: "email",
+    errorExist: "Email is exist",
+    isExist: validation.isExistEmail,
+    ...(formData && { value: formData.email }),
+  },
+  {
+    name: "phone",
+    type: "tel",
+    errorExist: "Phone is exist",
+    isExist: validation.isExistPhone,
+    ...(formData && { value: formData.phone }),
+  },
+  { name: "password", type: "password", min: 8, ...(formData && { value: formData.password }) },
 ];
 
 /**
@@ -80,7 +91,5 @@ export const buildUserFormInputs = (validation, formData = null) => [
  * @param {string} value - Search value
  * @returns {boolean} - True if matches
  */
-export const userFilterFn = (item, value) => 
-  item.username?.includes(value) ||
-  item.email?.includes(value) ||
-  item.phone?.includes(value);
+export const userFilterFn = (item, value) =>
+  item.username?.includes(value) || item.email?.includes(value) || item.phone?.includes(value);

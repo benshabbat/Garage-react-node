@@ -60,8 +60,7 @@ export const useAuthStore = create(
       clearAuth: () =>
         set({ user: null, isError: false, isSuccess: false, isLoading: false, message: "" }),
 
-      reset: () =>
-        set({ isError: false, isSuccess: false, isLoading: false, message: "" }),
+      reset: () => set({ isError: false, isSuccess: false, isLoading: false, message: "" }),
     }),
     {
       name: "auth-storage",

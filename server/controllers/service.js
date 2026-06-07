@@ -10,5 +10,3 @@ export const getServices = createHandler(serviceService.getServices, 200);
 export const getServicesByType = createHandler(serviceService.getServicesByType, 200);
 export const getServicesByCar = createHandler(serviceService.getServicesByCar, 200);
 export const getServicesByUser = createHandler(serviceService.getServicesByUser, 200);
-
-

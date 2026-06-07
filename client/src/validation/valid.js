@@ -34,7 +34,6 @@ const inputType = (input) => {
   );
 };
 
-
 const VALIDATORS = {
   email: validEmail,
   password: validPass,
@@ -44,12 +43,4 @@ const VALIDATORS = {
 
 const valid = (data, type) => VALIDATORS[type]?.(data) ?? false;
 
-export {
-  valid,
-  validCar,
-  validPhone,
-  validPass,
-  validEmail,
-  validUserIsExist,
-  inputType,
-};
+export { valid, validCar, validPhone, validPass, validEmail, validUserIsExist, inputType };

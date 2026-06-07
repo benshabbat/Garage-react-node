@@ -1,7 +1,7 @@
 import { OpenModal } from "../index";
 import PropTypes from "prop-types";
 
-const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
+const Delete = ({ deleteData, handle, nameData, isOpen, handleDelete }) => {
   return (
     <OpenModal
       comp={
@@ -11,7 +11,9 @@ const Delete = ({deleteData,handle,nameData,isOpen,handleDelete}) => {
               X
             </button>
             <h1 className="header">Delete</h1>
-            <h2>Delete <strong>{deleteData}</strong>?</h2>
+            <h2>
+              Delete <strong>{deleteData}</strong>?
+            </h2>
             <p className="delete-warning">⚠ This action cannot be undone.</p>
             <button
               type="button"

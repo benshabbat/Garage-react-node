@@ -1,21 +1,14 @@
 import { useReviewsState as useReviewsContext } from "../hooks/useReviewsState";
 
 export default function Pagination() {
-  const { currentIndex, indexPagination, numberOfPages, numCardsPreview } =
-    useReviewsContext();
-    
- 
-  
+  const { currentIndex, indexPagination, numberOfPages, numCardsPreview } = useReviewsContext();
+
   return (
     <div className="pagination">
       {Array.from({ length: numberOfPages }, (_, index) => (
         <button
           key={index}
-          className={`dot ${
-            Math.floor(currentIndex / numCardsPreview) === index
-              ? "active"
-              : ""
-          }`}
+          className={`dot ${Math.floor(currentIndex / numCardsPreview) === index ? "active" : ""}`}
           onClick={() => indexPagination(index)}
         />
       ))}
