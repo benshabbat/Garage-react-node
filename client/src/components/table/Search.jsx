@@ -8,6 +8,7 @@ export default function Search({ name, handleSearch, onExport }) {
         <input
           type="search"
           placeholder="Search Data..."
+          aria-label={`Search ${name}`}
           onChange={handleSearch}
         />
         {onExport && (
