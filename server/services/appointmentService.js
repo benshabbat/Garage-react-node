@@ -2,10 +2,7 @@ import Appointment from "../models/Appointment.js";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
 import { pickAllowed, getPaginationParams } from "../utils/queryHelpers.js";
-import {
-  sendAppointmentConfirmation,
-  sendStatusUpdate,
-} from "./emailService.js";
+import { sendAppointmentConfirmation, sendStatusUpdate } from "./emailService.js";
 
 const ALLOWED_APPOINTMENT_CREATE_FIELDS = [
   "clientName",

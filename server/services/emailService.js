@@ -66,11 +66,12 @@ export const sendStatusUpdate = async (appointment) => {
   const transporter = createTransporter();
   if (!transporter) return;
 
-  const statusLabel = {
-    confirmed: "Confirmed ✅",
-    cancelled: "Cancelled ❌",
-    pending: "Pending ⏳",
-  }[appointment.status] ?? appointment.status;
+  const statusLabel =
+    {
+      confirmed: "Confirmed ✅",
+      cancelled: "Cancelled ❌",
+      pending: "Pending ⏳",
+    }[appointment.status] ?? appointment.status;
 
   try {
     await transporter.sendMail({
