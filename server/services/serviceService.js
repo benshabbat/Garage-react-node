@@ -1,7 +1,7 @@
 import Service from "../models/Service.js";
 import Car from "../models/Car.js";
 import { createError } from "../utils/error.js";
-import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
+import { getPaginationParams, pickAllowed, getPaginatedWithPopulate } from "../utils/queryHelpers.js";
 
 const ALLOWED_SERVICE_POPULATE_FIELDS = ['car'];
 const ALLOWED_SERVICE_UPDATE_FIELDS = ['title', 'description', 'price', 'paid', 'status'];
@@ -64,15 +64,8 @@ const getServices = async (req) => {
   return services;
 };
 
-const getServicesByType = async (req) => {
-  const type = req.query.populate;
-  if (!ALLOWED_SERVICE_POPULATE_FIELDS.includes(type)) {
-    throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_SERVICE_POPULATE_FIELDS.join(', ')}`);
-  }
-  const { limit, page } = getPaginationParams(req);
-  const services = await Service.find().populate(type).skip((page - 1) * limit).limit(limit);
-  return services;
-};
+const getServicesByType = async (req) =>
+  getPaginatedWithPopulate(Service, req, ALLOWED_SERVICE_POPULATE_FIELDS);
 
 const getServicesByCar = async (req) => {
   const { limit, page } = getPaginationParams(req);
