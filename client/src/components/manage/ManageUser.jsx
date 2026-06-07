@@ -1,9 +1,8 @@
 import "./manage.css";
-import { CreateCar, OpenModal, EditUser } from "../index";
+import { CreateCar, EditUser } from "../index";
 import { useUsersUIStore } from "../../stores/uiStores";
 import { useUserAdminHandlers } from "../../pages/users/hooks/useUserAdminHandlers";
-import ButtonManage from "./ButtonManage";
-import FormManage from "./FormManage";
+import ManageModal from "./ManageModal";
 
 const MANAGE_USER_BUTTONS = [
   { name: "createCar",  type: "create", content: "Create Car"  },
@@ -16,29 +15,18 @@ const ManageUser = () => {
   const manageUserOpen = useUsersUIStore((s) => s.manageUserOpen);
   const toggleManageUser = useUsersUIStore((s) => s.toggleManageUser);
   const { handleUser } = useUserAdminHandlers();
+
   return (
-    <OpenModal
-      comp={
-        <>
-          <FormManage handle={toggleManageUser}>
-            {MANAGE_USER_BUTTONS.map(({ name, type, content }) => (
-              <ButtonManage
-                key={name}
-                name={name}
-                type={type}
-                handle={handleUser}
-                value={selectedUser?._id}
-                content={content}
-              />
-            ))}
-          </FormManage>
-          <CreateCar />
-          <EditUser />
-        </>
-      }
+    <ManageModal
+      buttons={MANAGE_USER_BUTTONS}
       isOpen={manageUserOpen}
       onClose={toggleManageUser}
-    />
+      handleAction={handleUser}
+      selectedId={selectedUser?._id}
+    >
+      <CreateCar />
+      <EditUser />
+    </ManageModal>
   );
 };
 
