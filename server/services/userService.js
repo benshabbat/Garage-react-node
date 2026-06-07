@@ -95,7 +95,7 @@ const getUsersByType = async (req) => {
     throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_POPULATE_FIELDS.join(', ')}`);
   }
   const { limit, page } = getPaginationParams(req);
-  const users = await User.find().populate(type).skip((page - 1) * limit).limit(limit);
+  const users = await User.find().select("-password").populate(type).skip((page - 1) * limit).limit(limit);
   return users;
 };
 

@@ -76,10 +76,10 @@ const login = async (req) => {
   }
 
   const user = await User.findOne({ username });
-  if (!user) throw createError(404, "User not found");
+  if (!user) throw createError(401, "Invalid credentials");
 
   const isPassword = await bcrypt.compare(password, user.password);
-  if (!isPassword) throw createError(400, "Wrong password");
+  if (!isPassword) throw createError(401, "Invalid credentials");
 
   const token = jwt.sign(
     { id: user._id, isAdmin: user.isAdmin },

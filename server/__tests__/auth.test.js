@@ -55,22 +55,22 @@ describe("POST /api/auth/login", () => {
     assert.ok(!res.body.password, "should not expose password");
   });
 
-  it("returns 400 on wrong password", async () => {
+  it("returns 401 on wrong password", async () => {
     await makeUser({ username: "bob", password: "Correct99" });
 
     const res = await request(app)
       .post("/api/auth/login")
       .send({ username: "bob", password: "WrongPass1" });
 
-    assert.equal(res.status, 400);
+    assert.equal(res.status, 401);
   });
 
-  it("returns 404 when user does not exist", async () => {
+  it("returns 401 when user does not exist", async () => {
     const res = await request(app)
       .post("/api/auth/login")
       .send({ username: "nobody", password: "Password1" });
 
-    assert.equal(res.status, 404);
+    assert.equal(res.status, 401);
   });
 
   it("returns 400 when fields are missing", async () => {

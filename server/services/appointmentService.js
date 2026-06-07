@@ -64,8 +64,13 @@ const deleteAppointment = async (req) => {
   return "Appointment has been deleted";
 };
 
+const VALID_STATUSES = ["pending", "confirmed", "cancelled"];
+
 const getAppointmentsByStatus = async (req) => {
   const { status } = req.query;
+  if (!status || !VALID_STATUSES.includes(status)) {
+    throw createError(400, `Status must be one of: ${VALID_STATUSES.join(", ")}`);
+  }
   const { limit, page } = getPaginationParams(req);
   const appointments = await Appointment.find({ status })
     .sort({ date: -1 })
