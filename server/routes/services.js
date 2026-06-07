@@ -10,6 +10,7 @@ import {
   getServicesByUser,
 } from "../controllers/service.js";
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
+import { auditAdmin } from "../middleware/audit.js";
 const router = express.Router();
 
 // Admin routes
@@ -17,9 +18,9 @@ const adminRouter = express.Router();
 adminRouter.use(verifyAdmin);
 adminRouter.get("/populate", getServicesByType);
 adminRouter.get("/", getServices);
-adminRouter.post("/:carId", createService);
-adminRouter.put("/:id", updateService);
-adminRouter.delete("/:id", deleteService);
+adminRouter.post("/:carId", auditAdmin("CREATE_SERVICE", "Service"), createService);
+adminRouter.put("/:id", auditAdmin("UPDATE_SERVICE", "Service"), updateService);
+adminRouter.delete("/:id", auditAdmin("DELETE_SERVICE", "Service"), deleteService);
 
 // User routes
 const userRouter = express.Router();
