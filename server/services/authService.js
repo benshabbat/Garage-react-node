@@ -4,7 +4,7 @@ import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { templatePhone } from "../utils/templates.js";
 
-const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN || "garage-server-dcv1.onrender.com";
+const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN;
 const isProd = () => process.env.NODE_ENV === "production";
 
 /**
