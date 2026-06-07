@@ -15,6 +15,7 @@ const ServicesAdmin = lazy(() => import("./pages/servicesAdmin/ServicesAdmin"));
 const MessagesOfContact = lazy(() => import("./pages/messagesOfContact/MessagesOfContact"));
 const Appointments = lazy(() => import("./pages/appointments/Appointments"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
+const Signup = lazy(() => import("./pages/signup/Signup"));
 const Unauthorized = lazy(() => import("./pages/Unauthorized"));
 
 const PRIVATE_ROUTES = [
@@ -51,6 +52,7 @@ function App() {
                   }
                 />
               ))}
+              <Route path="/signup" element={<Signup />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>

@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/login", login);
 router.post("/logout", logout);
 router.post("/refresh", refresh);
+router.post("/signup", register);
 
 // Auth routes — any verified user
 const authRouter = express.Router();

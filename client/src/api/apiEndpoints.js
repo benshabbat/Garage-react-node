@@ -4,6 +4,7 @@ export const API_URL_USER = "/users";
 export const API_URL_SERVICE = "/services";
 export const API_URL_MESSAGES = "/messages";
 export const API_URL_REGISTER = "/auth/register";
+export const API_URL_SIGNUP = "/auth/signup";
 export const API_URL_REVIEWS = "/reviews";
 export const API_URL_CONTACTS = "/contacts";
 export const API_URL_APPOINTMENTS = "/appointments";
