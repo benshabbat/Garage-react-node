@@ -10,6 +10,8 @@ import {
   getCarsByOwner,
 } from "../controllers/car.js";
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
+import { auditAdmin } from "../middleware/audit.js";
+
 const router = express.Router();
 
 // Admin routes
@@ -17,9 +19,9 @@ const adminRouter = express.Router();
 adminRouter.use(verifyAdmin);
 adminRouter.get("/populate", getCarsByType);
 adminRouter.get("/", getCars);
-adminRouter.post("/:userId", createCar);
-adminRouter.put("/:id", updateCar);
-adminRouter.delete("/:id/:userId", deleteCar);
+adminRouter.post("/:userId", auditAdmin("CREATE_CAR", "Car"), createCar);
+adminRouter.put("/:id", auditAdmin("UPDATE_CAR", "Car"), updateCar);
+adminRouter.delete("/:id/:userId", auditAdmin("DELETE_CAR", "Car"), deleteCar);
 
 // User routes
 const userRouter = express.Router();

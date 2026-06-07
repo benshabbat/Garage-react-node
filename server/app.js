@@ -12,6 +12,7 @@ import contactsRoute from "./routes/contacts.js";
 import appointmentsRoute from "./routes/appointments.js";
 import dashboardRoute from "./routes/dashboard.js";
 import agentRoute from "./routes/agent.js";
+import auditRoute from "./routes/audit.js";
 import errorHandler from "./middleware/errorHandler.js";
 import { logger } from "./middleware/logger.js";
 
@@ -76,6 +77,7 @@ app.post("/api/appointments", publicWriteLimiter);
 app.use("/api/appointments", publicLimiter, appointmentsRoute);
 app.use("/api/dashboard", publicLimiter, dashboardRoute);
 app.use("/api/agent", agentLimiter, agentRoute);
+app.use("/api/audit", publicLimiter, auditRoute);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
