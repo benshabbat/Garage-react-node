@@ -28,4 +28,5 @@ const ReviewSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+ReviewSchema.index({ user: 1 });
 export default mongoose.model("Review", ReviewSchema);

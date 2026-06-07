@@ -27,11 +27,9 @@ const MessageSchema = new Schema(
       minlength: [2, 'Description must be at least 2 characters'],
       maxlength: [5000, 'Description must be at most 5000 characters'],
     },  
-    // read or not read  
     read: {
       type: Boolean,
-      default:false,
-      // required: true,
+      default: false,
     }
   },
   { timestamps: true }

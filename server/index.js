@@ -18,6 +18,7 @@ const port = process.env.PORT || 8800;
 
 process.on("unhandledRejection", (reason) => {
   console.error("Unhandled promise rejection:", reason);
+  process.exit(1);
 });
 
 async function start() {

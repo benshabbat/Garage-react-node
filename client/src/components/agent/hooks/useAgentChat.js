@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import axios from "../../../axiosConfig.js";
 
 const BOT_INTRO = {
   id: "intro",
@@ -38,13 +39,10 @@ export function useAgentChat() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("/api/agent/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ message: text, history: messages }),
+      const { data } = await axios.post("/agent/chat", {
+        message: text,
+        history: messages,
       });
-      const data = await res.json();
       const botMsg = {
         id: Date.now() + 1,
         role: "assistant",
