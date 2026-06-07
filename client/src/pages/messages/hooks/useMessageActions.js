@@ -3,8 +3,7 @@ import {
   createMessage,
   createMessageToAdmin,
 } from "../../../api/services/messageApi";
-
-const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+import { extractErrorMessage } from "../../../utils/handlerUtils";
 
 /**
  * Custom hook for message CRUD operations

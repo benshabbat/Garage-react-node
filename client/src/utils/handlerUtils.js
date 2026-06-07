@@ -9,6 +9,9 @@
  * @param {Function} setSelected - State setter for the selected entity
  * @returns {string} The button's name attribute
  */
+export const extractErrorMessage = (err) =>
+  err?.response?.data?.message ?? err?.message ?? String(err);
+
 export const resolveActionTarget = (e, items, setSelected) => {
   e.preventDefault();
   const { name, value } = e.target;

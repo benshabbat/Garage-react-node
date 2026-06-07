@@ -4,7 +4,7 @@ import { useUserStore } from "../../../stores/userStore";
 import { useCarsUIStore } from "../../../stores/uiStores";
 import { useCarAdminHandlers } from "./useCarAdminHandlers";
 import useFilteredData from "../../../hooks/useFilteredData";
-import { carFilterFn } from "../utils/carValidation";
+import { carFilterFn } from "../../../utils/filterUtils";
 import { exportToCsv } from "../../../utils/exportCsv";
 
 export function useCarsTableData() {
