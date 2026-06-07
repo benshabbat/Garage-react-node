@@ -12,6 +12,8 @@ export const useReviewsState = () => {
 
   return {
     useAddReview: reviewsHandlers.useAddReview,
+    isSubmittedTemp: reviewsHandlers.isSubmittedTemp,
+    setIsSubmittedTemp: reviewsHandlers.setIsSubmittedTemp,
     handleAddReview: toggleAddReview,
     isOpenAddReview: addReviewOpen,
     indexPagination: reviewsHandlers.indexPagination,

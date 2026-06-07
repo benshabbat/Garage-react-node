@@ -37,6 +37,8 @@ export const useReviewsHandlers = (modals) => {
 
   return {
     useAddReview,
+    isSubmittedTemp,
+    setIsSubmittedTemp,
     indexPagination,
     prevCard,
     nextCard,
