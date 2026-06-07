@@ -1,5 +1,4 @@
-import { describe, it, before, after, beforeEach } from "node:test";
-import assert from "node:assert/strict";
+import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
@@ -11,13 +10,13 @@ import User from "../models/User.js";
 
 let mongod;
 
-before(async () => {
+beforeAll(async () => {
   process.env.JWT = "test-jwt-secret-for-unit-tests";
   mongod = await MongoMemoryServer.create();
   await mongoose.connect(mongod.getUri());
 });
 
-after(async () => {
+afterAll(async () => {
   await mongoose.disconnect();
   await mongod.stop();
 });
@@ -50,9 +49,9 @@ describe("POST /api/auth/login", () => {
       .post("/api/auth/login")
       .send({ username: "alice", password: "Secret99" });
 
-    assert.equal(res.status, 200);
-    assert.ok(res.body._id, "should return user _id");
-    assert.ok(!res.body.password, "should not expose password");
+    expect(res.status).toBe(200);
+    expect(res.body._id).toBeTruthy();
+    expect(res.body.password).toBeFalsy();
   });
 
   it("returns 401 on wrong password", async () => {
@@ -62,7 +61,7 @@ describe("POST /api/auth/login", () => {
       .post("/api/auth/login")
       .send({ username: "bob", password: "WrongPass1" });
 
-    assert.equal(res.status, 401);
+    expect(res.status).toBe(401);
   });
 
   it("returns 401 when user does not exist", async () => {
@@ -70,7 +69,7 @@ describe("POST /api/auth/login", () => {
       .post("/api/auth/login")
       .send({ username: "nobody", password: "Password1" });
 
-    assert.equal(res.status, 401);
+    expect(res.status).toBe(401);
   });
 
   it("returns 400 when fields are missing", async () => {
@@ -78,7 +77,7 @@ describe("POST /api/auth/login", () => {
       .post("/api/auth/login")
       .send({ username: "alice" }); // no password
 
-    assert.equal(res.status, 400);
+    expect(res.status).toBe(400);
   });
 });
 
@@ -88,7 +87,7 @@ describe("POST /api/auth/logout", () => {
   it("returns 200 and clears the cookie", async () => {
     const res = await request(app).post("/api/auth/logout");
 
-    assert.equal(res.status, 200);
-    assert.ok(res.body.message, "should return a message");
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBeTruthy();
   });
 });
