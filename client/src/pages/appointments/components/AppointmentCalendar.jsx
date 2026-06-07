@@ -1,8 +1,8 @@
-import { useMemo } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { enUS } from "date-fns/locale/en-US";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { useAppointmentCalendar } from "../hooks/useAppointmentCalendar";
 
 const localizer = dateFnsLocalizer({
   format,
@@ -18,21 +18,6 @@ const STATUS_COLORS = {
   cancelled: "#ef4444",
 };
 
-const appointmentToEvent = (a) => {
-  const [hours, minutes] = (a.time || "09:00").split(":").map(Number);
-  const start = new Date(a.date);
-  start.setHours(hours, minutes, 0, 0);
-  const end = new Date(start);
-  end.setHours(hours + 1, minutes, 0, 0);
-  return {
-    id: a._id,
-    title: `${a.clientName} (${a.status})`,
-    start,
-    end,
-    resource: a,
-  };
-};
-
 const eventStyleGetter = (event) => ({
   style: {
     backgroundColor: STATUS_COLORS[event.resource?.status] ?? "#6b7280",
@@ -44,7 +29,7 @@ const eventStyleGetter = (event) => ({
 });
 
 const AppointmentCalendar = ({ appointments }) => {
-  const events = useMemo(() => (appointments ?? []).map(appointmentToEvent), [appointments]);
+  const { events } = useAppointmentCalendar(appointments);
 
   return (
     <div className="apt-calendar-wrapper">

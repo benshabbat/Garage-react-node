@@ -1,14 +1,13 @@
 import Search from "../../components/table/Search";
 import Table from "../../components/table/Table";
-import { useAccountUIStore } from "../../stores/uiStores";
-import { useUserStore } from "../../stores/userStore";
-import useFilteredData from "../../hooks/useFilteredData";
-import { serviceFilterFn } from "./utils/accountValidation";
+import { useAccountServicesData } from "./hooks/useAccountServicesData";
+
 export default function AccountServices() {
-  const selectedCar = useAccountUIStore((s) => s.selectedCar);
-  const services = useUserStore((s) => s.services);
-  const { displayData: displayServicesUser, handleSearch: handleSerchServicesUser } =
-    useFilteredData(services, serviceFilterFn);
+  const {
+    selectedCar,
+    displayServices: displayServicesUser,
+    handleSearch: handleSerchServicesUser,
+  } = useAccountServicesData();
   const trTh = (
     <tr>
       <th>title</th>

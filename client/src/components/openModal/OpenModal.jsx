@@ -1,16 +1,9 @@
 import "./openModal.css";
-import { useEffect } from "react";
 import PropTypes from "prop-types";
+import { useOpenModalKeyboard } from "./hooks/useOpenModalKeyboard";
 
 const OpenModal = ({ comp = null, isOpen = false, onClose, dialogTitle }) => {
-  useEffect(() => {
-    if (!isOpen || !onClose) return;
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
+  useOpenModalKeyboard(isOpen, onClose);
 
   if (!isOpen) return null;
 

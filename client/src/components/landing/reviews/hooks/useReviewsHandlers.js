@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useReviewForm } from "./useReviewForm";
 import { useReviewsData } from "./useReviewsData";
 import useCardsDisplay from "../swiper/hooks/useCardsDisplay";
 import useCardsNavigation from "../swiper/hooks/useCardsNavigation";
 import { getVisibleCards, calculateNumberOfPages } from "../utils/reviewsUtils";
 
-/**
- * Custom hook for reviews action handlers
- * @param {Object} modals - Modal handlers
- * @returns {Object} Handler functions and state for reviews operations
- */
 export const useReviewsHandlers = (modals) => {
-  // Temporary state for form submission tracking
   const [isSubmittedTemp, setIsSubmittedTemp] = useState(false);
+
+  useEffect(() => {
+    if (!isSubmittedTemp) return;
+    const id = setTimeout(() => setIsSubmittedTemp(false), 7000);
+    return () => clearTimeout(id);
+  }, [isSubmittedTemp]);
 
   // Get reviews data
   const { allReviews, totalCards } = useReviewsData(isSubmittedTemp);

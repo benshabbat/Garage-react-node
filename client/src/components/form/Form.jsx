@@ -1,9 +1,9 @@
-import { useState } from "react";
 import "./form.css";
 import PropTypes from "prop-types";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import { memo } from "react";
+import { useFormState } from "./hooks/useFormState";
 
 const Form = memo(
   ({
@@ -20,21 +20,7 @@ const Form = memo(
     serverError = null,
     isLoading = false,
   }) => {
-    const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission
-
-    const handleChange = (e) => {
-      const { name, value, checked, type } = e.target;
-      setData((prevState) => ({
-        ...prevState,
-        [name]: type === "checkbox" ? checked : value,
-      }));
-    };
-
-    const handleFormSubmit = (e) => {
-      e.preventDefault();
-      setIsSubmitted(true); // Set form as submitted
-      onSubmit(e);
-    };
+    const { isSubmitted, handleChange, handleFormSubmit } = useFormState(setData, onSubmit);
 
     return (
       <form className="form" onSubmit={handleFormSubmit}>
