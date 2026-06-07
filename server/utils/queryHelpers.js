@@ -1,5 +1,5 @@
 const DEFAULT_LIMIT = 50;
-const MAX_LIMIT = 500;
+const MAX_LIMIT = 5000;
 
 export const getPaginationParams = (req) => ({
   limit: Math.min(parseInt(req.query.limit) || DEFAULT_LIMIT, MAX_LIMIT),

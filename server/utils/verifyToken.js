@@ -17,7 +17,7 @@ export const verifyToken = (req, res, next) => {
       req.user = user;
       next();
     });
-  } catch (err) {
+  } catch (_err) {
     next(createError(500, "Error verifying token"));
   }
 };
