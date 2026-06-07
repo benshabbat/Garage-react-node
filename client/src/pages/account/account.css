@@ -1,6 +1,24 @@
-tbody button:hover{
-    border-radius: 4px;
-    color:gray;
+tbody button:hover {
+  border-radius: 4px;
+  color: gray;
+}
+
+.account-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: calc(100vh - 80px);
+}
+
+.account-page .table-container {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 .back-btn {

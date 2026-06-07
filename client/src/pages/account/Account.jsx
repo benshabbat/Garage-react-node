@@ -7,10 +7,10 @@ const Account = () => {
   useAccountInit();
 
   return (
-    <>
+    <div className="account-page">
       <AccountTables />
       <ReqService />
-    </>
+    </div>
   );
 };
 
