@@ -1,5 +1,6 @@
 import Car from "../models/Car.js";
 import User from "../models/User.js";
+import Service from "../models/Service.js";
 import { templateCar } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
 import {
@@ -55,6 +56,7 @@ const deleteCar = async (req) => {
   await Promise.all([
     Car.findByIdAndDelete(id),
     User.findByIdAndUpdate(userId, { $pull: { cars: id } }),
+    Service.deleteMany({ car: id }),
   ]);
   return "The Car has been removed";
 };
@@ -81,20 +83,21 @@ const getCarsByType = async (req) =>
 
 const getCarsWithService = async (req) => {
   const { limit, page } = getPaginationParams(req);
-  const cars = await Car.find()
-    .populate("services")
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return cars;
+  const [cars, total] = await Promise.all([
+    Car.find().populate("services").skip((page - 1) * limit).limit(limit),
+    Car.countDocuments(),
+  ]);
+  return { data: cars, total, page, limit };
 };
 
 const getCarsByOwner = async (req) => {
+  const filter = { owner: req.params.user };
   const { limit, page } = getPaginationParams(req);
-  const cars = await Car.find({ owner: req.params.user })
-    .populate("services")
-    .skip((page - 1) * limit)
-    .limit(limit);
-  return cars;
+  const [cars, total] = await Promise.all([
+    Car.find(filter).populate("services").skip((page - 1) * limit).limit(limit),
+    Car.countDocuments(filter),
+  ]);
+  return { data: cars, total, page, limit };
 };
 
 const carService = {
