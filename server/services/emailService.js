@@ -19,6 +19,13 @@ const createTransporter = () => {
 const FROM = () =>
   process.env.EMAIL_FROM || `"Garage770" <${process.env.SMTP_USER || "no-reply@garage770.com"}>`;
 
+const escHtml = (str) =>
+  String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
 const formatDate = (date) =>
   new Date(date).toLocaleDateString("en-US", {
     weekday: "long",
@@ -42,12 +49,12 @@ export const sendAppointmentConfirmation = async (appointment) => {
       subject: "Your Garage770 Appointment is Confirmed",
       html: `
         <h2>Appointment Confirmed</h2>
-        <p>Hi ${appointment.clientName},</p>
+        <p>Hi ${escHtml(appointment.clientName)},</p>
         <p>Your appointment has been successfully booked at <strong>Garage770</strong>.</p>
         <table>
           <tr><td><strong>Date:</strong></td><td>${formatDate(appointment.date)}</td></tr>
-          <tr><td><strong>Time:</strong></td><td>${appointment.time}</td></tr>
-          ${appointment.notes ? `<tr><td><strong>Notes:</strong></td><td>${appointment.notes}</td></tr>` : ""}
+          <tr><td><strong>Time:</strong></td><td>${escHtml(appointment.time)}</td></tr>
+          ${appointment.notes ? `<tr><td><strong>Notes:</strong></td><td>${escHtml(appointment.notes)}</td></tr>` : ""}
         </table>
         <p>We will be in touch if anything changes. See you soon!</p>
         <p>— The Garage770 Team</p>
@@ -80,9 +87,9 @@ export const sendStatusUpdate = async (appointment) => {
       subject: `Garage770 Appointment ${statusLabel}`,
       html: `
         <h2>Appointment Status Updated</h2>
-        <p>Hi ${appointment.clientName},</p>
+        <p>Hi ${escHtml(appointment.clientName)},</p>
         <p>Your appointment on <strong>${formatDate(appointment.date)}</strong> at
-           <strong>${appointment.time}</strong> has been updated to:
+           <strong>${escHtml(appointment.time)}</strong> has been updated to:
            <strong>${statusLabel}</strong>.</p>
         ${
           appointment.status === "cancelled"
