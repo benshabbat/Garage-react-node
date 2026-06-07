@@ -14,12 +14,10 @@ export function useTableWithSort(trTh, trTd) {
     if (!sortConfig.key || !trTd) return trTd;
 
     return [...trTd].sort((a, b) => {
-      const aValue = a.props.children.find(
-        (child) => child.props["data-label"] === sortConfig.key
-      )?.props.children;
-      const bValue = b.props.children.find(
-        (child) => child.props["data-label"] === sortConfig.key
-      )?.props.children;
+      const aValue = a.props.children.find((child) => child.props["data-label"] === sortConfig.key)
+        ?.props.children;
+      const bValue = b.props.children.find((child) => child.props["data-label"] === sortConfig.key)
+        ?.props.children;
 
       const aDate = Date.parse(aValue);
       const bDate = Date.parse(bValue);

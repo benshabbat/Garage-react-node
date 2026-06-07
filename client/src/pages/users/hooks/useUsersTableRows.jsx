@@ -1,11 +1,5 @@
 import { useUsersTableData } from "./useUsersTableData";
 
-const COLUMNS = [
-  { key: "username", label: "User Name" },
-  { key: "email", label: "Email" },
-  { key: "phone", label: "Phone Number" },
-];
-
 export function useUsersTableRows() {
   const {
     displayUsers,
@@ -15,6 +9,12 @@ export function useUsersTableRows() {
     toggleCreateUser,
     handleExport,
   } = useUsersTableData();
+
+  const COLUMNS = [
+    { key: "username", label: "User Name" },
+    { key: "email", label: "Email" },
+    { key: "phone", label: "Phone Number" },
+  ];
 
   const trTh = (
     <tr>

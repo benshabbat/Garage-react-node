@@ -3,8 +3,11 @@ import Table from "../../components/table/Table";
 import { useAccountServicesData } from "./hooks/useAccountServicesData";
 
 export default function AccountServices() {
-  const { selectedCar, displayServices: displayServicesUser, handleSearch: handleSerchServicesUser } =
-    useAccountServicesData();
+  const {
+    selectedCar,
+    displayServices: displayServicesUser,
+    handleSearch: handleSerchServicesUser,
+  } = useAccountServicesData();
   const trTh = (
     <tr>
       <th>title</th>
