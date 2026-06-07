@@ -1,10 +1,9 @@
 import "./manage.css";
 import CreateService from "../create/CreateService";
-import { OpenModal, EditCar } from "../index";
+import { EditCar } from "../index";
 import { useCarsUIStore } from "../../stores/uiStores";
 import { useCarAdminHandlers } from "../../pages/cars/hooks/useCarAdminHandlers";
-import ButtonManage from "./ButtonManage";
-import FormManage from "./FormManage";
+import ManageModal from "./ManageModal";
 
 const MANAGE_CAR_BUTTONS = [
   { name: "createService", type: "create", content: "Create Service" },
@@ -19,28 +18,16 @@ const ManageCar = () => {
   const { handleCar } = useCarAdminHandlers();
 
   return (
-    <OpenModal
-      comp={
-        <>
-          <FormManage handle={toggleManageCar}>
-            {MANAGE_CAR_BUTTONS.map(({ name, type, content }) => (
-              <ButtonManage
-                key={name}
-                name={name}
-                type={type}
-                handle={handleCar}
-                value={selectedCar?._id}
-                content={content}
-              />
-            ))}
-          </FormManage>
-          <CreateService />
-          <EditCar />
-        </>
-      }
+    <ManageModal
+      buttons={MANAGE_CAR_BUTTONS}
       isOpen={manageCarOpen}
       onClose={toggleManageCar}
-    />
+      handleAction={handleCar}
+      selectedId={selectedCar?._id}
+    >
+      <CreateService />
+      <EditCar />
+    </ManageModal>
   );
 };
 

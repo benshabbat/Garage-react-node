@@ -2,7 +2,7 @@ import Car from "../models/Car.js";
 import User from "../models/User.js";
 import { templateCar } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
-import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
+import { getPaginationParams, pickAllowed, getPaginatedWithPopulate } from "../utils/queryHelpers.js";
 
 const ALLOWED_CAR_POPULATE_FIELDS = ['services', 'owner'];
 const ALLOWED_CAR_UPDATE_FIELDS = ['numberPlate', 'km', 'brand'];
@@ -70,15 +70,8 @@ const getCars = async (req) => {
   return cars;
 };
 
-const getCarsByType = async (req) => {
-  const type = req.query.populate;
-  if (!ALLOWED_CAR_POPULATE_FIELDS.includes(type)) {
-    throw createError(400, `Invalid populate field. Allowed: ${ALLOWED_CAR_POPULATE_FIELDS.join(', ')}`);
-  }
-  const { limit, page } = getPaginationParams(req);
-  const cars = await Car.find().populate(type).skip((page - 1) * limit).limit(limit);
-  return cars;
-};
+const getCarsByType = async (req) =>
+  getPaginatedWithPopulate(Car, req, ALLOWED_CAR_POPULATE_FIELDS);
 
 const getCarsWithService = async (req) => {
   const { limit, page } = getPaginationParams(req);

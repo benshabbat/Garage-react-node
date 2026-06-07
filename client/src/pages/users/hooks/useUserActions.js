@@ -1,7 +1,8 @@
 import { deleteUser, updateUser, createUser } from "../../../api/services/userApi";
 import { createCar } from "../../../api/services/carApi";
 import { isValidUserName, isValidCar } from "../utils/userValidation";
-const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+import { extractErrorMessage } from "../../../utils/handlerUtils";
+import { useToastStore } from "../../../stores/toastStore";
 
 /**
  * Custom hook for user CRUD operations
@@ -11,6 +12,7 @@ const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.messag
  * @returns {Object} CRUD operation functions
  */
 export const useUserActions = (selectedUser, setFilteredUsers, users) => {
+  const showToast = useToastStore((s) => s.show);
   
   /**
    * Create a new car for a user
@@ -40,6 +42,7 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
         const newUser = await createUser(formData);
         handleCreateUser();
         setFilteredUsers(() => [...users, newUser.data]);
+        showToast("User created successfully ✓");
       } catch (error) {
         throw new Error(extractErrorMessage(error));
       }
@@ -68,6 +71,7 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
           user._id === selectedUser?._id ? updated.data : user
         )
       );
+      showToast("User updated successfully ✓");
     }
   };
 
@@ -81,6 +85,7 @@ export const useUserActions = (selectedUser, setFilteredUsers, users) => {
       handleDeleteUser();
       handleManageUser();
       setFilteredUsers(users?.filter((user) => user._id !== selectedUser?._id));
+      showToast("User deleted ✓");
     } catch (err) {
       throw new Error(extractErrorMessage(err));
     }

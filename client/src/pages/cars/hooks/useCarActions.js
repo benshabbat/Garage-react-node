@@ -1,7 +1,6 @@
 import { updateCar, deleteCar } from "../../../api/services/carApi";
 import { createService } from "../../../api/services/serviceApi";
-
-const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+import { extractErrorMessage } from "../../../utils/handlerUtils";
 
 /**
  * Custom hook for car CRUD operations

@@ -1,10 +1,8 @@
 import "./manage.css";
-import { OpenModal } from "../index";
 import EditService from "../edit/EditService";
 import { useServicesUIStore } from "../../stores/uiStores";
 import { useServiceAdminHandlers } from "../../pages/servicesAdmin/hooks/useServiceAdminHandlers";
-import ButtonManage from "./ButtonManage";
-import FormManage from "./FormManage";
+import ManageModal from "./ManageModal";
 
 const MANAGE_SERVICE_BUTTONS = [
   { name: "editService",   type: "edit",   content: "Edit Service"   },
@@ -18,27 +16,15 @@ const ManageService = () => {
   const { handleServiceIdAction } = useServiceAdminHandlers();
 
   return (
-    <OpenModal
-      comp={
-        <>
-          <FormManage handle={toggleManageService}>
-            {MANAGE_SERVICE_BUTTONS.map(({ name, type, content }) => (
-              <ButtonManage
-                key={name}
-                name={name}
-                type={type}
-                handle={handleServiceIdAction}
-                value={selectedService?._id}
-                content={content}
-              />
-            ))}
-          </FormManage>
-          <EditService />
-        </>
-      }
+    <ManageModal
+      buttons={MANAGE_SERVICE_BUTTONS}
       isOpen={manageServiceOpen}
       onClose={toggleManageService}
-    />
+      handleAction={handleServiceIdAction}
+      selectedId={selectedService?._id}
+    >
+      <EditService />
+    </ManageModal>
   );
 };
 

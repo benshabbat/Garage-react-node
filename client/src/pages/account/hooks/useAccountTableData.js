@@ -1,7 +1,7 @@
 import { useUserStore } from "../../../stores/userStore";
 import { useAccountUIStore } from "../../../stores/uiStores";
 import useFilteredData from "../../../hooks/useFilteredData";
-import { carFilterFn } from "../utils/accountValidation";
+import { carFilterFn } from "../../../utils/filterUtils";
 import { handleCarAction as handleCarActionUtil } from "../utils/accountHandlerUtils";
 
 export function useAccountTableData() {

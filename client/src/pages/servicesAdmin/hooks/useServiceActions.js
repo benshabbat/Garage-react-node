@@ -1,6 +1,5 @@
 import { deleteService, updateService } from "../../../api/services/serviceApi";
-
-const extractErrorMessage = (err) => err?.response?.data?.message ?? err?.message ?? String(err);
+import { extractErrorMessage } from "../../../utils/handlerUtils";
 
 /**
  * Custom hook for service CRUD operations

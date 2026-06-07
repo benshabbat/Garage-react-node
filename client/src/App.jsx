@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header, Agent } from "./components";
+import Toast from "./components/Toast";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import { PrivateRoute } from "./PrivateRoute.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
@@ -55,6 +56,7 @@ function App() {
         </main>
       </BrowserRouter>
       <Agent />
+      <Toast />
     </ErrorBoundary>
   );
 }
