@@ -11,7 +11,9 @@ if (!process.env.JWT) {
 }
 
 if (!process.env.JWT_REFRESH) {
-  console.error("FATAL: JWT_REFRESH secret is not defined — refresh tokens require a separate secret");
+  console.error(
+    "FATAL: JWT_REFRESH secret is not defined — refresh tokens require a separate secret"
+  );
   process.exit(1);
 }
 
