@@ -31,7 +31,7 @@ authRouter.post("/to/:to", createMessageToAdmin);
 authRouter.put("/:id", updateMessage);
 authRouter.delete("/:id", deleteMessage);
 authRouter.get("/:id", getMessage);
-authRouter.post("/:from/:to", createMessage);
+authRouter.post("/:to", createMessage);
 
 router.use(adminRouter);
 router.use(userRouter);

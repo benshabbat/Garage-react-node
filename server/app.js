@@ -51,14 +51,14 @@ app.use(cors({
 }));
 
 app.use("/api/auth", authLimiter, authRoute);
-app.use("/api/users", usersRoute);
-app.use("/api/cars", carsRoute);
-app.use("/api/services", servicesRoute);
+app.use("/api/users", publicLimiter, usersRoute);
+app.use("/api/cars", publicLimiter, carsRoute);
+app.use("/api/services", publicLimiter, servicesRoute);
 app.use("/api/messages", publicLimiter, messagesRoute);
 app.use("/api/reviews", publicLimiter, reviewsRoute);
 app.use("/api/contacts", publicLimiter, contactsRoute);
 app.use("/api/appointments", publicLimiter, appointmentsRoute);
-app.use("/api/dashboard", dashboardRoute);
+app.use("/api/dashboard", publicLimiter, dashboardRoute);
 app.use("/api/agent", agentLimiter, agentRoute);
 
 app.use((req, res) => {
