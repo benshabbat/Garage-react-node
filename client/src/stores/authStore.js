@@ -4,6 +4,7 @@ import axios from "../axiosConfig.js";
 
 const API = {
   register: "/auth/register",
+  signup: "/auth/signup",
   login: "/auth/login",
   logout: "/auth/logout",
 };
@@ -28,6 +29,20 @@ export const useAuthStore = create(
             isError: true,
             message: err.response?.data?.message ?? err.message,
             user: null,
+          });
+        }
+      },
+
+      signup: async (userData) => {
+        set({ isLoading: true, isError: false, isSuccess: false, message: "" });
+        try {
+          await axios.post(API.signup, userData);
+          set({ isLoading: false, isSuccess: true });
+        } catch (err) {
+          set({
+            isLoading: false,
+            isError: true,
+            message: err.response?.data?.message ?? err.message,
           });
         }
       },
