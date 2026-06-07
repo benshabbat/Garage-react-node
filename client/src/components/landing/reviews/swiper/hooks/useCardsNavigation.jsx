@@ -1,21 +1,22 @@
 import { useState } from "react";
 
 
-export default function useCardsNavigation(numCardsPreview,totalCards) {
+export default function useCardsNavigation(numCardsPreview, totalCards) {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (!totalCards || !numCardsPreview) {
+    return { currentIndex: 0, nextCard: () => {}, prevCard: () => {}, indexPagination: () => {} };
+  }
+
+  const lastPageStart = Math.floor((totalCards - 1) / numCardsPreview) * numCardsPreview;
+
   // Handle navigation to next set of cards
   const nextCard = () => {
-    setCurrentIndex((prev) => (prev + numCardsPreview) % totalCards);
+    setCurrentIndex((prev) => (prev >= lastPageStart ? 0 : prev + numCardsPreview));
   };
 
   const prevCard = () => {
-    setCurrentIndex((prev) => {
-      const newIndex = prev - numCardsPreview;
-      return newIndex < 0
-        ? Math.floor((totalCards- 1) / numCardsPreview) *
-            numCardsPreview
-        : newIndex;
-    });
+    setCurrentIndex((prev) => (prev === 0 ? lastPageStart : prev - numCardsPreview));
   };
 
   // Handle pagination dot click
@@ -23,5 +24,5 @@ export default function useCardsNavigation(numCardsPreview,totalCards) {
     setCurrentIndex(index * numCardsPreview);
   };
 
-  return {currentIndex,nextCard,prevCard,indexPagination};
+  return { currentIndex, nextCard, prevCard, indexPagination };
 }

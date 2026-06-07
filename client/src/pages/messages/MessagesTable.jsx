@@ -27,6 +27,7 @@ export default function MessagesTable() {
               name="deleteMessage"
               value={message?._id}
               onClick={handleMsgAction}
+              aria-label={`Delete message from ${message?.from?.username || "unknown"}`}
             >
               Delete
             </button>

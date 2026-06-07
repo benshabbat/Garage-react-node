@@ -33,6 +33,7 @@ const CreateReviews = () => {
               type="text"
               title="Name"
               placeholder="type your name.."
+              maxLength={50}
             />
           </label>
           <label className="form-label">
