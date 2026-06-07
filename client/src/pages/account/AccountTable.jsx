@@ -6,10 +6,10 @@ export default function AccountTable() {
   const { displayCars, handleSearch, handleCar } = useAccountTableData();
   const trTh = (
     <tr>
-      <th>brand</th>
-      <th>numberPlate</th>
-      <th>km</th>
-      <th>history service</th>
+      <th>Brand</th>
+      <th>License Plate</th>
+      <th>Mileage (km)</th>
+      <th>Service History</th>
       <th>Request Service</th>
     </tr>
   );
@@ -21,12 +21,12 @@ export default function AccountTable() {
         <td>{car.km}</td>
         <td>
           <button value={car._id} name="services" onClick={handleCar}>
-            services
+            View Services
           </button>
         </td>
         <td>
           <button value={car._id} name="req-services" onClick={handleCar}>
-            req services
+            Request Service
           </button>
         </td>
       </tr>

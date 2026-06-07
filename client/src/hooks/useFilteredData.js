@@ -9,7 +9,9 @@ import { useState, useCallback } from "react";
 const useFilteredData = (data, filterFn) => {
   const [filteredData, setFilteredData] = useState(null);
 
-  const displayData = filteredData || data;
+  const displayData = filteredData
+    ? filteredData.filter((item) => data?.some((d) => d._id === item._id))
+    : data;
 
   const handleSearch = useCallback(
     (e) => {
