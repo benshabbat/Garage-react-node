@@ -2,6 +2,7 @@ import Appointment from "../models/Appointment.js";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
 import { pickAllowed, getPaginationParams } from "../utils/queryHelpers.js";
+import { sendAppointmentConfirmation, sendStatusUpdate } from "./emailService.js";
 
 const ALLOWED_APPOINTMENT_CREATE_FIELDS = [
   "clientName",
@@ -30,6 +31,7 @@ const createAppointment = async (req) => {
 
   const newAppointment = new Appointment({ ...safeBody, phone: formattedPhone });
   const savedAppointment = await newAppointment.save();
+  sendAppointmentConfirmation(savedAppointment); // fire-and-forget
   return savedAppointment;
 };
 
@@ -73,6 +75,7 @@ const updateAppointmentStatus = async (req) => {
     { new: true }
   );
   if (!updatedAppointment) throw createError(404, "Appointment not found");
+  sendStatusUpdate(updatedAppointment); // fire-and-forget
   return updatedAppointment;
 };
 
