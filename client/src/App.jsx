@@ -18,15 +18,17 @@ const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 const Signup = lazy(() => import("./pages/signup/Signup"));
 const Unauthorized = lazy(() => import("./pages/Unauthorized"));
 
+// adminOnly pages read admin-scoped endpoints, so a signed-in customer landing
+// on one would only see failed requests — send them to /unauthorized instead.
 const PRIVATE_ROUTES = [
   { path: "/myCars", Component: Account },
-  { path: "/users", Component: Users },
-  { path: "/cars", Component: Cars },
   { path: "/messages", Component: Messages },
-  { path: "/services", Component: ServicesAdmin },
-  { path: "/messages-contact", Component: MessagesOfContact },
-  { path: "/appointments", Component: Appointments },
-  { path: "/dashboard", Component: Dashboard },
+  { path: "/users", Component: Users, adminOnly: true },
+  { path: "/cars", Component: Cars, adminOnly: true },
+  { path: "/services", Component: ServicesAdmin, adminOnly: true },
+  { path: "/messages-contact", Component: MessagesOfContact, adminOnly: true },
+  { path: "/appointments", Component: Appointments, adminOnly: true },
+  { path: "/dashboard", Component: Dashboard, adminOnly: true },
 ];
 
 function App() {
@@ -43,12 +45,12 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<PageLanding />} />
-              {PRIVATE_ROUTES.map(({ path, Component }) => (
+              {PRIVATE_ROUTES.map(({ path, Component, adminOnly }) => (
                 <Route
                   key={path}
                   path={path}
                   element={
-                    <PrivateRoute>
+                    <PrivateRoute adminOnly={adminOnly}>
                       <Component />
                     </PrivateRoute>
                   }

@@ -1,18 +1,13 @@
 import Appointment from "../models/Appointment.js";
 import { templatePhone } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
+import { assertOwnerOrAdmin } from "../utils/ownership.js";
 import { pickAllowed, getPaginationParams } from "../utils/queryHelpers.js";
 import { sendAppointmentConfirmation, sendStatusUpdate } from "./emailService.js";
 
-const ALLOWED_APPOINTMENT_CREATE_FIELDS = [
-  "clientName",
-  "email",
-  "phone",
-  "date",
-  "time",
-  "notes",
-  "user",
-];
+// "user" is deliberately absent: the owner comes from the session, never the body,
+// so an anonymous booking cannot be attributed to somebody else's account.
+const ALLOWED_APPOINTMENT_CREATE_FIELDS = ["clientName", "email", "phone", "date", "time", "notes"];
 const ALLOWED_APPOINTMENT_UPDATE_FIELDS = [
   "clientName",
   "email",
@@ -29,7 +24,16 @@ const createAppointment = async (req) => {
 
   const safeBody = pickAllowed(req.body, ALLOWED_APPOINTMENT_CREATE_FIELDS);
 
-  const newAppointment = new Appointment({ ...safeBody, phone: formattedPhone });
+  // Admins book on a customer's behalf, so they may name the account. Everyone
+  // else is linked to their own session, and anonymous bookings stay unlinked —
+  // a public request must never be able to attach itself to another account.
+  const linkedUser = req.user?.isAdmin ? (req.body.user ?? null) : (req.user?.id ?? null);
+
+  const newAppointment = new Appointment({
+    ...safeBody,
+    phone: formattedPhone,
+    ...(linkedUser && { user: linkedUser }),
+  });
   const savedAppointment = await newAppointment.save();
   sendAppointmentConfirmation(savedAppointment); // fire-and-forget
   return savedAppointment;
@@ -54,6 +58,7 @@ const getAppointment = async (req) => {
     "username email phone"
   );
   if (!appointment) throw createError(404, "Appointment not found");
+  assertOwnerOrAdmin(appointment.user, req.user);
   return appointment;
 };
 

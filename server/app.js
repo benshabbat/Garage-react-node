@@ -16,45 +16,38 @@ import auditRoute from "./routes/audit.js";
 import errorHandler from "./middleware/errorHandler.js";
 import { logger } from "./middleware/logger.js";
 
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 20,
-  message: { message: "Too many requests, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
 
-const publicLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 50,
-  message: { message: "Too many requests, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+/**
+ * Throttles are disabled under NODE_ENV=test: otherwise a test's result depends
+ * on how many requests the tests before it happened to make.
+ */
+const createLimiter = (windowMs, max, message) =>
+  rateLimit({
+    windowMs,
+    max,
+    message: { message },
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: () => process.env.NODE_ENV === "test",
+  });
 
-const agentLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 10,
-  message: { message: "Too many AI requests, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+const TOO_MANY = "Too many requests, please try again later";
 
-const publicWriteLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 5,
-  message: { message: "Too many submissions, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-const signupLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 5,
-  message: { message: "Too many registration attempts, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+const authLimiter = createLimiter(15 * MINUTE, 20, TOO_MANY);
+const publicLimiter = createLimiter(15 * MINUTE, 50, TOO_MANY);
+const agentLimiter = createLimiter(MINUTE, 10, "Too many AI requests, please try again later");
+const publicWriteLimiter = createLimiter(
+  15 * MINUTE,
+  5,
+  "Too many submissions, please try again later"
+);
+const signupLimiter = createLimiter(
+  HOUR,
+  5,
+  "Too many registration attempts, please try again later"
+);
 
 const app = express();
 

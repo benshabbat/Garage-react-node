@@ -9,7 +9,7 @@ import {
   getAppointmentsByStatus,
   getAppointmentsByDateRange,
 } from "../controllers/appointment.js";
-import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
+import { optionalAuth, verifyAdmin, verifyToken } from "../utils/verifyToken.js";
 import {
   validateAppointmentCreation,
   validateAppointmentUpdate,
@@ -19,35 +19,36 @@ import { auditAdmin } from "../middleware/audit.js";
 
 const router = express.Router();
 
-// Public routes
-router.post("/", validateAppointmentCreation, createAppointment);
+// Public — anyone can book. optionalAuth links the booking to the caller's
+// account when they happen to be signed in.
+router.post("/", optionalAuth, validateAppointmentCreation, createAppointment);
 
-// Admin routes
-const adminRouter = express.Router();
-adminRouter.use(verifyAdmin);
-adminRouter.get("/", getAppointments);
-adminRouter.get("/status", getAppointmentsByStatus);
-adminRouter.get("/date-range", getAppointmentsByDateRange);
-adminRouter.put(
+// Admin routes — literal paths before "/:id"
+router.get("/status", verifyAdmin, getAppointmentsByStatus);
+router.get("/date-range", verifyAdmin, getAppointmentsByDateRange);
+router.get("/", verifyAdmin, getAppointments);
+router.put(
   "/:id",
+  verifyAdmin,
   validateAppointmentUpdate,
   auditAdmin("UPDATE_APPOINTMENT", "Appointment"),
   updateAppointment
 );
-adminRouter.patch(
+router.patch(
   "/:id/status",
+  verifyAdmin,
   validateStatusUpdate,
   auditAdmin("UPDATE_APPOINTMENT_STATUS", "Appointment"),
   updateAppointmentStatus
 );
-adminRouter.delete("/:id", auditAdmin("DELETE_APPOINTMENT", "Appointment"), deleteAppointment);
+router.delete(
+  "/:id",
+  verifyAdmin,
+  auditAdmin("DELETE_APPOINTMENT", "Appointment"),
+  deleteAppointment
+);
 
-// User routes
-const userRouter = express.Router();
-userRouter.use(verifyUser);
-userRouter.get("/:id", getAppointment);
-
-router.use(adminRouter);
-router.use(userRouter);
+// ":id" is an appointment id — ownership is resolved in the service
+router.get("/:id", verifyToken, getAppointment);
 
 export default router;

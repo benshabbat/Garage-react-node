@@ -9,27 +9,23 @@ import {
   getServicesByCar,
   getServicesByUser,
 } from "../controllers/service.js";
-import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
+import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 import { auditAdmin } from "../middleware/audit.js";
+
 const router = express.Router();
 
 // Admin routes
-const adminRouter = express.Router();
-adminRouter.use(verifyAdmin);
-adminRouter.get("/populate", getServicesByType);
-adminRouter.get("/", getServices);
-adminRouter.post("/:carId", auditAdmin("CREATE_SERVICE", "Service"), createService);
-adminRouter.put("/:id", auditAdmin("UPDATE_SERVICE", "Service"), updateService);
-adminRouter.delete("/:id", auditAdmin("DELETE_SERVICE", "Service"), deleteService);
+router.get("/populate", verifyAdmin, getServicesByType);
+router.get("/", verifyAdmin, getServices);
+router.post("/:carId", verifyAdmin, auditAdmin("CREATE_SERVICE", "Service"), createService);
+router.put("/:id", verifyAdmin, auditAdmin("UPDATE_SERVICE", "Service"), updateService);
+router.delete("/:id", verifyAdmin, auditAdmin("DELETE_SERVICE", "Service"), deleteService);
 
-// User routes
-const userRouter = express.Router();
-userRouter.use(verifyUser);
-userRouter.get("/user/:user", getServicesByUser);
-userRouter.get("/car/:car", getServicesByCar);
-userRouter.get("/:id", getService);
+// Owner or admin — ":user" is a user id
+router.get("/user/:user", verifyUser, getServicesByUser);
 
-router.use(adminRouter);
-router.use(userRouter);
+// Keyed by resource ids — ownership is resolved via the owning car in the service
+router.get("/car/:car", verifyToken, getServicesByCar);
+router.get("/:id", verifyToken, getService);
 
 export default router;

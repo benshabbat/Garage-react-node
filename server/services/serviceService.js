@@ -1,6 +1,7 @@
 import Service from "../models/Service.js";
 import Car from "../models/Car.js";
 import { createError } from "../utils/error.js";
+import { assertCarOwnerOrAdmin } from "../utils/ownership.js";
 import {
   getPaginationParams,
   pickAllowed,
@@ -59,6 +60,7 @@ const deleteService = async (req) => {
 const getService = async (req) => {
   const service = await Service.findById(req.params.id);
   if (!service) throw createError(404, "Service not found");
+  await assertCarOwnerOrAdmin(service.car, req.user);
   return service;
 };
 
@@ -78,6 +80,7 @@ const getServicesByType = async (req) =>
   getPaginatedWithPopulate(Service, req, ALLOWED_SERVICE_POPULATE_FIELDS);
 
 const getServicesByCar = async (req) => {
+  await assertCarOwnerOrAdmin(req.params.car, req.user);
   const filter = { car: req.params.car };
   const { limit, page } = getPaginationParams(req);
   const [services, total] = await Promise.all([
