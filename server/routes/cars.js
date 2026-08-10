@@ -9,28 +9,27 @@ import {
   getCarsWithService,
   getCarsByOwner,
 } from "../controllers/car.js";
-import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
+import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 import { auditAdmin } from "../middleware/audit.js";
 
 const router = express.Router();
 
-// Admin routes
-const adminRouter = express.Router();
-adminRouter.use(verifyAdmin);
-adminRouter.get("/populate", getCarsByType);
-adminRouter.get("/", getCars);
-adminRouter.post("/:userId", auditAdmin("CREATE_CAR", "Car"), createCar);
-adminRouter.put("/:id", auditAdmin("UPDATE_CAR", "Car"), updateCar);
-adminRouter.delete("/:id/:userId", auditAdmin("DELETE_CAR", "Car"), deleteCar);
+// Guards are attached per route rather than with router.use(): a router-level
+// verifyAdmin rejects every request that reaches the router, including ones
+// meant for the user routes further down, so non-admins never get there.
 
-// User routes
-const userRouter = express.Router();
-userRouter.use(verifyUser);
-userRouter.get("/service", getCarsWithService);
-userRouter.get("/user/:user", getCarsByOwner);
-userRouter.get("/:id", getCar);
+// Admin routes — literal paths first so they are not swallowed by "/:id"
+router.get("/populate", verifyAdmin, getCarsByType);
+router.get("/service", verifyAdmin, getCarsWithService); // returns every car, not just the caller's
+router.get("/", verifyAdmin, getCars);
+router.post("/:userId", verifyAdmin, auditAdmin("CREATE_CAR", "Car"), createCar);
+router.put("/:id", verifyAdmin, auditAdmin("UPDATE_CAR", "Car"), updateCar);
+router.delete("/:id/:userId", verifyAdmin, auditAdmin("DELETE_CAR", "Car"), deleteCar);
 
-router.use(adminRouter);
-router.use(userRouter);
+// Owner or admin — ":user" is a user id, so verifyUser can compare it directly
+router.get("/user/:user", verifyUser, getCarsByOwner);
+
+// ":id" is a car id — ownership is resolved against car.owner in the service
+router.get("/:id", verifyToken, getCar);
 
 export default router;

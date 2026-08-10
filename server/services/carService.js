@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import Service from "../models/Service.js";
 import { templateCar } from "../utils/templates.js";
 import { createError } from "../utils/error.js";
+import { assertOwnerOrAdmin } from "../utils/ownership.js";
 import {
   getPaginationParams,
   pickAllowed,
@@ -63,6 +64,7 @@ const deleteCar = async (req) => {
 const getCar = async (req) => {
   const car = await Car.findById(req.params.id).populate("services");
   if (!car) throw createError(404, "Car not found");
+  assertOwnerOrAdmin(car.owner, req.user);
   return car;
 };
 

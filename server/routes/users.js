@@ -6,19 +6,12 @@ import { auditAdmin } from "../middleware/audit.js";
 const router = express.Router();
 
 // Admin routes
-const adminRouter = express.Router();
-adminRouter.use(verifyAdmin);
-adminRouter.get("/populate", getUsersByType);
-adminRouter.get("/", getUsers);
-adminRouter.put("/:id", auditAdmin("UPDATE_USER", "User"), updateUser);
-adminRouter.delete("/:id", auditAdmin("DELETE_USER", "User"), deleteUser);
+router.get("/populate", verifyAdmin, getUsersByType);
+router.get("/", verifyAdmin, getUsers);
+router.put("/:id", verifyAdmin, auditAdmin("UPDATE_USER", "User"), updateUser);
+router.delete("/:id", verifyAdmin, auditAdmin("DELETE_USER", "User"), deleteUser);
 
-// User routes
-const userRouter = express.Router();
-userRouter.use(verifyUser);
-userRouter.get("/:id", getUser);
-
-router.use(adminRouter);
-router.use(userRouter);
+// Owner or admin
+router.get("/:id", verifyUser, getUser);
 
 export default router;

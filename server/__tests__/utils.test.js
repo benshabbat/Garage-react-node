@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
+import mongoose from "mongoose";
 import { getPaginationParams, pickAllowed } from "../utils/queryHelpers.js";
 import { templatePhone, templateCar } from "../utils/templates.js";
+import { assertOwnerOrAdmin, toId } from "../utils/ownership.js";
 
 // ─── getPaginationParams ─────────────────────────────────────────────────────
 
@@ -84,5 +86,62 @@ describe("templateCar", () => {
 
   it("returns an already-formatted plate unchanged", () => {
     expect(templateCar("12-345-67")).toBe("12-345-67");
+  });
+});
+
+// ─── toId ────────────────────────────────────────────────────────────────────
+
+describe("toId", () => {
+  it("returns null for a missing reference", () => {
+    expect(toId(null)).toBeNull();
+    expect(toId(undefined)).toBeNull();
+  });
+
+  it("stringifies a raw id", () => {
+    const id = new mongoose.Types.ObjectId();
+    expect(toId(id)).toBe(id.toString());
+  });
+
+  it("reads the _id of a populated document", () => {
+    const id = new mongoose.Types.ObjectId();
+    expect(toId({ _id: id, username: "someone" })).toBe(id.toString());
+  });
+});
+
+// ─── assertOwnerOrAdmin ──────────────────────────────────────────────────────
+
+describe("assertOwnerOrAdmin", () => {
+  const ownerId = new mongoose.Types.ObjectId();
+  const owner = { id: ownerId.toString(), isAdmin: false };
+  const stranger = { id: new mongoose.Types.ObjectId().toString(), isAdmin: false };
+  const admin = { id: new mongoose.Types.ObjectId().toString(), isAdmin: true };
+
+  it("allows the owner", () => {
+    expect(() => assertOwnerOrAdmin(ownerId, owner)).not.toThrow();
+  });
+
+  it("allows the owner when the reference is populated", () => {
+    expect(() => assertOwnerOrAdmin({ _id: ownerId }, owner)).not.toThrow();
+  });
+
+  it("allows any admin", () => {
+    expect(() => assertOwnerOrAdmin(ownerId, admin)).not.toThrow();
+  });
+
+  it("rejects a different user with 403", () => {
+    try {
+      assertOwnerOrAdmin(ownerId, stranger);
+      throw new Error("expected assertOwnerOrAdmin to throw");
+    } catch (err) {
+      expect(err.status).toBe(403);
+    }
+  });
+
+  it("rejects an unlinked resource for a non-admin", () => {
+    expect(() => assertOwnerOrAdmin(null, owner)).toThrow();
+  });
+
+  it("rejects when there is no caller", () => {
+    expect(() => assertOwnerOrAdmin(ownerId, undefined)).toThrow();
   });
 });

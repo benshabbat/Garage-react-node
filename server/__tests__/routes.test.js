@@ -8,6 +8,7 @@ import app from "../app.js";
 import User from "../models/User.js";
 import Appointment from "../models/Appointment.js";
 import Review from "../models/Review.js";
+import Car from "../models/Car.js";
 
 // ─── Test DB lifecycle ────────────────────────────────────────────────────────
 
@@ -28,6 +29,7 @@ beforeEach(async () => {
   await User.deleteMany({});
   await Appointment.deleteMany({});
   await Review.deleteMany({});
+  await Car.deleteMany({});
 });
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -196,5 +198,124 @@ describe("GET /api/dashboard/stats", () => {
     const res = await request(app).get("/api/dashboard/stats");
 
     expect(res.status).toBe(401);
+  });
+});
+
+// ─── GET /api/cars/:id — ownership ───────────────────────────────────────────
+
+describe("GET /api/cars/:id", () => {
+  const makeCar = (owner, numberPlate) =>
+    Car.create({ owner: owner._id, numberPlate, km: 1000, brand: "Mazda" });
+
+  it("the owner can read their own car", async () => {
+    const owner = await makeUser({ username: "carOwner" });
+    const car = await makeCar(owner, "11-111-11");
+
+    const res = await request(app).get(`/api/cars/${car._id}`).set("Cookie", authCookie(owner));
+
+    expect(res.status).toBe(200);
+    expect(res.body._id).toBe(car._id.toString());
+  });
+
+  it("returns 403 when a different customer asks for it", async () => {
+    const owner = await makeUser({ username: "carOwner2" });
+    const stranger = await makeUser({ username: "carStranger" });
+    const car = await makeCar(owner, "22-222-22");
+
+    const res = await request(app).get(`/api/cars/${car._id}`).set("Cookie", authCookie(stranger));
+
+    expect(res.status).toBe(403);
+  });
+
+  it("an admin can read any car", async () => {
+    const owner = await makeUser({ username: "carOwner3" });
+    const admin = await makeUser({ username: "carAdmin", isAdmin: true });
+    const car = await makeCar(owner, "33-333-33");
+
+    const res = await request(app).get(`/api/cars/${car._id}`).set("Cookie", authCookie(admin));
+
+    expect(res.status).toBe(200);
+  });
+});
+
+// ─── Appointment ownership ───────────────────────────────────────────────────
+
+describe("appointment ownership", () => {
+  const bookingBody = () => ({
+    clientName: "Owner Test",
+    email: "owner@test.com",
+    phone: "050-123-4567",
+    date: futureDate(),
+    time: "11:00",
+  });
+
+  it("ignores a user id supplied by an anonymous booking", async () => {
+    const victim = await makeUser({ username: "victimAccount" });
+
+    const res = await request(app)
+      .post("/api/appointments")
+      .send({ ...bookingBody(), user: victim._id.toString() });
+
+    expect(res.status).toBe(201);
+    const saved = await Appointment.findById(res.body._id);
+    expect(saved.user).toBeUndefined();
+  });
+
+  it("links a booking made by a signed-in customer to their own account", async () => {
+    const customer = await makeUser({ username: "bookingCustomer" });
+
+    const res = await request(app)
+      .post("/api/appointments")
+      .set("Cookie", authCookie(customer))
+      .send(bookingBody());
+
+    expect(res.status).toBe(201);
+    const saved = await Appointment.findById(res.body._id);
+    expect(saved.user.toString()).toBe(customer._id.toString());
+  });
+
+  it("lets the linked customer read their own appointment", async () => {
+    const customer = await makeUser({ username: "apptOwner" });
+    const appointment = await Appointment.create({
+      ...bookingBody(),
+      user: customer._id,
+    });
+
+    const res = await request(app)
+      .get(`/api/appointments/${appointment._id}`)
+      .set("Cookie", authCookie(customer));
+
+    expect(res.status).toBe(200);
+  });
+
+  it("returns 403 when a different customer asks for it", async () => {
+    const customer = await makeUser({ username: "apptOwner2" });
+    const stranger = await makeUser({ username: "apptStranger" });
+    const appointment = await Appointment.create({
+      ...bookingBody(),
+      user: customer._id,
+    });
+
+    const res = await request(app)
+      .get(`/api/appointments/${appointment._id}`)
+      .set("Cookie", authCookie(stranger));
+
+    expect(res.status).toBe(403);
+  });
+
+  it("keeps an unlinked appointment admin-only", async () => {
+    const customer = await makeUser({ username: "apptNosy" });
+    const admin = await makeUser({ username: "apptAdmin", isAdmin: true });
+    const appointment = await Appointment.create(bookingBody());
+
+    const asCustomer = await request(app)
+      .get(`/api/appointments/${appointment._id}`)
+      .set("Cookie", authCookie(customer));
+    const asAdmin = await request(app)
+      .get(`/api/appointments/${appointment._id}`)
+      .set("Cookie", authCookie(admin));
+
+    expect(asCustomer.status).toBe(403);
+    expect(asAdmin.status).toBe(200);
   });
 });

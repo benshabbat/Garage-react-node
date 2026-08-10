@@ -2,10 +2,11 @@ import NavLink from "./NavLink";
 import { MyAccount } from "../index";
 import { useHeaderHandlers } from "../header/hooks/useHeaderHandlers";
 
+// Appointments is an admin console (it lists every booking), so it is not linked
+// here — customers book through the form on the landing page.
 const NAV_LINKS = [
   { to: "/myCars", label: "MyCars" },
   { to: "/messages", label: "Messages" },
-  { to: "/appointments", label: "Appointments" },
 ];
 
 const NavUser = () => {

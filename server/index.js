@@ -22,6 +22,15 @@ if (!process.env.ANTHROPIC_API_KEY) {
   console.warn("WARNING: ANTHROPIC_API_KEY is not set — /api/agent endpoints will be unavailable");
 }
 
+// Silent failure otherwise: rate limiting would bucket every caller together
+// under the proxy's address, so one busy user throttles everybody.
+if (process.env.NODE_ENV === "production" && !process.env.TRUST_PROXY) {
+  console.warn(
+    "WARNING: TRUST_PROXY is not set — if the app runs behind a load balancer, " +
+      "all users will share a single rate-limit bucket. Set TRUST_PROXY to the number of proxy hops (usually 1)."
+  );
+}
+
 const port = process.env.PORT || 8800;
 
 process.on("unhandledRejection", (reason) => {

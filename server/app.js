@@ -1,7 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import rateLimit from "express-rate-limit";
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import carsRoute from "./routes/cars.js";
@@ -15,48 +14,38 @@ import agentRoute from "./routes/agent.js";
 import auditRoute from "./routes/audit.js";
 import errorHandler from "./middleware/errorHandler.js";
 import { logger } from "./middleware/logger.js";
+import {
+  agentLimiter,
+  apiLimiter,
+  authLimiter,
+  loginLimiter,
+  publicWriteLimiter,
+  signupLimiter,
+} from "./middleware/rateLimiters.js";
 
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 20,
-  message: { message: "Too many requests, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+/**
+ * How many reverse proxies sit in front of the app. Rate limiting keys on
+ * req.ip, so behind a load balancer with this unset every caller looks like the
+ * proxy and the whole user base shares one bucket.
+ *
+ * Set TRUST_PROXY to the number of hops (1 for a single load balancer). It is
+ * deliberately off by default: trusting a forwarded header that nobody is
+ * rewriting lets a client spoof its own address and slip the limiter entirely.
+ */
+export const parseTrustProxy = (value) => {
+  if (value === undefined || value === "") return false;
+  if (value === "false") return false;
+  if (value === "true") return true;
 
-const publicLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 50,
-  message: { message: "Too many requests, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+  const hops = Number(value);
+  if (Number.isInteger(hops) && hops >= 0) return hops;
 
-const agentLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 10,
-  message: { message: "Too many AI requests, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-const publicWriteLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 5,
-  message: { message: "Too many submissions, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-const signupLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 5,
-  message: { message: "Too many registration attempts, please try again later" },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+  return value; // an IP or subnet list, which Express understands as-is
+};
 
 const app = express();
+
+app.set("trust proxy", parseTrustProxy(process.env.TRUST_PROXY));
 
 app.use(logger);
 app.use(cookieParser());
@@ -73,20 +62,23 @@ app.use(
   })
 );
 
+// The narrow limiters are registered ahead of the router they protect, so a
+// login or a booking is counted by both its own budget and the general one.
 app.post("/api/auth/signup", signupLimiter);
+app.post("/api/auth/login", loginLimiter);
 app.use("/api/auth", authLimiter, authRoute);
-app.use("/api/users", publicLimiter, usersRoute);
-app.use("/api/cars", publicLimiter, carsRoute);
-app.use("/api/services", publicLimiter, servicesRoute);
-app.use("/api/messages", publicLimiter, messagesRoute);
-app.use("/api/reviews", publicLimiter, reviewsRoute);
+app.use("/api/users", apiLimiter, usersRoute);
+app.use("/api/cars", apiLimiter, carsRoute);
+app.use("/api/services", apiLimiter, servicesRoute);
+app.use("/api/messages", apiLimiter, messagesRoute);
+app.use("/api/reviews", apiLimiter, reviewsRoute);
 app.post("/api/contacts", publicWriteLimiter);
-app.use("/api/contacts", publicLimiter, contactsRoute);
+app.use("/api/contacts", apiLimiter, contactsRoute);
 app.post("/api/appointments", publicWriteLimiter);
-app.use("/api/appointments", publicLimiter, appointmentsRoute);
-app.use("/api/dashboard", publicLimiter, dashboardRoute);
+app.use("/api/appointments", apiLimiter, appointmentsRoute);
+app.use("/api/dashboard", apiLimiter, dashboardRoute);
 app.use("/api/agent", agentLimiter, agentRoute);
-app.use("/api/audit", publicLimiter, auditRoute);
+app.use("/api/audit", apiLimiter, auditRoute);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
