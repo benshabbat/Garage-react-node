@@ -138,6 +138,21 @@ Or run both together from the server directory:
 cd server && npm run dev
 ```
 
+### Deploying behind a proxy
+
+Rate limiting identifies callers by IP. Behind a load balancer (Render, Railway,
+Fly, nginx…) that IP arrives only in `X-Forwarded-For`, which Express ignores by
+default — leave it that way and every user shares a single rate-limit bucket.
+Set `TRUST_PROXY` to the number of proxy hops, usually `1`:
+
+```bash
+TRUST_PROXY=1
+```
+
+Leave it unset when the app is exposed directly: trusting a forwarded header
+nobody rewrites lets a client spoof its address and skip the limiter entirely.
+See `server/.env.example` for the full list of variables.
+
 ## API Endpoints
 
 ### Authentication
